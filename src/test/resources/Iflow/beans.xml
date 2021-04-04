@@ -1,0 +1,334 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:Generator="com.sap.it.gnb.ifl.common.gen.pluggability.api.GeneratorHandler"
+           xmlns:bsn="http://sapcd.com/bsnagt"
+           xmlns:camel="http://camel.apache.org/schema/blueprint"
+           xmlns:cxf="http://camel.apache.org/schema/blueprint/cxf"
+           xmlns:cxfcore="http://cxf.apache.org/blueprint/core"
+           xmlns:exsl="http://exslt.org/common"
+           xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0"
+           xmlns:hci-ph="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+           xmlns:http-conf="http://cxf.apache.org/transports/http/configuration"
+           xmlns:idocsoap="urn:sap-com:document:sap:idoc:soap:messages"
+           xmlns:jaxws="http://cxf.apache.org/blueprint/jaxws"
+           xmlns:ns="https://bsnschemas.netweaver.neo.com/bsnflow"
+           xmlns:orange="http://xi.com/orange"
+           xmlns:p1="urn:vendor:po:I:ERP-SD:ElectronicArchive:SendBarcodes"
+           xmlns:p2="urn:vendor:po:I:ERP-SD:ElectronicArchive:ReceiveBarcodes"
+           xmlns:p3="urn:vendor:po:I:HYB:ReplicateMH1"
+           xmlns:sap-cxf-generic-request="http://camel.apache.org/cxf/jaxws/dispatch"
+           xmlns:sap-cxf-generic-request-reply="http://camel.apache.org/cxf/jaxws/provider"
+           xmlns:sec="http://cxf.apache.org/configuration/security"
+           xmlns:str="http://exslt.org/strings"
+           xmlns:wsa="http://cxf.apache.org/ws/addressing"
+           xmlns:wsrm-mgr="http://cxf.apache.org/ws/rm/manager"
+           xmlns:wsrm-policy="http://schemas.xmlsoap.org/ws/2005/02/rm/policy"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd           http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd           http://camel.apache.org/schema/blueprint/cxf http://camel.apache.org/schema/blueprint/cxf/camel-cxf.xsd           http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd           http://cxf.apache.org/transports/http/configuration http://cxf.apache.org/schemas/configuration/http-conf.xsd           http://cxf.apache.org/ws/rm/manager http://cxf.apache.org/schemas/configuration/wsrm-manager.xsd           http://schemas.xmlsoap.org/ws/2005/02/rm/policy http://schemas.xmlsoap.org/ws/2005/02/rm/wsrm-policy.xsd           http://cxf.apache.org/configuration/security http://cxf.apache.org/schemas/configuration/security.xsd           http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd           http://cxf.apache.org/blueprint/jaxws http://cxf.apache.org/schemas/blueprint/jaxws.xsd">
+   <reference id="cxfTracingFeatureFactory"
+              interface="com.sap.it.op.agent.trace.cxf.CxfTracingFeatureFactory"/>
+   <bean class="com.sap.esb.monitoring.cxf.runtime.feature.RuntimeFeature"
+         id="cxf.feature.RuntimeFeature"/>
+   <reference id="customClassResolver" interface="org.apache.camel.spi.ClassResolver"/>
+   <bean class="com.sap.it.op.agent.collector.cxf.MplFeature"
+         id="MonitoringInboundFeature">
+      <property name="messageProcessingLogSink">
+         <ref component-id="MessageProcessingLogSink"/>
+      </property>
+      <property name="centralMonitor">
+         <ref component-id="itOpAgentMplEventNotifier"/>
+      </property>
+      <property name="startComponent" value="true"/>
+      <property name="endComponent" value="false"/>
+      <property name="errorEventPublisher">
+         <ref component-id="IntegrationOperationsErrorEventPublisher"/>
+      </property>
+   </bean>
+   <bean class="com.sap.it.op.agent.collector.cxf.MplFeature"
+         id="MonitoringOutboundFeature">
+      <property name="messageProcessingLogSink">
+         <ref component-id="MessageProcessingLogSink"/>
+      </property>
+      <property name="centralMonitor">
+         <ref component-id="itOpAgentMplEventNotifier"/>
+      </property>
+      <property name="startComponent" value="false"/>
+      <property name="endComponent" value="true"/>
+      <property name="errorEventPublisher">
+         <ref component-id="IntegrationOperationsErrorEventPublisher"/>
+      </property>
+   </bean>
+   <reference id="MessageProcessingLogSink"
+              interface="com.sap.it.op.agent.api.MessageProcessingLogSink"/>
+   <reference id="IntegrationOperationsErrorEventPublisher"
+              interface="com.sap.it.op.ed.IntegrationOperationsErrorEventPublisher"/>
+   <bean class="com.sap.it.op.agent.collector.camel.MplInterceptor"
+         id="itOpAgentMplInterceptor"/>
+   <bean class="com.sap.it.op.agent.collector.camel.MplEventNotifier"
+         id="itOpAgentMplEventNotifier">
+      <property name="messageProcessingLogSink">
+         <ref component-id="MessageProcessingLogSink"/>
+      </property>
+   </bean>
+   <bean class="org.apache.cxf.transport.common.gzip.GZIPFeature"
+         id="GZIPFeature"/>
+   <bean class="net.sf.saxon.xpath.XPathFactoryImpl" id="saxonFactory"/>
+   <bean class="com.sap.sod.utils.idoc.soap.processors.IDocOutboundRequestIntercProcessor"
+         id="idocOutboundRequest"/>
+   <bean class="com.sap.esb.application.services.cxf.interceptor.IgnorableSapAndTransportBindingPolicyInterceptorProvider"/>
+   <bean class="com.sap.esb.application.services.cxf.interceptor.PrincipalPropagationInterceptor"
+         id="soap1xPPInterceptor"/>
+   <bean class="com.sap.esb.application.services.cxf.interceptor.ReplyToInterceptor"
+         id="cxf.interceptor.replyto"/>
+   <bean class="com.sap.sod.utils.cxf.interceptors.SoapInboundRequestInterceptor"
+         id="soapInboundRequestInterceptor"/>
+   <bean class="com.sap.sod.utils.cxf.interceptors.SoapOutboundRequestInterceptor"
+         id="soapOutboundRequestInterceptor"/>
+   <bean class="com.sap.sod.utils.idoc.soap.interceptors.IDocInboundRequestInterceptor"
+         id="IDocInboundRequestInterceptor"/>
+   <bean class="com.sap.sod.utils.idoc.soap.interceptors.IDocInboundResponseInterceptor"
+         id="IDocInboundResponseInterceptor"/>
+   <bean class="com.sap.sod.utils.idoc.soap.interceptors.IDocOutboundRequestInterceptor"
+         id="IDocOutboundRequestInterceptor"/>
+   <bean class="com.sap.sod.utils.idoc.soap.interceptors.IDocOutboundResponseInterceptor"
+         id="IDocOutboundResponseInterceptor"/>
+   <bean class="com.sap.esb.application.services.cxf.interceptor.PrincipalPropagationInterceptor"
+         id="principalPropagationInterceptor"/>
+   <reference filter="(usage=pp-prepare)"
+              id="ppPreparationInterceptor"
+              interface="org.apache.cxf.phase.PhaseInterceptor"/>
+   <reference filter="(keystore=default)"
+              id="accessor"
+              interface="com.sap.esb.security.KeyCertificateAccessor"/>
+   <reference id="trustManagerFactory"
+              interface="com.sap.esb.security.TrustManagerFactory"/>
+   <reference id="keyManagerFactory"
+              interface="com.sap.esb.security.KeyManagerFactory"/>
+   <bean factory-method="getKeyManagers"
+         factory-ref="keyManagerFactory"
+         id="keyManager"/>
+   <bean factory-method="getTrustManagers"
+         factory-ref="trustManagerFactory"
+         id="trustManager"/>
+   <bean factory-method="getAuthSupplier"
+         factory-ref="authSupplierFactory"
+         id="Participant_2_SOAP_authSupplier">
+      <argument value="CloudCommerceCredential"/>
+   </bean>
+   <bean class="com.sap.esb.camel.webservice.endpoint.configurer.CxfEndpointConfigurerImpl"
+         id="MessageFlow_29.configurer">
+      <property name="httpConduitName" value="MessageFlow_29.conduit"/>
+   </bean>
+   <http-conf:conduit name="MessageFlow_29.conduit">
+      <http-conf:authSupplier bean="Participant_2_SOAP_authSupplier"/>
+      <http-conf:tlsClientParameters>
+         <sec:trustManagers ref="trustManager"/>
+      </http-conf:tlsClientParameters>
+      <http-conf:client AllowChunking="false" ReceiveTimeout="120000"/>
+   </http-conf:conduit>
+   <reference filter="(usage=soapfault)"
+              id="soapFaultInterceptor"
+              interface="org.apache.cxf.phase.PhaseInterceptor"/>
+   <reference filter="(usage=returncode)"
+              id="returnCodeInterceptor"
+              interface="org.apache.cxf.phase.PhaseInterceptor"/>
+   <reference id="auditLogService"
+              interface="com.sap.esb.webservice.audit.log.AuditLogger"/>
+   <reference id="authSupplierFactory"
+              interface="com.sap.esb.webservice.authorization.supplier.api.AuthorizationSupplierFactory"/>
+   <bean class="com.sap.esb.application.services.cxf.interceptor.SimpleAuthorizingInterceptor"
+         id="S4HANA_DOCMAS_DOCMAS05_authorizationInterceptor">
+      <property name="roles" value="ESBMessaging.send"/>
+      <property name="auditLogger" ref="auditLogService"/>
+   </bean>
+   <cxf:cxfEndpoint address="/vendor/s4hana/MH1Doc"
+                    bus="Participant_1_DOCMAS_DOCMAS05"
+                    endpointName="orange:sap_idoc_S4HANA_DOCMAS_DOCMAS05"
+                    id="S4HANA_DOCMAS_DOCMAS05">
+      <cxf:inInterceptors>
+         <ref component-id="S4HANA_DOCMAS_DOCMAS05_authorizationInterceptor"/>
+         <ref component-id="soapInboundRequestInterceptor"/>
+         <ref component-id="IDocInboundRequestInterceptor"/>
+      </cxf:inInterceptors>
+      <cxf:outInterceptors>
+         <ref component-id="IDocInboundResponseInterceptor"/>
+      </cxf:outInterceptors>
+      <cxf:properties>
+         <entry key="dataFormat" value="PAYLOAD"/>
+      </cxf:properties>
+   </cxf:cxfEndpoint>
+   <cxfcore:bus bus="Participant_1_DOCMAS_DOCMAS05"
+                id="vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud.S4HANA_DOCMAS_DOCMAS05">
+      <cxfcore:outFaultInterceptors>
+         <ref component-id="soapFaultInterceptor"/>
+         <ref component-id="returnCodeInterceptor"/>
+      </cxfcore:outFaultInterceptors>
+      <cxfcore:properties>
+         <entry key="bus.io.CachedOutputStream.CipherTransformation"
+                value="AES/CTR/NoPadding"/>
+         <entry key="bus.io.CachedOutputStream.Threshold" value="1048576"/>
+         <entry key="org.apache.cxf.logging.FaultListener">
+            <bean class="com.sap.esb.monitoring.cxf.response.log.FaultListener"/>
+         </entry>
+      </cxfcore:properties>
+      <cxfcore:features>
+         <ref component-id="MessageFlow_27.cxfTracingFeature"/>
+         <ref component-id="cxf.feature.RuntimeFeature"/>
+         <ref component-id="MonitoringInboundFeature"/>
+         <ref component-id="GZIPFeature"/>
+         <sap-p:policies xmlns:sap-p="http://cxf.apache.org/policy">
+            <sap-p:alternativeSelector>
+               <bean class="com.sap.esb.webservice.policy.alternative.selector.AlternativeSelector"
+                     id="alternativeSelector">
+                  <property name="basicAuth" value="true"/>
+               </bean>
+            </sap-p:alternativeSelector>
+         </sap-p:policies>
+      </cxfcore:features>
+   </cxfcore:bus>
+   <bean class="org.apache.cxf.management.counters.CounterRepository"
+         id="PerformanceCounterForS4HANA_DOCMAS_DOCMAS05">
+      <property name="bus">
+         <ref component-id="Participant_1_DOCMAS_DOCMAS05"/>
+      </property>
+   </bean>
+   <cxf:cxfEndpoint address="https://adm-dev.vendor.shop/vendorcustodyintegration/replicatemhdocument"
+                    bus="Participant_2_SOAP"
+                    endpointName="p3:MH1DocumentEndPointPort"
+                    id="CommerceCloud_SOAP"
+                    serviceName="p3:MH1DocumentEndPoint"
+                    wsdlURL="/wsdl/SI_ReplicateMH1_Service (8).wsdl">
+      <cxf:properties>
+         <entry key="dataFormat" value="PAYLOAD"/>
+         <entry key="synchronous" value="true"/>
+         <entry key="sendHttpResponseCode" value="true"/>
+         <entry key="defaultOperationName" value="replicatemhdocument"/>
+         <entry key="defaultOperationNamespace" value="urn:vendor:po:I:HYB:ReplicateMH1"/>
+      </cxf:properties>
+      <cxf:outInterceptors>
+         <ref component-id="cxf.interceptor.replyto"/>
+      </cxf:outInterceptors>
+   </cxf:cxfEndpoint>
+   <cxfcore:bus bus="Participant_2_SOAP"
+                id="vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud.CommerceCloud_SOAP">
+      <cxfcore:properties>
+         <entry key="bus.io.CachedOutputStream.CipherTransformation"
+                value="AES/CTR/NoPadding"/>
+         <entry key="bus.io.CachedOutputStream.Threshold" value="1048576"/>
+         <entry key="org.apache.cxf.logging.FaultListener">
+            <bean class="com.sap.esb.monitoring.cxf.response.log.FaultListener"/>
+         </entry>
+      </cxfcore:properties>
+      <cxfcore:features>
+         <ref component-id="MessageFlow_29.cxfTracingFeature"/>
+         <ref component-id="cxf.feature.RuntimeFeature"/>
+         <ref component-id="MonitoringOutboundFeature"/>
+         <sap-p:policies xmlns:sap-p="http://cxf.apache.org/policy">
+            <sap-p:alternativeSelector>
+               <bean class="com.sap.esb.webservice.policy.alternative.selector.AlternativeSelector"
+                     id="alternativeSelector">
+                  <property name="basicAuth" value="true"/>
+               </bean>
+            </sap-p:alternativeSelector>
+         </sap-p:policies>
+      </cxfcore:features>
+   </cxfcore:bus>
+   <bean class="org.apache.cxf.management.counters.CounterRepository"
+         id="PerformanceCounterForCommerceCloud_SOAP">
+      <property name="bus">
+         <ref component-id="Participant_2_SOAP"/>
+      </property>
+   </bean>
+   <bean factory-method="createCxfTracingFeature"
+         factory-ref="cxfTracingFeatureFactory"
+         id="MessageFlow_29.cxfTracingFeature">
+      <argument index="0" value="MessageFlow_29"/>
+   </bean>
+   <bean class="com.sap.esb.camel.webservice.cxfbinding.CxfBinding"
+         id="MessageFlow_29.cxfBinding"/>
+   <bean factory-method="createCxfTracingFeature"
+         factory-ref="cxfTracingFeatureFactory"
+         id="MessageFlow_27.cxfTracingFeature">
+      <argument index="0" value="MessageFlow_27"/>
+   </bean>
+   <bean class="com.sap.esb.camel.webservice.cxfbinding.CxfBinding"
+         id="MessageFlow_27.cxfBinding"/>
+   <bean class="com.sap.it.iflow.saxonee.SaxonEEConsumerFactory"
+         factory-method="getEnterpriseXPathFactoryInstance"
+         id="saxonEEXpathFactory"/>
+   <bean class="com.sap.gateway.ip.core.customdev.processor.IGWScriptProcessor"
+         id="scriptprocessor"/>
+   <bean class="java.util.HashMap" id="userdefinedNamespaces">
+      <argument>
+         <map>
+            <entry key="p1" value="urn:vendor:po:I:ERP-SD:ElectronicArchive:SendBarcodes"/>
+            <entry key="p2" value="urn:vendor:po:I:ERP-SD:ElectronicArchive:ReceiveBarcodes"/>
+            <entry key="p3" value="urn:vendor:po:I:HYB:ReplicateMH1"/>
+         </map>
+      </argument>
+   </bean>
+   <camel:camelContext id="vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud"
+                       streamCache="true">
+      <camel:properties>
+         <camel:property key="CamelLogDebugBodyMaxChars" value="-1"/>
+         <camel:property key="CamelMaximumEndpointCacheSize" value="50"/>
+      </camel:properties>
+      <camel:streamCaching id="vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud_cacheConfig"
+                           spoolChiper="AES/CTR/NoPadding"
+                           spoolDirectory="${karaf.base}/camel/camel-tmp-#camelId#-#uuid#"
+                           spoolThreshold="5242880"
+                           spoolUsedHeapMemoryThreshold="50"/>
+      <camel:route id="Process_1">
+         <camel:from id="MessageFlow_27_648544476249241"
+                     uri="cxf:bean:S4HANA_DOCMAS_DOCMAS05?cxfBinding=#MessageFlow_27.cxfBinding"/>
+         <camel:to uri="sap-pp-util://sender"/>
+         <camel:convertBodyTo type="java.lang.String"/>
+         <camel:onException id="MessageFlow_27_648544477020846">
+            <camel:exception>com.sap.esb.size.limiter.SizeLimitExceededException</camel:exception>
+            <camel:handled>
+               <camel:constant>false</camel:constant>
+            </camel:handled>
+         </camel:onException>
+         <camel:to uri="sap-size-limit://limit?body=41943040&amp;attachments=104857600"/>
+         <camel:removeHeaders excludePattern="(?i)CamelRedeliveryMaxCounter|SapMessageId|SapMessageIdEx|SapIDocSoapNamespace|SapIDocType|SapIDocTransferId"
+                              pattern="*"/>
+         <camel:to id="CallActivity_36_648544478550805" uri="sap-msgstore:Request"/>
+         <camel:setHeader headerName="SAP_ApplicationID" id="CallActivity_14_648544479709069">
+            <camel:xpath documentType="javax.xml.transform.sax.SAXSource"
+                         factoryRef="saxonEEXpathFactory"
+                         resultType="String">/DOCMAS05/IDOC/E1DRAWM/E1DRAWT[LANGU='Z']/DKTXT/text()</camel:xpath>
+         </camel:setHeader>
+         <camel:setHeader headerName="scriptFile" id="CallActivity_38_648544480852052">
+            <camel:constant>HYB_vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud.groovy</camel:constant>
+         </camel:setHeader>
+         <camel:setHeader headerName="functionName">
+            <camel:constant>mapping</camel:constant>
+         </camel:setHeader>
+         <camel:setHeader headerName="scriptFileType">
+            <camel:constant>groovy</camel:constant>
+         </camel:setHeader>
+         <camel:bean method="process" ref="scriptprocessor"/>
+         <camel:to id="CallActivity_33_648544481512656" uri="sap-msgstore:RequestMapped"/>
+         <camel:removeHeader headerName="operationName" id="MessageFlow_29_648544481998376"/>
+         <camel:removeHeader headerName="operationNamespace"/>
+         <camel:to uri="cxf:bean:CommerceCloud_SOAP?cxfBinding=#MessageFlow_29.cxfBinding&amp;cxfEndpointConfigurer=#MessageFlow_29.configurer"/>
+         <camel:removeHeader headerName="CamelCxfMessage"/>
+         <camel:removeHeader headerName="org.apache.cxf.headers.Header.list"/>
+         <camel:removeHeader headerName="ResponseContext"/>
+         <camel:removeHeader headerName="operationName"/>
+         <camel:removeHeader headerName="operationNamespace"/>
+         <camel:setHeader headerName="scriptFile" id="CallActivity_62395_648544483611683">
+            <camel:constant>HYB_vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud.groovy</camel:constant>
+         </camel:setHeader>
+         <camel:setHeader headerName="functionName">
+            <camel:constant>response</camel:constant>
+         </camel:setHeader>
+         <camel:setHeader headerName="scriptFileType">
+            <camel:constant>groovy</camel:constant>
+         </camel:setHeader>
+         <camel:bean method="process" ref="scriptprocessor"/>
+         <camel:setProperty id="EndEvent_2_648544492972685" propertyName="SAP_MarkMessageAsFailed">
+            <camel:constant>false</camel:constant>
+         </camel:setProperty>
+      </camel:route>
+   </camel:camelContext>
+</blueprint>

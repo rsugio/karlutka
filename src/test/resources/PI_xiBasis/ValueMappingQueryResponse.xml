@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Body>
+        <ns2:ValueMappingQueryResponse xmlns:ns2='http://sap.com/xi/BASIS'>
+            <ValueMappingID>bfeb23d2-5486-11ea-c17b-00ff06795f51</ValueMappingID>
+            <ValueMappingID>bf2d135e-5327-11ea-c824-00ff06795f51</ValueMappingID>
+            <ValueMappingID>67425183-5488-11ea-9966-00ff06795f51</ValueMappingID>
+            <ValueMappingID>7c1e482c-531f-11ea-c4c1-00ff06795f51</ValueMappingID>
+            <ValueMappingID>12acc39f-6eac-11ea-9d9b-00ff06795f51</ValueMappingID>
+            <ValueMappingID>a0a0514a-6f63-11ea-cace-00ff06795f51</ValueMappingID>
+            <ValueMappingID>33e39763-53b2-11ea-9262-00ff06795f51</ValueMappingID>
+            <LogMessageCollection></LogMessageCollection>
+        </ns2:ValueMappingQueryResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
