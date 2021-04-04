@@ -7,8 +7,8 @@ plugins {
     id("org.jetbrains.dokka") version "1.4.30"
 }
 
-group = "com.pinternals"
-version = "0.0.1-build3"
+group = "io.rsug"
+version = "0.0.1-build4"
 
 repositories {
     jcenter()
@@ -29,16 +29,16 @@ dependencies {
 
     implementation("com.github.xmlet:xsdParser:1.1.3")
 
-    // шихта всякая для изучений:
     testImplementation(kotlin("test-junit"))
-    testImplementation(files("C:/workspace/Karlutka/libs/com.sap.xi.mapping.tool.lib.filter.jar"))
-    testImplementation(files("C:/workspace/Karlutka/libs/com.sap.aii.mapping.api.filter.jar"))
-    testImplementation(files("C:/workspace/Karlutka/libs/com.sap.xi.mapping.tool.lib_api.jar"))
-    testRuntimeOnly(files("C:/workspace/Karlutka/libs/com.sap.aii.utilxi.core.jar"))
-    testRuntimeOnly(files("C:/workspace/Karlutka/libs/sap.com~tc~logging~java~impl.jar"))
-    testRuntimeOnly(files("C:/workspace/Karlutka/libs/sap.com~tc~bl~guidgenerator~impl.jar"))
-    testRuntimeOnly(files("C:/workspace/Karlutka/libs/com.sap.exception.jar"))
-    testRuntimeOnly(files("C:/workspace/Karlutka/libs/com.sap.aii.utilxi.server.jar"))
+    // шихта всякая для изучений:
+//    testImplementation(files("C:/workspace/Karlutka/libs/com.sap.xi.mapping.tool.lib.filter.jar"))
+//    testImplementation(files("C:/workspace/Karlutka/libs/com.sap.aii.mapping.api.filter.jar"))
+//    testImplementation(files("C:/workspace/Karlutka/libs/com.sap.xi.mapping.tool.lib_api.jar"))
+//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/com.sap.aii.utilxi.core.jar"))
+//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/sap.com~tc~logging~java~impl.jar"))
+//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/sap.com~tc~bl~guidgenerator~impl.jar"))
+//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/com.sap.exception.jar"))
+//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/com.sap.aii.utilxi.server.jar"))
 
 //    testImplementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }
