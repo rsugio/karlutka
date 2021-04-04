@@ -61,10 +61,16 @@ public class Tests {
     }
 
     @Test
+    public void massTestIco() throws IOException {
+
+    }
+
+    @Test
     public void cpi() throws IOException {
         Definitions.Companion.parse(getString("/Iflow/1.iflw.xml"));
 //      пока блупринты не парсятся полностью, надо писать дальше
-//        Blueprint.Companion.parse(getString("/Iflow/beans.xml"));
-
+        if (false) {
+            Blueprint.Companion.parse(getString("/Iflow/beans.xml"));
+        }
     }
 }

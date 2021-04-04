@@ -10,6 +10,12 @@ import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import java.net.URL
+import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+import java.nio.file.Paths
+import javax.net.ssl.HttpsURLConnection
+import kotlin.system.exitProcess
 
 enum class EnumDirection { INBOUND, OUTBOUND }
 
@@ -420,4 +426,41 @@ fun xml(): XML {
         autoPolymorphic = true
     }
     return xml
+}
+
+fun main() {
+//    var cnt = 100000
+//    while (cnt < 101336) {
+//        val xmlSoap = Files.newBufferedReader(Paths.get("tmp/$cnt.xml")).readText()
+//        println(cnt)
+//        val obj = IntegratedConfiguration750ReadResponse.parse(xmlSoap)
+//        cnt++
+//    }
+    // Очень простой клиент для проверки сериализатора
+    val auth = "Basic ?????????????????????????"
+    val host = "http://host:50000"
+//    var con = URL(IntegratedConfigurationQueryRequest.getUrl750(host)).openConnection()
+//    con.setRequestProperty("Authorization", auth)
+//    con.setRequestProperty("Content-Type", "text/xml; charset=utf-8")
+//    con.doOutput = true
+//    var writer = con.getOutputStream().writer()
+//    writer.write(IntegratedConfigurationQueryRequest().composeSOAP())
+//    writer.close()
+//    con.connect()
+//    var x = String(con.getInputStream().readAllBytes(), StandardCharsets.UTF_8)
+//    IntegratedConfigurationQueryResponse.parse(x).IntegratedConfigurationID.forEach {
+//        con = URL(IntegratedConfigurationReadRequest.getUrl750(host)).openConnection()
+//        con.setRequestProperty("Authorization", auth)
+//        con.setRequestProperty("Content-Type", "text/xml; charset=utf-8")
+//        con.doOutput = true
+//        writer = con.getOutputStream().writer()
+//        writer.write(IntegratedConfigurationReadRequest("User", mutableListOf(it)).composeSOAP())
+//        writer.close()
+//        con.connect()
+//        x = String(con.getInputStream().readAllBytes(), StandardCharsets.UTF_8)
+//        // Сохраняем как файл
+//        val wr = Files.newBufferedWriter(Paths.get("tmp/${cnt++}.xml"))
+//        wr.write(x)
+//        wr.close()
+//    }
 }
