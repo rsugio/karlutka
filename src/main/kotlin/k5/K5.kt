@@ -1,13 +1,15 @@
 package k5
 
-import kotlinx.serialization.*
+import kotlinx.serialization.Polymorphic
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.serializer
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
-import nl.adaptivity.xmlutil.serialization.XmlValue
 
 enum class EnumDirection { INBOUND, OUTBOUND }
 
@@ -405,26 +407,17 @@ fun xml(): XML {
             subclass(ConfigurationScenarioQueryResponse::class, serializer())
             subclass(ConfigurationScenarioReadRequest::class, serializer())
             subclass(ConfigurationScenarioReadResponse::class, serializer())
+            subclass(IntegratedConfigurationQueryRequest::class, serializer())
+            subclass(IntegratedConfigurationQueryResponse::class, serializer())
+            subclass(IntegratedConfigurationReadRequest::class, serializer())
+            subclass(IntegratedConfiguration750ReadResponse::class, serializer())
 
             //SAPJEEDSR_Service, SAPJEEDSR_ServiceExt
         }
     }
     val xml = XML(module) {
-        indent = 1
         xmlDeclMode = XmlDeclMode.None
         autoPolymorphic = true
     }
     return xml
 }
-
-fun main() {
-    var z = ""
-    val xml = xml()
-    val decoded: Envelope<ValueMappingReadResponse> = xml.decodeFromString(testXml)
-    decoded.data.ValueMapping.forEach {
-        println(it.Representation)
-    }
-}
-
-private val testXml = """
-"""

@@ -2,11 +2,10 @@ package k5
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
-import nl.adaptivity.xmlutil.XmlReader
+import kotlinx.serialization.encodeToString
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
-import java.io.Reader
 
 // Сервисы из http://sap.com/xi/BASIS
 
@@ -14,11 +13,12 @@ import java.io.Reader
 // {{host}}/CommunicationChannelInService/CommunicationChannelInImplBean
 @Serializable
 @XmlSerialName("CommunicationChannelQueryRequest", "http://sap.com/xi/BASIS", "b")
-class CommunicationChannelQueryRequest(
-) {
+class CommunicationChannelQueryRequest {
     companion object {
         fun getUrl(host: String) = "$host/CommunicationChannelInService/CommunicationChannelInImplBean"
     }
+
+    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -29,7 +29,7 @@ class CommunicationChannelQueryResponse(
     val channels: MutableList<CommunicationChannelID> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: String? = null
+    val LogMessageCollection: String
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -58,7 +58,7 @@ data class CommunicationChannelID(
 )
 
 @Serializable
-@XmlSerialName("IntegratedConfiguration", "", "")
+// @XmlSerialName использовать запрещено
 data class IntegratedConfigurationID(
     @XmlElement(true)
     val SenderPartyID: String,
@@ -86,6 +86,8 @@ class CommunicationChannelReadRequest(
     companion object {
         fun getUrl(host: String) = "$host/CommunicationChannelInService/CommunicationChannelInImplBean"
     }
+
+    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -249,11 +251,12 @@ data class AdministrativeData(
 
 @Serializable
 @XmlSerialName("ValueMappingQueryRequest", "http://sap.com/xi/BASIS", "b")
-class ValueMappingQueryRequest(
-) {
+class ValueMappingQueryRequest {
     companion object {
         fun getUrl(host: String) = "$host/ValueMappingInService/ValueMappingInImplBean"
     }
+
+    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -261,7 +264,7 @@ class ValueMappingQueryRequest(
 class ValueMappingQueryResponse(
     @XmlElement(true)
     @XmlSerialName("ValueMappingID", "", "")
-    val channel: MutableList<String> = mutableListOf(),
+    val ValueMappingID: MutableList<String> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
     val LogMessageCollection: String?
@@ -284,6 +287,8 @@ class ValueMappingReadRequest(
     companion object {
         fun getUrl(host: String) = "$host/ValueMappingInService/ValueMappingInImplBean"
     }
+
+    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -317,11 +322,12 @@ class ValueMapping(
 
 @Serializable
 @XmlSerialName("ConfigurationScenarioQueryRequest", "http://sap.com/xi/BASIS", "b")
-class ConfigurationScenarioQueryRequest(
-) {
+class ConfigurationScenarioQueryRequest {
     companion object {
         fun getUrl(host: String) = "$host/ConfigurationScenarioInService/ConfigurationScenarioInImplBean"
     }
+
+    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -355,6 +361,8 @@ class ConfigurationScenarioReadRequest(
     companion object {
         fun getUrl(host: String) = "$host/ConfigurationScenarioInService/ConfigurationScenarioInImplBean"
     }
+
+    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -389,5 +397,247 @@ class ConfigurationScenario(
     @XmlSerialName("CommunicationChannel", "", "")
     val CommunicationChannel: MutableList<CommunicationChannelID> = mutableListOf(),
     @XmlElement(true)
+    @XmlSerialName("IntegratedConfiguration", "", "")
     val IntegratedConfiguration: MutableList<IntegratedConfigurationID> = mutableListOf()
+)
+
+@Serializable
+@XmlSerialName("IntegratedConfigurationQueryRequest", "http://sap.com/xi/BASIS", "b")
+class IntegratedConfigurationQueryRequest {
+    companion object {
+        fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
+    }
+
+    fun composeSOAP() = xml().encodeToString(Envelope(this))
+}
+
+@Serializable
+@XmlSerialName("IntegratedConfigurationQueryResponse", "http://sap.com/xi/BASIS", "b")
+class IntegratedConfigurationQueryResponse(
+    @XmlElement(true)
+    @XmlSerialName("IntegratedConfigurationID", "", "")
+    val IntegratedConfigurationID: MutableList<IntegratedConfigurationID> = mutableListOf(),
+
+    @XmlElement(true)
+    @XmlSerialName("LogMessageCollection", "", "")
+    val LogMessageCollection: String? = null
+) {
+    companion object {
+        fun parse(payloadXml: String) =
+            xml().decodeFromString<Envelope<IntegratedConfigurationQueryResponse>>(payloadXml).data
+    }
+}
+
+@Serializable
+@XmlSerialName("IntegratedConfigurationReadRequest", "http://sap.com/xi/BASIS", "b")
+class IntegratedConfigurationReadRequest(
+    @XmlElement(true)
+    @XmlSerialName("ReadContext", "", "")
+    val ReadContext: String = "User",
+    @XmlElement(true)
+    @XmlSerialName("IntegratedConfigurationID", "", "")
+    val IntegratedConfigurationID: MutableList<IntegratedConfigurationID> = mutableListOf()
+) {
+    companion object {
+        fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
+    }
+
+    fun composeSOAP() = xml().encodeToString(Envelope(this))
+}
+
+@Serializable
+@XmlSerialName("IntegratedConfiguration750ReadResponse", "http://sap.com/xi/BASIS", "b")
+class IntegratedConfiguration750ReadResponse(
+    @XmlElement(true)
+    @XmlSerialName("IntegratedConfiguration", "", "")
+    val IntegratedConfiguration: MutableList<IntegratedConfiguration> = mutableListOf(),
+
+    @XmlElement(true)
+    @XmlSerialName("LogMessageCollection", "", "")
+    val LogMessageCollection: String? = null
+) {
+    companion object {
+        fun parse(payloadXml: String) =
+            xml().decodeFromString<Envelope<IntegratedConfiguration750ReadResponse>>(payloadXml).data
+    }
+}
+
+@Serializable
+@XmlSerialName("IntegratedConfiguration", "http://sap.com/xi/BASIS", "b")
+class IntegratedConfiguration(
+    @XmlElement(true)
+    val MasterLanguage: String,
+    @XmlElement(true)
+    val AdministrativeData: AdministrativeData,
+    @XmlElement(true)
+    @XmlSerialName("IntegratedConfigurationID", "", "")
+    val IntegratedConfigurationID: IntegratedConfigurationID,
+    @XmlElement(true)
+    val InboundProcessing: InboundProcessing,
+    @XmlElement(true)
+    val Receivers: Receivers,
+    @XmlElement(true)
+    val ReceiverInterfaces: ReceiverInterfaces,
+    @XmlElement(true)
+    val OutboundProcessing: OutboundProcessing,
+    @XmlElement(true)
+    @XmlSerialName("Logging", "", "")
+    val Logging: StagingLogging,
+    @XmlElement(true)
+    @XmlSerialName("Staging", "", "")
+    val Staging: StagingLogging,
+)
+
+@Serializable
+@XmlSerialName("InboundProcessing", "", "")
+class InboundProcessing(
+    @XmlElement(true)
+    @XmlSerialName("SenderInterfaceSoftwareComponentVersion", "", "")
+    val SenderInterfaceSoftwareComponentVersion: String,
+    @XmlElement(true)
+    @XmlSerialName("CommunicationChannel", "", "")
+    val CommunicationChannel: CommunicationChannelID,
+    @XmlElement(true)
+    @XmlSerialName("SchemaValidationIndicator", "", "")
+    val SchemaValidationIndicator: Boolean,
+    @XmlElement(true)
+    @XmlSerialName("VirusScan", "", "")
+    val VirusScan: String,
+)
+
+@Serializable
+@XmlSerialName("Receivers", "", "")
+class Receivers(
+    @XmlElement(true)
+    @XmlSerialName("ReceiverWildcardIndicator", "", "")
+    val ReceiverWildcardIndicator: Boolean,
+    @XmlElement(true)
+    @XmlSerialName("ReceiverRule", "", "")
+    val ReceiverRule: ReceiverRule,
+    @XmlElement(true)
+    @XmlSerialName("NoReceiverBehaviour", "", "")
+    val NoReceiverBehaviour: String,
+)
+
+@Serializable
+@XmlSerialName("ReceiverRule", "", "")
+class ReceiverRule(
+    @XmlElement(true)
+    @XmlSerialName("Condition", "", "")
+    val Condition: String,
+    @XmlElement(true)
+    @XmlSerialName("Receiver", "", "")
+    val Receiver: Receiver,
+)
+
+@Serializable
+@XmlSerialName("Receiver", "", "")
+class Receiver(
+    @XmlElement(true)
+    @XmlSerialName("CommunicationParty", "", "")
+    val CommunicationParty: ReceiverParam,
+    @XmlElement(true)
+    @XmlSerialName("CommunicationPartySchema", "", "")
+    val CommunicationPartySchema: ReceiverParam,
+    @XmlElement(true)
+    @XmlSerialName("CommunicationPartyAgency", "", "")
+    val CommunicationPartyAgency: ReceiverParam,
+    @XmlElement(true)
+    @XmlSerialName("CommunicationComponent", "", "")
+    val CommunicationComponent: ReceiverParam,
+)
+
+@Serializable
+class ReceiverParam(
+    @XmlElement(true)
+    val TypeID: String,
+    @XmlElement(true)
+    val Value: String,
+    @XmlElement(true)
+    val Datatype: String,
+    @XmlElement(true)
+    val ContextObjectName: String,
+    @XmlElement(true)
+    val ContextObjectNamespace: String,
+)
+
+
+@Serializable
+@XmlSerialName("ReceiverInterfaces", "", "")
+class ReceiverInterfaces(
+    @XmlElement(true)
+    @XmlSerialName("Receiver", "", "")
+    val Receiver: BusinessSystemID,
+    @XmlElement(true)
+    @XmlSerialName("ReceiverInterfaceRule", "", "")
+    val ReceiverInterfaceRule: ReceiverInterfaceRule,
+    @XmlElement(true)
+    @XmlSerialName("QualityOfService", "", "")
+    val QualityOfService: String,   //TODO - ENUM. EO, EOIO and what else?
+)
+
+@Serializable
+@XmlSerialName("ReceiverInterfaceRule", "", "")
+class ReceiverInterfaceRule(
+    @XmlElement(true)
+    @XmlSerialName("Operation", "", "")
+    val Operation: String,
+    @XmlElement(true)
+    @XmlSerialName("Mapping", "", "")
+    val Mapping: RepositoryReferenceID,
+    @XmlElement(true)
+    @XmlSerialName("Interface", "", "")
+    val Interface: RepositoryReferenceID,
+)
+
+@Serializable
+class RepositoryReferenceID(
+    @XmlElement(true)
+    val Name: String,
+    @XmlElement(true)
+    val Namespace: String,
+    @XmlElement(true)
+    val SoftwareComponentVersionID: String,
+)
+
+
+@Serializable
+@XmlSerialName("OutboundProcessing", "", "")
+class OutboundProcessing(
+    @XmlElement(true)
+    @XmlSerialName("Receiver", "", "")
+    val Receiver: BusinessSystemID,
+    @XmlElement(true)
+    @XmlSerialName("ReceiverInterface", "", "")
+    val ReceiverInterface: RepositoryReferenceID,
+    @XmlElement(true)
+    @XmlSerialName("CommunicationChannel", "", "")
+    val CommunicationChannel: CommunicationChannelID,
+    @XmlElement(true)
+    @XmlSerialName("SchemaValidationIndicator", "", "")
+    val SchemaValidationIndicator: Boolean,
+    @XmlElement(true)
+    @XmlSerialName("VirusScan", "", "")
+    val VirusScan: String,
+    @XmlElement(true)
+    @XmlSerialName("HeaderMapping", "", "")
+    val HeaderMapping: HeaderMapping,
+)
+
+@Serializable
+class HeaderMapping(
+    @XmlElement(true)
+    val Sender: String,
+    @XmlElement(true)
+    val Receiver: String
+)
+
+@Serializable
+class StagingLogging(
+    @XmlElement(true)
+    @XmlSerialName("UseGlobal", "", "")
+    val UseGlobal: Boolean,
+    @XmlElement(true)
+    @XmlSerialName("SpecificConfiguration", "", "")
+    val SpecificConfiguration: String
 )
