@@ -1,14 +1,14 @@
 
 plugins {
     idea
-    kotlin("jvm") version "1.5.0-M2"    // version "1.4.32"
+    kotlin("jvm") version "1.5.0-M2"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.5.0-M2"
     id("org.jetbrains.dokka") version "1.4.30"
     id("maven-publish")
 }
 
 group = "io.rsug"
-version = "0.0.1-build5"
+version = "0.0.1-build6"
 
 repositories {
     jcenter()
@@ -25,7 +25,7 @@ dependencies {
 
     implementation("net.devrieze:xmlutil-jvm:0.81.1")
     implementation("net.devrieze:xmlutil-serialization-jvm:0.81.1")
-    runtimeOnly("com.fasterxml.woodstox:woodstox-core:6+")
+    runtimeOnly("com.fasterxml.woodstox:woodstox-core:6.2.4")   // 6+
 
     implementation("com.github.xmlet:xsdParser:1.1.3")
 
@@ -43,18 +43,6 @@ dependencies {
 //    testImplementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }
 
-tasks.test {
-    useJUnit()
-}
-
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
-}
-
-tasks.dokkaHtml.configure {
-    outputDirectory.set(buildDir.resolve("dokka"))
-}
-
 publishing {
     requireNotNull(property("gpr.user"))
     requireNotNull(property("gpr.key"))
@@ -69,16 +57,26 @@ publishing {
         }
     }
     publications {
-        create<MavenPublication>("gpr") {
-            run {
-                groupId = group as String
+        publications {
+            create<MavenPublication>("maven") {
+                groupId = project.group as String // "io.rsug"
                 artifactId = "karlutka"
-                version = version as String
-                artifact("$buildDir/libs/karlutka-0.0.1-build5.jar")
+                version = project.version as String // "0.0.1-build6"
+
+                from(components["java"])
             }
         }
-//        register("gpr") {
-//            from(components["jar"])
-//        }
     }
+}
+
+tasks.test {
+    useJUnit()
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
+    kotlinOptions.jvmTarget = "11"
+}
+
+tasks.dokkaHtml.configure {
+    outputDirectory.set(buildDir.resolve("dokka"))
 }
