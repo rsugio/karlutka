@@ -1,19 +1,18 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     idea
     kotlin("jvm") version "1.5.0-M2"    // version "1.4.32"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.5.0-M2"
     id("org.jetbrains.dokka") version "1.4.30"
+    id("maven-publish")
 }
 
 group = "io.rsug"
-version = "0.0.1-build4"
+version = "0.0.1-build5"
 
 repositories {
     jcenter()
     mavenCentral()
-//    maven(url = "https://dl.bintray.com/pdvrieze/maven")
     // see https://stackoverflow.com/questions/48242437/how-to-add-a-maven-repository-by-url-using-kotlinscript-dsl-build-gradle-kts
     maven{
         url = uri("https://dl.bintray.com/pdvrieze/maven")
@@ -21,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.0-M2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
     implementation("net.devrieze:xmlutil-jvm:0.81.1")
@@ -47,10 +47,38 @@ tasks.test {
     useJUnit()
 }
 
-tasks.withType<KotlinCompile>() {
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
     kotlinOptions.jvmTarget = "11"
 }
 
 tasks.dokkaHtml.configure {
     outputDirectory.set(buildDir.resolve("dokka"))
+}
+
+publishing {
+    requireNotNull(property("gpr.user"))
+    requireNotNull(property("gpr.key"))
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/rsugio/karlutka")
+            credentials {
+                username = property("gpr.user") as String
+                password = property("gpr.key") as String
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("gpr") {
+            run {
+                groupId = group as String
+                artifactId = "karlutka"
+                version = version as String
+                artifact("$buildDir/libs/karlutka-0.0.1-build5.jar")
+            }
+        }
+//        register("gpr") {
+//            from(components["jar"])
+//        }
+    }
 }
