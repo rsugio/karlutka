@@ -389,7 +389,7 @@ class Envelope<BODYTYPE> private constructor(
 fun xml(): XML {
     val module = SerializersModule {
         polymorphic(Any::class) {
-            // AdapterMessageMonitoringVi
+            // AdapterMessageMonitoringViCommunicationChannelQueryResponse
             subclass(getConnections::class, serializer())
             subclass(getConnectionsResponse::class, serializer())
             subclass(getIntegrationFlows::class, serializer())

@@ -5,8 +5,8 @@
             <ValueMapping>
                 <MasterLanguage>EN</MasterLanguage>
                 <AdministrativeData>
-                    <ResponsibleUserAccountID>koptev_av</ResponsibleUserAccountID>
-                    <LastChangeUserAccountID>koptev_av</LastChangeUserAccountID>
+                    <ResponsibleUserAccountID>xxx</ResponsibleUserAccountID>
+                    <LastChangeUserAccountID>vvv</LastChangeUserAccountID>
                     <LastChangeDateTime>2020-02-21T11:49:33.840+03:00</LastChangeDateTime>
                     <FolderPathID>/ARIBA/QuoteRequest/</FolderPathID>
                 </AdministrativeData>
@@ -18,8 +18,8 @@
             <ValueMapping>
                 <MasterLanguage>EN</MasterLanguage>
                 <AdministrativeData>
-                    <ResponsibleUserAccountID>koptev_av</ResponsibleUserAccountID>
-                    <LastChangeUserAccountID>koptev_av</LastChangeUserAccountID>
+                    <ResponsibleUserAccountID>bbb</ResponsibleUserAccountID>
+                    <LastChangeUserAccountID>yy</LastChangeUserAccountID>
                     <LastChangeDateTime>2020-02-21T11:49:33.840+03:00</LastChangeDateTime>
                     <FolderPathID>/ARIBA/QuoteRequest/</FolderPathID>
                 </AdministrativeData>

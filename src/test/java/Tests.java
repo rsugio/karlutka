@@ -19,7 +19,7 @@ public class Tests {
 
     void printSoap(String url, String soapXml) {
 //        System.out.println(url);
-//        System.out.println(soapXml);
+//        System.out.println(soapXml+"\n\n");
     }
 
     @Test
@@ -41,6 +41,8 @@ public class Tests {
                 new CommunicationChannelReadRequest("User", ccqr.getChannels()).composeSOAP());
         CommunicationChannelReadResponse ccrr = CommunicationChannelReadResponse.Companion.parse(getString("/PI_xiBasis/CommunicationChannelReadResponse.xml"));
         assert ccrr.getChannels().size() > 0;
+        ccrr = CommunicationChannelReadResponse.Companion.parse(getString("/PI_xiBasis/CommunicationChannelReadResponse2.xml"));
+        assert ccrr.getChannels().size() == 0 && ccrr.getLogMessageCollection().getChannelLogs().size()>0;
 
         // Configuration Scenarios
         printSoap(ConfigurationScenarioQueryRequest.Companion.getUrl(localhost),

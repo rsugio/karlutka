@@ -9,6 +9,37 @@ import nl.adaptivity.xmlutil.serialization.XmlValue
 
 // Сервисы из http://sap.com/xi/BASIS
 
+@Serializable
+class LogMessageCollection(
+    @XmlElement(true)
+    @XmlSerialName("LogMessageCommunicationChannel", "", "")
+    val channelLogs: MutableList<LogMessage> = mutableListOf(),
+    @XmlElement(true)
+    @XmlSerialName("LogMessageOthers", "", "")
+    val otherLogs: MutableList<LogMessage> = mutableListOf(),
+)
+
+@Serializable
+// нельзя здесь указывать @XmlSerialName! он определяется по месту вызова
+class LogMessage(
+    @XmlElement(true)
+    @XmlSerialName("LogMessageItem", "", "")
+    val LogMessageItem: MutableList<LogMessageItem> = mutableListOf()
+)
+
+@Serializable
+class LogMessageItem(
+    @XmlElement(true)
+    @XmlSerialName("SeverityCode", "", "")
+    val SeverityCode: Int,
+    @XmlElement(true)
+    @XmlSerialName("ClassificationCode", "", "")
+    val ClassificationCode: String,
+    @XmlElement(true)
+    @XmlSerialName("Message", "", "")
+    val Message: String? = null
+)
+
 
 // {{host}}/CommunicationChannelInService/CommunicationChannelInImplBean
 @Serializable
@@ -29,7 +60,7 @@ class CommunicationChannelQueryResponse(
     val channels: MutableList<CommunicationChannelID> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: String
+    val LogMessageCollection: LogMessageCollection
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -81,6 +112,7 @@ class CommunicationChannelReadRequest(
     @XmlSerialName("ReadContext", "", "")
     val ReadContext: String = "User",
     @XmlElement(true)
+    @XmlSerialName("CommunicationChannelID", "", "")
     val channel: MutableList<CommunicationChannelID> = mutableListOf()
 ) {
     companion object {
@@ -97,7 +129,7 @@ class CommunicationChannelReadResponse(
     val channels: List<CommunicationChannel> = listOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: String? = null
+    val LogMessageCollection: LogMessageCollection
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -306,7 +338,7 @@ class ValueMappingReadResponse(
     val ValueMapping: MutableList<ValueMapping> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: String?
+    val LogMessageCollection: LogMessageCollection
 ) {
     companion object {
         fun parse(payloadXml: String) = xml().decodeFromString<Envelope<ValueMappingReadResponse>>(payloadXml).data
@@ -347,7 +379,7 @@ class ConfigurationScenarioQueryResponse(
 
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: String? = null
+    val LogMessageCollection: LogMessageCollection
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -382,7 +414,7 @@ class ConfigurationScenarioReadResponse(
 
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: String? = null
+    val LogMessageCollection: LogMessageCollection
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -428,7 +460,7 @@ class IntegratedConfigurationQueryResponse(
 
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: String? = null
+    val LogMessageCollection: LogMessageCollection
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -462,7 +494,7 @@ class IntegratedConfiguration750ReadResponse(
 
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: String? = null
+    val LogMessageCollection: LogMessageCollection
 ) {
     companion object {
         fun parse(payloadXml: String) =

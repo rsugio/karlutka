@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="успешно разобрано 1335 икошек">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/PI_xiBasis/IntegratedConfiguration750ReadResponse2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="исправлено в икошках - множественные получатели">
+      <change afterPath="$PROJECT_DIR$/src/test/resources/PI_xiBasis/CommunicationChannelReadResponse2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/K5.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/K5.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/XiBasis.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/XiBasis.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/PI_xiBasis/ValueMappingReadResponse.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/PI_xiBasis/ValueMappingReadResponse.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,29 +100,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
-  <component name="RunManager" selected="Gradle.Tests.pi">
-    <configuration name="Tests.pi" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;Tests.pi&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="karlutka [generateMetadataFileForGprPublication]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.karlutka [publishToMavenLocal]">
+    <configuration name="karlutka [check]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -134,7 +112,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="generateMetadataFileForGprPublication" />
+            <option value="check" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -144,7 +122,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="karlutka [generatePomFileForGprPublication]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="karlutka [generatePomFileForMavenPublication]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -155,7 +133,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="generatePomFileForGprPublication" />
+            <option value="generatePomFileForMavenPublication" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -165,18 +143,18 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="karlutka [publishAllPublicationsToGitHubPackagesRepository]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="karlutka [publishMavenPublicationToGitHubPackagesRepository]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="--scan" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="publishAllPublicationsToGitHubPackagesRepository" />
+            <option value="publishMavenPublicationToGitHubPackagesRepository" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -186,7 +164,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="karlutka [publishGprPublicationToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="karlutka [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -197,7 +175,28 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="publishGprPublicationToMavenLocal" />
+            <option value="publishToMavenLocal" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="karlutka [publish]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publish" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -209,11 +208,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests.pi" />
-        <item itemvalue="Gradle.karlutka [generateMetadataFileForGprPublication]" />
-        <item itemvalue="Gradle.karlutka [generatePomFileForGprPublication]" />
-        <item itemvalue="Gradle.karlutka [publishGprPublicationToMavenLocal]" />
-        <item itemvalue="Gradle.karlutka [publishAllPublicationsToGitHubPackagesRepository]" />
+        <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
+        <item itemvalue="Gradle.karlutka [publish]" />
+        <item itemvalue="Gradle.karlutka [publishMavenPublicationToGitHubPackagesRepository]" />
+        <item itemvalue="Gradle.karlutka [generatePomFileForMavenPublication]" />
+        <item itemvalue="Gradle.karlutka [check]" />
       </list>
     </recent_temporary>
   </component>
@@ -268,7 +267,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617560652971</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="попытки использовать GPR">
+      <created>1617601355788</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1617601355788</updated>
+    </task>
+    <task id="LOCAL-00008" summary="исправлено в икошках - множественные получатели">
+      <created>1617601381785</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1617601381785</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -288,6 +301,8 @@
     <MESSAGE value="расшарить проект" />
     <MESSAGE value="текущее" />
     <MESSAGE value="успешно разобрано 1335 икошек" />
-    <option name="LAST_COMMIT_MESSAGE" value="успешно разобрано 1335 икошек" />
+    <MESSAGE value="попытки использовать GPR" />
+    <MESSAGE value="исправлено в икошках - множественные получатели" />
+    <option name="LAST_COMMIT_MESSAGE" value="исправлено в икошках - множественные получатели" />
   </component>
 </project>
