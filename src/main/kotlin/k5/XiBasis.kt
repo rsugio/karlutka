@@ -487,9 +487,11 @@ class IntegratedConfiguration(
     @XmlElement(true)
     val Receivers: Receivers,
     @XmlElement(true)
-    val ReceiverInterfaces: ReceiverInterfaces,
+    @XmlSerialName("ReceiverInterfaces", "", "")
+    val ReceiverInterfaces: MutableList<ReceiverInterfaces> = mutableListOf(),
     @XmlElement(true)
-    val OutboundProcessing: OutboundProcessing,
+    @XmlSerialName("OutboundProcessing", "", "")
+    val OutboundProcessing: MutableList<OutboundProcessing> = mutableListOf(),
     @XmlElement(true)
     val PrefixNamespaceMapping: PrefixNamespaceMapping? = null,
     @XmlElement(true)

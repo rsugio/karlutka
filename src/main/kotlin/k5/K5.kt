@@ -389,6 +389,7 @@ class Envelope<BODYTYPE> private constructor(
 fun xml(): XML {
     val module = SerializersModule {
         polymorphic(Any::class) {
+            // AdapterMessageMonitoringVi
             subclass(getConnections::class, serializer())
             subclass(getConnectionsResponse::class, serializer())
             subclass(getIntegrationFlows::class, serializer())
@@ -437,8 +438,8 @@ fun main() {
 //        cnt++
 //    }
     // Очень простой клиент для проверки сериализатора
-    val auth = "Basic ?????????????????????????"
-    val host = "http://host:50000"
+//    val auth = "Basic ?????????????????????????"
+//    val host = "http://host:50000"
 //    var con = URL(IntegratedConfigurationQueryRequest.getUrl750(host)).openConnection()
 //    con.setRequestProperty("Authorization", auth)
 //    con.setRequestProperty("Content-Type", "text/xml; charset=utf-8")
