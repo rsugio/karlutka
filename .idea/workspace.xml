@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="исправлено в икошках - множественные получатели">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/PI_xiBasis/CommunicationChannelReadResponse2.xml" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="добавлен разбор логов, предварительно">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/K5.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/K5.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/XiBasis.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/XiBasis.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/PI_xiBasis/ValueMappingReadResponse.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/PI_xiBasis/ValueMappingReadResponse.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/MMap.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/MMap.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/XiObj.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/XiObj.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k3/K3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k3/K3.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,7 +279,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617601381785</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary=" работает GPR">
+      <created>1617641992836</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1617641992836</updated>
+    </task>
+    <task id="LOCAL-00010" summary="добавлен разбор логов, предварительно">
+      <created>1617642027071</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1617642027071</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -303,6 +315,8 @@
     <MESSAGE value="успешно разобрано 1335 икошек" />
     <MESSAGE value="попытки использовать GPR" />
     <MESSAGE value="исправлено в икошках - множественные получатели" />
-    <option name="LAST_COMMIT_MESSAGE" value="исправлено в икошках - множественные получатели" />
+    <MESSAGE value=" работает GPR" />
+    <MESSAGE value="добавлен разбор логов, предварительно" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлен разбор логов, предварительно" />
   </component>
 </project>

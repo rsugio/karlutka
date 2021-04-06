@@ -455,7 +455,6 @@ fun main() {
         )
     )
     var s = xml2.encodeToString(MappingTool.serializer(), mappingTool)
-//    println(s)
     s = Files.readString(Paths.get("C:\\workspace\\Karlutka\\src\\test\\resources\\mmap\\mappingTool.xml"))
     s = Files.readString(Paths.get("C:\\workspace\\Karlutka\\src\\test\\resources\\mmap\\1.mmap.xml"))
     mappingTool = xml.decodeFromString(s)

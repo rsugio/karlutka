@@ -290,5 +290,5 @@ fun main() {
     var s = xml.encodeToString(XiObj.Generic.serializer(), generic)
     s = Files.readString(Paths.get("C:\\workspace\\Karlutka\\src\\test\\resources\\mmap\\1.xml"))
     val xiObjs: XiObjs = xml.decodeFromString(s)
-    println(xiObjs.xiObj.content.contentString.trim())
+    val x123 = xiObjs.xiObj.content.contentString.trim()
 }

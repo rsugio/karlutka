@@ -59,9 +59,9 @@ publishing {
     publications {
         publications {
             create<MavenPublication>("maven") {
-                groupId = project.group as String // "io.rsug"
+                groupId = project.group as String
                 artifactId = "karlutka"
-                version = project.version as String // "0.0.1-build6"
+                version = project.version as String
 
                 from(components["java"])
             }

@@ -62,7 +62,6 @@ element is JsonObject && element.containsKey("__metadata")
 val __metadata = element["__metadata"]
 require(__metadata is JsonObject && __metadata.containsKey("type") && __metadata["type"] is JsonPrimitive)
 val type = __metadata["type"] as JsonPrimitive
-println(type)
 return type.content
 }
 
