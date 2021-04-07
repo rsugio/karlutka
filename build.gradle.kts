@@ -5,10 +5,11 @@ plugins {
     id("org.jetbrains.kotlin.plugin.serialization") version "1.5.0-M2"
     id("org.jetbrains.dokka") version "1.4.30"
     id("maven-publish")
+    id("com.jfrog.artifactory") version "4.21.0"
 }
 
 group = "io.rsug"
-version = "0.0.1-build6"
+version = "0.0.1-build7"
 
 repositories {
     jcenter()

@@ -31,7 +31,7 @@ enum class StateEnum { DEPLOYED }
 
 @Serializable
 @SerialName("__metadata")
-data class __Metadata(
+class __Metadata(
     val uri: String = "",
     val type: String = "",
     val id: String = "",
@@ -72,15 +72,15 @@ else -> K3.serializer()
 }
 }
 @Serializable
-data class K3s(val d: K3Data) {
+class K3s(val d: K3Data) {
 @Serializable
-data class K3Data(val results: List<K3>, val __next: String = "") {
+class K3Data(val results: List<K3>, val __next: String = "") {
 }
 }
 @Serializable
-data class K3Data(val results: List<K3Data>, val __next: String = "")
+class K3Data(val results: List<K3Data>, val __next: String = "")
 @Serializable
-data class K3Wrapper(val d: K3Data)
+class K3Wrapper(val d: K3Data)
  */
 
 @Serializable
@@ -98,7 +98,7 @@ class __DefUri(
 }
 
 @Serializable
-data class EntryPoint(
+class EntryPoint(
     val __metadata: __Metadata,
     val Name: String, //"UpdateServiceRequest",
     val Url: String, //"https://e45-iflmap.hcisbt.ru1.hana.ondemand.com/cxf/UpdateServiceRequest",
@@ -107,14 +107,14 @@ data class EntryPoint(
 )
 
 @Serializable
-data class ApiDefinition(
+class ApiDefinition(
     val __metadata: __Metadata,
     val Url: String, //"https://../Operations/api/WSDLDownload?artifactName=UpdateServiceRequest&servicePath=/UpdateServiceRequest&domainName=hcisbt.ru1.hana.ondemand.com&includePolicies=false",
     val Name: String, //"WSDL_POLICIES",
 )
 
 @Serializable
-data class ServiceEndpoint(
+class ServiceEndpoint(
     val __metadata: __Metadata,     //com.sap.hci.api.ServiceEndpoint
     val Name: String,    // "Create follow up document from ServiceRequest in S4HANA from Sales Cloud",
     val Id: String,             // "UpdateServiceRequest$endpointAddress=UpdateServiceRequest",
@@ -128,20 +128,20 @@ data class ServiceEndpoint(
     val ApiDefinitions: ApiDefinitionList // com.sap.hci.api.Definition
 ) {
     @Serializable
-    data class EntryPointsList(
+    class EntryPointsList(
         val __deferred: __Metadata = __Metadata.__deferred(),
         val results: List<EntryPoint> = listOf()
     )
 
     @Serializable
-    data class ApiDefinitionList(
+    class ApiDefinitionList(
         val __deferred: __Metadata = __Metadata.__deferred(),
         val results: List<ApiDefinition> = listOf()
     )
 }
 
 @Serializable
-data class IntegrationArtifact(
+class IntegrationArtifact(
     val __metadata: __Metadata,
     val Id: String,
     val Name: String,
@@ -151,7 +151,7 @@ data class IntegrationArtifact(
 )
 
 @Serializable
-data class MessageProcessingLog(
+class MessageProcessingLog(
     val __metadata: __Metadata,
     val MessageGuid: String,
     val CorrelationId: String,
@@ -180,32 +180,32 @@ data class MessageProcessingLog(
 )
 
 @Serializable
-data class CustomHeaderProperty(
+class CustomHeaderProperty(
     val __metadata: __Metadata,
     val Name: String, //"UpdateServiceRequest",
 )
 
 @Serializable
-data class CustomHeaderPropertiesList(
+class CustomHeaderPropertiesList(
     val __deferred: __Metadata = __Metadata.__deferred(),
     val results: List<CustomHeaderProperty> = listOf()
 )
 
 @Serializable
-data class AdapterAttribute(
+class AdapterAttribute(
     val __metadata: __Metadata,
     val Name: String, //"",
 )
 
 @Serializable
-data class AdapterAttributesList(
+class AdapterAttributesList(
     val __deferred: __Metadata = __Metadata.__deferred(),
     val results: List<AdapterAttribute> = listOf()
 )
 
 
 @Serializable
-data class MessageStoreEntry(
+class MessageStoreEntry(
     val __metadata: __Metadata, //MessageStoreEntry
     val Id: String, //"sap-it-res:msg:j68386e77:4c52bfe9-0c0e-4595-b44e-434dd3ad9ae3",
     val MessageGuid: String, //"AGBVsuUVg4t6AL3duuy39rKvkl0w",
@@ -217,7 +217,7 @@ data class MessageStoreEntry(
 )
 
 @Serializable
-data class ErrorInformation(
+class ErrorInformation(
     val __metadata: __Metadata,
     val MessageGuid: String,
     val Type: String,
@@ -225,7 +225,7 @@ data class ErrorInformation(
 )
 
 @Serializable
-data class Attachment(
+class Attachment(
     val __metadata: __Metadata,
     val Id: String,             // "sap-it-res:msg:j1f3f5ee1:daee9e6e-c068-4919-bf93-208daf5c1891"
     val MessageGuid: String,    // "AGAsY9TBVshDMOiDE4bn1oHJWvG2"
@@ -236,7 +236,7 @@ data class Attachment(
 )
 
 @Serializable
-data class IntegrationRuntimeArtifact(
+class IntegrationRuntimeArtifact(
     val __metadata: __Metadata, //com.sap.hci.api.IntegrationRuntimeArtifact
     val Id: String,             // "Create_follow_up_document_from_ServiceRequest_in_S4HANA_from_Sales_Cloud",
     val Version: String,        // "1.0.10"
@@ -245,8 +245,12 @@ data class IntegrationRuntimeArtifact(
     val DeployedBy: String,           // "s0123456789"
     val DeployedOn: String,    // "/Date(1616167332562)/"
     val Status: CpiDeployedStatus,     // "37542"
-    val ErrorInformation: __DefUri
-)
+    val ErrorInformation: __DefUri,
+) {
+    var integrationPackage: IntegrationPackage? = null
+    val integrationDesigntimeArtifact: IntegrationDesigntimeArtifact? = null
+    val errorInformation: ErrorInformation? = null
+}
 
 @Serializable
 class IntegrationPackage(
@@ -319,7 +323,7 @@ class IntegrationDesigntimeArtifacts(val d: IntegrationDesigntimeArtifactsData) 
 }
 
 @Serializable
-data class ValueMappingDesigntimeArtifact(
+class ValueMappingDesigntimeArtifact(
     val __metadata: __Metadata,     //com.sap.hci.api.ValueMappingDesigntimeArtifact
     val Id: String, //"OtherPartyMapping",
     val Version: String, //"1.0.2",
@@ -331,9 +335,9 @@ data class ValueMappingDesigntimeArtifact(
 )
 
 @Serializable
-data class ValueMappingDesigntimeArtifacts(val d: ValueMappingDesigntimeArtifactsData) {
+class ValueMappingDesigntimeArtifacts(val d: ValueMappingDesigntimeArtifactsData) {
     @Serializable
-    data class ValueMappingDesigntimeArtifactsData(
+    class ValueMappingDesigntimeArtifactsData(
         val results: List<ValueMappingDesigntimeArtifact>,
         val __next: String = ""
     )
@@ -345,7 +349,7 @@ data class ValueMappingDesigntimeArtifacts(val d: ValueMappingDesigntimeArtifact
 }
 
 @Serializable
-data class LogFile(
+class LogFile(
     val __metadata: __Metadata,     //com.sap.hci.api.LogFile
     val Name: String, //"http_access_2f39eb6_2021-03-13.log",
     val Application: String, //"e4500iflmap",
@@ -357,7 +361,7 @@ data class LogFile(
 )
 
 @Serializable
-data class LogFileArchive(
+class LogFileArchive(
     val __metadata: __Metadata,     //com.sap.hci.api.LogFileArchive
     val Scope: String,    // "all",
     val LogFileType: LogFileTypeEnum,             // "UpdateServiceRequest$endpointAddress=UpdateServiceRequest",
@@ -366,7 +370,7 @@ data class LogFileArchive(
 )
 
 @Serializable
-data class SecurityArtifactDescriptor(
+class SecurityArtifactDescriptor(
     val __metadata: __Metadata,     //com.sap.hci.api.SecurityArtifactDescriptor
     val Type: SecurityArtifactDescriptorTypeEnum, //"CREDENTIALS",
     val DeployedBy: String, //"S0020379160",
@@ -375,7 +379,7 @@ data class SecurityArtifactDescriptor(
 )
 
 @Serializable
-data class UserCredential(
+class UserCredential(
     val __metadata: __Metadata,     //com.sap.hci.api.UserCredential
     val Name: String, //"SalesCloudCredential",
     val Kind: String, //"default",
@@ -388,7 +392,7 @@ data class UserCredential(
 
 
 @Serializable
-data class Configuration(
+class Configuration(
     val __metadata: __Metadata,     //com.sap.hci.api.Configuration
     val ParameterKey: String,       //"BusinessSystem"
     val ParameterValue: String,     //"BS_SCPI_Q"
@@ -396,7 +400,7 @@ data class Configuration(
 )
 
 @Serializable
-data class Resource(
+class Resource(
     val __metadata: __Metadata,     //com.sap.hci.api.Resource
     val Name: String, //"logMessage.groovy"
     val ResourceType: String, //"groovy"
@@ -407,14 +411,14 @@ data class Resource(
 
 // ------------------------------------------------------------------------------------
 @Serializable
-data class MplDetailCommand(
+class MplDetailCommand(
     val messageGuid: String, //"AGBR51C6kL4uQkOorOEXuA3fDhAn"
     val mplData: String = "", //long text
     val lastError: String? = null, //"com.sap.gateway.core.ip.component.odata.exception.OsciException: Internal Server Error : 500 : HTTP/1.1 @ line 19 in ThrowException.groovy"
     val mplAttachments: List<MplAttachment2>,
 ) {
     @Serializable
-    data class MplAttachment2(
+    class MplAttachment2(
         val uri: String, //"sap-it-res:msg:j1f3f5ee1:ce8909db-4d99-47c2-a95c-2015a122aa20",
         val attachmentName: String, //"Log - Message",
         val contentType: String, //"text/xml",
@@ -432,15 +436,15 @@ data class MplDetailCommand(
 }
 
 @Serializable
-data class OPTag(val name: String, val value: String)
+class OPTag(val name: String, val value: String)
 
 //com.sap.it.nm.commands.deploy.DownloadContentCommand
 @Serializable
-data class OPDownloadContentCommand(
+class OPDownloadContentCommand(
     val artifacts: List<DownloadContent>, //"AGBR51C6kL4uQkOorOEXuA3fDhAn"
 ) {
     @Serializable
-    data class DownloadContent(
+    class DownloadContent(
         val content: ByteArray,
         val id: String, //"6ef77148-d236-41a3-b9ea-e6f703e7f774",
         val name: String, //"Replicate Claims Item from Sales RU to Sales EU",
@@ -451,7 +455,7 @@ data class OPDownloadContentCommand(
 
 // /itspaces/api/1.0/configurations
 @Serializable
-data class OPConfigurationKeyValue(val key: String, val value: JsonElement) {
+class OPConfigurationKeyValue(val key: String, val value: JsonElement) {
     companion object {
         val goodKeys = listOf("tenantId", "buildNumber", "nodeType", "tenantName", "webdavSupported")
         fun getUrl(hostTmn: String) =
@@ -480,12 +484,12 @@ data class OPConfigurationKeyValue(val key: String, val value: JsonElement) {
         }
     }
 }
-//data class OPCpiParams(val tenantId: String, val buildNumber: String, val tenantName:String)
+//class OPCpiParams(val tenantId: String, val buildNumber: String, val tenantName:String)
 
 @Serializable
-data class OPIntegrationComponentsListCommand(val artifactInformations: List<OPArtifactInformation>) {
+class OPIntegrationComponentsListCommand(val artifactInformations: List<OPArtifactInformation>) {
     @Serializable
-    data class OPArtifactInformation(
+    class OPArtifactInformation(
         val id: String, //"6ab549ff-888e-40f4-ac2c-7fa39de32beb"
         val name: String, //"VM_UOM"
         val symbolicName: String, //"VM_UOM"
@@ -508,9 +512,9 @@ data class OPIntegrationComponentsListCommand(val artifactInformations: List<OPA
 }
 
 @Serializable
-data class OPGetNodesCommand(val nodes: List<OPGetNodesCommandNode>) {
+class OPGetNodesCommand(val nodes: List<OPGetNodesCommandNode>) {
     @Serializable
-    data class OPGetNodesCommandNode(
+    class OPGetNodesCommandNode(
         val baseUrl: String,    //"https://vsa8281954:8041/"
         val clusterName: String, //"avtru1cpie.gbt7002.e450000"
         val components: List<OPGetNodesCommandNodeComponent>,
@@ -532,7 +536,7 @@ data class OPGetNodesCommand(val nodes: List<OPGetNodesCommandNode>) {
         val account: String,    //"avtru1cpie"
     ) {
         @Serializable
-        data class OPGetNodesCommandNodeComponent(
+        class OPGetNodesCommandNodeComponent(
             val desc: String, //"Monitor for Aries Subsystem Service Availability"
             val name: String, //"Subsystem Service"
             val artifactId: String = "",    //
@@ -540,14 +544,15 @@ data class OPGetNodesCommand(val nodes: List<OPGetNodesCommandNode>) {
             val tags: List<OPTag>, //[]
             val type: String, //"ESSENTIAL_SERVICE"
             val version: String = "", //"5.19.6"
-            val stateMessage: JsonElement = JsonNull, // OPGetNodesCommandNodeComponentStateMessage?, //Map<String, OPGetNodesCommandNodeComponentStateMessage>?,   //TODO -- пока неинтересно
+            //TODO -- пока stateMessage неинтересно, нужен контрпример если прямо насущно
+            val stateMessage: JsonElement = JsonNull, // OPGetNodesCommandNodeComponentStateMessage?, //Map<String, OPGetNodesCommandNodeComponentStateMessage>?,
             val restartable: Boolean, //false
             val syncState: String, //"NOT_APPLICABLE"
-            val adapterPollInfos: JsonArray   //TODO
+            val adapterPollInfos: JsonArray   //TODO -- нужен живой пример для уточнения типа
         )
 
         @Serializable
-        data class OPGetNodesCommandNodeDeployedArtifact(
+        class OPGetNodesCommandNodeDeployedArtifact(
             val id: String, //"02a15918-e7fd-4af0-ae51-5658534d83f1"
             val name: String, //"Custom Confirmation from Sales to MDG"
             val symbolicName: String, //"Custom_Confirmation_from_Sales_to_MDG"
@@ -571,7 +576,7 @@ data class OPGetNodesCommand(val nodes: List<OPGetNodesCommandNode>) {
 }
 
 @Serializable
-data class WebIFlow(
+class WebIFlow(
     val id: String, //"a949d19c-585c-4d32-9a73-36513cb01393",
     val bundleName: String, //"Update-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
     val state: StateEnum, //"DEPLOYED",
@@ -585,7 +590,7 @@ data class WebIFlow(
 }
 
 @Serializable
-data class WebIFlowSingle(
+class WebIFlowSingle(
     val version: String, //"1.34",
     val bpmnModel: BpmnModel,
     val propertyViewModel: JsonObject,
@@ -594,7 +599,7 @@ data class WebIFlowSingle(
     val galileiModel: JsonObject,
 ) {
     @Serializable
-    data class BpmnModel(
+    class BpmnModel(
         val iflowName: String, //"Replicate-Shipment-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
         val __type: String, //"iflow",
         val orientation: String, //"Vertical",
@@ -604,7 +609,7 @@ data class WebIFlowSingle(
     )
 
     @Serializable
-    data class Resource(
+    class Resource(
         val resourceName: String, //"LogMessage",
         val resourceLocation: String, //"script",
         val resourceType: String, //"groovy",
@@ -621,9 +626,9 @@ data class WebIFlowSingle(
 
 // ------------------------------------------------------------------------------------
 @Serializable
-data class MessageProcessingLogs(val d: MessageProcessingLogsData) {
+class MessageProcessingLogs(val d: MessageProcessingLogsData) {
     @Serializable
-    data class MessageProcessingLogsData(
+    class MessageProcessingLogsData(
         val results: List<MessageProcessingLog> = listOf(),
         val __next: String = ""
     )
@@ -634,7 +639,7 @@ data class MessageProcessingLogs(val d: MessageProcessingLogsData) {
 }
 
 @Serializable
-data class MessageProcessingLogSingle(val d: MessageProcessingLog) {
+class MessageProcessingLogSingle(val d: MessageProcessingLog) {
     companion object {
         fun getUrl(hostTmn: String, messageGuid: String, expand: Boolean = true) = if (expand)
             "$hostTmn/api/v1/MessageProcessingLogs('$messageGuid')?\$expand=CustomHeaderProperties,AdapterAttributes"
@@ -645,12 +650,12 @@ data class MessageProcessingLogSingle(val d: MessageProcessingLog) {
 
 
 @Serializable
-data class MPLErrorInformation(val d: ErrorInformation)
+class MPLErrorInformation(val d: ErrorInformation)
 
 @Serializable
-data class MPLAttachments(val d: MPLAttachmentsData) {
+class MPLAttachments(val d: MPLAttachmentsData) {
     @Serializable
-    data class MPLAttachmentsData(val results: List<Attachment>, val __next: String = "")
+    class MPLAttachmentsData(val results: List<Attachment>, val __next: String = "")
     companion object {
         fun getUrl(hostTmn: String, messageGuid: String) =
             "$hostTmn/api/v1/MessageProcessingLogs('$messageGuid')/Attachments"
@@ -658,18 +663,19 @@ data class MPLAttachments(val d: MPLAttachmentsData) {
 }
 
 @Serializable
-data class IntegrationRuntimeArtifacts(val d: IntegrationRuntimeArtifactsData) {
+class IntegrationRuntimeArtifacts(val d: IntegrationRuntimeArtifactsData) {
     @Serializable
-    data class IntegrationRuntimeArtifactsData(val results: List<IntegrationRuntimeArtifact>, val __next: String = "")
+    class IntegrationRuntimeArtifactsData(val results: List<IntegrationRuntimeArtifact>, val __next: String = "")
     companion object {
         fun getUrl(hostTmn: String) = "$hostTmn/api/v1/IntegrationRuntimeArtifacts"
+        fun parse(payloadJson: String) = jsonSerializer.decodeFromString<IntegrationRuntimeArtifacts>(payloadJson)
     }
 }
 
 @Serializable
-data class ServiceEndpoints(val d: ServiceEndpointsData) {
+class ServiceEndpoints(val d: ServiceEndpointsData) {
     @Serializable
-    data class ServiceEndpointsData(val results: List<ServiceEndpoint>, val __next: String = "")
+    class ServiceEndpointsData(val results: List<ServiceEndpoint>, val __next: String = "")
     companion object {
         fun getUrl(hostTmn: String, expand: Boolean) = if (expand)
             "$hostTmn/api/v1/ServiceEndpoints?\$expand=EntryPoints,ApiDefinitions"
@@ -681,9 +687,9 @@ data class ServiceEndpoints(val d: ServiceEndpointsData) {
 }
 
 @Serializable
-data class LogFiles(val d: LogFilesData) {
+class LogFiles(val d: LogFilesData) {
     @Serializable
-    data class LogFilesData(
+    class LogFilesData(
         val results: List<LogFile>, val __next: String = ""
     )
 
@@ -693,18 +699,18 @@ data class LogFiles(val d: LogFilesData) {
 }
 
 @Serializable
-data class LogFileArchives(val d: LogFileArchivesData) {
+class LogFileArchives(val d: LogFileArchivesData) {
     @Serializable
-    data class LogFileArchivesData(val results: List<LogFileArchive>, val __next: String = "")
+    class LogFileArchivesData(val results: List<LogFileArchive>, val __next: String = "")
     companion object {
         fun getUrl(hostTmn: String) = "$hostTmn/api/v1/LogFileArchives"
     }
 }
 
 @Serializable
-data class UserCredentials(val d: UserCredentialsData) {
+class UserCredentials(val d: UserCredentialsData) {
     @Serializable
-    data class UserCredentialsData(
+    class UserCredentialsData(
         val results: List<UserCredential>, val __next: String = ""
     )
 
@@ -714,9 +720,9 @@ data class UserCredentials(val d: UserCredentialsData) {
 }
 
 @Serializable
-data class MessageStoreEntries(val d: MessageStoreEntriesData) {
+class MessageStoreEntries(val d: MessageStoreEntriesData) {
     @Serializable
-    data class MessageStoreEntriesData(
+    class MessageStoreEntriesData(
         val results: List<MessageStoreEntry>, val __next: String = ""
     )
 
@@ -728,9 +734,9 @@ data class MessageStoreEntries(val d: MessageStoreEntriesData) {
 
 
 @Serializable
-data class Configurations(val d: ConfigurationsData) {
+class Configurations(val d: ConfigurationsData) {
     @Serializable
-    data class ConfigurationsData(
+    class ConfigurationsData(
         val results: List<Configuration>, val __next: String = ""
     )
 
@@ -740,9 +746,9 @@ data class Configurations(val d: ConfigurationsData) {
 }
 
 @Serializable
-data class Resources(val d: ResourcesData) {
+class Resources(val d: ResourcesData) {
     @Serializable
-    data class ResourcesData(
+    class ResourcesData(
         val results: List<Resource>, val __next: String = ""
     )
 

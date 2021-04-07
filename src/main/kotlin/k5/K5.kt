@@ -25,12 +25,12 @@ class getConnections()
 
 @Serializable
 @XmlSerialName("getConnectionsResponse", "urn:AdapterMessageMonitoringVi", "y")
-data class getConnectionsResponse(
+class getConnectionsResponse(
     val Response: Resp
 ) {
     @Serializable
     @XmlSerialName("Response", "", "")
-    data class Resp(
+    class Resp(
         @XmlSerialName("String", "urn:java/lang", "rn6")
         val x: List<String>
     )
@@ -38,7 +38,7 @@ data class getConnectionsResponse(
 
 @Serializable
 @XmlSerialName("getMessageBytesJavaLangStringIntBoolean", "urn:AdapterMessageMonitoringVi", "y")
-data class getMessageBytesJavaLangStringIntBoolean(
+class getMessageBytesJavaLangStringIntBoolean(
     @XmlElement(true)
     @XmlSerialName("messageKey", "urn:AdapterMessageMonitoringVi", "y")
     val messageKey: String = "",
@@ -52,7 +52,7 @@ data class getMessageBytesJavaLangStringIntBoolean(
 
 @Serializable
 @XmlSerialName("getMessageBytesJavaLangStringIntBooleanResponse", "urn:AdapterMessageMonitoringVi", "y")
-data class getMessageBytesJavaLangStringIntBooleanResponse(
+class getMessageBytesJavaLangStringIntBooleanResponse(
     @XmlElement(true)
     @XmlSerialName("Response", "", "")
     val Response: String = ""
@@ -60,7 +60,7 @@ data class getMessageBytesJavaLangStringIntBooleanResponse(
 
 @Serializable
 @XmlSerialName("getMessagesByIDs", "urn:AdapterMessageMonitoringVi", "y")
-data class getMessagesByIDs(
+class getMessagesByIDs(
     @XmlSerialName("messageIds", "urn:AdapterMessageMonitoringVi", "y")
     val messageIds: ListOfStrings = ListOfStrings(),
     @XmlSerialName("referenceIds", "urn:AdapterMessageMonitoringVi", "y")
@@ -71,7 +71,7 @@ data class getMessagesByIDs(
     val archive: Boolean = false
 ) {
     @Serializable
-    data class ListOfStrings(
+    class ListOfStrings(
         @XmlElement(true)
         @XmlSerialName("String", "urn:java/lang", "la")
         val String: List<String> = listOf()
@@ -80,12 +80,12 @@ data class getMessagesByIDs(
 
 @Serializable
 @XmlSerialName("getMessagesByIDsResponse", "urn:AdapterMessageMonitoringVi", "y")
-data class getMessagesByIDsResponse(
+class getMessagesByIDsResponse(
     val Resp: Response = Response(getMessageListResponse.LAFW(listOf()))
 ) {
     @Serializable
     @XmlSerialName("Response", "", "")
-    data class Response(
+    class Response(
         @XmlElement(true)
         val afw: getMessageListResponse.LAFW,
         @XmlElement(true)
@@ -102,7 +102,7 @@ data class getMessagesByIDsResponse(
 
 @Serializable
 @XmlSerialName("getMessageList", "urn:AdapterMessageMonitoringVi", "y")
-data class getMessageList(
+class getMessageList(
     @XmlElement(true)
     @XmlSerialName("filter", "urn:AdapterMessageMonitoringVi", "y")
     val filter: Filter = Filter(),
@@ -111,7 +111,7 @@ data class getMessageList(
     val maxMessages: Int = 9999
 ) {
     @Serializable
-    data class Filter(
+    class Filter(
         @XmlElement(true)
         @XmlSerialName("archive", "urn:com.sap.aii.mdt.server.adapterframework.ws", "pns")
         val archive: Boolean = false,
@@ -141,10 +141,10 @@ data class getMessageList(
 
 @Serializable
 @XmlSerialName("getMessageListResponse", "urn:AdapterMessageMonitoringVi", "y")
-data class getMessageListResponse(val Resp: Response) {
+class getMessageListResponse(val Resp: Response) {
     @Serializable
     @XmlSerialName("Response", "", "")
-    data class Response(
+    class Response(
         @XmlElement(true)
         @XmlSerialName("date", "urn:com.sap.aii.mdt.server.adapterframework.ws", "rn7")
         val date: String,
@@ -163,12 +163,12 @@ data class getMessageListResponse(val Resp: Response) {
 
     @Serializable
     @XmlSerialName("list", "urn:com.sap.aii.mdt.server.adapterframework.ws", "rn7")
-    data class LAFW(val list: List<AdapterFrameworkData>)
+    class LAFW(val list: List<AdapterFrameworkData>)
 }
 
 @Serializable
 @XmlSerialName("AdapterFrameworkData", "urn:com.sap.aii.mdt.server.adapterframework.ws", "rn7")
-data class AdapterFrameworkData(
+class AdapterFrameworkData(
     @XmlSerialName("cancelable", "urn:com.sap.aii.mdt.server.adapterframework.ws", "rn7")
     val cancelable: rn2Boolean = rn2Boolean(false),
     @XmlElement(true)
@@ -291,7 +291,7 @@ data class AdapterFrameworkData(
 )
 
 @Serializable
-data class Interface_(
+class Interface_(
     @XmlElement(true)
     @XmlSerialName("name", "urn:com.sap.aii.mdt.api.data", "rn2")
     val name: String = "",
@@ -301,7 +301,7 @@ data class Interface_(
 )
 
 @Serializable
-data class Party_(
+class Party_(
     @XmlElement(true)
     @XmlSerialName("agency", "urn:com.sap.aii.mdt.api.data", "rn2")
     val agency: String = "",
@@ -314,14 +314,14 @@ data class Party_(
 )
 
 @Serializable
-data class rn2Boolean(
+class rn2Boolean(
     @XmlElement(true)
     @XmlSerialName("value", "urn:com.sap.aii.mdt.api.data", "rn2")
     val value: Boolean
 )
 
 @Serializable
-data class laString(
+class laString(
     @XmlElement(true)
     @XmlSerialName("String", "urn:java/lang", "la")
     val string: String = ""
@@ -329,7 +329,7 @@ data class laString(
 
 
 @Serializable
-data class rn2Duration(
+class rn2Duration(
     @XmlElement(true)
     @XmlSerialName("duration", "urn:com.sap.aii.mdt.api.data", "rn2")
     val duration: Int
@@ -337,7 +337,7 @@ data class rn2Duration(
 
 @Serializable
 @XmlSerialName("getIntegrationFlows", "urn:AdapterMessageMonitoringVi", "y")
-data class getIntegrationFlows(
+class getIntegrationFlows(
     @XmlElement(true)
     @XmlSerialName("language", "urn:AdapterMessageMonitoringVi", "y")
     val language: String = ""
@@ -345,7 +345,7 @@ data class getIntegrationFlows(
 
 @Serializable
 @XmlSerialName("getIntegrationFlowsResponse", "urn:AdapterMessageMonitoringVi", "y")
-data class getIntegrationFlowsResponse(
+class getIntegrationFlowsResponse(
     val Response: Resp
 ) {
     @Serializable
@@ -383,7 +383,7 @@ class Envelope<BODYTYPE> private constructor(
     }
 
     @Serializable
-    private data class Body<BODYTYPE>(@Polymorphic val data: BODYTYPE)
+    private class Body<BODYTYPE>(@Polymorphic val data: BODYTYPE)
 }
 
 fun xml(): XML {

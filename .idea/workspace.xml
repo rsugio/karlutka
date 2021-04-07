@@ -4,12 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="добавлен разбор логов, предварительно">
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="Добавлен метод массового тестирования">
+      <change afterPath="$PROJECT_DIR$/.idea/modules/karlutka.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/karlutka.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/MMap.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/MMap.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/XiObj.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/XiObj.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/k3/K3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k3/K3.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k4/K4.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k4/K4.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/K5.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/K5.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/SAPJEEDSR_Service.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/SAPJEEDSR_Service.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/XiBasis.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/XiBasis.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,30 +45,7 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="karlutka" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="karlutka" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="karlutka" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="publishing" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="karlutka" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="verification" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="karlutka" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
               </path>
             </expand>
             <select />
@@ -96,26 +81,29 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.28735632" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RunManager" selected="Gradle.karlutka [publishToMavenLocal]">
-    <configuration name="karlutka [check]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Tests.cpi" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="--tests &quot;Tests.cpi&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="check" />
+            <option value=":test" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
@@ -207,10 +195,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
+        <item itemvalue="Gradle.Tests.cpi" />
         <item itemvalue="Gradle.karlutka [publish]" />
         <item itemvalue="Gradle.karlutka [publishMavenPublicationToGitHubPackagesRepository]" />
         <item itemvalue="Gradle.karlutka [generatePomFileForMavenPublication]" />
-        <item itemvalue="Gradle.karlutka [check]" />
       </list>
     </recent_temporary>
   </component>
@@ -293,7 +281,35 @@
       <option name="project" value="LOCAL" />
       <updated>1617642027071</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="текущее">
+      <created>1617683873291</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1617683873291</updated>
+    </task>
+    <task id="LOCAL-00012" summary="протестирован разбор на 800+ IFLW, возможно некоторые элементы загружаются единично, надо делать списки. Но ошибок уже нет.">
+      <created>1617785834478</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1617785834479</updated>
+    </task>
+    <task id="LOCAL-00013" summary="переименовано">
+      <created>1617785870077</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1617785870077</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Добавлен метод массового тестирования">
+      <created>1617785897655</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1617785897655</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -311,12 +327,15 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="расшарить проект" />
-    <MESSAGE value="текущее" />
     <MESSAGE value="успешно разобрано 1335 икошек" />
     <MESSAGE value="попытки использовать GPR" />
     <MESSAGE value="исправлено в икошках - множественные получатели" />
     <MESSAGE value=" работает GPR" />
     <MESSAGE value="добавлен разбор логов, предварительно" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавлен разбор логов, предварительно" />
+    <MESSAGE value="текущее" />
+    <MESSAGE value="протестирован разбор на 800+ IFLW, возможно некоторые элементы загружаются единично, надо делать списки. Но ошибок уже нет." />
+    <MESSAGE value="переименовано" />
+    <MESSAGE value="Добавлен метод массового тестирования" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен метод массового тестирования" />
   </component>
 </project>

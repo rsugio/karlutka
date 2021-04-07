@@ -8,14 +8,14 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 
 @Serializable
 @XmlSerialName("Edmx", "http://schemas.microsoft.com/ado/2007/06/edmx", "edmx")
-data class Edmx(
+class Edmx(
     val DataServices: DataServices,
     val Version: String
 )
 
 @Serializable
 @XmlSerialName("DataServices", "http://schemas.microsoft.com/ado/2007/06/edmx", "edmx")
-data class DataServices(
+class DataServices(
     @XmlSerialName("DataServiceVersion", "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata", "m")
     val DataServiceVersion: String,
     val Schema: Schema
@@ -23,7 +23,7 @@ data class DataServices(
 
 @Serializable
 @XmlSerialName("Schema", "http://schemas.microsoft.com/ado/2008/09/edm", "m")
-data class Schema(
+class Schema(
     val Namespace: String,
     val EntityType: List<EntityType>,
     val ComplexType: List<ComplexType>,
@@ -33,7 +33,7 @@ data class Schema(
 
 @Serializable
 @XmlSerialName("EntityType", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class EntityType(
+class EntityType(
     val Name: String,
     val BaseType: String?,
     @XmlSerialName("HasStream", "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata", "m")
@@ -48,7 +48,7 @@ data class EntityType(
 
 @Serializable
 @XmlSerialName("Property", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class Property(
+class Property(
     val Name: String,
     val Type: String,
     val Nullable: Boolean,
@@ -58,13 +58,13 @@ data class Property(
 
 @Serializable
 @XmlSerialName("Key", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class Key(
+class Key(
     val PropertyRef: List<PropertyRef>
 )
 
 @Serializable
 @XmlSerialName("NavigationProperty", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class NavigationProperty(
+class NavigationProperty(
     val Name: String,
     val Relationship: String,
     val FromRole: String,
@@ -73,27 +73,27 @@ data class NavigationProperty(
 
 @Serializable
 @XmlSerialName("PropertyRef", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class PropertyRef(
+class PropertyRef(
     val Name: String
 )
 
 @Serializable
 @XmlSerialName("ComplexType", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class ComplexType(
+class ComplexType(
     val Name: String,
     val Property: List<Property>
 )
 
 @Serializable
 @XmlSerialName("Association", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class Association(
+class Association(
     val Name: String,
     val End: List<End>
 )
 
 @Serializable
 @XmlSerialName("End", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class End(
+class End(
     val Type: String,
     val Multiplicity: String,
     val Role: String
@@ -101,7 +101,7 @@ data class End(
 
 @Serializable
 @XmlSerialName("EntityContainer", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class EntityContainer(
+class EntityContainer(
     val Name: String,
     @XmlSerialName("IsDefaultEntityContainer", "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata", "")
     val IsDefaultEntityContainer: String,
@@ -115,14 +115,14 @@ data class EntityContainer(
 
 @Serializable
 @XmlSerialName("EntitySet", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class EntitySet(
+class EntitySet(
     val Name: String,
     val EntityType: String
 )
 
 @Serializable
 @XmlSerialName("Parameter", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class Parameter(
+class Parameter(
     val Name: String,
     val Type: String,
     val Nullable: Boolean?
@@ -130,7 +130,7 @@ data class Parameter(
 
 @Serializable
 @XmlSerialName("FunctionImport", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class FunctionImport(
+class FunctionImport(
     val Name: String,
     val ReturnType: String,
     val EntitySet: String?,
@@ -142,7 +142,7 @@ data class FunctionImport(
 
 @Serializable
 @XmlSerialName("AssociationSet", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-data class AssociationSet(
+class AssociationSet(
     val Name: String,
     val Association: String,
     @XmlElement(true)
@@ -150,7 +150,7 @@ data class AssociationSet(
 ) {
     @Serializable
     @XmlSerialName("End", "http://schemas.microsoft.com/ado/2008/09/edm", "")
-    data class End2(val EntitySet: String, val Role: String)
+    class End2(val EntitySet: String, val Role: String)
 }
 
 fun parseEdmx(edm: String, ignoreNonstandard: Boolean = false): Edmx {

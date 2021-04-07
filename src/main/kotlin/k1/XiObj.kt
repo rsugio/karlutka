@@ -15,13 +15,13 @@ import java.nio.file.Paths
 
 @Serializable
 @XmlSerialName("xiObjs", "urn:sap-com:xi", "xi")
-data class XiObjs(
+class XiObjs(
     val xiObj: XiObj
 )
 
 @Serializable
 @XmlSerialName("xiObj", "urn:sap-com:xi", "xi")
-data class XiObj(
+class XiObj(
     @XmlElement(true)
     val idInfo: IdInfo,
     @XmlElement(true)
@@ -35,7 +35,7 @@ data class XiObj(
 ) {
     @Serializable
     @XmlSerialName("idInfo", "urn:sap-com:xi", "")
-    data class IdInfo(
+    class IdInfo(
         val VID: String,
         @XmlElement(true)
         val vc: VC,
@@ -47,7 +47,7 @@ data class XiObj(
     ) {
         @Serializable
         @XmlSerialName("vc", "urn:sap-com:xi", "")
-        data class VC(
+        class VC(
             val caption: String = "",
             val sp: Int = -1,
             val swcGuid: String = "",
@@ -57,13 +57,13 @@ data class XiObj(
         ) {
             @Serializable
             @XmlSerialName("clCxt", "urn:sap-com:xi", "")
-            data class ClCxt(val consider: String)
+            class ClCxt(val consider: String)
         }
     }
 
     @Serializable
     @XmlSerialName("key", "urn:sap-com:xi", "xi")
-    data class Key(
+    class Key(
         val typeID: String = "",
         val version: String? = null,
         val oid: String? = null,
@@ -72,11 +72,11 @@ data class XiObj(
 
     @Serializable
     @XmlSerialName("key", "urn:sap-com:xi", "xi")
-    data class Kex(val key: Key)
+    class Kex(val key: Key)
 
     @Serializable
     @XmlSerialName("documentation", "urn:sap-com:xi", "")
-    data class Documentation(
+    class Documentation(
         @XmlElement(true)
         @XmlSerialName("description", "urn:sap-com:xi", "")
         val description: String = ""
@@ -84,22 +84,22 @@ data class XiObj(
 
     @Serializable
     @XmlSerialName("generic", "urn:sap-com:xi", "xi")
-    data class Generic(
+    class Generic(
         val admInf: AdmInf,
         val lnks: Lnks,
         val textInfo: TextInfo,
     ) {
         @Serializable
         @XmlSerialName("lnks", "urn:sap-com:xi", "")
-        data class Lnks(val x: List<LnkRole> = listOf())
+        class Lnks(val x: List<LnkRole> = listOf())
 
         @Serializable
         @XmlSerialName("textInfo", "urn:sap-com:xi", "")
-        data class TextInfo(val loadedL: String = "EN", val textObj: TextObj)
+        class TextInfo(val loadedL: String = "EN", val textObj: TextObj)
 
         @Serializable
         @XmlSerialName("textObj", "urn:sap-com:xi", "")
-        data class TextObj(
+        class TextObj(
             val id: String = "c9fa2aec3da1451aacea970d8d441062",
             val masterL: String = "EN",
             val type: Int = 0,
@@ -109,7 +109,7 @@ data class XiObj(
 
         @Serializable
         @XmlSerialName("texts", "urn:sap-com:xi", "")
-        data class Texts(
+        class Texts(
             val lang: String = "",
             @XmlElement(true)
             val list: List<Text>
@@ -117,7 +117,7 @@ data class XiObj(
 
         @Serializable
         @XmlSerialName("text", "urn:sap-com:xi", "")
-        data class Text(
+        class Text(
             @XmlElement(false)
             val label: String = "",
             @XmlValue(true)
@@ -128,7 +128,7 @@ data class XiObj(
 
     @Serializable
     @XmlSerialName("admInf", "urn:sap-com:xi", "")
-    data class AdmInf(
+    class AdmInf(
         @XmlElement(true)
         @XmlSerialName("modifBy", "urn:sap-com:xi", "")
         val modifBy: String = "",
@@ -148,7 +148,7 @@ data class XiObj(
 
     @Serializable
     @XmlSerialName("lnkRole", "urn:sap-com:xi", "")
-    data class LnkRole(
+    class LnkRole(
         val kpos: Int,
         @XmlElement(false)
         val role: String,
@@ -157,7 +157,7 @@ data class XiObj(
 
     @Serializable
     @XmlSerialName("lnk", "urn:sap-com:xi", "")
-    data class Lnk(
+    class Lnk(
         val rMode: String,
         @XmlElement(true)
         val key: Key,
@@ -167,7 +167,7 @@ data class XiObj(
 
     @Serializable
     @XmlSerialName("content", "urn:sap-com:xi", "")
-    data class XiObjContent(
+    class XiObjContent(
         @XmlElement(true)
         val trafo: XiTrafo?
     )
@@ -176,85 +176,85 @@ data class XiObj(
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo2(
+class XiObjIdInfo2(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo3(
+class XiObjIdInfo3(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo4(
+class XiObjIdInfo4(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo5(
+class XiObjIdInfo5(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo6(
+class XiObjIdInfo6(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo7(
+class XiObjIdInfo7(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo8(
+class XiObjIdInfo8(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo9(
+class XiObjIdInfo9(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo10(
+class XiObjIdInfo10(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo11(
+class XiObjIdInfo11(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo12(
+class XiObjIdInfo12(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo13(
+class XiObjIdInfo13(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo14(
+class XiObjIdInfo14(
     val _a: String?
 )
 
 @Serializable
 @XmlSerialName("vc", "urn:sap-com:xi", "")
-data class XiObjIdInfo15(
+class XiObjIdInfo15(
     val _a: String?
 )
 

@@ -6,7 +6,7 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 
 @Serializable
 @XmlSerialName("_", "", "")
-data class TMP1(
+class TMP1(
     @XmlElement(true)
     val PartyID: String,
     @XmlElement(true)

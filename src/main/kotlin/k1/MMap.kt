@@ -14,7 +14,7 @@ import java.nio.file.Paths
 
 @Serializable
 @XmlSerialName("Parameter", "urn:sap-com:xi:mapping:xitrafo", "")
-data class Parameter(
+class Parameter(
     @XmlSerialName("Position", "urn:sap-com:xi:mapping:xitrafo", "")
     @XmlElement(true)
     val Position: String,
@@ -28,7 +28,7 @@ data class Parameter(
 
 @Serializable
 @XmlSerialName("SourceParameters", "urn:sap-com:xi:mapping:xitrafo", "tr")
-data class SourceParameters(
+class SourceParameters(
     @XmlSerialName("Parameter", "urn:sap-com:xi:mapping:xitrafo", "tr")
     @XmlElement(true)
     val Parameters: List<Parameter> = mutableListOf()
@@ -36,7 +36,7 @@ data class SourceParameters(
 
 @Serializable
 @XmlSerialName("TargetParameters", "urn:sap-com:xi:mapping:xitrafo", "tr")
-data class TargetParameters(
+class TargetParameters(
     @XmlSerialName("Parameter", "urn:sap-com:xi:mapping:xitrafo", "tr")
     @XmlElement(true)
     val Parameters: List<Parameter> = mutableListOf()
@@ -45,7 +45,7 @@ data class TargetParameters(
 
 @Serializable
 @XmlSerialName("XiTrafo", "urn:sap-com:xi:mapping:xitrafo", "tr")
-data class XiTrafo(
+class XiTrafo(
     @XmlSerialName("MetaData", "urn:sap-com:xi:mapping:xitrafo", "tr")
     @XmlElement(true)
     val MetaData: MappingTool,
@@ -69,19 +69,19 @@ data class XiTrafo(
 
 @Serializable
 @XmlSerialName("mappingtool", "", "")
-data class MappingTool(
+class MappingTool(
     val version: String,
     @XmlSerialName("project", "", "")
     val project: Project
 ) {
     @Serializable
     @XmlSerialName("libref", "", "")
-    data class LibRef(
+    class LibRef(
         @XmlSerialName("ref", "", "")
         val ref: Ref
     ) {
         @Serializable
-        data class Ref(
+        class Ref(
             val role: String,
             val pos: Int,
             @XmlSerialName("key", "", "")
@@ -90,7 +90,7 @@ data class MappingTool(
     }
     @Serializable
     @XmlSerialName("key", "", "")
-    data class Key(
+    class Key(
         val typeID: String = "",
         val version: String? = null,
         val oid: String? = null,
@@ -98,10 +98,10 @@ data class MappingTool(
     )
     @Serializable
     @XmlSerialName("key", "", "")
-    data class Kex(val key: Key)
+    class Kex(val key: Key)
 
     @Serializable
-    data class Project(
+    class Project(
         val version: String,
         val libstorage: Libstorage,
         @XmlSerialName("transformation", "", "")
@@ -115,17 +115,17 @@ data class MappingTool(
     ) {
         @Serializable
         @XmlSerialName("pcont", "", "")
-        data class PCont(
+        class PCont(
             val container: List<Container> = mutableListOf()
         ) {
             @Serializable
             @XmlSerialName("container", "", "")
-            data class Container(val key: String)
+            class Container(val key: String)
         }
 
         @Serializable
         @XmlSerialName("testData", "", "")
-        data class TestData(
+        class TestData(
             val instances: Instances?,
             @XmlSerialName("parameters", "", "")
             @Contextual
@@ -134,14 +134,14 @@ data class MappingTool(
 
         @Serializable
         @XmlSerialName("instances", "", "")
-        data class Instances(
+        class Instances(
             val default: String? = null,
             val testCase: List<TestCase> = mutableListOf()
         )
 
         @Serializable
         @XmlSerialName("testCase", "", "")
-        data class TestCase(
+        class TestCase(
             val name: String,
             @XmlValue(true)
             val content: String
@@ -149,12 +149,12 @@ data class MappingTool(
 
         @Serializable
         @XmlSerialName("libstorage", "", "")
-        data class Libstorage(
+        class Libstorage(
             @XmlSerialName("entry", "", "")
             val entry: List<Entry> = mutableListOf(),
         ) {
             @Serializable
-            data class Entry(
+            class Entry(
                 val name: String,
                 @XmlSerialName("functionstorage", "", "")
                 val entry: FunctionStorage?,
@@ -162,7 +162,7 @@ data class MappingTool(
                 val libref: LibRef?
             ) {
                 @Serializable
-                data class FunctionStorage(
+                class FunctionStorage(
                     val version: String,
                     @XmlElement(true)
                     val key: Kex,
@@ -189,7 +189,7 @@ data class MappingTool(
 
                     @Serializable
                     @XmlSerialName("globals", "", "")
-                    data class Globals(
+                    class Globals(
                         @XmlElement(true)
                         @XmlSerialName("javaText", "", "")
                         val javaText: String
@@ -197,7 +197,7 @@ data class MappingTool(
 
                     @Serializable
                     @XmlSerialName("cleanup", "", "")
-                    data class Cleanup(
+                    class Cleanup(
                         @XmlElement(true)
                         @XmlSerialName("javaText", "", "")
                         val javaText: String
@@ -205,14 +205,14 @@ data class MappingTool(
 
                     @Serializable
                     @XmlSerialName("init", "", "")
-                    data class Init(
+                    class Init(
                         @XmlSerialName("functionmodel", "", "")
                         val functionmodel: Functionmodel
                     )
 
                     @Serializable
                     @XmlSerialName("functionmodel", "", "")
-                    data class Functionmodel(
+                    class Functionmodel(
                         @XmlElement(true)
                         val signature: Signature = Signature("", null),
                         @XmlElement(true)
@@ -237,7 +237,7 @@ data class MappingTool(
 
                     @Serializable
                     @XmlSerialName("implementation", "", "")
-                    data class Implementation(
+                    class Implementation(
                         val type: String = "udf",
                         @XmlElement(true)
                         @XmlSerialName("javaText", "", "")
@@ -246,7 +246,7 @@ data class MappingTool(
 
                     @Serializable
                     @XmlSerialName("signature", "", "")
-                    data class Signature(
+                    class Signature(
                         val cacheType: String = "2",
                         @XmlElement(true)
                         val argument: Argument?
@@ -254,7 +254,7 @@ data class MappingTool(
 
                     @Serializable
                     @XmlSerialName("argument", "", "")
-                    data class Argument(
+                    class Argument(
                         val jtp: String = "String",
                         val nm: String = "id",
                         val tp: Int = 0,
@@ -267,7 +267,7 @@ data class MappingTool(
         }
 
         @Serializable
-        data class Transformation(
+        class Transformation(
             @XmlSerialName("brick", "", "")
             val bricks: List<Brick> = mutableListOf(),
             val namespaces: Namespaces
@@ -275,7 +275,7 @@ data class MappingTool(
 
         @Serializable
         @XmlSerialName("brick", "", "")
-        data class Brick(
+        class Brick(
             val gid: Int = -1,
             val path: String = "/ns2:Rezult",
             val type: String = "Dst",
@@ -296,7 +296,7 @@ data class MappingTool(
         ) {
             @Serializable
             @XmlSerialName("arg", "", "")
-            data class Arg(
+            class Arg(
                 @XmlElement(false)
                 val pin: Int? = null,
                 @XmlValue(true)
@@ -305,21 +305,21 @@ data class MappingTool(
 
             @Serializable
             @XmlSerialName("viewData", "", "")
-            data class ViewData(val x: Int = -1, val y: Int = -1)
+            class ViewData(val x: Int = -1, val y: Int = -1)
 
             @Serializable
             @XmlSerialName("group", "", "")
-            data class Group(val object_uid: String? = null)
+            class Group(val object_uid: String? = null)
 
             @Serializable
             @XmlSerialName("bindings", "", "")
-            data class Bindings(
+            class Bindings(
                 @XmlElement(true)
                 val param: List<Param> = mutableListOf()
             ) {
                 @Serializable
                 @XmlSerialName("param", "", "")
-                data class Param(
+                class Param(
                     val name: String,
                     @XmlElement(true)
                     @XmlSerialName("value", "", "")
@@ -328,7 +328,7 @@ data class MappingTool(
                 )
 //                @Serializable
 //                @XmlSerialName("value", "", "")
-//                data class Value(
+//                class Value(
 //                    @XmlValue(true)
 //                    val value: String? = null,
 ////                    @XmlElement(true)
@@ -339,14 +339,14 @@ data class MappingTool(
 
         @Serializable
         @XmlSerialName("properties", "", "")
-        data class Properties(
+        class Properties(
             @XmlElement(true)
             val properties: List<Property> = mutableListOf()
         )
 
         @Serializable
         @XmlSerialName("property", "", "")
-        data class Property(
+        class Property(
             val name: String,
             @XmlValue(true)
             val value: String
@@ -354,7 +354,7 @@ data class MappingTool(
 
         @Serializable
         @XmlSerialName("namespaces", "", "")
-        data class Namespaces(
+        class Namespaces(
             @XmlElement(true)
             val properties: Properties
         )

@@ -79,7 +79,6 @@ public class Tests {
         assert url != null;
         DirectoryStream<Path> iflws = Files.newDirectoryStream(Paths.get(url.toURI()), "*.iflw");
         for (Path x: iflws) {
-            System.out.println(x);
             String text = Files.readString(x);
             IFlowBpmnDefinitions.Companion.parse(text);
         }

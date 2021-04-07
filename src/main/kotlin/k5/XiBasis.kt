@@ -70,7 +70,7 @@ class CommunicationChannelQueryResponse(
 
 @Serializable
 @XmlSerialName("BusinessSystem", "", "")
-data class BusinessSystemID(
+class BusinessSystemID(
     @XmlElement(true)
     val PartyID: String,
     @XmlElement(true)
@@ -79,7 +79,7 @@ data class BusinessSystemID(
 
 @Serializable
 // @XmlSerialName здесь не указывать! оно определяется по месту вызова
-data class CommunicationChannelID(
+class CommunicationChannelID(
     @XmlElement(true)
     val PartyID: String,
     @XmlElement(true)
@@ -90,7 +90,7 @@ data class CommunicationChannelID(
 
 @Serializable
 // @XmlSerialName использовать запрещено
-data class IntegratedConfigurationID(
+class IntegratedConfigurationID(
     @XmlElement(true)
     val SenderPartyID: String,
     @XmlElement(true)
@@ -141,7 +141,7 @@ enum class CommunicationChannelDirectionEnum { Sender, Receiver }
 
 @Serializable
 @XmlSerialName("Description", "", "")
-data class Description(
+class Description(
     val languageCode: String,
     @XmlValue(true)
     val text: String? = null
@@ -149,7 +149,7 @@ data class Description(
 
 @Serializable
 @XmlSerialName("CommunicationChannel", "", "")
-data class CommunicationChannel(
+class CommunicationChannel(
     @XmlElement(true)
     val MasterLanguage: String,
     @XmlElement(true)
@@ -186,7 +186,7 @@ data class CommunicationChannel(
     val receiverIdentifier: Identifier,
 ) {
     @Serializable
-    data class AdapterMetadata(
+    class AdapterMetadata(
         @XmlElement(true)
         val Name: String, //SOAP
         @XmlElement(true)
@@ -196,7 +196,7 @@ data class CommunicationChannel(
     )
 
     @Serializable
-    data class AdapterSpecificAttribute(
+    class AdapterSpecificAttribute(
         @XmlElement(true)
         val Name: String, //enableDynConfigReceiver
         @XmlElement(true)
@@ -206,7 +206,7 @@ data class CommunicationChannel(
     )
 
     @Serializable
-    data class AdapterSpecificTableAttribute(
+    class AdapterSpecificTableAttribute(
         @XmlElement(true)
         val Name: String, //enableDynConfigReceiver
         @XmlElement(true)
@@ -217,13 +217,13 @@ data class CommunicationChannel(
         val valueTable: ValueTableRow? = null
     ) {
         @Serializable
-        data class ValueTableRow(
+        class ValueTableRow(
             @XmlElement(true)
             val valueTableCell: MutableList<ValueTableCell> = mutableListOf()
         )
 
         @Serializable
-        data class ValueTableCell(
+        class ValueTableCell(
             @XmlElement(true)
             val ColumnName: String,
             @XmlElement(true)
@@ -233,14 +233,14 @@ data class CommunicationChannel(
 
     @Serializable
     @XmlSerialName("ModuleProcess", "", "")
-    data class ModuleProcess(
+    class ModuleProcess(
         val process: MutableList<ProcessStep> = mutableListOf(),
         val params: MutableList<ParameterGroup> = mutableListOf()
     )
 
     @Serializable
     @XmlSerialName("ProcessStep", "", "")
-    data class ProcessStep(
+    class ProcessStep(
         @XmlElement(true)
         val ModuleName: String, //sap.com/com.sap.aii.af.soapadapter/XISOAPAdapterBean
         @XmlElement(true)
@@ -251,7 +251,7 @@ data class CommunicationChannel(
 
     @Serializable
     @XmlSerialName("ParameterGroup", "", "")
-    data class ParameterGroup(
+    class ParameterGroup(
         @XmlElement(true)
         val ParameterGroupID: String, //request
         @XmlElement(true)
@@ -259,7 +259,7 @@ data class CommunicationChannel(
     )
 
     @Serializable
-    data class Parameter(
+    class Parameter(
         @XmlElement(true)
         val Name: String = "", //interfaceNamespace
         @XmlElement(true)
@@ -269,7 +269,7 @@ data class CommunicationChannel(
 
 // у идентификаторов динамическое имя, сюда не пишем
 @Serializable
-data class Identifier(
+class Identifier(
     val schemeAgencyID: String = "", //sap.com/com.sap.aii.af.soapadapter/XISOAPAdapterBean
     val schemeID: String = "",       //Local Enterprise Bean
     @XmlValue(true)
@@ -278,7 +278,7 @@ data class Identifier(
 
 @Serializable
 @XmlSerialName("AdministrativeData", "", "")
-data class AdministrativeData(
+class AdministrativeData(
     @XmlElement(true)
     val ResponsibleUserAccountID: String, //ivanov
     @XmlElement(true)
