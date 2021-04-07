@@ -1,11 +1,18 @@
 import k5.*;
 import k6.Blueprint;
-import k6.Definitions;
+import k6.IFlowBpmnDefinitions;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Tests {
     String localhost = "http://localhost";
@@ -66,8 +73,16 @@ public class Tests {
     }
 
     @Test
-    public void cpi() throws IOException {
-        Definitions.Companion.parse(getString("/Iflow/1.iflw.xml"));
+    public void cpi() throws Exception {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        URL url = loader.getResource("Iflow");
+        assert url != null;
+        DirectoryStream<Path> iflws = Files.newDirectoryStream(Paths.get(url.toURI()), "*.iflw");
+        for (Path x: iflws) {
+            System.out.println(x);
+            String text = Files.readString(x);
+            IFlowBpmnDefinitions.Companion.parse(text);
+        }
 //      пока блупринты не парсятся полностью, надо писать дальше
         if (false) {
             Blueprint.Companion.parse(getString("/Iflow/beans.xml"));
