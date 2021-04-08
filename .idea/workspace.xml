@@ -4,20 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="Добавлен метод массового тестирования">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/karlutka.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/karlutka.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="текущее">
+      <change afterPath="$PROJECT_DIR$/src/test/resources/DesignTimeArtifacts/Value_Mapping_for_SAP_Commerce_Cloud_Integration_with_SAP_S4HANA.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/MMap.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/MMap.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/XiObj.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/XiObj.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/k3/K3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k3/K3.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k4/K4.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k4/K4.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/K5.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/K5.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/SAPJEEDSR_Service.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/SAPJEEDSR_Service.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k5/XiBasis.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k5/XiBasis.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +31,22 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="karlutka" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="karlutka" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="karlutka" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="karlutka" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
@@ -108,7 +114,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="karlutka [generatePomFileForMavenPublication]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="karlutka [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -119,7 +125,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="generatePomFileForMavenPublication" />
+            <option value="clean" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -195,10 +201,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
+        <item itemvalue="Gradle.karlutka [clean]" />
         <item itemvalue="Gradle.Tests.cpi" />
         <item itemvalue="Gradle.karlutka [publish]" />
         <item itemvalue="Gradle.karlutka [publishMavenPublicationToGitHubPackagesRepository]" />
-        <item itemvalue="Gradle.karlutka [generatePomFileForMavenPublication]" />
       </list>
     </recent_temporary>
   </component>
@@ -309,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617785897655</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="текущее">
+      <created>1617813561302</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1617813561302</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -332,10 +345,10 @@
     <MESSAGE value="исправлено в икошках - множественные получатели" />
     <MESSAGE value=" работает GPR" />
     <MESSAGE value="добавлен разбор логов, предварительно" />
-    <MESSAGE value="текущее" />
     <MESSAGE value="протестирован разбор на 800+ IFLW, возможно некоторые элементы загружаются единично, надо делать списки. Но ошибок уже нет." />
     <MESSAGE value="переименовано" />
     <MESSAGE value="Добавлен метод массового тестирования" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлен метод массового тестирования" />
+    <MESSAGE value="текущее" />
+    <option name="LAST_COMMIT_MESSAGE" value="текущее" />
   </component>
 </project>

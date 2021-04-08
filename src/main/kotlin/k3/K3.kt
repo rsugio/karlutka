@@ -1,8 +1,8 @@
-package k3
+@file:Suppress("unused", "EnumEntryName", "ClassName")
 
+package k3
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
-import java.io.InputStream
 
 /**
  * Внутренний сериализатор, наружу не отдаётся
@@ -140,6 +140,7 @@ class ServiceEndpoint(
     )
 }
 
+//TODO -- подумать как избавиться от этого IntegrationArtifact в пользу рантайм артефакта
 @Serializable
 class IntegrationArtifact(
     val __metadata: __Metadata,
@@ -241,7 +242,7 @@ class IntegrationRuntimeArtifact(
     val Id: String,             // "Create_follow_up_document_from_ServiceRequest_in_S4HANA_from_Sales_Cloud",
     val Version: String,        // "1.0.10"
     val Name: String,    // "Create follow up document from ServiceRequest in S4HANA from Sales Cloud",
-    val Type: IntegrationArtifactTypeEnum,      // "INTEGRATION_FLOW"
+    val Type: IntegrationArtifactTypeEnum,      // INTEGRATION_FLOW || VALUE_MAPPING
     val DeployedBy: String,           // "s0123456789"
     val DeployedOn: String,    // "/Date(1616167332562)/"
     val Status: CpiDeployedStatus,     // "37542"
@@ -250,6 +251,11 @@ class IntegrationRuntimeArtifact(
     var integrationPackage: IntegrationPackage? = null
     val integrationDesigntimeArtifact: IntegrationDesigntimeArtifact? = null
     val errorInformation: ErrorInformation? = null
+    var designtimeArtifact: IntegrationDesigntimeArtifact? = null
+    var designtimeVMG: ValueMappingDesigntimeArtifact? = null
+    fun orphan():Boolean {
+        return false
+    }
 }
 
 @Serializable
@@ -307,7 +313,10 @@ class IntegrationDesigntimeArtifact(
     val ArtifactContent: String?, //null
     val Configurations: __DefUri,
     val Resources: __DefUri
-)
+) {
+    @Transient
+    var integrationPackage: IntegrationPackage? = null
+}
 
 @Serializable
 class IntegrationDesigntimeArtifacts(val d: IntegrationDesigntimeArtifactsData) {
@@ -317,8 +326,13 @@ class IntegrationDesigntimeArtifacts(val d: IntegrationDesigntimeArtifactsData) 
     )
 
     companion object {
-        fun getUrl(hostTmn: String) = "$hostTmn/api/v1/IntegrationDesigntimeArtifacts"
-        fun parse(payloadJson: String) = jsonSerializer.decodeFromString<IntegrationDesigntimeArtifacts>(payloadJson)
+        // урла-то нет        fun getUrl(hostTmn: String) = "$hostTmn/api/v1/IntegrationDesigntimeArtifacts"
+//        fun parse(payloadJson: String) = jsonSerializer.decodeFromString<IntegrationDesigntimeArtifacts>(payloadJson)
+        fun parse(payloadJson: String, pack: IntegrationPackage?): IntegrationDesigntimeArtifacts {
+            val xs = jsonSerializer.decodeFromString<IntegrationDesigntimeArtifacts>(payloadJson)
+            if (pack != null) xs.d.results.forEach { it.integrationPackage = pack }
+            return xs
+        }
     }
 }
 
@@ -332,7 +346,10 @@ class ValueMappingDesigntimeArtifact(
     val Description: String?, //" ",
     val ArtifactContent: String?, //null,
     val ValMapSchema: __DefUri
-)
+) {
+    @Transient
+    var integrationPackage: IntegrationPackage? = null
+}
 
 @Serializable
 class ValueMappingDesigntimeArtifacts(val d: ValueMappingDesigntimeArtifactsData) {
@@ -343,8 +360,12 @@ class ValueMappingDesigntimeArtifacts(val d: ValueMappingDesigntimeArtifactsData
     )
 
     companion object {
-        fun getUrl(hostTmn: String) = "$hostTmn/api/v1/ValueMappingDesigntimeArtifacts"
-        fun parse(payloadJson: String) = jsonSerializer.decodeFromString<ValueMappingDesigntimeArtifacts>(payloadJson)
+        // урла-то нет       fun getUrl(hostTmn: String) = "$hostTmn/api/v1/ValueMappingDesigntimeArtifacts"
+        fun parse(payloadJson: String, pack: IntegrationPackage?): ValueMappingDesigntimeArtifacts {
+            val xs = jsonSerializer.decodeFromString<ValueMappingDesigntimeArtifacts>(payloadJson)
+            if (pack != null) xs.d.results.forEach { it.integrationPackage = pack }
+            return xs
+        }
     }
 }
 
