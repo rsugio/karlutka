@@ -1,6 +1,7 @@
-@file:Suppress("unused", "EnumEntryName", "ClassName")
+@file:Suppress("unused", "EnumEntryName", "ClassName", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate")
 
 package k3
+
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
@@ -37,7 +38,7 @@ class __Metadata(
     val id: String = "",
     val content_type: String = "",
     val media_src: String = "",
-    val edit_media: String = ""
+    val edit_media: String = "",
 ) {
     companion object {
         fun __deferred(): __Metadata = __Metadata()
@@ -125,18 +126,18 @@ class ServiceEndpoint(
     val LastUpdated: String, // "/Date(1576581100242)/"
     val Protocol: String, // one of SOAP, REST, ODATAV2
     val EntryPoints: EntryPointsList, //   com.sap.hci.api.EntryPoint
-    val ApiDefinitions: ApiDefinitionList // com.sap.hci.api.Definition
+    val ApiDefinitions: ApiDefinitionList, // com.sap.hci.api.Definition
 ) {
     @Serializable
     class EntryPointsList(
         val __deferred: __Metadata = __Metadata.__deferred(),
-        val results: List<EntryPoint> = listOf()
+        val results: List<EntryPoint> = listOf(),
     )
 
     @Serializable
     class ApiDefinitionList(
         val __deferred: __Metadata = __Metadata.__deferred(),
-        val results: List<ApiDefinition> = listOf()
+        val results: List<ApiDefinition> = listOf(),
     )
 }
 
@@ -148,7 +149,7 @@ class IntegrationArtifact(
     val Name: String,
     val Type: IntegrationArtifactTypeEnum,
     val PackageId: String?,
-    val PackageName: String?
+    val PackageName: String?,
 )
 
 @Serializable
@@ -177,7 +178,7 @@ class MessageProcessingLog(
     val ErrorInformation: __DefUri,
     val AdapterAttributes: AdapterAttributesList,
     val Attachments: __DefUri,
-    val Runs: __DefUri
+    val Runs: __DefUri,
 )
 
 @Serializable
@@ -189,7 +190,7 @@ class CustomHeaderProperty(
 @Serializable
 class CustomHeaderPropertiesList(
     val __deferred: __Metadata = __Metadata.__deferred(),
-    val results: List<CustomHeaderProperty> = listOf()
+    val results: List<CustomHeaderProperty> = listOf(),
 )
 
 @Serializable
@@ -201,7 +202,7 @@ class AdapterAttribute(
 @Serializable
 class AdapterAttributesList(
     val __deferred: __Metadata = __Metadata.__deferred(),
-    val results: List<AdapterAttribute> = listOf()
+    val results: List<AdapterAttribute> = listOf(),
 )
 
 
@@ -214,7 +215,7 @@ class MessageStoreEntry(
     val TimeStamp: String, //"/Date(1616229093263)/",
     val HasAttachments: Boolean, //false,
     val Attachments: __DefUri,
-    val Properties: __DefUri
+    val Properties: __DefUri,
 )
 
 @Serializable
@@ -222,7 +223,7 @@ class ErrorInformation(
     val __metadata: __Metadata,
     val MessageGuid: String,
     val Type: String,
-    val LastErrorModelStepId: String
+    val LastErrorModelStepId: String,
 )
 
 @Serializable
@@ -233,7 +234,7 @@ class Attachment(
     val TimeStamp: String,      // "/Date(1616167332562)/"
     val Name: String,           // "Log - IDOC"
     val ContentType: String,    // "text/xml"
-    val PayloadSize: String     // "37542"
+    val PayloadSize: String,     // "37542"
 )
 
 @Serializable
@@ -253,7 +254,7 @@ class IntegrationRuntimeArtifact(
     val errorInformation: ErrorInformation? = null
     var designtimeArtifact: IntegrationDesigntimeArtifact? = null
     var designtimeVMG: ValueMappingDesigntimeArtifact? = null
-    fun orphan():Boolean {
+    fun orphan(): Boolean {
         return false
     }
 }
@@ -283,7 +284,7 @@ class IntegrationPackage(
     val PackageContent: String?, //null,
     val IntegrationDesigntimeArtifacts: __DefUri,
     val ValueMappingDesigntimeArtifacts: __DefUri,
-    val CustomTags: __DefUri
+    val CustomTags: __DefUri,
 ) {
     val ida: MutableList<IntegrationDesigntimeArtifact> = mutableListOf()
     val vmda: MutableList<ValueMappingDesigntimeArtifact> = mutableListOf()
@@ -312,7 +313,7 @@ class IntegrationDesigntimeArtifact(
     val Receiver: String, //"S4HANA"
     val ArtifactContent: String?, //null
     val Configurations: __DefUri,
-    val Resources: __DefUri
+    val Resources: __DefUri,
 ) {
     @Transient
     var integrationPackage: IntegrationPackage? = null
@@ -322,7 +323,7 @@ class IntegrationDesigntimeArtifact(
 class IntegrationDesigntimeArtifacts(val d: IntegrationDesigntimeArtifactsData) {
     @Serializable
     class IntegrationDesigntimeArtifactsData(
-        val results: List<IntegrationDesigntimeArtifact>, val __next: String = ""
+        val results: List<IntegrationDesigntimeArtifact>, val __next: String = "",
     )
 
     companion object {
@@ -345,7 +346,7 @@ class ValueMappingDesigntimeArtifact(
     val Name: String, //"OtherPartyMapping",
     val Description: String?, //" ",
     val ArtifactContent: String?, //null,
-    val ValMapSchema: __DefUri
+    val ValMapSchema: __DefUri,
 ) {
     @Transient
     var integrationPackage: IntegrationPackage? = null
@@ -356,7 +357,7 @@ class ValueMappingDesigntimeArtifacts(val d: ValueMappingDesigntimeArtifactsData
     @Serializable
     class ValueMappingDesigntimeArtifactsData(
         val results: List<ValueMappingDesigntimeArtifact>,
-        val __next: String = ""
+        val __next: String = "",
     )
 
     companion object {
@@ -387,7 +388,7 @@ class LogFileArchive(
     val Scope: String,    // "all",
     val LogFileType: LogFileTypeEnum,             // "UpdateServiceRequest$endpointAddress=UpdateServiceRequest",
     val NodeScope: NodeScopeEnum,             // "UpdateServiceRequest",
-    val ContentType: String // com.sap.hci.api.Definition
+    val ContentType: String, // com.sap.hci.api.Definition
 )
 
 @Serializable
@@ -408,7 +409,7 @@ class UserCredential(
     val User: String, //"CLOUDCOMMERCECLAIM",
     val Password: String?, //null,
     val CompanyId: String?, //null,
-    val SecurityArtifactDescriptor: SecurityArtifactDescriptor
+    val SecurityArtifactDescriptor: SecurityArtifactDescriptor,
 )
 
 
@@ -417,7 +418,7 @@ class Configuration(
     val __metadata: __Metadata,     //com.sap.hci.api.Configuration
     val ParameterKey: String,       //"BusinessSystem"
     val ParameterValue: String,     //"BS_SCPI_Q"
-    val DataType: String            //"xsd:string"
+    val DataType: String,            //"xsd:string"
 )
 
 @Serializable
@@ -470,7 +471,7 @@ class OPDownloadContentCommand(
         val id: String, //"6ef77148-d236-41a3-b9ea-e6f703e7f774",
         val name: String, //"Replicate Claims Item from Sales RU to Sales EU",
         val tags: List<OPTag>,
-        val type: DownloadContentTypeEnum
+        val type: DownloadContentTypeEnum,
     )
 }
 
@@ -485,23 +486,19 @@ class OPConfigurationKeyValue(val key: String, val value: JsonElement) {
         /**
          * Разбираем весь список
          */
-        fun parseList(payloadJson: String): List<OPConfigurationKeyValue> {
-            val lst: List<OPConfigurationKeyValue> = jsonSerializer.decodeFromString(payloadJson)
-            return lst
-        }
+        fun parseList(payloadJson: String): List<OPConfigurationKeyValue> = jsonSerializer.decodeFromString(payloadJson)
 
         /**
          * Только интересные штуки, а то там много чепухи для браузера
          */
         fun getMap(payloadJson: String): Map<String, String> {
             val lst: List<OPConfigurationKeyValue> = jsonSerializer.decodeFromString(payloadJson)
-            val z = lst.mapNotNull {
+            return lst.mapNotNull {
                 if (goodKeys.contains(it.key))
                     Pair(it.key, it.value.jsonPrimitive.content)
                 else
                     null
             }.toMap()
-            return z
         }
     }
 }
@@ -522,7 +519,7 @@ class OPIntegrationComponentsListCommand(val artifactInformations: List<OPArtifa
         val tenantId: String, //"j68386e77"
         val semanticState: String, //"STARTED"
         val nodeType: String, //"IFLMAP"
-        val tags: List<OPTag>
+        val tags: List<OPTag>,
     )
 
     companion object {
@@ -569,7 +566,7 @@ class OPGetNodesCommand(val nodes: List<OPGetNodesCommandNode>) {
             val stateMessage: JsonElement = JsonNull, // OPGetNodesCommandNodeComponentStateMessage?, //Map<String, OPGetNodesCommandNodeComponentStateMessage>?,
             val restartable: Boolean, //false
             val syncState: String, //"NOT_APPLICABLE"
-            val adapterPollInfos: JsonArray   //TODO -- нужен живой пример для уточнения типа
+            val adapterPollInfos: JsonArray,   //TODO -- нужен живой пример для уточнения типа
         )
 
         @Serializable
@@ -586,7 +583,7 @@ class OPGetNodesCommand(val nodes: List<OPGetNodesCommandNode>) {
             val deployedBy: String, //"S0020379160"
             val deployedOn: String, //"Mar 20, 2021 6:00:03 AM"
             val description: String = "", //" "
-            val linkedComponentType: String = "" //"INTEGRATION_FLOW"
+            val linkedComponentType: String = "", //"INTEGRATION_FLOW"
         )
     }
 
@@ -651,7 +648,7 @@ class MessageProcessingLogs(val d: MessageProcessingLogsData) {
     @Serializable
     class MessageProcessingLogsData(
         val results: List<MessageProcessingLog> = listOf(),
-        val __next: String = ""
+        val __next: String = "",
     )
 
     companion object {
@@ -711,7 +708,7 @@ class ServiceEndpoints(val d: ServiceEndpointsData) {
 class LogFiles(val d: LogFilesData) {
     @Serializable
     class LogFilesData(
-        val results: List<LogFile>, val __next: String = ""
+        val results: List<LogFile>, val __next: String = "",
     )
 
     companion object {
@@ -732,7 +729,7 @@ class LogFileArchives(val d: LogFileArchivesData) {
 class UserCredentials(val d: UserCredentialsData) {
     @Serializable
     class UserCredentialsData(
-        val results: List<UserCredential>, val __next: String = ""
+        val results: List<UserCredential>, val __next: String = "",
     )
 
     companion object {
@@ -744,7 +741,7 @@ class UserCredentials(val d: UserCredentialsData) {
 class MessageStoreEntries(val d: MessageStoreEntriesData) {
     @Serializable
     class MessageStoreEntriesData(
-        val results: List<MessageStoreEntry>, val __next: String = ""
+        val results: List<MessageStoreEntry>, val __next: String = "",
     )
 
     companion object {
@@ -758,7 +755,7 @@ class MessageStoreEntries(val d: MessageStoreEntriesData) {
 class Configurations(val d: ConfigurationsData) {
     @Serializable
     class ConfigurationsData(
-        val results: List<Configuration>, val __next: String = ""
+        val results: List<Configuration>, val __next: String = "",
     )
 
     companion object {
@@ -770,7 +767,7 @@ class Configurations(val d: ConfigurationsData) {
 class Resources(val d: ResourcesData) {
     @Serializable
     class ResourcesData(
-        val results: List<Resource>, val __next: String = ""
+        val results: List<Resource>, val __next: String = "",
     )
 
     companion object {
@@ -818,7 +815,7 @@ class ContentPackages(val d: ContentPackagesD) {
         val ModifiedBy: String? = null, //"S0020379160",
         val PartnerContent: String? = null, //null,
         val CertifiedBySap: String? = null, //null,
-        val AdditionalAttributes: String? = null //null,
+        val AdditionalAttributes: String? = null, //null,
     )
 
     companion object {

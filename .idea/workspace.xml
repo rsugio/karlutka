@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="текущее">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/DesignTimeArtifacts/Value_Mapping_for_SAP_Commerce_Cloud_Integration_with_SAP_S4HANA.zip" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="инспекции">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/k3/K3.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k3/K3.kt" afterDir="false" />
     </list>
@@ -322,7 +321,28 @@
       <option name="project" value="LOCAL" />
       <updated>1617813561302</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="подавлены некоторые инспекции">
+      <created>1617859601676</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1617859601676</updated>
+    </task>
+    <task id="LOCAL-00017" summary="пример VMG">
+      <created>1617859613063</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1617859613063</updated>
+    </task>
+    <task id="LOCAL-00018" summary="инспекции">
+      <created>1617859625197</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1617859625197</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -349,6 +369,9 @@
     <MESSAGE value="переименовано" />
     <MESSAGE value="Добавлен метод массового тестирования" />
     <MESSAGE value="текущее" />
-    <option name="LAST_COMMIT_MESSAGE" value="текущее" />
+    <MESSAGE value="подавлены некоторые инспекции" />
+    <MESSAGE value="пример VMG" />
+    <MESSAGE value="инспекции" />
+    <option name="LAST_COMMIT_MESSAGE" value="инспекции" />
   </component>
 </project>
