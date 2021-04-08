@@ -1,8 +1,9 @@
+@file:Suppress("unused", "EnumEntryName", "ClassName", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate")
+
 package k5
 
 import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.serializer
@@ -10,29 +11,23 @@ import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
-import java.net.URL
-import java.nio.charset.StandardCharsets
-import java.nio.file.Files
-import java.nio.file.Paths
-import javax.net.ssl.HttpsURLConnection
-import kotlin.system.exitProcess
 
 enum class EnumDirection { INBOUND, OUTBOUND }
 
 @Serializable
 @XmlSerialName("getConnections", "urn:AdapterMessageMonitoringVi", "y")
-class getConnections()
+class getConnections
 
 @Serializable
 @XmlSerialName("getConnectionsResponse", "urn:AdapterMessageMonitoringVi", "y")
 class getConnectionsResponse(
-    val Response: Resp
+    val Response: Resp,
 ) {
     @Serializable
     @XmlSerialName("Response", "", "")
     class Resp(
         @XmlSerialName("String", "urn:java/lang", "rn6")
-        val x: List<String>
+        val x: List<String>,
     )
 }
 
@@ -47,7 +42,7 @@ class getMessageBytesJavaLangStringIntBoolean(
     val version: Int = 0,
     @XmlElement(true)
     @XmlSerialName("archive", "urn:AdapterMessageMonitoringVi", "y")
-    val archive: Boolean = false
+    val archive: Boolean = false,
 )
 
 @Serializable
@@ -55,7 +50,7 @@ class getMessageBytesJavaLangStringIntBoolean(
 class getMessageBytesJavaLangStringIntBooleanResponse(
     @XmlElement(true)
     @XmlSerialName("Response", "", "")
-    val Response: String = ""
+    val Response: String = "",
 )
 
 @Serializable
@@ -68,20 +63,20 @@ class getMessagesByIDs(
     @XmlSerialName("correlationIds", "urn:AdapterMessageMonitoringVi", "y")
     val correlationIds: ListOfStrings = ListOfStrings(),
     @XmlSerialName("archive", "urn:AdapterMessageMonitoringVi", "y")
-    val archive: Boolean = false
+    val archive: Boolean = false,
 ) {
     @Serializable
     class ListOfStrings(
         @XmlElement(true)
         @XmlSerialName("String", "urn:java/lang", "la")
-        val String: List<String> = listOf()
+        val String: List<String> = listOf(),
     )
 }
 
 @Serializable
 @XmlSerialName("getMessagesByIDsResponse", "urn:AdapterMessageMonitoringVi", "y")
 class getMessagesByIDsResponse(
-    val Resp: Response = Response(getMessageListResponse.LAFW(listOf()))
+    val Resp: Response = Response(getMessageListResponse.LAFW(listOf())),
 ) {
     @Serializable
     @XmlSerialName("Response", "", "")
@@ -96,7 +91,7 @@ class getMessagesByIDsResponse(
         val warning: Boolean = false,
         @XmlElement(true)
         @XmlSerialName("displayPermissionWarning", "urn:com.sap.aii.mdt.server.adapterframework.ws", "rn7")
-        val displayPermissionWarning: Boolean = false
+        val displayPermissionWarning: Boolean = false,
     )
 }
 
@@ -108,7 +103,7 @@ class getMessageList(
     val filter: Filter = Filter(),
     @XmlElement(true)
     @XmlSerialName("maxMessages", "urn:AdapterMessageMonitoringVi", "y")
-    val maxMessages: Int = 9999
+    val maxMessages: Int = 9999,
 ) {
     @Serializable
     class Filter(
@@ -135,7 +130,7 @@ class getMessageList(
         val timesFailed: Int = 0,
         @XmlElement(true)
         @XmlSerialName("wasEdited", "urn:com.sap.aii.mdt.server.adapterframework.ws", "pns")
-        val wasEdited: Boolean = false
+        val wasEdited: Boolean = false,
     )
 }
 
@@ -158,7 +153,7 @@ class getMessageListResponse(val Resp: Response) {
         val warning: Boolean,
         @XmlElement(true)
         @XmlSerialName("displayPermissionWarning", "urn:com.sap.aii.mdt.server.adapterframework.ws", "rn7")
-        val displayPermissionWarning: Boolean
+        val displayPermissionWarning: Boolean,
     )
 
     @Serializable
@@ -297,7 +292,7 @@ class Interface_(
     val name: String = "",
     @XmlElement(true)
     @XmlSerialName("namespace", "urn:com.sap.aii.mdt.api.data", "rn2")
-    val namespace: String = ""
+    val namespace: String = "",
 )
 
 @Serializable
@@ -317,14 +312,14 @@ class Party_(
 class rn2Boolean(
     @XmlElement(true)
     @XmlSerialName("value", "urn:com.sap.aii.mdt.api.data", "rn2")
-    val value: Boolean
+    val value: Boolean,
 )
 
 @Serializable
 class laString(
     @XmlElement(true)
     @XmlSerialName("String", "urn:java/lang", "la")
-    val string: String = ""
+    val string: String = "",
 )
 
 
@@ -332,7 +327,7 @@ class laString(
 class rn2Duration(
     @XmlElement(true)
     @XmlSerialName("duration", "urn:com.sap.aii.mdt.api.data", "rn2")
-    val duration: Int
+    val duration: Int,
 )
 
 @Serializable
@@ -340,19 +335,19 @@ class rn2Duration(
 class getIntegrationFlows(
     @XmlElement(true)
     @XmlSerialName("language", "urn:AdapterMessageMonitoringVi", "y")
-    val language: String = ""
+    val language: String = "",
 )
 
 @Serializable
 @XmlSerialName("getIntegrationFlowsResponse", "urn:AdapterMessageMonitoringVi", "y")
 class getIntegrationFlowsResponse(
-    val Response: Resp
+    val Response: Resp,
 ) {
     @Serializable
     @XmlSerialName("Response", "", "")
     class Resp(
         @XmlSerialName("IntegrationFlow", "urn:com.sap.aii.mdt.server.adapterframework.ws", "rn7")
-        val list: List<IntegrationFlow>
+        val list: List<IntegrationFlow>,
     )
 
     @Serializable
@@ -365,7 +360,7 @@ class getIntegrationFlowsResponse(
         val description: String? = null,
         @XmlElement(true)
         @XmlSerialName("id", "urn:com.sap.aii.mdt.server.adapterframework.ws", "rn7")
-        val id: String
+        val id: String,
     )
 }
 
@@ -373,7 +368,7 @@ class getIntegrationFlowsResponse(
 @Serializable
 @XmlSerialName("Envelope", "http://schemas.xmlsoap.org/soap/envelope/", "S")
 class Envelope<BODYTYPE> private constructor(
-    private val body: Body<BODYTYPE>
+    private val body: Body<BODYTYPE>,
 ) {
     constructor(data: BODYTYPE) : this(Body(data))
 
@@ -418,15 +413,15 @@ fun xml(): XML {
             subclass(IntegratedConfigurationQueryResponse::class, serializer())
             subclass(IntegratedConfigurationReadRequest::class, serializer())
             subclass(IntegratedConfiguration750ReadResponse::class, serializer())
+            subclass(IntegratedConfigurationReadResponse::class, serializer())
 
             //SAPJEEDSR_Service, SAPJEEDSR_ServiceExt
         }
     }
-    val xml = XML(module) {
+    return XML(module) {
         xmlDeclMode = XmlDeclMode.None
         autoPolymorphic = true
     }
-    return xml
 }
 
 fun main() {

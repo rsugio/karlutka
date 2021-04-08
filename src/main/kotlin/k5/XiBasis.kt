@@ -1,3 +1,5 @@
+@file:Suppress("unused", "EnumEntryName", "ClassName", "MemberVisibilityCanBePrivate", "MemberVisibilityCanBePrivate")
+
 package k5
 
 import kotlinx.serialization.Serializable
@@ -446,6 +448,7 @@ class ConfigurationScenario(
 class IntegratedConfigurationQueryRequest {
     companion object {
         fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
+        fun getUrl(host: String) = "$host/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"
     }
 
     fun composeSOAP() = xml().encodeToString(Envelope(this))
@@ -480,6 +483,7 @@ class IntegratedConfigurationReadRequest(
 ) {
     companion object {
         fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
+        fun getUrl(host: String) = "$host/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"
     }
 
     fun composeSOAP() = xml().encodeToString(Envelope(this))
@@ -499,6 +503,23 @@ class IntegratedConfiguration750ReadResponse(
     companion object {
         fun parse(payloadXml: String) =
             xml().decodeFromString<Envelope<IntegratedConfiguration750ReadResponse>>(payloadXml).data
+    }
+}
+
+@Serializable
+@XmlSerialName("IntegratedConfigurationReadResponse", "http://sap.com/xi/BASIS", "b")
+class IntegratedConfigurationReadResponse(
+    @XmlElement(true)
+    @XmlSerialName("IntegratedConfiguration", "", "")
+    val IntegratedConfiguration: MutableList<IntegratedConfiguration> = mutableListOf(),
+
+    @XmlElement(true)
+    @XmlSerialName("LogMessageCollection", "", "")
+    val LogMessageCollection: LogMessageCollection
+) {
+    companion object {
+        fun parse(payloadXml: String) =
+            xml().decodeFromString<Envelope<IntegratedConfigurationReadResponse>>(payloadXml).data
     }
 }
 
@@ -571,7 +592,7 @@ class InboundProcessing(
 class Receivers(
     @XmlElement(true)
     @XmlSerialName("ReceiverWildcardIndicator", "", "")
-    val ReceiverWildcardIndicator: Boolean,
+    val ReceiverWildcardIndicator: Boolean?,    //для 750 обязательно, ранее нет
     @XmlElement(true)
     @XmlSerialName("DynamicReceiverRule", "", "")
     val DynamicReceiverRule: DynamicReceiverRule? = null,
@@ -603,7 +624,7 @@ class DynamicReceiverRule(
 class ReceiverRule(
     @XmlElement(true)
     @XmlSerialName("Condition", "", "")
-    val Condition: ReceiverRuleCondition,
+    val Condition: ReceiverRuleCondition?,  // в 750 наверное есть всегда, ранее нет
     @XmlElement(true)
     @XmlSerialName("Receiver", "", "")
     val Receiver: Receiver,
@@ -654,21 +675,31 @@ class AtomicConditionExtractor(
     val ContextObjectNamespace: String
 )
 
+/**
+ * У Receiver в версии до 750 одни поля, в 750 другие
+ */
 @Serializable
 @XmlSerialName("Receiver", "", "")
 class Receiver(
+    // PartyID и ComponentID это для <750
+    @XmlElement(true)
+    val PartyID: String?,
+    @XmlElement(true)
+    val ComponentID: String?,
+
+    // Остальные поля только для 750
     @XmlElement(true)
     @XmlSerialName("CommunicationParty", "", "")
-    val CommunicationParty: ReceiverParam,
+    val CommunicationParty: ReceiverParam?,
     @XmlElement(true)
     @XmlSerialName("CommunicationPartySchema", "", "")
-    val CommunicationPartySchema: ReceiverParam,
+    val CommunicationPartySchema: ReceiverParam?,
     @XmlElement(true)
     @XmlSerialName("CommunicationPartyAgency", "", "")
-    val CommunicationPartyAgency: ReceiverParam,
+    val CommunicationPartyAgency: ReceiverParam?,
     @XmlElement(true)
     @XmlSerialName("CommunicationComponent", "", "")
-    val CommunicationComponent: ReceiverParam,
+    val CommunicationComponent: ReceiverParam?,
 )
 
 @Serializable

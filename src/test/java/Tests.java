@@ -3,10 +3,8 @@ import k6.Blueprint;
 import k6.IFlowBpmnDefinitions;
 import org.junit.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
@@ -16,6 +14,7 @@ import java.nio.file.Paths;
 
 public class Tests {
     String localhost = "http://localhost";
+
     String getString(String resourceName) throws IOException {
         InputStream is = getClass().getResourceAsStream(resourceName);
         if (is == null) throw new IOException("Not found resource: " + resourceName);
@@ -25,8 +24,11 @@ public class Tests {
     }
 
     void printSoap(String url, String soapXml) {
-//        System.out.println(url);
-//        System.out.println(soapXml+"\n\n");
+        //noinspection ConstantConditions
+        if (1 < 0) {
+            System.out.println(url);
+            System.out.println(soapXml+"\n\n");
+        }
     }
 
     @Test
@@ -49,7 +51,7 @@ public class Tests {
         CommunicationChannelReadResponse ccrr = CommunicationChannelReadResponse.Companion.parse(getString("/PI_xiBasis/CommunicationChannelReadResponse.xml"));
         assert ccrr.getChannels().size() > 0;
         ccrr = CommunicationChannelReadResponse.Companion.parse(getString("/PI_xiBasis/CommunicationChannelReadResponse2.xml"));
-        assert ccrr.getChannels().size() == 0 && ccrr.getLogMessageCollection().getChannelLogs().size()>0;
+        assert ccrr.getChannels().size() == 0 && ccrr.getLogMessageCollection().getChannelLogs().size() > 0;
 
         // Configuration Scenarios
         printSoap(ConfigurationScenarioQueryRequest.Companion.getUrl(localhost),
@@ -70,6 +72,16 @@ public class Tests {
         assert icrr.getIntegratedConfiguration().size() > 0;
         icrr = IntegratedConfiguration750ReadResponse.Companion.parse(getString("/PI_xiBasis/IntegratedConfiguration750ReadResponse2.xml"));
         assert icrr.getIntegratedConfiguration().size() > 0;
+
+        // before 750
+        printSoap(IntegratedConfigurationQueryRequest.Companion.getUrl(localhost),
+                new IntegratedConfigurationQueryRequest().composeSOAP());
+        printSoap(IntegratedConfigurationReadRequest.Companion.getUrl(localhost),
+                new IntegratedConfigurationReadRequest("User", icqr.getIntegratedConfigurationID()).composeSOAP());
+        IntegratedConfigurationReadResponse icrr2 = IntegratedConfigurationReadResponse.Companion.parse(getString("/PI_xiBasis/IntegratedConfigurationReadResponse.xml"));
+        assert icrr2.getIntegratedConfiguration().size() > 0;
+
+
     }
 
     @Test
@@ -78,11 +90,11 @@ public class Tests {
         URL url = loader.getResource("Iflow");
         assert url != null;
         DirectoryStream<Path> iflws = Files.newDirectoryStream(Paths.get(url.toURI()), "*.iflw");
-        for (Path x: iflws) {
+        for (Path x : iflws) {
             String text = Files.readString(x);
             IFlowBpmnDefinitions.Companion.parse(text);
         }
-//      пока блупринты не парсятся полностью, надо писать дальше
+        //noinspection ConstantConditions
         if (false) {
             Blueprint.Companion.parse(getString("/Iflow/beans.xml"));
         }
