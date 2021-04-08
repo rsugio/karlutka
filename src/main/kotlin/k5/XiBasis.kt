@@ -15,10 +15,10 @@ import nl.adaptivity.xmlutil.serialization.XmlValue
 class LogMessageCollection(
     @XmlElement(true)
     @XmlSerialName("LogMessageCommunicationChannel", "", "")
-    val channelLogs: MutableList<LogMessage> = mutableListOf(),
+    val channelLogs: List<LogMessage> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageOthers", "", "")
-    val otherLogs: MutableList<LogMessage> = mutableListOf(),
+    val otherLogs: List<LogMessage> = mutableListOf(),
 )
 
 @Serializable
@@ -26,7 +26,7 @@ class LogMessageCollection(
 class LogMessage(
     @XmlElement(true)
     @XmlSerialName("LogMessageItem", "", "")
-    val LogMessageItem: MutableList<LogMessageItem> = mutableListOf()
+    val LogMessageItem: List<LogMessageItem> = mutableListOf(),
 )
 
 @Serializable
@@ -39,7 +39,7 @@ class LogMessageItem(
     val ClassificationCode: String,
     @XmlElement(true)
     @XmlSerialName("Message", "", "")
-    val Message: String? = null
+    val Message: String? = null,
 )
 
 
@@ -59,10 +59,10 @@ class CommunicationChannelQueryRequest {
 class CommunicationChannelQueryResponse(
     @XmlElement(true)
     @XmlSerialName("CommunicationChannelID", "", "")
-    val channels: MutableList<CommunicationChannelID> = mutableListOf(),
+    val channels: List<CommunicationChannelID> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: LogMessageCollection
+    val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -87,7 +87,7 @@ class CommunicationChannelID(
     @XmlElement(true)
     val ComponentID: String,
     @XmlElement(true)
-    val ChannelID: String
+    val ChannelID: String,
 )
 
 @Serializable
@@ -104,7 +104,7 @@ class IntegratedConfigurationID(
     @XmlElement(true)
     val ReceiverPartyID: String,
     @XmlElement(true)
-    val ReceiverComponentID: String
+    val ReceiverComponentID: String,
 )
 
 @Serializable
@@ -115,7 +115,7 @@ class CommunicationChannelReadRequest(
     val ReadContext: String = "User",
     @XmlElement(true)
     @XmlSerialName("CommunicationChannelID", "", "")
-    val channel: MutableList<CommunicationChannelID> = mutableListOf()
+    val channel: List<CommunicationChannelID> = mutableListOf(),
 ) {
     companion object {
         fun getUrl(host: String) = "$host/CommunicationChannelInService/CommunicationChannelInImplBean"
@@ -131,7 +131,7 @@ class CommunicationChannelReadResponse(
     val channels: List<CommunicationChannel> = listOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: LogMessageCollection
+    val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -146,7 +146,7 @@ enum class CommunicationChannelDirectionEnum { Sender, Receiver }
 class Description(
     val languageCode: String,
     @XmlValue(true)
-    val text: String? = null
+    val text: String? = null,
 )
 
 @Serializable
@@ -204,7 +204,7 @@ class CommunicationChannel(
         @XmlElement(true)
         val Namespace: String, //?
         @XmlElement(true)
-        val Value: String
+        val Value: String,
     )
 
     @Serializable
@@ -216,12 +216,12 @@ class CommunicationChannel(
         @XmlElement(true)
         val Value: String? = null, //?
         @XmlElement(true)
-        val valueTable: ValueTableRow? = null
+        val valueTable: ValueTableRow? = null,
     ) {
         @Serializable
         class ValueTableRow(
             @XmlElement(true)
-            val valueTableCell: MutableList<ValueTableCell> = mutableListOf()
+            val valueTableCell: List<ValueTableCell> = mutableListOf(),
         )
 
         @Serializable
@@ -229,15 +229,15 @@ class CommunicationChannel(
             @XmlElement(true)
             val ColumnName: String,
             @XmlElement(true)
-            val Value: String
+            val Value: String,
         )
     }
 
     @Serializable
     @XmlSerialName("ModuleProcess", "", "")
     class ModuleProcess(
-        val process: MutableList<ProcessStep> = mutableListOf(),
-        val params: MutableList<ParameterGroup> = mutableListOf()
+        val process: List<ProcessStep> = mutableListOf(),
+        val params: List<ParameterGroup> = mutableListOf(),
     )
 
     @Serializable
@@ -257,7 +257,7 @@ class CommunicationChannel(
         @XmlElement(true)
         val ParameterGroupID: String, //request
         @XmlElement(true)
-        val parameters: MutableList<Parameter> = mutableListOf()
+        val parameters: List<Parameter> = mutableListOf(),
     )
 
     @Serializable
@@ -265,7 +265,7 @@ class CommunicationChannel(
         @XmlElement(true)
         val Name: String = "", //interfaceNamespace
         @XmlElement(true)
-        val Value: String = "" //urn:asdfgh
+        val Value: String = "", //urn:asdfgh
     )
 }
 
@@ -275,7 +275,7 @@ class Identifier(
     val schemeAgencyID: String = "", //sap.com/com.sap.aii.af.soapadapter/XISOAPAdapterBean
     val schemeID: String = "",       //Local Enterprise Bean
     @XmlValue(true)
-    inline val text: String = ""
+    inline val text: String = "",
 )
 
 @Serializable
@@ -306,10 +306,10 @@ class ValueMappingQueryRequest {
 class ValueMappingQueryResponse(
     @XmlElement(true)
     @XmlSerialName("ValueMappingID", "", "")
-    val ValueMappingID: MutableList<String> = mutableListOf(),
+    val ValueMappingID: List<String> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: String?
+    val LogMessageCollection: String?,
 ) {
     companion object {
         fun parse(payloadXml: String) = xml().decodeFromString<Envelope<ValueMappingQueryResponse>>(payloadXml).data
@@ -324,7 +324,7 @@ class ValueMappingReadRequest(
     val ReadContext: String? = null,
     @XmlElement(true)
     @XmlSerialName("ValueMappingID", "", "")
-    val channel: MutableList<String> = mutableListOf()
+    val channel: List<String> = mutableListOf(),
 ) {
     companion object {
         fun getUrl(host: String) = "$host/ValueMappingInService/ValueMappingInImplBean"
@@ -337,10 +337,10 @@ class ValueMappingReadRequest(
 @XmlSerialName("ValueMappingReadResponse", "http://sap.com/xi/BASIS", "b")
 class ValueMappingReadResponse(
     @XmlElement(true)
-    val ValueMapping: MutableList<ValueMapping> = mutableListOf(),
+    val ValueMapping: List<ValueMapping> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: LogMessageCollection
+    val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
         fun parse(payloadXml: String) = xml().decodeFromString<Envelope<ValueMappingReadResponse>>(payloadXml).data
@@ -359,7 +359,7 @@ class ValueMapping(
     val GroupName: String,
     @XmlElement(true)
     @XmlSerialName("Representation", "", "")
-    val Representation: MutableList<Identifier> = mutableListOf(),
+    val Representation: List<Identifier> = mutableListOf(),
 )
 
 @Serializable
@@ -377,11 +377,11 @@ class ConfigurationScenarioQueryRequest {
 class ConfigurationScenarioQueryResponse(
     @XmlElement(true)
     @XmlSerialName("ConfigurationScenarioID", "", "")
-    val ConfigurationScenarioID: MutableList<String> = mutableListOf(),
+    val ConfigurationScenarioID: List<String> = mutableListOf(),
 
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: LogMessageCollection
+    val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -398,7 +398,7 @@ class ConfigurationScenarioReadRequest(
 
     @XmlElement(true)
     @XmlSerialName("ConfigurationScenarioID", "", "")
-    val ConfigurationScenarioID: MutableList<String> = mutableListOf(),
+    val ConfigurationScenarioID: List<String> = mutableListOf(),
 ) {
     companion object {
         fun getUrl(host: String) = "$host/ConfigurationScenarioInService/ConfigurationScenarioInImplBean"
@@ -412,11 +412,11 @@ class ConfigurationScenarioReadRequest(
 class ConfigurationScenarioReadResponse(
     @XmlElement(true)
     @XmlSerialName("ConfigurationScenario", "", "")
-    val ConfigurationScenario: MutableList<ConfigurationScenario> = mutableListOf(),
+    val ConfigurationScenario: List<ConfigurationScenario> = mutableListOf(),
 
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: LogMessageCollection
+    val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -434,13 +434,13 @@ class ConfigurationScenario(
     @XmlElement(true)
     val ConfigurationScenarioID: String,
     @XmlElement(true)
-    val BusinessSystem: MutableList<BusinessSystemID> = mutableListOf(),
+    val BusinessSystem: List<BusinessSystemID> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("CommunicationChannel", "", "")
-    val CommunicationChannel: MutableList<CommunicationChannelID> = mutableListOf(),
+    val CommunicationChannel: List<CommunicationChannelID> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("IntegratedConfiguration", "", "")
-    val IntegratedConfiguration: MutableList<IntegratedConfigurationID> = mutableListOf()
+    val IntegratedConfiguration: List<IntegratedConfigurationID> = mutableListOf(),
 )
 
 @Serializable
@@ -459,11 +459,11 @@ class IntegratedConfigurationQueryRequest {
 class IntegratedConfigurationQueryResponse(
     @XmlElement(true)
     @XmlSerialName("IntegratedConfigurationID", "", "")
-    val IntegratedConfigurationID: MutableList<IntegratedConfigurationID> = mutableListOf(),
+    val IntegratedConfigurationID: List<IntegratedConfigurationID> = mutableListOf(),
 
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: LogMessageCollection
+    val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -479,7 +479,7 @@ class IntegratedConfigurationReadRequest(
     val ReadContext: String = "User",
     @XmlElement(true)
     @XmlSerialName("IntegratedConfigurationID", "", "")
-    val IntegratedConfigurationID: MutableList<IntegratedConfigurationID> = mutableListOf()
+    val IntegratedConfigurationID: List<IntegratedConfigurationID> = mutableListOf(),
 ) {
     companion object {
         fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
@@ -494,11 +494,11 @@ class IntegratedConfigurationReadRequest(
 class IntegratedConfiguration750ReadResponse(
     @XmlElement(true)
     @XmlSerialName("IntegratedConfiguration", "", "")
-    val IntegratedConfiguration: MutableList<IntegratedConfiguration> = mutableListOf(),
+    val IntegratedConfiguration: List<IntegratedConfiguration> = mutableListOf(),
 
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: LogMessageCollection
+    val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -511,11 +511,11 @@ class IntegratedConfiguration750ReadResponse(
 class IntegratedConfigurationReadResponse(
     @XmlElement(true)
     @XmlSerialName("IntegratedConfiguration", "", "")
-    val IntegratedConfiguration: MutableList<IntegratedConfiguration> = mutableListOf(),
+    val IntegratedConfiguration: List<IntegratedConfiguration> = mutableListOf(),
 
     @XmlElement(true)
     @XmlSerialName("LogMessageCollection", "", "")
-    val LogMessageCollection: LogMessageCollection
+    val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
         fun parse(payloadXml: String) =
@@ -541,10 +541,10 @@ class IntegratedConfiguration(
     val Receivers: Receivers,
     @XmlElement(true)
     @XmlSerialName("ReceiverInterfaces", "", "")
-    val ReceiverInterfaces: MutableList<ReceiverInterfaces> = mutableListOf(),
+    val ReceiverInterfaces: List<ReceiverInterfaces> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("OutboundProcessing", "", "")
-    val OutboundProcessing: MutableList<OutboundProcessing> = mutableListOf(),
+    val OutboundProcessing: List<OutboundProcessing> = mutableListOf(),
     @XmlElement(true)
     val PrefixNamespaceMapping: PrefixNamespaceMapping? = null,
     @XmlElement(true)
@@ -584,7 +584,7 @@ class InboundProcessing(
     val AdapterSpecificAttribute: CommunicationChannel.AdapterSpecificAttribute? = null,
     @XmlElement(true)
     @XmlSerialName("AssignedUser", "", "")
-    val AssignedUser: String? = null
+    val AssignedUser: String? = null,
 )
 
 @Serializable
@@ -598,13 +598,13 @@ class Receivers(
     val DynamicReceiverRule: DynamicReceiverRule? = null,
     @XmlElement(true)
     @XmlSerialName("ReceiverRule", "", "")
-    val ReceiverRule: MutableList<ReceiverRule> = mutableListOf(),
+    val ReceiverRule: List<ReceiverRule> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("NoReceiverBehaviour", "", "")
     val NoReceiverBehaviour: String,
     @XmlElement(true)
     @XmlSerialName("NoReceiverReceiver", "", "")
-    val NoReceiverReceiver: Receiver? = null
+    val NoReceiverReceiver: Receiver? = null,
 )
 
 @Serializable
@@ -616,7 +616,7 @@ class DynamicReceiverRule(
     val Mapping: RepositoryReferenceID,
     @XmlElement(true)
     @XmlSerialName("MappingParamters", "", "")
-    val MappingParamters: MutableList<MappingParameters> = mutableListOf()
+    val MappingParamters: List<MappingParameters> = mutableListOf(),
 )
 
 @Serializable
@@ -635,7 +635,7 @@ class ReceiverRule(
 class ReceiverRuleCondition(
     @XmlElement(true)
     @XmlSerialName("AtomicConditionBlock", "", "")
-    val AtomicConditionBlock: MutableList<AtomicConditionBlock> = mutableListOf(),
+    val AtomicConditionBlock: List<AtomicConditionBlock> = mutableListOf(),
 )
 
 @Serializable
@@ -657,7 +657,7 @@ class AtomicCondition(
     val LeftExtractor: AtomicConditionExtractor,
     @XmlElement(true)
     @XmlSerialName("RightExtractor", "", "")
-    val RightExtractor: AtomicConditionExtractor
+    val RightExtractor: AtomicConditionExtractor,
 )
 
 @Serializable
@@ -672,7 +672,7 @@ class AtomicConditionExtractor(
     @XmlElement(true)
     val ContextObjectName: String,
     @XmlElement(true)
-    val ContextObjectNamespace: String
+    val ContextObjectNamespace: String,
 )
 
 /**
@@ -713,7 +713,7 @@ class ReceiverParam(
     @XmlElement(true)
     val ContextObjectName: String,
     @XmlElement(true)
-    val ContextObjectNamespace: String
+    val ContextObjectNamespace: String,
 )
 
 
@@ -745,7 +745,7 @@ class ReceiverInterfaceRule(
     val Mapping: RepositoryReferenceID? = null,
     @XmlElement(true)
     @XmlSerialName("MappingParameters", "", "")
-    val MappingParameters: MutableList<MappingParameters> = mutableListOf(),
+    val MappingParameters: List<MappingParameters> = mutableListOf(),
     @XmlElement(true)
     @XmlSerialName("Interface", "", "")
     val Interface: RepositoryReferenceID,
@@ -758,7 +758,7 @@ class MappingParameters(
     val String: MappingParameterString? = null,
     @XmlElement(true)
     @XmlSerialName("Integer", "", "")
-    val Integer: MappingParameterString? = null
+    val Integer: MappingParameterString? = null,
 )
 
 @Serializable
@@ -815,7 +815,7 @@ class HeaderMapping(
     val Sender: CommunicationComponent,
     @XmlElement(true)
     @XmlSerialName("Receiver", "", "")
-    val Receiver: CommunicationComponent
+    val Receiver: CommunicationComponent,
 )
 
 @Serializable
@@ -831,7 +831,7 @@ class CommunicationComponent(
     val CommunicationPartyAgency: ReceiverParam? = null,
     @XmlElement(true)
     @XmlSerialName("CommunicationComponent", "", "")
-    val CommunicationComponent: ReceiverParam? = null
+    val CommunicationComponent: ReceiverParam? = null,
 )
 
 
@@ -842,5 +842,5 @@ class StagingLogging(
     val UseGlobal: Boolean,
     @XmlElement(true)
     @XmlSerialName("SpecificConfiguration", "", "")
-    val SpecificConfiguration: String? = null
+    val SpecificConfiguration: String? = null,
 )
