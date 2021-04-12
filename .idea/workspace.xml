@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="мелкие правки2">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/SimpleQuery/XI_TRAFO2.html" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="добавлена обработка Description но к сожалению они все ISO8859-1 и в знаках вопроса">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/01req.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/01resp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/NotSoComplexQuery.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/NotSoComplexQuery.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/SimpleQuery/XI_TRAFO.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/SimpleQuery/XI_TRAFO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/SimpleQuery/rep_ifmmessif.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/SimpleQuery/rep_ifmmessif.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,49 +101,7 @@
     <property name="project.structure.side.proportion" value="0.28735632" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
-  <component name="RunManager" selected="JUnit.Tests.simpleQuery">
-    <configuration name="Tests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;Tests&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="Tests.simpleQuery" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;Tests.simpleQuery&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="JUnit.Tests.hmi">
     <configuration name="karlutka [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -187,6 +144,26 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="Tests.hmValue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="karlutka.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Tests" />
+      <option name="METHOD_NAME" value="hmValue" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tests.hmi" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="karlutka.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Tests" />
+      <option name="METHOD_NAME" value="hmi" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Tests.simpleQuery" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="karlutka.test" />
       <option name="PACKAGE_NAME" value="" />
@@ -199,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Tests.hmi" />
+        <item itemvalue="JUnit.Tests.hmValue" />
+        <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
         <item itemvalue="JUnit.Tests.simpleQuery" />
         <item itemvalue="Gradle.karlutka [jar]" />
-        <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
-        <item itemvalue="Gradle.Tests.simpleQuery" />
-        <item itemvalue="Gradle.Tests" />
       </list>
     </recent_temporary>
   </component>
@@ -384,7 +361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618204198572</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="добавлена обработка Description но к сожалению они все ISO8859-1 и в знаках вопроса">
+      <created>1618206781608</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1618206781608</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -420,6 +404,7 @@
     <MESSAGE value="разбор простого квери" />
     <MESSAGE value="мелкие правки" />
     <MESSAGE value="мелкие правки2" />
-    <option name="LAST_COMMIT_MESSAGE" value="мелкие правки2" />
+    <MESSAGE value="добавлена обработка Description но к сожалению они все ISO8859-1 и в знаках вопроса" />
+    <option name="LAST_COMMIT_MESSAGE" value="добавлена обработка Description но к сожалению они все ISO8859-1 и в знаках вопроса" />
   </component>
 </project>

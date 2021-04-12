@@ -1,3 +1,5 @@
+import k1.HmAttribute;
+import k1.HmInstance;
 import k1.NotSoComplexQuery;
 import k5.*;
 import k6.Blueprint;
@@ -12,6 +14,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -106,10 +109,37 @@ public class Tests {
         for (Map<String, String> m : n.getLines()) {
             String name = m.get("Name");
             String desc = m.get("Description");
-            if (desc!=null && !desc.isEmpty()) {
+            if (desc != null && !desc.isEmpty()) {
                 System.out.println(name + "\t" + desc);
             }
         }
+    }
+
+    @Test
+    public void hmi() throws Exception {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        URL url = loader.getResource("Hmi");
+        assert url != null;
+        DirectoryStream<Path> iflws = Files.newDirectoryStream(Paths.get(url.toURI()), "*.xml");
+        for (Path x : iflws) {
+            String text = Files.readString(x);
+            HmInstance obj = HmInstance.Companion.parse(text);
+            for (HmAttribute attr : obj.getAttribute()) {
+                System.out.println(attr.getName() + attr.getSimple() + attr.getInstance());
+            }
+        }
+    }
+
+    @Test
+    public void hmValue() {
+        HmInstance inst = new HmInstance("typeId", new ArrayList<HmAttribute>());
+        System.out.println(inst.printXml());
+//        HmValue val = new HmValue(-1, true, inst);
+//        System.out.println(val.printXml());
+//        String s = val.printXml();
+//        System.out.println(s);
+//        HmValue val2 = HmValue.Companion.parse(s);
+//        System.out.println(val2.getData());
     }
 
     @Test
