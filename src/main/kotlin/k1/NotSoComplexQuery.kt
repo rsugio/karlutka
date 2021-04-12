@@ -38,8 +38,6 @@ class NotSoComplexQuery(s: Scanner) {
             }
             if (!mp.isEmpty()) lines.add(mp)
         }
-        println(headers)
-        println(lines.size)
     }
 
     companion object {

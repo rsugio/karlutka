@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "io.rsug"
-version = "0.0.1-build7"
+version = "0.0.1-build8"
 
 repositories {
     jcenter()
