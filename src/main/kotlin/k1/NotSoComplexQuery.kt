@@ -13,7 +13,7 @@ class NotSoComplexQuery(s: Scanner) {
     }
 
     private fun parse(s: Scanner) {
-        val xp = Regex("<(td|th)>\\s*(.+?)\\s*</\\1>", RegexOption.DOT_MATCHES_ALL)
+        val xp = Regex("<(td|th)>\\s*(.*?)\\s*</\\1>", RegexOption.DOT_MATCHES_ALL)
         val ahref = Regex("<a.+href=\"(.+)\">")
 
         s.findWithinHorizon(Pattern.compile("""<input type=submit name=action value="Start query" />.+<table border=1>""",

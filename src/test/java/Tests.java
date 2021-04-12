@@ -12,6 +12,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Tests {
@@ -98,10 +99,17 @@ public class Tests {
         NotSoComplexQuery.Companion.repQuery("XI_TRAFO");
 
         NotSoComplexQuery n;
-        n = new NotSoComplexQuery(getScanner("SimpleQuery/rep_ifmmessif.html"));
-        System.out.println(n.getHeaders() + "\t" + n.getLines().size());
+//        n = new NotSoComplexQuery(getScanner("SimpleQuery/rep_ifmmessif.html"));
+//        System.out.println(n.getHeaders() + "\t" + n.getLines().size());
         n = new NotSoComplexQuery(getScanner("SimpleQuery/XI_TRAFO.html"));
         System.out.println(n.getHeaders() + "\t" + n.getLines().size());
+        for (Map<String, String> m : n.getLines()) {
+            String name = m.get("Name");
+            String desc = m.get("Description");
+            if (desc!=null && !desc.isEmpty()) {
+                System.out.println(name + "\t" + desc);
+            }
+        }
     }
 
     @Test
