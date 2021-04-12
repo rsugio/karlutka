@@ -1,3 +1,4 @@
+import k1.NotSoComplexQuery;
 import k5.*;
 import k6.Blueprint;
 import k6.IFlowBpmnDefinitions;
@@ -11,6 +12,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class Tests {
     String localhost = "http://localhost";
@@ -23,11 +25,16 @@ public class Tests {
         return text;
     }
 
+    Scanner getScanner(String resourceName) {
+        InputStream is = getClass().getResourceAsStream(resourceName);
+        return new Scanner(is);
+    }
+
     void printSoap(String url, String soapXml) {
         //noinspection ConstantConditions
         if (1 < 0) {
             System.out.println(url);
-            System.out.println(soapXml+"\n\n");
+            System.out.println(soapXml + "\n\n");
         }
     }
 
@@ -80,8 +87,14 @@ public class Tests {
                 new IntegratedConfigurationReadRequest("User", icqr.getIntegratedConfigurationID()).composeSOAP());
         IntegratedConfigurationReadResponse icrr2 = IntegratedConfigurationReadResponse.Companion.parse(getString("/PI_xiBasis/IntegratedConfigurationReadResponse.xml"));
         assert icrr2.getIntegratedConfiguration().size() > 0;
+    }
 
-
+    @Test
+    public void simpleQuery() throws Exception {
+        String s = "";
+        NotSoComplexQuery n;
+        n = new NotSoComplexQuery(getScanner("SimpleQuery/rep_ifmmessif.html"));
+        n = new NotSoComplexQuery(getScanner("SimpleQuery/XI_TRAFO.html"));
     }
 
     @Test
