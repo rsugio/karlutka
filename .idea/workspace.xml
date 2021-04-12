@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="убраны мутабельные листы где не надо">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/k1/NotSoComplexQuery.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/SimpleQuery/XI_TRAFO.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/SimpleQuery/rep_ifmmessif.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/SimpleQuery/tmp1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="разбор простого квери">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/NotSoComplexQuery.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/NotSoComplexQuery.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -364,7 +361,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617904734510</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="разбор простого квери">
+      <created>1618201446438</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1618201446439</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -397,6 +401,7 @@
     <MESSAGE value="все инспекции работают как надо" />
     <MESSAGE value="добавлен в целом разбор IntegratedConfiguration для версии менее 750, необходимы тесты" />
     <MESSAGE value="убраны мутабельные листы где не надо" />
-    <option name="LAST_COMMIT_MESSAGE" value="убраны мутабельные листы где не надо" />
+    <MESSAGE value="разбор простого квери" />
+    <option name="LAST_COMMIT_MESSAGE" value="разбор простого квери" />
   </component>
 </project>

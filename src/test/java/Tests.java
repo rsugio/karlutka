@@ -91,10 +91,17 @@ public class Tests {
 
     @Test
     public void simpleQuery() throws Exception {
-        String s = "";
+        NotSoComplexQuery.Companion.getAllowedRep();
+        NotSoComplexQuery.Companion.getUrlRep("http://localhost");
+        NotSoComplexQuery.Companion.getUrlDir("http://localhost");
+        NotSoComplexQuery.Companion.getContentType();
+        NotSoComplexQuery.Companion.repQuery("XI_TRAFO");
+
         NotSoComplexQuery n;
         n = new NotSoComplexQuery(getScanner("SimpleQuery/rep_ifmmessif.html"));
+        System.out.println(n.getHeaders() + "\t" + n.getLines().size());
         n = new NotSoComplexQuery(getScanner("SimpleQuery/XI_TRAFO.html"));
+        System.out.println(n.getHeaders() + "\t" + n.getLines().size());
     }
 
     @Test

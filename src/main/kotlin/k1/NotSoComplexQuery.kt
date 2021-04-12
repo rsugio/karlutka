@@ -12,28 +12,29 @@ class NotSoComplexQuery(s: Scanner) {
         parse(s)
     }
 
-    private fun parse(s: Scanner): Unit {
+    private fun parse(s: Scanner) {
         val xp = Regex("<(td|th)>\\s*(.+?)\\s*</\\1>", RegexOption.DOT_MATCHES_ALL)
         val ahref = Regex("<a.+href=\"(.+)\">")
 
         s.findWithinHorizon(Pattern.compile("""<input type=submit name=action value="Start query" />.+<table border=1>""",
             Pattern.DOTALL), Int.MAX_VALUE)
         val w = s.findAll(Pattern.compile("<tr>\\s*(.+?)\\s*</tr>", Pattern.DOTALL))
-        w.forEach { it ->
+        w.forEach {
             val tr = it.group(1)
             val tdth = xp.findAll(tr)
             val mp: MutableMap<String, String> = mutableMapOf()
             tdth.forEachIndexed { i, m2 ->
-                if (m2.groupValues[1] == "th")
-                    headers.add(m2.groupValues[2])
-                else if (m2.groupValues[1] == "td") {
-                    var v = m2.groupValues[2]
-                    if (headers[i] in arrayOf("Raw", "WSDL") && !arrayOf("", "&nbsp;").contains(v)) {
-                        v = ahref.find(v)?.groupValues?.get(1) as String
+                when {
+                    m2.groupValues[1] == "th" -> headers.add(m2.groupValues[2])
+                    m2.groupValues[1] == "td" -> {
+                        var v = m2.groupValues[2]
+                        if (headers[i] in arrayOf("Raw", "WSDL") && !arrayOf("", "&nbsp;").contains(v)) {
+                            v = ahref.find(v)?.groupValues?.get(1) as String
+                        }
+                        mp[headers[i]] = v
                     }
-                    mp[headers[i]] = v
-                } else
-                    error("ERROR")
+                    else -> error("Unexpected tag ${m2.groupValues[1]}")
+                }
             }
             if (!mp.isEmpty()) lines.add(mp)
         }
