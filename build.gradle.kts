@@ -26,7 +26,7 @@ dependencies {
 
     implementation("net.devrieze:xmlutil-jvm:0.81.1")
     implementation("net.devrieze:xmlutil-serialization-jvm:0.81.1")
-    runtimeOnly("com.fasterxml.woodstox:woodstox-core:6.2.4")   // 6+
+    runtimeOnly("com.fasterxml.woodstox:woodstox-core:6.2.5")   // 6+
 
     implementation("com.github.xmlet:xsdParser:1.1.3")
 
