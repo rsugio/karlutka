@@ -52,7 +52,7 @@ public class Tests {
 
     void printSoap(String url, String soapXml) {
         //noinspection ConstantConditions
-        if (1 < 0) {
+        if (1 > 0) {
             System.out.println(url);
             System.out.println(soapXml + "\n\n");
         }
@@ -203,5 +203,15 @@ public class Tests {
             }
         }
         System.out.println(LjsTraceLine.Companion.distinct(all));
+    }
+
+    @Test
+    public void sapcontrol() throws Exception {
+        printSoap(SAPControl.Companion.getUrl13(localhost),
+                new SAPControl.ListLogFiles().composeSOAP());
+        SAPControl.ListLogFilesResponse llfr = SAPControl.ListLogFilesResponse.Companion.parseSOAP(getString("/SAPControl/ListLogFilesResponse.xml"));
+        for (SAPControl.ListLogFilesResponse.Item i : llfr.getFile().getItem()) {
+            System.out.println(i.getFilename() + "\t" + i.getFormat());
+        }
     }
 }

@@ -377,6 +377,10 @@ class Envelope<BODYTYPE> private constructor(
         return "Envelope(body=$body)"
     }
 
+//    @Serializable
+//    @XmlSerialName("Header", "http://schemas.xmlsoap.org/soap/envelope/", "S")
+//    private val Header: String? = null
+
     @Serializable
     private class Body<BODYTYPE>(@Polymorphic val data: BODYTYPE)
 }

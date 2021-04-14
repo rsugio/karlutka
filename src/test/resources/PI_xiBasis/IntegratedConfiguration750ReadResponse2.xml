@@ -5119,7 +5119,7 @@
 						<Receiver>
 							<CommunicationParty>
 								<TypeID>Constant</TypeID>
-								<Value>P_1C_SGOK</Value>
+								<Value>P_1C_</Value>
 								<Datatype>xsd:string</Datatype>
 								<ContextObjectName/>
 								<ContextObjectNamespace/>
@@ -5599,7 +5599,7 @@
 				</ReceiverInterfaces>
 				<ReceiverInterfaces>
 					<Receiver>
-						<PartyID>P_1C_SGOK</PartyID>
+						<PartyID>P_1C_</PartyID>
 						<ComponentID>BS_ASOP_Q</ComponentID>
 					</Receiver>
 					<ReceiverInterfaceRule>
@@ -7550,7 +7550,7 @@
 				</OutboundProcessing>
 				<OutboundProcessing>
 					<Receiver>
-						<PartyID>P_1C_SGOK</PartyID>
+						<PartyID>P_1C_</PartyID>
 						<ComponentID>BS_ASOP_Q</ComponentID>
 					</Receiver>
 					<ReceiverInterface>
@@ -7559,7 +7559,7 @@
 						<SoftwareComponentVersionID>84ac9bc1-973b-11e9-a26c-d7cbac130d0e</SoftwareComponentVersionID>
 					</ReceiverInterface>
 					<CommunicationChannel>
-						<PartyID>P_1C_SGOK</PartyID>
+						<PartyID>P_1C_</PartyID>
 						<ComponentID>BS_ASOP_Q</ComponentID>
 						<ChannelID>CC_SOAPReceiver_ASOP_OrganisationalStructureReplication</ChannelID>
 					</CommunicationChannel>
