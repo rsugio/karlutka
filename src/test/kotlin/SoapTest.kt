@@ -8,7 +8,6 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.util.CompactFragment
 import org.junit.Test
 
-
 @Serializable
 @XmlSerialName("Envelope", "http://schemas.xmlsoap.org/soap/envelope/", "S")
 data class Envelope2<BODYTYPE>(

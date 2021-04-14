@@ -141,7 +141,7 @@ public class Tests {
 
     @Test
     public void hmValue() {
-        HmInstance inst = new HmInstance("typeId", new ArrayList<HmAttribute>());
+        HmInstance inst = new HmInstance("typeId", new ArrayList<>());
 //        HmValue val = new HmValue(-1, true, inst);
 //        System.out.println(val.printXml());
 //        String s = val.printXml();
@@ -207,11 +207,12 @@ public class Tests {
 
     @Test
     public void sapcontrol() throws Exception {
-        printSoap(SAPControl.Companion.getUrl13(localhost),
+        printSoap(SAPControl.Companion.getUrl("http://host:59913"),
                 new SAPControl.ListLogFiles().composeSOAP());
         SAPControl.ListLogFilesResponse llfr = SAPControl.ListLogFilesResponse.Companion.parseSOAP(getString("/SAPControl/ListLogFilesResponse.xml"));
         for (SAPControl.ListLogFilesResponse.Item i : llfr.getFile().getItem()) {
-            System.out.println(i.getFilename() + "\t" + i.getFormat());
+            System.out.println(i.getFilename() + "\t" + i.getFormat() + "\t" + i.modTimeParsed());
         }
+
     }
 }
