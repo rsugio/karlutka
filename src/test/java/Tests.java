@@ -1,6 +1,7 @@
 import k1.HmAttribute;
 import k1.HmInstance;
 import k1.NotSoComplexQuery;
+import k3.HttpAccessLog;
 import k5.*;
 import k6.Blueprint;
 import k6.IFlowBpmnDefinitions;
@@ -8,6 +9,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
@@ -15,8 +17,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class Tests {
     String localhost = "http://localhost";
@@ -32,6 +38,14 @@ public class Tests {
     Scanner getScanner(String resourceName) {
         InputStream is = getClass().getResourceAsStream(resourceName);
         return new Scanner(is);
+    }
+
+    DirectoryStream<Path> getDirectoryStream(String folder, String glob)
+            throws URISyntaxException, IOException {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        URL url = loader.getResource(folder);
+        assert url != null;
+        return Files.newDirectoryStream(Paths.get(url.toURI()), glob);
     }
 
     void printSoap(String url, String soapXml) {
@@ -109,23 +123,16 @@ public class Tests {
         for (Map<String, String> m : n.getLines()) {
             String name = m.get("Name");
             String desc = m.get("Description");
-            if (desc != null && !desc.isEmpty()) {
-                System.out.println(name + "\t" + desc);
-            }
         }
     }
 
     @Test
     public void hmi() throws Exception {
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        URL url = loader.getResource("Hmi");
-        assert url != null;
-        DirectoryStream<Path> iflws = Files.newDirectoryStream(Paths.get(url.toURI()), "*.xml");
-        for (Path x : iflws) {
+        for (Path x : getDirectoryStream("Hmi", "*.xml")) {
             String text = Files.readString(x);
             HmInstance obj = HmInstance.Companion.parse(text);
             for (HmAttribute attr : obj.getAttribute()) {
-                System.out.println(attr.getName() + attr.getSimple() + attr.getInstance());
+                System.out.println(attr);
             }
         }
     }
@@ -133,7 +140,6 @@ public class Tests {
     @Test
     public void hmValue() {
         HmInstance inst = new HmInstance("typeId", new ArrayList<HmAttribute>());
-        System.out.println(inst.printXml());
 //        HmValue val = new HmValue(-1, true, inst);
 //        System.out.println(val.printXml());
 //        String s = val.printXml();
@@ -144,11 +150,7 @@ public class Tests {
 
     @Test
     public void cpi() throws Exception {
-        ClassLoader loader = Thread.currentThread().getContextClassLoader();
-        URL url = loader.getResource("Iflow");
-        assert url != null;
-        DirectoryStream<Path> iflws = Files.newDirectoryStream(Paths.get(url.toURI()), "*.iflw");
-        for (Path x : iflws) {
+        for (Path x : getDirectoryStream("Iflow", "*.iflw")) {
             String text = Files.readString(x);
             IFlowBpmnDefinitions.Companion.parse(text);
         }
@@ -157,4 +159,32 @@ public class Tests {
             Blueprint.Companion.parse(getString("/Iflow/beans.xml"));
         }
     }
+
+    @Test
+    public void CpiLogs() throws Exception {
+        for (Path x : getDirectoryStream("CpiLogs", "http_access*.*")) {
+            System.out.println(x);
+            if (x.toString().endsWith(".zip")) {
+                ZipInputStream zis = new ZipInputStream(Files.newInputStream(x));
+                ZipEntry ze = zis.getNextEntry();
+                while (ze != null) {
+                    Scanner sc = new Scanner(zis);
+                    List<HttpAccessLog> logLines = HttpAccessLog.Companion.parse(sc);
+                    System.out.println(logLines);
+                    sc.close();
+                    ze = zis.getNextEntry();
+                }
+                zis.close();
+            } else if (x.toString().endsWith(".gz")) {
+                GZIPInputStream gz = new GZIPInputStream(Files.newInputStream(x));
+                Scanner sc = new Scanner(gz);
+                List<HttpAccessLog> logLines = HttpAccessLog.Companion.parse(sc);
+                System.out.println(logLines);
+                sc.close();
+                gz.close();
+            }
+        }
+    }
+
+
 }

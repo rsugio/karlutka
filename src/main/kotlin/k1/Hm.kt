@@ -3,14 +3,10 @@ package k1
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.serializer
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
-import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
-
-//import nl.adaptivity.serialutil.MixedContent
 
 private val xmlHm = XML()
 
@@ -30,13 +26,16 @@ class HmInstance(
             return xmlHm.decodeFromString(bodyXml)
         }
     }
+
+    override fun toString(): String = "HmInstance($typeid)=$attribute"
+
 }
 
 @Serializable
 @XmlSerialName("attribute", "", "")
 class HmAttribute(
     val isleave: Boolean,
-    val leave_typeid: String? = null,   //TODO - enum or restricted values
+    val leave_typeid: String? = null,
     val name: String,
     @Contextual
     @XmlSerialName("value", "", "")
@@ -44,16 +43,33 @@ class HmAttribute(
 ) {
     var simple: String? = null
     var instance: HmInstance? = null
+    var innerXml: String? = null
 
     init {
-        val c = fragment.contentString
-        if (c.contains("<instance") && c.contains("</instance>")) {
+        val c = fragment.contentString.trim()
+        if (name == "Return") {
+            innerXml = unescapeXml(fragment.contentString)
+        } else if (c.contains("<instance") && c.contains("</instance>")) {
             instance = HmInstance.parse(fragment.contentString)
         } else
             simple = c.trim()
     }
+
+    override fun toString(): String = when {
+        innerXml != null -> "HmAttribute($name)=$innerXml"
+        instance != null -> "HmAttribute($name)=$instance"
+        simple != null -> "HmAttribute($name)=$simple"
+        else -> error("HmAttribute.toString() failed")
+    }
+
 }
 
-class Hm {
-
+/**
+ *  //TODO -- это времянка для быстрой HMI
+ */
+private fun unescapeXml(bodyS: String): String {
+    return bodyS
+        .replace("&lt;", "<")
+        .replace("&gt;", ">")
+        .replace("&quot;", "\"")
 }
