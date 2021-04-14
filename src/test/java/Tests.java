@@ -1,7 +1,7 @@
 import k1.HmAttribute;
 import k1.HmInstance;
 import k1.NotSoComplexQuery;
-import k3.HttpAccessLog;
+import k3.HttpAccessLogLine;
 import k5.*;
 import k6.Blueprint;
 import k6.IFlowBpmnDefinitions;
@@ -16,11 +16,10 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.TemporalAccessor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -163,6 +162,8 @@ public class Tests {
 
     @Test
     public void CpiLogs() throws Exception {
+        HttpAccessLogLine.Companion.toZoned("11/Apr/2099:23:59:59 +0130");
+        List<HttpAccessLogLine> all = new ArrayList<>(1024);
         for (Path x : getDirectoryStream("CpiLogs", "http_access*.*")) {
             System.out.println(x);
             if (x.toString().endsWith(".zip")) {
@@ -170,8 +171,7 @@ public class Tests {
                 ZipEntry ze = zis.getNextEntry();
                 while (ze != null) {
                     Scanner sc = new Scanner(zis);
-                    List<HttpAccessLog> logLines = HttpAccessLog.Companion.parse(sc);
-                    System.out.println(logLines);
+                    all.addAll(HttpAccessLogLine.Companion.parse(sc));
                     sc.close();
                     ze = zis.getNextEntry();
                 }
@@ -179,13 +179,11 @@ public class Tests {
             } else if (x.toString().endsWith(".gz")) {
                 GZIPInputStream gz = new GZIPInputStream(Files.newInputStream(x));
                 Scanner sc = new Scanner(gz);
-                List<HttpAccessLog> logLines = HttpAccessLog.Companion.parse(sc);
-                System.out.println(logLines);
+                all.addAll(HttpAccessLogLine.Companion.parse(sc));
                 sc.close();
                 gz.close();
             }
         }
+        System.out.println(HttpAccessLogLine.Companion.distinct(all));
     }
-
-
 }
