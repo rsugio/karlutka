@@ -2,6 +2,7 @@ import k1.HmAttribute;
 import k1.HmInstance;
 import k1.NotSoComplexQuery;
 import k3.HttpAccessLogLine;
+import k3.LjsTraceLine;
 import k5.*;
 import k6.Blueprint;
 import k6.IFlowBpmnDefinitions;
@@ -16,6 +17,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -161,7 +163,7 @@ public class Tests {
     }
 
     @Test
-    public void CpiLogs() throws Exception {
+    public void cpiLogsAccessLogs() throws Exception {
         HttpAccessLogLine.Companion.toZoned("11/Apr/2099:23:59:59 +0130");
         List<HttpAccessLogLine> all = new ArrayList<>(1024);
         for (Path x : getDirectoryStream("CpiLogs", "http_access*.*")) {
@@ -185,5 +187,21 @@ public class Tests {
             }
         }
         System.out.println(HttpAccessLogLine.Companion.distinct(all));
+    }
+
+    @Test
+    public void cpiLjsTraces() throws Exception {
+        ZonedDateTime zdt = LjsTraceLine.Companion.toZoned("2021 04 14 23:59:59#+02#");
+        System.out.println(zdt);
+        List<LjsTraceLine> all = new ArrayList<>(1024);
+        for (Path x : getDirectoryStream("CpiLogs", "ljs*.*")) {
+            System.out.println(x);
+            if (x.toString().endsWith(".gz")) {
+                GZIPInputStream gz = new GZIPInputStream(Files.newInputStream(x));
+                all.addAll(LjsTraceLine.Companion.parse(gz));
+                gz.close();
+            }
+        }
+        System.out.println(LjsTraceLine.Companion.distinct(all));
     }
 }

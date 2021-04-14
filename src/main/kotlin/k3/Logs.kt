@@ -1,5 +1,6 @@
 package k3
 
+import java.io.InputStream
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -92,8 +93,7 @@ class HttpAccessLogLine(
 //            val int3 = lst.map { it.int3 }.distinct()
             val unk2 = lst.map { it.unk2 }.distinct()
             val unk3 = lst.map { it.unk3 }.distinct()
-            return """
-ip1=$ip1
+            return """ip1=$ip1
 ip2=$ip2
 unk=$unk
 user=$user
@@ -103,6 +103,134 @@ proto=$proto
 rc=$rc
 unk2=$unk2
 unk3=${unk3.subList(0, minOf(10, resource.size))}"""
+        }
+    }
+}
+
+/**
+ * Разбор ljs_trace_\d+
+ */
+enum class LjsTraceLevelEnum { ERROR }
+class LjsTraceLine(
+    val dt: ZonedDateTime,
+    val level: LjsTraceLevelEnum,
+    val component: String,
+    val unk1: String,   // видел только пусто
+    val user: String,
+    val threadName: String,
+    val unk2: String,   // видел только пусто
+    val unk3: String,   // видел только пусто
+    val nodeId: String, // j1f3f5ee1
+    val unk4: String,   // [na, 1060B3D4396247CBA5379F638CC644CB, и другие гуиды]
+    val unk5: String,  // аналогично unk4
+    val unk6: String,  // аналогично unk4
+    val unk7: String,  // [na, 0, 1]
+    val msg: String,   // какое-то сообщение
+    // далее |\n    0x7C 0x0A
+) {
+    companion object {
+        val dt: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy MM dd HH:mm:ss'#'x'#'", Locale.ENGLISH)
+
+        fun toZoned(s: String): ZonedDateTime {
+            // s == 2021 04 14 00:00:07#+00#
+            return ZonedDateTime.parse(s, dt)
+        }
+
+        @ExperimentalStdlibApi
+        fun parse(sc: InputStream): List<LjsTraceLine> {
+            val lines = mutableListOf<LjsTraceLine>()
+            var todo = true
+
+            fun readHash(): String {
+                val ba = StringBuilder()
+                var i = sc.read()
+                while (todo) {
+                    when (i) {
+                        -1 -> {
+                            todo = false
+                            return ba.toString()
+                        }
+                        0x23 -> {   //#==0x23
+                            return ba.toString()
+                        }
+                        else -> {
+                            val s = Char(i)
+                            ba.append(s)
+                        }
+                    }
+                    i = sc.read()
+                }
+                return ""
+            }
+
+            fun readLn(): String {
+                val ba = StringBuilder()
+                var i = sc.read()
+                while (todo) {
+                    if (i == -1) {
+                        todo = false
+                        return ba.toString()
+                    } else if (i == 0x7C) {
+                        i = sc.read()
+                        if (i == 0x0A || i == -1) {
+                            return ba.toString()
+                        } else {
+                            ba.append(Char(i))
+                        }
+                    } else {
+                        ba.append(Char(i))
+                    }
+                    i = sc.read()
+                }
+                return ""
+            }
+            while (todo) {
+                val s = sc.readNBytes(24)
+                if (s.isEmpty()) break
+                val zdt = toZoned(String(s))
+                val level = readHash()
+                val comp = readHash()
+                val unk1 = readHash()
+                val user = readHash()
+                val thread = readHash()
+                val unk2 = readHash()
+                val unk3 = readHash()
+                val nodeId = readHash()
+                val unk4 = readHash()
+                val unk5 = readHash()
+                val unk6 = readHash()
+                val unk7 = readHash()
+                val msg = readLn()
+                val ln = LjsTraceLine(zdt,
+                    LjsTraceLevelEnum.valueOf(level), comp, unk1, user, thread,
+                    unk2, unk3, nodeId, unk4, unk5, unk6, unk7, msg)
+                lines.add(ln)
+            }
+            return lines
+        }
+
+        fun distinct(lst: List<LjsTraceLine>): String {
+            val level = lst.map { it.level }.distinct()
+            val component = lst.map { it.component }.distinct()
+            val user = lst.map { it.user }.distinct()
+            val threadName = lst.map { it.threadName }.distinct()
+
+            val unk1 = lst.map {it.unk1}.distinct()
+            val unk2 = lst.map {it.unk2}.distinct()
+            val unk3 = lst.map {it.unk3}.distinct()
+            val unk4 = lst.map {it.unk4}.distinct()
+            val unk5 = lst.map {it.unk5}.distinct()
+            val unk6 = lst.map {it.unk6}.distinct()
+            val unk7 = lst.map {it.unk7}.distinct()
+            val nodeId = lst.map {it.nodeId}.distinct()
+            return """level=$level
+user=$user
+nodeId=$nodeId
+threadName=$threadName
+component=$component
+unk1 = $unk1
+unk7 = $unk7
+"""
         }
     }
 }
