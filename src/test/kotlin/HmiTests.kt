@@ -1,4 +1,5 @@
 import k1.GeneralQueryRequest
+import k1.QueryResult
 import kotlin.test.Test
 
 class HmiTests {
@@ -20,5 +21,11 @@ class HmiTests {
             result = GeneralQueryRequest.Result(attrib = mutableListOf("TEXT", "NAME")),
         )
         println(wksp.compose(false))
+    }
+
+    @Test
+    fun generalQueryResponse() {
+        val s = javaClass.getResourceAsStream("/Hmi/unescaped/qr1.xml")!!.reader().readText()
+        println(QueryResult.parseUnescapedXml(s))
     }
 }

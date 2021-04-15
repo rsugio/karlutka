@@ -78,7 +78,10 @@ class GeneralQueryRequest(
 ) {
     fun compose(escaped: Boolean): String {
         val s = xmlHm.encodeToString(this)
-        return s
+        if (escaped) {
+            return ("<![CDATA[$s]]>")
+        } else
+            return s
     }
 
     @Serializable
@@ -132,7 +135,8 @@ class GeneralQueryRequest(
     @Serializable
     @XmlSerialName("single", "", "")
     class Single(
-        @XmlElement(true) val key: String,
+        @XmlElement(true)
+        val key: String,
         @XmlElement(true)
         val value: Val,
     )
@@ -148,6 +152,7 @@ class GeneralQueryRequest(
     class Simple(
         @XmlElement(true) val strg: String? = null,
         @XmlElement(true) val int: Int? = null,
+        @XmlElement(true) val bool: Boolean? = null,
     )
 
     @Serializable
@@ -173,56 +178,103 @@ class GeneralQueryRequest(
     @XmlSerialName("type", "", "")
     class Type(
         val id: String,
+        @XmlElement(true)
+        val key: MutableList<KeyElem> = mutableListOf(),
     )
 
     @Serializable
-    @XmlSerialName("_", "", "")
-    class a4_(
-        @XmlElement(true) val complex: Complex?,
+    @XmlSerialName("keyElem", "", "")
+    class KeyElem(
+        val name: String,
+        val pos: Int,
+    )
+
+
+}
+
+@Serializable
+@XmlSerialName("queryResult", "", "")
+class QueryResult(
+    @XmlElement(true)
+    val headerInfo: HeaderInfo,
+    @XmlElement(true)
+    val typeInfo: TypeInfo,
+    @XmlElement(true)
+    val matrix: Matrix,
+) {
+    @Serializable
+    @XmlSerialName("headerInfo", "", "")
+    class HeaderInfo(
+        @XmlElement(true)
+        @XmlSerialName("rows", "", "")
+        val rows: Counted,
+        @XmlElement(true)
+        @XmlSerialName("cols", "", "")
+        val cols: Counted,
+        @XmlElement(true)
+        val colDef: ColDef,
     )
 
     @Serializable
-    @XmlSerialName("_", "", "")
-    class a5_(
-        @XmlElement(true) val complex: Complex?,
+    class Counted(
+        val count: Int,
     )
 
     @Serializable
-    @XmlSerialName("_", "", "")
-    class a6_(
-        @XmlElement(true) val complex: Complex?,
+    @XmlSerialName("colDef", "", "")
+    class ColDef(
+        @XmlElement(true)
+        val def: MutableList<Def> = mutableListOf(),
     )
 
     @Serializable
-    @XmlSerialName("_", "", "")
-    class a7_(
-        @XmlElement(true) val complex: Complex?,
+    @XmlSerialName("def", "", "")
+    class Def(
+        val type: String,
+        val pos: Int,
     )
 
     @Serializable
-    @XmlSerialName("_", "", "")
-    class a8_(
-        @XmlElement(true) val complex: Complex?,
+    @XmlSerialName("typeInfo", "", "")
+    class TypeInfo(
+        @XmlSerialName("type", "", "")
+        val type: MutableList<GeneralQueryRequest.Type> = mutableListOf(),
     )
 
     @Serializable
-    @XmlSerialName("_", "", "")
-    class a9_(
-        @XmlElement(true) val complex: Complex?,
+    @XmlSerialName("matrix", "", "")
+    class Matrix(
+        @XmlElement(true)
+        val r: MutableList<R> = mutableListOf(),
     )
 
     @Serializable
-    @XmlSerialName("_", "", "")
-    class a11_(
-        @XmlElement(true) val complex: Complex?,
+    @XmlSerialName("r", "", "")
+    class R(
+        @XmlElement(true)
+        val c: MutableList<C> = mutableListOf(),
     )
 
     @Serializable
-    @XmlSerialName("_", "", "")
-    class a12_(
-        @XmlElement(true) val complex: Complex?,
+    @XmlSerialName("c", "", "")
+    class C(
+        @XmlElement(true)
+        val wkID: WkID? = null,
+        @XmlElement(true)
+        val simple: GeneralQueryRequest.Simple? = null,
     )
 
+    @Serializable
+    @XmlSerialName("wkID", "", "")
+    class WkID(
+        val id: String,
+        val order: Int,
+    )
+    companion object {
+        fun parseUnescapedXml(xml: String): QueryResult {
+            return xmlHm.decodeFromString(xml)
+        }
+    }
 }
 
 
