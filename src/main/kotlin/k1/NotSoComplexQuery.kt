@@ -4,6 +4,7 @@ import java.util.*
 import java.util.regex.Pattern
 
 // это не сложный квери
+// вряд ли имеет смысл его развивать при наличии HMI Query и глядя на ISO8859-1
 class NotSoComplexQuery(s: Scanner) {
     val headers: MutableList<String> = mutableListOf()
     val lines: MutableList<MutableMap<String, String>> = mutableListOf()

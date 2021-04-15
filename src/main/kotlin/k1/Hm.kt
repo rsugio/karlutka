@@ -18,6 +18,7 @@ class HmInstance(
     @XmlElement(true)
     val attribute: List<HmAttribute> = listOf(),
 ) {
+    override fun toString(): String = "HmInstance($typeid)=$attribute"
     fun printXml(): String {
         return xmlHm.encodeToString(serializer(), this)
     }
@@ -26,9 +27,17 @@ class HmInstance(
         fun parse(bodyXml: String): HmInstance {
             return xmlHm.decodeFromString(bodyXml)
         }
-    }
 
-    override fun toString(): String = "HmInstance($typeid)=$attribute"
+        fun request(clientId: String, lang: String): HmInstance {
+
+            val x = HmInstance("com.sap.aii.util.hmi.core.msg.HmiRequest",
+                listOf(
+//                    attribute(true, "string", "ClientId")
+                )
+            )
+            return x
+        }
+    }
 
 }
 
@@ -40,14 +49,14 @@ class HmAttribute(
     val name: String,
     @Contextual
     @XmlSerialName("value", "", "")
-    private val fragment: CompactFragment,
+    private val fragment: CompactFragment? = null,
 ) {
     var simple: String? = null
     var instance: HmInstance? = null
     var innerXml: String? = null
 
     init {
-        val c = fragment.contentString.trim()
+        val c = fragment!!.contentString.trim()
         if (name == "Return") {
             innerXml = unescapeXml(fragment.contentString)
         } else if (c.contains("<instance") && c.contains("</instance>")) {
@@ -79,6 +88,7 @@ class GeneralQueryRequest(
     fun compose(escaped: Boolean): String {
         val s = xmlHm.encodeToString(this)
         if (escaped) {
+            //как вариант сделать через &lt;
             return ("<![CDATA[$s]]>")
         } else
             return s
@@ -188,8 +198,6 @@ class GeneralQueryRequest(
         val name: String,
         val pos: Int,
     )
-
-
 }
 
 @Serializable
@@ -270,12 +278,17 @@ class QueryResult(
         val id: String,
         val order: Int,
     )
+
     companion object {
         fun parseUnescapedXml(xml: String): QueryResult {
             return xmlHm.decodeFromString(xml)
         }
     }
 }
+
+fun attribute0S(name: String, value: String): HmAttribute
+  = HmAttribute(true, "string", name, null)
+
 
 
 /**
@@ -287,3 +300,4 @@ private fun unescapeXml(bodyS: String): String {
         .replace("&gt;", ">")
         .replace("&quot;", "\"")
 }
+
