@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="GeneralQuery#1">
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="GeneralQuery#2 - подбираемся дальше">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/karlutka.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/karlutka.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/NotSoComplexQuery.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/NotSoComplexQuery.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/SoapTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/SoapTest.kt" afterDir="false" />
     </list>
@@ -33,6 +37,17 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="karlutka" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="karlutka" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="karlutka" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="publishing" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -77,12 +92,33 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last.edited.regexp" value="10.254.254.254 (157.133.237.49) - S9999860577 [11/Apr/2021:00:00:08 +0000] POST /cxf/vendor/Commerce/StockTdLoad HTTP/1.1 200 5406 924 e459999-iflmap.hcisbt.ru1.hana.ondemand.com:443 -" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../int/eclipse_cpi_luna/eclipse/plugins" />
-    <property name="project.structure.last.edited" value="Facets" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.28735632" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
-  <component name="RunManager" selected="JUnit.SoapTest.demo1">
+  <component name="RunManager" selected="JUnit.HmiTests.mixed">
+    <configuration name="karlutka [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publishToMavenLocal" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="HmiTests.generalQueryRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="karlutka.test" />
       <option name="PACKAGE_NAME" value="" />
@@ -103,6 +139,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="HmiTests.mixed" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="karlutka.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="HmiTests" />
+      <option name="METHOD_NAME" value="mixed" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SoapTest.demo1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="karlutka.test" />
       <option name="PACKAGE_NAME" value="" />
@@ -113,36 +159,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Tests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="karlutka.test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tests.sapcontrol" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="karlutka.test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="sapcontrol" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.HmiTests.mixed" />
+        <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
         <item itemvalue="JUnit.SoapTest.demo1" />
         <item itemvalue="JUnit.HmiTests.generalQueryRequest" />
         <item itemvalue="JUnit.HmiTests.generalQueryResponse" />
-        <item itemvalue="JUnit.Tests.sapcontrol" />
-        <item itemvalue="JUnit.Tests" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="StandaloneScriptsStorage">
+    <option name="files">
+      <set>
+        <option value="$PROJECT_DIR$/build.gradle.kts" />
+      </set>
+    </option>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="" />
@@ -417,7 +451,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618469756672</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="GeneralQuery#2 - подбираемся дальше">
+      <created>1618486373332</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1618486373332</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -434,7 +475,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Добавлен метод массового тестирования" />
     <MESSAGE value="текущее" />
     <MESSAGE value="подавлены некоторые инспекции" />
     <MESSAGE value="пример VMG" />
@@ -459,7 +499,8 @@
     <MESSAGE value="kotlin-1.5RC" />
     <MESSAGE value="хэмэай только в путь" />
     <MESSAGE value="GeneralQuery#1" />
-    <option name="LAST_COMMIT_MESSAGE" value="GeneralQuery#1" />
+    <MESSAGE value="GeneralQuery#2 - подбираемся дальше" />
+    <option name="LAST_COMMIT_MESSAGE" value="GeneralQuery#2 - подбираемся дальше" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

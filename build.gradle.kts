@@ -1,9 +1,9 @@
 
 plugins {
     idea
-    kotlin("jvm") version "1.5.0-RC"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.5.0-RC"
-    id("org.jetbrains.dokka") version "1.4.30"
+    kotlin("jvm") version "1.5+"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.5+"
+    id("org.jetbrains.dokka") version "1+"
     id("maven-publish")
     id("com.jfrog.artifactory") version "4.21.0"
 }
@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5.0-RC")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5+")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
     implementation("net.devrieze:xmlutil-jvm:+")    //0.81.1

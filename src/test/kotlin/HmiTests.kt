@@ -1,10 +1,58 @@
-import k1.GeneralQueryRequest
-import k1.HmInstance
-import k1.MappingTool
-import k1.QueryResult
+import k1.*
 import kotlin.test.Test
 
 class HmiTests {
+    @Test
+    fun mixed() {
+        val x = HmInstance.ofMap("com.sap.aii.util.hmi.core.msg.HmiRequest", mapOf(
+            Pair("ClientId", "f62de1959d9b11ebb68900059a3c7a00"),
+            Pair("ClientLanguage", "EN"),
+            Pair("ClientLevel",
+                HmInstance.ofMap("com.sap.aii.util.applcomp.ApplCompLevel", mapOf(
+                    Pair("Release", "7.0"),
+                    Pair("SupportPackage", "0"),
+                ))),
+            Pair("ClientPassword", "ClientPassword"),
+            Pair("ClientUser", "uname"),
+            Pair("ClientLanguage", "EN"),
+        )
+        )
+
+        val qu = GeneralQueryRequest.ofArg(listOf("workspace"),
+            GeneralQueryRequest.elementary("WS_ORDER", "EQ", GeneralQueryRequest.Simple(-1)),
+            "", "RA_WORKSPACE_ID", "WS_NAME", "TEXT")
+
+        val y = HmInstance.ofArg(
+            "com.sap.aii.util.hmi.core.msg.HmiRequest",
+            "ClientId", "f62de1959d9b11ebb68900059a3c7a00",
+            "ClientLanguage", "EN",
+            "ClientLevel",
+            HmInstance.ofArg(
+                "com.sap.aii.util.applcomp.ApplCompLevel",
+                "Release", "7.0",
+                "SupportPackage", "0",
+            ),
+            "ClientPassword", "dummy",
+            "ClientUser", "uname",
+            "ControlFlag", "0",
+            "HmiSpecVersion", "1.0",
+            "MethodId", "GENERIC",
+            "MethodInput",
+            HmInstance.ofArg(
+                "com.sap.aii.util.hmi.api.HmiMethodInput",
+                "Key", "QUERY_REQUEST_XML",
+                "Value", qu.compose()
+                ),
+            "RequestId", "fb3c98b19d9b11ebbc2a00059a3c7a00",
+            "RequiresSession", "false",
+            "ServerApplicationId", null,
+            "ServerLogicalSystemName", null,
+            "ServiceId", "QUERY",
+        )
+        println(y.printXml())
+//        require(x.printXml() == y.printXml())
+    }
+
     @Test
     fun generalQueryRequest() {
         val wksp = GeneralQueryRequest(
@@ -17,7 +65,7 @@ class HmiTests {
                 complex = null,
                 elementary = GeneralQueryRequest.Elementary(
                     GeneralQueryRequest.Single("WS_ORDER",
-                        GeneralQueryRequest.Val(GeneralQueryRequest.Simple(null, -1)))
+                        GeneralQueryRequest.Val(GeneralQueryRequest.Simple(-1)), "EQ")
                 )
             ),
             result = GeneralQueryRequest.Result(attrib = mutableListOf("TEXT", "NAME")),

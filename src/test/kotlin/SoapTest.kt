@@ -25,11 +25,9 @@ data class Envelope2<BODYTYPE>(
 }
 
 @Serializable
-class P<T>(@XmlValue(true) @Polymorphic val data: T)
-
-@Serializable
 @XmlSerialName("A", "urn:vendor-com:A", "")
-data class A(val a: String, val x: Int = 1)
+data class A(val a: String, val x: Int = 1) {
+}
 
 @Serializable
 @XmlSerialName("B", "urn:vendor-com:B", "")
@@ -49,7 +47,7 @@ private val xmlserializer = XML(xmlmodule) {
 }
 
 @Serializable
-data class MixedValueContainer(@XmlValue(true) val data: List<@Polymorphic Any>) {
+data class P(@XmlValue(true) val data: List<@Polymorphic Any>) {
     companion object {
         fun module(): SerializersModule {
             return SerializersModule {
@@ -58,7 +56,6 @@ data class MixedValueContainer(@XmlValue(true) val data: List<@Polymorphic Any>)
                 polymorphic(Any::class, B::class, B.serializer())
             }
         }
-
     }
 }
 
@@ -73,14 +70,14 @@ class SoapTest {
 //        println(a)
         val aSoap2 = """<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
             |<S:Header>123456<a/></S:Header>
-            |<S:Body><A xmlns="urn:vendor-com:A" a="stringA" x="1"/></S:Body></S:Envelope>""".trimMargin()
+            |<S:Body><A xmlns="urn:vendor-com:A" a="stringA" x="1"/></S:Body>
+            |</S:Envelope>""".trimMargin()
         val ax = xmlserializer.decodeFromString<Envelope2<A>>(aSoap2)
-//        println(ax)
 
-        val m = MixedValueContainer(listOf("123",A("a"), "456"))
+        val m = P(listOf("123",A("a"), "456"))
         val s = xmlserializer.encodeToString(m)
         println(s)
-        val n = xmlserializer.decodeFromString<MixedValueContainer>(s)
+        val n = xmlserializer.decodeFromString<P>(s)
         println(n)
     }
 }

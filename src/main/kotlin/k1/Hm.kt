@@ -1,41 +1,86 @@
 package k1
 
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
+import kotlinx.serialization.*
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
-import nl.adaptivity.xmlutil.util.CompactFragment
+import nl.adaptivity.xmlutil.serialization.XmlValue
 
-private val xmlHm = XML()
+private val xmlmodule = SerializersModule {
+    polymorphic(Any::class) {
+        subclass(HmValue::class, serializer())
+        subclass(HmInstance::class, serializer())
+        subclass(String::class, String.serializer())
+    }
+}
+private val xmlserializer = XML(xmlmodule) {
+    xmlDeclMode = XmlDeclMode.None
+    autoPolymorphic = true
+}
 
 @Serializable
 @XmlSerialName("instance", "", "")
 class HmInstance(
     val typeid: String, //TODO - enum or restricted values
     @XmlElement(true)
-    val attribute: List<HmAttribute> = listOf(),
+    val attribute: MutableList<HmAttribute> = mutableListOf(),
 ) {
-    override fun toString(): String = "HmInstance($typeid)=$attribute"
     fun printXml(): String {
-        return xmlHm.encodeToString(serializer(), this)
+        return xmlserializer.encodeToString(serializer(), this)
     }
 
     companion object {
-        fun parse(bodyXml: String): HmInstance {
-            return xmlHm.decodeFromString(bodyXml)
+        fun ofMap(typeid: String, attrs: Map<String, Any>): HmInstance {
+            val lst = mutableListOf<HmAttribute>()
+            attrs.forEach { k: String, v: Any ->
+                val hmValue = if (v is String) {
+                    HmAttribute(true, "string", k, HmValue(0, false, listOf(v)))
+                } else if (v is HmInstance) {
+                    HmAttribute(false, null, k, HmValue(0, false, listOf(v)))
+                } else {
+                    error("Not a valid type: ${v::class}")
+                }
+                lst.add(hmValue)
+            }
+            return HmInstance(typeid, lst)
         }
 
-        fun request(clientId: String, lang: String): HmInstance {
+        fun ofArg(typeid: String, vararg attrs: Any?): HmInstance {
+            val lst = mutableListOf<HmAttribute>()
+            var b = true
+            var k = ""
+            attrs.iterator().forEachRemaining { v ->
+                if (b) {
+                    require(v is String)
+                    k = v
+                } else {
+                    val hmValue = if (v == null) {
+                        HmAttribute(true, "string", k, HmValue(0, true, listOf()))
+                    } else if (v is String) {
+                        HmAttribute(true, "string", k, HmValue(0, false, listOf(v)))
+                    } else if (v is HmInstance) {
+                        HmAttribute(false, null, k, HmValue(0, false, listOf(v)))
+                    } else {
+                        error("Not a valid type: ${v::class}")
+                    }
+                    lst.add(hmValue)
+                }
+                b = !b
+            }
+            require(lst.size > 0 && b)
+            return HmInstance(typeid, lst)
+        }
 
-            val x = HmInstance("com.sap.aii.util.hmi.core.msg.HmiRequest",
-                listOf(
-//                    attribute(true, "string", "ClientId")
-                )
-            )
-            return x
+        fun parse(bodyXml: String): HmInstance {
+            return xmlserializer.decodeFromString(bodyXml)
+        }
+
+        fun request(clientId: String, lang: String): HmInstance? {
+            return null
         }
     }
 
@@ -44,34 +89,29 @@ class HmInstance(
 @Serializable
 @XmlSerialName("attribute", "", "")
 class HmAttribute(
-    val isleave: Boolean,
+    val isleave: Boolean = true,
     val leave_typeid: String? = null,
     val name: String,
-    @Contextual
-    @XmlSerialName("value", "", "")
-    private val fragment: CompactFragment? = null,
+    @XmlElement(true) val value: HmValue,
 ) {
-    var simple: String? = null
-    var instance: HmInstance? = null
-    var innerXml: String? = null
+    companion object {
+        fun string0S(name: String, value: String) =
+            HmAttribute(true, "string", name,
+                k1.HmValue(0, false, listOf(value))
+            )
 
-    init {
-        val c = fragment!!.contentString.trim()
-        if (name == "Return") {
-            innerXml = unescapeXml(fragment.contentString)
-        } else if (c.contains("<instance") && c.contains("</instance>")) {
-            instance = HmInstance.parse(fragment.contentString)
-        } else
-            simple = c.trim()
-    }
-
-    override fun toString(): String = when {
-        innerXml != null -> "HmAttribute($name)=$innerXml"
-        instance != null -> "HmAttribute($name)=$instance"
-        simple != null -> "HmAttribute($name)=$simple"
-        else -> error("HmAttribute.toString() failed")
+        fun instance(name: String, value: HmInstance, isleave: Boolean = false) =
+            HmAttribute(isleave, null, name, k1.HmValue(0, false, listOf(value)))
     }
 }
+
+@Serializable
+@XmlSerialName("value", "", "")
+class HmValue(
+    val index: Int = 0,
+    val isnull: Boolean = false,
+    @XmlValue(true) val value: List<@Polymorphic Any> = listOf(),
+)
 
 @Serializable
 @XmlSerialName("generalQueryRequest", "", "")
@@ -85,8 +125,8 @@ class GeneralQueryRequest(
     @XmlElement(true)
     val result: Result,
 ) {
-    fun compose(escaped: Boolean): String {
-        val s = xmlHm.encodeToString(this)
+    fun compose(escaped: Boolean = true): String {
+        val s = xmlserializer.encodeToString(this)
         if (escaped) {
             //как вариант сделать через &lt;
             return ("<![CDATA[$s]]>")
@@ -149,6 +189,8 @@ class GeneralQueryRequest(
         val key: String,
         @XmlElement(true)
         val value: Val,
+        @XmlElement(true)
+        val op: String,
     )
 
     @Serializable
@@ -163,7 +205,11 @@ class GeneralQueryRequest(
         @XmlElement(true) val strg: String? = null,
         @XmlElement(true) val int: Int? = null,
         @XmlElement(true) val bool: Boolean? = null,
-    )
+    ) {
+        constructor(a: String) : this(a, null, null)
+        constructor(a: Int) : this(null, a, null)
+        constructor(a: Boolean) : this(null, null, a)
+    }
 
     @Serializable
     @XmlSerialName("result", "", "")
@@ -198,6 +244,22 @@ class GeneralQueryRequest(
         val name: String,
         val pos: Int,
     )
+
+    companion object {
+        fun ofArg(lst: List<String>, cond: Condition, vararg result: String): GeneralQueryRequest {
+            val lst2 = lst.map { Type(it) } as MutableList<Type>
+            val res = GeneralQueryRequest.Result(result.toList() as MutableList<String>)
+            return GeneralQueryRequest(Types(lst2),
+                GeneralQueryRequest.QC("S", "N", ClCxt("L"), SwcListDef("A")),
+                cond,
+                res)
+        }
+
+        fun elementary(key: String, op: String, c: Simple): Condition {
+            return Condition(null, Elementary(Single(key, Val(c), op)))
+        }
+
+    }
 }
 
 @Serializable
@@ -281,14 +343,13 @@ class QueryResult(
 
     companion object {
         fun parseUnescapedXml(xml: String): QueryResult {
-            return xmlHm.decodeFromString(xml)
+            return xmlserializer.decodeFromString(xml)
         }
     }
 }
 
-fun attribute0S(name: String, value: String): HmAttribute
-  = HmAttribute(true, "string", name, null)
-
+//fun attribute0S(name: String, value: String): HmAttribute
+//  = HmAttribute(true, "string", name, null)
 
 
 /**
