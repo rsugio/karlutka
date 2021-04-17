@@ -6,10 +6,13 @@ plugins {
     id("org.jetbrains.dokka") version "1+"
     id("maven-publish")
     id("com.jfrog.artifactory") version "4.21.0"
+    id("fr.brouillard.oss.gradle.jgitver") version "0.6.1"
 }
 
 group = "io.rsug"
-version = "0.0.1-build8"
+jgitver {
+
+}
 
 repositories {
     jcenter()

@@ -20,7 +20,7 @@ private val jsonSerializer = Json {
 
 enum class IFlowRuntimeStatus { RETRY, COMPLETED, PROCESSING, FAILED, DISCARDED, ESCALATED, CANCELLED }
 enum class CpiLogLevel { NONE, INFO, DEBUG, TRACE }
-enum class CpiDeployedStatus { STARTED, STARTING }
+enum class CpiDeployedStatus { STARTED, STARTING, ERROR }
 enum class IntegrationArtifactTypeEnum { INTEGRATION_FLOW, VALUE_MAPPING }
 enum class LogFileTypeEnum { http, trace }
 enum class NodeScopeEnum { worker }
