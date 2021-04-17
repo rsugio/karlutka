@@ -2,6 +2,10 @@ import k1.*
 import kotlin.test.Test
 
 class HmiTests {
+
+    /**
+     * выдача HMI-запроса в удобном для разработки виде
+     */
     @Test
     fun mixed() {
         val x = HmInstance.ofMap("com.sap.aii.util.hmi.core.msg.HmiRequest", mapOf(
@@ -50,9 +54,12 @@ class HmiTests {
             "ServiceId", "QUERY",
         )
         println(y.printXml())
-//        require(x.printXml() == y.printXml())
+
     }
 
+    /**
+     * Выдача только квери, в неудобном виде
+     */
     @Test
     fun generalQueryRequest() {
         val wksp = GeneralQueryRequest(
@@ -77,6 +84,11 @@ class HmiTests {
     fun generalQueryResponse() {
         val s = javaClass.getResourceAsStream("/Hmi/unescaped/qr1.xml")!!.reader().readText()
         println(QueryResult.parseUnescapedXml(s))
+    }
+
+    @Test
+    fun parseHmiResponses() {
+
     }
 
     @Test

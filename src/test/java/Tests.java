@@ -132,9 +132,10 @@ public class Tests {
     public void hmi() throws Exception {
         for (Path x : getDirectoryStream("Hmi", "*.xml")) {
             String text = Files.readString(x);
+            System.out.println(x);
             HmInstance obj = HmInstance.Companion.parse(text);
             for (HmAttribute attr : obj.getAttribute()) {
-                System.out.println(attr);
+                System.out.println(attr.getName() + " = " + attr.getValue());
             }
         }
     }

@@ -107,7 +107,7 @@ class HmAttribute(
 
 @Serializable
 @XmlSerialName("value", "", "")
-class HmValue(
+data class HmValue(
     val index: Int = 0,
     val isnull: Boolean = false,
     @XmlValue(true) val value: List<@Polymorphic Any> = listOf(),
