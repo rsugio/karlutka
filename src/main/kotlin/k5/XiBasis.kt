@@ -51,7 +51,7 @@ class CommunicationChannelQueryRequest {
         fun getUrl(host: String) = "$host/CommunicationChannelInService/CommunicationChannelInImplBean"
     }
 
-    fun composeSOAP() = xml().encodeToString(Envelope(this))
+    fun composeSOAP() = xmlModule.encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -65,8 +65,8 @@ class CommunicationChannelQueryResponse(
     val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
-        fun parse(payloadXml: String) =
-            xml().decodeFromString<Envelope<CommunicationChannelQueryResponse>>(payloadXml).data
+        fun parse(payloadXml: String): CommunicationChannelQueryResponse =
+            xmlModule.decodeFromString<Envelope<CommunicationChannelQueryResponse>>(payloadXml).data
     }
 }
 
@@ -117,11 +117,12 @@ class CommunicationChannelReadRequest(
     @XmlSerialName("CommunicationChannelID", "", "")
     val channel: List<CommunicationChannelID> = mutableListOf(),
 ) {
+    fun composeSOAP() = xmlModule.encodeToString(Envelope(this))
+
     companion object {
         fun getUrl(host: String) = "$host/CommunicationChannelInService/CommunicationChannelInImplBean"
     }
 
-    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -134,8 +135,7 @@ class CommunicationChannelReadResponse(
     val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
-        fun parse(payloadXml: String) =
-            xml().decodeFromString<Envelope<CommunicationChannelReadResponse>>(payloadXml).data
+        fun parse(payloadXml: String) = xmlModule.decodeFromString<Envelope<CommunicationChannelReadResponse>>(payloadXml).data
     }
 }
 
@@ -298,7 +298,7 @@ class ValueMappingQueryRequest {
         fun getUrl(host: String) = "$host/ValueMappingInService/ValueMappingInImplBean"
     }
 
-    fun composeSOAP() = xml().encodeToString(Envelope(this))
+    fun composeSOAP() = xmlModule.encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -312,7 +312,7 @@ class ValueMappingQueryResponse(
     val LogMessageCollection: String?,
 ) {
     companion object {
-        fun parse(payloadXml: String) = xml().decodeFromString<Envelope<ValueMappingQueryResponse>>(payloadXml).data
+        fun parse(payloadXml: String) = xmlModule.decodeFromString<Envelope<ValueMappingQueryResponse>>(payloadXml).data
     }
 }
 
@@ -326,11 +326,11 @@ class ValueMappingReadRequest(
     @XmlSerialName("ValueMappingID", "", "")
     val channel: List<String> = mutableListOf(),
 ) {
+    fun composeSOAP() = xmlModule.encodeToString(Envelope(this))
+
     companion object {
         fun getUrl(host: String) = "$host/ValueMappingInService/ValueMappingInImplBean"
     }
-
-    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -343,7 +343,7 @@ class ValueMappingReadResponse(
     val LogMessageCollection: LogMessageCollection,
 ) {
     companion object {
-        fun parse(payloadXml: String) = xml().decodeFromString<Envelope<ValueMappingReadResponse>>(payloadXml).data
+        fun parse(payloadXml: String) = xmlModule.decodeFromString<Envelope<ValueMappingReadResponse>>(payloadXml).data
     }
 }
 
@@ -365,11 +365,11 @@ class ValueMapping(
 @Serializable
 @XmlSerialName("ConfigurationScenarioQueryRequest", "http://sap.com/xi/BASIS", "b")
 class ConfigurationScenarioQueryRequest {
+    fun composeSOAP() = xmlModule.encodeToString(Envelope(this))
+
     companion object {
         fun getUrl(host: String) = "$host/ConfigurationScenarioInService/ConfigurationScenarioInImplBean"
     }
-
-    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -385,7 +385,7 @@ class ConfigurationScenarioQueryResponse(
 ) {
     companion object {
         fun parse(payloadXml: String) =
-            xml().decodeFromString<Envelope<ConfigurationScenarioQueryResponse>>(payloadXml).data
+            xmlModule.decodeFromString<Envelope<ConfigurationScenarioQueryResponse>>(payloadXml).data
     }
 }
 
@@ -400,11 +400,11 @@ class ConfigurationScenarioReadRequest(
     @XmlSerialName("ConfigurationScenarioID", "", "")
     val ConfigurationScenarioID: List<String> = mutableListOf(),
 ) {
+    fun composeSOAP() = xmlModule.encodeToString(Envelope(this))
+
     companion object {
         fun getUrl(host: String) = "$host/ConfigurationScenarioInService/ConfigurationScenarioInImplBean"
     }
-
-    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -420,7 +420,7 @@ class ConfigurationScenarioReadResponse(
 ) {
     companion object {
         fun parse(payloadXml: String) =
-            xml().decodeFromString<Envelope<ConfigurationScenarioReadResponse>>(payloadXml).data
+            xmlModule.decodeFromString<Envelope<ConfigurationScenarioReadResponse>>(payloadXml).data
     }
 }
 
@@ -450,8 +450,7 @@ class IntegratedConfigurationQueryRequest {
         fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
         fun getUrl(host: String) = "$host/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"
     }
-
-    fun composeSOAP() = xml().encodeToString(Envelope(this))
+    fun composeSOAP() = xmlModule.encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -467,7 +466,7 @@ class IntegratedConfigurationQueryResponse(
 ) {
     companion object {
         fun parse(payloadXml: String) =
-            xml().decodeFromString<Envelope<IntegratedConfigurationQueryResponse>>(payloadXml).data
+            xmlModule.decodeFromString<Envelope<IntegratedConfigurationQueryResponse>>(payloadXml).data
     }
 }
 
@@ -481,12 +480,11 @@ class IntegratedConfigurationReadRequest(
     @XmlSerialName("IntegratedConfigurationID", "", "")
     val IntegratedConfigurationID: List<IntegratedConfigurationID> = mutableListOf(),
 ) {
+    fun composeSOAP() = xmlModule.encodeToString(Envelope(this))
     companion object {
         fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
         fun getUrl(host: String) = "$host/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"
     }
-
-    fun composeSOAP() = xml().encodeToString(Envelope(this))
 }
 
 @Serializable
@@ -502,7 +500,7 @@ class IntegratedConfiguration750ReadResponse(
 ) {
     companion object {
         fun parse(payloadXml: String) =
-            xml().decodeFromString<Envelope<IntegratedConfiguration750ReadResponse>>(payloadXml).data
+            xmlModule.decodeFromString<Envelope<IntegratedConfiguration750ReadResponse>>(payloadXml).data
     }
 }
 
@@ -519,7 +517,7 @@ class IntegratedConfigurationReadResponse(
 ) {
     companion object {
         fun parse(payloadXml: String) =
-            xml().decodeFromString<Envelope<IntegratedConfigurationReadResponse>>(payloadXml).data
+            xmlModule.decodeFromString<Envelope<IntegratedConfigurationReadResponse>>(payloadXml).data
     }
 }
 

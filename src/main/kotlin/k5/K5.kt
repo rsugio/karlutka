@@ -2,15 +2,41 @@
 
 package k5
 
-import kotlinx.serialization.Polymorphic
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
-import kotlinx.serialization.serializer
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import kotlin.reflect.KClass
+
+@Serializable
+@XmlSerialName("Envelope", "http://schemas.xmlsoap.org/soap/envelope/", "S")
+class Envelope<BODYTYPE> private constructor(
+    private val body: Body<BODYTYPE>,
+) {
+    constructor(data: BODYTYPE) : this(Body(data))
+
+    val data: BODYTYPE get() = body.data
+    override fun toString(): String {
+        return "Envelope(body=$body)"
+    }
+
+    @Serializable
+    private class Body<BODYTYPE>(@Polymorphic val data: BODYTYPE)
+
+//  пока не заработало, надо думать дальше:
+//    inline fun <reified BODYTYPE> xmlSoap():String = xmlModule.encodeToString(this)
+
+    companion object {
+//      моего знания котлина пока недостаточно чтобы понять почему такое вызывает эксепшОн
+//        fun <BODYTYPE> parseXmlSoap(xmlSoap: String):BODYTYPE {
+//            return xml().decodeFromString<Envelope<BODYTYPE>>(xmlSoap).data
+//        }
+    }
+
+}
 
 enum class EnumDirection { INBOUND, OUTBOUND }
 
@@ -364,28 +390,7 @@ class getIntegrationFlowsResponse(
     )
 }
 
-
-@Serializable
-@XmlSerialName("Envelope", "http://schemas.xmlsoap.org/soap/envelope/", "S")
-class Envelope<BODYTYPE> private constructor(
-    private val body: Body<BODYTYPE>,
-) {
-    constructor(data: BODYTYPE) : this(Body(data))
-
-    val data: BODYTYPE get() = body.data
-    override fun toString(): String {
-        return "Envelope(body=$body)"
-    }
-
-//    @Serializable
-//    @XmlSerialName("Header", "http://schemas.xmlsoap.org/soap/envelope/", "S")
-//    private val Header: String? = null
-
-    @Serializable
-    private class Body<BODYTYPE>(@Polymorphic val data: BODYTYPE)
-}
-
-fun xml(): XML {
+private fun xml(): XML {
     val module = SerializersModule {
         polymorphic(Any::class) {
             // AdapterMessageMonitoringViCommunicationChannelQueryResponse
@@ -418,7 +423,6 @@ fun xml(): XML {
             subclass(IntegratedConfigurationReadRequest::class, serializer())
             subclass(IntegratedConfiguration750ReadResponse::class, serializer())
             subclass(IntegratedConfigurationReadResponse::class, serializer())
-
             //SAPJEEDSR_Service, SAPJEEDSR_ServiceExt
         }
     }
@@ -427,6 +431,7 @@ fun xml(): XML {
         autoPolymorphic = true
     }
 }
+val xmlModule = xml()
 
 fun main() {
 //    var cnt = 100000

@@ -54,16 +54,17 @@ public class Tests {
         //noinspection ConstantConditions
         if (1 > 0) {
             System.out.println(url);
-            System.out.println(soapXml + "\n\n");
+            System.out.println(soapXml);
         }
     }
 
     @Test
     public void pi() throws IOException {
         // Value Mappings
+        ValueMappingQueryResponse vmqr = ValueMappingQueryResponse.Companion.parse(getString("/PI_xiBasis/ValueMappingQueryResponse.xml"));
+        System.out.println(vmqr);
         printSoap(ValueMappingQueryRequest.Companion.getUrl(localhost),
                 new ValueMappingQueryRequest().composeSOAP());
-        ValueMappingQueryResponse vmqr = ValueMappingQueryResponse.Companion.parse(getString("/PI_xiBasis/ValueMappingQueryResponse.xml"));
         printSoap(ValueMappingReadRequest.Companion.getUrl(localhost),
                 new ValueMappingReadRequest(null, vmqr.getValueMappingID()).composeSOAP());
         ValueMappingReadResponse vmrr = ValueMappingReadResponse.Companion.parse(getString("/PI_xiBasis/ValueMappingReadResponse.xml"));

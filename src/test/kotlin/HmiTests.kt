@@ -46,7 +46,7 @@ class HmiTests {
                 "com.sap.aii.util.hmi.api.HmiMethodInput",
                 "Key", "QUERY_REQUEST_XML",
                 "Value", qu.compose()
-                ),
+            ),
             "RequestId", "fb3c98b19d9b11ebbc2a00059a3c7a00",
             "RequiresSession", "false",
             "ServerApplicationId", null,
@@ -86,14 +86,4 @@ class HmiTests {
         println(QueryResult.parseUnescapedXml(s))
     }
 
-    @Test
-    fun parseHmiResponses() {
-
-    }
-
-    @Test
-    fun askWksp() {
-        val clientId = "f62de1959d9b11ebb68900059a3c7a00"
-//        val inst = HmInstance.request(clientId, "EN", null)
-    }
 }
