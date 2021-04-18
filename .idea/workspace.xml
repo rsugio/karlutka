@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="jgitver">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/mappingtest_request1.xml" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="MappingTest">
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/mappingtest_escaped.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/mmtest_request1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/mmtest_response1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/omtest_request2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/omtest_response2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/unescaped/testExecutionRequest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/XiObj.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/XiObj.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/Hmi/mappingtest_request1.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +125,7 @@
     <property name="project.structure.side.proportion" value="0.28735632" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
-  <component name="RunManager" selected="JUnit.HmiTests.testMapping">
+  <component name="RunManager" selected="JUnit.Tests.hmi">
     <configuration name="karlutka [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -186,27 +189,6 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="karlutka [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="HmiTests.testMapping" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="karlutka.test" />
       <option name="PACKAGE_NAME" value="" />
@@ -217,13 +199,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Tests.hmi" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="karlutka.test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Tests" />
+      <option name="METHOD_NAME" value="hmi" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Tests.hmi" />
         <item itemvalue="JUnit.HmiTests.testMapping" />
         <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
         <item itemvalue="Gradle.karlutka [clean]" />
         <item itemvalue="Gradle.karlutka [jar]" />
-        <item itemvalue="Gradle.karlutka [test]" />
       </list>
     </recent_temporary>
   </component>
@@ -544,7 +536,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618683377113</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="MappingTest">
+      <created>1618738542938</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1618738542938</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -561,7 +560,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="все инспекции работают как надо" />
     <MESSAGE value="добавлен в целом разбор IntegratedConfiguration для версии менее 750, необходимы тесты" />
     <MESSAGE value="убраны мутабельные листы где не надо" />
     <MESSAGE value="разбор простого квери" />
@@ -586,7 +584,8 @@
     <MESSAGE value="GeneralQuery#4" />
     <MESSAGE value="GeneralQuery#5 и переписывание старого" />
     <MESSAGE value="jgitver" />
-    <option name="LAST_COMMIT_MESSAGE" value="jgitver" />
+    <MESSAGE value="MappingTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="MappingTest" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

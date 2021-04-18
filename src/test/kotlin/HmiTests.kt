@@ -88,7 +88,7 @@ class HmiTests {
 
     @Test
     fun testMapping() {
-        val s = javaClass.getResourceAsStream("/Hmi/mappingtest_request1.xml")!!.reader().readText()
+        val s = javaClass.getResourceAsStream("/Hmi/unescaped/testExecutionRequest.xml")!!.reader().readText()
         val ter = TestExecutionRequest.parse(s)
         println(ter.testData.inputXml)
         val t = TestExecutionRequest(
