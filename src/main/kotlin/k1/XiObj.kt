@@ -48,10 +48,10 @@ class XiObj(
         @Serializable
         @XmlSerialName("vc", "urn:sap-com:xi", "")
         class VC(
-            val caption: String = "",
-            val sp: Int = -1,
             val swcGuid: String = "",
             val vcType: String = "",
+            val caption: String? = null,
+            val sp: Int = -1,
             @XmlElement(true)
             val clCxt: ClCxt = ClCxt("A")
         ) {

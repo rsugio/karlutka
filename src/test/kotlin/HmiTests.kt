@@ -86,4 +86,28 @@ class HmiTests {
         println(QueryResult.parseUnescapedXml(s))
     }
 
+    @Test
+    fun testMapping() {
+        val s = javaClass.getResourceAsStream("/Hmi/mappingtest_request1.xml")!!.reader().readText()
+        val ter = TestExecutionRequest.parse(s)
+        println(ter.testData.inputXml)
+        val t = TestExecutionRequest(
+            TestExecutionRequest.Ref(
+                TestExecutionRequest.VC("guid", "S"),
+                TestExecutionRequest.Key("MAPPING", mutableListOf("A", "B"))
+            ), TestExecutionRequest.TestData("&lt;a/&gt;",
+                TestExecutionRequest.Parameters(
+                TestExecutionRequest.TestParameterInfo(
+                    TestExecutionRequest.HIParameters(
+                        TestExecutionRequest.Properties(
+                            mutableListOf(TestExecutionRequest.Property("name", "value"))
+                        )), TestExecutionRequest.HIParameters(TestExecutionRequest.Properties(mutableListOf(
+                        TestExecutionRequest.Property("name", "value")))))
+                ),
+                TestExecutionRequest.TestParameters("AAA", 1, 2),
+                -1)
+        )
+        if (false) println(t.composeXml())
+    }
+
 }

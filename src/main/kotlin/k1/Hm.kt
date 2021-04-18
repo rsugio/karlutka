@@ -348,9 +348,142 @@ class QueryResult(
     }
 }
 
-//fun attribute0S(name: String, value: String): HmAttribute
-//  = HmAttribute(true, "string", name, null)
+@Serializable
+@XmlSerialName("testExecutionRequest", "", "")
+class TestExecutionRequest(
+    @XmlElement(true)
+    val ref: Ref,
+    @XmlElement(true)
+    val testData: TestData,
+) {
+    @Serializable
+    @XmlSerialName("ref", "", "")
+    class Ref(
+        val vc: VC,
+        val key: Key,
+    )
 
+    @Serializable
+    @XmlSerialName("testData", "", "")
+    class TestData(
+        @XmlElement(true)
+        val inputXml: String,
+        @XmlElement(true)
+        val parameters: Parameters,
+        @XmlElement(true)
+        val testParameters: TestParameters,
+        @XmlElement(true)
+        val traceLevel: Int = 3,
+    )
+
+    @Serializable
+    @XmlSerialName("parameters", "", "")
+    class Parameters(
+        @XmlElement(true)
+        val testParameterInfo: TestParameterInfo,
+    )
+
+    @Serializable
+    @XmlSerialName("testParameters", "", "")
+    class TestParameters(
+        @XmlElement(true) val direction: String,
+        @XmlElement(true) val fromStep: Int,
+        @XmlElement(true) val toStep: Int,
+    )
+
+    @Serializable
+    @XmlSerialName("testParameterInfo", "", "")
+    class TestParameterInfo(
+        @XmlElement(true)
+        @XmlSerialName("HeaderParameters", "", "")
+        val HeaderParameters: HIParameters,
+        @XmlElement(true)
+        @XmlSerialName("ImportingParameters", "", "")
+        val ImportingParameters: HIParameters,
+    )
+
+    @Serializable
+    class HIParameters(
+        @XmlElement(true) val properties: Properties
+    )
+
+    @Serializable
+    @XmlSerialName("properties", "", "")
+    class Properties(
+        @XmlElement(true)
+        val property: MutableList<Property> = mutableListOf()
+    )
+
+    @Serializable
+    @XmlSerialName("property", "", "")
+    class Property(
+        val name: String,
+        @XmlValue(true)
+        val value: String = ""
+    )
+
+    @Serializable
+    @XmlSerialName("vc", "", "")
+    class VC(
+        val swcGuid: String,
+        val vcType: String,
+    )
+
+    @Serializable
+    @XmlSerialName("key", "", "")
+    class Key(
+        val typeID: String,
+        @XmlElement(true)
+        val elem: MutableList<String> = mutableListOf(),
+    )
+
+    companion object {
+        fun parse(bodyXml: String): TestExecutionRequest {
+            return xmlserializer.decodeFromString(bodyXml)
+        }
+    }
+    fun composeXml() = xmlserializer.encodeToString(this)
+}
+
+fun request(
+    clientGuid: String,
+    method: String,
+    serviceId: String,
+    bodyEscaped: String,
+    clientUser: String = "dummy",
+    language: String = "EN",
+    release: String = "7.5",
+    releaseSP: String = "*",
+): HmInstance {
+    val inst = HmInstance.ofArg(
+        "com.sap.aii.util.hmi.core.msg.HmiRequest",
+        "ClientId", clientGuid,
+        "ClientLanguage", language,
+        "ClientLevel",
+        HmInstance.ofArg(
+            "com.sap.aii.util.applcomp.ApplCompLevel",
+            "Release", release,
+            "SupportPackage", releaseSP,
+        ),
+        "ClientPassword", "dummy",
+        "ClientUser", clientUser,
+        "ControlFlag", "0",
+        "HmiSpecVersion", "1.0",
+        "MethodId", method,
+        "MethodInput",
+        HmInstance.ofArg(
+            "com.sap.aii.util.hmi.api.HmiMethodInput",
+            "Key", "body",
+            "Value", bodyEscaped
+        ),
+        "RequestId", clientGuid,
+        "RequiresSession", "false",
+        "ServerApplicationId", null,
+        "ServerLogicalSystemName", null,
+        "ServiceId", serviceId,
+    )
+    return inst
+}
 
 /**
  *  //TODO -- это времянка для быстрого старта HMI
