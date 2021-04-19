@@ -371,7 +371,7 @@ class TestExecutionRequest(
         @XmlElement(true)
         val parameters: Parameters,
         @XmlElement(true)
-        val testParameters: TestParameters,
+        val testParameters: TestParameters? = null,
         @XmlElement(true)
         val traceLevel: Int = 3,
     )
