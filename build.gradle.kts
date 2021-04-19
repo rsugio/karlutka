@@ -19,8 +19,20 @@ repositories {
     jcenter()
     mavenCentral()
     // see https://stackoverflow.com/questions/48242437/how-to-add-a-maven-repository-by-url-using-kotlinscript-dsl-build-gradle-kts
+//    maven{
+//        url = uri("https://dl.bintray.com/pdvrieze/maven")
+//    }
     maven{
-        url = uri("https://dl.bintray.com/pdvrieze/maven")
+        requireNotNull(property("gpr.user"))
+        requireNotNull(property("gpr.key"))
+        url = uri("https://maven.pkg.github.com/pdvrieze/xmlutil")
+        credentials {
+            username = property("gpr.user") as String
+            password = property("gpr.key") as String
+        }
+        content {
+            includeGroup("io.github.pdvrieze.xmlutil")
+        }
     }
 }
 
@@ -28,8 +40,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5+")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
-    implementation("net.devrieze:xmlutil-jvm:+")    //0.81.1
-    implementation("net.devrieze:xmlutil-serialization-jvm:+")  // 0.81.1
+    implementation("io.github.pdvrieze.xmlutil:serialization-jvm:+")
     runtimeOnly("com.fasterxml.woodstox:woodstox-core:6+")   //6.2.5
 
     implementation("com.github.xmlet:xsdParser:1.1.3")
