@@ -37,11 +37,11 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.5+")
+    implementation(kotlin("stdlib"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
-    implementation("io.github.pdvrieze.xmlutil:serialization-jvm:+")
-    runtimeOnly("com.fasterxml.woodstox:woodstox-core:6+")   //6.2.5
+    implementation("io.github.pdvrieze.xmlutil:serialization-jvm:0.81.2")
+    runtimeOnly("com.fasterxml.woodstox:woodstox-core:6.2.5")   //6.2.5
 
     implementation("com.github.xmlet:xsdParser:1.1.3")
 
