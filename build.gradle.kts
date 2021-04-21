@@ -1,27 +1,22 @@
-
 plugins {
+    val kotlin_plugin = "1.5.0-RC"
     idea
-    kotlin("jvm") version "1.5+"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.5+"
-    id("org.jetbrains.dokka") version "1+"
+    kotlin("jvm") version kotlin_plugin
+    id("org.jetbrains.kotlin.plugin.serialization") version kotlin_plugin
+    id("org.jetbrains.dokka") version "1.4.30"
     id("maven-publish")
-    id("com.jfrog.artifactory") version "4.21.0"
-    id("fr.brouillard.oss.gradle.jgitver") version "0.6.1"
+//    id("com.jfrog.artifactory") version "4.21.0"
+//    id("fr.brouillard.oss.gradle.jgitver") version "0.6.1"
 }
 
 group = "io.rsug"
-version = "0.0.1-2"
-jgitver {
-    strategy(fr.brouillard.oss.jgitver.Strategies.CONFIGURABLE)
-}
+version = "0.0.1-build5"
+//jgitver {
+//    strategy(fr.brouillard.oss.jgitver.Strategies.CONFIGURABLE)
+//}
 
 repositories {
-    jcenter()
     mavenCentral()
-    // see https://stackoverflow.com/questions/48242437/how-to-add-a-maven-repository-by-url-using-kotlinscript-dsl-build-gradle-kts
-//    maven{
-//        url = uri("https://dl.bintray.com/pdvrieze/maven")
-//    }
     maven{
         requireNotNull(property("gpr.user"))
         requireNotNull(property("gpr.key"))
@@ -36,27 +31,17 @@ repositories {
     }
 }
 
+val kotlinx_serialization_version: String by project
+val xmlutil_version: String by project
+val woodstox_version: String by project
+
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
-
-    implementation("io.github.pdvrieze.xmlutil:serialization-jvm:0.81.2")
-    runtimeOnly("com.fasterxml.woodstox:woodstox-core:6.2.5")   //6.2.5
-
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_version")
+    implementation("io.github.pdvrieze.xmlutil:serialization-jvm:$xmlutil_version")
+    runtimeOnly("com.fasterxml.woodstox:woodstox-core:$woodstox_version")
     implementation("com.github.xmlet:xsdParser:1.1.3")
-
     testImplementation(kotlin("test-junit"))
-    // шихта всякая для изучений:
-//    testImplementation(files("C:/workspace/Karlutka/libs/com.sap.xi.mapping.tool.lib.filter.jar"))
-//    testImplementation(files("C:/workspace/Karlutka/libs/com.sap.aii.mapping.api.filter.jar"))
-//    testImplementation(files("C:/workspace/Karlutka/libs/com.sap.xi.mapping.tool.lib_api.jar"))
-//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/com.sap.aii.utilxi.core.jar"))
-//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/sap.com~tc~logging~java~impl.jar"))
-//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/sap.com~tc~bl~guidgenerator~impl.jar"))
-//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/com.sap.exception.jar"))
-//    testRuntimeOnly(files("C:/workspace/Karlutka/libs/com.sap.aii.utilxi.server.jar"))
-
-//    testImplementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 }
 
 publishing {

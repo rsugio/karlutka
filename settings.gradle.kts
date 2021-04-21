@@ -1,9 +1,8 @@
-
-rootProject.name = "karlutka"
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        jcenter()
+        mavenCentral()
     }
 }
+rootProject.name = "karlutka"
+
