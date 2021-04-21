@@ -33,6 +33,10 @@ class HmInstance(
         return xmlserializer.encodeToString(serializer(), this)
     }
 
+    fun get(name: String): HmValue? {
+        return attribute.find { it.name == name }?.value
+    }
+
     companion object {
         fun ofMap(typeid: String, attrs: Map<String, Any>): HmInstance {
             val lst = mutableListOf<HmAttribute>()
@@ -107,11 +111,20 @@ class HmAttribute(
 
 @Serializable
 @XmlSerialName("value", "", "")
-data class HmValue(
+class HmValue(
     val index: Int = 0,
     val isnull: Boolean = false,
     @XmlValue(true) val value: List<@Polymorphic Any> = listOf(),
-)
+) {
+    fun get(name: String): HmValue? {
+        value.forEach { it ->
+            if (it is HmInstance) {
+                return it.get(name)
+            }
+        }
+        return null
+    }
+}
 
 @Serializable
 @XmlSerialName("generalQueryRequest", "", "")
@@ -125,14 +138,7 @@ class GeneralQueryRequest(
     @XmlElement(true)
     val result: Result,
 ) {
-    fun compose(escaped: Boolean = true): String {
-        val s = xmlserializer.encodeToString(this)
-        if (escaped) {
-            //как вариант сделать через &lt;
-            return ("<![CDATA[$s]]>")
-        } else
-            return s
-    }
+    fun compose() = xmlserializer.encodeToString(this)
 
     @Serializable
     @XmlSerialName("types", "", "")
@@ -271,7 +277,28 @@ class QueryResult(
     val typeInfo: TypeInfo,
     @XmlElement(true)
     val matrix: Matrix,
+    @XmlElement(true)
+    val messages: String,
 ) {
+    fun toTable(): MutableList<MutableMap<String, String?>> {
+        val lines = mutableListOf<MutableMap<String, String?>>()
+        val posTypeMapping =
+            headerInfo.colDef.def.map { Pair(it.pos, it.type) }.toMap()    // 0:"", 1:RA_WORKSPACE_ID, 2:WS_NAME
+        matrix.r.forEachIndexed { rx, row ->
+            val res = mutableMapOf<String, String?>()
+            row.c.forEachIndexed { cx, col ->
+                val cn = posTypeMapping.get(cx)
+                requireNotNull(cn)
+                if (cn.isNotBlank()) {
+                    res.put(cn, col.strvalue())
+                }
+            }
+            lines.add(res)
+        }
+        require(lines.size == headerInfo.rows.count)
+        return lines
+    }
+
     @Serializable
     @XmlSerialName("headerInfo", "", "")
     class HeaderInfo(
@@ -332,7 +359,16 @@ class QueryResult(
         val wkID: WkID? = null,
         @XmlElement(true)
         val simple: GeneralQueryRequest.Simple? = null,
-    )
+    ) {
+        fun strvalue(): String? {
+            if (wkID != null) {
+                return wkID.id
+            } else if (simple != null) {
+                return simple.strg ?: simple.int.toString() ?: simple.bool.toString()
+            } else
+                return null
+        }
+    }
 
     @Serializable
     @XmlSerialName("wkID", "", "")
@@ -404,14 +440,14 @@ class TestExecutionRequest(
 
     @Serializable
     class HIParameters(
-        @XmlElement(true) val properties: Properties
+        @XmlElement(true) val properties: Properties,
     )
 
     @Serializable
     @XmlSerialName("properties", "", "")
     class Properties(
         @XmlElement(true)
-        val property: MutableList<Property> = mutableListOf()
+        val property: MutableList<Property> = mutableListOf(),
     )
 
     @Serializable
@@ -419,7 +455,7 @@ class TestExecutionRequest(
     class Property(
         val name: String,
         @XmlValue(true)
-        val value: String = ""
+        val value: String = "",
     )
 
     @Serializable
@@ -442,6 +478,7 @@ class TestExecutionRequest(
             return xmlserializer.decodeFromString(bodyXml)
         }
     }
+
     fun composeXml() = xmlserializer.encodeToString(this)
 }
 

@@ -8,6 +8,7 @@ class HmiTests {
      */
     @Test
     fun mixed() {
+        // один из вариантов запроса -- через Map.Pair, многословный
         val x = HmInstance.ofMap("com.sap.aii.util.hmi.core.msg.HmiRequest", mapOf(
             Pair("ClientId", "f62de1959d9b11ebb68900059a3c7a00"),
             Pair("ClientLanguage", "EN"),
@@ -24,8 +25,9 @@ class HmiTests {
 
         val qu = GeneralQueryRequest.ofArg(listOf("workspace"),
             GeneralQueryRequest.elementary("WS_ORDER", "EQ", GeneralQueryRequest.Simple(-1)),
-            "", "RA_WORKSPACE_ID", "WS_NAME", "TEXT")
+            "", "RA_WORKSPACE_ID", "WS_NAME")
 
+        // через String vararg пропроще
         val y = HmInstance.ofArg(
             "com.sap.aii.util.hmi.core.msg.HmiRequest",
             "ClientId", "f62de1959d9b11ebb68900059a3c7a00",
@@ -44,8 +46,11 @@ class HmiTests {
             "MethodInput",
             HmInstance.ofArg(
                 "com.sap.aii.util.hmi.api.HmiMethodInput",
-                "Key", "QUERY_REQUEST_XML",
-                "Value", qu.compose()
+                "Parameters",
+                HmInstance.ofArg("com.sap.aii.util.hmi.core.gdi2.EntryStringString",
+                    "Key", "QUERY_REQUEST_XML",
+                    "Value", qu.compose()
+                )
             ),
             "RequestId", "fb3c98b19d9b11ebbc2a00059a3c7a00",
             "RequiresSession", "false",
@@ -53,12 +58,20 @@ class HmiTests {
             "ServerLogicalSystemName", null,
             "ServiceId", "QUERY",
         )
+        // Это запрос в {{host}}/rep/query/int?container=any
         println(y.printXml())
-
+        // Это сырой ответ:
+        val respXml = javaClass.getResourceAsStream("/Hmi/rep_gqresp_wksp.xml")!!.reader().readText()
+        val resphmi = HmInstance.parse(respXml)
+        val queryResultXml = resphmi.get("MethodOutput")?.get("Return")?.value?.get(0) as String?
+        requireNotNull(queryResultXml)
+//        println(queryResultXml)
+        val res = QueryResult.parseUnescapedXml(queryResultXml).toTable()
+        println(res)
     }
 
     /**
-     * Выдача только квери, в неудобном виде
+     * Выдача только квери в общем виде. Проще через GeneralQueryRequest.ofArg который и надо развивать.
      */
     @Test
     fun generalQueryRequest() {
@@ -77,13 +90,15 @@ class HmiTests {
             ),
             result = GeneralQueryRequest.Result(attrib = mutableListOf("TEXT", "NAME")),
         )
-        println(wksp.compose(true))
+        println(wksp.compose())
     }
 
     @Test
     fun generalQueryResponse() {
-        val s = javaClass.getResourceAsStream("/Hmi/unescaped/qr1.xml")!!.reader().readText()
-        println(QueryResult.parseUnescapedXml(s))
+        val s = javaClass.getResourceAsStream("/Hmi/unescaped/rep_gqresp_wksp.xml")!!.reader().readText()
+        val res = QueryResult.parseUnescapedXml(s)
+        val table = res.toTable()
+        println(table)
     }
 
     @Test
@@ -97,12 +112,12 @@ class HmiTests {
                 TestExecutionRequest.Key("MAPPING", mutableListOf("A", "B"))
             ), TestExecutionRequest.TestData("&lt;a/&gt;",
                 TestExecutionRequest.Parameters(
-                TestExecutionRequest.TestParameterInfo(
-                    TestExecutionRequest.HIParameters(
-                        TestExecutionRequest.Properties(
-                            mutableListOf(TestExecutionRequest.Property("name", "value"))
-                        )), TestExecutionRequest.HIParameters(TestExecutionRequest.Properties(mutableListOf(
-                        TestExecutionRequest.Property("name", "value")))))
+                    TestExecutionRequest.TestParameterInfo(
+                        TestExecutionRequest.HIParameters(
+                            TestExecutionRequest.Properties(
+                                mutableListOf(TestExecutionRequest.Property("name", "value"))
+                            )), TestExecutionRequest.HIParameters(TestExecutionRequest.Properties(mutableListOf(
+                            TestExecutionRequest.Property("name", "value")))))
                 ),
                 TestExecutionRequest.TestParameters("AAA", 1, 2),
                 -1)

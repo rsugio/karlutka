@@ -15,7 +15,7 @@
 					<SenderPartyID/>
 					<SenderComponentID>BS_POCSC_Q</SenderComponentID>
 					<InterfaceName>OrganisationalStructureReplicationRequest_Abs</InterfaceName>
-					<InterfaceNamespace>urn:cscentr:po:i:romashka:Proxy:HR:OrganisationalStructure</InterfaceNamespace>
+					<InterfaceNamespace>urn:vendor:po:i:romashka:Proxy:HR:OrganisationalStructure</InterfaceNamespace>
 					<ReceiverPartyID/>
 					<ReceiverComponentID/>
 				</IntegratedConfigurationID>
@@ -8351,7 +8351,7 @@
 					</HeaderMapping>
 				</OutboundProcessing>
 				<PrefixNamespaceMapping>
-					<URI>urn:cscentr:po:i:romashka:Proxy:HR:OrganisationalStructure</URI>
+					<URI>urn:vendor:po:i:romashka:Proxy:HR:OrganisationalStructure</URI>
 					<Prefix>p1</Prefix>
 				</PrefixNamespaceMapping>
 				<Logging>

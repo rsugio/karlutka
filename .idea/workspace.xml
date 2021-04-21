@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="gradle">
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="груминг">
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/rep_gqresp_wksp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/rep_query_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/unescaped/rep_gqresp_wksp.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +99,49 @@
     <property name="project.structure.side.proportion" value="0.42528737" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
-  <component name="RunManager" selected="Gradle.karlutka [publishToMavenLocal]">
+  <component name="RunManager" selected="Gradle.HmiTests.mixed">
+    <configuration name="HmiTests.generalQueryResponse" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;HmiTests.generalQueryResponse&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="HmiTests.mixed" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;HmiTests.mixed&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="karlutka [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -161,33 +205,13 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="HmiTests.testMapping" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="karlutka.test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="HmiTests" />
-      <option name="METHOD_NAME" value="testMapping" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Tests.hmi" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="karlutka.test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Tests" />
-      <option name="METHOD_NAME" value="hmi" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.HmiTests.mixed" />
+        <item itemvalue="Gradle.HmiTests.generalQueryResponse" />
         <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
         <item itemvalue="Gradle.karlutka [clean]" />
         <item itemvalue="Gradle.karlutka [test]" />
-        <item itemvalue="JUnit.Tests.hmi" />
-        <item itemvalue="JUnit.HmiTests.testMapping" />
       </list>
     </recent_temporary>
   </component>
@@ -199,13 +223,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617547969497</updated>
-    </task>
-    <task id="LOCAL-00001" summary="расшарить проект">
-      <created>1617548157207</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1617548157207</updated>
     </task>
     <task id="LOCAL-00002" summary="расшарить проект">
       <created>1617549668354</created>
@@ -543,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618892674448</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="груминг">
+      <created>1618996954160</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1618996954161</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -565,7 +589,6 @@
     <MESSAGE value="woodstox 6.2.5" />
     <MESSAGE value="разбор хттп логов доступа" />
     <MESSAGE value="поправлены форматы даты времени" />
-    <MESSAGE value="груминг" />
     <MESSAGE value="---" />
     <MESSAGE value="LjsTrace" />
     <MESSAGE value="САПКонтрол, начало" />
@@ -585,7 +608,8 @@
     <MESSAGE value="дальше тест меппинга" />
     <MESSAGE value="конфиг" />
     <MESSAGE value="gradle" />
-    <option name="LAST_COMMIT_MESSAGE" value="gradle" />
+    <MESSAGE value="груминг" />
+    <option name="LAST_COMMIT_MESSAGE" value="груминг" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
