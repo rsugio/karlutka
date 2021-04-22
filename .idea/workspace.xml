@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="формирование и разбор GeneralQuery">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/rep_gqresp_text.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/unescaped/rep_gqreq_text.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/unescaped/rep_gqresp_text.xml" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="генеральское квери работает">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/Hmi/mmtest_request1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/Hmi/mmtest_request1.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +96,7 @@
     <property name="project.structure.side.proportion" value="0.42528737" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
-  <component name="RunManager" selected="Gradle.HmiTests.mixed">
+  <component name="RunManager" selected="Gradle.HmiTests.testMM_XiPatternMessage1ToMessage2">
     <configuration name="HmiTests.generalQueryResponse" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -142,49 +139,49 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="karlutka [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="HmiTests.testMM_XiPatternMessage1ToMessage2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="--tests &quot;HmiTests.testMM_XiPatternMessage1ToMessage2&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="clean" />
+            <option value=":test" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="karlutka [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="HmiTests.testMapping" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="--tests &quot;HmiTests.testMapping&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="publishToMavenLocal" />
+            <option value=":test" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="karlutka [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="karlutka [check]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -195,7 +192,7 @@
         </option>
         <option name="taskNames">
           <list>
-            <option value="test" />
+            <option value="check" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -207,11 +204,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.HmiTests.testMM_XiPatternMessage1ToMessage2" />
+        <item itemvalue="Gradle.HmiTests.testMapping" />
+        <item itemvalue="Gradle.karlutka [check]" />
         <item itemvalue="Gradle.HmiTests.mixed" />
         <item itemvalue="Gradle.HmiTests.generalQueryResponse" />
-        <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
-        <item itemvalue="Gradle.karlutka [clean]" />
-        <item itemvalue="Gradle.karlutka [test]" />
       </list>
     </recent_temporary>
   </component>
@@ -223,13 +220,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617547969497</updated>
-    </task>
-    <task id="LOCAL-00003" summary="расшарить проект">
-      <created>1617549715782</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1617549715782</updated>
     </task>
     <task id="LOCAL-00004" summary="расшарить проект">
       <created>1617549972803</created>
@@ -567,7 +557,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619004812083</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="генеральское квери работает">
+      <created>1619061059327</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1619061059327</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -584,7 +581,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Предварительный Hmi" />
     <MESSAGE value="woodstox 6.2.5" />
     <MESSAGE value="разбор хттп логов доступа" />
     <MESSAGE value="поправлены форматы даты времени" />
@@ -609,7 +605,8 @@
     <MESSAGE value="gradle" />
     <MESSAGE value="груминг" />
     <MESSAGE value="формирование и разбор GeneralQuery" />
-    <option name="LAST_COMMIT_MESSAGE" value="формирование и разбор GeneralQuery" />
+    <MESSAGE value="генеральское квери работает" />
+    <option name="LAST_COMMIT_MESSAGE" value="генеральское квери работает" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

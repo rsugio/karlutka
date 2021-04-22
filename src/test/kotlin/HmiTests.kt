@@ -143,14 +143,14 @@ class HmiTests {
     }
 
     @Test
-    fun testMapping() {
+    fun testMM_XiPatternMessage1ToMessage2() {
         val s = javaClass.getResourceAsStream("/Hmi/unescaped/testExecutionRequest.xml")!!.reader().readText()
         val ter = TestExecutionRequest.parse(s)
-        println(ter.testData.inputXml)
+        ter.testData.inputXml
         val t = TestExecutionRequest(
             HmRef(
-                HmVC("guid", "S"),
-                HmKey("MAPPING", null, mutableListOf("A", "B"))
+                HmVC("0050568f0aac1ed4a6e56926325e2eb3", "S"),
+                HmKey("XI_TRAFO", null, mutableListOf("XiPatternMessage1ToMessage2", "http://sap.com/xi/XI/System/Patterns"))
             ), TestExecutionRequest.TestData("&lt;a/&gt;",
                 TestExecutionRequest.Parameters(
                     TestExecutionRequest.TestParameterInfo(
@@ -160,10 +160,38 @@ class HmiTests {
                             )), TestExecutionRequest.HIParameters(TestExecutionRequest.Properties(mutableListOf(
                             TestExecutionRequest.Property("name", "value")))))
                 ),
-                TestExecutionRequest.TestParameters("AAA", 1, 2),
-                -1)
+                null, //TestExecutionRequest.TestParameters("AAA", 1, 2),
+                3)
         )
-        if (false) println(t.composeXml())
+        t.composeXml()
+        val z = HmInstance.ofArg(
+            "com.sap.aii.util.hmi.core.msg.HmiRequest",
+            "ClientId", "f62de1959d9b11ebb68900059a3c7a00",
+            "ClientLanguage", "EN",
+            "ClientLevel", HmInstance.ofArg(
+                "com.sap.aii.util.applcomp.ApplCompLevel",
+                "Release", "7.31",
+                "SupportPackage", "*",
+            ),
+            "ClientPassword", "dummy",
+            "ClientUser", "uname",
+            "ControlFlag", "0",
+            "HmiSpecVersion", "1.0",
+            "MethodId", "executemappingmethod",
+            "MethodInput", HmInstance.ofArg(
+                "com.sap.aii.util.hmi.api.HmiMethodInput",
+                "Parameters", HmInstance.ofArg("com.sap.aii.util.hmi.core.gdi2.EntryStringString",
+                    "Key", "body",
+                    "Value", t.composeXml()
+                )
+            ),
+            "RequestId", "fb3c98b19d9b11ebbc2a00059a3c7a00",
+            "RequiresSession", "false",
+            "ServerApplicationId", null,
+            "ServerLogicalSystemName", null,
+            "ServiceId", "mappingtestservice",
+        )
+        println(z.printXml())
     }
 
 }
