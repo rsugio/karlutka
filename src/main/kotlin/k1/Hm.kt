@@ -148,12 +148,6 @@ class GeneralQueryRequest(
     )
 
     @Serializable
-    @XmlSerialName("clCxt", "", "")
-    class ClCxt(
-        val consider: String,
-    )
-
-    @Serializable
     @XmlSerialName("swcListDef", "", "")
     class SwcListDef(
         val def: String,
@@ -165,8 +159,8 @@ class GeneralQueryRequest(
     class QC(
         val qcType: String?,
         val delMode: String?,
-        @XmlElement(true) val clCxt: ClCxt,
-        @XmlElement(true) val swcListDef: SwcListDef,
+        @XmlElement(true) var clCxt: HmClCxt,
+        @XmlElement(true) var swcListDef: SwcListDef,
     )
 
     @Serializable
@@ -207,7 +201,7 @@ class GeneralQueryRequest(
 
     @Serializable
     @XmlSerialName("simple", "", "")
-    class Simple(
+    data class Simple(
         @XmlElement(true) val strg: String? = null,
         @XmlElement(true) val int: Int? = null,
         @XmlElement(true) val bool: Boolean? = null,
@@ -233,7 +227,7 @@ class GeneralQueryRequest(
     @XmlSerialName("swc", "", "")
     class SWC(
         val id: String,
-        val underlL: Boolean,
+        val underL: Boolean,
     )
 
     @Serializable
@@ -252,12 +246,13 @@ class GeneralQueryRequest(
     )
 
     companion object {
-        fun ofArg(lst: List<String>, cond: Condition, vararg result: String): GeneralQueryRequest {
+        fun ofArg(lst: List<String>, cond: Condition?, vararg result: String): GeneralQueryRequest {
             val lst2 = lst.map { Type(it) } as MutableList<Type>
             val res = GeneralQueryRequest.Result(result.toList() as MutableList<String>)
+
             return GeneralQueryRequest(Types(lst2),
-                GeneralQueryRequest.QC("S", "N", ClCxt("L"), SwcListDef("A")),
-                cond,
+                GeneralQueryRequest.QC("S", "N", HmClCxt("L"), SwcListDef("A")),
+                cond ?: Condition(),
                 res)
         }
 
@@ -295,7 +290,7 @@ class QueryResult(
             }
             lines.add(res)
         }
-        require(lines.size == headerInfo.rows.count)
+        require(lines.size == headerInfo.rows.count, {"Must be ${headerInfo.rows.count} but found ${lines.size}"})
         return lines
     }
 
@@ -359,12 +354,16 @@ class QueryResult(
         val wkID: WkID? = null,
         @XmlElement(true)
         val simple: GeneralQueryRequest.Simple? = null,
+        @XmlElement(true)
+        val qref: Qref? = null,
     ) {
         fun strvalue(): String? {
-            if (wkID != null) {
+            if (qref != null) {
+                return "qref=" + qref.ref.key.typeID
+            } else if (wkID != null) {
                 return wkID.id
             } else if (simple != null) {
-                return simple.strg ?: simple.int.toString() ?: simple.bool.toString()
+                return simple.toString()
             } else
                 return null
         }
@@ -377,6 +376,14 @@ class QueryResult(
         val order: Int,
     )
 
+    @Serializable
+    @XmlSerialName("qref", "", "")
+    class Qref(
+        val isMod: Boolean,
+        val isInUnderL: Boolean,
+        @XmlElement(true) val ref: HmRef,
+    )
+
     companion object {
         fun parseUnescapedXml(xml: String): QueryResult {
             return xmlserializer.decodeFromString(xml)
@@ -385,19 +392,55 @@ class QueryResult(
 }
 
 @Serializable
+@XmlSerialName("vc", "", "")
+class HmVC(
+    val swcGuid: String,
+    val vcType: String,
+    val sp: Int = -1,
+    val caption: String? = null,
+    @XmlElement(true) val clCxt: HmClCxt? = null,
+)
+
+@Serializable
+@XmlSerialName("key", "", "")
+class HmKey(
+    val typeID: String,
+    val oid: String? = null,
+    @XmlElement(true)
+    val elem: MutableList<String> = mutableListOf(),
+)
+
+@Serializable
+@XmlSerialName("ref", "", "")
+class HmRef(
+    val vc: HmVC,
+    val key: HmKey,
+    @XmlElement(true)
+    val vspec: VSpec? = null,
+) {
+    @Serializable
+    @XmlSerialName("vspec", "", "")
+    class VSpec(
+        val type: Int,
+        val id: String,
+        val deleted: Boolean,
+    )
+}
+
+@Serializable
+@XmlSerialName("clCxt", "", "")
+class HmClCxt(
+    val consider: String,
+)
+
+@Serializable
 @XmlSerialName("testExecutionRequest", "", "")
 class TestExecutionRequest(
     @XmlElement(true)
-    val ref: Ref,
+    val ref: HmRef,
     @XmlElement(true)
     val testData: TestData,
 ) {
-    @Serializable
-    @XmlSerialName("ref", "", "")
-    class Ref(
-        val vc: VC,
-        val key: Key,
-    )
 
     @Serializable
     @XmlSerialName("testData", "", "")
@@ -456,21 +499,6 @@ class TestExecutionRequest(
         val name: String,
         @XmlValue(true)
         val value: String = "",
-    )
-
-    @Serializable
-    @XmlSerialName("vc", "", "")
-    class VC(
-        val swcGuid: String,
-        val vcType: String,
-    )
-
-    @Serializable
-    @XmlSerialName("key", "", "")
-    class Key(
-        val typeID: String,
-        @XmlElement(true)
-        val elem: MutableList<String> = mutableListOf(),
     )
 
     companion object {

@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="груминг">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/rep_gqresp_wksp.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/rep_query_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/unescaped/rep_gqresp_wksp.xml" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="формирование и разбор GeneralQuery">
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/rep_gqresp_text.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/unescaped/rep_gqreq_text.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/unescaped/rep_gqresp_text.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" afterDir="false" />
@@ -223,13 +223,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617547969497</updated>
-    </task>
-    <task id="LOCAL-00002" summary="расшарить проект">
-      <created>1617549668354</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1617549668354</updated>
     </task>
     <task id="LOCAL-00003" summary="расшарить проект">
       <created>1617549715782</created>
@@ -567,7 +560,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618996954161</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="формирование и разбор GeneralQuery">
+      <created>1619004812083</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1619004812083</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -584,7 +584,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="добавлена обработка Description но к сожалению они все ISO8859-1 и в знаках вопроса" />
     <MESSAGE value="Предварительный Hmi" />
     <MESSAGE value="woodstox 6.2.5" />
     <MESSAGE value="разбор хттп логов доступа" />
@@ -609,7 +608,8 @@
     <MESSAGE value="конфиг" />
     <MESSAGE value="gradle" />
     <MESSAGE value="груминг" />
-    <option name="LAST_COMMIT_MESSAGE" value="груминг" />
+    <MESSAGE value="формирование и разбор GeneralQuery" />
+    <option name="LAST_COMMIT_MESSAGE" value="формирование и разбор GeneralQuery" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
