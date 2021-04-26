@@ -822,3 +822,8 @@ class ContentPackages(val d: ContentPackagesD) {
         fun getUrl(hostTmn: String) = "$hostTmn/itspaces/odata/1.0/workspace.svc/ContentPackages"
     }
 }
+
+// -- Сервисы для AlertRetrievalWS
+// https://e459999-tmn.hci.ru1.hana.ondemand.com/api/AlertRetrievalWS?wsdl
+// https://e459999-tmn.hci.ru1.hana.ondemand.com/api/v1?_wadl
+class AlertRetrievalWS ()

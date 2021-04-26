@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "io.rsug"
-version = "0.0.1-build5"
+version = "0.0.1-build6"
 //jgitver {
 //    strategy(fr.brouillard.oss.jgitver.Strategies.CONFIGURABLE)
 //}
@@ -75,7 +75,7 @@ tasks.test {
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "16"
 }
 
 tasks.dokkaHtml.configure {

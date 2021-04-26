@@ -143,27 +143,36 @@ class HmiTests {
     }
 
     @Test
-    fun testMM_XiPatternMessage1ToMessage2() {
+    fun testOM_XiPatternMessage1ToMessage2() {
         val s = javaClass.getResourceAsStream("/Hmi/unescaped/testExecutionRequest.xml")!!.reader().readText()
         val ter = TestExecutionRequest.parse(s)
         ter.testData.inputXml
         val t = TestExecutionRequest(
             HmRef(
                 HmVC("0050568f0aac1ed4a6e56926325e2eb3", "S"),
-                HmKey("XI_TRAFO", null, mutableListOf("XiPatternMessage1ToMessage2", "http://sap.com/xi/XI/System/Patterns"))
-            ), TestExecutionRequest.TestData("&lt;a/&gt;",
+                HmKey("MAPPING", null, mutableListOf("XiPatternInterface1ToInterface2", "http://sap.com/xi/XI/System/Patterns"))
+            ), TestExecutionRequest.TestData("""<ns0:XiPatternMessage1 xmlns:ns0="http://sap.com/xi/XI/System/Patterns">
+   <Person>
+      <Id/>
+      <LastName/>
+      <FirstName/>
+      <TelephoneNumber/>
+      <CountryCode/>
+   </Person>
+</ns0:XiPatternMessage1>""",
                 TestExecutionRequest.Parameters(
                     TestExecutionRequest.TestParameterInfo(
                         TestExecutionRequest.HIParameters(
                             TestExecutionRequest.Properties(
-                                mutableListOf(TestExecutionRequest.Property("name", "value"))
-                            )), TestExecutionRequest.HIParameters(TestExecutionRequest.Properties(mutableListOf(
-                            TestExecutionRequest.Property("name", "value")))))
+                                mutableListOf(TestExecutionRequest.Property("TimeSent", ""))
+                            )),
+                        TestExecutionRequest.HIParameters(
+                            TestExecutionRequest.Properties(mutableListOf())))
                 ),
                 null, //TestExecutionRequest.TestParameters("AAA", 1, 2),
                 3)
         )
-        t.composeXml()
+//        println(t.composeXml())
         val z = HmInstance.ofArg(
             "com.sap.aii.util.hmi.core.msg.HmiRequest",
             "ClientId", "f62de1959d9b11ebb68900059a3c7a00",
@@ -177,7 +186,7 @@ class HmiTests {
             "ClientUser", "uname",
             "ControlFlag", "0",
             "HmiSpecVersion", "1.0",
-            "MethodId", "executemappingmethod",
+            "MethodId", "executeoperationmappingmethod",
             "MethodInput", HmInstance.ofArg(
                 "com.sap.aii.util.hmi.api.HmiMethodInput",
                 "Parameters", HmInstance.ofArg("com.sap.aii.util.hmi.core.gdi2.EntryStringString",

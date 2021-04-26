@@ -396,7 +396,7 @@ class QueryResult(
 class HmVC(
     val swcGuid: String,
     val vcType: String,
-    val sp: Int = -1,
+    val sp: Int? = null,
     val caption: String? = null,
     @XmlElement(true) val clCxt: HmClCxt? = null,
 )
