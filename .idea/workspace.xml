@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="дальше ММтест и ОМтест">
-      <change afterPath="$PROJECT_DIR$/full.bat" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="xmlutil 0.82, kotlinx-serialization 1.2.0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -246,13 +244,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617547969497</updated>
-    </task>
-    <task id="LOCAL-00006" summary="успешно разобрано 1335 икошек">
-      <created>1617560652971</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1617560652971</updated>
     </task>
     <task id="LOCAL-00007" summary="попытки использовать GPR">
       <created>1617601355788</created>
@@ -590,7 +581,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619418648213</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="xmlutil 0.82, kotlinx-serialization 1.2.0">
+      <created>1619675022332</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1619675022333</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -607,7 +605,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="разбор хттп логов доступа" />
     <MESSAGE value="поправлены форматы даты времени" />
     <MESSAGE value="---" />
     <MESSAGE value="LjsTrace" />
@@ -632,7 +629,8 @@
     <MESSAGE value="формирование и разбор GeneralQuery" />
     <MESSAGE value="генеральское квери работает" />
     <MESSAGE value="дальше ММтест и ОМтест" />
-    <option name="LAST_COMMIT_MESSAGE" value="дальше ММтест и ОМтест" />
+    <MESSAGE value="xmlutil 0.82, kotlinx-serialization 1.2.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="xmlutil 0.82, kotlinx-serialization 1.2.0" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

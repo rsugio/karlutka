@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.5.0-RC"
-    kotlin("plugin.serialization") version "1.5.0-RC"
+    kotlin("jvm") version "1.5.0"
+    kotlin("plugin.serialization") version "1.5.0"
     id("org.jetbrains.dokka") version "1.4.30"
     id("maven-publish")
 //    id("fr.brouillard.oss.gradle.jgitver") version "0.6.1"
