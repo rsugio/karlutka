@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.rsug"
-version = "0.0.1-build8"
+version = "0.0.1-build9"
 //jgitver {
 //    strategy(fr.brouillard.oss.jgitver.Strategies.CONFIGURABLE)
 //}

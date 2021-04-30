@@ -9,6 +9,7 @@ import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
+import java.util.*
 
 private val xmlmodule = SerializersModule {
     polymorphic(Any::class) {
@@ -34,7 +35,26 @@ class HmInstance(
     }
 
     fun get(name: String): HmValue? {
-        return attribute.find { it.name == name }?.value
+        val attr = attribute.find { it.name == name }
+        if (attr!=null)
+            return attr.value
+        else
+            return null
+    }
+
+    fun getCoreException(): HmCoreException {
+        val a = get("CoreException")
+        requireNotNull(a)
+        require(a.value.size == 1 && a.value[0] is HmInstance)
+        val ix = a.value[0] as HmInstance
+        require(ix.typeid == "com.sap.aii.utilxi.hmi.api.HmiCoreException")
+        return HmCoreException(ix)
+    }
+
+    fun isException(): Boolean {
+        val hmval = get("CoreException")
+        val sz = hmval?.value?.size ?: 0
+        return sz>0
     }
 
     companion object {
@@ -87,7 +107,6 @@ class HmInstance(
             return null
         }
     }
-
 }
 
 @Serializable
@@ -259,7 +278,6 @@ class GeneralQueryRequest(
         fun elementary(key: String, op: String, c: Simple): Condition {
             return Condition(null, Elementary(Single(key, Val(c), op)))
         }
-
     }
 }
 
@@ -290,7 +308,7 @@ class QueryResult(
             }
             lines.add(res)
         }
-        require(lines.size == headerInfo.rows.count, {"Must be ${headerInfo.rows.count} but found ${lines.size}"})
+        require(lines.size == headerInfo.rows.count, { "Must be ${headerInfo.rows.count} but found ${lines.size}" })
         return lines
     }
 
@@ -510,45 +528,99 @@ class TestExecutionRequest(
     fun composeXml() = xmlserializer.encodeToString(this)
 }
 
-fun request(
-    clientGuid: String,
-    method: String,
-    serviceId: String,
-    bodyEscaped: String,
-    clientUser: String = "dummy",
-    language: String = "EN",
-    release: String = "7.5",
-    releaseSP: String = "*",
-): HmInstance {
-    val inst = HmInstance.ofArg(
-        "com.sap.aii.util.hmi.core.msg.HmiRequest",
-        "ClientId", clientGuid,
-        "ClientLanguage", language,
-        "ClientLevel",
-        HmInstance.ofArg(
-            "com.sap.aii.util.applcomp.ApplCompLevel",
-            "Release", release,
-            "SupportPackage", releaseSP,
-        ),
-        "ClientPassword", "dummy",
-        "ClientUser", clientUser,
-        "ControlFlag", "0",
-        "HmiSpecVersion", "1.0",
-        "MethodId", method,
-        "MethodInput",
-        HmInstance.ofArg(
-            "com.sap.aii.util.hmi.api.HmiMethodInput",
-            "Key", "body",
-            "Value", bodyEscaped
-        ),
-        "RequestId", clientGuid,
-        "RequiresSession", "false",
-        "ServerApplicationId", null,
-        "ServerLogicalSystemName", null,
-        "ServiceId", serviceId,
-    )
-    return inst
+data class HmCoreException(
+    var localizedMessage: String,
+    var severity: String,
+    var subtypeId: String,
+    var originalStackTrace: String? = null,
+) {
+    constructor(ix: HmInstance) : this("", "", "") {
+        localizedMessage = ix.get("LocalizedMessage")!!.value[0] as String
+        severity = ix.get("Severity")!!.value[0] as String
+        subtypeId = ix.get("SubtypeId")!!.value[0] as String
+        val l = ix.get("OriginalStackTrace")!!.value
+        originalStackTrace = if (l.size > 0) l[0] as String else null
+    }
 }
+
+class HmRequest(
+    val user: String = "dummy",
+    val release: String = "7.10",
+    val sp: String = "*",
+) {
+    var requestId = UUID.randomUUID()
+    val clientId = UUID.randomUUID()
+
+    fun render(methodInput: HmInstance, methodId: String, serviceId: String): HmInstance {
+        return HmInstance.ofArg("com.sap.aii.util.hmi.core.msg.HmiRequest",
+            "ClientId", clientId.toString().replace("-", ""),
+            "ClientLanguage", "EN",
+            "ClientLevel", HmInstance.ofArg(
+                "com.sap.aii.util.applcomp.ApplCompLevel",
+                "Release", release,
+                "SupportPackage", sp,
+            ),
+            "ClientPassword", "dummy",
+            "ClientUser", user,
+            "ControlFlag", "0",
+            "HmiSpecVersion", "1.0",
+            "MethodId", methodId,
+            "MethodInput", methodInput,
+            "RequestId", requestId.toString().replace("-", ""),
+            "RequiresSession", "false",
+            "ServerApplicationId", null,
+            "ServerLogicalSystemName", null,
+            "ServiceId", serviceId
+        )
+    }
+
+    companion object {
+        fun input(key: String, bodyXml: String) = HmInstance.ofArg("com.sap.aii.util.hmi.api.HmiMethodInput",
+            "Parameters", HmInstance.ofArg("com.sap.aii.util.hmi.core.gdi2.EntryStringString",
+                "Key", key,
+                "Value", bodyXml
+            )
+        )
+    }
+}
+
+//fun request(
+//    clientGuid: String,
+//    method: String,
+//    serviceId: String,
+//    bodyEscaped: String,
+//    clientUser: String = "dummy",
+//    language: String = "EN",
+//    release: String = "7.5",
+//    releaseSP: String = "*",
+//): HmInstance {
+//    val inst = HmInstance.ofArg(
+//        "com.sap.aii.util.hmi.core.msg.HmiRequest",
+//        "ClientId", clientGuid,
+//        "ClientLanguage", language,
+//        "ClientLevel", HmInstance.ofArg(
+//            "com.sap.aii.util.applcomp.ApplCompLevel",
+//            "Release", release,
+//            "SupportPackage", releaseSP,
+//        ),
+//        "ClientPassword", "dummy",
+//        "ClientUser", clientUser,
+//        "ControlFlag", "0",
+//        "HmiSpecVersion", "1.0",
+//        "MethodId", method,
+//        "MethodInput", HmInstance.ofArg(
+//            "com.sap.aii.util.hmi.api.HmiMethodInput",
+//            "Key", "body",
+//            "Value", bodyEscaped
+//        ),
+//        "RequestId", clientGuid,
+//        "RequiresSession", "false",
+//        "ServerApplicationId", null,
+//        "ServerLogicalSystemName", null,
+//        "ServiceId", serviceId,
+//    )
+//    return inst
+//}
 
 /**
  *  //TODO -- это времянка для быстрого старта HMI

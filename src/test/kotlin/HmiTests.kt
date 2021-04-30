@@ -8,6 +8,16 @@ class HmiTests {
      */
     @Test
     fun mixed() {
+        // разбор ошибки
+        val exceptionXml = javaClass.getResourceAsStream("/Hmi/exception.xml")!!.reader().readText()
+        var inst = HmInstance.parse(exceptionXml)
+        require (inst.isException()) {
+            println(inst.getCoreException())
+        }
+        val nonExceptionXml = javaClass.getResourceAsStream("/Hmi/rep_gqresp_wksp.xml")!!.reader().readText()
+        inst = HmInstance.parse(nonExceptionXml)
+        require (!inst.isException())
+
         // один из вариантов запроса -- через Map.Pair, многословный
         HmInstance.ofMap("com.sap.aii.util.hmi.core.msg.HmiRequest", mapOf(
             Pair("ClientId", "f62de1959d9b11ebb68900059a3c7a00"),
@@ -27,35 +37,10 @@ class HmiTests {
             GeneralQueryRequest.elementary("WS_ORDER", "EQ", GeneralQueryRequest.Simple(-1)),
             "", "RA_WORKSPACE_ID", "WS_NAME", "VENDOR", "NAME", "VERSION", "CAPTION", "WS_TYPE")
 
-        val y = HmInstance.ofArg(
-            "com.sap.aii.util.hmi.core.msg.HmiRequest",
-            "ClientId", "f62de1959d9b11ebb68900059a3c7a00",
-            "ClientLanguage", "EN",
-            "ClientLevel", HmInstance.ofArg(
-                "com.sap.aii.util.applcomp.ApplCompLevel",
-                "Release", "7.00",
-                "SupportPackage", "0",
-            ),
-            "ClientPassword", "dummy",
-            "ClientUser", "uname",
-            "ControlFlag", "0",
-            "HmiSpecVersion", "1.0",
-            "MethodId", "GENERIC",
-            "MethodInput", HmInstance.ofArg(
-                "com.sap.aii.util.hmi.api.HmiMethodInput",
-                "Parameters", HmInstance.ofArg("com.sap.aii.util.hmi.core.gdi2.EntryStringString",
-                    "Key", "QUERY_REQUEST_XML",
-                    "Value", qu.compose()
-                )
-            ),
-            "RequestId", "fb3c98b19d9b11ebbc2a00059a3c7a00",
-            "RequiresSession", "false",
-            "ServerApplicationId", null,
-            "ServerLogicalSystemName", null,
-            "ServiceId", "QUERY",
-        )
+        val req = HmRequest("dummy")
+        val y = req.render(HmRequest.input("QUERY_REQUEST_XML", qu.compose()), "GENERIC", "QUERY")
         // Это запрос в {{host}}/rep/query/int?container=any
-        y.printXml()
+        println(y.printXml())
 
         // Это сырой ответ:
         val respXml = javaClass.getResourceAsStream("/Hmi/rep_gqresp_wksp.xml")!!.reader().readText()
@@ -78,7 +63,8 @@ class HmiTests {
             "com.sap.aii.util.hmi.core.msg.HmiRequest",
             "ClientId", "f62de1959d9b11ebb68900059a3c7a00",
             "ClientLanguage", "EN",
-            "ClientLevel", HmInstance.ofArg(
+            "ClientLevel",
+            HmInstance.ofArg(
                 "com.sap.aii.util.applcomp.ApplCompLevel",
                 "Release", "7.0",
                 "SupportPackage", "0",
@@ -88,7 +74,8 @@ class HmiTests {
             "ControlFlag", "0",
             "HmiSpecVersion", "1.0",
             "MethodId", "GENERIC",
-            "MethodInput", HmInstance.ofArg(
+            "MethodInput",
+            HmInstance.ofArg(
                 "com.sap.aii.util.hmi.api.HmiMethodInput",
                 "Parameters", HmInstance.ofArg("com.sap.aii.util.hmi.core.gdi2.EntryStringString",
                     "Key", "QUERY_REQUEST_XML",
@@ -150,7 +137,9 @@ class HmiTests {
         val t = TestExecutionRequest(
             HmRef(
                 HmVC("0050568f0aac1ed4a6e56926325e2eb3", "S"),
-                HmKey("MAPPING", null, mutableListOf("XiPatternInterface1ToInterface2", "http://sap.com/xi/XI/System/Patterns"))
+                HmKey("MAPPING",
+                    null,
+                    mutableListOf("XiPatternInterface1ToInterface2", "http://sap.com/xi/XI/System/Patterns"))
             ), TestExecutionRequest.TestData("""<ns0:XiPatternMessage1 xmlns:ns0="http://sap.com/xi/XI/System/Patterns">
    <Person>
       <Id/>
@@ -177,7 +166,8 @@ class HmiTests {
             "com.sap.aii.util.hmi.core.msg.HmiRequest",
             "ClientId", "f62de1959d9b11ebb68900059a3c7a00",
             "ClientLanguage", "EN",
-            "ClientLevel", HmInstance.ofArg(
+            "ClientLevel",
+            HmInstance.ofArg(
                 "com.sap.aii.util.applcomp.ApplCompLevel",
                 "Release", "7.31",
                 "SupportPackage", "*",
@@ -187,7 +177,8 @@ class HmiTests {
             "ControlFlag", "0",
             "HmiSpecVersion", "1.0",
             "MethodId", "executeoperationmappingmethod",
-            "MethodInput", HmInstance.ofArg(
+            "MethodInput",
+            HmInstance.ofArg(
                 "com.sap.aii.util.hmi.api.HmiMethodInput",
                 "Parameters", HmInstance.ofArg("com.sap.aii.util.hmi.core.gdi2.EntryStringString",
                     "Key", "body",

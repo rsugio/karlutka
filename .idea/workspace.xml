@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="xmlutil 0.82, kotlinx-serialization 1.2.0">
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="переход на котлин 1.5 и минус jcenter">
+      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/exception.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,6 +101,11 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/build.gradle.kts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1qi2DPc3avIrqcY1bor0zZyAZTz" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -121,12 +127,12 @@
     <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
   </component>
   <component name="RunManager" selected="Gradle.karlutka [publishToMavenLocal]">
-    <configuration name="HmiTests.testMM_XiPatternMessage1ToMessage2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="HmiTests.mixed" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;HmiTests.testMM_XiPatternMessage1ToMessage2&quot;" />
+        <option name="scriptParameters" value="--tests &quot;HmiTests.mixed&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -229,10 +235,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
+        <item itemvalue="Gradle.HmiTests.mixed" />
         <item itemvalue="Gradle.karlutka [build]" />
         <item itemvalue="Gradle.karlutka [clean]" />
         <item itemvalue="Gradle.HmiTests.testOM_XiPatternMessage1ToMessage2" />
-        <item itemvalue="Gradle.HmiTests.testMM_XiPatternMessage1ToMessage2" />
       </list>
     </recent_temporary>
   </component>
@@ -244,13 +250,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617547969497</updated>
-    </task>
-    <task id="LOCAL-00007" summary="попытки использовать GPR">
-      <created>1617601355788</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1617601355788</updated>
     </task>
     <task id="LOCAL-00008" summary="исправлено в икошках - множественные получатели">
       <created>1617601381785</created>
@@ -588,7 +587,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619675022333</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="переход на котлин 1.5 и минус jcenter">
+      <created>1619784434932</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1619784434933</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -605,7 +611,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="поправлены форматы даты времени" />
     <MESSAGE value="---" />
     <MESSAGE value="LjsTrace" />
     <MESSAGE value="САПКонтрол, начало" />
@@ -630,7 +635,8 @@
     <MESSAGE value="генеральское квери работает" />
     <MESSAGE value="дальше ММтест и ОМтест" />
     <MESSAGE value="xmlutil 0.82, kotlinx-serialization 1.2.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="xmlutil 0.82, kotlinx-serialization 1.2.0" />
+    <MESSAGE value="переход на котлин 1.5 и минус jcenter" />
+    <option name="LAST_COMMIT_MESSAGE" value="переход на котлин 1.5 и минус jcenter" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
