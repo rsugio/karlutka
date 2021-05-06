@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="переход на котлин 1.5 и минус jcenter">
-      <change afterPath="$PROJECT_DIR$/src/test/resources/Hmi/exception.xml" afterDir="false" />
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="выборка SWCV, мелочи">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,34 +124,13 @@
     <property name="project.structure.side.proportion" value="0.42528737" />
     <property name="settings.editor.selected.configurable" value="preferences.language.Kotlin" />
   </component>
-  <component name="RunManager" selected="Gradle.karlutka [publishToMavenLocal]">
+  <component name="RunManager" selected="Gradle.karlutka [publishMavenPublicationToGitHubPackagesRepository]">
     <configuration name="HmiTests.mixed" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="--tests &quot;HmiTests.mixed&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="HmiTests.testOM_XiPatternMessage1ToMessage2" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;HmiTests.testOM_XiPatternMessage1ToMessage2&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -211,6 +188,27 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="karlutka [publishMavenPublicationToGitHubPackagesRepository]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="publishMavenPublicationToGitHubPackagesRepository" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="karlutka [publishToMavenLocal]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -234,11 +232,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.karlutka [publishMavenPublicationToGitHubPackagesRepository]" />
         <item itemvalue="Gradle.karlutka [publishToMavenLocal]" />
         <item itemvalue="Gradle.HmiTests.mixed" />
         <item itemvalue="Gradle.karlutka [build]" />
         <item itemvalue="Gradle.karlutka [clean]" />
-        <item itemvalue="Gradle.HmiTests.testOM_XiPatternMessage1ToMessage2" />
       </list>
     </recent_temporary>
   </component>
@@ -250,13 +248,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617547969497</updated>
-    </task>
-    <task id="LOCAL-00008" summary="исправлено в икошках - множественные получатели">
-      <created>1617601381785</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1617601381785</updated>
     </task>
     <task id="LOCAL-00009" summary=" работает GPR">
       <created>1617641992836</created>
@@ -594,7 +585,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619784434933</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="выборка SWCV, мелочи">
+      <created>1619799511098</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1619799511098</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -611,7 +609,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="---" />
     <MESSAGE value="LjsTrace" />
     <MESSAGE value="САПКонтрол, начало" />
     <MESSAGE value="обучение полиморфизму на тестах" />
@@ -636,7 +633,8 @@
     <MESSAGE value="дальше ММтест и ОМтест" />
     <MESSAGE value="xmlutil 0.82, kotlinx-serialization 1.2.0" />
     <MESSAGE value="переход на котлин 1.5 и минус jcenter" />
-    <option name="LAST_COMMIT_MESSAGE" value="переход на котлин 1.5 и минус jcenter" />
+    <MESSAGE value="выборка SWCV, мелочи" />
+    <option name="LAST_COMMIT_MESSAGE" value="выборка SWCV, мелочи" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

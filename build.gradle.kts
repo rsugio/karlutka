@@ -60,7 +60,7 @@ tasks.test {
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>() {
-    kotlinOptions.jvmTarget = "16"
+    kotlinOptions.jvmTarget = "11"
 }
 
 tasks.dokkaHtml.configure {

@@ -141,14 +141,13 @@ class HmiTests {
                     null,
                     mutableListOf("XiPatternInterface1ToInterface2", "http://sap.com/xi/XI/System/Patterns"))
             ), TestExecutionRequest.TestData("""<ns0:XiPatternMessage1 xmlns:ns0="http://sap.com/xi/XI/System/Patterns">
-   <Person>
-      <Id/>
-      <LastName/>
-      <FirstName/>
-      <TelephoneNumber/>
-      <CountryCode/>
-   </Person>
-</ns0:XiPatternMessage1>""",
+<Person>
+  <Id/>
+  <LastName/>
+  <FirstName/>
+  <TelephoneNumber/>
+  <CountryCode/>
+</Person></ns0:XiPatternMessage1>""",
                 TestExecutionRequest.Parameters(
                     TestExecutionRequest.TestParameterInfo(
                         TestExecutionRequest.HIParameters(
