@@ -9,7 +9,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
-group = "org.example"
+group = "io.rsug"
 version = "0.2.0"
 
 repositories {
