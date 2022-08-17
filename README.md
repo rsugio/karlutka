@@ -79,6 +79,7 @@ securityMaterials:
 
 ## История
 * 2022-08-17 v0.2.0 - выложено на гитхаб.
+  https://github.com/rsugio/karlutka/releases/tag/v0.2.0
 
 Недоработки: пароли в открытом виде, кейстор надо создавать снаружи.
 Тестирование: на windows и linux.
