@@ -1,0 +1,4 @@
+﻿<table class="gridData"><thead><tr class="headerRow"><th>Message Id</th><th>Node Id</th><th>Process State</th><th>Status Message</th><th>Expire Time</th></tr></thead><tbody>
+</tbody></table>
+
+<!--{{host}}/remoteapi/getstatuslogs?channelName=CC_SOAPSender_XI30&service=TER400&party=&adapterType=SOAP -->

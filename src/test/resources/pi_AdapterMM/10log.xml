@@ -1,0 +1,7 @@
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SOAP-ENV:Body xmlns:rpl="urn:AdapterMessageMonitoringVi">
+		<rpl:getLogEntriesResponse>
+			<rpl:Response/>
+		</rpl:getLogEntriesResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

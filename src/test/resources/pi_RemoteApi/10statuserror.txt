@@ -1,0 +1,6 @@
+<table class="gridData"><thead><tr class="headerRow"><th>Message Id</th><th>Node Id</th><th>Process State</th><th>Status Message</th><th>Expire Time</th></tr></thead><tbody>
+<tr class ="even">
+<td>62d7d008-b7f3-48dc-9fb7-a2a20078b95a</td>
+<td>4991250</td>
+<td>ERROR</td>
+An exception occured. Please check the default traces for error details.

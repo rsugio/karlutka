@@ -1,0 +1,72 @@
+content-type:multipart/related;boundary=SAP_005056BF8D881EED84E548A97F50B00A_END;type="text/xml";start="<soap-005056BF8D881EED84E548A97F50900A@sap.com>"
+content-length:7036
+
+--SAP_005056BF8D881EED84E548A97F50B00A_END
+content-type:text/xml
+content-length:5021
+content-id:<soap-005056BF8D881EED84E548A97F50900A@sap.com>
+
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+<SOAP:Header xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sap="http://sap.com/xi/XI/Message/30" xmlns:SAP="http://sap.com/xi/XI/Message/30">
+<SAP:ReliableMessaging SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:QualityOfService>ExactlyOnce</SAP:QualityOfService></SAP:ReliableMessaging>
+<SAP:DynamicConfiguration SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="SourceMessageType">MT_Content</SAP:Record><SAP:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="InterfaceDeterminationHash">481e8acfd48c37fa9892635c726b3291</SAP:Record><SAP:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="SourceMessageTypeNS">urn:zzz:po:I:ERP-H2H:UniCredit-Bank</SAP:Record><SAP:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="InterfaceFromOperation">SI_UniCreditContent_Abs</SAP:Record><SAP:Record namespace="http://sap.com/xi/XI/Message/30/general" name="senderAgreementGUID">c600d30238e93303ae58bc04da471f5c</SAP:Record><SAP:Record namespace="http://sap.com/xi/XI/System/File" name="FileName">IMBKRUMM_camt.052.001.02_20220726064039_00002_00106941_40702810500404827164.xml</SAP:Record></SAP:DynamicConfiguration>
+<sap:Passport xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sap="http://sap.com/xi/XI/Message/30" xmlns:SAP="http://sap.com/xi/XI/Message/30"><sap:PassportHash>2A54482A0300E600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000326239353539666265343635313165633963613330303530353662343835316400000000022B9559FBE46511EC9CA3005056B4851D0000000000000000000000000000000000000000000000002A54482A</sap:PassportHash><sap:Transaction_ID>2b9559fbe46511ec9ca3005056b4851d</sap:Transaction_ID></sap:Passport>
+
+<SAP:HopList SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:Hop timeStamp="2022-07-26T03:42:41Z" wasRead="false"><SAP:Engine type="AE">af.ppz.nl-s-pozdb</SAP:Engine><SAP:Adapter namespace="http://sap.com/xi/XI/System">XIRA</SAP:Adapter><SAP:MessageId>00329156-0C95-11ED-9D31-000000BECB2A</SAP:MessageId><SAP:Info/></SAP:Hop><SAP:Hop timeStamp="2022-07-26T03:42:41Z" wasRead="false"><SAP:Engine type="AE">af.</SAP:Engine><SAP:Adapter namespace="http://sap.com/xi/XI/System">XIRA</SAP:Adapter><SAP:MessageId>00329156-0C95-11ED-9D31-000000BECB2A</SAP:MessageId><SAP:Info/></SAP:Hop><SAP:Hop timeStamp="2022-07-26T03:42:41Z" wasRead="false"><SAP:Engine type="BS">PER400</SAP:Engine><SAP:Adapter namespace="http://sap.com/xi/XI/System">XI</SAP:Adapter><SAP:MessageId>00329156-0C95-11ED-9D31-000000BECB2A</SAP:MessageId><SAP:Info>3.0</SAP:Info></SAP:Hop></SAP:HopList>
+<SAP:Main versionMajor="003" versionMinor="001" SOAP:mustUnderstand="1" wsu:Id="wsuid-main-92ABE13F5C59AB7FE10000000A1551F7" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><SAP:MessageClass>ApplicationMessage</SAP:MessageClass><SAP:ProcessingMode>asynchronous</SAP:ProcessingMode><SAP:MessageId>00329156-0C95-11ED-9D31-000000BECB2A</SAP:MessageId><SAP:TimeSent>2022-07-26T03:42:41Z</SAP:TimeSent><SAP:Sender><SAP:Service>INTEGRATION_ENGINE_JAVA_NCAE_PPZ</SAP:Service></SAP:Sender><SAP:Receiver><SAP:Party agency="http://sap.com/xi/XI" scheme="XIParty"/><SAP:Service>PER400</SAP:Service></SAP:Receiver><SAP:Interface namespace="urn:zzz:po:I:ERP-H2H:UniCredit-Bank">SI_UniCreditContent_InAsync</SAP:Interface></SAP:Main>
+<SAP:Diagnostic SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:TraceLevel>Information</SAP:TraceLevel><SAP:Logging>On</SAP:Logging></SAP:Diagnostic>
+
+
+</SOAP:Header>
+<SOAP:Body xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:sap="http://sap.com/xi/XI/Message/30" xmlns:SAP="http://sap.com/xi/XI/Message/30">
+<SAP:Manifest wsu:Id="wsuid-manifest-5CABE13F5C59AB7FE10000000A1551F7" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><SAP:Payload xlink:href="cid:IMBKRUMM_camt.052.001.02_20220726064039_00002_00106941_40702810500404827164.xml"><SAP:Name>IMBKRUMM_camt.052.001.02_20220726064039_00002_00106941_40702810500404827164.xml</SAP:Name><SAP:Description/><SAP:Type>ApplicationAttachment</SAP:Type></SAP:Payload></SAP:Manifest>
+</SOAP:Body>
+</SOAP:Envelope>
+
+--SAP_005056BF8D881EED84E548A97F50B00A_END
+content-type:application/xml
+content-length:1624
+content-id:<IMBKRUMM_camt.052.001.02_20220726064039_00002_00106941_40702810500404827164.xml>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.052.001.02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<BkToCstmrAcctRpt>
+<GrpHdr>
+    <MsgId>UCB001069412022072606:40:390002</MsgId>
+    <CreDtTm>2022-07-26T06:40:39+03:00</CreDtTm>
+</GrpHdr>
+<Rpt>
+    <Id>00106941RURCOSA101/2022-07-26/</Id>
+    <ElctrncSeqNb></ElctrncSeqNb>
+    <CreDtTm>2022-07-26T06:40:39+03:00</CreDtTm>
+    <FrToDt><FrDtTm>2022-07-26T00:00:00+03:00</FrDtTm><ToDtTm>2022-07-26T06:40:39+03:00</ToDtTm></FrToDt>
+    <Acct>
+        <Id><Othr><Id>40702810500404827164</Id><SchmeNm><Cd>BBAN</Cd></SchmeNm></Othr></Id>
+        <Ccy>RUB</Ccy>
+        <Ownr>
+            <Nm>АО "Алтай-Кокс"                                                                 </Nm>
+            <Id><OrgId><Othr><Id>00106941</Id><SchmeNm><Cd>BANK</Cd></SchmeNm></Othr></OrgId></Id>
+        </Ownr>
+        <Svcr><FinInstnId><BIC>IMBKRUMM</BIC></FinInstnId></Svcr>
+    </Acct>
+    <Bal>
+        <Tp><CdOrPrtry><Cd>OPBD</Cd></CdOrPrtry></Tp>
+        <Amt Ccy="RUB">78548.04</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2022-07-25</Dt></Dt>
+    </Bal>
+    <Bal>
+        <Tp><CdOrPrtry><Cd>ITAV</Cd></CdOrPrtry></Tp>
+        <Amt Ccy="RUB">78548.04</Amt>
+        <CdtDbtInd>CRDT</CdtDbtInd>
+        <Dt><Dt>2022-07-26</Dt></Dt>
+    </Bal>
+    <TxsSummry>
+        <TtlCdtNtries><NbOfNtries>0</NbOfNtries><Sum>0.00</Sum></TtlCdtNtries>
+        <TtlDbtNtries><NbOfNtries>0</NbOfNtries><Sum>0.00</Sum></TtlDbtNtries>
+    </TxsSummry>
+</Rpt>
+</BkToCstmrAcctRpt>
+</Document>
+
+--SAP_005056BF8D881EED84E548A97F50B00A_END--

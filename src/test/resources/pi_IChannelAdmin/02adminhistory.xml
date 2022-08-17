@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Body>
+        <ns2:getChannelAdminHistoryResponse xmlns:ns2='urn:com:sap:netweaver:pi:monitoring'>
+            <adminHistory>
+                <channelName>CC_RESTSender_ProjectContractLimitCheck</channelName>
+                <service>BS_ECM_Q</service>
+                <party></party>
+                <adminHistory>
+                    <time>2022-08-13T07:34:59.837+03:00</time>
+                    <action>STARTED</action>
+                    <user>dsdsdsd</user>
+                </adminHistory>
+                <adminHistory>
+                    <time>2022-08-13T07:34:58.558+03:00</time>
+                    <action>STOPPED</action>
+                    <user>iuiuiui</user>
+                </adminHistory>
+            </adminHistory>
+            <adminHistory>
+                <channelName>CC_JDBCSender_RO_SpecCloth</channelName>
+                <service>BST_TransportHUB</service>
+                <party></party>
+            </adminHistory>
+        </ns2:getChannelAdminHistoryResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

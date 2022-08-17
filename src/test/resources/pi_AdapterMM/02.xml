@@ -1,0 +1,13 @@
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <SOAP-ENV:Body>
+      <SOAP-ENV:Fault>
+         <faultcode>SOAP-ENV:Server</faultcode>
+         <faultstring>Authentication failed. For details see log entry logID=C000AC130D121CF4000000020000116D in security log.</faultstring>
+         <detail>
+            <yq1:com.sap.engine.interfaces.webservices.runtime.ProtocolExceptionExt 
+		xmlns:yq1="http://sap-j2ee-engine/error">Authentication failed. For details see log entry logID=C000AC130D121CF4000000020000116D in security log.
+	</yq1:com.sap.engine.interfaces.webservices.runtime.ProtocolExceptionExt>
+         </detail>
+      </SOAP-ENV:Fault>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

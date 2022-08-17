@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--DOCTYPE ChannelStatusResult SYSTEM "/AdapterFramework/channelAdmin/ChannelAdmin.dtd"-->
+<ChannelStatusResult xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="ChannelAdmin.xsd">
+	<Channels>
+		<Channel>
+			<Party/>
+			<Service>BS_ECM_ZZZ</Service>
+			<ChannelName>CC_RESTSender_ProjectContractLimitCheck</ChannelName>
+			<ChannelID>5d7c82087c0a3ca28465a5684396b023</ChannelID>
+			<AdapterType>REST</AdapterType>
+			<Direction>INBOUND</Direction>
+			<ActivationState>STARTED</ActivationState>
+			<ChannelState>ERROR</ChannelState>
+			<Control>SCHEDULER</Control>
+			<ShortLog>
+				<![CDATA[Server 00 00_49912 : Error: Configuration table Custom XML/JSON Conversion Rules has an invalid value in row 2. Parameter Array Type does not contain a valid boolean expression.]]>
+			</ShortLog>
+			<ProcessLog/>
+			<AdminHistory>
+				<AdminEntry>
+					<Time>13.08.2022 04:34:59 UTC</Time>
+					<User>123</User>
+					<Action>STARTED</Action>
+					<AdminErrors/>
+				</AdminEntry>
+				<AdminEntry>
+					<Time>13.08.2022 04:34:58 UTC</Time>
+					<User>123</User>
+					<Action>STOPPED</Action>
+					<AdminErrors/>
+				</AdminEntry>
+			</AdminHistory>
+		</Channel>
+		<Channel>
+			<Party/>
+			<Service>1212</Service>
+			<ChannelName>CC_123</ChannelName>
+			<ChannelID>c181f5900ebe31cdad96471da9684fc0</ChannelID>
+			<AdapterType>JDBC</AdapterType>
+			<Direction>INBOUND</Direction>
+			<ActivationState>STARTED</ActivationState>
+			<ChannelState>OK</ChannelState>
+			<Control>MANUAL</Control>
+			<ProcessLog>
+				<LogEntry>
+					<Time>13.08.2022 04:05:43 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey>b054f2f3197e11ed933f0000004c2912&#x28;OUTBOUND&#x29;</MessageKey>
+					<Text>Processing&#x20;finished&#x20;successfully</Text>
+				</LogEntry>
+				<LogEntry>
+					<Time>13.08.2022 04:05:43 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey/>
+					<Text>Processing&#x20;started</Text>
+				</LogEntry>
+				<LogEntry>
+					<Time>13.08.2022 03:05:43 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey>b054f2f3197e11ed933f0000004c2912&#x28;OUTBOUND&#x29;</MessageKey>
+					<Text>Processing&#x20;finished&#x20;successfully</Text>
+				</LogEntry>
+				<LogEntry>
+					<Time>13.08.2022 03:05:43 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey/>
+					<Text>Processing&#x20;started</Text>
+				</LogEntry>
+				<LogEntry>
+					<Time>13.08.2022 02:05:43 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey>b054f2f3197e11ed933f0000004c2912&#x28;OUTBOUND&#x29;</MessageKey>
+					<Text>Processing&#x20;finished&#x20;successfully</Text>
+				</LogEntry>
+			</ProcessLog>
+			<AdminHistory/>
+		</Channel>
+		<Channel>
+			<Party/>
+			<Service>BS_ZZZ</Service>
+			<ChannelName>CC_Voyage</ChannelName>
+			<ChannelID>07c5226ce9f930769fa610eae5584755</ChannelID>
+			<AdapterType>REST</AdapterType>
+			<Direction>OUTBOUND</Direction>
+			<ActivationState>STARTED</ActivationState>
+			<ChannelState>OK</ChannelState>
+			<Control>SCHEDULER</Control>
+			<ProcessLog>
+				<LogEntry>
+					<Time>09.08.2022 11:21:03 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey>005056bf-8d88-1eed-85fa-ab2a69df2212&#x28;INBOUND&#x29;</MessageKey>
+					<Text>Message&#x20;processing&#x20;completed&#x20;successfully</Text>
+				</LogEntry>
+				<LogEntry>
+					<Time>09.08.2022 11:21:03 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey>005056bf-8d88-1eed-85fa-ab2a69df2212&#x28;INBOUND&#x29;</MessageKey>
+					<Text>Message&#x20;sent&#x20;to&#x20;external&#x20;server</Text>
+				</LogEntry>
+				<LogEntry>
+					<Time>09.08.2022 11:21:01 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey>005056bf-8d88-1eed-85fa-ab2a69df2212&#x28;INBOUND&#x29;</MessageKey>
+					<Text>Start&#x20;processing&#x20;outbound&#x20;message</Text>
+				</LogEntry>
+				<LogEntry>
+					<Time>09.08.2022 11:21:01 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey>005056bf-8d88-1eed-85fa-ab2a69df2212&#x28;INBOUND&#x29;</MessageKey>
+					<Text>Message&#x20;processing&#x20;started</Text>
+				</LogEntry>
+				<LogEntry>
+					<Time>09.08.2022 11:21:00 UTC</Time>
+					<Node>Server 00 00_49912</Node>
+					<Status>OK</Status>
+					<MessageKey>005056bf-8d88-1eed-85fa-ab02b7ea8212&#x28;INBOUND&#x29;</MessageKey>
+					<Text>Message&#x20;sent&#x20;to&#x20;external&#x20;server</Text>
+				</LogEntry>
+			</ProcessLog>
+			<AdminHistory>
+				<AdminEntry>
+					<Time>20.06.2022 08:42:08 UTC</Time>
+					<User>123</User>
+					<Action>STARTED</Action>
+					<AdminErrors/>
+				</AdminEntry>
+				<AdminEntry>
+					<Time>25.03.2022 13:45:54 UTC</Time>
+					<User>123</User>
+					<Action>STOPPED</Action>
+					<AdminErrors>
+						<ErrorEntry>
+							<Time>1</Time>
+							<Node>2</Node>
+							<ErrorInfo>3</ErrorInfo>
+						</ErrorEntry>
+					</AdminErrors>
+				</AdminEntry>
+			</AdminHistory>
+
+		</Channel>
+	</Channels>
+</ChannelStatusResult>

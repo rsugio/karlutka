@@ -1,0 +1,2 @@
+daily,QoS=BE,INBOUND_CHANNEL=CC_SOAPSender_XI30,ACTION_NAME=SI_GetPowerOfAttorneyVoyage_InSync message_counter=273i,total_processing_time=254528820i,avg_message_size=201665i 1660672800000
+daily,QoS=EO,INBOUND_CHANNEL=CC_SOAPSender_XI30,ACTION_NAME=SI_ListOfFinishGoodsStocks_Abs message_counter=3i,total_processing_time=219711i,avg_message_size=2698i 1660672800000

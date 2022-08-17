@@ -1,0 +1,53 @@
+﻿<testExecutionRequest>
+ <ref>
+  <vc swcGuid="{{SWCVId}}" vcType="S"/>
+  <key typeID="MAPPING">
+   <elem>{{OperationMappingName}}</elem>
+   <elem>{{OperationMappingNamespace}}</elem>
+  </key>
+ </ref>
+ <testData>
+  <inputXml><![CDATA[{{Input_temp}}]]></inputXml>
+  <parameters>
+   <testParameterInfo>
+    <HeaderParameters>
+     <properties>
+      <property name="TimeSent"/>
+      <property name="SenderSystem"><![CDATA[Test_SenderSystem]]></property>
+      <property name="SenderParty"><![CDATA[Test_SenderParty]]></property>
+      <property name="InterfaceNamespace"/>
+      <property name="Interface"/>
+      <property name="SenderPartyScheme"/>
+      <property name="ReceiverPartyAgency"/>
+      <property name="RefToMessageId"/>
+      <property name="ReceiverPartyScheme"/>
+      <property name="SenderName"/>
+      <property name="Profiling"><![CDATA[off]]></property>
+      <property name="MessageId"/>
+      <property name="VersionMajor"/>
+      <property name="ReceiverName"/>
+      <property name="ReceiverParty"><![CDATA[Test_ReceiverParty]]></property>
+      <property name="ProcessingMode"/>
+      <property name="SenderService"><![CDATA[Test_SenderService]]></property>
+      <property name="ReceiverNamespace"/>
+      <property name="ConversationId"/>
+      <property name="VersionMinor"/>
+      <property name="SenderNamespace"/>
+      <property name="ReceiverService"><![CDATA[Test_ReceiverService]]></property>
+      <property name="ReceiverSystem"><![CDATA[Test_ReceiverSystem]]></property>
+      <property name="SenderPartyAgency"/>
+     </properties>
+    </HeaderParameters>
+    <ImportingParameters>
+     <properties/>
+    </ImportingParameters>
+   </testParameterInfo>
+  </parameters>
+  <testParameters>
+   <direction>{{Direction}}</direction>
+   <fromStep>0</fromStep>
+   <toStep>0</toStep>
+  </testParameters>
+  <traceLevel>3</traceLevel>
+ </testData>
+</testExecutionRequest>

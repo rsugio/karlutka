@@ -1,0 +1,341 @@
+<sample>
+<generalQueryRequest>
+	<types>
+		<type id="workspace"/>
+	</types>
+	<qc qcType="S" delMode="N">
+		<clCxt consider="L"/>
+		<swcListDef def="A"/>
+	</qc>
+	<condition>
+		<elementary>
+			<single>
+				<key>WS_ORDER</key>
+				<val>
+					<simple>
+						<int>-1</int>
+					</simple>
+				</val>
+				<op>EQ</op>
+			</single>
+		</elementary>
+	</condition>
+	<result>
+		<attrib>RA_WORKSPACE_ID</attrib>
+		<attrib>WS_NAME</attrib>
+		<attrib>VENDOR</attrib>
+		<attrib>NAME</attrib>
+		<attrib>VERSION</attrib>
+		<attrib>CAPTION</attrib>
+		<attrib>WS_TYPE</attrib>
+		<attrib>ORIGINAL_LANGUAGE</attrib>
+		<attrib>EDITABLE</attrib>
+		<attrib>BACKENDCOMPMODE</attrib>
+		<attrib>ORIGINAL</attrib>
+	</result>
+</generalQueryRequest>
+
+<queryResult>
+	<headerInfo xmlns="">
+		<rows count="351"/>
+		<cols count="11"/>
+		<colDef>
+			<def type="RA_WORKSPACE_ID" pos="0"/>
+			<def type="WS_NAME" pos="1"/>
+			<def type="VENDOR" pos="2"/>
+			<def type="NAME" pos="3"/>
+			<def type="VERSION" pos="4"/>
+			<def type="CAPTION" pos="5"/>
+			<def type="WS_TYPE" pos="6"/>
+			<def type="ORIGINAL_LANGUAGE" pos="7"/>
+			<def type="EDITABLE" pos="8"/>
+			<def type="BACKENDCOMPMODE" pos="9"/>
+			<def type="ORIGINAL" pos="10"/>
+		</colDef>
+	</headerInfo>
+	<typeInfo xmlns="">
+		<type id="workspace">
+			<keyElem name="WS_ID" pos="0"/>
+			<keyElem name="WS_ORDER" pos="1"/>
+		</type>
+	</typeInfo>
+	<matrix xmlns="">
+		<r>
+			<c>
+				<wkID id="b6b53370825d11ebb8cae89fac130d0e" order="-1"/>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_I_END, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_I_END</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>1.0</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_I_END, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>S</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>EN</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>NW07_MYSAP</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+		</r>
+		<r>
+			<c>
+				<wkID id="2929b1e18d5f11eb8ae8fd13ac130d0e" order="-1"/>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_EUROPE_EDI_SCPI, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_EUROPE_EDI_SCPI</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>1.0</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_EUROPE_EDI_SCPI, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>S</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>EN</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>NW07_MYSAP</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+		</r>
+		<r>
+			<c>
+				<wkID id="855acca0212f11e8b2d7c19fac130d0e" order="-1"/>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_BH_PEIS, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_BH_PEIS</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>1.0</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_BH_PEIS, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>S</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>EN</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>NW07_MYSAP</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+		</r>
+		<r>
+			<c>
+				<wkID id="0050568f0aac1ed3a5b2d9f0b458ba15" order="-1"/>
+			</c>
+			<c>
+				<simple>
+					<strg>SFIHCM03 600</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>sap.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SFIHCM03</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>600</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SFIHCM03 600</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>S</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>EN</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>NW04S</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+		</r>
+		<r>
+			<c>
+				<wkID id="74cc75d0ef0d11e89c15f50cac130d0e" order="-1"/>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_MDG_ESPHERE, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_MDG_ESPHERE</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>1.0</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_MDG_ESPHERE, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>S</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>EN</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>NW07_MYSAP</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bool>false</bool>
+				</simple>
+			</c>
+		</r>
+	</matrix>
+</queryResult>
+
+</sample>

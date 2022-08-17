@@ -1,0 +1,33 @@
+
+# Русские буквыЪ
+targets:
+- type: ABAP
+  sid: ERD
+  text: разработка
+  jco: !!map
+    jco.client.codepage: 4110
+    jco.client.lang: en
+    jco.client.client: 400
+    jco.client.user: "" #
+    jco.client.passwd: "" #
+    jco.client.sysnr: 00
+    jco.client.ashost: sap.local
+  auth: defaultS4
+
+- type: PIAF
+  sid: PID
+  url: "http://host.local:50000"
+  auth: defaultPO
+
+# тут пока свалка параметров
+httpClientThreads: 3
+httpClientConnectionTimeoutMillis: 1200
+httpClientRetryOnServerErrors: 3
+httpClientLogLevel: HEADERS
+
+
+influxdb:
+  host: "http://localhost:8086"
+  org: test
+  bucket: test
+  auth: influx

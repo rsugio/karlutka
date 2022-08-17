@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Systems>
+	<CommunicationComponents>
+		<CommunicationComponent isABAPSystem="false">
+			<Service>BS_QHM230</Service>
+			<Type>BS</Type>
+			<Description/>
+			<Party/>
+			<objectid>c233f8d9d67a3ed3a591a225440755c7</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+		<CommunicationComponent isABAPSystem="false">
+			<Service>BC_SuccessFactors</Service>
+			<Type>SR</Type>
+			<Description/>
+			<Party/>
+			<objectid>700a186144703a6f985060e26dad4ddd</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+		<CommunicationComponent isABAPSystem="false">
+			<Service>BS_BANK_Q</Service>
+			<Type>BS</Type>
+			<Description/>
+			<Party>AAAAAAAAAAAAAAAAA</Party>
+			<objectid>9a107a61039239188097e0b38391fdd8</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+		<CommunicationComponent isABAPSystem="false">
+			<Service>AAAAAAAAA</Service>
+			<Type>BS</Type>
+			<Description>Сбербанк</Description>
+			<Party/>
+			<objectid>101047b8712236d1968fec6d166d1b4c</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+		<CommunicationComponent isABAPSystem="false">
+			<Service>BS_URA_Q</Service>
+			<Type>BS</Type>
+			<Description>URA</Description>
+			<Party/>
+			<objectid>59ac15fcd248392e81046d0f47e444ed</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+		<CommunicationComponent isABAPSystem="false">
+			<Service>BS_PSI_Kaluga_Q</Service>
+			<Type>BS</Type>
+			<Description/>
+			<Party/>
+			<objectid>8a7035b66ac23eff8461d304cbbd15f4</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+		<CommunicationComponent isABAPSystem="false">
+			<Service>BC_SPARK</Service>
+			<Type>SR</Type>
+			<Description/>
+			<Party>P_MDGSPARK</Party>
+			<objectid>8b43364697443c0e95045e52322005c6</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+	</CommunicationComponents>
+	<SldSystems>
+		<SldSystem isABAPSystem="false">
+			<Name>BS_PEIS_D</Name>
+			<Desc>BS_PEIS_D</Desc>
+		</SldSystem>
+		<SldSystem isABAPSystem="true">
+			<Name>BS_QH1260</Name>
+			<Desc>BS_QH1260</Desc>
+		</SldSystem>
+	</SldSystems>
+	<Exceptions/>
+</Systems>

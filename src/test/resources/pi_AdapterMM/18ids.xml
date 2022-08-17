@@ -1,0 +1,11 @@
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Body>
+        <SOAP-ENV:Fault>
+            <faultcode>SOAP-ENV:Client</faultcode>
+            <faultstring>Cannot find the required parameter [referenceIds] in request message content.</faultstring>
+            <detail>
+                <yq1:com.sap.engine.services.webservices.espbase.server.additions.exceptions.ProcessException xmlns:yq1='http://sap-j2ee-engine/error'>Cannot find the required parameter [referenceIds] in request message content.</yq1:com.sap.engine.services.webservices.espbase.server.additions.exceptions.ProcessException>
+            </detail>
+        </SOAP-ENV:Fault>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

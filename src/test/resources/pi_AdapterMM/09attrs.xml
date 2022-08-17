@@ -1,0 +1,18 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns0="urn:AdapterMessageMonitoringVi"
+	xmlns:ns1="urn:com.sap.aii.mdt.server.adapterframework.ws">
+	<SOAP-ENV:Header/>
+	<SOAP-ENV:Body>
+		<ns0:getUserDefinedSearchAttributesResponse>
+			<Response>
+				<ns1:BusinessAttribute>
+					<ns1:name>1</ns1:name>
+					<ns1:value>2</ns1:value>
+				</ns1:BusinessAttribute>
+				<ns1:BusinessAttribute>
+					<ns1:name>3</ns1:name>
+					<ns1:value>4</ns1:value>
+				</ns1:BusinessAttribute>
+			</Response>
+		</ns0:getUserDefinedSearchAttributesResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

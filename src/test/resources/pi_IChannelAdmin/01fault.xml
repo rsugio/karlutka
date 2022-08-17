@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Body>
+        <SOAP-ENV:Fault>
+            <faultcode>SOAP-ENV:Server</faultcode>
+            <faultstring>No channels were found matching the provided channel name/service/party combinations</faultstring>
+            <detail>
+                <ns2:ChannelAdminServiceException xmlns:ns2='urn:com:sap:netweaver:pi:monitoring'>
+                    <message>No channels were found matching the provided channel name/service/party combinations</message>
+                </ns2:ChannelAdminServiceException>
+            </detail>
+        </SOAP-ENV:Fault>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

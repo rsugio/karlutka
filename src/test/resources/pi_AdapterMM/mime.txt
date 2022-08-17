@@ -1,0 +1,19 @@
+content-length:3340
+http:POST
+content-type:multipart/related; boundary=SAP_7b773746-1227-11ed-c66c-0000004c2912_END; type="text/xml"; start="<soap-7b773745122711ed80c80000004c2912@sap.com>"
+
+--SAP_7b773746-1227-11ed-c66c-0000004c2912_END
+Content-ID: <soap-7b773745122711ed80c80000004c2912@sap.com>
+Content-Disposition: attachment;filename="soap-7b773745122711ed80c80000004c2912@sap.com.xml"
+Content-Type: text/xml; charset=utf-8
+Content-Description: SOAP
+
+<SOAP:Envelope xmlns:SOAP='http://schemas.xmlsoap.org/soap/envelope/'><SOAP:Header xmlns:sap='http://sap.com/xi/XI/Message/30'><sap:Main versionMajor='3' versionMinor='1' SOAP:mustUnderstand='1'><sap:MessageClass>ApplicationMessage</sap:MessageClass><sap:ProcessingMode>asynchronous</sap:ProcessingMode><sap:MessageId>7b761582-1227-11ed-8bad-0000004c2912</sap:MessageId><sap:TimeSent>2022-08-02T05:53:50Z</sap:TimeSent><sap:Sender><sap:Party agency='http://sap.com/xi/XI' scheme='XIParty'></sap:Party><sap:Service>BC_TEST1</sap:Service></sap:Sender><sap:Receiver><sap:Party agency='http://sap.com/xi/XI' scheme='XIParty'></sap:Party><sap:Service></sap:Service></sap:Receiver><sap:Interface namespace='urn:dummy_namespace'>dummy_interface</sap:Interface></sap:Main><sap:ReliableMessaging SOAP:mustUnderstand='1'><sap:QualityOfService>ExactlyOnce</sap:QualityOfService></sap:ReliableMessaging><sap:Passport><sap:PassportHash>2A54482A0300E600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000373763303731633731323237313165643833333930303030303034633239313200000000026E913D34122711EDAFA10000004C29120000000000000000000000000000000000000000000000002A54482A</sap:PassportHash><sap:Transaction_ID>77c071c7122711ed83390000004c2912</sap:Transaction_ID></sap:Passport><sap:System SOAP:mustUnderstand='1'><sap:Record namespace='http://sap.com/xi/XI/Message/30/general' name='senderAgreementGUID'>810fe374c79b37c0bdfc3be3c8190e29</sap:Record></sap:System><sap:DynamicConfiguration SOAP:mustUnderstand='1'><sap:Record namespace='http://sap.com/xi/XI/Message/30/general' name='senderAgreementGUID'>810fe374c79b37c0bdfc3be3c8190e29</sap:Record></sap:DynamicConfiguration><sap:HopList SOAP:mustUnderstand='1'><sap:Hop timeStamp='2022-08-02T05:53:50Z' wasRead='false'><sap:Engine type='AE'>af.qph.ld-s-tstzzzdb</sap:Engine><sap:Adapter namespace='http://sap.com/xi/XI/System'>XIRA</sap:Adapter><sap:MessageId>7b761582-1227-11ed-8bad-0000004c2912</sap:MessageId></sap:Hop></sap:HopList></SOAP:Header><SOAP:Body><sap:Manifest xmlns:sap='http://sap.com/xi/XI/Message/30' xmlns:xlink='http://www.w3.org/1999/xlink'><sap:Payload xlink:type='simple' xlink:href='cid:payload-7b761584122711ed954c0000004c2912@sap.com'><sap:Name>MainDocument</sap:Name><sap:Type>Application</sap:Type></sap:Payload></sap:Manifest></SOAP:Body></SOAP:Envelope>
+--SAP_7b773746-1227-11ed-c66c-0000004c2912_END
+Content-ID: <payload-7b761584122711ed954c0000004c2912@sap.com>
+Content-Type: application/xml
+Content-Disposition: attachment;filename="MainDocument.xml"
+Content-Description: MainDocument
+
+<ququ/>
+--SAP_7b773746-1227-11ed-c66c-0000004c2912_END--

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<scenario>
+	<scenname/>
+	<scenversion/>
+	<sceninst/>
+	<component>
+		<compname>selftest</compname>
+		<comphost>ldasasa</comphost>
+		<compversion>Server 00 00_49912</compversion>
+		<property>
+			<propname>result</propname>
+			<propvalue>not OK</propvalue>
+		</property>
+	</component>
+	<component>
+		<compname>featureCheck</compname>
+		<property>
+			<propname>feature</propname>
+			<propvalue>Channel Active/Inactive Test</propvalue>
+		</property>
+		<property>
+			<propname>featureDescr</propname>
+			<propvalue>Channel Not Active</propvalue>
+		</property>
+		<property>
+			<propname>result</propname>
+			<propvalue>OK with warning</propvalue>
+		</property>
+		<property>
+			<propname>details</propname>
+			<propvalue/>
+		</property>
+	</component>
+	<component>
+		<compname>featureCheck</compname>
+		<property>
+			<propname>feature</propname>
+			<propvalue>Sender Agreement Existence Test</propvalue>
+		</property>
+		<property>
+			<propname>featureDescr</propname>
+			<propvalue>There is no binding associated with this channel</propvalue>
+		</property>
+		<property>
+			<propname>result</propname>
+			<propvalue>not OK</propvalue>
+		</property>
+		<property>
+			<propname>details</propname>
+			<propvalue/>
+		</property>
+	</component>
+</scenario>

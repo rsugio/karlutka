@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- $Id$ -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="ChannelAdminResult" type="ChannelsType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The result of a "start" or "stop" action.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ChannelStatusResult" type="ChannelsType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">The result of a "status" action.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="ErrorInformation" type="ErrorInformationType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Provides information about a fatal error encountered while executing a request.
+			</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="ChannelsType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">A set of channels.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Channels">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Channel" maxOccurs="unbounded" type="ChannelType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ChannelType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Provides information about a channel identified by its party, service and channel name. For the
+				"status" action the channel's status is returned in addition to its activation state (whether
+				it is started or stopped) while for the "start" and "stop" action, only the new activation
+				state is returned. If starting or stopping the channel was not successful, additional
+				information is provided inside the AdminErrorInformation element.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Party" type="xsd:string" />
+			<xsd:element name="Service" type="xsd:string" />
+			<xsd:element name="ChannelName" type="xsd:string" />
+			<xsd:element name="ChannelID" type="GUIDType" />
+			<xsd:element name="AdapterType" type="xsd:string" />
+			<xsd:element name="Direction" type="DirectionType" />
+			<xsd:element name="ActivationState"
+				type="ActivationStateType" />
+			<xsd:element name="ChannelState" type="ChannelStateType"
+				minOccurs="0" />
+			<xsd:element name="Control" type="AutomationStateType" />
+			<xsd:element name="ShortLog" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="AdminErrorInformation" type="xsd:string"
+				minOccurs="0" />
+			<xsd:element name="ProcessLog" maxOccurs="1" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="LogEntry" maxOccurs="unbounded" minOccurs="0">
+                            <xsd:complexType>
+
+                            	<xsd:sequence>
+                            		<xsd:element name="Time"
+                            			type="xsd:string" maxOccurs="1" minOccurs="1">
+                            		</xsd:element>
+                            		<xsd:element name="Node"
+                            			type="xsd:string" maxOccurs="1" minOccurs="1">
+                            		</xsd:element>
+                            		<xsd:element name="Status"
+                            			type="xsd:string" maxOccurs="1" minOccurs="1">
+                            		</xsd:element>
+                            		<xsd:element name="MessageKey"
+                            			type="xsd:string" maxOccurs="1" minOccurs="1">
+                            		</xsd:element>
+                            		<xsd:element name="Text"
+                            			type="xsd:string" maxOccurs="1" minOccurs="1">
+                            		</xsd:element>
+                            	</xsd:sequence>
+                            </xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="AdminHistory" maxOccurs="1" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="AdminEntry" maxOccurs="unbounded" minOccurs="0">
+                            <xsd:complexType>
+                            	<xsd:sequence>
+                            		<xsd:element name="Time" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+                            		<xsd:element name="User" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+                            		<xsd:element name="Action" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+                            		<xsd:element name="AdminErrors" maxOccurs="1" minOccurs="1">
+										<xsd:complexType>
+			                            	<xsd:sequence>
+			                            		<xsd:element name="ErrorEntry" maxOccurs="unbounded" minOccurs="0">
+			                            			<xsd:complexType>
+			                            				<xsd:sequence>
+						                            		<xsd:element name="Time" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+						                            		<xsd:element name="Node" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+						                            		<xsd:element name="ErrorInfo" type="xsd:string" maxOccurs="1" minOccurs="1"/>
+														</xsd:sequence>
+			                            			</xsd:complexType>
+			                            		</xsd:element>
+			                            	</xsd:sequence>
+			                            </xsd:complexType>
+                                    </xsd:element>
+                            	</xsd:sequence>
+                            </xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ErrorInformationType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Provides information about a fatal error encountered while executing a request.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Exception" type="xsd:string" minOccurs="0" />
+			<xsd:element name="Usage" type="xsd:string" minOccurs="0" />
+			<xsd:element name="Description" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="GUIDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9A-Fa-f]{32}" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ActivationStateType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Identifies the activation state of a channel, i.e., whether it is started or stopped.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="STARTED" />
+			<xsd:enumeration value="STOPPED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ChannelStateType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Identifies the state of a channel, i.e., whether it is running or in error.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ERROR" />
+			<xsd:enumeration value="OK" />
+			<xsd:enumeration value="INACTIVE" />
+			<xsd:enumeration value="UNKNOWN" />
+			<xsd:enumeration value="UNREGISTERED" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="AutomationStateType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Identifies the automation state of a channel. Possible values: MANUAL (channel started and stopped manually from the Communication Channel Monitor tool), SCHEDULER (channel started and stopped automatically by the Adapter Framework according to Availability Time plans) and  WEBSERVICE ((channel started and stopped from external source by a call to the /AdapterFramework/ChannelAdminServlet)
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="MANUAL" />
+			<xsd:enumeration value="SCHEDULER" />
+			<xsd:enumeration value="WEBSERVICE" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="DirectionType">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">
+				Identifies the direction of a channel. Possible values: INBOUND (Sender Channel) and OUTBOUND (Receiver Channel).
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="INBOUND" />
+			<xsd:enumeration value="OUTBOUND" />
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

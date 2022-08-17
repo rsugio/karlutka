@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<PerformanceDataQueryResults xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://zzz:44339/mdt/monitor/PerformanceDataQuery.xsd">
+	<Result>
+		<Code>OK</Code>
+		<Details>OK</Details>
+		<Text>No&#x20;data&#x20;for&#x20;selection.</Text>
+	</Result>
+
+</PerformanceDataQueryResults>

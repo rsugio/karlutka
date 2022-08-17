@@ -1,0 +1,933 @@
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Body xmlns:rpl='urn:AdapterMessageMonitoringVi'>
+        <rpl:getAllAvailableStatusDetailsResponse xmlns:rn0='urn:com.sap.aii.mdt.api.data.esiext' xmlns:rn1='urn:com.sap.exception' xmlns:rn2='urn:com.sap.aii.mdt.api.data' xmlns:rn3='http://schemas.xmlsoap.org/soap/encoding/' xmlns:rn4='java:sap/standard' xmlns:rn5='urn:com.sap.aii.mdt.server.adapterframework.ws.esiext' xmlns:rn6='urn:java/lang' xmlns:rn7='urn:com.sap.aii.mdt.server.adapterframework.ws' xmlns:rn8='urn:java.lang'>
+            <Response>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6401</rn7:errorLabelID>
+                    <rn7:description>OData Adapter: Initialization error</rn7:description>
+                    <rn7:text>OData Adapter: Initialization error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6402</rn7:errorLabelID>
+                    <rn7:description>OData Adapter: Channel not activated</rn7:description>
+                    <rn7:text>OData Adapter: Channel not activated</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6403</rn7:errorLabelID>
+                    <rn7:description>OData Adapter: Processing error</rn7:description>
+                    <rn7:text>OData Adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6404</rn7:errorLabelID>
+                    <rn7:description>OData Adapter: Authentication error</rn7:description>
+                    <rn7:text>OData Adapter: Authentication error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4101</rn7:errorLabelID>
+                    <rn7:description>IDoc_AAE Adapter: Processing error</rn7:description>
+                    <rn7:text>IDoc_AAE Adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4102</rn7:errorLabelID>
+                    <rn7:description>IDoc_AAE Adapter: Parsing error</rn7:description>
+                    <rn7:text>IDoc_AAE Adapter: Parsing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1030</rn7:errorLabelID>
+                    <rn7:description>Error while reading exchange profile</rn7:description>
+                    <rn7:text>Error while reading exchange profile</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4103</rn7:errorLabelID>
+                    <rn7:description>IDoc_AAE Adapter: Out of memory</rn7:description>
+                    <rn7:text>IDoc_AAE Adapter: Out of memory</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4104</rn7:errorLabelID>
+                    <rn7:description>IDoc_AAE Adapter: Store error</rn7:description>
+                    <rn7:text>IDoc_AAE Adapter: Store error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1800</rn7:errorLabelID>
+                    <rn7:description>Black-Listed Messages</rn7:description>
+                    <rn7:text>Black-Listed Messages</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4105</rn7:errorLabelID>
+                    <rn7:description>IDoc_AAE Adapter: Channel not found</rn7:description>
+                    <rn7:text>IDoc_AAE Adapter: Channel not found</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1801</rn7:errorLabelID>
+                    <rn7:description>Black-Listed Failover</rn7:description>
+                    <rn7:text>Black-Listed Failover</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1033</rn7:errorLabelID>
+                    <rn7:description>Alerting: Records deleted</rn7:description>
+                    <rn7:text>Alerting: Records deleted</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4106</rn7:errorLabelID>
+                    <rn7:description>IDoc_AAE Adapter: Channel stopped</rn7:description>
+                    <rn7:text>IDoc_AAE Adapter: Channel stopped</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1802</rn7:errorLabelID>
+                    <rn7:description>Application error</rn7:description>
+                    <rn7:text>Application error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>9999</rn7:errorLabelID>
+                    <rn7:description>Non-classified error</rn7:description>
+                    <rn7:text>Non-classified error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1040</rn7:errorLabelID>
+                    <rn7:description>Integration Engine: You are not authorized to process messages</rn7:description>
+                    <rn7:text>Integration Engine: You are not authorized to process messages</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1300</rn7:errorLabelID>
+                    <rn7:description>XML Validation: General Error</rn7:description>
+                    <rn7:text>XML Validation: General Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1301</rn7:errorLabelID>
+                    <rn7:description>XML Validation: Communication Error</rn7:description>
+                    <rn7:text>XML Validation: Communication Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1302</rn7:errorLabelID>
+                    <rn7:description>XML validation: Schema not found</rn7:description>
+                    <rn7:text>XML validation: Schema not found</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1050</rn7:errorLabelID>
+                    <rn7:description>Integration Engine: Pipeline error</rn7:description>
+                    <rn7:text>Integration Engine: Pipeline error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1060</rn7:errorLabelID>
+                    <rn7:description>Message Reorganization: Error during archiving</rn7:description>
+                    <rn7:text>Message Reorganization: Error during archiving</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1065</rn7:errorLabelID>
+                    <rn7:description>Message Reorganization: Error during deletion</rn7:description>
+                    <rn7:text>Message Reorganization: Error during deletion</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6701</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Error while connecting to SFTP server</rn7:description>
+                    <rn7:text>SFTP Adapter: Error while connecting to SFTP server</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1070</rn7:errorLabelID>
+                    <rn7:description>Proxy Error: Error in ABAP proxy</rn7:description>
+                    <rn7:text>Proxy Error: Error in ABAP proxy</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6702</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Error while writing a file on the SFTP server</rn7:description>
+                    <rn7:text>SFTP Adapter: Error while writing a file on the SFTP server</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6703</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Error while reading a file from the SFTP server</rn7:description>
+                    <rn7:text>SFTP Adapter: Error while reading a file from the SFTP server</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6704</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Content Conversion Error</rn7:description>
+                    <rn7:text>SFTP Adapter: Content Conversion Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6705</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Configuration Error</rn7:description>
+                    <rn7:text>SFTP Adapter: Configuration Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6706</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Archiving Error</rn7:description>
+                    <rn7:text>SFTP Adapter: Archiving Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1075</rn7:errorLabelID>
+                    <rn7:description>Proxy Error: Error in Java proxy</rn7:description>
+                    <rn7:text>Proxy Error: Error in Java proxy</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6707</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Deletion Error</rn7:description>
+                    <rn7:text>SFTP Adapter: Deletion Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2100</rn7:errorLabelID>
+                    <rn7:description>JMS adapter: Processing error</rn7:description>
+                    <rn7:text>JMS adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6708</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Binding Error</rn7:description>
+                    <rn7:text>SFTP Adapter: Binding Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6709</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Channel Inactive</rn7:description>
+                    <rn7:text>SFTP Adapter: Channel Inactive</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2101</rn7:errorLabelID>
+                    <rn7:description>JMS adapter: Unsupported message type</rn7:description>
+                    <rn7:text>JMS adapter: Unsupported message type</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6710</rn7:errorLabelID>
+                    <rn7:description>SFTP Adapter: Processing Error</rn7:description>
+                    <rn7:text>SFTP Adapter: Processing Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1080</rn7:errorLabelID>
+                    <rn7:description>Error in message security handling</rn7:description>
+                    <rn7:text>Error in message security handling</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6201</rn7:errorLabelID>
+                    <rn7:description>SuccessFactors Adapter: Initialization error</rn7:description>
+                    <rn7:text>SuccessFactors Adapter: Initialization error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6202</rn7:errorLabelID>
+                    <rn7:description>SuccessFactors Adapter: Channel not activated</rn7:description>
+                    <rn7:text>SuccessFactors Adapter: Channel not activated</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6203</rn7:errorLabelID>
+                    <rn7:description>SuccessFactors Adapter: Logon error</rn7:description>
+                    <rn7:text>SuccessFactors Adapter: Logon error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6204</rn7:errorLabelID>
+                    <rn7:description>SuccessFactors Adapter: Processing error</rn7:description>
+                    <rn7:text>SuccessFactors Adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2111</rn7:errorLabelID>
+                    <rn7:description>JMS adapter: Charset error</rn7:description>
+                    <rn7:text>JMS adapter: Charset error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2112</rn7:errorLabelID>
+                    <rn7:description>JMS adapter: Dynamic headers missing</rn7:description>
+                    <rn7:text>JMS adapter: Dynamic headers missing</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1600</rn7:errorLabelID>
+                    <rn7:description>CIDX adapter: Processing error</rn7:description>
+                    <rn7:text>CIDX adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>8001</rn7:errorLabelID>
+                    <rn7:description>JPR: Outbound Processing Error</rn7:description>
+                    <rn7:text>JPR: Outbound Processing Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1601</rn7:errorLabelID>
+                    <rn7:description>CIDX Adapter: Recoverable error</rn7:description>
+                    <rn7:text>CIDX Adapter: Recoverable error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1090</rn7:errorLabelID>
+                    <rn7:description>Message Blacklisted</rn7:description>
+                    <rn7:text>Message Blacklisted</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1602</rn7:errorLabelID>
+                    <rn7:description>CIDX Adapter: Non-Recoverable Error</rn7:description>
+                    <rn7:text>CIDX Adapter: Non-Recoverable Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1603</rn7:errorLabelID>
+                    <rn7:description>CIDX Adapter: Delivery failure error</rn7:description>
+                    <rn7:text>CIDX Adapter: Delivery failure error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1604</rn7:errorLabelID>
+                    <rn7:description>CIDX Adapter: Sync. delivery not supported</rn7:description>
+                    <rn7:text>CIDX Adapter: Sync. delivery not supported</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1605</rn7:errorLabelID>
+                    <rn7:description>CIDX Adapter: Message creation error</rn7:description>
+                    <rn7:text>CIDX Adapter: Message creation error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1350</rn7:errorLabelID>
+                    <rn7:description>Virus Scan: General Error</rn7:description>
+                    <rn7:text>Virus Scan: General Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1606</rn7:errorLabelID>
+                    <rn7:description>CIDX Adapter: Out of memory error</rn7:description>
+                    <rn7:text>CIDX Adapter: Out of memory error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1351</rn7:errorLabelID>
+                    <rn7:description>Virus Scan Interface: General Error</rn7:description>
+                    <rn7:text>Virus Scan Interface: General Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1352</rn7:errorLabelID>
+                    <rn7:description>Virus Scan Interface: Configuration Error</rn7:description>
+                    <rn7:text>Virus Scan Interface: Configuration Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2120</rn7:errorLabelID>
+                    <rn7:description>JMS adapter: Channel not initialized</rn7:description>
+                    <rn7:text>JMS adapter: Channel not initialized</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1353</rn7:errorLabelID>
+                    <rn7:description>Virus Scan Interface: Scan Error</rn7:description>
+                    <rn7:text>Virus Scan Interface: Scan Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2121</rn7:errorLabelID>
+                    <rn7:description>JMS adapter: Channel not found</rn7:description>
+                    <rn7:text>JMS adapter: Channel not found</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2122</rn7:errorLabelID>
+                    <rn7:description>JMS adapter: Out of memory error</rn7:description>
+                    <rn7:text>JMS adapter: Out of memory error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2123</rn7:errorLabelID>
+                    <rn7:description>JMS adapter: Channel failed to start</rn7:description>
+                    <rn7:text>JMS adapter: Channel failed to start</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1100</rn7:errorLabelID>
+                    <rn7:description>Interface determination error</rn7:description>
+                    <rn7:text>Interface determination error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1101</rn7:errorLabelID>
+                    <rn7:description>Interface determination error: Multiple interfaces found</rn7:description>
+                    <rn7:text>Interface determination error: Multiple interfaces found</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1110</rn7:errorLabelID>
+                    <rn7:description>Receiver determination error</rn7:description>
+                    <rn7:text>Receiver determination error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1111</rn7:errorLabelID>
+                    <rn7:description>Receiver determination: Unable to determine a receiver</rn7:description>
+                    <rn7:text>Receiver determination: Unable to determine a receiver</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1112</rn7:errorLabelID>
+                    <rn7:description>Ambiguous receiver determination: Multiple receivers for synchronous call</rn7:description>
+                    <rn7:text>Ambiguous receiver determination: Multiple receivers for synchronous call</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>7001</rn7:errorLabelID>
+                    <rn7:description>OFTP Adapter: SFNA received</rn7:description>
+                    <rn7:text>OFTP Adapter: SFNA received</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>7002</rn7:errorLabelID>
+                    <rn7:description>OFTP Adapter: NERP generated</rn7:description>
+                    <rn7:text>OFTP Adapter: NERP generated</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>7003</rn7:errorLabelID>
+                    <rn7:description>OFTP Adapter: NERP received</rn7:description>
+                    <rn7:text>OFTP Adapter: NERP received</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>7006</rn7:errorLabelID>
+                    <rn7:description>OFTP Adapter: ESID renerated</rn7:description>
+                    <rn7:text>OFTP Adapter: ESID renerated</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>7007</rn7:errorLabelID>
+                    <rn7:description>OFTP Adapter: ESID received</rn7:description>
+                    <rn7:text>OFTP Adapter: ESID received</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1120</rn7:errorLabelID>
+                    <rn7:description>Missing or invalid receiver agreement</rn7:description>
+                    <rn7:text>Missing or invalid receiver agreement</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2400</rn7:errorLabelID>
+                    <rn7:description>RFC adapter: Processing error</rn7:description>
+                    <rn7:text>RFC adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1121</rn7:errorLabelID>
+                    <rn7:description>Missing or invalid sender agreement</rn7:description>
+                    <rn7:text>Missing or invalid sender agreement</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2401</rn7:errorLabelID>
+                    <rn7:description>RFC adapter: Receiver processing error</rn7:description>
+                    <rn7:text>RFC adapter: Receiver processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2402</rn7:errorLabelID>
+                    <rn7:description>RFC adapter: Receiver static error</rn7:description>
+                    <rn7:text>RFC adapter: Receiver static error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2403</rn7:errorLabelID>
+                    <rn7:description>RFC adapter: Receiver repository error</rn7:description>
+                    <rn7:text>RFC adapter: Receiver repository error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6502</rn7:errorLabelID>
+                    <rn7:description>WS_AAE Adapter: Invalid authentication method</rn7:description>
+                    <rn7:text>WS_AAE Adapter: Invalid authentication method</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6503</rn7:errorLabelID>
+                    <rn7:description>WS_AAE Adapter: Acknowledgement missing for WS-RM message</rn7:description>
+                    <rn7:text>WS_AAE Adapter: Acknowledgement missing for WS-RM message</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6504</rn7:errorLabelID>
+                    <rn7:description>WS_AAE Adapter: Processing error</rn7:description>
+                    <rn7:text>WS_AAE Adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6505</rn7:errorLabelID>
+                    <rn7:description>WS_AAE Adapter: Out-of-memory error</rn7:description>
+                    <rn7:text>WS_AAE Adapter: Out-of-memory error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1130</rn7:errorLabelID>
+                    <rn7:description>Error in Party Normalization</rn7:description>
+                    <rn7:text>Error in Party Normalization</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1131</rn7:errorLabelID>
+                    <rn7:description>Error in Party Denormalization</rn7:description>
+                    <rn7:text>Error in Party Denormalization</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1901</rn7:errorLabelID>
+                    <rn7:description>JDBC adapter: Channel not initialized</rn7:description>
+                    <rn7:text>JDBC adapter: Channel not initialized</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1902</rn7:errorLabelID>
+                    <rn7:description>JDBC adapter: Channel inactive</rn7:description>
+                    <rn7:text>JDBC adapter: Channel inactive</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1903</rn7:errorLabelID>
+                    <rn7:description>JDBC adapter: Processing error</rn7:description>
+                    <rn7:text>JDBC adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1904</rn7:errorLabelID>
+                    <rn7:description>JDBC adapter: Out of memory</rn7:description>
+                    <rn7:text>JDBC adapter: Out of memory</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6001</rn7:errorLabelID>
+                    <rn7:description>HTTP Adapter: Processing error</rn7:description>
+                    <rn7:text>HTTP Adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1905</rn7:errorLabelID>
+                    <rn7:description>JDBC adapter: Channel not found</rn7:description>
+                    <rn7:text>JDBC adapter: Channel not found</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6002</rn7:errorLabelID>
+                    <rn7:description>Http Adapter: Out of memory</rn7:description>
+                    <rn7:text>Http Adapter: Out of memory</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6003</rn7:errorLabelID>
+                    <rn7:description>Http Adapter: Message creation error</rn7:description>
+                    <rn7:text>Http Adapter: Message creation error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6004</rn7:errorLabelID>
+                    <rn7:description>Http Adapter: Error while reading http response body</rn7:description>
+                    <rn7:text>Http Adapter: Error while reading http response body</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1140</rn7:errorLabelID>
+                    <rn7:description>Error in Header Mapping</rn7:description>
+                    <rn7:text>Error in Header Mapping</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6005</rn7:errorLabelID>
+                    <rn7:description>Http Adapter: Error while sending http request</rn7:description>
+                    <rn7:text>Http Adapter: Error while sending http request</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6006</rn7:errorLabelID>
+                    <rn7:description>Http Adapter: Wrong status code</rn7:description>
+                    <rn7:text>Http Adapter: Wrong status code</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1400</rn7:errorLabelID>
+                    <rn7:description>Mapping: Out of memory</rn7:description>
+                    <rn7:text>Mapping: Out of memory</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1401</rn7:errorLabelID>
+                    <rn7:description>Receiver delivery: General Error</rn7:description>
+                    <rn7:text>Receiver delivery: General Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1402</rn7:errorLabelID>
+                    <rn7:description>Receiver Delivery: Receiver channel stopped or inactive</rn7:description>
+                    <rn7:text>Receiver Delivery: Receiver channel stopped or inactive</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1405</rn7:errorLabelID>
+                    <rn7:description>Receiver delivery: Cannot determine receiver channel</rn7:description>
+                    <rn7:text>Receiver delivery: Cannot determine receiver channel</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1410</rn7:errorLabelID>
+                    <rn7:description>Channel: General Error</rn7:description>
+                    <rn7:text>Channel: General Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>5000</rn7:errorLabelID>
+                    <rn7:description>RNIF11 adapter: Processing error</rn7:description>
+                    <rn7:text>RNIF11 adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>5001</rn7:errorLabelID>
+                    <rn7:description>RNIF11 Adapter: Recoverable error</rn7:description>
+                    <rn7:text>RNIF11 Adapter: Recoverable error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>5002</rn7:errorLabelID>
+                    <rn7:description>RNIF11 Adapter: Non-recoverable error</rn7:description>
+                    <rn7:text>RNIF11 Adapter: Non-recoverable error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>5003</rn7:errorLabelID>
+                    <rn7:description>RNIF11 Adapter: Delivery failure error</rn7:description>
+                    <rn7:text>RNIF11 Adapter: Delivery failure error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>5004</rn7:errorLabelID>
+                    <rn7:description>RNIF11 Adapter: Sync. delivery not supported</rn7:description>
+                    <rn7:text>RNIF11 Adapter: Sync. delivery not supported</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>5005</rn7:errorLabelID>
+                    <rn7:description>RNIF11 Adapter: Message creation error</rn7:description>
+                    <rn7:text>RNIF11 Adapter: Message creation error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>5006</rn7:errorLabelID>
+                    <rn7:description>RNIF11 Adapter: Out of memory error</rn7:description>
+                    <rn7:text>RNIF11 Adapter: Out of memory error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6801</rn7:errorLabelID>
+                    <rn7:description>MDM adapter: Processing error</rn7:description>
+                    <rn7:text>MDM adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6802</rn7:errorLabelID>
+                    <rn7:description>MDM adapter: MDM port error</rn7:description>
+                    <rn7:text>MDM adapter: MDM port error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6803</rn7:errorLabelID>
+                    <rn7:description>MDM adapter: MDM repository error</rn7:description>
+                    <rn7:text>MDM adapter: MDM repository error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6804</rn7:errorLabelID>
+                    <rn7:description>MDM adapter: MDM channel error</rn7:description>
+                    <rn7:text>MDM adapter: MDM channel error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2200</rn7:errorLabelID>
+                    <rn7:description>BC adapter: Processing error</rn7:description>
+                    <rn7:text>BC adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6301</rn7:errorLabelID>
+                    <rn7:description>EDI Separator Adapter: Negative acknowledgement generated</rn7:description>
+                    <rn7:text>EDI Separator Adapter: Negative acknowledgement generated</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6302</rn7:errorLabelID>
+                    <rn7:description>EDI Separator Adapter: Negative acknowledgement received</rn7:description>
+                    <rn7:text>EDI Separator Adapter: Negative acknowledgement received</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6303</rn7:errorLabelID>
+                    <rn7:description>EDI Separator Adapter: Inbound acknowledgement SLA (Service Level Agreement) violated</rn7:description>
+                    <rn7:text>EDI Separator Adapter: Inbound acknowledgement SLA (Service Level Agreement) violated</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6304</rn7:errorLabelID>
+                    <rn7:description>EDI Separator Adapter: Outbound acknowledgement SLA (Service Level Agreement) violated</rn7:description>
+                    <rn7:text>EDI Separator Adapter: Outbound acknowledgement SLA (Service Level Agreement) violated</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4001</rn7:errorLabelID>
+                    <rn7:description>IDoc Adapter: Pre-processing error</rn7:description>
+                    <rn7:text>IDoc Adapter: Pre-processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6305</rn7:errorLabelID>
+                    <rn7:description>EDI Separator Adapter: Duplicate EDI content detected</rn7:description>
+                    <rn7:text>EDI Separator Adapter: Duplicate EDI content detected</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4002</rn7:errorLabelID>
+                    <rn7:description>IDoc Adapter: Processing error</rn7:description>
+                    <rn7:text>IDoc Adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4003</rn7:errorLabelID>
+                    <rn7:description>IDoc Adapter: Parsing error</rn7:description>
+                    <rn7:text>IDoc Adapter: Parsing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4004</rn7:errorLabelID>
+                    <rn7:description>IDoc Adapter: Out of memory</rn7:description>
+                    <rn7:text>IDoc Adapter: Out of memory</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1700</rn7:errorLabelID>
+                    <rn7:description>RNIF adapter: Processing error</rn7:description>
+                    <rn7:text>RNIF adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4005</rn7:errorLabelID>
+                    <rn7:description>IDoc Adapter: Configuration error</rn7:description>
+                    <rn7:text>IDoc Adapter: Configuration error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1701</rn7:errorLabelID>
+                    <rn7:description>RNIF Adapter: Recoverable error</rn7:description>
+                    <rn7:text>RNIF Adapter: Recoverable error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>4006</rn7:errorLabelID>
+                    <rn7:description>IDoc Adapter: SQL error</rn7:description>
+                    <rn7:text>IDoc Adapter: SQL error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1702</rn7:errorLabelID>
+                    <rn7:description>RNIF Adapter: Non-recoverable error</rn7:description>
+                    <rn7:text>RNIF Adapter: Non-recoverable error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1703</rn7:errorLabelID>
+                    <rn7:description>RNIF Adapter: Delivery failure error</rn7:description>
+                    <rn7:text>RNIF Adapter: Delivery failure error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1704</rn7:errorLabelID>
+                    <rn7:description>RNIF Adapter: Sync. delivery not supported</rn7:description>
+                    <rn7:text>RNIF Adapter: Sync. delivery not supported</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1705</rn7:errorLabelID>
+                    <rn7:description>RNIF Adapter: Message creation error</rn7:description>
+                    <rn7:text>RNIF Adapter: Message creation error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1706</rn7:errorLabelID>
+                    <rn7:description>RNIF Adapter: Out of memory error</rn7:description>
+                    <rn7:text>RNIF Adapter: Out of memory error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1200</rn7:errorLabelID>
+                    <rn7:description>Mapping: General error</rn7:description>
+                    <rn7:text>Mapping: General error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>3002</rn7:errorLabelID>
+                    <rn7:description>Mail Adapter: Channel inactive</rn7:description>
+                    <rn7:text>Mail Adapter: Channel inactive</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1210</rn7:errorLabelID>
+                    <rn7:description>Mapping: Error in ABAP mapping</rn7:description>
+                    <rn7:text>Mapping: Error in ABAP mapping</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>3003</rn7:errorLabelID>
+                    <rn7:description>Mail adapter: Processing error</rn7:description>
+                    <rn7:text>Mail adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>3004</rn7:errorLabelID>
+                    <rn7:description>Mail adapter: Out of memory</rn7:description>
+                    <rn7:text>Mail adapter: Out of memory</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>7101</rn7:errorLabelID>
+                    <rn7:description>X400 Adapter: No ReturnResult received</rn7:description>
+                    <rn7:text>X400 Adapter: No ReturnResult received</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1220</rn7:errorLabelID>
+                    <rn7:description>Mapping: Error in resource resolution or initialization</rn7:description>
+                    <rn7:text>Mapping: Error in resource resolution or initialization</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6601</rn7:errorLabelID>
+                    <rn7:description>REST Adapter: Processing error</rn7:description>
+                    <rn7:text>REST Adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6602</rn7:errorLabelID>
+                    <rn7:description>REST Adapter: Channel not found</rn7:description>
+                    <rn7:text>REST Adapter: Channel not found</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1230</rn7:errorLabelID>
+                    <rn7:description>Mapping: Error in XSLT transformation</rn7:description>
+                    <rn7:text>Mapping: Error in XSLT transformation</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2000</rn7:errorLabelID>
+                    <rn7:description>Error in Receiver Side ABAP Application</rn7:description>
+                    <rn7:text>Error in Receiver Side ABAP Application</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2001</rn7:errorLabelID>
+                    <rn7:description>SOAP adapter: Channel not initialized</rn7:description>
+                    <rn7:text>SOAP adapter: Channel not initialized</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2002</rn7:errorLabelID>
+                    <rn7:description>SOAP adapter: Channel inactive</rn7:description>
+                    <rn7:text>SOAP adapter: Channel inactive</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2003</rn7:errorLabelID>
+                    <rn7:description>SOAP adapter: Processing error</rn7:description>
+                    <rn7:text>SOAP adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2004</rn7:errorLabelID>
+                    <rn7:description>SOAP adapter: Out of memory</rn7:description>
+                    <rn7:text>SOAP adapter: Out of memory</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2005</rn7:errorLabelID>
+                    <rn7:description>SOAP adapter: Channel not found</rn7:description>
+                    <rn7:text>SOAP adapter: Channel not found</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6101</rn7:errorLabelID>
+                    <rn7:description>AS2 Adapter: MDN negative received</rn7:description>
+                    <rn7:text>AS2 Adapter: MDN negative received</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2006</rn7:errorLabelID>
+                    <rn7:description>SOAP adapter: Channel stopped</rn7:description>
+                    <rn7:text>SOAP adapter: Channel stopped</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6102</rn7:errorLabelID>
+                    <rn7:description>AS2 Adapter: MDN negative generated</rn7:description>
+                    <rn7:text>AS2 Adapter: MDN negative generated</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6103</rn7:errorLabelID>
+                    <rn7:description>AS2 Adapter: MDN not received</rn7:description>
+                    <rn7:text>AS2 Adapter: MDN not received</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1240</rn7:errorLabelID>
+                    <rn7:description>Mapping: Error in Java transformation</rn7:description>
+                    <rn7:text>Mapping: Error in Java transformation</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2010</rn7:errorLabelID>
+                    <rn7:description>Error in IDOC Adapter Processing</rn7:description>
+                    <rn7:text>Error in IDOC Adapter Processing</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1501</rn7:errorLabelID>
+                    <rn7:description>File adapter: Channel not initialized</rn7:description>
+                    <rn7:text>File adapter: Channel not initialized</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1245</rn7:errorLabelID>
+                    <rn7:description>Mapping: JCO Communication Failure</rn7:description>
+                    <rn7:text>Mapping: JCO Communication Failure</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1502</rn7:errorLabelID>
+                    <rn7:description>File adapter: Channel inactive</rn7:description>
+                    <rn7:text>File adapter: Channel inactive</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1503</rn7:errorLabelID>
+                    <rn7:description>File adapter: Processing error</rn7:description>
+                    <rn7:text>File adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1504</rn7:errorLabelID>
+                    <rn7:description>File Adapter: Payload Codepage Error</rn7:description>
+                    <rn7:text>File Adapter: Payload Codepage Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1505</rn7:errorLabelID>
+                    <rn7:description>File Adapter: Configuration Error</rn7:description>
+                    <rn7:text>File Adapter: Configuration Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1506</rn7:errorLabelID>
+                    <rn7:description>File Adapter: Content Conversion Error</rn7:description>
+                    <rn7:text>File Adapter: Content Conversion Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1507</rn7:errorLabelID>
+                    <rn7:description>File Adapter: Out-of-Memory Error</rn7:description>
+                    <rn7:text>File Adapter: Out-of-Memory Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1508</rn7:errorLabelID>
+                    <rn7:description>File Adapter: Binding Error</rn7:description>
+                    <rn7:text>File Adapter: Binding Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2020</rn7:errorLabelID>
+                    <rn7:description>Error in Plain Http Adapter Processing</rn7:description>
+                    <rn7:text>Error in Plain Http Adapter Processing</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1509</rn7:errorLabelID>
+                    <rn7:description>File Adapter: FTP Error</rn7:description>
+                    <rn7:text>File Adapter: FTP Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1510</rn7:errorLabelID>
+                    <rn7:description>File Adapter: Archiving Error</rn7:description>
+                    <rn7:text>File Adapter: Archiving Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1511</rn7:errorLabelID>
+                    <rn7:description>File Adapter: Deletion Error</rn7:description>
+                    <rn7:text>File Adapter: Deletion Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1000</rn7:errorLabelID>
+                    <rn7:description>Integration Engine: General Error</rn7:description>
+                    <rn7:text>Integration Engine: General Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1001</rn7:errorLabelID>
+                    <rn7:description>Messaging: General error</rn7:description>
+                    <rn7:text>Messaging: General error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1003</rn7:errorLabelID>
+                    <rn7:description>Duplicate Message Error</rn7:description>
+                    <rn7:text>Duplicate Message Error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1005</rn7:errorLabelID>
+                    <rn7:description>HTTP Error: Receiving Message</rn7:description>
+                    <rn7:text>HTTP Error: Receiving Message</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2030</rn7:errorLabelID>
+                    <rn7:description>Error in BPE Adapter Processing</rn7:description>
+                    <rn7:text>Error in BPE Adapter Processing</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1006</rn7:errorLabelID>
+                    <rn7:description>HTTP Error: Sending Message</rn7:description>
+                    <rn7:text>HTTP Error: Sending Message</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1010</rn7:errorLabelID>
+                    <rn7:description>Error while parsing PI message</rn7:description>
+                    <rn7:text>Error while parsing PI message</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1011</rn7:errorLabelID>
+                    <rn7:description>Error while parsing PI response</rn7:description>
+                    <rn7:text>Error while parsing PI response</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6901</rn7:errorLabelID>
+                    <rn7:description>HTTP_AAE Adapter: Processing error</rn7:description>
+                    <rn7:text>HTTP_AAE Adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6902</rn7:errorLabelID>
+                    <rn7:description>HTTP_AAE Adapter: Error while reading http response body</rn7:description>
+                    <rn7:text>HTTP_AAE Adapter: Error while reading http response body</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6903</rn7:errorLabelID>
+                    <rn7:description>HTTP_AAE Adapter: Error while sending http request</rn7:description>
+                    <rn7:text>HTTP_AAE Adapter: Error while sending http request</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6904</rn7:errorLabelID>
+                    <rn7:description>HTTP_AAE Adapter: Socket timeout</rn7:description>
+                    <rn7:text>HTTP_AAE Adapter: Socket timeout</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2040</rn7:errorLabelID>
+                    <rn7:description>Error in WS Adapter Processing</rn7:description>
+                    <rn7:text>Error in WS Adapter Processing</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6905</rn7:errorLabelID>
+                    <rn7:description>HTTP_AAE Adapter: Main payload field name missing</rn7:description>
+                    <rn7:text>HTTP_AAE Adapter: Main payload field name missing</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6906</rn7:errorLabelID>
+                    <rn7:description>HTTP_AAE Adapter: Error while writing http response</rn7:description>
+                    <rn7:text>HTTP_AAE Adapter: Error while writing http response</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6907</rn7:errorLabelID>
+                    <rn7:description>HTTP_AAE Adapter: Module chain error</rn7:description>
+                    <rn7:text>HTTP_AAE Adapter: Module chain error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6908</rn7:errorLabelID>
+                    <rn7:description>HTTP_AAE Adapter: Module processor error</rn7:description>
+                    <rn7:text>HTTP_AAE Adapter: Module processor error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>2300</rn7:errorLabelID>
+                    <rn7:description>MPA adapter: Processing error</rn7:description>
+                    <rn7:text>MPA adapter: Processing error</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>1020</rn7:errorLabelID>
+                    <rn7:description>Integration Engine: RFC Communication Failure</rn7:description>
+                    <rn7:text>Integration Engine: RFC Communication Failure</rn7:text>
+                </rn7:StatusDetail>
+                <rn7:StatusDetail>
+                    <rn7:errorLabelID>6909</rn7:errorLabelID>
+                    <rn7:description>HTTP_AAE Adapter: Payload parameter missing</rn7:description>
+                    <rn7:text>HTTP_AAE Adapter: Payload parameter missing</rn7:text>
+                </rn7:StatusDetail>
+            </Response>
+        </rpl:getAllAvailableStatusDetailsResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

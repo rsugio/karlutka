@@ -1,0 +1,35 @@
+
+#
+keystore:
+  path: "keystore.jks"
+  passwd: "123"
+
+securityMaterials:
+  - id: defaultS4
+    type: basic
+    text: для TER, PER
+    login: nr10002321
+    passwd: "%^&*(IUYTRT"
+
+  - type: basic
+    id: defaultPO
+    text: для ZZZ
+    login: surname02
+    passwd: "Zaq1234"
+
+  - type: basic
+    id: defaultPI
+    text: для ZZ
+    login: nr10002321
+    passwd: ")(*&^%$#@!"
+
+  - type: oauth
+    id: jmwh20_platform_api
+    text: sdsds2
+    client_id: 1234567-2321-21211221-12112323434343
+    client_secret: 123
+
+  - id: influx
+    type: apitoken
+    token: "wOiQU9GAEpZUBvJXIUQF3-FSo-reWD8bH6cPqllFPAkoTq25kTWx702KOEdHD0YXX-Z7ssBofE7rFJiliebnKA=="
+
