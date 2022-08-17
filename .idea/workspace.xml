@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="выборка SWCV, мелочи">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="801b5f8f-6217-4e39-b52e-802a04b28a81" name="Default Changelist" comment="удаляем старый мусор" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,9 +52,11 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/build.gradle.kts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/kotlin/k1/Hm.kt" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/test/kotlin/HmiTests.kt" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="1qi2DPc3avIrqcY1bor0zZyAZTz" />
   <component name="ProjectLevelVcsManager">
@@ -72,6 +71,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
 }]]></component>
@@ -212,14 +214,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617547969497</updated>
-      <workItem from="1660749308915" duration="122000" />
-    </task>
-    <task id="LOCAL-00009" summary=" работает GPR">
-      <created>1617641992836</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1617641992836</updated>
+      <workItem from="1660749308915" duration="298000" />
     </task>
     <task id="LOCAL-00010" summary="добавлен разбор логов, предварительно">
       <created>1617642027071</created>
@@ -557,7 +552,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619799511098</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="удаляем старый мусор">
+      <created>1660749510651</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1660749510651</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +578,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="LjsTrace" />
     <MESSAGE value="САПКонтрол, начало" />
     <MESSAGE value="обучение полиморфизму на тестах" />
     <MESSAGE value="продолжается SAPControl" />
@@ -601,7 +602,8 @@
     <MESSAGE value="xmlutil 0.82, kotlinx-serialization 1.2.0" />
     <MESSAGE value="переход на котлин 1.5 и минус jcenter" />
     <MESSAGE value="выборка SWCV, мелочи" />
-    <option name="LAST_COMMIT_MESSAGE" value="выборка SWCV, мелочи" />
+    <MESSAGE value="удаляем старый мусор" />
+    <option name="LAST_COMMIT_MESSAGE" value="удаляем старый мусор" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
