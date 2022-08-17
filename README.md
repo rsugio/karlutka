@@ -27,7 +27,7 @@ targets:                    # список подключаемых систем
     jco.client.sysnr: 00
     jco.client.ashost: host.erp.company
   # для PIAF
-  url: https://po:50100
+  url: https://po.company:50100
   # auth есть и для ABAP, и для ABAP
   auth: password123         # ссылка на пароль в файле passwd.yaml
     
@@ -52,7 +52,7 @@ influxdb:
   host: "http://localhost:8086"
   org: test
   bucket: test1
-  auth: influx
+  auth: influx              # ссылка на securityMaterials.id в passwd.yaml
 ```
 
 ### Конфигурирование passwd.yaml (пароли и тд)
