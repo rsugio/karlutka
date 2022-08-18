@@ -1,6 +1,6 @@
 package karlutka.parsers.pi
 
-import karlutka.models.PIModel
+import karlutka.models.MPI
 import karlutka.serialization.KSoap.*
 import karlutka.serialization.KSoap.Companion.xmlserializer
 import kotlinx.serialization.Serializable
@@ -989,7 +989,7 @@ class AdapterMessageMonitoringVi {
 
         @XmlElement(true)
         @XmlSerialName("direction", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
-        val direction: PIModel.DIRECTION? = null, // EnumDirection.OUTBOUND,
+        val direction: MPI.DIRECTION? = null, // EnumDirection.OUTBOUND,
 
         @XmlSerialName("editable", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
         val editable: rn2Boolean? = null, // = rn2Boolean(false),

@@ -1,0 +1,78 @@
+{
+    "resources": [
+        {
+            "id": "bf18ce46-f139-4cfd-a8f3-e271a025dc80",
+            "externalId": "S123454543"
+            "meta": {
+                "version": 1,
+                "created": "2022-07-21T09:54:59.592Z",
+                "lastModified": "2022-07-21T10:10:10.407Z"
+            },
+            "userName": "a@b.com",
+            "name": {
+                "familyName": "A",
+                "givenName": "B"
+            },
+            "emails": [
+                {
+                    "value": "a@b.com",
+                    "primary": false
+                }
+            ],
+            "groups": [
+                {
+                    "value": "Subaccount Service Administrator",
+                    "display": "Subaccount Service Administrator",
+                    "type": "DIRECT"
+                },
+                {
+                    "value": "Subaccount Viewer",
+                    "display": "Subaccount Viewer",
+                    "type": "DIRECT"
+                },
+                {
+                    "value": "tmpXSUAA",
+                    "display": "tmpXSUAA",
+                    "type": "DIRECT"
+                },
+                {
+                    "value": "Destination Administrator",
+                    "display": "Destination Administrator",
+                    "type": "DIRECT"
+                },
+                {
+                    "value": "Connectivity and Destination Administrator",
+                    "display": "Connectivity and Destination Administrator",
+                    "type": "DIRECT"
+                },
+                {
+                    "value": "Cloud Connector Administrator",
+                    "display": "Cloud Connector Administrator",
+                    "type": "DIRECT"
+                },
+                {
+                    "value": "Subaccount Administrator",
+                    "display": "Subaccount Administrator",
+                    "type": "DIRECT"
+                }
+            ],
+            "approvals": [],
+            "active": true,
+            "verified": true,
+            "origin": "sap.default",
+            "zoneId": "eddd1d16-2a25-4055-86c0-7405b88ea57d",
+            "passwordLastModified": "2022-07-21T09:54:59.000Z",
+            "previousLogonTime": 1660804320716,
+            "lastLogonTime": 1660804324660,
+            "schemas": [
+                "urn:scim:schemas:core:1.0"
+            ]
+        }
+    ],
+    "startIndex": 1,
+    "itemsPerPage": 100,
+    "totalResults": 1,
+    "schemas": [
+        "urn:scim:schemas:core:1.0"
+    ]
+}

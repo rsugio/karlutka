@@ -16,6 +16,6 @@ object DatabaseFactory {
 //        newSuspendedTransaction(Dispatchers.IO) { block() }
 
     fun close() {
-//        println("H2 отсоединён")
+        println("H2 отсоединён")
     }
 }

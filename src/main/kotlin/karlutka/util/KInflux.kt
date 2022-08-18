@@ -71,9 +71,8 @@ object KInflux {
         println("write OK")
     }
 
-
     fun close() {
-//        ifx.close()
+        client.close()
     }
 
 }

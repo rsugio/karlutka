@@ -1,0 +1,44 @@
+{
+  "Resources": [
+    {
+      "id": "P9999999999",
+      "meta": {
+        "created": "2022-08-18T04:11:53.098Z",
+        "lastModified": "2022-08-18T04:11:53.098Z",
+        "location": "https://apissecurity.eu3.hana.ondemand.com/authorization/v1/platform/Users/P9999999999"
+      },
+      "schemas": [
+        "urn:sap:cloud:scim:schemas:extension:custom:2.0:UserExt",
+        "urn:ietf:params:scim:schemas:core:2.0:User"
+      ],
+      "userName": "P9999999999",
+      "roles": [
+        {
+          "value": "AccountAdministrator",
+          "primary": false,
+          "type": "Predefined"
+        },
+        {
+          "value": "ReadOnly",
+          "primary": false,
+          "type": "Predefined"
+        },
+        {
+          "value": "company-ZZ",
+          "primary": false,
+          "type": "Custom"
+        }
+      ],
+      "urn:sap:cloud:scim:schemas:extension:custom:2.0:UserExt": {
+        "userbase": "ACCOUNTS.SAP.COM",
+        "description": "Tekstoff Text email@company.com"
+      }
+    }
+  ],
+  "totalResults": 1,
+  "itemsPerPage": 0,
+  "startIndex": 1,
+  "schemas": [
+    "urn:ietf:params:scim:api:messages:2.0:ListResponse"
+  ]
+}

@@ -1,30 +1,35 @@
-
 # Русские буквыЪ
 targets:
-- type: ABAP
-  sid: ERD
-  text: разработка
-  jco: !!map
-    jco.client.codepage: 4110
-    jco.client.lang: en
-    jco.client.client: 400
-    jco.client.user: "" #
-    jco.client.passwd: "" #
-    jco.client.sysnr: 00
-    jco.client.ashost: sap.local
-  auth: defaultS4
+  - type: ABAP
+    sid: ERD
+    text: разработка
+    jco: !!map
+      jco.client.codepage: 4110
+      jco.client.lang: en
+      jco.client.client: 400
+      jco.client.user: "" #
+      jco.client.passwd: "" #
+      jco.client.sysnr: 00
+      jco.client.ashost: sap.local
+    auth: defaultS4
 
-- type: PIAF
-  sid: PID
-  url: "http://host.local:50000"
-  auth: defaultPO
+  - type: PIAF
+    sid: PID
+    url: "http://host.local:50000"
+    auth: defaultPO
 
-- sid: jqtaz20xaq
-  type: BTPNEO
-  globalaccount: CA1211212XT2323123123232131231
-  subaccount: jqtaz20xaq
-  apihost: https://api.eu3.hana.ondemand.com
-  auth: jqtaz20xaq
+  - sid: jqtaz20xaq
+    type: BTPNEO
+    globalaccount: CA1211212XT2323123123232131231
+    subaccount: jqtaz20xaq
+    apihost: https://api.eu3.hana.ondemand.com
+    auth: jqtaz20xaq
+
+  - sid: bc09a195trial
+    type: BTPCF
+    subaccount: eddd1d16-2a25-4055-86c0-7405b88ea57d
+    apiAuthentication: "https://api.authentication.us10.hana.ondemand.com"
+    auth: bc09a195trial
 
 # тут пока свалка параметров
 httpClientThreads: 3

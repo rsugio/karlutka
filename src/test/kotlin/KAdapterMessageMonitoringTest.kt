@@ -16,7 +16,7 @@ class KAdapterMessageMonitoringTest {
             GetUserDefinedSearchFiltersResponse.parseSOAP(s("pi_AdapterMM/01.xml"), fault)
         require(filterResponse.size == 3 && fault.isSuccess())
         val b = GetUserDefinedSearchFiltersResponse.parseSOAP(s("pi_AdapterMM/02.xml"), fault)
-        require(b.size == 0 && fault.faultstring == "Authentication failed. For details see log entry logID=C000AC130D121CF4000000020000116D in security log.")
+        require(b.size == 0 && fault.faultstring.startsWith("Authentication failed"))
 
         val f1 = GetUserDefinedSearchExtractors("COND_A.COND_A04", "urn:sap-com:document:sap:idoc:messages")
         f1.composeSOAP()
@@ -33,7 +33,7 @@ class KAdapterMessageMonitoringTest {
         require(l!!.afw!!.list[0].businessAttributes!!.list!!.size == 3)
         l = GetMessageListResponse.parseSOAP(s("pi_AdapterMM/06fault.xml"), fault)
         require(!fault.isSuccess() && l == null)
-        require(fault.faultstring == "Authentication failed. For details see log entry logID=C000AC130D0E9C3A0000000200004360 in security log.")
+        require(fault.faultstring.startsWith("Authentication failed"))
         val bykeysreq = GetMessagesByKeys(ArrayOfStrings(mkey, mkey), 1000)
         require(bykeysreq.filter.strings.size == 2 && bykeysreq.composeSOAP().isNotBlank())
 
@@ -87,7 +87,7 @@ class KAdapterMessageMonitoringTest {
         s = GetMessagesByIDs(ArrayOfStrings("7b761582-1227-11ed-8bad-0000004c2912")).composeSOAP()
         require(s.isNotBlank())
         var ids = GetMessagesByIDsResponse.parseSOAP(s("pi_AdapterMM/18ids.xml"), fault)
-        require(fault.isFailure() && fault.faultstring == "Cannot find the required parameter [referenceIds] in request message content." && ids == null)
+        require(fault.isFailure() && fault.faultstring.startsWith("Cannot find the required parameter [referenceIds]") && ids == null)
         ids = GetMessagesByIDsResponse.parseSOAP(s("pi_AdapterMM/19ids.xml"), fault)
         require(fault.isSuccess() && ids != null && ids.number == 0)
         ids = GetMessagesByIDsResponse.parseSOAP(s("pi_AdapterMM/20ids.xml"), fault)

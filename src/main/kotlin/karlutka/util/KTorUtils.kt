@@ -1,3 +1,5 @@
+@file:Suppress("DIVISION_BY_ZERO")
+
 package karlutka.util
 
 import io.ktor.client.*

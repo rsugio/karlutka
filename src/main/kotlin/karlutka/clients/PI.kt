@@ -4,7 +4,7 @@ import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import karlutka.models.KTarget
+import karlutka.models.MTarget
 import karlutka.parsers.pi.AdapterMessageMonitoringVi
 import karlutka.parsers.pi.PerfMonitorServlet
 import karlutka.util.KTorUtils
@@ -23,7 +23,7 @@ class PI {
     class AF(
         val client: HttpClient,
         override val konfig: KfTarget,
-    ) : KTarget {
+    ) : MTarget {
         val httpHostPort: URL
         val components = mutableListOf<String>()
 

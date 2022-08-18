@@ -7,7 +7,7 @@ import com.sap.conn.jco.JCoTable
 import com.sap.conn.jco.ext.DestinationDataEventListener
 import com.sap.conn.jco.ext.DestinationDataProvider
 import com.sap.conn.jco.ext.Environment
-import karlutka.models.KTarget
+import karlutka.models.MTarget
 import karlutka.util.KfTarget
 import java.time.LocalDateTime
 import java.util.*
@@ -17,7 +17,7 @@ PID: SXMB_GET_PIPELINES
 Нам нужны лишь RECEIVER, SENDER и подтверждения: RECEIVER_BACK, SENDER_BACK
  */
 
-class AbapJCo(override val konfig: KfTarget) : KTarget {
+class AbapJCo(override val konfig: KfTarget) : MTarget {
     private val runtime: JCoDestination
     private val repository: JCoRepository
 

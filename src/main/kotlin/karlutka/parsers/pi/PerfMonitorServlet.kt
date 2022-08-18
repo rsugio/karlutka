@@ -1,6 +1,6 @@
 ﻿package karlutka.parsers.pi
 
-import karlutka.models.PIModel
+import karlutka.models.MPI
 import kotlinx.serialization.*
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.modules.SerializersModule
@@ -55,7 +55,7 @@ class PerfMonitorServlet {
     data class PerformanceTableRow(
         val INBOUND_CHANNEL: String,
         val OUTBOUND_CHANNEL: String,
-        val DIRECTION: PIModel.DIRECTION,
+        val DIRECTION: MPI.DIRECTION,
         val DELIVERY_SEMANTICS: String, //BE, EO, EOIO или пусто для аномалий
         val SERVER_NODE: String,
         val FROM_PARTY_NAME: String,
@@ -315,7 +315,7 @@ class PerfMonitorServlet {
                 val x = PerformanceTableRow(
                     l[mx["INBOUND_CHANNEL"]!!].text(),
                     l[mx["OUTBOUND_CHANNEL"]!!].text(),
-                    PIModel.DIRECTION.valueOf(l[mx["DIRECTION"]!!].text()),
+                    MPI.DIRECTION.valueOf(l[mx["DIRECTION"]!!].text()),
                     l[mx["DELIVERY_SEMANTICS"]!!].text(), //XI_DELIVERY_SEMANTICS.valueOf(l[3].text()),
                     l[mx["SERVER_NODE"]!!].text(),
                     l[mx["FROM_PARTY_NAME"]!!].text(),

@@ -2,7 +2,7 @@ import com.sap.conn.jco.JCo
 import io.ktor.client.plugins.logging.*
 import karlutka.clients.AbapJCo
 import karlutka.clients.PI
-import karlutka.models.KTarget
+import karlutka.models.MTarget
 import karlutka.server.DatabaseFactory
 import karlutka.server.Server
 import karlutka.util.*
@@ -71,7 +71,7 @@ fun main(args: Array<String>) {
     println("Загружаем опрашиваемые системы:")
     Server.kfg.targets.forEach { konf ->
         konf.loadAuths(Server.kfpasswds.securityMaterials)
-        val target: KTarget
+        val target: MTarget
         if (konf is KfTarget.ABAP) {
             target = AbapJCo(konf)
         } else if (konf is KfTarget.PIAF) {

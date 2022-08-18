@@ -1,21 +1,13 @@
 package karlutka.parsers.cpi
 
 import karlutka.serialization.KZonedDateTimeSerializer
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonNames
 import java.time.ZonedDateTime
 
-class Btn {
-    @Serializable
-    data class Token(
-        val access_token: String,
-        val token_type: String,
-        val expires_in: Int,
-        val scope: String = "",
-    ) {
-        fun auth() = "$token_type $access_token"
-    }
-
+class MBtpNeo {
     // см /src/test/resources/btpNeo/04groups.json - в ключе только name
     @Serializable
     data class Groups(val groups: List<Map<String, String>>) {
@@ -35,9 +27,12 @@ class Btn {
         fun names() = users.map { it["name"]!! }
     }
 
+    // Реализация здесь временная и по месту, не весь SCIM а просто под Neo.
+    // надо это переделать под общий стандарт RFC7643
     @Serializable
-    data class Scim(
-        val Resources: List<ScimUser>,
+    data class Scim @OptIn(ExperimentalSerializationApi::class) constructor(
+        @JsonNames("resources", "Resources")
+        val resources: List<ScimUser>,
         val totalResults: Int,
         val itemsPerPage: Int,
         val startIndex: Int,
@@ -47,12 +42,13 @@ class Btn {
     @Serializable
     data class ScimUser(
         val id: String,
+        val externalId: String? = null,
         val meta: ScimMeta,
         val schemas: List<String>,
         val userName: String,
         val name: ScimName? = null,
         val emails: List<ScimEmail> = listOf(),
-        val roles: List<ScimRole>,
+        val roles: List<ScimRole> = listOf(),
         @SerialName("urn:sap:cloud:scim:schemas:extension:custom:2.0:UserExt")
         val UserExt: Map<String, String>,
     )

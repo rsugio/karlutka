@@ -1,19 +1,23 @@
 # karlutka
+
 Кто знает зачем, тот использует.
 
-## Сборка текущей версии 0.2.0
-gradle-7.5, openjdk-17.0.2
+## Сборка текущей версии 0.2.1alpha
+
+gradle-7.5, openjdk-17.0.2, kotlin-1.7.10, ktor-2.1, xmlutil-0.84.2
 
 ## Запуск и использование
+
 Установить influxdb (для локального обычно висит на `http://localhost:8086`).
 
-Выложить локально `sapjco3.jar` и `libsapjco3.so` для линукса, 
+Выложить локально `sapjco3.jar` и `libsapjco3.so` для линукса,
 `sapjco3.dll` для windows.
 
 Запуск:
 ```c:\java17\bin\java -ea -Xms64m -Xmx512m -classpath sapjco3.jar;karlutka-0.2.0-all.jar MainKt karla.yaml passwd.yaml```
 
 ### Конфигурирование karla.yaml (соединения и свойства программы)
+
 ```yaml
 targets:                    # список подключаемых систем
 - sid: <SID>                # уникальный идентификатор системы
@@ -56,6 +60,7 @@ influxdb:
 ```
 
 ### Конфигурирование passwd.yaml (пароли и тд)
+
 ```yaml
 # где находится кейстор и какой пароль к нему. Обязательно.
 keystore:
@@ -78,6 +83,7 @@ securityMaterials:
 ```
 
 ## История
+
 * 2022-08-17 v0.2.0 - выложено на гитхаб.
   https://github.com/rsugio/karlutka/releases/tag/v0.2.0
 

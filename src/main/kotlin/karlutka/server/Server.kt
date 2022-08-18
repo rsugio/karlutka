@@ -4,7 +4,7 @@ import io.ktor.server.application.*
 import io.ktor.server.html.*
 import io.ktor.server.routing.*
 import karlutka.clients.PI
-import karlutka.models.KTarget
+import karlutka.models.MTarget
 import karlutka.parsers.pi.PerfMonitorServlet
 import karlutka.util.KTorUtils
 import karlutka.util.KfPasswds
@@ -24,7 +24,7 @@ object Server {
     lateinit var ppw: Path
     lateinit var kfg: Kfg
     lateinit var kfpasswds: KfPasswds
-    val targets = mutableMapOf<String, KTarget>()
+    val targets = mutableMapOf<String, MTarget>()
 
     fun installRoutings(app: Application) {
         app.routing {

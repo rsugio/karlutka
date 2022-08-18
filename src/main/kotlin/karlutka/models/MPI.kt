@@ -1,5 +1,5 @@
 package karlutka.models
 
-class PIModel {
+class MPI {
     enum class DIRECTION { INBOUND, OUTBOUND }
 }

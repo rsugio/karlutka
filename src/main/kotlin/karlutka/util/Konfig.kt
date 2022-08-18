@@ -1,6 +1,7 @@
 package karlutka.util
 
 import com.charleskorn.kaml.*
+import io.ktor.util.*
 import karlutka.clients.AbapJCo
 import karlutka.serialization.KPasswordSerializer
 import karlutka.serialization.KPathSerializer
@@ -10,6 +11,7 @@ import kotlinx.serialization.Transient
 import kotlinx.serialization.modules.EmptySerializersModule
 import java.nio.file.Path
 import kotlin.io.path.readText
+import kotlin.text.toCharArray
 
 @Serializable
 sealed class KfTarget {
@@ -47,19 +49,13 @@ sealed class KfTarget {
         val auth: String = "",
     ) : KfTarget() {
         @Transient
-        var basic: KfAuth.Basic? = null //TODO подумать про другие варианты аутентификации - NTLM, формы
+        var basic: KfAuth.Basic? = null //TODO подумать про аутентификацию формой /logon_ui_resources/
 
         override fun loadAuths(auths: List<KfAuth>) {
             val kfa = auths.find { it.id == auth }
             require(kfa != null && kfa is KfAuth.Basic)
             basic = kfa
         }
-
-//        fun getBasic(): CharArray {
-//            requireNotNull(basic)
-//            val s = "Basic " + (basic!!.login + ":" + String(basic!!.passwd())).encodeBase64()
-//            return s.toCharArray()
-//        }
 
         override fun getKind() = "PIAF"
     }
@@ -69,21 +65,45 @@ sealed class KfTarget {
     class BTPNEO(
         override val sid: String,
         override val text: String? = null,
-        val globalaccount: String,           // CA1212121212112122323424343435
+        val globalaccount: String = "",      // CA1212121212112122323424343435
         val subaccount: String,              // не гуид а техническое имя, вида asasa20eew
         val apihost: String,                 // https://api.eu3.hana.ondemand.com
-        val auth: String = ""
+        val auth: String = "",
     ) : KfTarget() {
         @Transient
-        lateinit var basic: KfAuth.Basic
+        lateinit var oauth: KfAuth.OAuth     // переделать на нормальный OAuth
 
         override fun loadAuths(auths: List<KfAuth>) {
             val kfa = auths.find { it.id == auth }
-            require(kfa != null && kfa is KfAuth.Basic)
-            basic = kfa
+            require(kfa != null && kfa is KfAuth.OAuth)
+            oauth = kfa
         }
 
         override fun getKind() = "BTPNEO"
+    }
+
+    @SerialName("BTPCF")
+    @Serializable
+    class BTPCF(
+        override val sid: String,
+        override val text: String? = null,
+        val globalaccount: String = "",        // CA1212121212112122323424343435
+        val subaccount: String,                // eddd1d16-2a25-4055-86c0-7405b88ea57d
+//        val orgId: String = "",                // 00029bc0-34d5-4f10-9852-c91334a1bd8a подключить по мере надобности
+//        val apihost: String,                   // https://api.cf.us10.hana.ondemand.com   подключить по мере надобности
+        val apiAuthentication: String,         // = "https://api.authentication.us10.hana.ondemand.com",
+        val auth: String = "",
+    ) : KfTarget() {
+        @Transient
+        lateinit var oauth: KfAuth.OAuth
+
+        override fun loadAuths(auths: List<KfAuth>) {
+            val oauth = auths.find { it.id == auth }
+            require(oauth != null && oauth is KfAuth.OAuth)
+            this.oauth = oauth
+        }
+
+        override fun getKind() = "BTPCF"
     }
 
     override fun toString() = "($sid[${getKind()}])"
@@ -177,11 +197,15 @@ sealed class KfAuth {
     class OAuth(
         override val id: String,
         override val text: String? = null,
+        val url: String,
         val client_id: String,
-        private var client_secret: String,
-        val scope: String? = null,
+        @Serializable(with = KPasswordSerializer::class)
+        val client_secret: CharArray,
     ) : KfAuth() {
-        fun client_secret() = client_secret.toCharArray()
+        fun getBasic(): String {
+            return "Basic " + (client_id + ":" + String(client_secret)).encodeBase64()
+        }
+
     }
 }
 
