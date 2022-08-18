@@ -82,7 +82,7 @@ class PI {
         }
 
         suspend fun pingNoAuth(): String {
-            val resp = client.get(httpHostPort)
+            val resp = client.get("/")
 
             require(resp.status.isSuccess())
             return resp.headers["server"].toString()
@@ -92,7 +92,7 @@ class PI {
          * Пока смотрим, чтобы ответ был предсказуемым
          */
         suspend fun checkAuth(resource: String, expected: String) {
-            val resp = client.get(URL(httpHostPort, resource))
+            val resp = client.get(resource)
             require(resp.status.isSuccess())
             val resptext = resp.bodyAsText()
             require(!resptext.contains("logon_ui_resources"),

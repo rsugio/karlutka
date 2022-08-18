@@ -18,9 +18,7 @@ import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import io.ktor.server.html.*
 import io.ktor.server.http.content.*
-import io.ktor.server.metrics.micrometer.*
 import io.ktor.server.plugins.autohead.*
-import io.ktor.server.plugins.callid.*
 import io.ktor.server.plugins.callloging.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.conditionalheaders.*
@@ -33,8 +31,6 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.utils.io.*
 import io.ktor.utils.io.core.*
-import io.micrometer.prometheus.PrometheusConfig
-import io.micrometer.prometheus.PrometheusMeterRegistry
 import karlutka.server.DatabaseFactory
 import karlutka.server.Server
 import kotlinx.coroutines.*
@@ -94,6 +90,9 @@ object KTorUtils {
             install(Logging) {
                 logger = Logger.DEFAULT
                 level = logLevel
+            }
+            install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
+                json()
             }
             install(Auth)   //конфигурация будет позднее
             defaultRequest {
@@ -197,14 +196,14 @@ object KTorUtils {
             install(CallLogging) {
                 level = Level.INFO
                 filter { call -> call.request.path().startsWith("/") }
-                callIdMdc("call-id")
+//                callIdMdc("call-id")
             }
-            install(CallId) {
-                header(HttpHeaders.XRequestId)
-                verify { callId: String ->
-                    callId.isNotEmpty()
-                }
-            }
+//            install(CallId) {
+//                header(HttpHeaders.XRequestId)
+//                verify { callId: String ->
+//                    callId.isNotEmpty()
+//                }
+//            }
             install(AutoHeadResponse)
 //            install(Sessions) {
 //                cookie<UserServerSession>("user_session") {
@@ -220,19 +219,18 @@ object KTorUtils {
                 exception<Exception> { call, cause ->
                     val st = cause.stackTrace.joinToString("\n\t")
                     val s = "ОШИБКА ОБРАБОТКИ ЗАПРОСА ${call.request.httpMethod.value} ${call.request.uri}\n" +
-                            "CallId: ${call.callId}\n" +
                             "$cause\n\n$st"
                     call.respondText(s, ContentType.Text.Plain, HttpStatusCode.InternalServerError)
                 }
             }
-            val appMicrometerRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
-            install(MicrometerMetrics) {
-                registry = appMicrometerRegistry
-            }
+//            val appMicrometerRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
+//            install(MicrometerMetrics) {
+//                registry = appMicrometerRegistry
+//            }
             routing {
-                get("/metrics") {
-                    call.respondText(appMicrometerRegistry.scrape())
-                }
+//                get("/metrics") {
+//                    call.respondText(appMicrometerRegistry.scrape())
+//                }
                 get("/error") {
                     call.respondText("${1 / 0}")
                 }
