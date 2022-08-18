@@ -19,6 +19,13 @@ targets:
   url: "http://host.local:50000"
   auth: defaultPO
 
+- sid: jqtaz20xaq
+  type: BTPNEO
+  globalaccount: CA1211212XT2323123123232131231
+  subaccount: jqtaz20xaq
+  apihost: https://api.eu3.hana.ondemand.com
+  auth: jqtaz20xaq
+
 # тут пока свалка параметров
 httpClientThreads: 3
 httpClientConnectionTimeoutMillis: 1200

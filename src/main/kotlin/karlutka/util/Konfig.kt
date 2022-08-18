@@ -1,7 +1,6 @@
 package karlutka.util
 
 import com.charleskorn.kaml.*
-import io.ktor.util.*
 import karlutka.clients.AbapJCo
 import karlutka.serialization.KPasswordSerializer
 import karlutka.serialization.KPathSerializer
@@ -11,7 +10,6 @@ import kotlinx.serialization.Transient
 import kotlinx.serialization.modules.EmptySerializersModule
 import java.nio.file.Path
 import kotlin.io.path.readText
-import kotlin.text.toCharArray
 
 @Serializable
 sealed class KfTarget {
@@ -57,11 +55,11 @@ sealed class KfTarget {
             basic = kfa
         }
 
-        fun getBasic(): CharArray {
-            requireNotNull(basic)
-            val s = "Basic " + (basic!!.login + ":" + String(basic!!.passwd())).encodeBase64()
-            return s.toCharArray()
-        }
+//        fun getBasic(): CharArray {
+//            requireNotNull(basic)
+//            val s = "Basic " + (basic!!.login + ":" + String(basic!!.passwd())).encodeBase64()
+//            return s.toCharArray()
+//        }
 
         override fun getKind() = "PIAF"
     }
@@ -71,10 +69,18 @@ sealed class KfTarget {
     class BTPNEO(
         override val sid: String,
         override val text: String? = null,
-        val technicalName: String,
+        val globalaccount: String,           // CA1212121212112122323424343435
+        val subaccount: String,              // не гуид а техническое имя, вида asasa20eew
+        val apihost: String,                 // https://api.eu3.hana.ondemand.com
+        val auth: String = ""
     ) : KfTarget() {
+        @Transient
+        lateinit var basic: KfAuth.Basic
+
         override fun loadAuths(auths: List<KfAuth>) {
-            val todo = auths.find { it.id == "//TODO" }
+            val kfa = auths.find { it.id == auth }
+            require(kfa != null && kfa is KfAuth.Basic)
+            basic = kfa
         }
 
         override fun getKind() = "BTPNEO"

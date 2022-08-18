@@ -2,7 +2,7 @@
 #
 keystore:
   path: "keystore.jks"
-  passwd: "123"
+  passwd: ""     # см. keystore.txt 
 
 securityMaterials:
   - id: defaultS4
@@ -17,11 +17,10 @@ securityMaterials:
     login: surname02
     passwd: "Zaq1234"
 
-  - type: basic
-    id: defaultPI
-    text: для ZZ
-    login: nr10002321
-    passwd: ")(*&^%$#@!"
+  - id: jqtaz20xaq # e500230 btp
+    type: basic
+    login: 12323232-2323-2323-9233-000000000000
+    passwd: ffffffff-ffff-ffff-ffff-ffffffffffff
 
   - type: oauth
     id: jmwh20_platform_api
