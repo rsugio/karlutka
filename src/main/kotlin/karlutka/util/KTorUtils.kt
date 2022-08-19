@@ -84,6 +84,7 @@ object KTorUtils {
         requireNotNull(clientEngine)
         val client = HttpClient(clientEngine) {
             expectSuccess = true
+            install(HttpTimeout)
             install(HttpCookies)
             install(HttpRequestRetry) {
                 retryOnServerErrors(maxRetries = retries)
