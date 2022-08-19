@@ -1,6 +1,7 @@
 /.idea
-/.gradle/
-/tmp/
+/.gradle
+/tmp
 /out
 /build
 *.log
+.run
