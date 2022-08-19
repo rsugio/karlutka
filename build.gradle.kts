@@ -71,6 +71,7 @@ dependencies {
 //    implementation("com.influxdb:influxdb-client-kotlin:6.4+")  //бесполезная штука
 
     testImplementation(kotlin("test"))
+    implementation("commons-io:commons-io:2.11+")    //BOMInputStream
     //testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
 }
 
