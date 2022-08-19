@@ -68,14 +68,15 @@ sealed class KfTarget {
         val globalaccount: String = "",      // CA1212121212112122323424343435
         val subaccount: String,              // не гуид а техническое имя, вида asasa20eew
         val apihost: String,                 // https://api.eu3.hana.ondemand.com
-        val auth: String = "",
+        val auth: String,
     ) : KfTarget() {
         @Transient
         lateinit var oauth: KfAuth.OAuth     // переделать на нормальный OAuth
 
         override fun loadAuths(auths: List<KfAuth>) {
             val kfa = auths.find { it.id == auth }
-            require(kfa != null && kfa is KfAuth.OAuth)
+            require(kfa!=null, {"для $sid не найден пароль $auth"})
+            require(kfa is KfAuth.OAuth, {"для $sid найден пароль $auth но это не OAuth"})
             oauth = kfa
         }
 

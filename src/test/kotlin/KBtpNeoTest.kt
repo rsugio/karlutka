@@ -22,14 +22,14 @@ class KBtpNeoTest {
         KTorUtils.createClientEngine()
         KTorUtils.tempFolder = Paths.get("C:/data/tmp")
 
-        target = kfg.targets.find { it.sid == "eu3dev" }!! as KfTarget.BTPNEO
+        target = kfg.targets.find { it.sid == "eu3prod" }!! as KfTarget.BTPNEO
         target.loadAuths(kfp.securityMaterials)
 
     }
 
     @Test
     fun static() {
-        require(target.oauth.client_id.startsWith("65ed6bda-"))
+        require(target.oauth.client_id.isNotBlank())
         val a1 = DefaultJson.decodeFromString<MCommon.AuthToken>(s("btpNeo/01authok.json"))
         require(a1.token_type.lowercase() == "bearer")
         val g4 = DefaultJson.decodeFromString<MBtpNeo.Groups>(s("btpNeo/04groups.json"))

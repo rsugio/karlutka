@@ -58,7 +58,6 @@ class KonfigTest {
             "?"
         )
 //        val t6 = Target.CPICF("e10001", "https://e10001.tmn.eu3.hana.ondemand.com")
-//        val t7 = Targe.JDBCt("e10001", "https://e10001.tmn.eu3.hana.ondemand.com")
 
         val k1 = Kfg(mutableListOf(t1, t2, t3, t5))
 
