@@ -12,7 +12,6 @@ class KPiTest {
     val detailed = false
 
     var target: KfTarget.PIAF
-    var client: HttpClient
     var af: PI.AF
 
     init {
@@ -22,8 +21,7 @@ class KPiTest {
 
         target = kfg.targets.find { it.sid == "QPH" }!! as KfTarget.PIAF
         target.loadAuths(kfp.securityMaterials)
-        client = KTorUtils.createClient(target.url, 1, LogLevel.INFO)
-        af = PI.AF(client, target)
+        af = PI.AF(target)
     }
 
     @Test

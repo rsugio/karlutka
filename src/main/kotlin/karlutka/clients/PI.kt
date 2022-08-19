@@ -1,12 +1,14 @@
 package karlutka.clients
 
 import io.ktor.client.*
+import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import karlutka.models.MTarget
 import karlutka.parsers.pi.AdapterMessageMonitoringVi
 import karlutka.parsers.pi.PerfMonitorServlet
+import karlutka.server.Server
 import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
 import kotlinx.coroutines.CoroutineScope
@@ -15,21 +17,25 @@ import java.net.URL
 import java.net.URLEncoder
 
 class PI {
-    enum class XI_DIRECTION { INBOUND, OUTBOUND }
     companion object {
         val mdtperfservlet = "/mdt/performancedataqueryservlet"
     }
 
     class AF(
-        val client: HttpClient,
         override val konfig: KfTarget,
     ) : MTarget {
         val httpHostPort: URL
+        val client: HttpClient
         val components = mutableListOf<String>()
 
         init {
             require(konfig is KfTarget.PIAF)
             httpHostPort = URL(konfig.url)
+            client = KTorUtils.createClient(
+                konfig.url,
+                Server.kfg.httpClientRetryOnServerErrors,
+                LogLevel.valueOf(Server.kfg.httpClientLogLevel)
+            )
             KTorUtils.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
         }
 

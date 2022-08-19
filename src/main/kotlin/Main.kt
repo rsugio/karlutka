@@ -1,6 +1,7 @@
 import com.sap.conn.jco.JCo
-import io.ktor.client.plugins.logging.*
 import karlutka.clients.AbapJCo
+import karlutka.clients.BTPCF
+import karlutka.clients.BTPNEO
 import karlutka.clients.PI
 import karlutka.models.MTarget
 import karlutka.server.DatabaseFactory
@@ -14,7 +15,7 @@ import kotlin.io.path.forEachDirectoryEntry
 
 fun main(args: Array<String>) {
     val pid = ProcessHandle.current().pid()
-    println("[ru-hello]Привет мир-труд-май русские буквы ♣, pid=$pid")
+    println("[ru-hello]Привет (∀x∈X)P(x), pid=$pid")
 
     val pkfg: Path
     val ppw: Path
@@ -28,6 +29,7 @@ fun main(args: Array<String>) {
     } else {
         ppw = Paths.get(args[1])
     }
+    println("Конфиг=${pkfg.toAbsolutePath()}, пароли=${ppw.toAbsolutePath()}")
     // Эта проверка инициализирует JCo, проверяет наличие отдельного sapjco3.jar
     // и работоспособность sapjco3.dll под текущую операционную систему
     require(JCo.getDestinationIDs().size == 0)
@@ -68,21 +70,18 @@ fun main(args: Array<String>) {
         System.err.println("Influx не указан")
     }
 
-    println("Загружаем опрашиваемые системы:")
+    println("Проверка телеметрии:")
     Server.kfg.targets.forEach { konf ->
         konf.loadAuths(Server.kfpasswds.securityMaterials)
         val target: MTarget
         if (konf is KfTarget.ABAP) {
             target = AbapJCo(konf)
         } else if (konf is KfTarget.PIAF) {
-            val client = KTorUtils.createClient(
-                konf.url,
-                Server.kfg.httpClientRetryOnServerErrors,
-                LogLevel.valueOf(Server.kfg.httpClientLogLevel)
-            )
-            target = PI.AF(client, konf)
+            target = PI.AF(konf)
         } else if (konf is KfTarget.BTPNEO) {
-            TODO("BTPNEO")
+            target = BTPNEO(konf)
+        } else if (konf is KfTarget.BTPCF) {
+            target = BTPCF(konf)
         } else {
             TODO("UNKNOWN")
         }
