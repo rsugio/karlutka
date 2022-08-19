@@ -7,15 +7,15 @@ class KHmiTests {
     @Test
     fun request() {
         val req = HmiRequest(
-            "requestId", true, "serviceId", "methodId",
-            HmiMethodInput(LinkedHashMap(mapOf("user_alias" to "aasasa"))),
-            null,
-            null,
-            "clientId",
-            ApplCompLevel(),
-            "user", "password",
+            "clientId", "requestId", ApplCompLevel(), HmiMethodInput("user_alias", "aasasa"),
+            "methodId",
+            "serviceId",
+            "user",
+            "password",
             "EN",
-            0, "1.0"
+            true, null,
+            null,
+            "1.0", 0
         )
         req.encodeToString()
 

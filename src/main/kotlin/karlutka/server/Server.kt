@@ -108,16 +108,16 @@ object Server {
 
         withContext(Dispatchers.IO) {
             // все махом запрашиваем
-            val tasks = mutableMapOf<PI.AF, Deferred<KTorUtils.Task>>()
-            targets.values.filter { it is PI.AF }.forEach { t ->
-                require(t is PI.AF)
-                if (t.components.isEmpty()) {
+            val tasks = mutableMapOf<PI, Deferred<KTorUtils.Task>>()
+            targets.values.filter { it is PI }.forEach { t ->
+                require(t is PI)
+                if (t.afs.isEmpty()) {
                     tasks[t] = t.perfServletListOfComponents(this)
                 }
             }
             tasks.values.awaitAll()
             tasks.forEach { (target, taskD) ->
-                target.components.addAll(target.perfServletListOfComponents(taskD))
+                target.afs.addAll(target.perfServletListOfComponents(taskD))
             }
         }
 
@@ -130,11 +130,11 @@ object Server {
                 }
                 body {
                     h1 { +"По списку систем (${dur.toMillis()} ms)" }
-                    targets.values.filter { it is PI.AF }.forEach { t ->
-                        require(t is PI.AF)
+                    targets.values.filter { it is PI }.forEach { t ->
+                        require(t is PI)
                         h2 { +t.getSid() }
                         ul {
-                            t.components.forEach { c ->
+                            t.afs.forEach { c ->
                                 li {
                                     a("/PIAF/performance/${t.getSid()}/$c") { +c }
                                     +" запрос информации по компоненту"
@@ -148,7 +148,7 @@ object Server {
             requireNotNull(component)   // af.sid.database
             require(targets.keys.contains(sid))
             val pi = targets[sid]!!      // что-то типа SID
-            require(pi is PI.AF)
+            require(pi is PI)
 
             val periods = mutableMapOf<String, MutableList<PerfMonitorServlet.PerformanceTableRow>>()
             withContext(Dispatchers.IO) {

@@ -1,5 +1,3 @@
-import io.ktor.client.*
-import io.ktor.client.plugins.logging.*
 import karlutka.clients.PI
 import karlutka.util.*
 import kotlinx.coroutines.runBlocking
@@ -12,7 +10,7 @@ class KPiTest {
     val detailed = false
 
     var target: KfTarget.PIAF
-    var af: PI.AF
+    var pi: PI
 
     init {
         KKeystore.load(kfp.keystore.path, kfp.keystore.passwd)
@@ -21,24 +19,24 @@ class KPiTest {
 
         target = kfg.targets.find { it.sid == "QPH" }!! as KfTarget.PIAF
         target.loadAuths(kfp.securityMaterials)
-        af = PI.AF(target)
+        pi = PI(target)
     }
 
     @Test
     fun ping() {
         runBlocking {
-            println(af.pingNoAuth())
-            af.checkAuth("/rwb", "Runtime Workbench")
+            println(pi.pingNoAuth())
+            pi.checkAuth("/rwb", "Runtime Workbench")
         }
     }
 
     @Test
     fun performance() {
         runBlocking {
-            val afs = af.perfServletListOfComponents(af.perfServletListOfComponents(this))
+            val afs = pi.perfServletListOfComponents(pi.perfServletListOfComponents(this))
             println(afs)
             if (detailed) {
-                val ints = af.perfServletByComponent(afs[0], this)
+                val ints = pi.perfServletByComponent(afs[0], this)
                 ints.forEach { (begin, lst) ->
                     println("=$begin ${lst.size}")
                 }
@@ -47,9 +45,9 @@ class KPiTest {
     }
 
     @Test
-    fun amm() {
+    fun htmi() {
         runBlocking {
-
+            pi.postHMI()
         }
     }
 }

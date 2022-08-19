@@ -77,7 +77,7 @@ fun main(args: Array<String>) {
         if (konf is KfTarget.ABAP) {
             target = AbapJCo(konf)
         } else if (konf is KfTarget.PIAF) {
-            target = PI.AF(konf)
+            target = PI(konf)
         } else if (konf is KfTarget.BTPNEO) {
             target = BTPNEO(konf)
         } else if (konf is KfTarget.BTPCF) {
