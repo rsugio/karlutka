@@ -16,8 +16,7 @@
 		<value index="0" isnull="true"/>
 	</attribute>
 	<attribute isleave="false" name="MethodOutput">
-		<value index="0" isnull="false">
-			<instance typeid="com.sap.aii.utilxi.hmi.api.HmiMethodOutput">
+		<value index="0" isnull="false"><instance typeid="com.sap.aii.utilxi.hmi.api.HmiMethodOutput">
 				<attribute isleave="true" leave_typeid="string" name="ContentType">
 					<value index="0" isnull="false">text/xml</value>
 				</attribute>
