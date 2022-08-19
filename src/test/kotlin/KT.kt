@@ -1,3 +1,4 @@
+import org.apache.commons.io.input.BOMInputStream
 import java.io.InputStreamReader
 
 class KT {
@@ -8,7 +9,7 @@ class KT {
         fun s(s: String): String {
             val x = Companion::class.java.getResourceAsStream(s)
             requireNotNull(x)
-            return InputStreamReader(x, Charsets.UTF_8).readText()
+            return InputStreamReader(BOMInputStream(x), Charsets.UTF_8).readText()
         }
     }
 }
