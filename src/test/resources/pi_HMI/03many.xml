@@ -1,0 +1,47 @@
+<instance typeid="com.sap.aii.util.hmi.api.HmiMethodInput"><attribute isleave="false" name="Parameters">
+	<value index="0" isnull="false"><instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+				<attribute isleave="true" leave_typeid="string" name="Key">
+					<value index="0" isnull="false">release</value>
+				</attribute>
+				<attribute isleave="true" leave_typeid="string" name="Value">
+					<value index="0" isnull="false">7.0</value>
+				</attribute>
+			</instance>
+		</value><value index="1" isnull="false"><instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+				<attribute isleave="true" leave_typeid="string" name="Key">
+					<value index="0" isnull="false">body</value>
+				</attribute>
+				<attribute isleave="true" leave_typeid="string" name="Value">
+					<value index="0" isnull="false"/>
+				</attribute>
+			</instance>
+		</value><value index="2" isnull="false">
+			<instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+				<attribute isleave="true" leave_typeid="string" name="Key">
+					<value index="0" isnull="false">VC</value>
+				</attribute>
+				<attribute isleave="true" leave_typeid="string" name="Value">
+					<value index="0" isnull="false">SWC</value>
+				</attribute>
+			</instance>
+		</value><value index="3" isnull="false">
+			<instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+				<attribute isleave="true" leave_typeid="string" name="Key">
+					<value index="0" isnull="false">SP</value>
+				</attribute>
+				<attribute isleave="true" leave_typeid="string" name="Value">
+					<value index="0" isnull="false">-1</value>
+				</attribute>
+			</instance>
+		</value><value index="4" isnull="false">
+			<instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+				<attribute isleave="true" leave_typeid="string" name="Key">
+					<value index="0" isnull="false">UC</value>
+				</attribute>
+				<attribute isleave="true" leave_typeid="string" name="Value">
+					<value index="0" isnull="false">true</value>
+				</attribute>
+			</instance>
+		</value>
+	</attribute>
+</instance>

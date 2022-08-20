@@ -1,0 +1,103 @@
+<instance typeid="com.sap.aii.util.hmi.core.msg.HmiRequest">
+	<attribute isleave="true" leave_typeid="string" name="ClientId">
+		<value index="0" isnull="false">f632f8a99d9b11ebcbe500059a3c7a00</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ClientLanguage">
+		<value index="0" isnull="false">EN</value>
+	</attribute>
+	<attribute isleave="false" name="ClientLevel">
+		<value index="0" isnull="false">
+			<instance typeid="com.sap.aii.util.applcomp.ApplCompLevel">
+				<attribute isleave="true" leave_typeid="string" name="Release">
+					<value index="0" isnull="false">7.0</value>
+				</attribute>
+				<attribute isleave="true" leave_typeid="string" name="SupportPackage">
+					<value index="0" isnull="false">0</value>
+				</attribute>
+			</instance>
+</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ClientPassword">
+		<value index="0" isnull="false">dummy</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ClientUser">
+		<value index="0" isnull="false">kuznetsov_in2</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ControlFlag">
+		<value index="0" isnull="false">0</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="HmiSpecVersion">
+		<value index="0" isnull="false">1.0</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="MethodId">
+		<value index="0" isnull="false">DEFAULT</value>
+	</attribute>
+	<attribute isleave="false" name="MethodInput">
+		<value index="0" isnull="false"><instance typeid="com.sap.aii.util.hmi.api.HmiMethodInput">
+				<attribute isleave="false" name="Parameters">
+					<value index="0" isnull="false"><instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+							<attribute isleave="true" leave_typeid="string" name="Key">
+								<value index="0" isnull="false">release</value>
+							</attribute>
+							<attribute isleave="true" leave_typeid="string" name="Value">
+								<value index="0" isnull="false">7.0</value>
+							</attribute>
+						</instance>
+</value>
+					<value index="1" isnull="false">
+						<instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+							<attribute isleave="true" leave_typeid="string" name="Key">
+								<value index="0" isnull="false">body</value>
+							</attribute>
+							<attribute isleave="true" leave_typeid="string" name="Value">
+								<value index="0" isnull="false"/>
+							</attribute>
+						</instance>
+					</value>
+					<value index="2" isnull="false"><instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+							<attribute isleave="true" leave_typeid="string" name="Key">
+								<value index="0" isnull="false">VC</value>
+							</attribute>
+							<attribute isleave="true" leave_typeid="string" name="Value">
+								<value index="0" isnull="false">SWC</value>
+							</attribute>
+						</instance>
+</value>
+					<value index="3" isnull="false"><instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+							<attribute isleave="true" leave_typeid="string" name="Key">
+								<value index="0" isnull="false">SP</value>
+							</attribute>
+							<attribute isleave="true" leave_typeid="string" name="Value">
+								<value index="0" isnull="false">-1</value>
+							</attribute>
+						</instance>
+</value>
+					<value index="4" isnull="false"><instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+							<attribute isleave="true" leave_typeid="string" name="Key">
+								<value index="0" isnull="false">UC</value>
+							</attribute>
+							<attribute isleave="true" leave_typeid="string" name="Value">
+								<value index="0" isnull="false">true</value>
+							</attribute>
+						</instance>
+</value>
+				</attribute>
+			</instance>
+</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="RequestId">
+		<value index="0" isnull="false">f632f8aa9d9b11ebac5000059a3c7a00</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="RequiresSession">
+		<value index="0" isnull="false">false</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ServerApplicationId">
+		<value index="0" isnull="true"/>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ServerLogicalSystemName">
+		<value index="0" isnull="true"/>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ServiceId">
+		<value index="0" isnull="false">getregisteredhmimethods</value>
+	</attribute>
+</instance>
