@@ -117,14 +117,33 @@ class PI(
     }
 
     fun uuid(u: UUID) = u.toString().replace("-", "")
-    suspend fun hmiGeneralQuery(x: String, uri: String = "/rep/query/int?container=any"): Hm.QueryResult {
-        val req = Hm.HmiRequest(
+
+    //         uri: String = ",
+    val req = Hm.HmiRequest(
+        uuid(hmiClientId),
+        uuid(UUID.randomUUID()),
+        Hm.ApplCompLevel("7.0", "0"),
+        Hm.HmiMethodInput("QUERY_REQUEST_XML", "?"),
+        "GENERIC",
+        "query",
+        "dummy",
+        "dummy",
+        "EN",
+        false,
+        null,
+        null,
+        "1.0"
+    )
+
+
+    suspend fun hmiGetRegistered() {
+        val rep = Hm.HmiRequest(
             uuid(hmiClientId),
             uuid(UUID.randomUUID()),
             Hm.ApplCompLevel("7.0", "0"),
-            Hm.HmiMethodInput("QUERY_REQUEST_XML", x),
-            "GENERIC",
-            "QUERY",
+            Hm.HmiMethodInput("release", "7.0"),
+            "DEFAULT",
+            "getregisteredhmimethods",
             "dummy",
             "dummy",
             "EN",
@@ -133,6 +152,14 @@ class PI(
             null,
             "1.0"
         )
+        val repRegistered = hmiPost("/rep/getregisteredhmimethods/int?container=any", rep)
+
+    }
+
+    suspend fun hmiPost(
+        uri: String,
+        req: Hm.HmiRequest
+    ): Hm.HmiResponse {
         val a = client.post(uri) {
             contentType(ContentType.Text.Xml)
             val t = req.encodeToString()
@@ -143,9 +170,6 @@ class PI(
         val t = a.bodyAsText()
         Paths.get("c:/data/tmp/posthmi.response").writeText(t)
         val hr = Hm.parseResponse(t)
-        require(hr.MethodOutput != null)
-        Paths.get("c:/data/tmp/queryResult.xml").writeText(hr.MethodOutput.Return)
-        val qr = Hm.QueryResult.parse(hr.MethodOutput.Return)
-        return qr
+        return hr
     }
 }

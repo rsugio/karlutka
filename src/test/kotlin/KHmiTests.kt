@@ -6,6 +6,8 @@ import kotlin.test.Test
 class KHmiTests {
     @Test
     fun rawhmi() {
+        Hm.hmiServices(s("pi_HMI/rep_registered.xml"))
+
         HmiMethodInput("ключ", "значение").attr()
         val req = HmiRequest(
             "clientId", "requestId", ApplCompLevel(),
@@ -19,7 +21,7 @@ class KHmiTests {
             null,
             "1.0", 0
         )
-        println(req.encodeToString())
+        req.encodeToString()
 
         val instResp = Hm.parseInstance(s("pi_HMI/01resp.xml"))
         val resp = HmiResponse.from(instResp)

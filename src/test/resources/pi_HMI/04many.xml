@@ -21,7 +21,7 @@
 		<value index="0" isnull="false">dummy</value>
 	</attribute>
 	<attribute isleave="true" leave_typeid="string" name="ClientUser">
-		<value index="0" isnull="false">kuznetsov_in2</value>
+		<value index="0" isnull="false">adf</value>
 	</attribute>
 	<attribute isleave="true" leave_typeid="string" name="ControlFlag">
 		<value index="0" isnull="false">0</value>

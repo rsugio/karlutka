@@ -4,6 +4,7 @@ import karlutka.server.Server
 import karlutka.util.*
 import kotlinx.coroutines.runBlocking
 import java.nio.file.Paths
+import kotlin.io.path.writeText
 import kotlin.test.Test
 
 class KPiTest {
@@ -49,8 +50,16 @@ class KPiTest {
     @Test
     fun hmi() {
         runBlocking {
-            val a = pi.hmiGeneralQuery(Hm.GeneralQueryRequest.swcv()).toSwcv()
-            println(a)
+            pi.hmiGetRegistered()
+//            val lst = pi.rawhmi(Hm.GeneralQueryRequest.swcv())
+
+//            require(hr.MethodOutput != null)
+//            Paths.get("c:/data/tmp/queryResult.xml").writeText(hr.MethodOutput.Return)
+//            val qr = Hm.QueryResult.parse(hr.MethodOutput.Return)
+
+//                .toSwcv()
+
+
         }
     }
 }

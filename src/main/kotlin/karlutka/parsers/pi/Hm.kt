@@ -54,6 +54,20 @@ class Hm {
                     Value(ix, false, listOf(v))
             }
         }
+
+
+        fun hmiServices(sxml: String) {
+            val lst = hmserializer.decodeFromString<HmiServices>(sxml).list
+            val services = lst.map { it.serviceid }.distinct().sorted()
+            services.forEach { x ->
+                val sublist = lst.filter { it.serviceid == x }.sortedBy { it.methodid }
+                println(x)
+                sublist.forEach {s ->
+                    println("\t${s.methodid}\t${s.release}/${s.SP}")
+                }
+            }
+        }
+
     }
 
     @Serializable
@@ -96,6 +110,7 @@ class Hm {
     ) {
         @Transient
         var string: String? = null
+
         @Transient
         var instance: Instance? = null
 
@@ -120,7 +135,7 @@ class Hm {
     ) {
         init {
             value.forEach {
-                require(it is String || it is Instance) {"wrong type: ${it::class}"}
+                require(it is String || it is Instance) { "wrong type: ${it::class}" }
             }
         }
     }
@@ -137,7 +152,7 @@ class Hm {
 
     data class ApplCompLevel(
         val Release: String = "7.0",
-        val SupportPackage: String = "0"
+        val SupportPackage: String = "*"
     ) {
         fun attr(n: String = "ClientLevel") = instance(
             n, "com.sap.aii.util.applcomp.ApplCompLevel",
@@ -145,6 +160,24 @@ class Hm {
             HmString(SupportPackage).attr("SupportPackage")
         )
 
+    }
+
+    @Serializable
+    @XmlSerialName("Services", "", "")
+    // Читается по /rep/getregisteredhmimethods/int?container=any
+    data class HmiServices(val list: List<HmiService> = listOf())
+
+    @Serializable
+    @XmlSerialName("service", "", "")
+    data class HmiService(
+        val serviceid: String,  //mappingtestservice
+        val methodid: String,   //executemappingmethod
+        val release: String,    //7.31
+        val SP: String,         //0 или *
+        val subrelease: String, //*
+        val patchlevel: String, //*
+    ) {
+        fun applCompLevel(): ApplCompLevel = ApplCompLevel(release, SP)
     }
 
     class HmiMethodInput(val input: Map<String, String?>) {
@@ -169,8 +202,11 @@ class Hm {
             val inst = Instance("com.sap.aii.util.hmi.api.HmiMethodInput", listOf(params))
             val at = Attribute(
                 false, null, name,
-                listOf(Value(0, false,
-                    listOf(inst))
+                listOf(
+                    Value(
+                        0, false,
+                        listOf(inst)
+                    )
                 )
             )
             return at
@@ -266,7 +302,6 @@ class Hm {
         }
 
         fun encodeToString() = hmserializer.encodeToString(this.instance())
-
     }
 
     data class HmiResponse(
