@@ -16,7 +16,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import java.net.URL
 import java.net.URLEncoder
+import java.nio.file.Paths
 import java.util.*
+import kotlin.io.path.writeText
 
 class PI(
     override val konfig: KfTarget,
@@ -114,22 +116,36 @@ class PI(
         val url = "/AdapterMessageMonitoring/basic"
     }
 
-    suspend fun postHMI() {
-        val x = "<xml/>"
+    fun uuid(u: UUID) = u.toString().replace("-", "")
+    suspend fun hmiGeneralQuery(x: String, uri: String = "/rep/query/int?container=any"): Hm.QueryResult {
         val req = Hm.HmiRequest(
-            hmiClientId.toString(),
-            UUID.randomUUID().toString(),
-            Hm.ApplCompLevel("7.0", "*"),
+            uuid(hmiClientId),
+            uuid(UUID.randomUUID()),
+            Hm.ApplCompLevel("7.0", "0"),
             Hm.HmiMethodInput("QUERY_REQUEST_XML", x),
             "GENERIC",
-            null,
-            "",
-            "",
+            "QUERY",
+            "dummy",
+            "dummy",
             "EN",
             false,
             null,
-            null
+            null,
+            "1.0"
         )
-        println(req.encodeToString())
+        val a = client.post(uri) {
+            contentType(ContentType.Text.Xml)
+            val t = req.encodeToString()
+            Paths.get("c:/data/tmp/posthmi.request").writeText(t)
+            setBody(t)
+        }
+        require(a.status.isSuccess() && a.contentType()!!.match("text/xml"))
+        val t = a.bodyAsText()
+        Paths.get("c:/data/tmp/posthmi.response").writeText(t)
+        val hr = Hm.parseResponse(t)
+        require(hr.MethodOutput != null)
+        Paths.get("c:/data/tmp/queryResult.xml").writeText(hr.MethodOutput.Return)
+        val qr = Hm.QueryResult.parse(hr.MethodOutput.Return)
+        return qr
     }
 }

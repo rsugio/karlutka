@@ -1,24 +1,26 @@
 import karlutka.clients.PI
+import karlutka.parsers.pi.Hm
+import karlutka.server.Server
 import karlutka.util.*
 import kotlinx.coroutines.runBlocking
 import java.nio.file.Paths
 import kotlin.test.Test
 
 class KPiTest {
-    private val kfp = KfPasswds.parse(Paths.get("C:\\data\\passwd.yaml"))
-    private val kfg = Kfg.parse(Paths.get("c:\\data\\karla.yaml"))
     val detailed = false
 
     var target: KfTarget.PIAF
     var pi: PI
 
     init {
-        KKeystore.load(kfp.keystore.path, kfp.keystore.passwd)
+        Server.kfpasswds = KfPasswds.parse(Paths.get("C:\\data\\passwd.yaml"))
+        Server.kfg = Kfg.parse(Paths.get("c:\\data\\karla.yaml"))
+        KKeystore.load(Server.kfpasswds.keystore.path, Server.kfpasswds.keystore.passwd)
         KTorUtils.createClientEngine()
-        KTorUtils.tempFolder = Paths.get("c:/data/tmp")
+        KTorUtils.tempFolder = Paths.get(Server.kfg.tmpdir)
 
-        target = kfg.targets.find { it.sid == "QPH" }!! as KfTarget.PIAF
-        target.loadAuths(kfp.securityMaterials)
+        target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
+        target.loadAuths(Server.kfpasswds.securityMaterials)
         pi = PI(target)
     }
 
@@ -47,7 +49,8 @@ class KPiTest {
     @Test
     fun htmi() {
         runBlocking {
-            pi.postHMI()
+            val a = pi.hmiGeneralQuery(Hm.GeneralQueryRequest.swcv()).toSwcv()
+            println(a)
         }
     }
 }

@@ -1,5 +1,6 @@
 package karlutka.parsers.pi
 
+import karlutka.models.MPI
 import kotlinx.serialization.*
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.modules.SerializersModule
@@ -9,6 +10,8 @@ import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
+import org.apache.commons.io.input.BOMInputStream
+import java.io.InputStreamReader
 
 class Hm {
     companion object {
@@ -27,6 +30,7 @@ class Hm {
         fun parseInstance(sxml: String): Instance {
             return hmserializer.decodeFromString(sxml)
         }
+
         fun parseResponse(sxml: String): HmiResponse {
             return HmiResponse.from(hmserializer.decodeFromString(sxml))
         }
@@ -117,7 +121,8 @@ class Hm {
     }
 
     class HmiMethodInput(val map: LinkedHashMap<String, String>) {
-        constructor(key:String, value:String) : this(LinkedHashMap(mapOf(key to value)))
+        constructor(key: String, value: String) : this(LinkedHashMap(mapOf(key to value)))
+
         fun attr(name: String = "MethodInput"): Attribute {
             require(map.size == 1)    //TODO нужен пример на ==0 и >1
             val e = map.entries.toList()[0]
@@ -189,8 +194,8 @@ class Hm {
         val RequestId: String,
         val ClientLevel: ApplCompLevel, //UriElement
         val HmiMethodInput: HmiMethodInput, //UriElement
-        val MethodId: String? = null, //HmiMethodInput
-        val ServiceId: String? = null,
+        val MethodId: String, //HmiMethodInput
+        val ServiceId: String,
         val ClientUser: String = "",
         val ClientPassword: String = "",                     //IGUID
         val ClientLanguage: String = "EN",
@@ -202,20 +207,21 @@ class Hm {
     ) {
         fun instance(): Instance {
             val a = mutableListOf<Attribute>()
-            a.add(HmString(RequestId).attr("RequestId"))
-            a.add(HmString(RequiresSession.toString()).attr("RequiresSession"))
-            if (ServiceId !=null) a.add(HmString(ServiceId).attr("ServiceId"))
-            if (MethodId !=null) a.add(HmString(MethodId).attr("MethodId"))
-            a.add(HmiMethodInput.attr())
-            if (ServerLogicalSystemName != null) a.add(HmString(ServerLogicalSystemName).attr("ServerLogicalSystemName"))
-            if (ServerApplicationId != null) a.add(HmString(ServerApplicationId).attr("ServerApplicationId"))
             a.add(HmString(ClientId).attr("ClientId"))
+            a.add(HmString(ClientLanguage).attr("ClientLanguage"))
             a.add(ClientLevel.attr())
             a.add(HmString(ClientUser).attr("ClientUser"))
             a.add(HmString(ClientPassword).attr("ClientPassword"))
-            a.add(HmString(ClientLanguage).attr("ClientLanguage"))
             a.add(HmString(ControlFlag.toString()).attr("ControlFlag"))
             if (HmiSpecVersion != null) a.add(HmString(HmiSpecVersion).attr("HmiSpecVersion"))
+            a.add(HmString(MethodId).attr("MethodId"))
+            a.add(HmiMethodInput.attr())
+
+            a.add(HmString(RequestId).attr("RequestId"))
+            a.add(HmString(RequiresSession.toString()).attr("RequiresSession"))
+            a.add(HmString(ServerLogicalSystemName).attr("ServerLogicalSystemName"))
+            a.add(HmString(ServerApplicationId).attr("ServerApplicationId"))
+            a.add(HmString(ServiceId).attr("ServiceId"))
             return Instance("com.sap.aii.util.hmi.core.msg.HmiRequest", a)
         }
 
@@ -381,7 +387,7 @@ class Hm {
         companion object {
             fun ofArg(lst: List<String>, cond: Condition?, vararg result: String): GeneralQueryRequest {
                 val lst2 = lst.map { Type(it) } as MutableList<Type>
-                val res = GeneralQueryRequest.Result(result.toList() as MutableList<String>)
+                val res = Result(result.toList() as MutableList<String>)
 
                 return GeneralQueryRequest(
                     Types(lst2),
@@ -393,6 +399,12 @@ class Hm {
 
             fun elementary(key: String, op: String, c: Simple): Condition {
                 return Condition(null, Elementary(Single(key, Val(c), op)))
+            }
+
+            fun swcv(): String {
+                val res = Companion::class.java.getResourceAsStream("/hmi/swcv.xml")
+                requireNotNull(res)
+                return InputStreamReader(res, Charsets.UTF_8).readText()
             }
         }
     }
@@ -410,25 +422,41 @@ class Hm {
         @XmlElement(true)
         val matrix: Matrix,
         @XmlElement(true)
-        val messages: String,
+        val messages: String? = null
     ) {
         fun toTable(): MutableList<MutableMap<String, String?>> {
             val lines = mutableListOf<MutableMap<String, String?>>()
             val posTypeMapping =
-                headerInfo.colDef.def.map { Pair(it.pos, it.type) }.toMap()    // 0:"", 1:RA_WORKSPACE_ID, 2:WS_NAME
-            matrix.r.forEachIndexed { rx, row ->
+                headerInfo.colDef.def.associate { Pair(it.pos, it.type) }    // 0:"", 1:RA_WORKSPACE_ID, 2:WS_NAME
+            matrix.r.forEach { row ->
                 val res = mutableMapOf<String, String?>()
                 row.c.forEachIndexed { cx, col ->
                     val cn = posTypeMapping.get(cx)
                     requireNotNull(cn)
                     if (cn.isNotBlank()) {
-                        res.put(cn, col.strvalue())
+                        res[cn] = col.strvalue()
                     }
                 }
                 lines.add(res)
             }
-            require(lines.size == headerInfo.rows.count, { "Must be ${headerInfo.rows.count} but found ${lines.size}" })
+            require(lines.size == headerInfo.rows.count) { "Must be ${headerInfo.rows.count} but found ${lines.size}" }
             return lines
+        }
+
+        fun toSwcv(): List<MPI.Swcv> {
+            val table = toTable()
+            return table.map { x ->
+                MPI.Swcv(
+                    x["RA_WORKSPACE_ID"]!!,
+                    x["VENDOR"]!!,
+                    x["NAME"]!!,
+                    x["VERSION"]!!,
+                    x["WS_TYPE"]!!.get(0),
+                    x["ORIGINAL_LANGUAGE"]!!,
+                    x["WS_NAME"]!!
+                )
+            }
+            //
         }
 
         @Serializable
@@ -500,7 +528,7 @@ class Hm {
                 } else if (wkID != null) {
                     return wkID.id
                 } else if (simple != null) {
-                    return simple.toString()
+                    return simple.strg
                 } else
                     return null
             }

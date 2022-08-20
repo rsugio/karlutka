@@ -5,7 +5,7 @@ import kotlin.test.Test
 
 class KHmiTests {
     @Test
-    fun request() {
+    fun rawhmi() {
         val req = HmiRequest(
             "clientId", "requestId", ApplCompLevel(), HmiMethodInput("user_alias", "aasasa"),
             "methodId",
@@ -41,5 +41,14 @@ class KHmiTests {
 
         val x3 = HmiResponse.from(Hm.parseInstance(s("pi_HMI/rep_query_1.xml")))
         require(x3.MethodOutput!!.Return.length > 10000)
+    }
+
+    @Test
+    fun queryservice() {
+        require(GeneralQueryRequest.swcv().isNotBlank())
+        val q1 = QueryResult.parse(s("pi_HMI/queryResult_swcv1.xml")).toSwcv()
+        require(q1.size > 100)
+        val q2 = QueryResult.parse(s("pi_HMI/queryResult_swcv2.xml")).toSwcv()
+        require(q2.size > 100)
     }
 }
