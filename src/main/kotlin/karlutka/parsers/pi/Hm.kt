@@ -27,6 +27,9 @@ class Hm {
         fun parseInstance(sxml: String): Instance {
             return hmserializer.decodeFromString(sxml)
         }
+        fun parseResponse(sxml: String): HmiResponse {
+            return HmiResponse.from(hmserializer.decodeFromString(sxml))
+        }
 
         // возвращает инстанс завёрнутый в атрибут
         fun instance(name: String, typeid: String, vararg atts: Attribute): Attribute {
@@ -221,8 +224,8 @@ class Hm {
     }
 
     data class HmiResponse(
-        val ClientId: String,
-        val RequestId: String,
+        val ClientId: String? = null,
+        val RequestId: String? = null,
         val MethodOutput: HmiMethodOutput? = null,
         val MethodFault: HmiMethodFault? = null,
         val CoreException: HmiCoreException? = null,
@@ -236,11 +239,10 @@ class Hm {
                 val requestId = i.string("RequestId")
                 val cf = i.string("ControlFlag")!!.toInt()
                 val hv = i.string("HmiSpecVersion")
-                val i2 = i.instance("MethodOutput")
-                val hmo = HmiMethodOutput.from(i2)
+                val hmo = HmiMethodOutput.from(i.instance("MethodOutput"))
                 val hmf = HmiMethodFault.from(i.instance("MethodFault"))
                 val hce = HmiCoreException.from(i.instance("CoreException"))
-                return HmiResponse(clientId!!, requestId!!, hmo, hmf, hce, cf, hv)
+                return HmiResponse(clientId, requestId, hmo, hmf, hce, cf, hv)
             }
         }
     }

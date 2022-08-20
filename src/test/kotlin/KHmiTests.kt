@@ -25,6 +25,7 @@ class KHmiTests {
 
         val exc = HmiResponse.from(Hm.parseInstance(s("pi_HMI/exception.xml")))
         require(exc.CoreException!!.LocalizedMessage.startsWith("Internal error: Method generic"))
+        Hm.parseResponse(s("pi_HMI/02exception.xml"))
 
         val mm1 = HmiResponse.from(Hm.parseInstance(s("pi_HMI/mmtest_response1.xml")))
         require(mm1.MethodOutput!!.Return.length > 10000) //длинный ответ
