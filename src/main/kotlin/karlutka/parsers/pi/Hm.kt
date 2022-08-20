@@ -10,14 +10,12 @@ import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
-import org.apache.commons.io.input.BOMInputStream
 import java.io.InputStreamReader
 
 class Hm {
     companion object {
         private val hmxml = SerializersModule {
             polymorphic(Any::class) {
-                subclass(Value::class, serializer())
                 subclass(Instance::class, serializer())
                 subclass(String::class, String.serializer())
             }
@@ -39,10 +37,23 @@ class Hm {
         fun instance(name: String, typeid: String, vararg atts: Attribute): Attribute {
             return Attribute(
                 false, null, name,
-                Value(0, false, listOf(Instance(typeid, atts.toMutableList())))
+                listOf(
+                    Value(0, false, listOf(Instance(typeid, atts.toMutableList())))
+                )
             )
         }
 
+        /**
+         * Из списка инстансов делает список значений с номерами (0,1,..)
+         */
+        fun valueList(instances: List<Instance?>): List<Value> {
+            return instances.mapIndexed { ix, v ->
+                if (v == null)
+                    Value(ix, true)
+                else
+                    Value(ix, false, listOf(v))
+            }
+        }
     }
 
     @Serializable
@@ -50,46 +61,53 @@ class Hm {
     class Instance(
         val typeid: String,
         @XmlElement(true)
-        val attribute: MutableList<Attribute> = mutableListOf(),
+        val attribute: List<Attribute> = listOf(),
     ) {
         fun string(name: String): String? {
             for (a in attribute) {
-                if (a.name == name && a.leave_typeid == "string")
-                    if (a.value.isnull)
-                        return null
-                    else
-                        return a.value.value[0] as String
+                if (a.name == name) {
+                    require(a.leave_typeid == "string")
+                    return a.string
+                }
             }
             error("Not found string: $name")
         }
 
-        fun instance(name: String): Instance? {
-            for (a in attribute) {
-                if (a.name == name && a.leave_typeid == null)
-                    if (a.value.isnull)
-                        return null
-                    else {
-                        return a.value.value.find { it is Instance } as Instance?
-                    }
-            }
-            error("Not found instance: $name")
+        /**
+         * Для данного инстанса находит атрибут с данным именем (обязательно)
+         */
+        fun attribute(name: String): Attribute {
+            val a = attribute.find { it.name == name }
+            requireNotNull(a) //TODO описание ошибки здесь
+            return a
         }
+
+        fun encodeToString() = hmserializer.encodeToString(this)
     }
 
     @Serializable
     @XmlSerialName("attribute", "", "")
-    class Attribute(
+    data class Attribute(
         var isleave: Boolean = true,
         var leave_typeid: String? = null,
         var name: String,
-        @XmlElement(true) val value: Value,
+        // Если leave_typeid это строка то value это список из [0..1] строки, иначе список из объектов
+        @XmlElement(true) val value: List<Value> = listOf(),
     ) {
-        fun string(): String? {
-            require(leave_typeid == "string")
-            if (value.isnull)
-                return null
-            else
-                return value.value[0] as String
+        @Transient
+        var string: String? = null
+        @Transient
+        var instance: Instance? = null
+
+        init {
+            require(value.size > 0)
+            if (leave_typeid == "string" && !value[0].isnull && value[0].value.size > 0)
+                string = value[0].value[0] as String
+            if (leave_typeid == null) {
+                val x = value.filter { it.isnull == false }
+                    .flatMap { m -> m.value.filter { it is Instance } as List<Instance> }
+                if (x.size > 0) instance = x[0]
+            }
         }
     }
 
@@ -99,12 +117,21 @@ class Hm {
         var index: Int = 0,
         var isnull: Boolean = false,
         @XmlValue(true) val value: List<@Polymorphic Any> = listOf(),
-    )
+    ) {
+        init {
+            value.forEach {
+                require(it is String || it is Instance) {"wrong type: ${it::class}"}
+            }
+        }
+    }
 
     data class HmString(val s: String?) {
         fun attr(n: String) = Attribute(
-            true, "string", n, if (s == null) Value(0, true)
-            else Value(0, false, mutableListOf(s))
+            true, "string", n,
+            if (s == null)
+                listOf(Value(0, true))
+            else
+                listOf(Value(0, false, mutableListOf(s)))
         )
     }
 
@@ -120,20 +147,33 @@ class Hm {
 
     }
 
-    class HmiMethodInput(val map: LinkedHashMap<String, String>) {
-        constructor(key: String, value: String) : this(LinkedHashMap(mapOf(key to value)))
+    class HmiMethodInput(val input: Map<String, String?>) {
+        constructor(key: String, value: String?) : this(mapOf(key to value))
 
         fun attr(name: String = "MethodInput"): Attribute {
-            require(map.size == 1)    //TODO нужен пример на ==0 и >1
-            val e = map.entries.toList()[0]
-            return instance(
-                name, "com.sap.aii.util.hmi.api.HmiMethodInput",
-                instance(
-                    "Parameters", "com.sap.aii.util.hmi.core.gdi2.EntryStringString",
-                    HmString(e.key).attr("Key"),
-                    HmString(e.value).attr("Value")
+            // пример на несколько - см /test/resources/pi_HMI/03many.xml
+            val lst = mutableListOf<Value>()
+            var ix = 0
+            input.map { e ->
+                val inst = Instance(
+                    "com.sap.aii.util.hmi.core.gdi2.EntryStringString",
+                    listOf(
+                        HmString(e.key).attr("Key"),
+                        HmString(e.value).attr("Value")
+                    )
+                )
+                lst.add(Value(ix++, false, listOf(inst)))
+
+            }
+            val params = Attribute(false, null, "Parameters", lst)
+            val inst = Instance("com.sap.aii.util.hmi.api.HmiMethodInput", listOf(params))
+            val at = Attribute(
+                false, null, name,
+                listOf(Value(0, false,
+                    listOf(inst))
                 )
             )
+            return at
         }
     }
 
@@ -245,9 +285,9 @@ class Hm {
                 val requestId = i.string("RequestId")
                 val cf = i.string("ControlFlag")!!.toInt()
                 val hv = i.string("HmiSpecVersion")
-                val hmo = HmiMethodOutput.from(i.instance("MethodOutput"))
-                val hmf = HmiMethodFault.from(i.instance("MethodFault"))
-                val hce = HmiCoreException.from(i.instance("CoreException"))
+                val hmo = HmiMethodOutput.from(i.attribute("MethodOutput").instance)
+                val hmf = HmiMethodFault.from(i.attribute("MethodFault").instance)
+                val hce = HmiCoreException.from(i.attribute("CoreException").instance)
                 return HmiResponse(clientId, requestId, hmo, hmf, hce, cf, hv)
             }
         }
