@@ -20,7 +20,7 @@ class KPiTest {
         KTorUtils.createClientEngine()
         KTorUtils.tempFolder = Paths.get(Server.kfg.tmpdir)
 
-        target = Server.kfg.targets.find { it.sid == "QPH" }!! as KfTarget.PIAF
+        target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
         target.loadAuths(Server.kfpasswds.securityMaterials)
         pi = PI(target)
     }
@@ -51,6 +51,8 @@ class KPiTest {
     fun hmi() {
         runBlocking {
             pi.hmiGetRegistered()
+            pi.hmiAskSWCV()
+            pi.askNamespaces()
 //            val lst = pi.rawhmi(Hm.GeneralQueryRequest.swcv())
 
 //            require(hr.MethodOutput != null)

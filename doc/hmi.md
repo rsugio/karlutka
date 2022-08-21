@@ -249,3 +249,16 @@ writecad
 	default	7.3/*
 ```
 
+### Основы
+tc~aii~util_api.jar
+
+### /rep/getregisteredhmimethods
+com.sap.aii.utilxi.server.jar
+com.sap.aii.utilxi.hmis.server.diag.GetRegisteredMethodsHmiService
+HmiMethodInput = mapOf("release" to "7.5")
+
+### query
+com.sap.aii.ib.server.query.CrossReferenceServiceProvider
+
+\com\sap\aii\ib\server\query\util\QueryResultHelper.class, QueryServerUtils.class  
+

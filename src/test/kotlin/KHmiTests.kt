@@ -1,12 +1,14 @@
 import KT.Companion.s
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.Hm.*
+import kotlinx.serialization.decodeFromString
 import kotlin.test.Test
 
 class KHmiTests {
     @Test
     fun rawhmi() {
-        Hm.hmiServices(s("pi_HMI/rep_registered.xml"))
+        val services = Hm.hmserializer.decodeFromString<Hm.HmiServices>(s("pi_HMI/rep_registered.xml")).list
+        require(services.size>10)
 
         HmiMethodInput("ключ", "значение").attr()
         val req = HmiRequest(

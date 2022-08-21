@@ -5,6 +5,7 @@ import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import karlutka.models.MPI
 import karlutka.models.MTarget
 import karlutka.parsers.pi.AdapterMessageMonitoringVi
 import karlutka.parsers.pi.Hm
@@ -14,6 +15,7 @@ import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
+import kotlinx.serialization.decodeFromString
 import java.net.URL
 import java.net.URLEncoder
 import java.nio.file.Paths
@@ -33,6 +35,8 @@ class PI(
     // список адаптер фреймворков, вида af.sid.host-db
     val afs = mutableListOf<String>()
     val hmiClientId = UUID.randomUUID()
+    lateinit var hmiServices: List<Hm.HmiService>
+    var swcv: List<MPI.Swcv> = listOf()
 
     init {
         require(konfig is KfTarget.PIAF)
@@ -43,6 +47,26 @@ class PI(
             LogLevel.valueOf(Server.kfg.httpClientLogLevel)
         )
         KTorUtils.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
+    }
+
+    fun hmiServices(sxml: String) {
+        hmiServices = Hm.hmserializer.decodeFromString<Hm.HmiServices>(sxml).list
+        val services = hmiServices.map { it.serviceid }.distinct().sorted()
+        val log = StringBuffer()
+        services.forEach { x ->
+            val sublist = hmiServices.filter { it.serviceid == x }.sortedBy { it.methodid }
+            log.append(x).append("\n")
+            sublist.forEach { s ->
+                log.append("\t${s.methodid}\t${s.release}/${s.SP}\n")
+            }
+        }
+        println(log)
+    }
+
+    fun findHmiServiceMethod(service: String, method: String): Hm.HmiService {
+        val s = hmiServices.filter { it.serviceid == service && it.methodid == method }.sortedBy { it.release }
+        require(s.size > 0)
+        return s.last()
     }
 
     suspend fun perfServletListOfComponents(scope: CoroutineScope) =
@@ -118,30 +142,12 @@ class PI(
 
     fun uuid(u: UUID) = u.toString().replace("-", "")
 
-    //         uri: String = ",
-    val req = Hm.HmiRequest(
-        uuid(hmiClientId),
-        uuid(UUID.randomUUID()),
-        Hm.ApplCompLevel("7.0", "0"),
-        Hm.HmiMethodInput("QUERY_REQUEST_XML", "?"),
-        "GENERIC",
-        "query",
-        "dummy",
-        "dummy",
-        "EN",
-        false,
-        null,
-        null,
-        "1.0"
-    )
-
-
     suspend fun hmiGetRegistered() {
         val rep = Hm.HmiRequest(
             uuid(hmiClientId),
             uuid(UUID.randomUUID()),
-            Hm.ApplCompLevel("7.0", "0"),
-            Hm.HmiMethodInput("release", "7.0"),
+            Hm.ApplCompLevel("*", "*"),
+            Hm.HmiMethodInput(mapOf("release" to "7.5")),
             "DEFAULT",
             "getregisteredhmimethods",
             "dummy",
@@ -153,6 +159,49 @@ class PI(
             "1.0"
         )
         val repRegistered = hmiPost("/rep/getregisteredhmimethods/int?container=any", rep)
+        this.hmiServices(repRegistered.MethodOutput!!.Return)
+    }
+
+    suspend fun hmiAskSWCV() {
+        val serv = findHmiServiceMethod("query", "generic")
+        val req = Hm.HmiRequest(
+            uuid(hmiClientId),
+            uuid(UUID.randomUUID()),
+            serv.applCompLevel(),
+            Hm.HmiMethodInput("QUERY_REQUEST_XML", Hm.GeneralQueryRequest.swcv()),
+            serv.methodid.uppercase(),
+            serv.serviceid,
+            "dummy",
+            "dummy",
+            "EN",
+            false,
+            null,
+            null,
+            "1.0"
+        )
+        val resp = hmiPost(serv.url(), req)
+        swcv = Hm.QueryResult.parse(resp.MethodOutput!!.Return).toSwcv()
+    }
+
+    suspend fun askNamespaces() {
+        val serv = findHmiServiceMethod("query", "generic")
+        val srq = Hm.GeneralQueryRequest.ofArg(listOf("namespdecl"), null, "RA_WORKSPACE_ID")
+        val req = Hm.HmiRequest(
+            uuid(hmiClientId),
+            uuid(UUID.randomUUID()),
+            serv.applCompLevel(),
+            Hm.HmiMethodInput("QUERY_REQUEST_XML", srq.encodeToString()),
+            serv.methodid.uppercase(),
+            serv.serviceid,
+            "dummy",
+            "dummy",
+            "EN",
+            false,
+            null,
+            null,
+            "1.0"
+        )
+        val resp = hmiPost(serv.url(), req)
 
     }
 

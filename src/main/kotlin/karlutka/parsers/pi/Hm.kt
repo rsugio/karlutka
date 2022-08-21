@@ -20,7 +20,7 @@ class Hm {
                 subclass(String::class, String.serializer())
             }
         }
-        private val hmserializer = XML(hmxml) {
+        val hmserializer = XML(hmxml) {
             xmlDeclMode = XmlDeclMode.None
             autoPolymorphic = true
         }
@@ -52,19 +52,6 @@ class Hm {
                     Value(ix, true)
                 else
                     Value(ix, false, listOf(v))
-            }
-        }
-
-
-        fun hmiServices(sxml: String) {
-            val lst = hmserializer.decodeFromString<HmiServices>(sxml).list
-            val services = lst.map { it.serviceid }.distinct().sorted()
-            services.forEach { x ->
-                val sublist = lst.filter { it.serviceid == x }.sortedBy { it.methodid }
-                println(x)
-                sublist.forEach {s ->
-                    println("\t${s.methodid}\t${s.release}/${s.SP}")
-                }
             }
         }
 
@@ -178,6 +165,7 @@ class Hm {
         val patchlevel: String, //*
     ) {
         fun applCompLevel(): ApplCompLevel = ApplCompLevel(release, SP)
+        fun url() = "/rep/$serviceid/int?container=any"
     }
 
     class HmiMethodInput(val input: Map<String, String?>) {
@@ -345,7 +333,7 @@ class Hm {
         @XmlElement(true)
         val result: Result,
     ) {
-        fun compose() = hmserializer.encodeToString(this)
+        fun encodeToString() = hmserializer.encodeToString(this)
 
         @Serializable
         @XmlSerialName("types", "", "")
