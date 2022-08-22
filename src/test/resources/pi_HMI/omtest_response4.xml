@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutionResponse>
+	<exception>
+		<type>com.sap.aii.ibrep.server.mapping.hmi.MappingTestExecutionException</type>
+		<message>
+			<text>Runtime Exception when executing application mapping program com/sap/xi/tf/_MM_Test_; Details:
+				com.sap.aii.utilxi.misc.api.BaseRuntimeException; The element type &quot;Person&quot; must be terminated
+				by the matching end-tag &quot;&lt;/Person&gt;&quot;.</text>
+		</message>
+	</exception>
+<stacktrace>com.sap.aii.ibrep.server.mapping.hmi.MappingTestExecutionException: Runtime Exception when executing
+application mapping program com/sap/xi/tf/_MM_Test_; Details: com.sap.aii.utilxi.misc.api.BaseRuntimeException;
+The element type &quot;Person&quot; must be terminated by the matching end-tag &quot;&lt;/Person&gt;&quot;. at
+com.sap.aii.ibrep.server.mapping.hmi.OperationMappingTestExecutionHmi.executeMapping(OperationMappingTestExecutionHmi.java:309)
+</stacktrace>
+</testExecutionResponse>

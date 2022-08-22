@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutionResponse>
+	<outputXML><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<ns:XiPatternMessage2 xmlns:ns="http://sap.com/xi/XI/System/Patterns"><Person><Id></Id><FullName> </FullName><PhoneNumber></PhoneNumber><CountryCode></CountryCode></Person></ns:XiPatternMessage2>]]></outputXML>
+	<exportParameters/>
+	<messages>
+		<message level="INFO">Loaded class com.sap.xi.tf._XiPatternMessage1ToMessage2_</message>
+		<message level="INFO">Call method execute of the application Java mapping com.sap.xi.tf._XiPatternMessage1ToMessage2_</message>
+		<message level="INFO">Resource not found: META-INF/services/javax.xml.parsers.SAXParserFactory</message>
+		<message level="INFO">com.sap.aii.ib.server.mapping.execution.MappingClassNotFoundException:
+META-INF/services/javax.xml.parsers.saxparserfactory at
+com.sap.aii.ib.server.mapping.execution.InternalMappingFinder.getInputStream(InternalMappingFinder.java:125)
+at com.sap.aii.ib.server.mapping.execution.InternalMappingFinder.readFile(InternalMappingFinder.java:63) at
+com.sap.aii.ib.server.mapping.execution.MappingLoader.findResources(MappingLoader.java:354) at
+com.sap.aii.mappingtool.tf3.rt.xparser.XParser.run(XParser.java:83)</message>
+		<message level="INFO">Java mapping com/sap/xi/tf/_XiPatternMessage1ToMessage2_ completed. (executeStep() of
+			com.sap.xi.tf._XiPatternMessage1ToMessage2_).</message>
+		<message level="INFO">Execution of mapping on server took 144 milliseconds</message>
+		<message level="INFO">Executed successfully</message>
+	</messages>
+</testExecutionResponse>
