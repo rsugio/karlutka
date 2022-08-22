@@ -37,6 +37,7 @@ class PI(
     val hmiClientId = UUID.randomUUID()
     lateinit var hmiServices: List<Hm.HmiService>
     var swcv: List<MPI.Swcv> = listOf()
+    var namespaces: List<MPI.Namespace> = listOf()
 
     init {
         require(konfig is KfTarget.PIAF)
@@ -60,12 +61,12 @@ class PI(
                 log.append("\t${s.methodid}\t${s.release}/${s.SP}\n")
             }
         }
-        println(log)
+        //println(log)
     }
 
-    fun findHmiServiceMethod(service: String, method: String): Hm.HmiService {
+    private fun findHmiServiceMethod(service: String, method: String): Hm.HmiService {
         val s = hmiServices.filter { it.serviceid == service && it.methodid == method }.sortedBy { it.release }
-        require(s.size > 0)
+        require(s.isNotEmpty())
         return s.last()
     }
 
@@ -185,7 +186,7 @@ class PI(
 
     suspend fun askNamespaces() {
         val serv = findHmiServiceMethod("query", "generic")
-        val srq = Hm.GeneralQueryRequest.ofArg(listOf("namespdecl"), null, "RA_WORKSPACE_ID")
+        val srq = Hm.GeneralQueryRequest.namespaces(swcv.map{it.id})
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
             uuid(UUID.randomUUID()),
@@ -202,13 +203,40 @@ class PI(
             "1.0"
         )
         val resp = hmiPost(serv.url(), req)
+        val nsp = Hm.QueryResult.parse(resp.MethodOutput!!.Return)
+        namespaces = nsp.toNamespace(swcv)
+    }
 
+    suspend fun executeOMtest(testRequest: Hm.TestExecutionRequest): Hm.TestExecutionResponse {
+        val serv = findHmiServiceMethod("mappingtestservice", "executeoperationmappingmethod")
+
+        val req = Hm.HmiRequest(
+            uuid(hmiClientId),
+            uuid(UUID.randomUUID()),
+            serv.applCompLevel(),
+            Hm.HmiMethodInput("body", testRequest.encodeToString()),
+            serv.methodid.uppercase(),
+            serv.serviceid,
+            "dummy",
+            "dummy",
+            "EN",
+            false,
+            null,
+            null,
+            "1.0"
+        )
+        val resp = hmiPost(serv.url(), req)
+        val trsp = Hm.TestExecutionResponse.decodeFromString(resp.MethodOutput!!.Return)
+        return trsp
     }
 
     suspend fun hmiPost(
         uri: String,
         req: Hm.HmiRequest
     ): Hm.HmiResponse {
+        if (req.HmiMethodInput.input.contains("QUERY_REQUEST_XML")) {
+            Paths.get("c:/data/tmp/QUERY_REQUEST_XML.xml").writeText(req.HmiMethodInput.input["QUERY_REQUEST_XML"]!!)
+        }
         val a = client.post(uri) {
             contentType(ContentType.Text.Xml)
             val t = req.encodeToString()
@@ -219,6 +247,7 @@ class PI(
         val t = a.bodyAsText()
         Paths.get("c:/data/tmp/posthmi.response").writeText(t)
         val hr = Hm.parseResponse(t)
+        if (hr.MethodOutput!=null) Paths.get("c:/data/tmp/hmo.xml").writeText(hr.MethodOutput.Return)
         return hr
     }
 }

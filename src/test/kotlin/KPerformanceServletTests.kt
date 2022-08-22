@@ -13,17 +13,17 @@ class KPerformanceServletTests {
 
     @Test
     fun static() {
-        val p1 = PerformanceDataQueryResults.parse(s("pi_PerformanceDataQuery/01empty.xml"))
+        val p1 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/01empty.xml"))
         show(p1.components())
-        val p2 = PerformanceDataQueryResults.parse(s("pi_PerformanceDataQuery/02intervals.xml"))
+        val p2 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/02intervals.xml"))
         show(p2.Periods!!.value.size)
-        val p3 = PerformanceDataQueryResults.parse(s("pi_PerformanceDataQuery/03data.xml"))
+        val p3 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/03data.xml"))
         show(p3.perfdata().size)
-        val p4 = PerformanceDataQueryResults.parse(s("pi_PerformanceDataQuery/04datamin.xml"))
+        val p4 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/04datamin.xml"))
         show(p4.perfdata().size)
-        val p5 = PerformanceDataQueryResults.parse(s("pi_PerformanceDataQuery/05intervals.xml"))
+        val p5 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/05intervals.xml"))
         show(p5.Periods!!.value.size)
-        val p6 = PerformanceDataQueryResults.parse(s("pi_PerformanceDataQuery/06nodata.xml"))
+        val p6 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/06nodata.xml"))
         show(p6)
     }
 

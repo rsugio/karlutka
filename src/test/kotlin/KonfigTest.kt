@@ -13,10 +13,10 @@ class KonfigTest {
 
     @Test
     fun karla() {
-        val k0 = Kfg.parse(s("Kfg/empty.yaml"))
+        val k0 = Kfg.parse(s("/Kfg/empty.yaml"))
         assertEquals(0, k0.targets.size)
 
-        val rus = s("Kfg/karla.yaml")
+        val rus = s("/Kfg/karla.yaml")
         require(rus.contains("Русские буквы"))
         val k1 = Kfg.parse(rus)
         show(k1)
@@ -31,7 +31,7 @@ class KonfigTest {
         val btpcf = k1.targets[3] as KfTarget.BTPCF
         require(btpcf.subaccount == "eddd1d16-2a25-4055-86c0-7405b88ea57d")
 
-        val pws = KfPasswds.parse(s("Kfg/passwd.yaml"))
+        val pws = KfPasswds.parse(s("/Kfg/passwd.yaml"))
         k1.targets.forEach { t ->
             t.loadAuths(pws.securityMaterials)
         }
@@ -68,7 +68,7 @@ class KonfigTest {
 
     @Test
     fun passwds() {
-        val kfp = KfPasswds.parse(s("Kfg/passwd.yaml"))
+        val kfp = KfPasswds.parse(s("/Kfg/passwd.yaml"))
         require(kfp.securityMaterials.size == 6, { kfp.securityMaterials.size })
         //TODO добавить проверку загрузки кейстора
         require(kfp.keystore.path == Paths.get("keystore.jks"))

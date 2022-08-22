@@ -26,19 +26,19 @@ class KBtpCfTest {
     @Test
     fun static() {
         require(target.oauth.client_id.isNotBlank())
-        val a1 = DefaultJson.decodeFromString<MCommon.AuthToken>(s("btpCf/01authok.json"))
+        val a1 = DefaultJson.decodeFromString<MCommon.AuthToken>(s("/btpCf/01authok.json"))
         require(a1.token_type.lowercase() == "bearer")
 
-        DefaultJson.decodeFromString<List<Btcf.Role>>(s("btpCf/03roles.json"))
-        DefaultJson.decodeFromString<List<Btcf.RoleCollection>>(s("btpCf/04rolecollections.json"))
-        DefaultJson.decodeFromString<List<Btcf.App>>(s("btpCf/05apps.json"))
+        DefaultJson.decodeFromString<List<Btcf.Role>>(s("/btpCf/03roles.json"))
+        DefaultJson.decodeFromString<List<Btcf.RoleCollection>>(s("/btpCf/04rolecollections.json"))
+        DefaultJson.decodeFromString<List<Btcf.App>>(s("/btpCf/05apps.json"))
         //DefaultJson.decodeFromString<Scim?>(s("btpCf/06groups.json"))
         //DefaultJson.decodeFromString<Scim?>(s("btpCf/07users.json"))
     }
 
     @Test
     fun dynamic() {
-        var bn = BTPCF(target)
+        val bn = BTPCF(target)
         runBlocking {
             println(bn.authorizationV2Roles().size)
             println(bn.authorizationV2Rolecollections().size)

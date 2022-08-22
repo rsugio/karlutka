@@ -4,7 +4,6 @@ import karlutka.server.Server
 import karlutka.util.*
 import kotlinx.coroutines.runBlocking
 import java.nio.file.Paths
-import kotlin.io.path.writeText
 import kotlin.test.Test
 
 class KPiTest {
@@ -51,17 +50,27 @@ class KPiTest {
     fun hmi() {
         runBlocking {
             pi.hmiGetRegistered()
-            pi.hmiAskSWCV()
-            pi.askNamespaces()
-//            val lst = pi.rawhmi(Hm.GeneralQueryRequest.swcv())
+//            pi.hmiAskSWCV()
+//            pi.askNamespaces()
 
-//            require(hr.MethodOutput != null)
-//            Paths.get("c:/data/tmp/queryResult.xml").writeText(hr.MethodOutput.Return)
-//            val qr = Hm.QueryResult.parse(hr.MethodOutput.Return)
+            val xml = """<ns0:XiPatternMessage1 xmlns:ns0="http://sap.com/xi/XI/System/Patterns">
+<Person>  <Id>Русскiй языкъ прекрасенъ</Id>  <LastName/>  <FirstName/>  <TelephoneNumber/>  <CountryCode/> </Person>
+</ns0:XiPatternMessage1>"""
+            val om1 = Hm.TestExecutionRequest.create(
+                Hm.HmVC("0050568f0aac1ed4a6e56926325e2eb3", "S"),
+                "XiPatternInterface1ToInterface2", "http://sap.com/xi/XI/System/Patterns", null,
+                xml
+            )
+            val r1 = pi.executeOMtest(om1)
+            println(r1.outputXML)
 
-//                .toSwcv()
-
-
+            val om2 = Hm.TestExecutionRequest.create(
+                Hm.HmVC("9c1353476b6f11ebcedc000000417ca6", "L"),
+                "OM_Test", "http://test.com", "5a4477d155483833a4e147f464ecac3c",
+                xml
+            )
+            val r2 = pi.executeOMtest(om2)
+            println(r2.outputXML)
         }
     }
 }

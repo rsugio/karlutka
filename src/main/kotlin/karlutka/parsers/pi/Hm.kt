@@ -10,6 +10,7 @@ import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
+import nl.adaptivity.xmlutil.util.CompactFragment
 import java.io.InputStreamReader
 
 class Hm {
@@ -59,7 +60,7 @@ class Hm {
 
     @Serializable
     @XmlSerialName("instance", "", "")
-    class Instance(
+    data class Instance(
         val typeid: String,
         @XmlElement(true)
         val attribute: List<Attribute> = listOf(),
@@ -102,13 +103,13 @@ class Hm {
         var instance: Instance? = null
 
         init {
-            require(value.size > 0)
+            require(value.isNotEmpty())
             if (leave_typeid == "string" && !value[0].isnull && value[0].value.size > 0)
                 string = value[0].value[0] as String
             if (leave_typeid == null) {
                 val x = value.filter { it.isnull == false }
                     .flatMap { m -> m.value.filter { it is Instance } as List<Instance> }
-                if (x.size > 0) instance = x[0]
+                if (x.isNotEmpty()) instance = x[0]
             }
         }
     }
@@ -323,7 +324,7 @@ class Hm {
     /**
      * Выборки из ESR
      */
-    class GeneralQueryRequest(
+    data class GeneralQueryRequest(
         @XmlElement(true)
         val types: Types,
         @XmlElement(true)
@@ -337,21 +338,21 @@ class Hm {
 
         @Serializable
         @XmlSerialName("types", "", "")
-        class Types(
+        data class Types(
             @XmlElement(true)
-            val type: MutableList<Type> = mutableListOf(),
+            val type: List<Type> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("swcListDef", "", "")
-        class SwcListDef(
+        data class SwcListDef(
             val def: String,
             val swcInfoList: SwcInfoList? = null,
         )
 
         @Serializable
         @XmlSerialName("qc", "", "")
-        class QC(
+        data class QC(
             val qcType: String = "S",
             val delMode: String = "N",
             @XmlElement(true) var clCxt: ClCxt,
@@ -359,105 +360,113 @@ class Hm {
         )
 
         @Serializable
-        @XmlSerialName("qc", "", "")
-        class ClCxt(
+        @XmlSerialName("clCxt", "", "")
+        data class ClCxt(
             val consider: String = "",
             val user: String = ""
         )
 
         @Serializable
         @XmlSerialName("condition", "", "")
-        class Condition(
+        data class Condition(
             @XmlElement(true) val complex: Complex? = null,
             @XmlElement(true) val elementary: Elementary? = null,
         )
 
         @Serializable
         @XmlSerialName("complex", "", "")
-        class Complex(
+        data class Complex(
             @XmlElement(true) val elementary: List<Elementary> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("elementary", "", "")
-        class Elementary(
+        data class Elementary(
             @XmlElement(true) val single: Single,
         )
 
         @Serializable
         @XmlSerialName("single", "", "")
-        class Single(
+        data class Single(
             @XmlElement(true)
             val key: String,
             @XmlElement(true)
+            // Value types:#BO#(Boolean),#DT#(Date),#GU#(Guid), #IN#(Integer),#XK#(XiKey),#XR#(XiRef),#AG#(Guid[])
             val value: Val,
             @XmlElement(true)
+            // EQ, NOT_EQ, LIKE, NOT_LIKE, GE, LE, GT, BETWEEN, NOT_BETWEEN, IN, NOT_IN, IS_NULL, IS_NOT_NULL
             val op: String,
         )
 
         @Serializable
         @XmlSerialName("val", "", "")
-        class Val(
-            @XmlElement(true) val simple: Simple,
+        data class Val(
+            @XmlElement(true) val simple: Simple
         )
 
         @Serializable
         @XmlSerialName("simple", "", "")
+        // Value types:#BO#(Boolean),#DT#(Date),#GU#(Guid), #IN#(Integer),#XK#(XiKey),#XR#(XiRef),#AG#(Guid[])
         data class Simple(
             @XmlElement(true) val strg: String? = null,
             @XmlElement(true) val int: Int? = null,
             @XmlElement(true) val bool: Boolean? = null,
+            @XmlElement(true) val date: String? = null, //2022-01-12T10:19:12
+            @XmlElement(true) val bin: String? = null,  //00000000000000000000000000000000
         ) {
             constructor(a: String) : this(a, null, null)
-            constructor(a: Int) : this(null, a, null)
-            constructor(a: Boolean) : this(null, null, a)
         }
 
         @Serializable
         @XmlSerialName("result", "", "")
-        class Result(
-            @XmlElement(true) val attrib: MutableList<String> = mutableListOf(),
+        data class Result(
+            @XmlElement(true) val attrib: List<String> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("swcInfoList", "", "")
-        class SwcInfoList(
-            @XmlElement(true) val swc: MutableList<SWC> = mutableListOf(),
+        data class SwcInfoList(
+            @XmlElement(true) val swc: List<SWC> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("swc", "", "")
-        class SWC(
+        data class SWC(
             val id: String,
+            val sp: String?,
             val underL: Boolean,
         )
 
         @Serializable
         @XmlSerialName("type", "", "")
-        class Type(
+        data class Type(
             val id: String,
             @XmlElement(true)
-            val key: MutableList<KeyElem> = mutableListOf(),
+            val key: List<KeyElem> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("keyElem", "", "")
-        class KeyElem(
+        data class KeyElem(
             val name: String,
             val pos: Int,
         )
 
         companion object {
             fun ofArg(lst: List<String>, cond: Condition?, vararg result: String): GeneralQueryRequest {
-                val lst2 = lst.map { Type(it) } as MutableList<Type>
-                val res = Result(result.toList() as MutableList<String>)
+                val lst2 = lst.map { Type(it) }
+                val res = Result(result.toList())
 
                 return GeneralQueryRequest(
                     Types(lst2),
-                    GeneralQueryRequest.QC("S", "N", ClCxt("S", "U"), SwcListDef("A")),
+                    QC("S", "N", ClCxt("S", "U"), SwcListDef("A")),
                     cond ?: Condition(),
                     res
                 )
+            }
+
+            fun ofType(type: String, cond: Condition?, vararg result: String): GeneralQueryRequest {
+                return ofArg(listOf(type), cond, *result)
             }
 
             fun elementary(key: String, op: String, c: Simple): Condition {
@@ -469,6 +478,24 @@ class Hm {
                 requireNotNull(res)
                 return InputStreamReader(res, Charsets.UTF_8).readText()
             }
+
+            fun namespaces(swc: List<String>): GeneralQueryRequest {
+                val swcinfolist = SwcInfoList(swc.map { x -> SWC(x, "-1", false) })
+                val req = GeneralQueryRequest(
+                    Types(listOf(Type("namespace"))),
+                    QC("S", "N", ClCxt("S", "User"), SwcListDef("G", swcinfolist)),
+                    elementary("QA_NSP_ADD_CLASSIC", "EQ", Simple(null, null, false)),
+                    Result(listOf("RA_NSP_STRING"))
+                )
+                val req2 = GeneralQueryRequest(
+                    Types(listOf(Type("namespdecl"))),
+                    QC("S", "N", ClCxt("S", "User"), SwcListDef("G", swcinfolist)),
+                    elementary("OBJECTID", "NOT_EQ", Simple("")),
+                    Result(listOf("Namespace", "OBJECTID", "RA_XILINK", "MODIFYDATE", "MODIFYUSER", "VERSIONID"))
+                )
+
+                return req
+            }
         }
     }
 
@@ -477,7 +504,7 @@ class Hm {
     /**
      * Ответ на запрос (симпл квери)
      */
-    class QueryResult(
+    data class QueryResult(
         @XmlElement(true)
         val headerInfo: HeaderInfo,
         @XmlElement(true)
@@ -487,17 +514,17 @@ class Hm {
         @XmlElement(true)
         val messages: String? = null
     ) {
-        fun toTable(): MutableList<MutableMap<String, String?>> {
-            val lines = mutableListOf<MutableMap<String, String?>>()
+        fun toTable(): List<MutableMap<String, C>> {
+            val lines = mutableListOf<MutableMap<String, C>>()
             val posTypeMapping =
                 headerInfo.colDef.def.associate { Pair(it.pos, it.type) }    // 0:"", 1:RA_WORKSPACE_ID, 2:WS_NAME
             matrix.r.forEach { row ->
-                val res = mutableMapOf<String, String?>()
+                val res = mutableMapOf<String, C>()
                 row.c.forEachIndexed { cx, col ->
                     val cn = posTypeMapping.get(cx)
                     requireNotNull(cn)
                     if (cn.isNotBlank()) {
-                        res[cn] = col.strvalue()
+                        res[cn] = col
                     }
                 }
                 lines.add(res)
@@ -506,25 +533,44 @@ class Hm {
             return lines
         }
 
+        // см. PI.swcv
         fun toSwcv(): List<MPI.Swcv> {
-            val table = toTable()
-            return table.map { x ->
+            return toTable().map { x ->
                 MPI.Swcv(
-                    x["RA_WORKSPACE_ID"]!!,
-                    x["VENDOR"]!!,
-                    x["NAME"]!!,
-                    x["VERSION"]!!,
-                    x["WS_TYPE"]!!.get(0),
-                    x["ORIGINAL_LANGUAGE"]!!,
-                    x["WS_NAME"]!!
+                    x["RA_WORKSPACE_ID"]!!.strvalue()!!,
+                    x["VENDOR"]!!.strvalue()!!,
+                    x["NAME"]!!.strvalue()!!,
+                    x["VERSION"]!!.strvalue()!!,
+                    x["WS_TYPE"]!!.strvalue()!!.get(0),
+                    x["ORIGINAL_LANGUAGE"]!!.strvalue()!!,
+                    x["WS_NAME"]!!.strvalue()!!
                 )
             }
-            //
+        }
+
+        // см. PI.namespaces
+        fun toNamespace(swcv: List<MPI.Swcv>): List<MPI.Namespace> {
+            val t = toTable().map { x ->
+                val c = x["RA_NSP_STRING"]!!
+                val nsp = c.nsp!!
+                val text = nsp.key.elem[0]
+                val oid = nsp.ref.key.oid
+                require(nsp.key.typeID == "namespace")
+                requireNotNull(nsp.ref)
+                if (text.isNotBlank()) {
+                    val sw = swcv.find { it.id == oid }
+                    requireNotNull(sw) { "SWCV oid=$oid title=${nsp.ref.vc.caption} не найден для неймспейса '$text'" }
+                    MPI.Namespace(text, nsp.key.elem[0], sw)
+                } else {
+                    null
+                }
+            }
+            return t.filter { it != null } as List<MPI.Namespace>
         }
 
         @Serializable
         @XmlSerialName("headerInfo", "", "")
-        class HeaderInfo(
+        data class HeaderInfo(
             @XmlElement(true)
             @XmlSerialName("rows", "", "")
             val rows: Counted,
@@ -536,43 +582,43 @@ class Hm {
         )
 
         @Serializable
-        class Counted(
+        data class Counted(
             val count: Int,
         )
 
         @Serializable
         @XmlSerialName("colDef", "", "")
-        class ColDef(
+        data class ColDef(
             @XmlElement(true)
-            val def: MutableList<Def> = mutableListOf(),
+            val def: List<Def> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("def", "", "")
-        class Def(
+        data class Def(
             val type: String,
             val pos: Int,
         )
 
         @Serializable
         @XmlSerialName("typeInfo", "", "")
-        class TypeInfo(
+        data class TypeInfo(
             @XmlSerialName("type", "", "")
-            val type: MutableList<GeneralQueryRequest.Type> = mutableListOf(),
+            val type: List<GeneralQueryRequest.Type> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("matrix", "", "")
-        class Matrix(
+        data class Matrix(
             @XmlElement(true)
-            val r: MutableList<R> = mutableListOf(),
+            val r: List<R> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("r", "", "")
         class R(
             @XmlElement(true)
-            val c: MutableList<C> = mutableListOf(),
+            val c: List<C> = listOf(),
         )
 
         @Serializable
@@ -584,10 +630,14 @@ class Hm {
             val simple: GeneralQueryRequest.Simple? = null,
             @XmlElement(true)
             val qref: Qref? = null,
+            @XmlElement(true)
+            val nsp: Nsp? = null
         ) {
             fun strvalue(): String? {
                 if (qref != null) {
                     return "qref=" + qref.ref.key.typeID
+                } else if (nsp != null) {
+                    return nsp.key.elem[0]      //неймспейсы
                 } else if (wkID != null) {
                     return wkID.id
                 } else if (simple != null) {
@@ -605,48 +655,22 @@ class Hm {
         )
 
         @Serializable
+        @XmlSerialName("nsp", "", "")
+        class Nsp(
+            val isUL: Boolean,
+            @XmlElement(true)
+            val key: Key,
+            @XmlElement(true)
+            val ref: Ref,
+        )
+
+        @Serializable
         @XmlSerialName("qref", "", "")
         class Qref(
             val isMod: Boolean,
             val isInUnderL: Boolean,
             @XmlElement(true) val ref: Ref,
         )
-
-        @Serializable
-        @XmlSerialName("vc", "", "")
-        class HmVC(
-            val swcGuid: String,
-            val vcType: String,
-            val sp: Int? = null,
-            val caption: String? = null,
-            @XmlElement(true) val clCxt: GeneralQueryRequest.ClCxt? = null,
-        )
-
-        @Serializable
-        @XmlSerialName("key", "", "")
-        class HmKey(
-            val typeID: String,
-            val oid: String? = null,
-            @XmlElement(true)
-            val elem: MutableList<String> = mutableListOf(),
-        )
-
-        @Serializable
-        @XmlSerialName("ref", "", "")
-        class Ref(
-            val vc: HmVC,
-            val key: HmKey,
-            @XmlElement(true)
-            val vspec: VSpec? = null,
-        ) {
-            @Serializable
-            @XmlSerialName("vspec", "", "")
-            class VSpec(
-                val type: Int,
-                val id: String,
-                val deleted: Boolean,
-            )
-        }
 
         companion object {
             // на входе чистый xml
@@ -655,5 +679,212 @@ class Hm {
             }
         }
     }
+
+    @Serializable
+    @XmlSerialName("vc", "", "")
+    class HmVC(
+        val swcGuid: String,
+        val vcType: String,
+        val sp: Int? = null,
+        val caption: String? = null,
+        @XmlElement(true) val clCxt: GeneralQueryRequest.ClCxt? = null,
+    )
+
+    @Serializable
+    @XmlSerialName("key", "", "")
+    class Key(
+        val typeID: String,
+        val oid: String? = null,
+        @XmlElement(true)
+        val elem: List<String> = listOf(),
+    )
+
+    @Serializable
+    @XmlSerialName("ref", "", "")
+    class Ref(
+        val vc: HmVC,
+        val key: Key,
+        @XmlElement(true)
+        val vspec: VSpec? = null,
+    ) {
+        @Serializable
+        @XmlSerialName("vspec", "", "")
+        class VSpec(
+            val type: Int,
+            val id: String,
+            val deleted: Boolean,
+        )
+    }
+
+    @Serializable
+    @XmlSerialName("testExecutionRequest", "", "")
+    data class TestExecutionRequest(
+        @XmlElement(true)
+        val ref: Ref,
+        @XmlElement(true)
+        val testData: TestData,
+    ) {
+
+        @Serializable
+        @XmlSerialName("testData", "", "")
+        class TestData(
+            @XmlElement(true)
+            val inputXml: String,
+            @XmlElement(true)
+            val parameters: Parameters,
+            @XmlElement(true)
+            val testParameters: TestParameters? = null,
+            @XmlElement(true)
+            val traceLevel: Int = 3,
+        )
+
+        @Serializable
+        @XmlSerialName("parameters", "", "")
+        class Parameters(
+            @XmlElement(true)
+            val testParameterInfo: TestParameterInfo,
+        )
+
+        @Serializable
+        @XmlSerialName("testParameters", "", "")
+        class TestParameters(
+            @XmlElement(true) val direction: String,
+            @XmlElement(true) val fromStep: Int,
+            @XmlElement(true) val toStep: Int,
+        )
+
+        @Serializable
+        @XmlSerialName("testParameterInfo", "", "")
+        class TestParameterInfo(
+            @XmlElement(true)
+            @XmlSerialName("HeaderParameters", "", "")
+            val HeaderParameters: HIParameters,
+            @XmlElement(true)
+            @XmlSerialName("ImportingParameters", "", "")
+            val ImportingParameters: HIParameters,
+        )
+
+        @Serializable
+        class HIParameters(
+            @XmlElement(true) val properties: Properties,
+        )
+
+        @Serializable
+        @XmlSerialName("properties", "", "")
+        class Properties(
+            @XmlElement(true)
+            val property: List<Property> = listOf(),
+        )
+
+        @Serializable
+        @XmlSerialName("property", "", "")
+        class Property(
+            val name: String,
+            @XmlValue(true)
+            val value: String = "",
+        )
+
+        fun encodeToString() = hmserializer.encodeToString(this)
+
+        companion object {
+            fun decodeFromString(sxml: String): TestExecutionRequest {
+                return hmserializer.decodeFromString(sxml)
+            }
+
+            fun create(
+                swcv: HmVC,
+                name: String,
+                namespace: String,
+                oid: String? = null,
+                testXml: String
+            ): TestExecutionRequest {
+                val params = listOf(
+                    Property("TimeSent", ""),
+                    Property("SenderSystem", ""),
+                    Property("SenderParty", ""),
+                    Property("InterfaceNamespace", ""),
+                    Property("Interface", ""),
+                    Property("SenderPartyScheme", ""),
+                    Property("ReceiverPartyAgency", ""),
+                    Property("RefToMessageId", ""),
+                    Property("ReceiverPartyScheme", ""),
+                    Property("SenderName", ""),
+                    Property("Profiling", ""),
+                    Property("MessageId", ""),
+                    Property("VersionMajor", ""),
+                    Property("ReceiverName", ""),
+                    Property("ReceiverParty", ""),
+                    Property("ProcessingMode", ""),
+                    Property("SenderService", ""),
+                    Property("ReceiverNamespace", ""),
+                    Property("ConversationId", ""),
+                    Property("VersionMinor", ""),
+                    Property("SenderNamespace", ""),
+                    Property("ReceiverService", ""),
+                    Property("ReceiverSystem", ""),
+                    Property("SenderPartyAgency", ""),
+                )
+                val ref = Ref(swcv, Key("MAPPING", oid, listOf(name, namespace)))
+                val td = TestData(
+                    testXml, Parameters(
+                        TestParameterInfo(
+                            HIParameters(Properties(params)),
+                            HIParameters(Properties(listOf()))
+                        )
+                    ),
+                    TestParameters("REQUEST", 0, 0),
+                    3
+                )
+                val t = TestExecutionRequest(ref, td)
+                return t
+            }
+        }
+    }
+    @Serializable
+    @XmlSerialName("testExecutionResponse", "", "")
+    data class TestExecutionResponse(
+        @XmlElement(true)
+        val outputXML: String? = null,
+        @XmlElement(true)
+        val exportParameters: String? = null,       //TODO неизвестный тип, подобрать
+        @XmlElement(true)
+        val messages: Messages? = null,
+        @XmlElement(true)
+        val exception: TestException? = null,
+        @XmlElement(true)
+        val stacktrace: String? = null,
+    ) {
+        companion object {
+            fun decodeFromString(sxml: String): TestExecutionResponse {
+                return hmserializer.decodeFromString(sxml)
+            }
+        }
+    }
+
+    @Serializable
+    @XmlSerialName("exception", "", "")
+    data class TestException(
+        @XmlElement(true)
+        val type: String,
+        @XmlElement(true)
+        @Contextual
+        @XmlSerialName("message", "", "")
+        val message: CompactFragment,
+    )
+
+    @Serializable
+    @XmlSerialName("message", "", "")
+    data class TestMessage(
+        val level: String? = "INFO",
+        @XmlValue(true)
+        val text2: String? = null
+    )
+
+    @Serializable
+    @XmlSerialName("messages", "", "")
+    data class Messages(
+        @XmlElement(true)
+        val message: List<TestMessage>,
+    )
 
 }

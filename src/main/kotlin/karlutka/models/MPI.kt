@@ -13,5 +13,10 @@ class MPI {
         val ws_name: String,    // SC_I_END, 1.0 of vendor.com
     )
 
+    data class Namespace(
+        val id: String,        // пока совпадает с SWCV.id
+        val value: String,
+        val swcv: Swcv
+    )
 
 }

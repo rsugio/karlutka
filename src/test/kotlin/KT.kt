@@ -7,8 +7,9 @@ class KT {
          * Строка из ресурса
          */
         fun s(s: String): String {
+            require(s.startsWith("/"))
             val x = Companion::class.java.getResourceAsStream(s)
-            requireNotNull(x)
+            requireNotNull(x) {"Ресурс $s не найден"}
             return InputStreamReader(BOMInputStream(x), Charsets.UTF_8).readText()
         }
     }
