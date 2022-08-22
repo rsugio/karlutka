@@ -7,6 +7,8 @@ plugins {
     application
     java
     id("com.github.johnrengelman.shadow") version "7.0.0"
+    //id("io.ktor.plugin") version "2.1.0"
+
 }
 
 group = "io.rsug"
@@ -88,9 +90,14 @@ application {
     mainClass.set("MainKt")
 }
 
-val shadowJar: ShadowJar by tasks
-shadowJar.apply {
+//val shadowJar: ShadowJar by tasks
+//shadowJar.apply {
 //    dependencies {
-//      exclude(dependency(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar")))))
 //    }
-}
+//}
+
+//ktor {
+//    fatJar {
+//        archiveFileName.set("fat.jar")
+//    }
+//}
