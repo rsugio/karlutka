@@ -230,6 +230,29 @@ class PI(
         return trsp
     }
 
+    suspend fun executeMMtest(testRequest: Hm.TestExecutionRequest): Hm.TestExecutionResponse {
+        val serv = findHmiServiceMethod("mappingtestservice", "executemappingmethod")
+
+        val req = Hm.HmiRequest(
+            uuid(hmiClientId),
+            uuid(UUID.randomUUID()),
+            serv.applCompLevel(),
+            Hm.HmiMethodInput("body", testRequest.encodeToString()),
+            serv.methodid.uppercase(),
+            serv.serviceid,
+            "dummy",
+            "dummy",
+            "EN",
+            false,
+            null,
+            null,
+            "1.0"
+        )
+        val resp = hmiPost(serv.url(), req)
+        val trsp = Hm.TestExecutionResponse.decodeFromString(resp.MethodOutput!!.Return)
+        return trsp
+    }
+
     suspend fun hmiPost(
         uri: String,
         req: Hm.HmiRequest

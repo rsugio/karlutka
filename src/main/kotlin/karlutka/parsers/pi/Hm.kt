@@ -793,9 +793,9 @@ class Hm {
 
             fun create(
                 swcv: HmVC,
+                typeId: String = "MAPPING", //для ММ - XI_TRAFO
                 name: String,
                 namespace: String,
-                oid: String? = null,
                 testXml: String
             ): TestExecutionRequest {
                 val params = listOf(
@@ -824,7 +824,8 @@ class Hm {
                     Property("ReceiverSystem", ""),
                     Property("SenderPartyAgency", ""),
                 )
-                val ref = Ref(swcv, Key("MAPPING", oid, listOf(name, namespace)))
+                // здесь oid ничем не помогает
+                val ref = Ref(swcv, Key(typeId, null, listOf(name, namespace)))
                 val td = TestData(
                     testXml, Parameters(
                         TestParameterInfo(

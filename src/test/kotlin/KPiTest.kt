@@ -54,23 +54,31 @@ class KPiTest {
 //            pi.askNamespaces()
 
             val xml = """<ns0:XiPatternMessage1 xmlns:ns0="http://sap.com/xi/XI/System/Patterns">
-<Person>  <Id>Русскiй языкъ прекрасенъ</Id>  <LastName/>  <FirstName/>  <TelephoneNumber/>  <CountryCode/> </Person>
+<Person><Id>Русскiй языкъ прекрасенъ</Id><LastName/><FirstName/><TelephoneNumber/><CountryCode/></Person>
 </ns0:XiPatternMessage1>"""
+
             val om1 = Hm.TestExecutionRequest.create(
                 Hm.HmVC("0050568f0aac1ed4a6e56926325e2eb3", "S"),
-                "XiPatternInterface1ToInterface2", "http://sap.com/xi/XI/System/Patterns", null,
+                "MAPPING", "XiPatternInterface1ToInterface2",
+                "http://sap.com/xi/XI/System/Patterns",
                 xml
             )
-            val r1 = pi.executeOMtest(om1)
-            println(r1.outputXML)
+//            val r1 = pi.executeOMtest(om1)
+//            println(r1.outputXML)
 
             val om2 = Hm.TestExecutionRequest.create(
                 Hm.HmVC("9c1353476b6f11ebcedc000000417ca6", "L"),
-                "OM_Test", "http://test.com", "5a4477d155483833a4e147f464ecac3c",
-                xml
+                "MAPPING", "OM_Ume", "http://test.com", "<a/>"
             )
-            val r2 = pi.executeOMtest(om2)
-            println(r2.outputXML)
+            //val r2 = pi.executeOMtest(om2)
+            //println(r2.outputXML)
+
+            val mm1 = Hm.TestExecutionRequest.create(
+                Hm.HmVC("9c1353476b6f11ebcedc000000417ca6", "L"),
+                "XI_TRAFO", "MM_Test", "http://test.com", "<a/>"
+            )
+            val rm1 = pi.executeMMtest(mm1)
+            println(rm1.outputXML)
         }
     }
 }
