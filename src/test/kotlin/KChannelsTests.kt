@@ -4,7 +4,7 @@ import karlutka.parsers.pi.IChannelAdmin.*
 import karlutka.parsers.pi.RemoteApi
 import kotlin.test.Test
 
-class KChannelsTest {
+class KChannelsTests {
     @Test
     fun IChannelAdminTest() {
         //TODO доделать нормальные тесты и в целом забыть. Остаётся здесь на всякий случай.

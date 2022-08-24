@@ -6,7 +6,7 @@ import javax.mail.internet.MimeMultipart
 import javax.mail.util.ByteArrayDataSource
 import kotlin.test.Test
 
-class KAdapterMessageMonitoringTest {
+class KAdapterMessageMonitoringTests {
     @Test
     fun stable() {
         GetUserDefinedSearchFilters().composeSOAP()

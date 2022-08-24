@@ -1,6 +1,6 @@
 import kotlin.test.Test
 
-class KAbapTest {
+class KAbapTests {
     @Test
     fun az() {
 //        val ter400 = AbapJCo("TER400", null)

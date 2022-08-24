@@ -6,7 +6,7 @@ import java.nio.file.Paths
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class KonfigTest {
+class KonfigTests {
     fun show(a: Any) {
         if (true) println(a)
     }

@@ -7,7 +7,7 @@ import kotlin.math.sin
 import kotlin.test.Test
 
 // https://github.com/influxdata/influxdb-client-java/tree/master/client-kotlin -
-class KInfluxTest {
+class KInfluxTests {
     val token = "XaH4I6PlO8p7HuZqCn0SsCiw4KwkXd72b_v9ETZc5e-zFHDWuKPyTgqI-Eri5v7eBTix9eZPM2iXT6fg2OMxSQ=="
 
     init {

@@ -6,7 +6,7 @@ import kotlinx.coroutines.runBlocking
 import java.nio.file.Paths
 import kotlin.test.Test
 
-class KPiTest {
+class KPiTests {
     val detailed = false
 
     var target: KfTarget.PIAF
