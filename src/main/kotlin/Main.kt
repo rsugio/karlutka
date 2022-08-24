@@ -1,8 +1,5 @@
 import com.sap.conn.jco.JCo
-import karlutka.clients.AbapJCo
-import karlutka.clients.BTPCF
-import karlutka.clients.BTPNEO
-import karlutka.clients.PI
+import karlutka.clients.*
 import karlutka.models.MTarget
 import karlutka.server.DatabaseFactory
 import karlutka.server.Server
@@ -82,6 +79,8 @@ fun main(args: Array<String>) {
             target = BTPNEO(konf)
         } else if (konf is KfTarget.BTPCF) {
             target = BTPCF(konf)
+        } else if (konf is KfTarget.CPINEO) {
+            target = CPINEO(konf)
         } else {
             TODO("UNKNOWN")
         }
