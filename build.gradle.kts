@@ -8,7 +8,7 @@ plugins {
     java
     id("com.github.johnrengelman.shadow") version "7.0.0"
     //id("io.ktor.plugin") version "2.1.0"
-
+    `maven-publish`
 }
 
 group = "io.rsug"
@@ -90,14 +90,20 @@ application {
     mainClass.set("MainKt")
 }
 
-//val shadowJar: ShadowJar by tasks
-//shadowJar.apply {
+publishing {//https://docs.gradle.org/current/userguide/publishing_maven.html
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "io.rsug"
+            artifactId = "karlutka"
+            version = "0.2.1alpha"
+
+            from(components["java"])
+        }
+    }
+}
+
+val shadowJar: ShadowJar by tasks
+shadowJar.apply {
 //    dependencies {
 //    }
-//}
-
-//ktor {
-//    fatJar {
-//        archiveFileName.set("fat.jar")
-//    }
-//}
+}
