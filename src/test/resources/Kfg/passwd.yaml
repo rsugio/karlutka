@@ -10,8 +10,8 @@ securityMaterials:
     login: nr10002321
     passwd: "%^&*(IUYTRT"
 
-  - type: basic
-    id: defaultPO
+  - id: defaultPO
+    type: basic
     text: для ZZZ
     login: surname02
     passwd: "Zaq1234"
@@ -28,12 +28,17 @@ securityMaterials:
     client_id: "sb-na-bfb08b56-80b0-4182-8a6e-530ecdfb5772!a93363"
     client_secret: "4e9f5361-195a-4b29-a1ce-fb191a0de5ea$ZDAoMAN_on9y_Vo_NaVMu4dVFFCKqhk8zRPfUgsjpDc="
 
-  - type: oauth
-    id: jmwh20_platform_api
+  - id: jmwh20_platform_api
+    type: oauth
     text: sdsds2
     url: http://unknown/oauth/token
     client_id: 1234567-2321-21211221-12112323434343
     client_secret: 123
+
+  - id: e500000
+    type: basic
+    login: s0012345678
+    passwd: "1234543534543543"
 
   - id: influx
     type: apitoken

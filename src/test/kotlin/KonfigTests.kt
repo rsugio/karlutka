@@ -20,7 +20,7 @@ class KonfigTests {
         require(rus.contains("Русские буквы"))
         val k1 = Kfg.parse(rus)
         show(k1)
-        require(k1.targets.size == 4)
+        require(k1.targets.size == 5)
         val a1 = k1.targets[0] as KfTarget.ABAP
         assertEquals("разработка", a1.text)
         show(a1.jco.toProperties())
@@ -37,6 +37,10 @@ class KonfigTests {
         }
         require(btpneo.oauth.client_id == "12323232-2323-2323-9233-000000000000")
         require(btpcf.oauth.client_id == "sb-na-bfb08b56-80b0-4182-8a6e-530ecdfb5772!a93363")
+
+        val cpineo = k1.targets[4] as KfTarget.CPINEO
+        require(cpineo.iflmap.contains("iflmap") && cpineo.tmn.contains("tmn"))
+
     }
 
     @Test
@@ -69,7 +73,7 @@ class KonfigTests {
     @Test
     fun passwds() {
         val kfp = KfPasswds.parse(s("/Kfg/passwd.yaml"))
-        require(kfp.securityMaterials.size == 6, { kfp.securityMaterials.size })
+        require(kfp.securityMaterials.size == 7, { kfp.securityMaterials.size })
         //TODO добавить проверку загрузки кейстора
         require(kfp.keystore.path == Paths.get("keystore.jks"))
         require(kfp.keystore.passwd.contentEquals("".toCharArray()))

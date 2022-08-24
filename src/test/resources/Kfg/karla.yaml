@@ -31,6 +31,12 @@ targets:
     apiAuthentication: "https://api.authentication.us10.hana.ondemand.com"
     auth: bc09a195trial
 
+  - sid: e500000
+    type: CPINEO
+    tmn: https://e100999-tmn.hci.eu3.hana.ondemand.com
+    iflmap: https://e100999-iflmap.test.eu3.hana.ondemand.com
+    auth: e500000
+
 # тут пока свалка параметров
 httpClientThreads: 3
 httpClientConnectionTimeoutMillis: 1200

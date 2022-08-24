@@ -75,8 +75,8 @@ sealed class KfTarget {
 
         override fun loadAuths(auths: List<KfAuth>) {
             val kfa = auths.find { it.id == auth }
-            require(kfa!=null, {"для $sid не найден пароль $auth"})
-            require(kfa is KfAuth.OAuth, {"для $sid найден пароль $auth но это не OAuth"})
+            require(kfa != null, { "для $sid не найден пароль $auth" })
+            require(kfa is KfAuth.OAuth, { "для $sid найден пароль $auth но это не OAuth" })
             oauth = kfa
         }
 
@@ -105,6 +105,28 @@ sealed class KfTarget {
         }
 
         override fun getKind() = "BTPCF"
+    }
+
+    @SerialName("CPINEO")
+    @Serializable
+    class CPINEO(
+        override val sid: String,
+        override val text: String? = null,
+        val tmn: String,                 // https://e100999-tmn.hci.eu3.hana.ondemand.com/
+        val iflmap: String,              // https://e100999-iflmap.hci.eu3.hana.ondemand.com/
+        val auth: String,
+    ) : KfTarget() {
+//        @Transient
+//        lateinit var oauth: KfAuth.OAuth     // переделать на нормальный OAuth
+
+        override fun loadAuths(auths: List<KfAuth>) {
+            val kfa = auths.find { it.id == auth }
+            require(kfa != null, { "для $sid не найден пароль $auth" })
+//            require(kfa is KfAuth.OAuth, {"для $sid найден пароль $auth но это не OAuth"})
+//            oauth = kfa
+        }
+
+        override fun getKind() = "CPINEO"
     }
 
     override fun toString() = "($sid[${getKind()}])"
