@@ -25,7 +25,7 @@ class BTPNEO(override val konfig: KfTarget.BTPNEO) : MTarget {
     lateinit var token: MCommon.AuthToken
 
     init {
-        client = KTorUtils.createClient(konfig.apihost, 1, LogLevel.INFO)
+        client = KTorUtils.createClient(konfig.apihost, 1, LogLevel.INFO, mapOf(), json)
         runBlocking { loadToken() }
         client.plugin(Auth).bearer {
             loadTokens {

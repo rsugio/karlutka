@@ -14,6 +14,7 @@ import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
@@ -38,6 +39,7 @@ import karlutka.server.Server
 import kotlinx.coroutines.*
 import kotlinx.html.head
 import kotlinx.html.title
+import kotlinx.serialization.StringFormat
 import org.slf4j.event.Level
 import java.io.OutputStream
 import java.nio.file.Files
@@ -64,11 +66,12 @@ object KTorUtils {
     ) {
         clientEngine = Java.create {
             threadsCount = threads
-            pipelining = true
+            pipelining = false
             protocolVersion = java.net.http.HttpClient.Version.HTTP_1_1
             config {
                 connectTimeout(connectionTimeo)
                 sslContext(KKeystore.getSslContext())
+//                sslParameters(SSLParameters())
             }
         }
     }
@@ -80,6 +83,8 @@ object KTorUtils {
         defaultHostPort: String,
         retries: Int = 2,
         logLevel: LogLevel = LogLevel.NONE,
+        headers: Map<String, String> = mapOf(),
+        format: StringFormat? = null
     ): HttpClient {
         requireNotNull(clientEngine)
         val client = HttpClient(clientEngine) {
@@ -95,12 +100,14 @@ object KTorUtils {
                 level = logLevel
             }
             install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
-                json()
+                if (format!=null) serialization(ContentType.Application.Json, format) // DefaultJson)
             }
             install(Auth)   //конфигурация будет позднее
-            defaultRequest {
+            install(DefaultRequest) {
                 url(defaultHostPort)
-                header("Z", "z")
+                headers.forEach { (k, v) ->
+                    header(k, v)
+                }
             }
         }
         clients.add(client)

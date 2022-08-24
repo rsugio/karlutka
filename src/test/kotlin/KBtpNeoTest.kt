@@ -16,7 +16,6 @@ class KBtpNeoTest {
     private val kfg = Kfg.parse(Paths.get("C:/data/karla.yaml"))
     private var target: KfTarget.BTPNEO
 
-
     init {
         KKeystore.load(kfp.keystore.path, kfp.keystore.passwd)
         KTorUtils.createClientEngine()
@@ -24,8 +23,7 @@ class KBtpNeoTest {
 
         target = kfg.targets.find { it.sid == "eu3prod" }!! as KfTarget.BTPNEO
         target.loadAuths(kfp.securityMaterials)
-
-    }
+   }
 
     @Test
     fun static() {

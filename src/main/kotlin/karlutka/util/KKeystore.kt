@@ -17,6 +17,7 @@ object KKeystore {
 
     fun load(inputStream: InputStream, passwd: CharArray) {
         keyStore.load(inputStream, passwd)
+        println("Keystore aliases:" + keyStore.aliases().toList())
     }
 
     fun getTrustManagerFactory(): TrustManagerFactory? {
@@ -31,7 +32,7 @@ object KKeystore {
         return sslContext
     }
 
-    fun getTrustManager(): X509TrustManager {
-        return getTrustManagerFactory()?.trustManagers?.first { it is X509TrustManager } as X509TrustManager
-    }
+//    fun getTrustManager(): X509TrustManager {
+//        return getTrustManagerFactory()?.trustManagers?.first { it is X509TrustManager } as X509TrustManager
+//    }
 }

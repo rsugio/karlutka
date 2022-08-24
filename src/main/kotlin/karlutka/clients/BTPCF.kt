@@ -23,7 +23,8 @@ class BTPCF(override val konfig: KfTarget.BTPCF) : MTarget {
     var json: Json = DefaultJson    // на случай кастомного json
 
     init {
-        client = KTorUtils.createClient("", 1, LogLevel.INFO)
+        client = KTorUtils.createClient("", 1, LogLevel.INFO, mapOf(), json)
+
         runBlocking { loadToken() }
         client.plugin(Auth).bearer {
             loadTokens {
