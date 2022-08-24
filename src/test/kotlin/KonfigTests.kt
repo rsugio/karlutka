@@ -39,8 +39,7 @@ class KonfigTests {
         require(btpcf.oauth.client_id == "sb-na-bfb08b56-80b0-4182-8a6e-530ecdfb5772!a93363")
 
         val cpineo = k1.targets[4] as KfTarget.CPINEO
-        require(cpineo.iflmap.contains("iflmap") && cpineo.tmn.contains("tmn"))
-
+        require(cpineo.tmn.contains("tmn"))
     }
 
     @Test

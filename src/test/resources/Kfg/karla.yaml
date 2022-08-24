@@ -33,8 +33,7 @@ targets:
 
   - sid: e500000
     type: CPINEO
-    tmn: https://e100999-tmn.hci.eu3.hana.ondemand.com
-    iflmap: https://e100999-iflmap.test.eu3.hana.ondemand.com
+    tmn: "https://e100999-tmn.hci.eu3.hana.ondemand.com"
     auth: e500000
 
 # тут пока свалка параметров

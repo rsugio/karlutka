@@ -113,17 +113,24 @@ sealed class KfTarget {
         override val sid: String,
         override val text: String? = null,
         val tmn: String,                 // https://e100999-tmn.hci.eu3.hana.ondemand.com/
-        val iflmap: String,              // https://e100999-iflmap.hci.eu3.hana.ondemand.com/
+//        val iflmap: String? = null,              // https://e100999-iflmap.hci.eu3.hana.ondemand.com/
         val auth: String,
     ) : KfTarget() {
-//        @Transient
-//        lateinit var oauth: KfAuth.OAuth     // переделать на нормальный OAuth
+        @Transient
+        var basic: KfAuth.Basic? = null
+        @Transient
+        var oauth: KfAuth.OAuth? = null
 
         override fun loadAuths(auths: List<KfAuth>) {
             val kfa = auths.find { it.id == auth }
             require(kfa != null, { "для $sid не найден пароль $auth" })
-//            require(kfa is KfAuth.OAuth, {"для $sid найден пароль $auth но это не OAuth"})
-//            oauth = kfa
+            if (kfa is KfAuth.Basic) {
+                basic = kfa
+            } else if (kfa is KfAuth.OAuth) {
+                oauth = kfa
+            } else {
+                error("Unsupported")
+            }
         }
 
         override fun getKind() = "CPINEO"
@@ -198,6 +205,7 @@ sealed class KfAuth {
     ) : KfAuth() {
         @Transient
         private var _passwd = CharArray(0)
+        fun passwd() = _passwd
 
         init {
             if (passwd.startsWith("!encoded!")) {
@@ -211,8 +219,6 @@ sealed class KfAuth {
                 this.passwd = "!encoded!9876"
             }
         }
-
-        fun passwd() = _passwd
     }
 
     @SerialName("oauth")
