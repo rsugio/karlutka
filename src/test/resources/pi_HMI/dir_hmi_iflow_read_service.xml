@@ -1,0 +1,155 @@
+﻿<!--
+POST /dir/hmi_iflow_read_service/int?container=any
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<instance typeid="com.sap.aii.util.hmi.core.msg.HmiRequest">
+  <attribute isleave="true" leave_typeid="string" name="ClientId">
+    <value index="0" isnull="false">c5f44cd8237011edcab1005056b4c5ba</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ClientLanguage">
+    <value index="0" isnull="false">EN</value>
+  </attribute>
+  <attribute isleave="false" name="ClientLevel">
+    <value index="0" isnull="false">
+      <instance typeid="com.sap.aii.util.applcomp.ApplCompLevel">
+        <attribute isleave="true" leave_typeid="string" name="Release">
+          <value index="0" isnull="false">7.0</value>
+        </attribute>
+        <attribute isleave="true" leave_typeid="string" name="SupportPackage">
+          <value index="0" isnull="false">*</value>
+        </attribute>
+      </instance>
+    </value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ClientPassword">
+    <value index="0" isnull="false">dummy</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ClientUser">
+    <value index="0" isnull="false">user</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ControlFlag">
+    <value index="0" isnull="false">0</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="HmiSpecVersion">
+    <value index="0" isnull="false">1.0</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="MethodId">
+    <value index="0" isnull="false">query</value>
+  </attribute>
+  <attribute isleave="false" name="MethodInput">
+    <value index="0" isnull="false">
+      <instance typeid="com.sap.aii.util.hmi.api.HmiMethodInput">
+        <attribute isleave="false" name="Parameters">
+          <value index="0" isnull="false">
+            <instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+              <attribute isleave="true" leave_typeid="string" name="Key">
+                <value index="0" isnull="false">com.sap.aii.util.hmi.api.HmiMethodInput</value>
+              </attribute>
+              <attribute isleave="true" leave_typeid="string" name="Value">
+                <value index="0" isnull="false">NoParameters</value>
+              </attribute>
+            </instance>
+          </value>
+        </attribute>
+      </instance>
+    </value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="RequestId">
+    <value index="0" isnull="false">c5f44cd9237011edc7e8005056b4c5ba</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="RequiresSession">
+    <value index="0" isnull="false">true</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ServerApplicationId">
+    <value index="0" isnull="false">ld-s-devpi</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ServerLogicalSystemName">
+    <value index="0" isnull="false">DPH</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ServiceId">
+    <value index="0" isnull="false">hmi_iflow_read_service</value>
+  </attribute>
+</instance>
+
+
+POST 50000/dir/hmi_iflow_read_service/int?container=any
+<?xml version="1.0" encoding="UTF-8"?>
+<instance typeid="com.sap.aii.util.hmi.core.msg.HmiRequest">
+	<attribute isleave="true" leave_typeid="string" name="ClientId">
+		<value index="0" isnull="false">c5f44cd8237011edcab1005056b4c5ba</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ClientLanguage">
+		<value index="0" isnull="false">EN</value>
+	</attribute>
+	<attribute isleave="false" name="ClientLevel">
+		<value index="0" isnull="false">
+			<instance typeid="com.sap.aii.util.applcomp.ApplCompLevel">
+				<attribute isleave="true" leave_typeid="string" name="Release">
+					<value index="0" isnull="false">7.0</value>
+				</attribute>
+				<attribute isleave="true" leave_typeid="string" name="SupportPackage">
+					<value index="0" isnull="false">*</value>
+				</attribute>
+			</instance>
+</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ClientPassword">
+		<value index="0" isnull="false">dummy</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ClientUser">
+		<value index="0" isnull="false">user</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ControlFlag">
+		<value index="0" isnull="false">0</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="HmiSpecVersion">
+		<value index="0" isnull="false">1.0</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="MethodId">
+		<value index="0" isnull="false">query</value>
+	</attribute>
+	<attribute isleave="false" name="MethodInput">
+		<value index="0" isnull="false">
+			<instance typeid="com.sap.aii.util.hmi.api.HmiMethodInput">
+				<attribute isleave="false" name="Parameters">
+					<value index="0" isnull="false">
+						<instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+							<attribute isleave="true" leave_typeid="string" name="Key">
+								<value index="0" isnull="false">com.sap.aii.util.hmi.api.HmiMethodInput</value>
+							</attribute>
+							<attribute isleave="true" leave_typeid="string" name="Value">
+								<value index="0" isnull="false">NoParameters</value>
+							</attribute>
+						</instance>
+</value>
+				</attribute>
+			</instance>
+</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="RequestId">
+		<value index="0" isnull="false">c5f44cd9237011edc7e8005056b4c5ba</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="RequiresSession">
+		<value index="0" isnull="false">true</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ServerApplicationId">
+		<value index="0" isnull="false">ld-s-</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ServerLogicalSystemName">
+		<value index="0" isnull="false">DPH</value>
+	</attribute>
+	<attribute isleave="true" leave_typeid="string" name="ServiceId">
+		<value index="0" isnull="false">hmi_iflow_read_service</value>
+	</attribute>
+</instance>
+
+ответ
+<instance typeid="nice_hmi">
+	<attribute isleave="true" leave_typeid="string" name="status">
+		<value index="0" isnull="false">OK</value>
+	</attribute>
+</instance>
+
+
+
+-->

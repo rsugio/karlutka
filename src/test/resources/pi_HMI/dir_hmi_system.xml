@@ -1,0 +1,45 @@
+<Systems>
+<!--
+POST /dir/hmi_system/int?container=any HTTP/1.1
+method = read_system
+service = hmi_system
+params = [importedOnly : false]
+ -->
+	<CommunicationComponents>
+		<CommunicationComponent isABAPSystem="false">
+			<Service>BS_123_D</Service>
+			<Type>BS</Type>
+			<Description>Инжиниринг</Description>
+			<Party/>
+			<objectid>fe813a6e28d233afb9f33288aaf0e686</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+		<CommunicationComponent isABAPSystem="true">
+			<Service>SOL200</Service>
+			<Type>BS</Type>
+			<Description>Solution Manager</Description>
+			<Party/>
+			<objectid>086d38bb9687391f82c0efb38d360063</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+		<CommunicationComponent isABAPSystem="false">
+			<Service>BS_1C_D</Service>
+			<Type>BS</Type>
+			<Description/>
+			<Party>P_FILIAL</Party>
+			<objectid>bbb0f90c00fc3b738cb5d08229928e3e</objectid>
+			<ISNWBPM>false</ISNWBPM>
+		</CommunicationComponent>
+	</CommunicationComponents>
+	<SldSystems>
+		<SldSystem isABAPSystem="true">
+			<Name>BS_DHM105</Name>
+			<Desc>BS_DHM105</Desc>
+		</SldSystem>
+		<SldSystem isABAPSystem="false">
+			<Name>BS_ECM2_D</Name>
+			<Desc>BS_ECM2_D</Desc>
+		</SldSystem>
+	</SldSystems>
+	<Exceptions/>
+</Systems>

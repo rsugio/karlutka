@@ -25,9 +25,6 @@ import kotlin.io.path.writeText
 class PI(
     override val konfig: KfTarget,
 ) : MTarget {
-    companion object {
-        val mdtperfservlet = "/mdt/performancedataqueryservlet"
-    }
 
     val httpHostPort: URL
     val client: HttpClient
@@ -38,6 +35,8 @@ class PI(
     lateinit var hmiServices: List<Hm.HmiService>
     var swcv: List<MPI.Swcv> = listOf()
     var namespaces: List<MPI.Namespace> = listOf()
+
+    lateinit var dirConfiguration: Hm.DirConfiguration
 
     init {
         require(konfig is KfTarget.PIAF)
@@ -253,6 +252,28 @@ class PI(
         return trsp
     }
 
+    // http://ld-s-devpih.ao.nlmk:50000/dir/hmi_server_details/int?container=any
+    suspend fun dirReadHmiServerDetails(userAlias: String) {
+        val req = Hm.HmiRequest(
+            uuid(hmiClientId),
+            uuid(UUID.randomUUID()),
+            Hm.ApplCompLevel(),
+            Hm.HmiMethodInput("user_alias", userAlias),
+            "read_server_details",
+            "hmi_server_details",
+            "dummy",
+            "dummy",
+            "EN",
+            true,
+            null,           //ld-s-devpih.ao.nlmk ?
+            null,
+            "1.0",
+            0
+        )
+        val resp = hmiPost("/dir/hmi_server_details/int?container=any", req)
+        require(resp.MethodOutput!!.ContentType=="text/xml")
+        dirConfiguration = Hm.DirConfiguration.decodeFromString(resp.MethodOutput!!.Return)
+    }
     suspend fun hmiPost(
         uri: String,
         req: Hm.HmiRequest
@@ -272,5 +293,8 @@ class PI(
         val hr = Hm.parseResponse(t)
         if (hr.MethodOutput!=null) Paths.get("c:/data/tmp/hmo.xml").writeText(hr.MethodOutput.Return)
         return hr
+    }
+    companion object {
+        val mdtperfservlet = "/mdt/performancedataqueryservlet"
     }
 }

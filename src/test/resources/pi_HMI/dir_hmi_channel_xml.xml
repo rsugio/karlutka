@@ -1,0 +1,217 @@
+﻿<CommunicationChannel>
+<!-- 
+POST /dir/hmi_channel_xml/int?container=any HTTP/1.1
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<instance typeid="com.sap.aii.util.hmi.core.msg.HmiRequest">
+  <attribute isleave="true" leave_typeid="string" name="ClientId">
+    <value index="0" isnull="false">c629a40d237011edb58a005056b4c5ba</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ClientLanguage">
+    <value index="0" isnull="false">EN</value>
+  </attribute>
+  <attribute isleave="false" name="ClientLevel">
+    <value index="0" isnull="false">
+      <instance typeid="com.sap.aii.util.applcomp.ApplCompLevel">
+        <attribute isleave="true" leave_typeid="string" name="Release">
+          <value index="0" isnull="false">7.0</value>
+        </attribute>
+        <attribute isleave="true" leave_typeid="string" name="SupportPackage">
+          <value index="0" isnull="false">*</value>
+        </attribute>
+      </instance>
+    </value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ClientPassword">
+    <value index="0" isnull="false">dummy</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ClientUser">
+    <value index="0" isnull="false">user</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ControlFlag">
+    <value index="0" isnull="false">0</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="HmiSpecVersion">
+    <value index="0" isnull="false">1.0</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="MethodId">
+    <value index="0" isnull="false">read_channel_xml</value>
+  </attribute>
+  <attribute isleave="false" name="MethodInput">
+    <value index="0" isnull="false">
+      <instance typeid="com.sap.aii.util.hmi.api.HmiMethodInput">
+        <attribute isleave="false" name="Parameters">
+          <value index="0" isnull="false">
+            <instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+              <attribute isleave="true" leave_typeid="string" name="Key">
+                <value index="0" isnull="false">readAllData</value>
+              </attribute>
+              <attribute isleave="true" leave_typeid="string" name="Value">
+                <value index="0" isnull="false">true</value>
+              </attribute>
+            </instance>
+          </value>
+          <value index="1" isnull="false">
+            <instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+              <attribute isleave="true" leave_typeid="string" name="Key">
+                <value index="0" isnull="false">com.sap.xpi.features.channel.ref.cleanup</value>
+              </attribute>
+              <attribute isleave="true" leave_typeid="string" name="Value">
+                <value index="0" isnull="false">true</value>
+              </attribute>
+            </instance>
+          </value>
+          <value index="2" isnull="false">
+            <instance typeid="com.sap.aii.util.hmi.core.gdi2.EntryStringString">
+              <attribute isleave="true" leave_typeid="string" name="Key">
+                <value index="0" isnull="false">id</value>
+              </attribute>
+              <attribute isleave="true" leave_typeid="string" name="Value">
+                <value index="0" isnull="false">/BS_ENERGO_D/CC_SOAPSender_Async</value>
+              </attribute>
+            </instance>
+          </value>
+        </attribute>
+      </instance>
+    </value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="RequestId">
+    <value index="0" isnull="false">c629a40e237011eda075005056b4c5ba</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="RequiresSession">
+    <value index="0" isnull="false">true</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ServerApplicationId">
+    <value index="0" isnull="false">ld-s-devk</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ServerLogicalSystemName">
+    <value index="0" isnull="false">DPH</value>
+  </attribute>
+  <attribute isleave="true" leave_typeid="string" name="ServiceId">
+    <value index="0" isnull="false">hmi_channel_xml</value>
+  </attribute>
+</instance>
+
+
+POST /dir/hmi_channel_xml/int?container=any HTTP/1.1
+
+-->
+	<MasterLanguage>English</MasterLanguage>
+	<AdministrativeData>
+		<ResponsibleUserAccountID>aa</ResponsibleUserAccountID>
+		<LastChangeUserAccountID>aa</LastChangeUserAccountID>
+		<LastChangeDateTime>2020-07-15T19:32:44.649+03:00</LastChangeDateTime>
+		<FolderPathID>/ENERGO/</FolderPathID>
+	</AdministrativeData>
+	<Description languageCode="EN"/>
+	<CommunicationChannelID>
+		<PartyID/>
+		<ComponentID>BS_ENERGO_D</ComponentID>
+		<ChannelID>CC_SOAPSender_Async</ChannelID>
+	</CommunicationChannelID>
+	<AdapterMetadata>
+		<Name>SOAP</Name>
+		<Namespace>http://sap.com/xi/XI/System</Namespace>
+		<SoftwareComponentVersionID>0050568f-0aac-1ed4-a6e5-6926325e2eb3</SoftwareComponentVersionID>
+	</AdapterMetadata>
+	<Direction>Sender</Direction>
+	<TransportProtocol>SOAP</TransportProtocol>
+	<TransportProtocolVersion/>
+	<MessageProtocol>SOAP</MessageProtocol>
+	<MessageProtocolVersion/>
+	<AdapterEngineName/>
+	<AdapterSpecificAttribute>
+		<Name>SecurityProfile</Name>
+		<Namespace/>
+		<Value>securityProfileWSSE</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XI.QueueName</Name>
+		<Namespace/>
+		<Value/>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XMBWS.KeepHeaders</Name>
+		<Namespace/>
+		<Value>0</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XI.QualityOfService</Name>
+		<Namespace/>
+		<Value>EO</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XHeaderName2</Name>
+		<Namespace/>
+		<Value/>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>dcTransport</Name>
+		<Namespace/>
+		<Value>0</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>PersistDuration</Name>
+		<Namespace/>
+		<Value>2592000000</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XHeaderName1</Name>
+		<Namespace/>
+		<Value/>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XMBWS.UseQueryString</Name>
+		<Namespace/>
+		<Value>0</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XMBWS.NoSOAP</Name>
+		<Namespace/>
+		<Value>0</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XMBWS.UseEncoded</Name>
+		<Namespace/>
+		<Value>0</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XHeaderName3</Name>
+		<Namespace/>
+		<Value/>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>adapterStatus</Name>
+		<Namespace/>
+		<Value>active</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>enableDynConfigSender</Name>
+		<Namespace/>
+		<Value>0</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>securityLevelHTTP</Name>
+		<Namespace/>
+		<Value>HTTPplain</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>XMBWS.KeepAttachments</Name>
+		<Namespace/>
+		<Value>0</Value>
+	</AdapterSpecificAttribute>
+	<AdapterSpecificAttribute>
+		<Name>isMessageSecurity</Name>
+		<Namespace/>
+		<Value>0</Value>
+	</AdapterSpecificAttribute>
+	<ModuleProcess>
+		<ProcessStep>
+			<ModuleName>CallSapAdapter</ModuleName>
+			<ModuleType>Local Enterprise Bean</ModuleType>
+			<ParameterGroupID>soap</ParameterGroupID>
+		</ProcessStep>
+	</ModuleProcess>
+	<SenderIdentifier schemeID="" schemaAgencyID=""/>
+	<ReceiverIdentifier schemeID="" schemaAgencyID=""/>
+</CommunicationChannel>
