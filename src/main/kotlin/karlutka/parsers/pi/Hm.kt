@@ -841,6 +841,7 @@ class Hm {
             }
         }
     }
+
     @Serializable
     @XmlSerialName("testExecutionResponse", "", "")
     data class TestExecutionResponse(
@@ -887,5 +888,111 @@ class Hm {
         @XmlElement(true)
         val message: List<TestMessage>,
     )
+
+    @Serializable
+    @XmlSerialName("configuration", "", "")
+    data class DirConfiguration(
+        @XmlElement(true)
+        val user: User,
+        @XmlElement(true)
+        val repository: Repository,
+        @XmlElement(true)
+        val properties: Properties,
+        @XmlElement(true)
+        val FEATURES: Features,
+        @XmlElement(true)
+        val Roles: _Roles,
+        @XmlElement(true)
+        val AdapterEngines: _AdapterEngines,
+        @XmlElement(true)
+        val CacheInstances: _CacheInstances,
+    ) {
+        @Serializable
+        @XmlSerialName("user", "", "")
+        data class User(
+            @XmlElement(true)
+            val userid: String,
+        )
+
+        @Serializable
+        @XmlSerialName("repository", "", "")
+        data class Repository(
+            @XmlElement(true) val type: String,
+            @XmlElement(true) val host: String,
+            @XmlElement(true) val httpport: Int,
+            @XmlElement(true) val httpsport: Int,
+        )
+
+        @Serializable
+        @XmlSerialName("properties", "", "")
+        data class Properties(
+            @XmlElement(true) val property: List<Property>,
+        )
+
+        @Serializable
+        @XmlSerialName("property", "", "")
+        data class Property(
+            val key: String,
+            val value: String,
+        )
+
+        @Serializable
+        @XmlSerialName("FEATURES", "", "")
+        data class Features(
+            @XmlElement(true) val FEATURE: List<Feature>,
+        )
+
+        @Serializable
+        @XmlSerialName("FEATURE", "", "")
+        data class Feature(
+            val FEATUREID: String
+        )
+
+        @Serializable
+        @XmlSerialName("Roles", "", "")
+        data class _Roles(
+            @XmlElement(true) val Role: List<Role>,
+        )
+
+        @Serializable
+        @XmlSerialName("Role", "", "")
+        data class Role(
+            val RoleID: String
+        )
+
+        @Serializable
+        @XmlSerialName("AdapterEngines", "", "")
+        data class _AdapterEngines(
+            @XmlElement(true) val AdapterFrameWork: List<AdapterFrameWork>,
+        )
+
+        @Serializable
+        @XmlSerialName("AdapterFrameWork", "", "")
+        data class AdapterFrameWork(
+            @XmlElement(true) val key: String,
+            @XmlElement(true) val name: String,
+            @XmlElement(true) val isCentral: Boolean,
+            @XmlElement(true) val httpUrl: String,
+            @XmlElement(true) val httpsUrl: String,
+        )
+
+        @Serializable
+        @XmlSerialName("CacheInstances", "", "")
+        data class _CacheInstances(
+            @XmlElement(true) val CacheInstance: List<CacheInstance>,
+        )
+
+        @Serializable
+        @XmlSerialName("CacheInstance", "", "")
+        data class CacheInstance(
+            @XmlElement(true) val name: String,
+            @XmlElement(true) val mode: String,
+            @XmlElement(true) val displayName: String,
+        )
+
+        companion object {
+            fun decodeFromString(sxml:String) = hmserializer.decodeFromString<DirConfiguration>(sxml)
+        }
+    }
 
 }

@@ -85,4 +85,12 @@ class KHmiTests {
         val r4 = TestExecutionResponse.decodeFromString(s("/pi_HMI/omtest_response4.xml"))
         println(r4.exception!!.message.contentString.trim())
     }
+
+    @Test
+    fun dirConfiguration() {
+        val conf = DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration.xml"))
+        println(conf.FEATURES.FEATURE)
+//        val conf2 = DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration2.xml"))
+//        println(conf2)
+    }
 }
