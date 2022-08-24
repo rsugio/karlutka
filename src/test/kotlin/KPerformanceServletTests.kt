@@ -1,4 +1,5 @@
 import KT.Companion.s
+import karlutka.models.MPerfStat
 import karlutka.parsers.pi.PerfMonitorServlet.MessageStatisticsQueryResults
 import karlutka.parsers.pi.PerfMonitorServlet.PerformanceDataQueryResults
 import nl.adaptivity.xmlutil.PlatformXmlReader
@@ -120,5 +121,44 @@ class KPerformanceServletTests {
             rez.append('\n')
         }
         Paths.get("C:\\data\\PerformanceDataQuery\\influx.dat").writeText(rez)
+    }
+
+    @Test
+    fun stat_raw() {
+        // без агрегации
+        val csv = StringBuilder()
+        csv.append("hour\tQOS\tqty\tAVG_MESSAGE_SIZE\tMIN_MESSAGE_SIZE\tMAX_MESSAGE_SIZE\n")
+        Paths.get("C:\\data\\PerformanceDataQuery\\pph\\hourly").forEachDirectoryEntry("*.xml") { p ->
+            val p3 = PerformanceDataQueryResults.parse(p.readText())
+            val hour = p3.Result.BeginTime!!.inst().hour
+            println(hour)
+            p3.perfdata().filter { !it.anomaly() }.forEach { pr ->
+                csv.append("$hour\t${pr.DELIVERY_SEMANTICS}\t${pr.MESSAGE_COUNTER}\t${pr.AVG_MESSAGE_SIZE}\t${pr.MIN_MESSAGE_SIZE}\t${pr.MAX_MESSAGE_SIZE}\n")
+            }
+        }
+        Paths.get("c:\\data\\csv\\perf_raw.txt").writeText(csv)
+    }
+
+    @Test
+    fun stat_aggr() {
+        val raw = mutableListOf<PerformanceDataQueryResults>()
+        Paths.get("C:\\data\\PerformanceDataQuery\\pph\\hourly").forEachDirectoryEntry("*.xml") { p ->
+            raw.add(PerformanceDataQueryResults.parse(p.readText()))
+        }
+        // определяем размеры сообщений
+
+
+        val strates = MPerfStat.makeHourly(raw)
+        val js = MPerfStat.makeJS(strates, "титул")
+        Paths.get("C:\\data\\PerformanceDataQuery\\report\\chart1.html").writeText(js)
+
+        // выводим по порядку
+        val csv = StringBuilder()
+        csv.append("hour\tQOS\tСлой\tqty\tavg\n")
+        strates.filter { it.qty > 0 }.forEach { pr ->
+            csv.append("${pr.hour}\t${pr.qos}\t${pr.stratum}\t${pr.qty}\t${pr.avg}\n") //\t${pr.min}\t${pr.max}\n")
+        }
+        Paths.get("C:\\data\\PerformanceDataQuery\\report\\strates.txt").writeText(csv)
+
     }
 }

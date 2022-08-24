@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>$title$</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']})
+        google.charts.setOnLoadCallback(drawEO);
+        google.charts.setOnLoadCallback(drawBE);
+
+        function drawEO() {
+        var data = google.visualization.arrayToDataTable([
+        $EO$
+        ]);
+
+        var options = {
+        title: 'EO+EOIO',
+        hAxis: {title: 'Час',  titleTextStyle: {color: '#333'}},
+        vAxis: {minValue: 0}
+    };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('charteo'));
+        chart.draw(data, options);
+    }
+
+
+        function drawBE() {
+        var data = google.visualization.arrayToDataTable([
+        $BE$
+        ]);
+
+        var options = {
+        title: 'BE',
+        hAxis: {title: 'Час',  titleTextStyle: {color: '#333'}},
+        vAxis: {minValue: 0}
+    };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chartbe'));
+        chart.draw(data, options);
+    }
+    </script>
+</head>
+<body>
+<h1>$title$</h1>
+<div id="charteo" style="width: 100%; height: 500px;"></div>
+<div id="chartbe" style="width: 100%; height: 500px;"></div>
+</body>
+</html>
