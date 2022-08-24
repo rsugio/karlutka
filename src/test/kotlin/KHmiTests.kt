@@ -89,8 +89,8 @@ class KHmiTests {
     @Test
     fun dirConfiguration() {
         val conf = DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration.xml"))
-        println(conf.FEATURES.FEATURE)
-//        val conf2 = DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration2.xml"))
-//        println(conf2)
+        require(conf.FEATURES.FEATURE.size==30)
+        val conf2 = DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration2.xml"))
+        require(conf2.FEATURES.FEATURE.size==30)
     }
 }
