@@ -52,10 +52,7 @@ class KPiTest {
 //            pi.hmiGetRegistered()
 //            pi.hmiAskSWCV()
 //            pi.askNamespaces()
-            pi.dirReadHmiServerDetails("123")
-
-
-            return@runBlocking
+            pi.dirReadHmiServerDetails("user")
 
             val xml = """<ns0:XiPatternMessage1 xmlns:ns0="http://sap.com/xi/XI/System/Patterns">
 <Person><Id>Русскiй языкъ прекрасенъ</Id><LastName/><FirstName/><TelephoneNumber/><CountryCode/></Person>

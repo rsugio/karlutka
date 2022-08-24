@@ -272,7 +272,7 @@ class PI(
         )
         val resp = hmiPost("/dir/hmi_server_details/int?container=any", req)
         require(resp.MethodOutput!!.ContentType=="text/xml")
-        dirConfiguration = Hm.DirConfiguration.decodeFromString(resp.MethodOutput!!.Return)
+        dirConfiguration = Hm.DirConfiguration.decodeFromString(resp.MethodOutput.Return)
     }
     suspend fun hmiPost(
         uri: String,
