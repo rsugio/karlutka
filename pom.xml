@@ -37,7 +37,7 @@
     <dependency>
       <groupId>com.charleskorn.kaml</groupId>
       <artifactId>kaml-jvm</artifactId>
-      <version>0.46.0</version>
+      <version>0.47.0</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -157,7 +157,7 @@
     <dependency>
       <groupId>org.jetbrains.kotlinx</groupId>
       <artifactId>kotlinx-html-jvm</artifactId>
-      <version>0.7.3</version>
+      <version>0.8.0</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -169,19 +169,19 @@
     <dependency>
       <groupId>org.jetbrains.exposed</groupId>
       <artifactId>exposed-core</artifactId>
-      <version>0.39.1</version>
+      <version>0.39.2</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.exposed</groupId>
       <artifactId>exposed-dao</artifactId>
-      <version>0.39.1</version>
+      <version>0.39.2</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.jetbrains.exposed</groupId>
       <artifactId>exposed-jdbc</artifactId>
-      <version>0.39.1</version>
+      <version>0.39.2</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
