@@ -19,6 +19,17 @@ class PCpi {
     )
 
     @Serializable
+    data class __Deferred<T>(
+        val __deferred: Uri? = null,
+        val results: List<T> = listOf()
+    )
+
+    @Serializable
+    class Uri(
+        val uri: String
+    )
+
+    @Serializable
     open class ODataJson(
         val __metadata: __Metadata? = null
     )
@@ -43,6 +54,17 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
+    data class DataStore(
+        val DataStoreName: String,
+        val IntegrationFlow: String,
+        val Type: String,
+        val Visibility: String? = null,
+        val NumberOfMessages: Long? = null,
+        val NumberOfOverdueMessages: Long? = null,
+        val Entries: __Deferred<ODataJson>? = null //NavigationProperty Relationship="com.sap.hci.api.DataStore_2_r_Entries" FromRole="DataStore" ToRole="r_Entries"
+    ) : ODataJson()
+
+    @Serializable
     data class DataStoreEntry(
         val Id: String,  //SAPCpiOutboundOrder_10496001A_ZTD
         val DataStoreName: String, //HYBRISCOMMERCE
@@ -56,6 +78,91 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
+    class IntegrationPackage(
+        val Id: String, // CommerceCloudwithS4HANAmodified
+        val Name: String, // Commerce Cloud with S4HANA - modified
+        val ResourceId: String, //ef44d444d648433a8da21a3bfe3ba247
+        val Description: String, // <p></p>
+        val ShortText: String, // траляля
+        val Version: String, // ""
+        val Vendor: String,
+        val PartnerContent: Boolean,
+        val UpdateAvailable: Boolean,
+        val Mode: String, //EDIT_ALLOWED
+        val SupportedPlatform: String, //SAP Cloud Integration
+        val ModifiedBy: String, // "S00000000000"
+        val CreationDate: String, //"1563787275340" -- string millis
+        val ModifiedDate: String?, //"1563787275340" -- string millis
+        val CreatedBy: String, // "S00000000000"
+        val Products: String?, //"",
+        val Keywords: String?, //"",
+        val Countries: String?, //"",
+        val Industries: String?, //"",
+        val LineOfBusiness: String?, //"",
+        val PackageContent: String?, //null,
+        val IntegrationDesigntimeArtifacts: __Deferred<ODataJson>,
+        val ValueMappingDesigntimeArtifacts: __Deferred<ODataJson>,
+        val MessageMappingDesigntimeArtifacts: __Deferred<ODataJson>,
+        val CustomTags: __Deferred<ODataJson>,
+    ) : ODataJson()
+//    {
+//        val ida: MutableList<IntegrationDesigntimeArtifact> = mutableListOf()
+//        val vmda: MutableList<ValueMappingDesigntimeArtifact> = mutableListOf()
+//    }
+
+    @Serializable
+    class IntegrationArtifact(
+        val Id: String,
+        val Name: String,
+        val Type: String,
+        val PackageId: String?,
+        val PackageName: String?,
+    ) : ODataJson()
+
+    @Serializable
+    class MessageProcessingLog(
+        val MessageGuid: String,
+        val CorrelationId: String,
+        val ApplicationMessageId: String?,
+        val ApplicationMessageType: String?,
+        val LogStart: String,       // /Date(1613521876190)/
+        val LogEnd: String = "",    // /Date(1613521876190)/
+        val Sender: String?,
+        val Receiver: String?,
+        val IntegrationFlowName: String,
+        val Status: String,
+        val AlternateWebLink: String,
+        val IntegrationArtifact: IntegrationArtifact,
+        val LogLevel: String,
+        val CustomStatus: String?,
+
+        val ArchivingStatus: String?,   //NOT_RELEVANT
+        val ArchivingSenderChannelMessages: Boolean,
+        val ArchivingReceiverChannelMessages: Boolean,
+        val ArchivingLogAttachments: Boolean,
+        val ArchivingPersistedMessages: Boolean,
+
+        val TransactionId: String?,
+        val PreviousComponentName: String?,
+        val LocalComponentName: String?,
+        val OriginComponentName: String?,
+        val CustomHeaderProperties: __Deferred<MessageProcessingLogCustomHeaderProperties>,
+        val MessageStoreEntries: __Deferred<ODataJson>,
+        val ErrorInformation: __Deferred<ODataJson>,
+        val AdapterAttributes: __Deferred<ODataJson>,
+        val Attachments: __Deferred<ODataJson>,
+        val Runs: __Deferred<ODataJson>,
+    ) : ODataJson()
+
+    @Serializable
+    class MessageProcessingLogCustomHeaderProperties(
+        val Id: String,
+        val Name: String,
+        val Value: String,
+        val Log: __Deferred<ODataJson>
+    ) : ODataJson()
+
+    @Serializable
     class ODataJsonRoot(val d: ODataJsonD)
 
     @Serializable
@@ -66,9 +173,16 @@ class PCpi {
 
     companion object {
         val __metas = mapOf(
-            "com.sap.hci.api.SecurityArtifactDescriptor" to SecurityArtifactDescriptor::class,
+            // закомментированных нет на верхнем уровне.
+            // Нас интересует полиморфизм верхнего уровня, но здесь для поиска пусть будет
+//            "com.sap.hci.api.SecurityArtifactDescriptor" to SecurityArtifactDescriptor::class,
+//            "com.sap.hci.api.IntegrationArtifact" to IntegrationArtifact::class,
+//            "com.sap.hci.api.MessageProcessingLogCustomHeaderProperty" to MessageProcessingLogCustomHeaderProperty::class,
             "com.sap.hci.api.UserCredential" to UserCredential::class,
             "com.sap.hci.api.DataStoreEntry" to DataStoreEntry::class,
+            "com.sap.hci.api.DataStore" to DataStore::class,
+            "com.sap.hci.api.IntegrationPackage" to IntegrationPackage::class,
+            "com.sap.hci.api.MessageProcessingLog" to MessageProcessingLog::class,
         )
 
         @OptIn(InternalSerializationApi::class)
