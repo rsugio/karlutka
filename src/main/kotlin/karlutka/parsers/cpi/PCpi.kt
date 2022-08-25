@@ -75,7 +75,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    class IntegrationPackage(
+    data class IntegrationPackage(
         val Id: String, // CommerceCloudwithS4HANAmodified
         val Name: String, // Commerce Cloud with S4HANA - modified
         val ResourceId: String, //ef44d444d648433a8da21a3bfe3ba247
@@ -102,13 +102,9 @@ class PCpi {
         val MessageMappingDesigntimeArtifacts: __Deferred<ODataJson>,
         val CustomTags: __Deferred<ODataJson>,
     ) : ODataJson()
-//    {
-//        val ida: MutableList<IntegrationDesigntimeArtifact> = mutableListOf()
-//        val vmda: MutableList<ValueMappingDesigntimeArtifact> = mutableListOf()
-//    }
 
     @Serializable
-    class IntegrationArtifact(
+    data class IntegrationArtifact(
         val Id: String,
         val Name: String,
         val Type: String,
@@ -117,7 +113,61 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    class MessageProcessingLog(
+    data class IntegrationDesigntimeArtifact(
+        val Id: String, //"Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA"
+        val Version: String, //"1.0.7" or "Active"
+        val PackageId: String, //"SALES05"
+        val Name: String, //"Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA"
+        val Description: String, //" "
+        val Sender: String, //"Commerce"
+        val Receiver: String, //"S4HANA"
+        val ArtifactContent: String?, //null
+        val Configurations: __Deferred<ODataJson>,
+        val Resources: __Deferred<ODataJson>,
+    ): ODataJson()
+
+    @Serializable
+    data class ValueMappingDesigntimeArtifact(
+        val Id: String, //"OtherPartyMapping",
+        val Version: String, //"1.0.2",
+        val PackageId: String, //"C4Custom",
+        val Name: String, //"OtherPartyMapping",
+        val Description: String?, //" ",
+        val ArtifactContent: String?, //null,
+        val ValMapSchema:__Deferred<ODataJson>,
+    ): ODataJson()
+
+    @Serializable
+    data class ServiceEndpoint(
+        val Name: String,    // "Create follow up document from ServiceRequest in S4HANA from Sales Cloud",
+        val Id: String,             // "UpdateServiceRequest$endpointAddress=UpdateServiceRequest",
+        val Title: String,             // "UpdateServiceRequest",
+        val Version: String, // "1.0.1",
+        val Summary: String, // "UpdateServiceRequestInternalService in Sales Cloud",
+        val Description: String, // "UpdateServiceRequestInternalService in Sales Cloud",
+        val LastUpdated: String, // "/Date(1576581100242)/"
+        val Protocol: String, // one of SOAP, REST, ODATAV2
+        val EntryPoints: __Deferred<EntryPoint>, //   com.sap.hci.api.EntryPoint
+        val ApiDefinitions: __Deferred<ApiDefinition>, // com.sap.hci.api.Definition
+    ) : ODataJson()
+
+    @Serializable
+    data class EntryPoint(
+        val Name: String, //"UpdateServiceRequest",
+        val Url: String, //"https://e45-iflmap.hcisbt.ru1.hana.ondemand.com/cxf/UpdateServiceRequest",
+        val Type: String, //"PROD",
+        val AdditionalInformation: String? = "", //null
+    ): ODataJson()
+
+    @Serializable
+    data class ApiDefinition(
+        val Url: String, //"https://../Operations/api/WSDLDownload?artifactName=UpdateServiceRequest&servicePath=/UpdateServiceRequest&domainName=hcisbt.ru1.hana.ondemand.com&includePolicies=false",
+        val Name: String, //"WSDL_POLICIES",
+    ): ODataJson()
+
+
+    @Serializable
+    data class MessageProcessingLog(
         val MessageGuid: String,
         val CorrelationId: String,
         val ApplicationMessageId: String?,
@@ -176,9 +226,12 @@ class PCpi {
 //            "com.sap.hci.api.IntegrationArtifact" to IntegrationArtifact::class,
 //            "com.sap.hci.api.MessageProcessingLogCustomHeaderProperty" to MessageProcessingLogCustomHeaderProperty::class,
             "com.sap.hci.api.UserCredential" to UserCredential::class,
-            "com.sap.hci.api.DataStoreEntry" to DataStoreEntry::class,
             "com.sap.hci.api.DataStore" to DataStore::class,
+            "com.sap.hci.api.DataStoreEntry" to DataStoreEntry::class,
             "com.sap.hci.api.IntegrationPackage" to IntegrationPackage::class,
+            "com.sap.hci.api.IntegrationDesigntimeArtifact" to IntegrationDesigntimeArtifact::class,
+            "com.sap.hci.api.ValueMappingDesigntimeArtifact" to ValueMappingDesigntimeArtifact::class,
+            "com.sap.hci.api.ServiceEndpoint" to ServiceEndpoint::class,
             "com.sap.hci.api.MessageProcessingLog" to MessageProcessingLog::class,
         )
 

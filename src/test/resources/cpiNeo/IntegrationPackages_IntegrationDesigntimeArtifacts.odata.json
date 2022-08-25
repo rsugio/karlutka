@@ -1,0 +1,774 @@
+{
+	"d": {
+		"results": [
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Update-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Update-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Update-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Update-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/$value"
+				},
+				"Id": "Update-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
+				"Version": "2.0.2",
+				"PackageId": "RUECOMetc",
+				"Name": "Update-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
+				"Description": "В S/4 уходит ZSHP_OBDLV_CHANGE.SHP_OBDLV_CHANGE02",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Update-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Update-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Order-Cancellations-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Order-Cancellations-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Order-Cancellations-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Order-Cancellations-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/$value"
+				},
+				"Id": "vendor-Replicate-Order-Cancellations-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
+				"Version": "2.0.2",
+				"PackageId": "RUECOMetc",
+				"Name": "vendor-Replicate-Order-Cancellations-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
+				"Description": "ZSALESORDER_CREATEFROMDAT2.SALESORDER_CREATEFROMDAT204",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Order-Cancellations-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Order-Cancellations-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Classification-From-S4-To-Commerce',Version='1.0.18')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Classification-From-S4-To-Commerce',Version='1.0.18')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Classification-From-S4-To-Commerce',Version='1.0.18')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Classification-From-S4-To-Commerce',Version='1.0.18')/$value"
+				},
+				"Id": "vendor-Classification-From-S4-To-Commerce",
+				"Version": "1.0.18",
+				"PackageId": "RUECOMetc",
+				"Name": "vendor-Classification-From-S4-To-Commerce",
+				"Description": "S/4 шлёт CHRMAS, CLFMAS and CLSMAS",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Classification-From-S4-To-Commerce',Version='1.0.18')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Classification-From-S4-To-Commerce',Version='1.0.18')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_MH3_status_From_S4HANA_To_SAP_Commerce_Cloud',Version='1.0.6')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_MH3_status_From_S4HANA_To_SAP_Commerce_Cloud',Version='1.0.6')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_MH3_status_From_S4HANA_To_SAP_Commerce_Cloud',Version='1.0.6')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_MH3_status_From_S4HANA_To_SAP_Commerce_Cloud',Version='1.0.6')/$value"
+				},
+				"Id": "Replicate_MH3_status_From_S4HANA_To_SAP_Commerce_Cloud",
+				"Version": "1.0.6",
+				"PackageId": "RUECOMetc",
+				"Name": "Replicate MH3 status From S4HANA To SAP Commerce Cloud",
+				"Description": "S/4 шлёт SI_CreateOrderMH3Result_OutAsync",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_MH3_status_From_S4HANA_To_SAP_Commerce_Cloud',Version='1.0.6')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_MH3_status_From_S4HANA_To_SAP_Commerce_Cloud',Version='1.0.6')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockTdLoad_cpi',Version='2.0.0')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockTdLoad_cpi',Version='2.0.0')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockTdLoad_cpi',Version='2.0.0')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockTdLoad_cpi',Version='2.0.0')/$value"
+				},
+				"Id": "ECOMtoS4_SYN_Request_StockTdLoad_cpi",
+				"Version": "2.0.0",
+				"PackageId": "RUECOMetc",
+				"Name": "ECOMtoS4_SYN_Request StockTdLoad cpi",
+				"Description": "в S/4 приходит SI_StockTdLoad_InSync",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockTdLoad_cpi',Version='2.0.0')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockTdLoad_cpi',Version='2.0.0')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_ASY_Request_Report_cpi',Version='2.0.3')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_ASY_Request_Report_cpi',Version='2.0.3')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_ASY_Request_Report_cpi',Version='2.0.3')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_ASY_Request_Report_cpi',Version='2.0.3')/$value"
+				},
+				"Id": "ECOMtoS4_ASY_Request_Report_cpi",
+				"Version": "2.0.3",
+				"PackageId": "RUECOMetc",
+				"Name": "ECOMtoS4_ASY_Request Report cpi",
+				"Description": "в S/4 приходит SI_RequestReport_InAsync",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_ASY_Request_Report_cpi',Version='2.0.3')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_ASY_Request_Report_cpi',Version='2.0.3')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_ReadUpdateZtable_cpi',Version='2.0.3')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_ReadUpdateZtable_cpi',Version='2.0.3')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_ReadUpdateZtable_cpi',Version='2.0.3')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_ReadUpdateZtable_cpi',Version='2.0.3')/$value"
+				},
+				"Id": "ECOMtoS4_SYN_ReadUpdateZtable_cpi",
+				"Version": "2.0.3",
+				"PackageId": "RUECOMetc",
+				"Name": "ECOMtoS4_SYN_ReadUpdateZtable cpi",
+				"Description": "в S/4 приходит SI_ReadUpdateZtable_InSync",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_ReadUpdateZtable_cpi',Version='2.0.3')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_ReadUpdateZtable_cpi',Version='2.0.3')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Send_Report_cpi',Version='2.0.7')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Send_Report_cpi',Version='2.0.7')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Send_Report_cpi',Version='2.0.7')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Send_Report_cpi',Version='2.0.7')/$value"
+				},
+				"Id": "S4toECOM_ASY_Send_Report_cpi",
+				"Version": "2.0.7",
+				"PackageId": "RUECOMetc",
+				"Name": "S4toECOM_ASY_Send Report cpi",
+				"Description": "S/4 шлёт SI_SendReport_OutAsync",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Send_Report_cpi',Version='2.0.7')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Send_Report_cpi',Version='2.0.7')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Commerce_Shipment_Carrier_Data_to_S4HANA',Version='1.0.4')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Commerce_Shipment_Carrier_Data_to_S4HANA',Version='1.0.4')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Commerce_Shipment_Carrier_Data_to_S4HANA',Version='1.0.4')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Commerce_Shipment_Carrier_Data_to_S4HANA',Version='1.0.4')/$value"
+				},
+				"Id": "Replicate_Commerce_Shipment_Carrier_Data_to_S4HANA",
+				"Version": "1.0.4",
+				"PackageId": "RUECOMetc",
+				"Name": "Replicate Commerce Shipment Carrier Data to S4HANA",
+				"Description": " ",
+				"Sender": "CommerceCloud",
+				"Receiver": "S4HANA",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Commerce_Shipment_Carrier_Data_to_S4HANA',Version='1.0.4')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Commerce_Shipment_Carrier_Data_to_S4HANA',Version='1.0.4')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockBalance_cpi',Version='2.0.0')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockBalance_cpi',Version='2.0.0')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockBalance_cpi',Version='2.0.0')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockBalance_cpi',Version='2.0.0')/$value"
+				},
+				"Id": "ECOMtoS4_SYN_Request_StockBalance_cpi",
+				"Version": "2.0.0",
+				"PackageId": "RUECOMetc",
+				"Name": "ECOMtoS4_SYN_Request StockBalance cpi",
+				"Description": "в S/4 приходит SI_GetStockBalance_InSync",
+				"Sender": "CommerceCloud",
+				"Receiver": "S4HANA",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockBalance_cpi',Version='2.0.0')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Request_StockBalance_cpi',Version='2.0.0')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate-OrderMH3-IDOC-From-SAP-Commerce-Cloud-To-S4HANA',Version='2.0.1')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate-OrderMH3-IDOC-From-SAP-Commerce-Cloud-To-S4HANA',Version='2.0.1')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate-OrderMH3-IDOC-From-SAP-Commerce-Cloud-To-S4HANA',Version='2.0.1')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate-OrderMH3-IDOC-From-SAP-Commerce-Cloud-To-S4HANA',Version='2.0.1')/$value"
+				},
+				"Id": "Replicate-OrderMH3-IDOC-From-SAP-Commerce-Cloud-To-S4HANA",
+				"Version": "2.0.1",
+				"PackageId": "RUECOMetc",
+				"Name": "Replicate-OrderMH3-IDOC-From-SAP-Commerce-Cloud-To-S4HANA",
+				"Description": " ZSALESORDER_CREATEFROMDAT2.SALESORDER_CREATEFROMDAT204",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate-OrderMH3-IDOC-From-SAP-Commerce-Cloud-To-S4HANA',Version='2.0.1')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate-OrderMH3-IDOC-From-SAP-Commerce-Cloud-To-S4HANA',Version='2.0.1')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Request_File_by_Code_From_SAP_Commerce_Cloud_To_SAP_S4HANA',Version='1.0.2')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Request_File_by_Code_From_SAP_Commerce_Cloud_To_SAP_S4HANA',Version='1.0.2')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Request_File_by_Code_From_SAP_Commerce_Cloud_To_SAP_S4HANA',Version='1.0.2')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Request_File_by_Code_From_SAP_Commerce_Cloud_To_SAP_S4HANA',Version='1.0.2')/$value"
+				},
+				"Id": "Request_File_by_Code_From_SAP_Commerce_Cloud_To_SAP_S4HANA",
+				"Version": "1.0.2",
+				"PackageId": "RUECOMetc",
+				"Name": "Request File by Code From SAP Commerce Cloud To SAP S4HANA",
+				"Description": " ",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Request_File_by_Code_From_SAP_Commerce_Cloud_To_SAP_S4HANA',Version='1.0.2')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Request_File_by_Code_From_SAP_Commerce_Cloud_To_SAP_S4HANA',Version='1.0.2')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Invoice_INVOIC02_cpi',Version='2.0.0')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Invoice_INVOIC02_cpi',Version='2.0.0')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Invoice_INVOIC02_cpi',Version='2.0.0')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Invoice_INVOIC02_cpi',Version='2.0.0')/$value"
+				},
+				"Id": "S4toECOM_ASY_Replicate_Invoice_INVOIC02_cpi",
+				"Version": "2.0.0",
+				"PackageId": "RUECOMetc",
+				"Name": "S4toECOM_ASY_Replicate Invoice INVOIC02 cpi",
+				"Description": "S/4 шлёт INVOIC02",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Invoice_INVOIC02_cpi',Version='2.0.0')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Invoice_INVOIC02_cpi',Version='2.0.0')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoIST_SYN_Request_WagonsDislocationReport_cpi',Version='2.0.1')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoIST_SYN_Request_WagonsDislocationReport_cpi',Version='2.0.1')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoIST_SYN_Request_WagonsDislocationReport_cpi',Version='2.0.1')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoIST_SYN_Request_WagonsDislocationReport_cpi',Version='2.0.1')/$value"
+				},
+				"Id": "ECOMtoIST_SYN_Request_WagonsDislocationReport_cpi",
+				"Version": "2.0.1",
+				"PackageId": "RUECOMetc",
+				"Name": "ECOMtoIST_SYN_Request WagonsDislocationReport cpi",
+				"Description": "в IST приходит SI_WagonsDislocationReport_InSync",
+				"Sender": "ECOM",
+				"Receiver": "IST",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoIST_SYN_Request_WagonsDislocationReport_cpi',Version='2.0.1')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoIST_SYN_Request_WagonsDislocationReport_cpi',Version='2.0.1')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')/$value"
+				},
+				"Id": "vendor_Replicate_MH_from_SAP_S4HANA_to_SAP_Commerce_Cloud",
+				"Version": "1.0.8",
+				"PackageId": "RUECOMetc",
+				"Name": "vendor Replicate MH from SAP S4HANA to SAP Commerce Cloud",
+				"Description": "S/4 шлёт DOCMAS.DOCMAS05",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Archive_From_SAP_Commerce_Cloud_To_ERP',Version='1.0.3')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Archive_From_SAP_Commerce_Cloud_To_ERP',Version='1.0.3')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Archive_From_SAP_Commerce_Cloud_To_ERP',Version='1.0.3')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Archive_From_SAP_Commerce_Cloud_To_ERP',Version='1.0.3')/$value"
+				},
+				"Id": "Replicate_Archive_From_SAP_Commerce_Cloud_To_ERP",
+				"Version": "1.0.3",
+				"PackageId": "RUECOMetc",
+				"Name": "Replicate Archive From SAP Commerce Cloud To ERP",
+				"Description": "в S/4 уходит SI_PostInArchive_OutSync",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Archive_From_SAP_Commerce_Cloud_To_ERP',Version='1.0.3')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Replicate_Archive_From_SAP_Commerce_Cloud_To_ERP',Version='1.0.3')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Contract_cpi',Version='Active')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Contract_cpi',Version='Active')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Contract_cpi',Version='Active')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Contract_cpi',Version='Active')/$value"
+				},
+				"Id": "S4toECOM_ASY_Replicate_Contract_cpi",
+				"Version": "Active",
+				"PackageId": "RUECOMetc",
+				"Name": "S4toECOM_ASY_Replicate Contract cpi",
+				"Description": " ",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Contract_cpi',Version='Active')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Contract_cpi',Version='Active')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Shipment_DELVRY07_cpi',Version='2.0.2')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Shipment_DELVRY07_cpi',Version='2.0.2')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Shipment_DELVRY07_cpi',Version='2.0.2')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Shipment_DELVRY07_cpi',Version='2.0.2')/$value"
+				},
+				"Id": "S4toECOM_ASY_Shipment_DELVRY07_cpi",
+				"Version": "2.0.2",
+				"PackageId": "RUECOMetc",
+				"Name": "S4toECOM_ASY_Shipment DELVRY07 cpi",
+				"Description": "из S/4 уходит DELVRY07",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Shipment_DELVRY07_cpi',Version='2.0.2')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Shipment_DELVRY07_cpi',Version='2.0.2')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ISTtoECOM_ASY_Railway_Stations_cpi',Version='2.0.0')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ISTtoECOM_ASY_Railway_Stations_cpi',Version='2.0.0')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ISTtoECOM_ASY_Railway_Stations_cpi',Version='2.0.0')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ISTtoECOM_ASY_Railway_Stations_cpi',Version='2.0.0')/$value"
+				},
+				"Id": "ISTtoECOM_ASY_Railway_Stations_cpi",
+				"Version": "2.0.0",
+				"PackageId": "RUECOMetc",
+				"Name": "ISTtoECOM_ASY_Railway Stations cpi",
+				"Description": "IST шлёт SI_RailwayStations_OutAsync",
+				"Sender": "IST,",
+				"Receiver": "ECOM,",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ISTtoECOM_ASY_Railway_Stations_cpi',Version='2.0.0')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ISTtoECOM_ASY_Railway_Stations_cpi',Version='2.0.0')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_BarCodes_cpi',Version='1.0.7')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_BarCodes_cpi',Version='1.0.7')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_BarCodes_cpi',Version='1.0.7')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_BarCodes_cpi',Version='1.0.7')/$value"
+				},
+				"Id": "S4toECOM_ASY_Replicate_BarCodes_cpi",
+				"Version": "1.0.7",
+				"PackageId": "RUECOMetc",
+				"Name": "S4toECOM_ASY_Replicate BarCodes cpi",
+				"Description": "S/4 шлёт SI_SendBarcodes_OutAsync",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_BarCodes_cpi',Version='1.0.7')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_BarCodes_cpi',Version='1.0.7')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Access_DataStore_for_S4HANA',Version='1.0.2')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Access_DataStore_for_S4HANA',Version='1.0.2')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Access_DataStore_for_S4HANA',Version='1.0.2')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Access_DataStore_for_S4HANA',Version='1.0.2')/$value"
+				},
+				"Id": "Access_DataStore_for_S4HANA",
+				"Version": "1.0.2",
+				"PackageId": "RUECOMetc",
+				"Name": "Access DataStore for S4HANA",
+				"Description": "Utility integration flow to access any datastore associated with the package",
+				"Sender": "",
+				"Receiver": "",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Access_DataStore_for_S4HANA',Version='1.0.2')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Access_DataStore_for_S4HANA',Version='1.0.2')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Replicate_MH1_cpi',Version='2.0.0')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Replicate_MH1_cpi',Version='2.0.0')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Replicate_MH1_cpi',Version='2.0.0')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Replicate_MH1_cpi',Version='2.0.0')/$value"
+				},
+				"Id": "ECOMtoS4_SYN_Replicate_MH1_cpi",
+				"Version": "2.0.0",
+				"PackageId": "RUECOMetc",
+				"Name": "ECOMtoS4_SYN_Replicate MH1 cpi",
+				"Description": "в S/4 приходит SI_PostMH1_InSync\n",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Replicate_MH1_cpi',Version='2.0.0')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_Replicate_MH1_cpi',Version='2.0.0')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.3')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.3')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.3')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.3')/$value"
+				},
+				"Id": "Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
+				"Version": "2.0.3",
+				"PackageId": "RUECOMetc",
+				"Name": "Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
+				"Description": "в S/4 уходит ZSHP_OBDLV_CREATE_SLS.SHP_OBDLV_CREATE_SLS01",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.3')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.3')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Material-From-S4HANA-To-Commerce',Version='2.2.0')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Material-From-S4HANA-To-Commerce',Version='2.2.0')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Material-From-S4HANA-To-Commerce',Version='2.2.0')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Material-From-S4HANA-To-Commerce',Version='2.2.0')/$value"
+				},
+				"Id": "vendor-Replicate-Material-From-S4HANA-To-Commerce",
+				"Version": "2.2.0",
+				"PackageId": "RUECOMetc",
+				"Name": "vendor-Replicate-Material-From-S4HANA-To-Commerce",
+				"Description": " ",
+				"Sender": "S4HANA",
+				"Receiver": "Commerce",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Material-From-S4HANA-To-Commerce',Version='2.2.0')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-Material-From-S4HANA-To-Commerce',Version='2.2.0')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Prices_CONDA04_cpi',Version='1.0.13')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Prices_CONDA04_cpi',Version='1.0.13')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Prices_CONDA04_cpi',Version='1.0.13')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Prices_CONDA04_cpi',Version='1.0.13')/$value"
+				},
+				"Id": "S4toECOM_ASY_Prices_CONDA04_cpi",
+				"Version": "1.0.13",
+				"PackageId": "RUECOMetc",
+				"Name": "S4toECOM_ASY_Prices CONDA04 cpi",
+				"Description": "S/4 шлёт COND_A",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Prices_CONDA04_cpi',Version='1.0.13')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Prices_CONDA04_cpi',Version='1.0.13')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Routes_cpi',Version='1.0.13')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Routes_cpi',Version='1.0.13')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Routes_cpi',Version='1.0.13')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Routes_cpi',Version='1.0.13')/$value"
+				},
+				"Id": "S4toECOM_ASY_Replicate_Routes_cpi",
+				"Version": "1.0.13",
+				"PackageId": "RUECOMetc",
+				"Name": "S4toECOM_ASY_Replicate Routes cpi",
+				"Description": "S/4 шлёт SI_RouteSend_OutAsync",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Routes_cpi',Version='1.0.13')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_Replicate_Routes_cpi',Version='1.0.13')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtovendor_SYN_Store_personal_data',Version='1.0.2')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtovendor_SYN_Store_personal_data',Version='1.0.2')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtovendor_SYN_Store_personal_data',Version='1.0.2')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtovendor_SYN_Store_personal_data',Version='1.0.2')/$value"
+				},
+				"Id": "ECOMtovendor_SYN_Store_personal_data",
+				"Version": "1.0.2",
+				"PackageId": "RUECOMetc",
+				"Name": "ECOMtovendor_SYN_Store personal data",
+				"Description": "Сохранение ПДн в ландшафте НЛМК",
+				"Sender": "ECOM",
+				"Receiver": "vendor",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtovendor_SYN_Store_personal_data',Version='1.0.2')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtovendor_SYN_Store_personal_data',Version='1.0.2')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoSMSC_SYN_SMS_Service_cpi',Version='2.0.0')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoSMSC_SYN_SMS_Service_cpi',Version='2.0.0')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoSMSC_SYN_SMS_Service_cpi',Version='2.0.0')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoSMSC_SYN_SMS_Service_cpi',Version='2.0.0')/$value"
+				},
+				"Id": "ECOMtoSMSC_SYN_SMS_Service_cpi",
+				"Version": "2.0.0",
+				"PackageId": "RUECOMetc",
+				"Name": "ECOMtoSMSC_SYN_SMS Service cpi",
+				"Description": " ",
+				"Sender": "ECOM",
+				"Receiver": "SMSCRU",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoSMSC_SYN_SMS_Service_cpi',Version='2.0.0')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoSMSC_SYN_SMS_Service_cpi',Version='2.0.0')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')/$value"
+				},
+				"Id": "vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud",
+				"Version": "1.0.8",
+				"PackageId": "RUECOMetc",
+				"Name": "vendor Replicate MH1 from SAP S4HANA to SAP Commerce Cloud",
+				"Description": "@Deprecated",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor_Replicate_MH1_from_SAP_S4HANA_to_SAP_Commerce_Cloud',Version='1.0.8')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-CPQ-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-CPQ-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-CPQ-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-CPQ-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/$value"
+				},
+				"Id": "vendor-Replicate-CPQ-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
+				"Version": "2.0.2",
+				"PackageId": "RUECOMetc",
+				"Name": "vendor-Replicate-CPQ-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA",
+				"Description": "в S/4 ZSALESORDER_CREATEFROMDAT2.SALESORDER_CREATEFROMDAT204",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-CPQ-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='vendor-Replicate-CPQ-Orders-From-SAP-Commerce-Cloud-To-SAP-S4HANA',Version='2.0.2')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_ZORDERS05_cpi',Version='2.0.0')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_ZORDERS05_cpi',Version='2.0.0')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_ZORDERS05_cpi',Version='2.0.0')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_ZORDERS05_cpi',Version='2.0.0')/$value"
+				},
+				"Id": "S4toECOM_ASY_ZORDERS05_cpi",
+				"Version": "2.0.0",
+				"PackageId": "RUECOMetc",
+				"Name": "S4toECOM_ASY_ZORDERS05 cpi",
+				"Description": "S/4 шлёт ZORDERS05",
+				"Sender": "S4",
+				"Receiver": "ECOM",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_ZORDERS05_cpi',Version='2.0.0')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='S4toECOM_ASY_ZORDERS05_cpi',Version='2.0.0')/Resources"}
+				}
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_CreateOrderMH3_cpi',Version='2.0.0')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_CreateOrderMH3_cpi',Version='2.0.0')",
+					"type": "com.sap.hci.api.IntegrationDesigntimeArtifact",
+					"content_type": "application/octet-stream",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_CreateOrderMH3_cpi',Version='2.0.0')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_CreateOrderMH3_cpi',Version='2.0.0')/$value"
+				},
+				"Id": "ECOMtoS4_SYN_CreateOrderMH3_cpi",
+				"Version": "2.0.0",
+				"PackageId": "RUECOMetc",
+				"Name": "ECOMtoS4_SYN_CreateOrderMH3 cpi",
+				"Description": "в S/4 приходит SI_CreateOrderMH3_InSync",
+				"Sender": "ECOM",
+				"Receiver": "S4",
+				"ArtifactContent": null,
+				"Configurations": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_CreateOrderMH3_cpi',Version='2.0.0')/Configurations"}
+				},
+				"Resources": {
+					"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/IntegrationDesigntimeArtifacts(Id='ECOMtoS4_SYN_CreateOrderMH3_cpi',Version='2.0.0')/Resources"}
+				}
+			}
+		]
+	}
+}

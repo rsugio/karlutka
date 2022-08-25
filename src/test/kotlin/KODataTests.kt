@@ -21,7 +21,25 @@ class KODataTests {
         val mpl2 = PCpi.parse<PCpi.MessageProcessingLog>(s("/cpiNeo/MessageProcessingLogs2.odata.json"))
         require(mpl2.first.size > 0)
         require(mpl2.first[0].CustomHeaderProperties.results.size == 4)   //$expand=CustomHeaderProperties
+        //одиночный лог с экспандами
         val mpl3 = PCpi.parseSingle<PCpi.MessageProcessingLog>(s("/cpiNeo/MessageProcessingLogs3.odata.json"))
-        println(mpl3.CustomHeaderProperties.results[0])                   //одиночный лог с экспандами
+        require(mpl3.CustomHeaderProperties.results[0].Name=="lifnr")
+        require(mpl3.CustomHeaderProperties.results[0].Value=="11055631")
+        // Артефакты по пакету
+        val ipid = PCpi.parse<PCpi.IntegrationDesigntimeArtifact>(s("/cpiNeo/IntegrationPackages_IntegrationDesigntimeArtifacts.odata.json"))
+        require(ipid.first.size>10)
+        // просто VMG
+        val vm = PCpi.parse<PCpi.ValueMappingDesigntimeArtifact>(s("/cpiNeo/ValueMappingDesigntimeArtifacts.odata.json"))
+        require(vm.first.size==3)
+        val se1 = PCpi.parse<PCpi.ServiceEndpoint>(s("/cpiNeo/ServiceEndpoints1.odata.json"))
+        require(se1.first.size>20)
+        val se2 = PCpi.parse<PCpi.ServiceEndpoint>(s("/cpiNeo/ServiceEndpoints2.odata.json"))
+        require(se2.first.size>20)
+    }
+
+    @Test
+    fun new() {
+        val x = PCpi.parse<PCpi.ServiceEndpoint>(s("/cpiNeo/ServiceEndpoints.odata.json"))
+        println(x)
     }
 }
