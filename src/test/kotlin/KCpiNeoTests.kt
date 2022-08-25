@@ -21,11 +21,16 @@ class KCpiNeoTests {
     }
 
     @Test
-    fun ping() {
+    fun dynamic() {
         runBlocking {
             cpineo.login()
-            cpineo.userCredentials()
-
+//            cpineo.userCredentials()
+            val packs = cpineo.integrationPackagesList()
+            packs.forEach{p->
+                println(p.Id)
+                val med = cpineo.downloadMedia(p.__metadata!!.media_src!!)
+                println(med)
+            }
         }
     }
 }

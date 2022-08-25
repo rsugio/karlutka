@@ -1,6 +1,7 @@
 package karlutka.clients
 
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.auth.*
 import io.ktor.client.plugins.auth.providers.*
@@ -26,7 +27,7 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
     lateinit var token: MCommon.AuthToken
 
     init {
-        client = KTorUtils.createClient(konfig.tmn, 2, LogLevel.INFO, headers, null)
+        client = KTorUtils.createClient(konfig.tmn, 2, LogLevel.HEADERS, headers, null)
 
         if (konfig.basic != null) {
             client.plugin(Auth).basic {
@@ -71,12 +72,50 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
         token = DefaultJson.decodeFromString(rsp.bodyAsText())
     }
 
-    suspend fun userCredentials(): List<PCpi.UserCredential> {
-        val json = client.get("/api/v1/UserCredentials") {
+    suspend fun userCredentialsList(filter: String? = null): List<PCpi.UserCredential> {
+        val json = client.get("/api/v1/UserCredentials${filter ?: ""}") {
             accept(ContentType.Application.Json)
         }.bodyAsText()
         val v = PCpi.parse<PCpi.UserCredential>(json)
         require(v.second == null) { "Листание /api/v1/UserCredentials не предусмотрено" }
         return v.first
+    }
+
+    suspend fun integrationPackagesList(filter: String? = null): List<PCpi.IntegrationPackage> {
+        val json = client.get("/api/v1/IntegrationPackages${filter ?: ""}") {
+            accept(ContentType.Application.Json)
+        }.bodyAsText()
+        val pair = PCpi.parse<PCpi.IntegrationPackage>(json)
+        require(pair.second == null) { "слишком много пакетов, требуется дописать листание" }
+        return pair.first
+    }
+
+    class Downloaded(
+        val error: PCpi.Error? = null,
+        val contentType: ContentType? = null,
+        val contentDisposition: ContentDisposition? = null,
+        val bytes: ByteArray? = null    //TODO переделать на временный файл
+    ) {
+        override fun toString() = "Downloaded($error,$contentDisposition,length=${bytes?.size})"
+    }
+
+    suspend fun downloadMedia(media_src: String): Downloaded {
+        try {
+            val rsp = client.get(media_src) {
+                accept(ContentType.Application.Json)   // для сообщений об ошибках в JSON
+            }
+            require(rsp.status.isSuccess())
+            val ct = rsp.contentType()!!
+            val cd = ContentDisposition.parse(rsp.headers.get("CONTENT-DISPOSITION")!!)
+            return Downloaded(null, ct, cd, rsp.body() as ByteArray)
+        } catch (e: ServerResponseException) {
+            require(e.response.contentType()!!.match(ContentType.Application.Json)) { "Ошибка не в формате JSON" }
+            val er = PCpi.parseError(e.response.bodyAsText())
+            return Downloaded(er)
+        }
+    }
+
+    suspend fun integrationPackageValue(media_src: String, content_type: String) {
+
     }
 }

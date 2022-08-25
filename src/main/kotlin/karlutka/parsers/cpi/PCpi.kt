@@ -6,6 +6,18 @@ import kotlinx.serialization.json.Json.Default.decodeFromJsonElement
 
 class PCpi {
     @Serializable
+    data class Error(
+        val code: String,
+        val message: Message
+    ) {
+        @Serializable
+        data class Message(
+            val lang: String,
+            val value: String
+        )
+    }
+
+    @Serializable
     class __Metadata(
         val type: String,
         val id: String? = null,
@@ -282,7 +294,14 @@ class PCpi {
             val src = Json.decodeFromString<JsonObject>(sjson)
             val j = src["d"]!!
             val s = decodeFromJsonElement(serializerFromMetadata(j), j)
-            return s as T
+            require(s is T) {"запрошен разбор типа ${T::class} но обнаружен ${s::class}"}
+            return s
+        }
+
+        @Serializable
+        private class X(val error: Error)
+        fun parseError(sjson:String) : Error {
+            return Json.decodeFromString<X>(sjson).error
         }
     }
 }

@@ -1,0 +1,8 @@
+{"error": {
+		"code": "Internal Server Error",
+		"message": {
+			"lang": "en",
+			"value": "Package export failed. It contains the following artifacts are in draft state: [ {Type=IFlow, Name=CICtoCIC_SYN_Delete datastore entry} ]"
+		}
+	}
+}
