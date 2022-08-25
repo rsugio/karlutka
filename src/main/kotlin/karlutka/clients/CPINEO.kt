@@ -12,6 +12,7 @@ import io.ktor.serialization.kotlinx.json.*
 import karlutka.models.MCommon
 import karlutka.models.MTarget
 import karlutka.parsers.PEdmx
+import karlutka.parsers.cpi.PCpi
 import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
 import kotlinx.coroutines.runBlocking
@@ -25,7 +26,7 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
     lateinit var token: MCommon.AuthToken
 
     init {
-        client = KTorUtils.createClient(konfig.tmn, 2, LogLevel.ALL, headers, null)
+        client = KTorUtils.createClient(konfig.tmn, 2, LogLevel.INFO, headers, null)
 
         if (konfig.basic != null) {
             client.plugin(Auth).basic {
@@ -58,14 +59,22 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
         val edmx: PEdmx.Edmx = PEdmx.parseEdmx(client.get("/api/v1/\$metadata") {
             contentType(ContentType.Application.Xml)
         }.bodyAsText())
+        require(edmx.Version.isNotBlank())
     }
 
     suspend fun loadToken() {
         val rsp = client.post(konfig.oauth!!.url) {
             header("Authorization", konfig.oauth!!.getBasic())
+            accept(ContentType.Application.Json)
         }
         require(rsp.status.isSuccess() && rsp.contentType()!!.match(ContentType.Application.Json))
         token = DefaultJson.decodeFromString(rsp.bodyAsText())
     }
 
+    suspend fun userCredentials(): List<PCpi.UserCredential> {
+        val json = client.get("/api/v1/UserCredentials") {
+            accept(ContentType.Application.Json)
+        }.bodyAsText()
+        return PCpi.parse(json)
+    }
 }

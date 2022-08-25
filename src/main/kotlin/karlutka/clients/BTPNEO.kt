@@ -12,7 +12,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import karlutka.models.MCommon
 import karlutka.models.MTarget
-import karlutka.parsers.cpi.MBtpNeo
+import karlutka.parsers.cpi.PBtpNeo
 import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
 import kotlinx.coroutines.runBlocking
@@ -46,37 +46,37 @@ class BTPNEO(override val konfig: KfTarget.BTPNEO) : MTarget {
 
 
     // Группы вообще
-    suspend fun authorizationV1AccountsGroups(): MBtpNeo.Groups {
+    suspend fun authorizationV1AccountsGroups(): PBtpNeo.Groups {
         return client.get("/authorization/v1/accounts/${konfig.subaccount}/groups").body()
     }
 
     // Роли по одной группе
-    suspend fun authorizationV1AccountsGroupRolesBy(g: String): MBtpNeo.Roles {
+    suspend fun authorizationV1AccountsGroupRolesBy(g: String): PBtpNeo.Roles {
         return client.get("/authorization/v1/accounts/${konfig.subaccount}/groups/roles?groupName=$g").body()
     }
 
     // Юзеры по одной группе
-    suspend fun authorizationV1AccountsGroupUsersBy(g: String): MBtpNeo.Users {
+    suspend fun authorizationV1AccountsGroupUsersBy(g: String): PBtpNeo.Users {
         return client.get("/authorization/v1/accounts/${konfig.subaccount}/groups/users?groupName=$g").body()
     }
 
     // Группы юзера
-    suspend fun authorizationV1AccountsUserGroupsBy(u: String): MBtpNeo.Groups {
+    suspend fun authorizationV1AccountsUserGroupsBy(u: String): PBtpNeo.Groups {
         return client.get("/authorization/v1/accounts/${konfig.subaccount}/users/groups?userId=$u").body()
     }
 
     // Роли юзера
-    suspend fun authorizationV1AccountsUserRolesBy(u: String): MBtpNeo.Roles {
+    suspend fun authorizationV1AccountsUserRolesBy(u: String): PBtpNeo.Roles {
         return client.get("/authorization/v1/accounts/${konfig.subaccount}/users/roles?userId=$u").body()
     }
 
     // Роли по приложению
-    suspend fun authorizationV1AccountsAppsRolesBy(app: String, acc: String): MBtpNeo.Roles {
+    suspend fun authorizationV1AccountsAppsRolesBy(app: String, acc: String): PBtpNeo.Roles {
         return client.get("/authorization/v1/accounts/${konfig.subaccount}/apps/$app/roles?providerAccount=$acc").body()
     }
 
     // Платформенные юзеры
-    suspend fun authorizationV1AccountsUsers(): MBtpNeo.Scim {
+    suspend fun authorizationV1AccountsUsers(): PBtpNeo.Scim {
         val resp = client.get("/authorization/v1/platform/accounts/${konfig.subaccount}/Users") {
             header("Accept", "application/scim+json")
         }

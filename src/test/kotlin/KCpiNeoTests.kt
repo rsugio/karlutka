@@ -24,6 +24,7 @@ class KCpiNeoTests {
     fun ping() {
         runBlocking {
             cpineo.login()
+            println(cpineo.userCredentials())
         }
     }
 }

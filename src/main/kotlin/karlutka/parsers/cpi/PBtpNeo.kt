@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonNames
 import java.time.ZonedDateTime
 
-class MBtpNeo {
+class PBtpNeo {
     // см /src/test/resources/btpNeo/04groups.json - в ключе только name
     @Serializable
     data class Groups(val groups: List<Map<String, String>>) {

@@ -11,7 +11,7 @@ import io.ktor.client.statement.*
 import io.ktor.serialization.kotlinx.json.*
 import karlutka.models.MCommon
 import karlutka.models.MTarget
-import karlutka.parsers.cpi.Btcf
+import karlutka.parsers.cpi.PBtpCf
 import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
 import kotlinx.coroutines.runBlocking
@@ -62,17 +62,17 @@ class BTPCF(override val konfig: KfTarget.BTPCF) : MTarget {
     }
 
     // Роли
-    suspend fun authorizationV2Roles(): List<Btcf.Role> {
+    suspend fun authorizationV2Roles(): List<PBtpCf.Role> {
         return get("${konfig.apiAuthentication}/sap/rest/authorization/v2/roles").body()
     }
 
     // Коллекции ролей
-    suspend fun authorizationV2Rolecollections(): List<Btcf.RoleCollection> {
+    suspend fun authorizationV2Rolecollections(): List<PBtpCf.RoleCollection> {
         return get("${konfig.apiAuthentication}/sap/rest/authorization/v2/rolecollections").body()
     }
 
     // Приложения
-    suspend fun authorizationV2Apps(): List<Btcf.App> {
+    suspend fun authorizationV2Apps(): List<PBtpCf.App> {
         return get("${konfig.apiAuthentication}/sap/rest/authorization/v2/apps").body()
     }
 

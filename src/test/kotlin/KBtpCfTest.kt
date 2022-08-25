@@ -2,7 +2,7 @@ import KT.Companion.s
 import io.ktor.serialization.kotlinx.json.*
 import karlutka.clients.BTPCF
 import karlutka.models.MCommon
-import karlutka.parsers.cpi.Btcf
+import karlutka.parsers.cpi.PBtpCf
 import karlutka.util.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.decodeFromString
@@ -29,9 +29,9 @@ class KBtpCfTest {
         val a1 = DefaultJson.decodeFromString<MCommon.AuthToken>(s("/btpCf/01authok.json"))
         require(a1.token_type.lowercase() == "bearer")
 
-        DefaultJson.decodeFromString<List<Btcf.Role>>(s("/btpCf/03roles.json"))
-        DefaultJson.decodeFromString<List<Btcf.RoleCollection>>(s("/btpCf/04rolecollections.json"))
-        DefaultJson.decodeFromString<List<Btcf.App>>(s("/btpCf/05apps.json"))
+        DefaultJson.decodeFromString<List<PBtpCf.Role>>(s("/btpCf/03roles.json"))
+        DefaultJson.decodeFromString<List<PBtpCf.RoleCollection>>(s("/btpCf/04rolecollections.json"))
+        DefaultJson.decodeFromString<List<PBtpCf.App>>(s("/btpCf/05apps.json"))
         //DefaultJson.decodeFromString<Scim?>(s("btpCf/06groups.json"))
         //DefaultJson.decodeFromString<Scim?>(s("btpCf/07users.json"))
     }

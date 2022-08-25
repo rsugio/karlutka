@@ -2,7 +2,7 @@ import KT.Companion.s
 import io.ktor.serialization.kotlinx.json.*
 import karlutka.clients.BTPNEO
 import karlutka.models.MCommon
-import karlutka.parsers.cpi.MBtpNeo
+import karlutka.parsers.cpi.PBtpNeo
 import karlutka.util.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -30,17 +30,17 @@ class KBtpNeoTest {
         require(target.oauth.client_id.isNotBlank())
         val a1 = DefaultJson.decodeFromString<MCommon.AuthToken>(s("/btpNeo/01authok.json"))
         require(a1.token_type.lowercase() == "bearer")
-        val g4 = DefaultJson.decodeFromString<MBtpNeo.Groups>(s("/btpNeo/04groups.json"))
+        val g4 = DefaultJson.decodeFromString<PBtpNeo.Groups>(s("/btpNeo/04groups.json"))
         require(g4.groups.size == 10)
-        val g5 = DefaultJson.decodeFromString<MBtpNeo.Roles>(s("/btpNeo/05groupRolesBy.json"))
+        val g5 = DefaultJson.decodeFromString<PBtpNeo.Roles>(s("/btpNeo/05groupRolesBy.json"))
         require(g5.roles.size > 10)
-        val g6 = DefaultJson.decodeFromString<MBtpNeo.Users>(s("/btpNeo/06groupUsersBy.json"))
+        val g6 = DefaultJson.decodeFromString<PBtpNeo.Users>(s("/btpNeo/06groupUsersBy.json"))
         require(g6.names().size == 2)
-        val g7 = DefaultJson.decodeFromString<MBtpNeo.Roles>(s("/btpNeo/07approles.json"))
+        val g7 = DefaultJson.decodeFromString<PBtpNeo.Roles>(s("/btpNeo/07approles.json"))
         require(g7.roles.size > 10)
-        val scim9 = DefaultJson.decodeFromString<MBtpNeo.Scim>(s("/btpNeo/09platform.json"))
+        val scim9 = DefaultJson.decodeFromString<PBtpNeo.Scim>(s("/btpNeo/09platform.json"))
         require(scim9.resources[0].id == "P9999999999")
-        val scim10 = DefaultJson.decodeFromString<MBtpNeo.Scim>(s("/btpNeo/10platform.json"))
+        val scim10 = DefaultJson.decodeFromString<PBtpNeo.Scim>(s("/btpNeo/10platform.json"))
         require(scim10.resources.size == 7, { scim10.resources.size })
         val user = scim10.resources[6]
         require(user.name!!.familyName == "ZZZZZZZZZZ" && user.name!!.givenName == "ZZZZZZZ")

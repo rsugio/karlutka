@@ -3,7 +3,7 @@ package karlutka.parsers.cpi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-class Btcf {
+class PBtpCf {
     @Serializable
     data class Role(
         val roleTemplateName: String,
