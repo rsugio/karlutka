@@ -75,6 +75,8 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
         val json = client.get("/api/v1/UserCredentials") {
             accept(ContentType.Application.Json)
         }.bodyAsText()
-        return PCpi.parse(json)
+        val v = PCpi.parse<PCpi.UserCredential>(json)
+        require(v.second==null) {"Листание /api/v1/UserCredentials не предусмотрено"}
+        return v.first
     }
 }

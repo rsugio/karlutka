@@ -9,10 +9,13 @@ import kotlinx.serialization.json.jsonObject
 
 class PCpi {
     @Serializable
-    data class __Metadata(
+    class __Metadata(
         val type: String,
         val id: String? = null,
         val uri: String? = null,
+        val content_type: String? = null,
+        val media_src: String? = null,
+        val edit_media: String? = null
     )
 
     @Serializable
@@ -40,15 +43,32 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
+    data class DataStoreEntry(
+        val Id: String,  //SAPCpiOutboundOrder_10496001A_ZTD
+        val DataStoreName: String, //HYBRISCOMMERCE
+        val IntegrationFlow: String?, //
+        val Type: String = "",
+        val Status: String, //Overdue
+        val MessageId: String? = null,
+        val DueAt: String, //TODO /Date(1654433933006)/
+        val CreatedAt: String, //TODO /Date(1654261133006)/
+        val RetainUntil: String, //TODO /Date(1662037133006)/
+    ) : ODataJson()
+
+    @Serializable
     class ODataJsonRoot(val d: ODataJsonD)
 
     @Serializable
-    class ODataJsonD(val results: List<JsonElement>)
+    class ODataJsonD(
+        val results: List<JsonElement>,
+        val __next: String? = null
+    )
 
     companion object {
         val __metas = mapOf(
             "com.sap.hci.api.SecurityArtifactDescriptor" to SecurityArtifactDescriptor::class,
-            "com.sap.hci.api.UserCredential" to UserCredential::class
+            "com.sap.hci.api.UserCredential" to UserCredential::class,
+            "com.sap.hci.api.DataStoreEntry" to DataStoreEntry::class,
         )
 
         @OptIn(InternalSerializationApi::class)
@@ -61,7 +81,7 @@ class PCpi {
             return kl.serializer()
         }
 
-        fun <T> parse(sjson: String): List<T> {
+        fun <T> parse(sjson: String): Pair<List<T>, String?> {
             val d = Json.decodeFromString<ODataJsonRoot>(sjson)
             val results = d.d.results
             val out = mutableListOf<ODataJson>()
@@ -70,7 +90,7 @@ class PCpi {
                 requireNotNull(s.__metadata)
                 out.add(s)
             }
-            return out as List<T>
+            return Pair(out as List<T>, d.d.__next)
         }
     }
 }
