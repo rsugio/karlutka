@@ -24,13 +24,15 @@ class KCpiNeoTests {
     fun dynamic() {
         runBlocking {
             cpineo.login()
-//            cpineo.userCredentials()
+
+            cpineo.userCredentialsList()
             val packs = cpineo.integrationPackagesList()
             packs.forEach{p->
-                println(p.Id)
                 val med = cpineo.downloadMedia(p.__metadata!!.media_src!!)
-                println(med)
+                println("${p.Id} $med")
             }
         }
     }
+
+
 }
