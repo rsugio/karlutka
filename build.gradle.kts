@@ -26,12 +26,12 @@ val xmlutil_version: String = "0.84.2"
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4+")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
     implementation("io.github.pdvrieze.xmlutil:core-jvm:$xmlutil_version")
     implementation("io.github.pdvrieze.xmlutil:serialization-jvm:$xmlutil_version")
     implementation("com.charleskorn.kaml:kaml:0.46.0")
 
-    implementation("ch.qos.logback:logback-classic:1.2+")
+    implementation("ch.qos.logback:logback-classic:1.2.11")
     implementation("org.apache.commons:commons-email:1.5")
 
     implementation("io.ktor:ktor-client-core-jvm:$ktor_version")
@@ -73,7 +73,7 @@ dependencies {
 //    implementation("com.influxdb:influxdb-client-kotlin:6.4+")  //бесполезная штука
 
     testImplementation(kotlin("test"))
-    implementation("commons-io:commons-io:2.11+")    //BOMInputStream
+    testImplementation("commons-io:commons-io:2.11.0")    //BOMInputStream
     //testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
 }
 
