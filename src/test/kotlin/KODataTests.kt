@@ -35,11 +35,15 @@ class KODataTests {
         require(se1.first.size>20)
         val se2 = PCpi.parse<PCpi.ServiceEndpoint>(s("/cpiNeo/ServiceEndpoints2.odata.json"))
         require(se2.first.size>20)
+        val lf = PCpi.parse<PCpi.LogFile>(s("/cpiNeo/LogFiles.odata.json"))
+        require(lf.first.size>5)
+        val lfa = PCpi.parse<PCpi.LogFileArchive>(s("/cpiNeo/LogFileArchives.odata.json"))
+        require(lfa.first.size>3)
     }
 
     @Test
     fun new() {
-        val x = PCpi.parse<PCpi.ServiceEndpoint>(s("/cpiNeo/ServiceEndpoints.odata.json"))
-        println(x)
+        val lfa = PCpi.parse<PCpi.LogFileArchive>(s("/cpiNeo/LogFileArchives.odata.json"))
+        println(lfa)
     }
 }

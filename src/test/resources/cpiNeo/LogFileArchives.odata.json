@@ -1,0 +1,62 @@
+{
+	"d": {
+		"results": [
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='all',LogFileType='http',NodeScope='worker')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='all',LogFileType='http',NodeScope='worker')",
+					"type": "com.sap.hci.api.LogFileArchive",
+					"content_type": "application/zip",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='all',LogFileType='http',NodeScope='worker')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='all',LogFileType='http',NodeScope='worker')/$value"
+				},
+				"Scope": "all",
+				"LogFileType": "http",
+				"NodeScope": "worker",
+				"ContentType": "application/zip"
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='latest',LogFileType='http',NodeScope='worker')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='latest',LogFileType='http',NodeScope='worker')",
+					"type": "com.sap.hci.api.LogFileArchive",
+					"content_type": "application/zip",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='latest',LogFileType='http',NodeScope='worker')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='latest',LogFileType='http',NodeScope='worker')/$value"
+				},
+				"Scope": "latest",
+				"LogFileType": "http",
+				"NodeScope": "worker",
+				"ContentType": "application/zip"
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='all',LogFileType='trace',NodeScope='worker')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='all',LogFileType='trace',NodeScope='worker')",
+					"type": "com.sap.hci.api.LogFileArchive",
+					"content_type": "application/zip",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='all',LogFileType='trace',NodeScope='worker')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='all',LogFileType='trace',NodeScope='worker')/$value"
+				},
+				"Scope": "all",
+				"LogFileType": "trace",
+				"NodeScope": "worker",
+				"ContentType": "application/zip"
+			},
+			{
+				"__metadata": {
+					"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='latest',LogFileType='trace',NodeScope='worker')",
+					"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='latest',LogFileType='trace',NodeScope='worker')",
+					"type": "com.sap.hci.api.LogFileArchive",
+					"content_type": "application/zip",
+					"media_src": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='latest',LogFileType='trace',NodeScope='worker')/$value",
+					"edit_media": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/LogFileArchives(Scope='latest',LogFileType='trace',NodeScope='worker')/$value"
+				},
+				"Scope": "latest",
+				"LogFileType": "trace",
+				"NodeScope": "worker",
+				"ContentType": "application/zip"
+			}
+		]
+	}
+}

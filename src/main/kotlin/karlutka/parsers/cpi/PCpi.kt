@@ -165,7 +165,6 @@ class PCpi {
         val Name: String, //"WSDL_POLICIES",
     ): ODataJson()
 
-
     @Serializable
     data class MessageProcessingLog(
         val MessageGuid: String,
@@ -210,13 +209,24 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    class ODataJsonRoot(val d: ODataJsonList)
+    data class LogFile(
+        val Name: String,               //"http_access_2f39eb6_2021-03-13.log",
+        val Application: String,        //"e4500iflmap",
+        val LastModified: String,       //"/Date(1615679941000)/",
+        val ContentType: String,        //"application/gzip",
+        val LogFileType: String,        //"http",
+        val NodeScope: String,          //"worker",
+        val Size: String,               //"7988"
+    ): ODataJson()
 
     @Serializable
-    class ODataJsonList(
-        val results: List<JsonElement>,
-        val __next: String? = null
-    )
+    data class LogFileArchive(
+        val Scope: String,              // "all",
+        val LogFileType: String,        // "UpdateServiceRequest$endpointAddress=UpdateServiceRequest",
+        val NodeScope: String,          // "UpdateServiceRequest",
+        val ContentType: String,        // com.sap.hci.api.Definition
+    ): ODataJson()
+
 
     companion object {
         val __metas = mapOf(
@@ -233,6 +243,8 @@ class PCpi {
             "com.sap.hci.api.ValueMappingDesigntimeArtifact" to ValueMappingDesigntimeArtifact::class,
             "com.sap.hci.api.ServiceEndpoint" to ServiceEndpoint::class,
             "com.sap.hci.api.MessageProcessingLog" to MessageProcessingLog::class,
+            "com.sap.hci.api.LogFile" to LogFile::class,
+            "com.sap.hci.api.LogFileArchive" to LogFileArchive::class,
         )
 
         @OptIn(InternalSerializationApi::class)
@@ -245,13 +257,22 @@ class PCpi {
             return kl.serializer()
         }
 
+        @Serializable
+        class ODataJsonRoot(val d: ODataJsonList)
+
+        @Serializable
+        class ODataJsonList(
+            val results: List<JsonElement>,
+            val __next: String? = null
+        )
+
         inline fun <reified T> parse(sjson: String): Pair<List<T>, String?> {
             val d = Json.decodeFromString<ODataJsonRoot>(sjson)
             val results = d.d.results
             val out = mutableListOf<T>()
             results.forEach { j ->
                 val s = decodeFromJsonElement(serializerFromMetadata(j), j)
-                require(s is T)
+                require(s is T) {"запрошен разбор типа ${T::class} но обнаружен ${s::class}"}
                 out.add(s)
             }
             return Pair(out, d.d.__next)
