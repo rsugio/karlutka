@@ -1,0 +1,71 @@
+{
+	"d": {
+		"__metadata": {
+			"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/MessageProcessingLogs('AGLo5COoPOEZXnD5DFSkGz3HigGf')",
+			"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/MessageProcessingLogs('AGLo5COoPOEZXnD5DFSkGz3HigGf')",
+			"type": "com.sap.hci.api.MessageProcessingLog"
+		},
+		"MessageGuid": "AGLo5COoPOEZXnD5DFSkGz3HigGf",
+		"CorrelationId": "AGLo5CMcLziBOJror7c4Qfq8Xyu3",
+		"ApplicationMessageId": "11055631",
+		"ApplicationMessageType": null,
+		"LogStart": "/Date(1659429923226)/",
+		"LogEnd": "/Date(1659429926966)/",
+		"Sender": "MDG_XI",
+		"Receiver": "C4C_SOAP,C4CLog_SOAP",
+		"IntegrationFlowName": "Confirm_Business_Partner_Replication_from_SAP_MDG",
+		"Status": "COMPLETED",
+		"AlternateWebLink": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/itspaces/shell/monitoring/MessageDetails/%7B%22messageGuid%22%3A%22AGLo5COoPOEZXnD5DFSkGz3HigGf%22%7D",
+		"IntegrationArtifact": {
+			"__metadata": {"type": "com.sap.hci.api.IntegrationArtifact"},
+			"Id": "Confirm_Business_Partner_Replication_from_SAP_MDG",
+			"Name": "Confirm Business Partner Replication from SAP MDG",
+			"Type": "INTEGRATION_FLOW",
+			"PackageId": "RUC4CMDG",
+			"PackageName": "RU_C4C__MDG"
+		},
+		"LogLevel": "INFO",
+		"CustomStatus": "COMPLETED",
+		"ArchivingStatus": "NOT_RELEVANT",
+		"ArchivingSenderChannelMessages": false,
+		"ArchivingReceiverChannelMessages": false,
+		"ArchivingLogAttachments": false,
+		"ArchivingPersistedMessages": false,
+		"TransactionId": "64f480c864c6473d9796de2b8c5d46e6",
+		"PreviousComponentName": "CPI_e100999",
+		"LocalComponentName": "CPI_e100999",
+		"OriginComponentName": "CPI_e100999",
+		"CustomHeaderProperties": {
+			"results": [
+				{
+					"__metadata": {
+						"id": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/MessageProcessingLogCustomHeaderProperties('624401')",
+						"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/MessageProcessingLogCustomHeaderProperties('624401')",
+						"type": "com.sap.hci.api.MessageProcessingLogCustomHeaderProperty"
+					},
+					"Id": "624401",
+					"Name": "lifnr",
+					"Value": "11055631",
+					"Log": {
+						"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/MessageProcessingLogCustomHeaderProperties('624401')/Log"}
+					}
+				}
+			]
+		},
+		"MessageStoreEntries": {
+			"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/MessageProcessingLogs('AGLo5COoPOEZXnD5DFSkGz3HigGf')/MessageStoreEntries"}
+		},
+		"ErrorInformation": {
+			"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/MessageProcessingLogs('AGLo5COoPOEZXnD5DFSkGz3HigGf')/ErrorInformation"}
+		},
+		"AdapterAttributes": {
+			"results": []
+		},
+		"Attachments": {
+			"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/MessageProcessingLogs('AGLo5COoPOEZXnD5DFSkGz3HigGf')/Attachments"}
+		},
+		"Runs": {
+			"__deferred": {"uri": "https://e100999-tmn.hci.eu3.hana.ondemand.com:443/api/v1/MessageProcessingLogs('AGLo5COoPOEZXnD5DFSkGz3HigGf')/Runs"}
+		}
+	}
+}

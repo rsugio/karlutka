@@ -1,11 +1,8 @@
 package karlutka.parsers.cpi
 
 import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.*
 import kotlinx.serialization.json.Json.Default.decodeFromJsonElement
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.jsonObject
 
 class PCpi {
     @Serializable
@@ -155,7 +152,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    class MessageProcessingLogCustomHeaderProperties(
+    data class MessageProcessingLogCustomHeaderProperties(
         val Id: String,
         val Name: String,
         val Value: String,
@@ -163,10 +160,10 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    class ODataJsonRoot(val d: ODataJsonD)
+    class ODataJsonRoot(val d: ODataJsonList)
 
     @Serializable
-    class ODataJsonD(
+    class ODataJsonList(
         val results: List<JsonElement>,
         val __next: String? = null
     )
@@ -195,16 +192,23 @@ class PCpi {
             return kl.serializer()
         }
 
-        fun <T> parse(sjson: String): Pair<List<T>, String?> {
+        inline fun <reified T> parse(sjson: String): Pair<List<T>, String?> {
             val d = Json.decodeFromString<ODataJsonRoot>(sjson)
             val results = d.d.results
-            val out = mutableListOf<ODataJson>()
+            val out = mutableListOf<T>()
             results.forEach { j ->
                 val s = decodeFromJsonElement(serializerFromMetadata(j), j)
-                requireNotNull(s.__metadata)
+                require(s is T)
                 out.add(s)
             }
-            return Pair(out as List<T>, d.d.__next)
+            return Pair(out, d.d.__next)
+        }
+
+        inline fun <reified T> parseSingle(sjson: String): T {
+            val src = Json.decodeFromString<JsonObject>(sjson)
+            val j = src["d"]!!
+            val s = decodeFromJsonElement(serializerFromMetadata(j), j)
+            return s as T
         }
     }
 }
