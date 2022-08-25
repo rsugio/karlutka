@@ -6,18 +6,23 @@ import io.ktor.client.plugins.auth.*
 import io.ktor.client.plugins.auth.providers.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import karlutka.models.MCommon
 import karlutka.models.MTarget
+import karlutka.parsers.PEdmx
 import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
 class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
     val client: HttpClient
     var json: Json = DefaultJson
-    var headers= mutableMapOf("x-csrf-token" to "Fetch")
-//    lateinit var token: MCommon.AuthToken
+    var headers = mutableMapOf("x-csrf-token" to "Fetch")
+    lateinit var token: MCommon.AuthToken
 
     init {
         client = KTorUtils.createClient(konfig.tmn, 2, LogLevel.ALL, headers, null)
@@ -28,31 +33,39 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
                 sendWithoutRequest { false }
             }
         } else if (konfig.oauth != null) {
-            TODO()  //TODO
+            runBlocking { loadToken() }
+            client.plugin(Auth).bearer {
+                loadTokens {
+                    token.bearer()
+                }
+                refreshTokens {
+                    loadToken()
+                    token.bearer()
+                }
+            }
+        } else {
+            error("CpiNeo auth")
         }
-//            runBlocking { loadToken() }
-//            client.plugin(Auth).bearer {
-//                loadTokens {
-//                    token.bearer()
-//                }
-//                refreshTokens {
-//                    loadToken()
-//                    token.bearer()
-//                }
-//            }
     }
 
     suspend fun login() {
         var rsp = client.head("/api/v1/")
         headers["x-csrf-token"] = rsp.headers["X-CSRF-Token"]!!
-        require(headers["x-csrf-token"]!!.length>16)    // не Fetch а гуид или что-то вроде
+        require(headers["x-csrf-token"]!!.length > 16)    // не Fetch а гуид или что-то вроде
         require(rsp.status.isSuccess())
-        rsp = client.get("/api/v1/")
-        rsp = client.get("/api/v1/\$metadata") {
+        rsp = client.get("/api/v1/") { header("accept", "application/json") }
+        require(rsp.status.isSuccess())
+        val edmx: PEdmx.Edmx = PEdmx.parseEdmx(client.get("/api/v1/\$metadata") {
             contentType(ContentType.Application.Xml)
-        }
-
+        }.bodyAsText())
     }
 
+    suspend fun loadToken() {
+        val rsp = client.post(konfig.oauth!!.url) {
+            header("Authorization", konfig.oauth!!.getBasic())
+        }
+        require(rsp.status.isSuccess() && rsp.contentType()!!.match(ContentType.Application.Json))
+        token = DefaultJson.decodeFromString(rsp.bodyAsText())
+    }
 
 }
