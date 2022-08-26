@@ -1,0 +1,10 @@
+﻿<list>
+	<type id="namespdecl" ADD_IFR_PROPERTIES="true" STOP_ON_FIRST_ERROR="false" RELEASE="7.0" DOCU_LANG="EN">
+		<ref>
+			<vc vcType="S" vcQMode="D" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1"/>
+			<key typeID="namespdecl">
+				<elem>3f38b2400b9e11ea9c32fae8ac130d0e</elem>
+			</key>
+		</ref>
+	</type>
+</list>

@@ -8,6 +8,11 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+import nl.adaptivity.xmlutil.XmlDeclMode
+import nl.adaptivity.xmlutil.serialization.XML
+import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import kotlin.test.Test
 
 @Serializable(with = ColorAsStringSerializer::class)
@@ -41,7 +46,37 @@ object ColorAsStringSerializer : KSerializer<A> {
     }
 }
 
+@Serializable
+open class VC(
+    val swcGuid: String = "vc"
+)
+
+@Serializable
+@XmlSerialName("VC", "vcns", "")
+class VC1() : VC("vc1")
+
+@Serializable
+@XmlSerialName("VC", "vc2", "")
+class VC2() : VC("vc2")
+
 class KBukvar {
+    private val hmxml = SerializersModule {
+        polymorphic(Any::class) {}
+    }
+    private val hmserializer = XML(hmxml) {
+        xmlDeclMode = XmlDeclMode.None
+        autoPolymorphic = true
+    }
+
+    // тесты на один класс в разных неймспейсах
+    @Test
+    fun vc() {
+        val v1 = hmserializer.encodeToString(VC1())
+        val v2 = hmserializer.encodeToString(VC2())
+        println(hmserializer.decodeFromString<VC1>(v1))
+        println(hmserializer.decodeFromString<VC2>(v2))
+    }
+
     @Test
     fun tmp() {
         val a = A(333)
@@ -50,4 +85,9 @@ class KBukvar {
         println(b)
     }
 
+    @Test
+    fun вопрос() {
+        val a = listOf<Any?>(1, 2, 3, null, 4)
+        val b = a.filterNotNull().filterIsInstance<Int>()
+    }
 }

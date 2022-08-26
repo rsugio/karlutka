@@ -162,13 +162,13 @@ class PI(
         this.hmiServices(repRegistered.MethodOutput!!.Return)
     }
 
-    suspend fun hmiAskSWCV() {
+    suspend fun hmiGeneralQuery(sxml: String): Hm.QueryResult {
         val serv = findHmiServiceMethod("query", "generic")
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
             uuid(UUID.randomUUID()),
             serv.applCompLevel(),
-            Hm.HmiMethodInput("QUERY_REQUEST_XML", Hm.GeneralQueryRequest.swcv()),
+            Hm.HmiMethodInput("QUERY_REQUEST_XML", sxml),
             serv.methodid.uppercase(),
             serv.serviceid,
             "dummy",
@@ -180,17 +180,16 @@ class PI(
             "1.0"
         )
         val resp = hmiPost(serv.url(), req)
-        swcv = Hm.QueryResult.parse(resp.MethodOutput!!.Return).toSwcv()
+        return Hm.QueryResult.parse(resp.MethodOutput!!.Return)
     }
 
-    suspend fun askNamespaces() {
-        val serv = findHmiServiceMethod("query", "generic")
-        val srq = Hm.GeneralQueryRequest.namespaces(swcv.map{it.id})
+    suspend fun hmiRead(bodyXml: String, vc: String = "SWC", sp: String = "-1", uc: Boolean = true): String {
+        val serv = findHmiServiceMethod("read", "plain")
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
             uuid(UUID.randomUUID()),
             serv.applCompLevel(),
-            Hm.HmiMethodInput("QUERY_REQUEST_XML", srq.encodeToString()),
+            Hm.HmiMethodInput(mapOf("body" to bodyXml, "VC" to vc, sp to sp, "UC" to uc.toString())),
             serv.methodid.uppercase(),
             serv.serviceid,
             "dummy",
@@ -202,8 +201,47 @@ class PI(
             "1.0"
         )
         val resp = hmiPost(serv.url(), req)
-        val nsp = Hm.QueryResult.parse(resp.MethodOutput!!.Return)
-        namespaces = nsp.toNamespace(swcv)
+        require(resp.MethodOutput!!.ContentType == "text/xml")
+        return resp.MethodOutput.Return
+    }
+
+    suspend fun hmiGeneralQuery(req: Hm.GeneralQueryRequest) = hmiGeneralQuery(req.encodeToString())
+
+    suspend fun hmiAskSWCV() {
+        swcv = hmiGeneralQuery(Hm.GeneralQueryRequest.swcv()).toSwcv()
+    }
+//
+//        val serv = findHmiServiceMethod("query", "generic")
+//        val req = Hm.HmiRequest(
+//            uuid(hmiClientId),
+//            uuid(UUID.randomUUID()),
+//            serv.applCompLevel(),
+//            Hm.HmiMethodInput("QUERY_REQUEST_XML", Hm.GeneralQueryRequest.swcv()),
+//            serv.methodid.uppercase(),
+//            serv.serviceid,
+//            "dummy",
+//            "dummy",
+//            "EN",
+//            false,
+//            null,
+//            null,
+//            "1.0"
+//        )
+//        val resp = hmiPost(serv.url(), req)
+//        swcv = Hm.QueryResult.parse(resp.MethodOutput!!.Return).toSwcv()
+//    }
+
+    suspend fun askNamespaces() {
+        val srq = Hm.GeneralQueryRequest.namespaces(swcv.map { it.id })
+        namespaces = hmiGeneralQuery(srq).toNamespace(swcv)
+    }
+
+    suspend fun askNamespaces2() {
+        val sxml = ""
+        val resp = hmiRead(sxml)
+        println(resp)
+
+//        //namespaces = hmiGeneralQuery(srq).toNamespace2(swcv)
     }
 
     suspend fun executeOMtest(testRequest: Hm.TestExecutionRequest): Hm.TestExecutionResponse {
@@ -264,15 +302,16 @@ class PI(
             "dummy",
             "EN",
             true,
-            null,           //ld-s-devpih.ao.nlmk ?
+            null,           //hostname ?
             null,
             "1.0",
             0
         )
         val resp = hmiPost("/dir/hmi_server_details/int?container=any", req)
-        require(resp.MethodOutput!!.ContentType=="text/xml")
+        require(resp.MethodOutput!!.ContentType == "text/xml")
         dirConfiguration = Hm.DirConfiguration.decodeFromString(resp.MethodOutput.Return)
     }
+
     suspend fun hmiPost(
         uri: String,
         req: Hm.HmiRequest
@@ -290,9 +329,10 @@ class PI(
         val t = a.bodyAsText()
         Paths.get("c:/data/tmp/posthmi.response").writeText(t)
         val hr = Hm.parseResponse(t)
-        if (hr.MethodOutput!=null) Paths.get("c:/data/tmp/hmo.xml").writeText(hr.MethodOutput.Return)
+        if (hr.MethodOutput != null) Paths.get("c:/data/tmp/hmo.xml").writeText(hr.MethodOutput.Return)
         return hr
     }
+
     companion object {
         val mdtperfservlet = "/mdt/performancedataqueryservlet"
     }

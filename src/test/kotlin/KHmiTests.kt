@@ -1,6 +1,7 @@
 import KT.Companion.s
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.Hm.*
+import karlutka.parsers.pi.PCommon
 import kotlinx.serialization.decodeFromString
 import kotlin.test.Test
 
@@ -8,7 +9,7 @@ class KHmiTests {
     @Test
     fun rawhmi() {
         val services = Hm.hmserializer.decodeFromString<Hm.HmiServices>(s("/pi_HMI/rep_registered.xml")).list
-        require(services.size>10)
+        require(services.size > 10)
 
         HmiMethodInput("ключ", "значение").attr()
         val req = HmiRequest(
@@ -63,7 +64,13 @@ class KHmiTests {
 //        val q2 = QueryResult.parse(s("/pi_HMI/queryResult_swcv2.xml")).toSwcv()
 //        require(q2.size > 100)
         val t = Hm.hmserializer.decodeFromString<QueryResult>(s("/pi_HMI/namespaceResponse2.xml")).toNamespace(q1)
-        println(t)
+        require(t.size > 0)
+
+        val types = QueryResult.parse(s("/pi_HMI/rep1_query_resp.xml"))
+        types.toTable().forEach { m ->
+            val ref = m["RA_XILINK"]!!.qref!!.ref
+            println(ref)
+        }
     }
 
     @Test
@@ -87,10 +94,38 @@ class KHmiTests {
     }
 
     @Test
+    fun repQuery() {
+        val repdatatypes = GeneralQueryRequest.Types.of(
+            "rfc", "ifmextdef", "ifmtypedef", "ifmmessif", "ifmfaultm", "ifmmessage", "idoc",
+            "ifmuitexts", "ifmtypeenh"
+        )
+        val qc = GeneralQueryRequest.QC(
+            "S", "N",
+            PCommon.ClCxt("A", "dummyuser"),
+            GeneralQueryRequest.SwcListDef("G", GeneralQueryRequest.SwcInfoList.of("c0f91671b1a511e8b1c4d4f2ac130d0e"))
+        )
+        val cond = GeneralQueryRequest.Condition(null, null)
+        val q = GeneralQueryRequest(repdatatypes, qc, cond, GeneralQueryRequest.Result.of("RA_XILINK", "FOLDERREF"))
+        println(q.encodeToString())
+    }
+
+    @Test
     fun dirConfiguration() {
         val conf = DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration.xml"))
-        require(conf.FEATURES.FEATURE.size==30)
+        require(conf.FEATURES.FEATURE.size == 30)
         val conf2 = DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration2.xml"))
-        require(conf2.FEATURES.FEATURE.size==30)
+        require(conf2.FEATURES.FEATURE.size == 30)
+    }
+
+    @Test
+    fun read() {
+        val ref = Ref(
+            PCommon.VC("3f38b2400b9e11ea9c32fae8ac130d0e", "S", -1),
+            PCommon.Key("namespdecl", null, listOf("3f38b2400b9e11ea9c32fae8ac130d0e"))
+        )
+        val type = Type("namespdecl", true, false, "7.0", "EN", ref)
+        val list = ReadListRequest(type)
+        println(list.encodeToString())
+
     }
 }

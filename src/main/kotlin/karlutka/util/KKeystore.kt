@@ -5,7 +5,6 @@ import java.nio.file.Path
 import java.security.KeyStore
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManagerFactory
-import javax.net.ssl.X509TrustManager
 import kotlin.io.path.inputStream
 
 object KKeystore {

@@ -1077,10 +1077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:MDG:1C-ERP:Material:Replication</elem>
+						<elem>urn:vendor:po:a:MDG:1C-ERP:Material:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="8c3e43e0f42c11e9c9a0df1eac130d0e" sp="-1" caption="SC_A_MDG_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="8c3e43e0f42c11e9c9a0df1eac130d0e" sp="-1" caption="SC_A_MDG_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="8c3e43e0f42c11e9c9a0df1eac130d0e">
@@ -4037,10 +4037,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:al:HCM:NonABAP:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:al:HCM:NonABAP:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c357f0400b9e11eac224fae8ac130d0e" sp="-1" caption="CSC_AL_HCM_NONABAP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="c357f0400b9e11eac224fae8ac130d0e" sp="-1" caption="CSC_AL_HCM_NONABAP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c357f0400b9e11eac224fae8ac130d0e">
@@ -4257,10 +4257,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:AXAPTA:BP:Replication</elem>
+						<elem>urn:vendor:po:i:AXAPTA:BP:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="2a08bc40e29911e987b2ed2bac130d0e" sp="-1" caption="SC_I_AXAPTA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="2a08bc40e29911e987b2ed2bac130d0e" sp="-1" caption="SC_I_AXAPTA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="2a08bc40e29911e987b2ed2bac130d0e">
@@ -4277,10 +4277,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:Axapta:LO:SalesOrder</elem>
+						<elem>urn:vendor:po:i:Axapta:LO:SalesOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="2a08bc40e29911e987b2ed2bac130d0e" sp="-1" caption="SC_I_AXAPTA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="2a08bc40e29911e987b2ed2bac130d0e" sp="-1" caption="SC_I_AXAPTA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="2a08bc40e29911e987b2ed2bac130d0e">
@@ -4297,10 +4297,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:Axapta:LO:BillingDocument</elem>
+						<elem>urn:vendor:po:i:Axapta:LO:BillingDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="2a08bc40e29911e987b2ed2bac130d0e" sp="-1" caption="SC_I_AXAPTA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="2a08bc40e29911e987b2ed2bac130d0e" sp="-1" caption="SC_I_AXAPTA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="2a08bc40e29911e987b2ed2bac130d0e">
@@ -4317,10 +4317,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:Common</elem>
+						<elem>urn:vendor:po:i:ERP:Common</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4337,10 +4337,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:DMS:ContractManagement</elem>
+						<elem>urn:vendor:po:i:ERP:DMS:ContractManagement</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4357,10 +4357,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:Bank:Replication</elem>
+						<elem>urn:vendor:po:i:ERP:Bank:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4377,10 +4377,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:LO:PurchaseOrder</elem>
+						<elem>urn:vendor:po:i:ERP:LO:PurchaseOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4397,10 +4397,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:LO:SalesOrder</elem>
+						<elem>urn:vendor:po:i:ERP:LO:SalesOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4417,10 +4417,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:LO:BillingDocument</elem>
+						<elem>urn:vendor:po:i:ERP:LO:BillingDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4437,10 +4437,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:LO:InventoryStock</elem>
+						<elem>urn:vendor:po:i:ERP:LO:InventoryStock</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4457,10 +4457,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:LO:GoodsMovement</elem>
+						<elem>urn:vendor:po:i:ERP:LO:GoodsMovement</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4477,10 +4477,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:LO:OutboundDelivery</elem>
+						<elem>urn:vendor:po:i:ERP:LO:OutboundDelivery</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4497,10 +4497,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:ECMLink</elem>
+						<elem>urn:vendor:po:i:ERP:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4517,10 +4517,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:LO:PurchaseOrderItemHistoryNotification</elem>
+						<elem>urn:vendor:po:i:ERP:LO:PurchaseOrderItemHistoryNotification</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4617,10 +4617,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:MDG:1C-ERP:BP:Replication</elem>
+						<elem>urn:vendor:po:a:MDG:1C-ERP:BP:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="8c3e43e0f42c11e9c9a0df1eac130d0e" sp="-1" caption="SC_A_MDG_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="8c3e43e0f42c11e9c9a0df1eac130d0e" sp="-1" caption="SC_A_MDG_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="8c3e43e0f42c11e9c9a0df1eac130d0e">
@@ -4637,10 +4637,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:CO:InternalOrder</elem>
+						<elem>urn:vendor:po:i:ERP:CO:InternalOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4657,10 +4657,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:RCM:Contract</elem>
+						<elem>urn:vendor:po:i:ERP:RCM:Contract</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e5a469e0cd8611e9872cd7cbac130d0e" sp="-1" caption="SC_I_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e5a469e0cd8611e9872cd7cbac130d0e">
@@ -4837,10 +4837,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:DMZ:DAX:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:a:DMZ:DAX:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e07b77601c0a11ea9ff0fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_DAX, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e07b77601c0a11ea9ff0fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_DAX, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e07b77601c0a11ea9ff0fae8ac130d0e">
@@ -4857,10 +4857,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:DMZ:DAX:HR:Employee</elem>
+						<elem>urn:vendor:po:a:DMZ:DAX:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e07b77601c0a11ea9ff0fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_DAX, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e07b77601c0a11ea9ff0fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_DAX, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e07b77601c0a11ea9ff0fae8ac130d0e">
@@ -4917,10 +4917,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:HR:Staffing</elem>
+						<elem>urn:vendor:po:i:1C-ERP:HR:Staffing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -4937,10 +4937,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:LO:BillingDocument</elem>
+						<elem>urn:vendor:po:i:1C-ERP:LO:BillingDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -4977,10 +4977,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:L:HCM:Common</elem>
+						<elem>urn:vendor:po:L:HCM:Common</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1950a2d0e68311e98312ed2bac130d0e" sp="-1" caption="SC_L_HCM, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="1950a2d0e68311e98312ed2bac130d0e" sp="-1" caption="SC_L_HCM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1950a2d0e68311e98312ed2bac130d0e">
@@ -4997,10 +4997,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:L:HCM:OrgStructure</elem>
+						<elem>urn:vendor:po:L:HCM:OrgStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1950a2d0e68311e98312ed2bac130d0e" sp="-1" caption="SC_L_HCM, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="1950a2d0e68311e98312ed2bac130d0e" sp="-1" caption="SC_L_HCM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1950a2d0e68311e98312ed2bac130d0e">
@@ -5017,10 +5017,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:L:HCM:Employee</elem>
+						<elem>urn:vendor:po:L:HCM:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1950a2d0e68311e98312ed2bac130d0e" sp="-1" caption="SC_L_HCM, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="1950a2d0e68311e98312ed2bac130d0e" sp="-1" caption="SC_L_HCM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1950a2d0e68311e98312ed2bac130d0e">
@@ -5037,10 +5037,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:L:HCM:EmployeeTime</elem>
+						<elem>urn:vendor:po:L:HCM:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1950a2d0e68311e98312ed2bac130d0e" sp="-1" caption="SC_L_HCM, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="1950a2d0e68311e98312ed2bac130d0e" sp="-1" caption="SC_L_HCM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1950a2d0e68311e98312ed2bac130d0e">
@@ -5057,10 +5057,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:MDG:1C-ERP:Bank:Replication</elem>
+						<elem>urn:vendor:po:a:MDG:1C-ERP:Bank:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="8c3e43e0f42c11e9c9a0df1eac130d0e" sp="-1" caption="SC_A_MDG_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="8c3e43e0f42c11e9c9a0df1eac130d0e" sp="-1" caption="SC_A_MDG_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="8c3e43e0f42c11e9c9a0df1eac130d0e">
@@ -5077,10 +5077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:HR:OrganizationUnits</elem>
+						<elem>urn:vendor:po:i:1C-ERP:HR:OrganizationUnits</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -5097,10 +5097,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:LO:PurchaseOrderItemHistoryNotification</elem>
+						<elem>urn:vendor:po:i:1C-ERP:LO:PurchaseOrderItemHistoryNotification</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -5117,10 +5117,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:LO:OutboundDelivery</elem>
+						<elem>urn:vendor:po:i:1C-ERP:LO:OutboundDelivery</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -5177,10 +5177,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:PY:Payslip</elem>
+						<elem>urn:vendor:po:i:HCM:PY:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="942c02500b9b11ea9abcfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="942c02500b9b11ea9abcfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="942c02500b9b11ea9abcfae8ac130d0e">
@@ -5257,10 +5257,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:1C:LO:PurchaseOrder</elem>
+						<elem>urn:vendor:po:a:ERP:1C:LO:PurchaseOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d0ac640dad811e99495ed2bac130d0e">
@@ -5277,10 +5277,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:1C:LO:PurchaseOrderHistoryNotification</elem>
+						<elem>urn:vendor:po:a:ERP:1C:LO:PurchaseOrderHistoryNotification</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d0ac640dad811e99495ed2bac130d0e">
@@ -5297,10 +5297,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:1C:LO:GoodsMovement</elem>
+						<elem>urn:vendor:po:a:ERP:1C:LO:GoodsMovement</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d0ac640dad811e99495ed2bac130d0e">
@@ -5317,10 +5317,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:1C:LO:GoodsMovementCancel</elem>
+						<elem>urn:vendor:po:a:ERP:1C:LO:GoodsMovementCancel</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d0ac640dad811e99495ed2bac130d0e">
@@ -5337,10 +5337,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:1C:LO:SalesOrder</elem>
+						<elem>urn:vendor:po:a:ERP:1C:LO:SalesOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d0ac640dad811e99495ed2bac130d0e">
@@ -5357,10 +5357,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:1C:LO:BillingDocument</elem>
+						<elem>urn:vendor:po:a:ERP:1C:LO:BillingDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d0ac640dad811e99495ed2bac130d0e">
@@ -5377,10 +5377,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:1C:CO:InternalOrder</elem>
+						<elem>urn:vendor:po:a:ERP:1C:CO:InternalOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d0ac640dad811e99495ed2bac130d0e">
@@ -5397,10 +5397,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:1C:CO:InventoryStock</elem>
+						<elem>urn:vendor:po:a:ERP:1C:CO:InventoryStock</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d0ac640dad811e99495ed2bac130d0e">
@@ -5937,10 +5937,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:HR:Employees</elem>
+						<elem>urn:vendor:po:i:1C-ERP:HR:Employees</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -5957,10 +5957,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:HR:RepairLaborCosts</elem>
+						<elem>urn:vendor:po:i:1C-ERP:HR:RepairLaborCosts</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -5977,10 +5977,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:LO:GoodsMovement</elem>
+						<elem>urn:vendor:po:i:1C-ERP:LO:GoodsMovement</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -5997,10 +5997,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:HR:Positions</elem>
+						<elem>urn:vendor:po:i:1C-ERP:HR:Positions</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -6017,10 +6017,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:Bank:Replication</elem>
+						<elem>urn:vendor:po:i:1C-ERP:Bank:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -6037,10 +6037,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:CO:InternalOrder</elem>
+						<elem>urn:vendor:po:i:1C-ERP:CO:InternalOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -6057,10 +6057,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:CO:InventoryStock</elem>
+						<elem>urn:vendor:po:i:1C-ERP:CO:InventoryStock</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -6077,10 +6077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:LO:SalesOrder</elem>
+						<elem>urn:vendor:po:i:1C-ERP:LO:SalesOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -6117,10 +6117,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:LO:PurchaseOrder</elem>
+						<elem>urn:vendor:po:i:1C-ERP:LO:PurchaseOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -6137,10 +6137,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:LO:GoodsMovementCancel</elem>
+						<elem>urn:vendor:po:i:1C-ERP:LO:GoodsMovementCancel</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -6157,10 +6157,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:BP:Replication</elem>
+						<elem>urn:vendor:po:i:1C-ERP:BP:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -6197,10 +6197,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:Common</elem>
+						<elem>urn:vendor:po:i:1C-ERP:Common</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4596e9a0dad811e9a741ed2bac130d0e" sp="-1" caption="SC_I_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4596e9a0dad811e9a741ed2bac130d0e">
@@ -13137,10 +13137,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ECM:CA:Calendar</elem>
+						<elem>urn:vendor:po:i:ECM:CA:Calendar</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="bff6e240257911ea93a1fae8ac130d0e" sp="-1" caption="CSC_I_ECM_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="bff6e240257911ea93a1fae8ac130d0e" sp="-1" caption="CSC_I_ECM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="bff6e240257911ea93a1fae8ac130d0e">
@@ -13177,10 +13177,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:CA:Barcode</elem>
+						<elem>urn:vendor:po:i:ERP:CA:Barcode</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="282a7390257a11ea8595fae8ac130d0e">
@@ -13197,10 +13197,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:DMS:ContractManagement</elem>
+						<elem>urn:vendor:po:i:DMS:ContractManagement</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="de3de700ce3811e9a7d6d7cbac130d0e" sp="-1" caption="SC_I_DMS, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="de3de700ce3811e9a7d6d7cbac130d0e" sp="-1" caption="SC_I_DMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="de3de700ce3811e9a7d6d7cbac130d0e">
@@ -13217,10 +13217,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:CA:SearchHelp</elem>
+						<elem>urn:vendor:po:i:ERP:CA:SearchHelp</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="282a7390257a11ea8595fae8ac130d0e">
@@ -13377,10 +13377,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:DMS:DMS:Contract</elem>
+						<elem>urn:vendor:po:a:ERP:DMS:DMS:Contract</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c0c4c750257e11eab949fae8ac130d0e" sp="-1" caption="CSC_A_ERP_DMS, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="c0c4c750257e11eab949fae8ac130d0e" sp="-1" caption="CSC_A_ERP_DMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c0c4c750257e11eab949fae8ac130d0e">
@@ -13397,10 +13397,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:CA:Calendar</elem>
+						<elem>urn:vendor:po:i:ERP:CA:Calendar</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="282a7390257a11ea8595fae8ac130d0e">
@@ -13457,10 +13457,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ERP:CA:ECMLink</elem>
+						<elem>urn:vendor:po:i:ERP:CA:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="282a7390257a11ea8595fae8ac130d0e">
@@ -13477,10 +13477,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ECM:CA:SearchHelp</elem>
+						<elem>urn:vendor:po:i:ECM:CA:SearchHelp</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="bff6e240257911ea93a1fae8ac130d0e" sp="-1" caption="CSC_I_ECM_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="bff6e240257911ea93a1fae8ac130d0e" sp="-1" caption="CSC_I_ECM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="bff6e240257911ea93a1fae8ac130d0e">
@@ -13777,10 +13777,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:DMS:ERP:ContractData</elem>
+						<elem>urn:vendor:po:a:DMS:ERP:ContractData</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="801d4420ebf411e9cd18ed2bac130d0e" sp="-1" caption="SC_A_DMS_ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="801d4420ebf411e9cd18ed2bac130d0e" sp="-1" caption="SC_A_DMS_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="801d4420ebf411e9cd18ed2bac130d0e">
@@ -13857,10 +13857,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:MDG:SED:BP:Replication</elem>
+						<elem>urn:vendor:po:a:MDG:SED:BP:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="bbc18b80f42d11e98377df1eac130d0e" sp="-1" caption="SC_A_MDG_SED, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="bbc18b80f42d11e98377df1eac130d0e" sp="-1" caption="SC_A_MDG_SED, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="bbc18b80f42d11e98377df1eac130d0e">
@@ -13917,10 +13917,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:MDG:AXAPTA:BP:Replication</elem>
+						<elem>urn:vendor:po:a:MDG:AXAPTA:BP:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="2bb4a4d0f42f11e9bc90df1eac130d0e" sp="-1" caption="SC_A_MDG_AXAPTA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="2bb4a4d0f42f11e9bc90df1eac130d0e" sp="-1" caption="SC_A_MDG_AXAPTA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="2bb4a4d0f42f11e9bc90df1eac130d0e">
@@ -13957,10 +13957,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:SED:BP:Replication</elem>
+						<elem>urn:vendor:po:i:SED:BP:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="21548c50e29e11e98077ed2bac130d0e" sp="-1" caption="SC_I_SED, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="21548c50e29e11e98077ed2bac130d0e" sp="-1" caption="SC_I_SED, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="21548c50e29e11e98077ed2bac130d0e">
@@ -14937,10 +14937,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:ECMLink</elem>
+						<elem>urn:vendor:po:i:HCM:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="09fb81e0cd7b11e9aab4d7cbac130d0e" sp="-1" caption="SC_I_HCM, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="09fb81e0cd7b11e9aab4d7cbac130d0e" sp="-1" caption="SC_I_HCM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="09fb81e0cd7b11e9aab4d7cbac130d0e">
@@ -14977,10 +14977,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:Employee</elem>
+						<elem>urn:vendor:po:i:HCM:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="09fb81e0cd7b11e9aab4d7cbac130d0e" sp="-1" caption="SC_I_HCM, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="09fb81e0cd7b11e9aab4d7cbac130d0e" sp="-1" caption="SC_I_HCM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="09fb81e0cd7b11e9aab4d7cbac130d0e">
@@ -15077,10 +15077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:HCM:1C-ERP:HR:Employees</elem>
+						<elem>urn:vendor:po:a:HCM:1C-ERP:HR:Employees</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="fb4e3c80e50011e9c842ed2bac130d0e" sp="-1" caption="SC_A_HCM_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="fb4e3c80e50011e9c842ed2bac130d0e" sp="-1" caption="SC_A_HCM_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="fb4e3c80e50011e9c842ed2bac130d0e">
@@ -15097,10 +15097,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:HCM:1C-ERP:HR:OrgStructure</elem>
+						<elem>urn:vendor:po:a:HCM:1C-ERP:HR:OrgStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="fb4e3c80e50011e9c842ed2bac130d0e" sp="-1" caption="SC_A_HCM_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="fb4e3c80e50011e9c842ed2bac130d0e" sp="-1" caption="SC_A_HCM_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="fb4e3c80e50011e9c842ed2bac130d0e">
@@ -15897,10 +15897,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:CSCPortal:HR:Employee</elem>
+						<elem>urn:vendor:po:i:CSCPortal:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -15917,10 +15917,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:CSCPortal:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:i:CSCPortal:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -16297,10 +16297,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:CSCPortal:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:i:CSCPortal:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -16337,10 +16337,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:HCM:CSCPortal:HR:Employee</elem>
+						<elem>urn:vendor:po:a:HCM:CSCPortal:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="a52cdae00b9e11ea8b0cfae8ac130d0e">
@@ -16357,10 +16357,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:HCM:CSCPortal:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:a:HCM:CSCPortal:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="a52cdae00b9e11ea8b0cfae8ac130d0e">
@@ -16377,10 +16377,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:HCM:CSCPortal:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:a:HCM:CSCPortal:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="a52cdae00b9e11ea8b0cfae8ac130d0e">
@@ -16397,10 +16397,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:HCM:CSCPortal:HR:Payslip</elem>
+						<elem>urn:vendor:po:a:HCM:CSCPortal:HR:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="a52cdae00b9e11ea8b0cfae8ac130d0e">
@@ -16417,10 +16417,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:CSCPortal:HR:Payslip</elem>
+						<elem>urn:vendor:po:i:CSCPortal:HR:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -16437,10 +16437,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:CSCPortal:HR:TestDocument</elem>
+						<elem>urn:vendor:po:i:CSCPortal:HR:TestDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -16797,10 +16797,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:PA:Employee</elem>
+						<elem>urn:vendor:po:i:HCM:PA:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="8ac823b00b9b11ea9b7bfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="8ac823b00b9b11ea9b7bfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="8ac823b00b9b11ea9b7bfae8ac130d0e">
@@ -16817,10 +16817,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:PA:Performance:vendor</elem>
+						<elem>urn:vendor:po:i:HCM:PA:Performance:vendor</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="8ac823b00b9b11ea9b7bfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="8ac823b00b9b11ea9b7bfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="8ac823b00b9b11ea9b7bfae8ac130d0e">
@@ -16837,10 +16837,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:CSCPortal:Common</elem>
+						<elem>urn:vendor:po:i:CSCPortal:Common</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -17757,10 +17757,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:DAX:LO:SalesOrder</elem>
+						<elem>urn:vendor:po:a:ERP:DAX:LO:SalesOrder</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5d0390400c9011ea9685fae8ac130d0e" sp="-1" caption="SC_A_ERP_AXAPTA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="5d0390400c9011ea9685fae8ac130d0e" sp="-1" caption="SC_A_ERP_AXAPTA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5d0390400c9011ea9685fae8ac130d0e">
@@ -17777,10 +17777,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:DAX:LO:BillingDocument</elem>
+						<elem>urn:vendor:po:a:ERP:DAX:LO:BillingDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5d0390400c9011ea9685fae8ac130d0e" sp="-1" caption="SC_A_ERP_AXAPTA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="5d0390400c9011ea9685fae8ac130d0e" sp="-1" caption="SC_A_ERP_AXAPTA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5d0390400c9011ea9685fae8ac130d0e">
@@ -18097,10 +18097,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:il:Common</elem>
+						<elem>urn:vendor:po:il:Common</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b67ae0c0060911eac799df1eac130d0e" sp="-1" caption="CSC_IL_COMMON, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="b67ae0c0060911eac799df1eac130d0e" sp="-1" caption="CSC_IL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b67ae0c0060911eac799df1eac130d0e">
@@ -18577,10 +18577,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:ERP:1C:LO:OutboundDelivery</elem>
+						<elem>urn:vendor:po:a:ERP:1C:LO:OutboundDelivery</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="7d0ac640dad811e99495ed2bac130d0e" sp="-1" caption="SC_A_ERP_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d0ac640dad811e99495ed2bac130d0e">
@@ -19597,10 +19597,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:HCM:DMZ:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:a:HCM:DMZ:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="CSC_A_HCM_DMZ, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="CSC_A_HCM_DMZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b7c7bbc00b9e11ea914bfae8ac130d0e">
@@ -19697,10 +19697,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:HCM:DMZ:HR:Employee</elem>
+						<elem>urn:vendor:po:a:HCM:DMZ:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="CSC_A_HCM_DMZ, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="CSC_A_HCM_DMZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b7c7bbc00b9e11ea914bfae8ac130d0e">
@@ -19717,10 +19717,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:HCM:DMZ:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:a:HCM:DMZ:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="CSC_A_HCM_DMZ, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="CSC_A_HCM_DMZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b7c7bbc00b9e11ea914bfae8ac130d0e">
@@ -22057,7 +22057,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:FI:Payment:Sberbank</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:FI:Payment:Sberbank</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -22077,7 +22077,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:User:SF</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:User:SF</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -22097,7 +22097,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:IdentityDocument</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:IdentityDocument</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23537,7 +23537,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:VehicleTrip</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:VehicleTrip</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23557,7 +23557,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:Learning</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:Learning</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23577,7 +23577,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:EmployeeStatistics</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeStatistics</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23597,7 +23597,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:APIDictionary:SF</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:APIDictionary:SF</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23617,7 +23617,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:Payslip</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:Payslip</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23637,7 +23637,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:Generic:SF</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:Generic:SF</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23657,7 +23657,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:Compensation:SF</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:Compensation:SF</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23677,7 +23677,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:Bank</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:Bank</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23897,7 +23897,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23917,7 +23917,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:IDoc</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:IDoc</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23937,7 +23937,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:EmployeeTimeSheet</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeTimeSheet</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23957,7 +23957,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeTime</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23977,7 +23977,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:Performance</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:Performance</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -23997,7 +23997,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:AdditionalPayment</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:AdditionalPayment</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24017,7 +24017,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:User:SF:UserStatus</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:User:SF:UserStatus</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24037,7 +24037,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:EmployeeWorkSchedule</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeWorkSchedule</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24057,7 +24057,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:Session:SF</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:Session:SF</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24077,7 +24077,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:Goal</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:Goal</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24097,7 +24097,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:JobApplication:SF</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:JobApplication:SF</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24117,7 +24117,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:Employee</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:Employee</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24137,7 +24137,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:HRBusinessEntity</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:HRBusinessEntity</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24157,7 +24157,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:RFC</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:RFC</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24177,7 +24177,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:Query:SF</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:Query:SF</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24197,7 +24197,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:BusinessPartner</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:BusinessPartner</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24217,7 +24217,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:MDF</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:MDF</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24237,7 +24237,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:EmployeeTrip</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeTrip</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24257,7 +24257,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:Candidate:SF</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:Candidate:SF</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24277,7 +24277,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:EmployeeVacation</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeVacation</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24297,7 +24297,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:EmployeeCertificate</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeCertificate</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24317,7 +24317,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:EmployeeHRConsultation</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeHRConsultation</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24337,7 +24337,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:Dividend</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:Dividend</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24357,7 +24357,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:CA:Session:IDM</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:CA:Session:IDM</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -24377,7 +24377,7 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:vendor:Proxy:HR:Employee:IDM</elem>
+						<elem>urn:vendor:po:i:vendor:Proxy:HR:Employee:IDM</elem>
 					</key>
 					<ref>
 						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
@@ -29917,10 +29917,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:i:1C-ERP:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="CSC_I_1C-ERP_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="CSC_I_1C-ERP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1207e8d0058c11eabdcfdf1eac130d0e">
@@ -29937,10 +29937,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:i:1C-ERP:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="CSC_I_1C-ERP_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="CSC_I_1C-ERP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1207e8d0058c11eabdcfdf1eac130d0e">
@@ -29957,10 +29957,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:1C-ERP:HR:Employee</elem>
+						<elem>urn:vendor:po:i:1C-ERP:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="CSC_I_1C-ERP_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="CSC_I_1C-ERP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1207e8d0058c11eabdcfdf1eac130d0e">
@@ -29997,10 +29997,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:il:NonABAP:HR:Employee</elem>
+						<elem>urn:vendor:po:il:NonABAP:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="43cfd280021a11eacf63df1eac130d0e">
@@ -30137,10 +30137,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:il:NonABAP:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:il:NonABAP:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="43cfd280021a11eacf63df1eac130d0e">
@@ -30157,10 +30157,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:il:NonABAP:HR:Common</elem>
+						<elem>urn:vendor:po:il:NonABAP:HR:Common</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="43cfd280021a11eacf63df1eac130d0e">
@@ -30177,10 +30177,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:il:NonABAP:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:il:NonABAP:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="43cfd280021a11eacf63df1eac130d0e">
@@ -31377,10 +31377,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:DMZ:1C-ERP:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:a:DMZ:1C-ERP:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3f38b2400b9e11ea9c32fae8ac130d0e">
@@ -31397,10 +31397,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:DMZ:1C-ERP:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:a:DMZ:1C-ERP:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3f38b2400b9e11ea9c32fae8ac130d0e">
@@ -31417,10 +31417,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PODMZ:ECM:ECMLink</elem>
+						<elem>urn:vendor:po:i:PODMZ:ECM:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of cscentr.com">
+						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4c6f55a0e06e11e9cd17ed2bac130d0e">
@@ -31437,10 +31437,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:DMZ:1C-ERP:HR:Employee</elem>
+						<elem>urn:vendor:po:a:DMZ:1C-ERP:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_1C-ERP, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3f38b2400b9e11ea9c32fae8ac130d0e">
@@ -31477,10 +31477,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PODMZ:1C-ERP:Bank:Replication</elem>
+						<elem>urn:vendor:po:i:PODMZ:1C-ERP:Bank:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of cscentr.com">
+						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4c6f55a0e06e11e9cd17ed2bac130d0e">
@@ -32937,10 +32937,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:DAX:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:i:DAX:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e51a94401c0511eacd07fae8ac130d0e" sp="-1" caption="CSC_I_DAX_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e51a94401c0511eacd07fae8ac130d0e" sp="-1" caption="CSC_I_DAX_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e51a94401c0511eacd07fae8ac130d0e">
@@ -32957,10 +32957,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:DAX:HR:Employee</elem>
+						<elem>urn:vendor:po:i:DAX:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e51a94401c0511eacd07fae8ac130d0e" sp="-1" caption="CSC_I_DAX_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="e51a94401c0511eacd07fae8ac130d0e" sp="-1" caption="CSC_I_DAX_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e51a94401c0511eacd07fae8ac130d0e">
@@ -32997,10 +32997,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:CA:ECMLink</elem>
+						<elem>urn:vendor:po:i:HCM:CA:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="f1368ff00b9c11eaa808fae8ac130d0e">
@@ -33017,10 +33017,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:CA:Barcode</elem>
+						<elem>urn:vendor:po:i:HCM:CA:Barcode</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="f1368ff00b9c11eaa808fae8ac130d0e">
@@ -33037,10 +33037,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:CA:SearchHelp</elem>
+						<elem>urn:vendor:po:i:HCM:CA:SearchHelp</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="f1368ff00b9c11eaa808fae8ac130d0e">
@@ -33057,10 +33057,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:CA:Calendar</elem>
+						<elem>urn:vendor:po:i:HCM:CA:Calendar</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="f1368ff00b9c11eaa808fae8ac130d0e">
@@ -33077,10 +33077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ECM:DMS:Barcode</elem>
+						<elem>urn:vendor:po:i:ECM:DMS:Barcode</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="0998fb40257a11eabb65fae8ac130d0e" sp="-1" caption="CSC_I_ECM_DMS, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="0998fb40257a11eabb65fae8ac130d0e" sp="-1" caption="CSC_I_ECM_DMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="0998fb40257a11eabb65fae8ac130d0e">
@@ -33097,10 +33097,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ECM:DMS:ECMLink</elem>
+						<elem>urn:vendor:po:i:ECM:DMS:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="0998fb40257a11eabb65fae8ac130d0e" sp="-1" caption="CSC_I_ECM_DMS, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="0998fb40257a11eabb65fae8ac130d0e" sp="-1" caption="CSC_I_ECM_DMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="0998fb40257a11eabb65fae8ac130d0e">
@@ -33117,10 +33117,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:ECM:ECMLink</elem>
+						<elem>urn:vendor:po:i:ECM:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="d3b8f2f0e0fa11e99541ed2bac130d0e" sp="-1" caption="SC_I_ECM, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="d3b8f2f0e0fa11e99541ed2bac130d0e" sp="-1" caption="SC_I_ECM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="d3b8f2f0e0fa11e99541ed2bac130d0e">
@@ -34277,10 +34277,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:DMS:DMS:Contract</elem>
+						<elem>urn:vendor:po:i:DMS:DMS:Contract</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="0091f060257f11ea95bcfae8ac130d0e" sp="-1" caption="CSC_I_DMS_DMS, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="0091f060257f11ea95bcfae8ac130d0e" sp="-1" caption="CSC_I_DMS_DMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="0091f060257f11ea95bcfae8ac130d0e">
@@ -34377,10 +34377,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:THPortal:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:i:THPortal:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="561996b00b9d11eacf3bfae8ac130d0e" sp="-1" caption="CSC_I_THPORTAL_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="561996b00b9d11eacf3bfae8ac130d0e" sp="-1" caption="CSC_I_THPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="561996b00b9d11eacf3bfae8ac130d0e">
@@ -34397,10 +34397,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:THPortal:HR:Employee</elem>
+						<elem>urn:vendor:po:i:THPortal:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="561996b00b9d11eacf3bfae8ac130d0e" sp="-1" caption="CSC_I_THPORTAL_HR, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="561996b00b9d11eacf3bfae8ac130d0e" sp="-1" caption="CSC_I_THPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="561996b00b9d11eacf3bfae8ac130d0e">
@@ -34417,10 +34417,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:CSCPortal:Test:TestDocument</elem>
+						<elem>urn:vendor:po:a:CSCPortal:Test:TestDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3e0dc150146611eaabf9fae8ac130d0e" sp="-1" caption="CSC_A_CSCPORTAL_TEST, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="3e0dc150146611eaabf9fae8ac130d0e" sp="-1" caption="CSC_A_CSCPORTAL_TEST, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3e0dc150146611eaabf9fae8ac130d0e">
@@ -34437,10 +34437,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:Test:HR:TestDocument</elem>
+						<elem>urn:vendor:po:i:Test:HR:TestDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c025da20146511eac69ffae8ac130d0e" sp="-1" caption="CSC_I_TEST, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="c025da20146511eac69ffae8ac130d0e" sp="-1" caption="CSC_I_TEST, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c025da20146511eac69ffae8ac130d0e">
@@ -34457,10 +34457,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:Test:HR:Payslip</elem>
+						<elem>urn:vendor:po:i:Test:HR:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c025da20146511eac69ffae8ac130d0e" sp="-1" caption="CSC_I_TEST, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="c025da20146511eac69ffae8ac130d0e" sp="-1" caption="CSC_I_TEST, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c025da20146511eac69ffae8ac130d0e">
@@ -34477,10 +34477,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:CSCPortal:Test:Payslip</elem>
+						<elem>urn:vendor:po:a:CSCPortal:Test:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3e0dc150146611eaabf9fae8ac130d0e" sp="-1" caption="CSC_A_CSCPORTAL_TEST, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="3e0dc150146611eaabf9fae8ac130d0e" sp="-1" caption="CSC_A_CSCPORTAL_TEST, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3e0dc150146611eaabf9fae8ac130d0e">
@@ -34877,10 +34877,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:DMZ:Proxy:IDoc</elem>
+						<elem>urn:vendor:po:i:DMZ:Proxy:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34897,10 +34897,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:DMZ:Proxy:RFC</elem>
+						<elem>urn:vendor:po:i:DMZ:Proxy:RFC</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34917,10 +34917,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:DMZ:Proxy:HR:Employee</elem>
+						<elem>urn:vendor:po:i:DMZ:Proxy:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34937,10 +34937,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:DMZ:Proxy:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:i:DMZ:Proxy:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34957,10 +34957,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:DMZ:Proxy:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:i:DMZ:Proxy:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34977,10 +34977,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:HCM:PT:EmployeeTime</elem>
+						<elem>urn:vendor:po:i:HCM:PT:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="9dbd59900b9b11ea9d1dfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PT, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="9dbd59900b9b11ea9d1dfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PT, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="9dbd59900b9b11ea9d1dfae8ac130d0e">
@@ -36097,10 +36097,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:al:Common:FileProcessing</elem>
+						<elem>urn:vendor:po:al:Common:FileProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36117,10 +36117,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:al:Common:HTTPProcessing</elem>
+						<elem>urn:vendor:po:al:Common:HTTPProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36137,10 +36137,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:al:Common:MailProcessing</elem>
+						<elem>urn:vendor:po:al:Common:MailProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36157,10 +36157,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:al:Common:XMLProcessing</elem>
+						<elem>urn:vendor:po:al:Common:XMLProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36177,10 +36177,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:al:Common:TextProcessing</elem>
+						<elem>urn:vendor:po:al:Common:TextProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36277,10 +36277,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:al:Common:XI30Processing</elem>
+						<elem>urn:vendor:po:al:Common:XI30Processing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -39897,10 +39897,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PODMZ:ERP:LO</elem>
+						<elem>urn:vendor:po:i:PODMZ:ERP:LO</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of cscentr.com">
+						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4c6f55a0e06e11e9cd17ed2bac130d0e">
@@ -39917,10 +39917,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PODMZ:1C-ERP:LO</elem>
+						<elem>urn:vendor:po:i:PODMZ:1C-ERP:LO</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of cscentr.com">
+						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4c6f55a0e06e11e9cd17ed2bac130d0e">
@@ -39937,10 +39937,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PODMZ:DMS:LO</elem>
+						<elem>urn:vendor:po:i:PODMZ:DMS:LO</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of cscentr.com">
+						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4c6f55a0e06e11e9cd17ed2bac130d0e">
@@ -39957,10 +39957,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PODMZ:DAX:LO</elem>
+						<elem>urn:vendor:po:i:PODMZ:DAX:LO</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of cscentr.com">
+						<vc vcType="S" swcGuid="4c6f55a0e06e11e9cd17ed2bac130d0e" sp="-1" caption="SC_I_PO, 1.1 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4c6f55a0e06e11e9cd17ed2bac130d0e">
@@ -40077,10 +40077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PGK:Proxy:RFC</elem>
+						<elem>urn:vendor:po:i:PGK:Proxy:RFC</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40097,10 +40097,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PGK:Proxy:HR:Employee</elem>
+						<elem>urn:vendor:po:i:PGK:Proxy:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40117,10 +40117,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PGK:Proxy:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:i:PGK:Proxy:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40137,10 +40137,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PGK:Proxy:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:i:PGK:Proxy:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40177,10 +40177,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:DMZ:PGK:HR:Employee</elem>
+						<elem>urn:vendor:po:a:DMZ:PGK:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_PGK, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_PGK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4be7f2700c3a11eab482fae8ac130d0e">
@@ -40217,10 +40217,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:i:PGK:Proxy:IDoc</elem>
+						<elem>urn:vendor:po:i:PGK:Proxy:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40257,10 +40257,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:DMZ:PGK:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:a:DMZ:PGK:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_PGK, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_PGK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4be7f2700c3a11eab482fae8ac130d0e">
@@ -40277,10 +40277,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:cscentr:po:a:DMZ:PGK:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:a:DMZ:PGK:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_PGK, 1.0 of cscentr.com">
+						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_PGK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4be7f2700c3a11eab482fae8ac130d0e">

@@ -28,7 +28,7 @@ class KCpiNeoTests {
             cpineo.login()
 
             cpineo.userCredentialsList()
-            cpineo.integrationPackagePost("test220825", Paths.get("C:\\data\\tmp\\test220825.zip").readBytes())
+            cpineo.integrationPackagePut("test220825", Paths.get("C:\\data\\tmp\\test220825.zip").readBytes())
 
             if (false) {
                 val packs = cpineo.integrationPackagesList()

@@ -965,12 +965,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PY, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_PY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -985,7 +985,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PY, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_PY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1350,12 +1350,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CA, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_ERP_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1370,7 +1370,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CA, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_ERP_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1460,12 +1460,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_ECM_ERP_HCM, cscentr.com of cscentr.com</strg>
+					<strg>SC_A_ECM_ERP_HCM, vendor.com of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1475,12 +1475,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_ECM_ERP_HCM, cscentr.com of cscentr.com</strg>
+					<strg>SC_A_ECM_ERP_HCM, vendor.com of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1570,12 +1570,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_ERP_DMS, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_ERP_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1590,7 +1590,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_ERP_DMS, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_ERP_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1735,12 +1735,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_HCM, 1.0 of cscentr.com</strg>
+					<strg>SC_I_HCM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1755,7 +1755,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_HCM, 1.0 of cscentr.com</strg>
+					<strg>SC_I_HCM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1845,12 +1845,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_DAX, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_DMZ_DAX, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1865,7 +1865,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_DAX, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_DMZ_DAX, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1900,12 +1900,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_I_ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1920,7 +1920,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_I_ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -2010,12 +2010,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_L_HCM, 1.0 of cscentr.com</strg>
+					<strg>SC_L_HCM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -2030,7 +2030,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_L_HCM, 1.0 of cscentr.com</strg>
+					<strg>SC_L_HCM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -2835,12 +2835,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_HCM_NONABAP, 1.0 of cscentr.com</strg>
+					<strg>CSC_AL_HCM_NONABAP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -2855,7 +2855,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_HCM_NONABAP, 1.0 of cscentr.com</strg>
+					<strg>CSC_AL_HCM_NONABAP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3055,12 +3055,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_DMZ, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_HCM_DMZ, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3075,7 +3075,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_DMZ, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_HCM_DMZ, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3385,12 +3385,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_DMS_ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_DMS_ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3405,7 +3405,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_DMS_ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_DMS_ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3605,12 +3605,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_CA, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_ECM_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3625,7 +3625,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_CA, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_ECM_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3660,12 +3660,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_DMS, 1.0 of cscentr.com</strg>
+					<strg>SC_I_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3680,7 +3680,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_DMS, 1.0 of cscentr.com</strg>
+					<strg>SC_I_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3715,12 +3715,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_HCM_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_HCM_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3735,7 +3735,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_HCM_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_HCM_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3770,12 +3770,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_MDG_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_MDG_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3790,7 +3790,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_MDG_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_MDG_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3825,12 +3825,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_AXAPTA, 1.0 of cscentr.com</strg>
+					<strg>SC_I_AXAPTA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3845,7 +3845,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_AXAPTA, 1.0 of cscentr.com</strg>
+					<strg>SC_I_AXAPTA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3880,12 +3880,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_SED, 1.0 of cscentr.com</strg>
+					<strg>SC_I_SED, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3900,7 +3900,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_SED, 1.0 of cscentr.com</strg>
+					<strg>SC_I_SED, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3935,12 +3935,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_MDG_SED, 1.0 of cscentr.com</strg>
+					<strg>SC_A_MDG_SED, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3955,7 +3955,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_MDG_SED, 1.0 of cscentr.com</strg>
+					<strg>SC_A_MDG_SED, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3990,12 +3990,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_MDG_AXAPTA, 1.0 of cscentr.com</strg>
+					<strg>SC_A_MDG_AXAPTA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4010,7 +4010,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_MDG_AXAPTA, 1.0 of cscentr.com</strg>
+					<strg>SC_A_MDG_AXAPTA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4045,12 +4045,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CORE, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_ERP_CORE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4065,7 +4065,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CORE, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_ERP_CORE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4210,12 +4210,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_CSCPORTAL_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_CSCPORTAL_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4230,7 +4230,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_CSCPORTAL_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_CSCPORTAL_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4375,12 +4375,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PA, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_PA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4395,7 +4395,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PA, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_PA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4870,12 +4870,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_CSCPORTAL, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4890,7 +4890,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_CSCPORTAL, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -10645,12 +10645,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_HCM_ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_HCM_ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -10665,7 +10665,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_HCM_ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_HCM_ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -11140,12 +11140,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_I_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -11160,7 +11160,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_I_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12020,12 +12020,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_ERP_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_ERP_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12040,7 +12040,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_ERP_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>SC_A_ERP_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -13670,12 +13670,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_ERP_AXAPTA, 1.0 of cscentr.com</strg>
+					<strg>SC_A_ERP_AXAPTA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -13690,7 +13690,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_ERP_AXAPTA, 1.0 of cscentr.com</strg>
+					<strg>SC_A_ERP_AXAPTA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -13945,12 +13945,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_COMMON, 1.0 of cscentr.com</strg>
+					<strg>CSC_IL_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -13965,7 +13965,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_COMMON, 1.0 of cscentr.com</strg>
+					<strg>CSC_IL_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -14275,12 +14275,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CA, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -14295,7 +14295,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CA, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15925,12 +15925,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_COMMON, 1.0 of cscentr.com</strg>
+					<strg>CSC_AL_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15945,7 +15945,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_COMMON, 1.0 of cscentr.com</strg>
+					<strg>CSC_AL_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16035,12 +16035,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_PGK_PROXY, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_PGK_PROXY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16055,7 +16055,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_PGK_PROXY, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_PGK_PROXY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16530,12 +16530,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_TEST, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_TEST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16550,7 +16550,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_TEST, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_TEST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16585,12 +16585,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_CSCPORTAL_TEST, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_CSCPORTAL_TEST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16605,7 +16605,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_CSCPORTAL_TEST, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_CSCPORTAL_TEST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18235,12 +18235,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_NONABAP_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_IL_NONABAP_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18255,7 +18255,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_NONABAP_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_IL_NONABAP_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18290,12 +18290,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMZ_PROXY, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_DMZ_PROXY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18310,7 +18310,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMZ_PROXY, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_DMZ_PROXY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18455,12 +18455,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_1C-ERP_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_1C-ERP_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18475,7 +18475,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_1C-ERP_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_1C-ERP_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18675,12 +18675,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMS_DMS, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_DMS_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18695,7 +18695,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMS_DMS, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_DMS_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18840,12 +18840,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CORE, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_CORE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18860,7 +18860,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CORE, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_CORE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -19060,12 +19060,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_PGK, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_DMZ_PGK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -19080,7 +19080,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_PGK, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_DMZ_PGK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -19830,12 +19830,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_ECM, 1.0 of cscentr.com</strg>
+					<strg>SC_I_ECM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -19850,7 +19850,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_ECM, 1.0 of cscentr.com</strg>
+					<strg>SC_I_ECM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21370,12 +21370,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PT, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_PT, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21390,7 +21390,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PT, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_HCM_PT, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21425,12 +21425,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_DMZ_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21445,7 +21445,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_1C-ERP, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_DMZ_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23130,12 +23130,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_DMS, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_ECM_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23150,7 +23150,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_DMS, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_ECM_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23185,12 +23185,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_PO, 1.1 of cscentr.com</strg>
+					<strg>SC_I_PO, 1.1 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23205,7 +23205,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_PO, 1.1 of cscentr.com</strg>
+					<strg>SC_I_PO, 1.1 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25275,12 +25275,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_THPORTAL_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_THPORTAL_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25295,7 +25295,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_THPORTAL_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_THPORTAL_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25495,12 +25495,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_THPORTAL, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_DMZ_THPORTAL, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25515,7 +25515,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_THPORTAL, 1.0 of cscentr.com</strg>
+					<strg>CSC_A_DMZ_THPORTAL, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25770,12 +25770,12 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DAX_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_DAX_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
 				<simple>
-					<strg>cscentr.com</strg>
+					<strg>vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25790,7 +25790,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DAX_HR, 1.0 of cscentr.com</strg>
+					<strg>CSC_I_DAX_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>

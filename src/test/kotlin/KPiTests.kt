@@ -1,5 +1,6 @@
 import karlutka.clients.PI
 import karlutka.parsers.pi.Hm
+import karlutka.parsers.pi.PCommon
 import karlutka.server.Server
 import karlutka.util.*
 import kotlinx.coroutines.runBlocking
@@ -49,8 +50,8 @@ class KPiTests {
     @Test
     fun hmi() {
         runBlocking {
-//            pi.hmiGetRegistered()
-//            pi.hmiAskSWCV()
+            pi.hmiGetRegistered()
+            pi.hmiAskSWCV()
 //            pi.askNamespaces()
             pi.dirReadHmiServerDetails("user")
 
@@ -59,7 +60,7 @@ class KPiTests {
 </ns0:XiPatternMessage1>"""
 
             val om1 = Hm.TestExecutionRequest.create(
-                Hm.HmVC("0050568f0aac1ed4a6e56926325e2eb3", "S"),
+                PCommon.VC("0050568f0aac1ed4a6e56926325e2eb3", "S"),
                 "MAPPING", "XiPatternInterface1ToInterface2", "http://sap.com/xi/XI/System/Patterns",
                 xml
             )
@@ -67,18 +68,51 @@ class KPiTests {
             println(r1.outputXML)
 
             val om2 = Hm.TestExecutionRequest.create(
-                Hm.HmVC("9c1353476b6f11ebcedc000000417ca6", "L"),
+                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", "L"),
                 "MAPPING", "OM_Ume", "http://test.com", "<a/>"
             )
             val r2 = pi.executeOMtest(om2)
             println(r2.outputXML)
 
             val mm1 = Hm.TestExecutionRequest.create(
-                Hm.HmVC("9c1353476b6f11ebcedc000000417ca6", "L"),
+                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", "L"),
                 "XI_TRAFO", "MM_Test", "http://test.com", "<a/>"
             )
             val rm1 = pi.executeMMtest(mm1)
             println(rm1.outputXML)
+        }
+    }
+
+    @Test
+    fun repTypes() {
+        runBlocking {
+            pi.hmiGetRegistered()
+            pi.hmiAskSWCV()
+
+            val ref = Hm.Ref(
+                PCommon.VC("3f38b2400b9e11ea9c32fae8ac130d0e", "S", -1),
+                PCommon.Key("namespdecl", null, listOf("3f38b2400b9e11ea9c32fae8ac130d0e"))
+            )
+            val type = Hm.Type("namespdecl", true, false, "7.0", "EN", ref)
+            val list = Hm.ReadListRequest(type)
+
+            val s = pi.hmiRead(list.encodeToString())
+            println(s)
+
+
+            if (false) {
+                val lst = pi.swcv
+                    .filter { it.vendor.startsWith("n") }
+                    .map { it.id }
+                val a = pi.hmiGeneralQuery(Hm.GeneralQueryRequest.requestDataTypesList(lst))
+                val objects = a.toTable().map { it["RA_XILINK"]!!.qref!!.ref.key }
+                println(objects.size)
+                val texts = a.toTable()
+                    .map { it["TEXT"]!!.simple!!.strg }
+                    .filter { it!!.isNotBlank() }
+                println(texts.size)
+
+            }
         }
     }
 }

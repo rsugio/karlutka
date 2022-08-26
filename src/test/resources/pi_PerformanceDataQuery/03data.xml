@@ -47,7 +47,7 @@
 				<Entry/>
 				<Entry>BS_JEFFIT_Q</Entry>
 				<Entry>OrganisationalStructureReplicationRequest_Abs</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;HR&#x3a;OrganisationalStructure</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;HR&#x3a;OrganisationalStructure</Entry>
 				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
@@ -183,7 +183,7 @@
 				<Entry/>
 				<Entry>BS_POCSC_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateConfirmation_Abs</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;INTEGRATION_ENGINE_JAVA_NCAE_DPZ&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
@@ -358,7 +358,7 @@
 				<Entry/>
 				<Entry>BS_POCSC_Q</Entry>
 				<Entry>GLMAST_GLMAST01</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;IDoc</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;IDoc</Entry>
 				<Entry>&#x7c;TER400&#x7c;GLMAST.GLMAST01&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
@@ -433,7 +433,7 @@
 				<Entry/>
 				<Entry>BS_POCSC_Q</Entry>
 				<Entry>GLCORE_GLCORE01</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;IDoc</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;IDoc</Entry>
 				<Entry>&#x7c;TER400&#x7c;GLCORE.GLCORE01&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
@@ -658,7 +658,7 @@
 				<Entry/>
 				<Entry>BS_POCSC_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateConfirmation_Abs</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;TER400&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Out&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
@@ -683,7 +683,7 @@
 				<Entry/>
 				<Entry>BS_POCSC_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateConfirmation_Abs</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;BS_CIC_Q&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Out&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
@@ -958,7 +958,7 @@
 				<Entry/>
 				<Entry>BS_POCSC_Q</Entry>
 				<Entry>PROJECT_PROJECT01</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;IDoc</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;IDoc</Entry>
 				<Entry>&#x7c;TER400&#x7c;PROJECT.PROJECT01&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>6</Entry>
@@ -983,7 +983,7 @@
 				<Entry/>
 				<Entry>BS_POCSC_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateRequest_Abs</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;INTEGRATION_ENGINE_JAVA_NCAE_DPZ&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
@@ -1108,7 +1108,7 @@
 				<Entry/>
 				<Entry>BS_POCSC_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateConfirmation_Abs</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;BS_ECM_Q&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Out&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
@@ -1283,7 +1283,7 @@
 				<Entry/>
 				<Entry/>
 				<Entry>OrganisationalStructureReplicationRequest_Abs</Entry>
-				<Entry>urn&#x3a;cscentr&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;HR&#x3a;OrganisationalStructure</Entry>
+				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;HR&#x3a;OrganisationalStructure</Entry>
 				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>

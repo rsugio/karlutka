@@ -10,6 +10,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.util.*
 import io.ktor.utils.io.*
 import io.ktor.utils.io.core.*
 import karlutka.models.MCommon
@@ -97,11 +98,12 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
         return pair.first
     }
 
-    suspend fun integrationPackagePost(id: String, zipCnt: ByteArray) {
+    suspend fun integrationPackagePut(id: String, zipCnt: ByteArray) {
         require(id.isNotBlank())
-        val resp = client.put("/api/v1/IntegrationPackages('$id')/\$value") {
-            contentType(ContentType.Application.Zip)
-            setBody(zipCnt)
+        val resp = client.post("/api/v1/IntegrationPackages") {
+            header("content-transfer-encoding", "base64")
+            contentType(ContentType.Application.Json)
+            setBody(zipCnt.encodeBase64())
         }
         println(resp)
     }

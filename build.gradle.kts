@@ -20,15 +20,16 @@ repositories {
 //    maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers") }
 }
 val ktor_version: String = "2.1.0"
+val kotlinx_html_jvm_version = "0.8.0"    //было 0.7.3
+val kotlinx_serialization_json_version = "1.4.0"
 val exposed_version: String = "0.39.2"  //было 0.39.1
 val xmlutil_version: String = "0.84.2"
 val kaml_version: String = "0.47.0"     //было 0.46
-val kotlinx_html_jvm_version="0.8.0"    //было 0.7.3
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_json_version")
     implementation("io.github.pdvrieze.xmlutil:core-jvm:$xmlutil_version")
     implementation("io.github.pdvrieze.xmlutil:serialization-jvm:$xmlutil_version")
     implementation("com.charleskorn.kaml:kaml:$kaml_version")
