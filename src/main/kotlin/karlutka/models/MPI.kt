@@ -1,10 +1,5 @@
 package karlutka.models
 
-import karlutka.parsers.pi.Hm
-import kotlinx.serialization.Serializable
-import nl.adaptivity.xmlutil.serialization.XmlElement
-import nl.adaptivity.xmlutil.serialization.XmlSerialName
-
 class MPI {
     enum class DIRECTION { INBOUND, OUTBOUND }
 

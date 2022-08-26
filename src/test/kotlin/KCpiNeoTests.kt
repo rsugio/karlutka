@@ -3,7 +3,6 @@ import karlutka.util.*
 import kotlinx.coroutines.runBlocking
 import java.nio.file.Files
 import java.nio.file.Paths
-import kotlin.io.path.readBytes
 import kotlin.test.Test
 
 class KCpiNeoTests {
@@ -28,16 +27,16 @@ class KCpiNeoTests {
             cpineo.login()
 
             cpineo.userCredentialsList()
-            cpineo.integrationPackagePut("test220825", Paths.get("C:\\data\\tmp\\test220825.zip").readBytes())
 
             if (false) {
+                //cpineo.integrationPackagePut("test220825", Paths.get("C:\\data\\tmp\\test220825.zip").readBytes())
                 val packs = cpineo.integrationPackagesList()
                 packs.filter { it.Id == "test220825" }.forEach { p ->
                     val med = cpineo.downloadMedia(p.__metadata!!.media_src!!)
                     println("${p.Id} $med")
                     if (med.error == null) {
                         val newname = med.contentDisposition!!.parameter("filename")
-                        Files.move(med.tempFile!!, med.tempFile!!.resolveSibling(newname))
+                        Files.move(med.tempFile!!, med.tempFile!!.resolveSibling(newname!!))
                     }
                 }
             }

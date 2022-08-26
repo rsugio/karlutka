@@ -8,7 +8,7 @@ import kotlin.test.Test
 class KHmiTests {
     @Test
     fun rawhmi() {
-        val services = Hm.hmserializer.decodeFromString<Hm.HmiServices>(s("/pi_HMI/rep_registered.xml")).list
+        val services = Hm.hmserializer.decodeFromString<HmiServices>(s("/pi_HMI/rep_registered.xml")).list
         require(services.size > 10)
 
         HmiMethodInput("ключ", "значение").attr()
@@ -61,8 +61,8 @@ class KHmiTests {
         require(GeneralQueryRequest.swcv().isNotBlank())
         val q1 = QueryResult.parse(s("/pi_HMI/queryResult_swcv1.xml")).toSwcv() //DPH
         require(q1.size == 481)
-//        val q2 = QueryResult.parse(s("/pi_HMI/queryResult_swcv2.xml")).toSwcv()
-//        require(q2.size > 100)
+        val q2 = QueryResult.parse(s("/pi_HMI/queryResult_swcv2.xml")).toSwcv()
+        require(q2.size > 100)
         val t = Hm.hmserializer.decodeFromString<QueryResult>(s("/pi_HMI/namespaceResponse2.xml")).toNamespace(q1)
         require(t.size > 0)
 

@@ -344,7 +344,9 @@ class Hm {
         data class QC(
             val qcType: String = "S",
             val delMode: String = "N",
-            @XmlElement(true) var clCxt: PCommon.ClCxt,
+            @XmlElement(true)
+            @XmlSerialName("clCxt", "", "")
+            var clCxt: PCommon.ClCxt,
             @XmlElement(true) var swcListDef: SwcListDef,
         )
 
@@ -404,7 +406,7 @@ class Hm {
             @XmlElement(true) val attrib: List<String> = listOf(),
         ) {
             companion object {
-                fun of(vararg names: String) = GeneralQueryRequest.Result(names.asList())
+                fun of(vararg names: String) = Result(names.asList())
             }
         }
 
@@ -492,7 +494,7 @@ class Hm {
             }
 
             fun requestDataTypesList(swcv: List<String>, cond: Condition = Condition()): GeneralQueryRequest {
-                val repdatatypes = GeneralQueryRequest.Types.of(
+                val repdatatypes = Types.of(
                     MPI.RepTypes.values().map{it.toString()}
                 )
                 val qc = QC("S", "N",
@@ -553,7 +555,7 @@ class Hm {
         fun toNamespace(swcv: List<MPI.Swcv>): List<MPI.Namespace> {
             val t = toTable().map { x ->
                 val c = x["RA_NSP_STRING"]!!
-                val text = x["TEXT"]!!.simple?.strg ?: ""
+                val text = "?"
                 val nsp = c.nsp!!
                 val namespaceurl = nsp.key.elem[0]
                 val oid = nsp.ref.key.oid
@@ -671,8 +673,12 @@ class Hm {
         @XmlSerialName("nsp", "", "")
         class Nsp(
             val isUL: Boolean,
-            @XmlElement(true) val key: PCommon.Key,
-            @XmlElement(true) val ref: Ref,
+            @XmlElement(true)
+            @XmlSerialName("key", "", "")
+            val key: PCommon.Key,
+            @XmlElement(true)
+            @XmlSerialName("ref", "", "")
+            val ref: Ref,
         )
 
         @Serializable
@@ -694,7 +700,10 @@ class Hm {
     @Serializable
     @XmlSerialName("ref", "", "")
     class Ref(
+        @XmlElement(true)
+        @XmlSerialName("vc", "", "")
         val vc: PCommon.VC,
+        @XmlSerialName("key", "", "")
         val key: PCommon.Key,
         @XmlElement(true) val vspec: VSpec? = null,
     ) {
@@ -967,6 +976,6 @@ class Hm {
         val RELEASE: String = "7.0",
         val DOCU_LANG: String = "EN",
         @XmlElement(true)
-        val ref: Hm.Ref
+        val ref: Ref
     )
 }

@@ -7,23 +7,25 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 // общие для разных парсеров классы
 class PCommon {
     @Serializable
-    @XmlSerialName("vc", "", "")
     class VC(
         val swcGuid: String,
         val vcType: String,
         val sp: Int? = null,
         val caption: String? = null,
-        @XmlElement(true) val clCxt: ClCxt? = null,
+        @XmlElement(true)
+        @XmlSerialName("clCxt", "", "")
+        val clCxt: ClCxt? = null,
+        @XmlElement(true)
+        @XmlSerialName("clCxt", "urn:sap-com:xi", "xi")
+        val clCxt2: ClCxt? = null,
     )
 
     @Serializable
-    @XmlSerialName("clCxt", "", "")
-    data class ClCxt(
+    class ClCxt(
         val consider: String = "", val user: String = ""
     )
 
     @Serializable
-    @XmlSerialName("key", "", "")
     class Key(
         val typeID: String,
         val oid: String? = null,

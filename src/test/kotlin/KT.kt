@@ -12,5 +12,8 @@ class KT {
             requireNotNull(x) {"Ресурс $s не найден"}
             return InputStreamReader(BOMInputStream(x), Charsets.UTF_8).readText()
         }
+
+        val testInflux = false
+        val testBtpCf = false
     }
 }

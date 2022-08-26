@@ -1,4 +1,5 @@
 import KT.Companion.s
+import KT.Companion.testBtpCf
 import io.ktor.serialization.kotlinx.json.*
 import karlutka.clients.BTPCF
 import karlutka.models.MCommon
@@ -38,6 +39,7 @@ class KBtpCfTest {
 
     @Test
     fun dynamic() {
+        if (!testBtpCf) return
         val bn = BTPCF(target)
         runBlocking {
             println(bn.authorizationV2Roles().size)

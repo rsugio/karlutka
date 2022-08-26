@@ -1,0 +1,46 @@
+﻿<generalQueryRequest>
+		<types>
+			<type id="MAP_TEMPLATE"/>
+			<type id="TRAFO_JAR"/>
+			<type id="XI_TRAFO"/>
+			<type id="ifmcontobj"/>
+			<type id="rfc"/>
+			<type id="ifmextdef"/>
+			<type id="FUNC_LIB"/>
+			<type id="ifmtypedef"/>
+			<type id="ifmmessif"/>
+			<type id="ifmfaultm"/>
+			<type id="ifmmessage"/>
+			<type id="MAPPING"/>
+			<type id="AdapterMetaData"/>
+			<type id="FOLDER"/>
+			<type id="idoc"/>
+			<type id="ifmuitexts"/>
+			<type id="ifmtypeenh"/>
+		</types>
+		<qc qcType="S" delMode="N">
+			<clCxt consider="A" user="user"/>
+			<swcListDef def="G">
+				<swcInfoList>
+					<swc id="c0f91671b1a511e8b1c4d4f2ac130d0e" sp="-1" underL="false"/>
+				</swcInfoList>
+			</swcListDef>
+		</qc>
+		<condition>
+			<elementary>
+				<single>
+					<key>NAMESPACE</key>
+					<val>
+						<simple>
+							<strg>urn:vendor:po:I:URA:TOPLIVO</strg>
+						</simple>
+					</val>
+					<op>EQ</op>
+				</single>
+			</elementary>
+		</condition>
+		<result>
+			<attrib>RA_XILINK</attrib>
+			<attrib>FOLDERREF</attrib>
+		</result>
+	</generalQueryRequest>
