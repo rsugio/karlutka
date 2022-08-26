@@ -1,4 +1,5 @@
 package karlutka.parsers.pi
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.decodeFromString
@@ -8,6 +9,8 @@ import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import nl.adaptivity.xmlutil.serialization.XmlValue
+import nl.adaptivity.xmlutil.util.CompactFragment
 
 @Serializable
 @XmlSerialName("xiObj", "urn:sap-com:xi", "xi")
@@ -16,8 +19,12 @@ class XiObj (
     val idInfo: IdInfo,
     @XmlElement(true)
     val documentation: String? = null,
-//    @XmlElement(true)
-//    val generic: String,
+    @XmlElement(true)
+    val generic: Generic,
+    @XmlElement(true)
+    @Contextual
+    @XmlSerialName("content", "urn:sap-com:xi", "xi")
+    val content: CompactFragment,
 ) {
     @Serializable
     @XmlSerialName("idInfo", "urn:sap-com:xi", "xi")
@@ -33,6 +40,98 @@ class XiObj (
         @XmlSerialName("version", "urn:sap-com:xi", "")
         val version: String? = null
     )
+
+    @Serializable
+    @XmlSerialName("generic", "urn:sap-com:xi", "xi")
+    class Generic(
+        val admInf: AdmInf,
+        val lnks: Lnks?,
+        val textInfo: TextInfo,
+    ) {
+        @Serializable
+        @XmlSerialName("lnks", "urn:sap-com:xi", "xi")
+        class Lnks(val x: List<LnkRole> = listOf())
+
+        @Serializable
+        @XmlSerialName("textInfo", "urn:sap-com:xi", "xi")
+        class TextInfo(val loadedL: String = "EN", val textObj: TextObj)
+
+        @Serializable
+        @XmlSerialName("textObj", "urn:sap-com:xi", "xi")
+        class TextObj(
+            val id: String = "c9fa2aec3da1451aacea970d8d441062",
+            val masterL: String = "EN",
+            val type: Int = 0,
+            @XmlElement(true)
+            val texts: Texts
+        )
+
+        @Serializable
+        @XmlSerialName("texts", "urn:sap-com:xi", "xi")
+        class Texts(
+            val lang: String = "",
+            @XmlElement(true)
+            val list: List<Text>
+        )
+
+        @Serializable
+        @XmlSerialName("text", "urn:sap-com:xi", "xi")
+        class Text(
+            @XmlElement(false)
+            val label: String = "",
+            @XmlValue(true)
+            val value: String = ""
+        )
+
+        @Serializable
+        @XmlSerialName("admInf", "urn:sap-com:xi", "xi")
+        class AdmInf(
+            @XmlElement(true)
+            @XmlSerialName("modifBy", "urn:sap-com:xi", "xi")
+            val modifBy: String = "",
+            @XmlElement(true)
+            @XmlSerialName("modifAt", "urn:sap-com:xi", "xi")
+            val modifAt: String = "",
+            @XmlElement(true)
+            @XmlSerialName("modifAtLong", "urn:sap-com:xi", "xi")
+            val modifAtLong: Long? = null,
+            @XmlElement(true)
+            @XmlSerialName("modifAtLong", "", "xi")
+            val modifAtLong2: Long? = null,
+            @XmlElement(true)
+            @XmlSerialName("owner", "urn:sap-com:xi", "xi")
+            val owner: String = ""
+        )
+
+        @Serializable
+        @XmlSerialName("lnkRole", "urn:sap-com:xi", "xi")
+        class LnkRole(
+            val kpos: Int,
+            @XmlElement(false)
+            val role: String,
+            val lnk: Lnk
+        )
+
+        @Serializable
+        @XmlSerialName("lnk", "urn:sap-com:xi", "xi")
+        class Lnk(
+            val rMode: String,
+            @XmlElement(true)
+            @XmlSerialName("key", "urn:sap-com:xi", "xi")
+            val key: PCommon.Key,
+            @XmlElement(true)
+            val vc: PCommon.VC? = null
+        )
+
+//        @Serializable
+//        @XmlSerialName("content", "urn:sap-com:xi", "")
+//        class XiObjContent(
+//            @XmlElement(true)
+//            val trafo: XiTrafo?
+//        )
+
+    }
+
 
     companion object {
         private val xiobjxml = SerializersModule {

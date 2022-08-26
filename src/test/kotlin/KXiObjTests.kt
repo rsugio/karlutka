@@ -6,6 +6,7 @@ class KXiObjTests {
     @Test
     fun repository() {
         val namespdecl = XiObj.decodeFromString(s("/pi_xiObj/rep01namespdecl.xml"))
-        println(namespdecl)
+        println(namespdecl.content.contentString.trim())
+        println(namespdecl.generic.textInfo)
     }
 }

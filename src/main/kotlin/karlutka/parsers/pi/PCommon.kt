@@ -18,7 +18,9 @@ class PCommon {
         @XmlElement(true)
         @XmlSerialName("clCxt", "urn:sap-com:xi", "xi")
         val clCxt2: ClCxt? = null,
-    )
+    ) {
+        fun clCxt() = clCxt ?: clCxt2
+    }
 
     @Serializable
     class ClCxt(
