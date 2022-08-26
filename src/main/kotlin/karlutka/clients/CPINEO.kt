@@ -97,6 +97,15 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
         return pair.first
     }
 
+    suspend fun integrationPackagePost(id: String, zipCnt: ByteArray) {
+        require(id.isNotBlank())
+        val resp = client.put("/api/v1/IntegrationPackages('$id')/\$value") {
+            contentType(ContentType.Application.Zip)
+            setBody(zipCnt)
+        }
+        println(resp)
+    }
+
     class Downloaded(
         val error: PCpi.Error? = null,
         val contentType: ContentType? = null,
