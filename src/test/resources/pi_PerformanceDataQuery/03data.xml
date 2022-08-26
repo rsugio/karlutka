@@ -43,12 +43,12 @@
 				<Entry>EOIO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_JEFFIT_Q</Entry>
 				<Entry>OrganisationalStructureReplicationRequest_Abs</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;HR&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>2440</Entry>
@@ -181,7 +181,7 @@
 				<Entry/>
 				<Entry>INTEGRATION_ENGINE_JAVA_NCAE_DPZ</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateConfirmation_Abs</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;INTEGRATION_ENGINE_JAVA_NCAE_DPZ&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Abs&#x7c;&#x7c;</Entry>
@@ -229,12 +229,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_END_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplicationRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;END&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
 				<Entry>70352</Entry>
@@ -254,12 +254,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_END_STAGDOK_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplicationRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;END-STAGDOK&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
 				<Entry>70352</Entry>
@@ -304,12 +304,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>QBH300</Entry>
 				<Entry>SI_BusinessPartnerSUITEBulkReplicateRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;BH&#x3a;BP&#x3a;Replication</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>260435</Entry>
@@ -329,12 +329,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_IDM_OneIdentity_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplicationRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;IDM-OneIdentity&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
 				<Entry>52646</Entry>
@@ -356,7 +356,7 @@
 				<Entry/>
 				<Entry>TER400</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>GLMAST_GLMAST01</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;IDoc</Entry>
 				<Entry>&#x7c;TER400&#x7c;GLMAST.GLMAST01&#x7c;&#x7c;</Entry>
@@ -379,12 +379,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_ESMO_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplicationRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;ESMO&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
 				<Entry>70352</Entry>
@@ -431,7 +431,7 @@
 				<Entry/>
 				<Entry>TER400</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>GLCORE_GLCORE01</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;IDoc</Entry>
 				<Entry>&#x7c;TER400&#x7c;GLCORE.GLCORE01&#x7c;&#x7c;</Entry>
@@ -479,12 +479,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>P_1C_METIZ</Entry>
 				<Entry>BS_ASOP_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplication_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;ASOP&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>9013</Entry>
@@ -554,12 +554,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>QGR300</Entry>
 				<Entry>SI_OrganisationalStructureReplicationRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;GRC&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
 				<Entry>43742</Entry>
@@ -579,12 +579,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>P_1C_URALS</Entry>
 				<Entry>BS_ASOP_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplication_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;ASOP&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>9013</Entry>
@@ -656,7 +656,7 @@
 				<Entry/>
 				<Entry>TER400</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateConfirmation_Abs</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;TER400&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Out&#x7c;&#x7c;</Entry>
@@ -681,7 +681,7 @@
 				<Entry/>
 				<Entry>BS_CIC_Q</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateConfirmation_Abs</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;BS_CIC_Q&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Out&#x7c;&#x7c;</Entry>
@@ -754,12 +754,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_ECM_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateRequest_In</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;ECM&#x3a;BP&#x3a;Replication</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>151223</Entry>
@@ -779,12 +779,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>P_1C_VIZS</Entry>
 				<Entry>BS_ASOP_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplication_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;ASOP&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>9013</Entry>
@@ -804,12 +804,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_1C_TMS_zzz_Q</Entry>
 				<Entry>SI_BusinessPartnerReplicateRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;1C&#x3a;TMS-zzz&#x3a;BusinessPartner</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>45927</Entry>
@@ -879,12 +879,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>TER400</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateRequest_In</Entry>
 				<Entry>http&#x3a;&#x2f;&#x2f;sap.com&#x2f;xi&#x2f;SAP_BS_FND&#x2f;MDG&#x2f;Global2</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>307837</Entry>
@@ -904,12 +904,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>P_1C_HOLDING</Entry>
 				<Entry>BS_ASOP_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplication_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;ASOP&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>9013</Entry>
@@ -956,7 +956,7 @@
 				<Entry/>
 				<Entry>TER400</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>PROJECT_PROJECT01</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;IDoc</Entry>
 				<Entry>&#x7c;TER400&#x7c;PROJECT.PROJECT01&#x7c;&#x7c;</Entry>
@@ -981,7 +981,7 @@
 				<Entry/>
 				<Entry>INTEGRATION_ENGINE_JAVA_NCAE_DPZ</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateRequest_Abs</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;INTEGRATION_ENGINE_JAVA_NCAE_DPZ&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
@@ -1004,12 +1004,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>P_1C_URALE</Entry>
 				<Entry>BS_ASOP_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplication_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;ASOP&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>9013</Entry>
@@ -1029,12 +1029,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_END_SGOK_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplicationRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;END-SGOK&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
 				<Entry>70352</Entry>
@@ -1106,7 +1106,7 @@
 				<Entry/>
 				<Entry>BS_ECM_Q</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateConfirmation_Abs</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;CA&#x3a;BusinessPartner</Entry>
 				<Entry>&#x7c;BS_ECM_Q&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Out&#x7c;&#x7c;</Entry>
@@ -1154,12 +1154,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry>P_1C_zzz</Entry>
 				<Entry>BS_ASOP_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplication_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;ASOP&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>9013</Entry>
@@ -1179,12 +1179,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_1C_TMS_zzz_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplicationRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;1C&#x3a;TMS-zzz&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>12076</Entry>
@@ -1204,12 +1204,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_END_DOLOMIT_Q</Entry>
 				<Entry>SI_OrganisationalStructureReplicationRequest_InAsync</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;END-DOLOMIT&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
 				<Entry>70352</Entry>
@@ -1249,17 +1249,17 @@
 			</Row>
 			<Row>
 				<Entry>CC_SOAPSender_XI30</Entry>
-				<Entry>CC_CSC_SOAPReceiver_Proxy_DMZ</Entry>
+				<Entry>CC_ZZZ_SOAPReceiver_Proxy_DMZ</Entry>
 				<Entry>OUTBOUND</Entry>
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>INTEGRATION_ENGINE_JAVA_NCAE_DPZ</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateConfirmation_Abs</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;PODMZ&#x3a;SCPI&#x3a;BPReplication</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;BusinessPartnerSUITEBulkReplicateConfirmation_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>1830</Entry>
@@ -1279,12 +1279,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry/>
 				<Entry>OrganisationalStructureReplicationRequest_Abs</Entry>
 				<Entry>urn&#x3a;vendor&#x3a;po&#x3a;i&#x3a;zzz&#x3a;Proxy&#x3a;HR&#x3a;OrganisationalStructure</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;OrganisationalStructureReplicationRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
 				<Entry>70352</Entry>
@@ -1379,12 +1379,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_CIC_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateRequest_In</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;SCPI&#x3a;BP&#x3a;Replication</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>306388</Entry>
@@ -1399,17 +1399,17 @@
 			</Row>
 			<Row>
 				<Entry>CC_SOAPSender_XI30</Entry>
-				<Entry>CC_CSC_SOAPReceiver_Proxy_DMZ</Entry>
+				<Entry>CC_ZZZ_SOAPReceiver_Proxy_DMZ</Entry>
 				<Entry>OUTBOUND</Entry>
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>INTEGRATION_ENGINE_JAVA_NCAE_DPZ</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateRequest_Abs</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;PODMZ&#x3a;SCPI&#x3a;BPReplication</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>2</Entry>
 				<Entry>306654</Entry>
@@ -1529,12 +1529,12 @@
 				<Entry>EO</Entry>
 				<Entry>4991250</Entry>
 				<Entry/>
-				<Entry>BS_POCSC_Q</Entry>
+				<Entry>BS_POZZZ_Q</Entry>
 				<Entry/>
 				<Entry>BS_PlanningProduction_Q</Entry>
 				<Entry>BusinessPartnerSUITEBulkReplicateRequest_In</Entry>
 				<Entry>urn&#x3a;zzz&#x3a;po&#x3a;I&#x3a;PlanningProduction&#x3a;BP&#x3a;Replication</Entry>
-				<Entry>&#x7c;BS_POCSC_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
+				<Entry>&#x7c;BS_POZZZ_Q&#x7c;BusinessPartnerSUITEBulkReplicateRequest_Abs&#x7c;&#x7c;</Entry>
 				<Entry/>
 				<Entry>1</Entry>
 				<Entry>307664</Entry>

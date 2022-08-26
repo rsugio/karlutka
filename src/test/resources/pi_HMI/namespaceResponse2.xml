@@ -3037,10 +3037,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:IDM-OneIdentity:Employee</elem>
+						<elem>urn:vendor:po:A:POZZZ:IDM-OneIdentity:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5d430040087511eb9175fc3eac130d0e" sp="-1" caption="SC_A_POCSC_IDM-ONEIDENTITY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5d430040087511eb9175fc3eac130d0e" sp="-1" caption="SC_A_POZZZ_IDM-ONEIDENTITY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5d430040087511eb9175fc3eac130d0e">
@@ -3057,10 +3057,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:IDM-OneIdentity:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:A:POZZZ:IDM-OneIdentity:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5d430040087511eb9175fc3eac130d0e" sp="-1" caption="SC_A_POCSC_IDM-ONEIDENTITY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5d430040087511eb9175fc3eac130d0e" sp="-1" caption="SC_A_POZZZ_IDM-ONEIDENTITY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5d430040087511eb9175fc3eac130d0e">
@@ -3077,10 +3077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:IDM-OneIdentity:IDoc</elem>
+						<elem>urn:vendor:po:A:POZZZ:IDM-OneIdentity:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5d430040087511eb9175fc3eac130d0e" sp="-1" caption="SC_A_POCSC_IDM-ONEIDENTITY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5d430040087511eb9175fc3eac130d0e" sp="-1" caption="SC_A_POZZZ_IDM-ONEIDENTITY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5d430040087511eb9175fc3eac130d0e">
@@ -3197,10 +3197,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:PACS-RUSGUARD:Orgstructure</elem>
+						<elem>urn:vendor:po:A:POZZZ:PACS-RUSGUARD:Orgstructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c424ab00483711ea9daae72eac130d0e" sp="-1" caption="SC_A_POCSC_PACS-RUSGUARD, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c424ab00483711ea9daae72eac130d0e" sp="-1" caption="SC_A_POZZZ_PACS-RUSGUARD, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c424ab00483711ea9daae72eac130d0e">
@@ -3357,10 +3357,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ECM:BPReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:ECM:BPReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1f58ff80466c11eab2b3e72eac130d0e" sp="-1" caption="SC_A_POCSC_ECM, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="1f58ff80466c11eab2b3e72eac130d0e" sp="-1" caption="SC_A_POZZZ_ECM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1f58ff80466c11eab2b3e72eac130d0e">
@@ -3377,10 +3377,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ECM:HRMD_A</elem>
+						<elem>urn:vendor:po:A:POZZZ:ECM:HRMD_A</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1f58ff80466c11eab2b3e72eac130d0e" sp="-1" caption="SC_A_POCSC_ECM, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="1f58ff80466c11eab2b3e72eac130d0e" sp="-1" caption="SC_A_POZZZ_ECM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1f58ff80466c11eab2b3e72eac130d0e">
@@ -3397,10 +3397,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ECM:IdentityDocument</elem>
+						<elem>urn:vendor:po:A:POZZZ:ECM:IdentityDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1f58ff80466c11eab2b3e72eac130d0e" sp="-1" caption="SC_A_POCSC_ECM, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="1f58ff80466c11eab2b3e72eac130d0e" sp="-1" caption="SC_A_POZZZ_ECM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1f58ff80466c11eab2b3e72eac130d0e">
@@ -3417,10 +3417,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ECM:Dic:BankReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:ECM:Dic:BankReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1f58ff80466c11eab2b3e72eac130d0e" sp="-1" caption="SC_A_POCSC_ECM, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="1f58ff80466c11eab2b3e72eac130d0e" sp="-1" caption="SC_A_POZZZ_ECM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1f58ff80466c11eab2b3e72eac130d0e">
@@ -3797,10 +3797,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:PPS:CustomerData</elem>
+						<elem>urn:vendor:po:A:POZZZ:PPS:CustomerData</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="716a0ae00e1111ebb1b1fc3eac130d0e" sp="-1" caption="SC_A_POCSC_PPS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="716a0ae00e1111ebb1b1fc3eac130d0e" sp="-1" caption="SC_A_POZZZ_PPS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="716a0ae00e1111ebb1b1fc3eac130d0e">
@@ -4040,7 +4040,7 @@
 						<elem>urn:vendor:po:al:HCM:NonABAP:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c357f0400b9e11eac224fae8ac130d0e" sp="-1" caption="CSC_AL_HCM_NONABAP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c357f0400b9e11eac224fae8ac130d0e" sp="-1" caption="ZZZ_AL_HCM_NONABAP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c357f0400b9e11eac224fae8ac130d0e">
@@ -4840,7 +4840,7 @@
 						<elem>urn:vendor:po:a:DMZ:DAX:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e07b77601c0a11ea9ff0fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_DAX, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="e07b77601c0a11ea9ff0fae8ac130d0e" sp="-1" caption="ZZZ_A_DMZ_DAX, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e07b77601c0a11ea9ff0fae8ac130d0e">
@@ -4860,7 +4860,7 @@
 						<elem>urn:vendor:po:a:DMZ:DAX:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e07b77601c0a11ea9ff0fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_DAX, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="e07b77601c0a11ea9ff0fae8ac130d0e" sp="-1" caption="ZZZ_A_DMZ_DAX, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e07b77601c0a11ea9ff0fae8ac130d0e">
@@ -5180,7 +5180,7 @@
 						<elem>urn:vendor:po:i:HCM:PY:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="942c02500b9b11ea9abcfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="942c02500b9b11ea9abcfae8ac130d0e" sp="-1" caption="ZZZ_I_HCM_PY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="942c02500b9b11ea9abcfae8ac130d0e">
@@ -6937,10 +6937,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:MES_EUROPE:TransportVendor</elem>
+						<elem>urn:vendor:po:A:POZZZ:MES_EUROPE:TransportVendor</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="9a71c7108e1411ebac7dfd13ac130d0e" sp="-1" caption="SC_A_POCSC_MES_EUROPE, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="9a71c7108e1411ebac7dfd13ac130d0e" sp="-1" caption="SC_A_POZZZ_MES_EUROPE, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="9a71c7108e1411ebac7dfd13ac130d0e">
@@ -12797,10 +12797,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:IDoc</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -12817,10 +12817,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:MBOCompleteForm</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:MBOCompleteForm</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -12837,10 +12837,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:AuthProxy</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:AuthProxy</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -12997,10 +12997,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:AuthGetToken</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:AuthGetToken</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13017,10 +13017,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:FormInfo</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:FormInfo</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13037,10 +13037,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:FormCustomElement</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:FormCustomElement</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13057,10 +13057,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:Compensation</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:Compensation</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13077,10 +13077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:User</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:User</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13097,10 +13097,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:Goal</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:Goal</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13140,7 +13140,7 @@
 						<elem>urn:vendor:po:i:ECM:CA:Calendar</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="bff6e240257911ea93a1fae8ac130d0e" sp="-1" caption="CSC_I_ECM_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="bff6e240257911ea93a1fae8ac130d0e" sp="-1" caption="ZZZ_I_ECM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="bff6e240257911ea93a1fae8ac130d0e">
@@ -13180,7 +13180,7 @@
 						<elem>urn:vendor:po:i:ERP:CA:Barcode</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="ZZZ_I_ERP_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="282a7390257a11ea8595fae8ac130d0e">
@@ -13220,7 +13220,7 @@
 						<elem>urn:vendor:po:i:ERP:CA:SearchHelp</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="ZZZ_I_ERP_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="282a7390257a11ea8595fae8ac130d0e">
@@ -13380,7 +13380,7 @@
 						<elem>urn:vendor:po:a:ERP:DMS:DMS:Contract</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c0c4c750257e11eab949fae8ac130d0e" sp="-1" caption="CSC_A_ERP_DMS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c0c4c750257e11eab949fae8ac130d0e" sp="-1" caption="ZZZ_A_ERP_DMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c0c4c750257e11eab949fae8ac130d0e">
@@ -13400,7 +13400,7 @@
 						<elem>urn:vendor:po:i:ERP:CA:Calendar</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="ZZZ_I_ERP_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="282a7390257a11ea8595fae8ac130d0e">
@@ -13460,7 +13460,7 @@
 						<elem>urn:vendor:po:i:ERP:CA:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="CSC_I_ERP_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="282a7390257a11ea8595fae8ac130d0e" sp="-1" caption="ZZZ_I_ERP_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="282a7390257a11ea8595fae8ac130d0e">
@@ -13480,7 +13480,7 @@
 						<elem>urn:vendor:po:i:ECM:CA:SearchHelp</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="bff6e240257911ea93a1fae8ac130d0e" sp="-1" caption="CSC_I_ECM_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="bff6e240257911ea93a1fae8ac130d0e" sp="-1" caption="ZZZ_I_ECM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="bff6e240257911ea93a1fae8ac130d0e">
@@ -13497,10 +13497,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:AdditionalPayment</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:AdditionalPayment</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13637,10 +13637,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:Payslip</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13657,10 +13657,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:Employee</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13677,10 +13677,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:MDF</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:MDF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13717,10 +13717,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:HRBusinessEntity</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:HRBusinessEntity</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13737,10 +13737,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:WorkerRatings</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:WorkerRatings</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -13757,10 +13757,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUCCESSFACTORS:Learning</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUCCESSFACTORS:Learning</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="79703a7047f111ea968ce72eac130d0e" sp="-1" caption="SC_A_POZZZ_SUCCESSFACTORS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="79703a7047f111ea968ce72eac130d0e">
@@ -15297,10 +15297,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ERP:IDoc</elem>
+						<elem>urn:vendor:po:A:POZZZ:ERP:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="18ef4380466b11eaa087e72eac130d0e" sp="-1" caption="SC_A_POCSC_ERP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="18ef4380466b11eaa087e72eac130d0e" sp="-1" caption="SC_A_POZZZ_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="18ef4380466b11eaa087e72eac130d0e">
@@ -15317,10 +15317,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SRM:BPReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:SRM:BPReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c69e8ae0475611ea9a89e72eac130d0e" sp="-1" caption="SC_A_POCSC_SRM, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c69e8ae0475611ea9a89e72eac130d0e" sp="-1" caption="SC_A_POZZZ_SRM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c69e8ae0475611ea9a89e72eac130d0e">
@@ -15877,10 +15877,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SRM:BPMonitoring</elem>
+						<elem>urn:vendor:po:A:POZZZ:SRM:BPMonitoring</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c69e8ae0475611ea9a89e72eac130d0e" sp="-1" caption="SC_A_POCSC_SRM, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c69e8ae0475611ea9a89e72eac130d0e" sp="-1" caption="SC_A_POZZZ_SRM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c69e8ae0475611ea9a89e72eac130d0e">
@@ -15897,10 +15897,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:i:CSCPortal:HR:Employee</elem>
+						<elem>urn:vendor:po:i:ZZZPortal:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="ZZZ_I_ZZZPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -15917,10 +15917,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:i:CSCPortal:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:i:ZZZPortal:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="ZZZ_I_ZZZPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -16217,10 +16217,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ERP:RFC</elem>
+						<elem>urn:vendor:po:A:POZZZ:ERP:RFC</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="18ef4380466b11eaa087e72eac130d0e" sp="-1" caption="SC_A_POCSC_ERP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="18ef4380466b11eaa087e72eac130d0e" sp="-1" caption="SC_A_POZZZ_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="18ef4380466b11eaa087e72eac130d0e">
@@ -16257,10 +16257,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ERP:BankReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:ERP:BankReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="18ef4380466b11eaa087e72eac130d0e" sp="-1" caption="SC_A_POCSC_ERP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="18ef4380466b11eaa087e72eac130d0e" sp="-1" caption="SC_A_POZZZ_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="18ef4380466b11eaa087e72eac130d0e">
@@ -16277,10 +16277,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ERP:BPMonitoring</elem>
+						<elem>urn:vendor:po:A:POZZZ:ERP:BPMonitoring</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="18ef4380466b11eaa087e72eac130d0e" sp="-1" caption="SC_A_POCSC_ERP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="18ef4380466b11eaa087e72eac130d0e" sp="-1" caption="SC_A_POZZZ_ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="18ef4380466b11eaa087e72eac130d0e">
@@ -16297,10 +16297,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:i:CSCPortal:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:i:ZZZPortal:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="ZZZ_I_ZZZPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -16337,10 +16337,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:a:HCM:CSCPortal:HR:Employee</elem>
+						<elem>urn:vendor:po:a:HCM:ZZZPortal:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="ZZZ_A_HCM_ZZZPORTAL, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="a52cdae00b9e11ea8b0cfae8ac130d0e">
@@ -16357,10 +16357,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:a:HCM:CSCPortal:HR:EmployeeTime</elem>
+						<elem>urn:vendor:po:a:HCM:ZZZPortal:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="ZZZ_A_HCM_ZZZPORTAL, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="a52cdae00b9e11ea8b0cfae8ac130d0e">
@@ -16377,10 +16377,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:a:HCM:CSCPortal:HR:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:a:HCM:ZZZPortal:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="ZZZ_A_HCM_ZZZPORTAL, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="a52cdae00b9e11ea8b0cfae8ac130d0e">
@@ -16397,10 +16397,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:a:HCM:CSCPortal:HR:Payslip</elem>
+						<elem>urn:vendor:po:a:HCM:ZZZPortal:HR:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="a52cdae00b9e11ea8b0cfae8ac130d0e" sp="-1" caption="ZZZ_A_HCM_ZZZPORTAL, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="a52cdae00b9e11ea8b0cfae8ac130d0e">
@@ -16417,10 +16417,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:i:CSCPortal:HR:Payslip</elem>
+						<elem>urn:vendor:po:i:ZZZPortal:HR:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="ZZZ_I_ZZZPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -16437,10 +16437,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:i:CSCPortal:HR:TestDocument</elem>
+						<elem>urn:vendor:po:i:ZZZPortal:HR:TestDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="ZZZ_I_ZZZPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -16457,10 +16457,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:TRANSPORTHUB:IDoc</elem>
+						<elem>urn:vendor:po:A:POZZZ:TRANSPORTHUB:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5c2ed700466b11eac2dee72eac130d0e" sp="-1" caption="SC_A_POCSC_TRANSPORTHUB, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5c2ed700466b11eac2dee72eac130d0e" sp="-1" caption="SC_A_POZZZ_TRANSPORTHUB, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5c2ed700466b11eac2dee72eac130d0e">
@@ -16477,10 +16477,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:TRANSPORTHUB:HR:Payslip</elem>
+						<elem>urn:vendor:po:A:POZZZ:TRANSPORTHUB:HR:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5c2ed700466b11eac2dee72eac130d0e" sp="-1" caption="SC_A_POCSC_TRANSPORTHUB, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5c2ed700466b11eac2dee72eac130d0e" sp="-1" caption="SC_A_POZZZ_TRANSPORTHUB, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5c2ed700466b11eac2dee72eac130d0e">
@@ -16597,10 +16597,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:TRANSPORTHUB:BPReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:TRANSPORTHUB:BPReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5c2ed700466b11eac2dee72eac130d0e" sp="-1" caption="SC_A_POCSC_TRANSPORTHUB, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5c2ed700466b11eac2dee72eac130d0e" sp="-1" caption="SC_A_POZZZ_TRANSPORTHUB, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5c2ed700466b11eac2dee72eac130d0e">
@@ -16617,10 +16617,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:TRANSPORTHUB:HR:VehicleTrip</elem>
+						<elem>urn:vendor:po:A:POZZZ:TRANSPORTHUB:HR:VehicleTrip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5c2ed700466b11eac2dee72eac130d0e" sp="-1" caption="SC_A_POCSC_TRANSPORTHUB, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5c2ed700466b11eac2dee72eac130d0e" sp="-1" caption="SC_A_POZZZ_TRANSPORTHUB, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5c2ed700466b11eac2dee72eac130d0e">
@@ -16800,7 +16800,7 @@
 						<elem>urn:vendor:po:i:HCM:PA:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="8ac823b00b9b11ea9b7bfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="8ac823b00b9b11ea9b7bfae8ac130d0e" sp="-1" caption="ZZZ_I_HCM_PA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="8ac823b00b9b11ea9b7bfae8ac130d0e">
@@ -16820,7 +16820,7 @@
 						<elem>urn:vendor:po:i:HCM:PA:Performance:vendor</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="8ac823b00b9b11ea9b7bfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="8ac823b00b9b11ea9b7bfae8ac130d0e" sp="-1" caption="ZZZ_I_HCM_PA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="8ac823b00b9b11ea9b7bfae8ac130d0e">
@@ -16837,10 +16837,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:i:CSCPortal:Common</elem>
+						<elem>urn:vendor:po:i:ZZZPortal:Common</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="CSC_I_CSCPORTAL_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7c695cf0017611eabb99df1eac130d0e" sp="-1" caption="ZZZ_I_ZZZPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7c695cf0017611eabb99df1eac130d0e">
@@ -17457,10 +17457,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SCPI:BPReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:SCPI:BPReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="51ab6220466c11ea884ae72eac130d0e" sp="-1" caption="SC_A_POCSC_SCPI, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="51ab6220466c11ea884ae72eac130d0e" sp="-1" caption="SC_A_POZZZ_SCPI, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="51ab6220466c11ea884ae72eac130d0e">
@@ -17477,10 +17477,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:PLANNINGPRODUCTION:BPReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:PLANNINGPRODUCTION:BPReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="bc9d5020466c11eaa0c2e72eac130d0e" sp="-1" caption="SC_A_POCSC_PLANNINGPRODUCTION, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="bc9d5020466c11eaa0c2e72eac130d0e" sp="-1" caption="SC_A_POZZZ_PLANNINGPRODUCTION, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="bc9d5020466c11eaa0c2e72eac130d0e">
@@ -17497,10 +17497,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:Bank_Of_Ideas:Payments</elem>
+						<elem>urn:vendor:po:A:POZZZ:Bank_Of_Ideas:Payments</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b8338a70483a11eab26be72eac130d0e" sp="-1" caption="SC_A_POCSC_BANK_OF_IDEAS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="b8338a70483a11eab26be72eac130d0e" sp="-1" caption="SC_A_POZZZ_BANK_OF_IDEAS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b8338a70483a11eab26be72eac130d0e">
@@ -17537,10 +17537,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:Bank_Of_Ideas:HRMD_A</elem>
+						<elem>urn:vendor:po:A:POZZZ:Bank_Of_Ideas:HRMD_A</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b8338a70483a11eab26be72eac130d0e" sp="-1" caption="SC_A_POCSC_BANK_OF_IDEAS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="b8338a70483a11eab26be72eac130d0e" sp="-1" caption="SC_A_POZZZ_BANK_OF_IDEAS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b8338a70483a11eab26be72eac130d0e">
@@ -18100,7 +18100,7 @@
 						<elem>urn:vendor:po:il:Common</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b67ae0c0060911eac799df1eac130d0e" sp="-1" caption="CSC_IL_COMMON, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="b67ae0c0060911eac799df1eac130d0e" sp="-1" caption="ZZZ_IL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b67ae0c0060911eac799df1eac130d0e">
@@ -19600,7 +19600,7 @@
 						<elem>urn:vendor:po:a:HCM:DMZ:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="CSC_A_HCM_DMZ, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="ZZZ_A_HCM_DMZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b7c7bbc00b9e11ea914bfae8ac130d0e">
@@ -19700,7 +19700,7 @@
 						<elem>urn:vendor:po:a:HCM:DMZ:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="CSC_A_HCM_DMZ, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="ZZZ_A_HCM_DMZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b7c7bbc00b9e11ea914bfae8ac130d0e">
@@ -19720,7 +19720,7 @@
 						<elem>urn:vendor:po:a:HCM:DMZ:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="CSC_A_HCM_DMZ, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="b7c7bbc00b9e11ea914bfae8ac130d0e" sp="-1" caption="ZZZ_A_HCM_DMZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b7c7bbc00b9e11ea914bfae8ac130d0e">
@@ -22060,7 +22060,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:FI:Payment:Sberbank</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -22080,7 +22080,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:User:SF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -22100,7 +22100,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:IdentityDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -22177,10 +22177,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ECC-EU:IDoc</elem>
+						<elem>urn:vendor:po:A:POZZZ:ECC-EU:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3ad6ad10c5ed11eaa812f282ac130d0e" sp="-1" caption="SC_A_POCSC_ECC-EU, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="3ad6ad10c5ed11eaa812f282ac130d0e" sp="-1" caption="SC_A_POZZZ_ECC-EU, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3ad6ad10c5ed11eaa812f282ac130d0e">
@@ -23540,7 +23540,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:VehicleTrip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23560,7 +23560,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:Learning</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23580,7 +23580,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeStatistics</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23600,7 +23600,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:APIDictionary:SF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23620,7 +23620,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23640,7 +23640,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:Generic:SF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23660,7 +23660,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:Compensation:SF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23680,7 +23680,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:Bank</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23900,7 +23900,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23920,7 +23920,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23940,7 +23940,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeTimeSheet</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23960,7 +23960,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -23980,7 +23980,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:Performance</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24000,7 +24000,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:AdditionalPayment</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24020,7 +24020,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:User:SF:UserStatus</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24040,7 +24040,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeWorkSchedule</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24060,7 +24060,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:Session:SF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24080,7 +24080,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:Goal</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24100,7 +24100,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:JobApplication:SF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24120,7 +24120,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24140,7 +24140,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:HRBusinessEntity</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24160,7 +24160,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:RFC</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24180,7 +24180,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:Query:SF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24200,7 +24200,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:BusinessPartner</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24220,7 +24220,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:MDF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24240,7 +24240,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeTrip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24260,7 +24260,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:Candidate:SF</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24280,7 +24280,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeVacation</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24300,7 +24300,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeCertificate</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24320,7 +24320,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:EmployeeHRConsultation</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24340,7 +24340,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:Dividend</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24360,7 +24360,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:CA:Session:IDM</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24380,7 +24380,7 @@
 						<elem>urn:vendor:po:i:vendor:Proxy:HR:Employee:IDM</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POCSC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="5bb22020360811eabed6cd9dac130d0e" sp="-1" caption="SC_I_POZZZ, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="5bb22020360811eabed6cd9dac130d0e">
@@ -24577,10 +24577,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:PACS-RUSGUARD-ALTAY:Orgstructure</elem>
+						<elem>urn:vendor:po:A:POZZZ:PACS-RUSGUARD-ALTAY:Orgstructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e14b48902f3d11eba488fc3eac130d0e" sp="-1" caption="SC_A_POCSC_PACS-RUSGUARD-ALTAY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="e14b48902f3d11eba488fc3eac130d0e" sp="-1" caption="SC_A_POZZZ_PACS-RUSGUARD-ALTAY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e14b48902f3d11eba488fc3eac130d0e">
@@ -28477,10 +28477,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ISOTiPB:IDoc</elem>
+						<elem>urn:vendor:po:A:POZZZ:ISOTiPB:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c1fcae301f4c11eb8fbdfc3eac130d0e" sp="-1" caption="SC_A_POCSC_ISOTIPB, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c1fcae301f4c11eb8fbdfc3eac130d0e" sp="-1" caption="SC_A_POZZZ_ISOTIPB, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c1fcae301f4c11eb8fbdfc3eac130d0e">
@@ -28497,10 +28497,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ISOTiPB:BusinessPatners</elem>
+						<elem>urn:vendor:po:A:POZZZ:ISOTiPB:BusinessPatners</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c1fcae301f4c11eb8fbdfc3eac130d0e" sp="-1" caption="SC_A_POCSC_ISOTIPB, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c1fcae301f4c11eb8fbdfc3eac130d0e" sp="-1" caption="SC_A_POZZZ_ISOTIPB, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c1fcae301f4c11eb8fbdfc3eac130d0e">
@@ -29557,10 +29557,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:COMMON:BPReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:COMMON:BPReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="02025650465a11eaa837e72eac130d0e" sp="-1" caption="SC_A_POCSC_COMMON, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="02025650465a11eaa837e72eac130d0e" sp="-1" caption="SC_A_POZZZ_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="02025650465a11eaa837e72eac130d0e">
@@ -29920,7 +29920,7 @@
 						<elem>urn:vendor:po:i:1C-ERP:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="CSC_I_1C-ERP_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="ZZZ_I_1C-ERP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1207e8d0058c11eabdcfdf1eac130d0e">
@@ -29940,7 +29940,7 @@
 						<elem>urn:vendor:po:i:1C-ERP:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="CSC_I_1C-ERP_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="ZZZ_I_1C-ERP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1207e8d0058c11eabdcfdf1eac130d0e">
@@ -29960,7 +29960,7 @@
 						<elem>urn:vendor:po:i:1C-ERP:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="CSC_I_1C-ERP_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1" caption="ZZZ_I_1C-ERP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="1207e8d0058c11eabdcfdf1eac130d0e">
@@ -30000,7 +30000,7 @@
 						<elem>urn:vendor:po:il:NonABAP:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="ZZZ_IL_NONABAP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="43cfd280021a11eacf63df1eac130d0e">
@@ -30140,7 +30140,7 @@
 						<elem>urn:vendor:po:il:NonABAP:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="ZZZ_IL_NONABAP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="43cfd280021a11eacf63df1eac130d0e">
@@ -30160,7 +30160,7 @@
 						<elem>urn:vendor:po:il:NonABAP:HR:Common</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="ZZZ_IL_NONABAP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="43cfd280021a11eacf63df1eac130d0e">
@@ -30180,7 +30180,7 @@
 						<elem>urn:vendor:po:il:NonABAP:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="CSC_IL_NONABAP_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="43cfd280021a11eacf63df1eac130d0e" sp="-1" caption="ZZZ_IL_NONABAP_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="43cfd280021a11eacf63df1eac130d0e">
@@ -30657,10 +30657,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ISECOLOGY:IDoc</elem>
+						<elem>urn:vendor:po:A:POZZZ:ISECOLOGY:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="56b8e2a0395611eba4f2ebfbac130d0e" sp="-1" caption="SC_A_POCSC_ISECOLOGY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="56b8e2a0395611eba4f2ebfbac130d0e" sp="-1" caption="SC_A_POZZZ_ISECOLOGY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="56b8e2a0395611eba4f2ebfbac130d0e">
@@ -30697,10 +30697,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ISECOLOGY:BusinessPartners</elem>
+						<elem>urn:vendor:po:A:POZZZ:ISECOLOGY:BusinessPartners</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="56b8e2a0395611eba4f2ebfbac130d0e" sp="-1" caption="SC_A_POCSC_ISECOLOGY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="56b8e2a0395611eba4f2ebfbac130d0e" sp="-1" caption="SC_A_POZZZ_ISECOLOGY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="56b8e2a0395611eba4f2ebfbac130d0e">
@@ -30857,10 +30857,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:GRC:Employees</elem>
+						<elem>urn:vendor:po:A:POZZZ:GRC:Employees</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d3ff660835711eccdfaf638ac130d0e" sp="-1" caption="SC_A_POCSC_GRC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7d3ff660835711eccdfaf638ac130d0e" sp="-1" caption="SC_A_POZZZ_GRC, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d3ff660835711eccdfaf638ac130d0e">
@@ -30877,10 +30877,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:GRC:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:A:POZZZ:GRC:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d3ff660835711eccdfaf638ac130d0e" sp="-1" caption="SC_A_POCSC_GRC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7d3ff660835711eccdfaf638ac130d0e" sp="-1" caption="SC_A_POZZZ_GRC, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d3ff660835711eccdfaf638ac130d0e">
@@ -30897,10 +30897,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:GRC:EmployeeTime</elem>
+						<elem>urn:vendor:po:A:POZZZ:GRC:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7d3ff660835711eccdfaf638ac130d0e" sp="-1" caption="SC_A_POCSC_GRC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7d3ff660835711eccdfaf638ac130d0e" sp="-1" caption="SC_A_POZZZ_GRC, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7d3ff660835711eccdfaf638ac130d0e">
@@ -31037,10 +31037,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:JEFFIT:Login</elem>
+						<elem>urn:vendor:po:A:POZZZ:JEFFIT:Login</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="77c3d8d0af1111ea866ef282ac130d0e" sp="-1" caption="SC_A_POCSC_JEFFIT, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="77c3d8d0af1111ea866ef282ac130d0e" sp="-1" caption="SC_A_POZZZ_JEFFIT, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="77c3d8d0af1111ea866ef282ac130d0e">
@@ -31057,10 +31057,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:JEFFIT:OrganizationStructure</elem>
+						<elem>urn:vendor:po:A:POZZZ:JEFFIT:OrganizationStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="77c3d8d0af1111ea866ef282ac130d0e" sp="-1" caption="SC_A_POCSC_JEFFIT, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="77c3d8d0af1111ea866ef282ac130d0e" sp="-1" caption="SC_A_POZZZ_JEFFIT, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="77c3d8d0af1111ea866ef282ac130d0e">
@@ -31077,10 +31077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C-TMS-vendor:BusinessPartner</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C-TMS-vendor:BusinessPartner</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POCSC_1C-TMS-vendor, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POZZZ_1C-TMS-vendor, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="868f8b006b9711ebc64ae89fac130d0e">
@@ -31117,10 +31117,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C-TMS-vendor:OrganisationalStructure</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C-TMS-vendor:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POCSC_1C-TMS-vendor, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POZZZ_1C-TMS-vendor, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="868f8b006b9711ebc64ae89fac130d0e">
@@ -31277,10 +31277,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C-TMS-vendor:Employee</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C-TMS-vendor:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POCSC_1C-TMS-vendor, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POZZZ_1C-TMS-vendor, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="868f8b006b9711ebc64ae89fac130d0e">
@@ -31297,10 +31297,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C-TMS-vendor:EmployeeTime</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C-TMS-vendor:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POCSC_1C-TMS-vendor, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POZZZ_1C-TMS-vendor, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="868f8b006b9711ebc64ae89fac130d0e">
@@ -31317,10 +31317,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C-TMS-vendor:EmployeeWorkSchedule</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C-TMS-vendor:EmployeeWorkSchedule</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POCSC_1C-TMS-vendor, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="868f8b006b9711ebc64ae89fac130d0e" sp="-1" caption="SC_A_POZZZ_1C-TMS-vendor, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="868f8b006b9711ebc64ae89fac130d0e">
@@ -31380,7 +31380,7 @@
 						<elem>urn:vendor:po:a:DMZ:1C-ERP:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_1C-ERP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="ZZZ_A_DMZ_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3f38b2400b9e11ea9c32fae8ac130d0e">
@@ -31400,7 +31400,7 @@
 						<elem>urn:vendor:po:a:DMZ:1C-ERP:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_1C-ERP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="ZZZ_A_DMZ_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3f38b2400b9e11ea9c32fae8ac130d0e">
@@ -31440,7 +31440,7 @@
 						<elem>urn:vendor:po:a:DMZ:1C-ERP:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_1C-ERP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1" caption="ZZZ_A_DMZ_1C-ERP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3f38b2400b9e11ea9c32fae8ac130d0e">
@@ -31857,10 +31857,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C:Dividend</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C:Dividend</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="af5c2771459411ea8488e72eac130d0e" sp="-1" caption="SC_A_POCSC_1C, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="af5c2771459411ea8488e72eac130d0e" sp="-1" caption="SC_A_POZZZ_1C, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="af5c2771459411ea8488e72eac130d0e">
@@ -31877,10 +31877,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C:BankReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C:BankReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="af5c2771459411ea8488e72eac130d0e" sp="-1" caption="SC_A_POCSC_1C, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="af5c2771459411ea8488e72eac130d0e" sp="-1" caption="SC_A_POZZZ_1C, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="af5c2771459411ea8488e72eac130d0e">
@@ -31917,10 +31917,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C:BPMonitoring</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C:BPMonitoring</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="af5c2771459411ea8488e72eac130d0e" sp="-1" caption="SC_A_POCSC_1C, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="af5c2771459411ea8488e72eac130d0e" sp="-1" caption="SC_A_POZZZ_1C, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="af5c2771459411ea8488e72eac130d0e">
@@ -31957,10 +31957,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C:BPReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C:BPReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="af5c2771459411ea8488e72eac130d0e" sp="-1" caption="SC_A_POCSC_1C, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="af5c2771459411ea8488e72eac130d0e" sp="-1" caption="SC_A_POZZZ_1C, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="af5c2771459411ea8488e72eac130d0e">
@@ -32777,10 +32777,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SUPR-SGOK:Employee</elem>
+						<elem>urn:vendor:po:A:POZZZ:SUPR-SGOK:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e60c8f20f68811eb8574ea51ac130d0e" sp="-1" caption="SC_A_POCSC_SUPR-SGOK, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="e60c8f20f68811eb8574ea51ac130d0e" sp="-1" caption="SC_A_POZZZ_SUPR-SGOK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e60c8f20f68811eb8574ea51ac130d0e">
@@ -32940,7 +32940,7 @@
 						<elem>urn:vendor:po:i:DAX:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e51a94401c0511eacd07fae8ac130d0e" sp="-1" caption="CSC_I_DAX_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="e51a94401c0511eacd07fae8ac130d0e" sp="-1" caption="ZZZ_I_DAX_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e51a94401c0511eacd07fae8ac130d0e">
@@ -32960,7 +32960,7 @@
 						<elem>urn:vendor:po:i:DAX:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="e51a94401c0511eacd07fae8ac130d0e" sp="-1" caption="CSC_I_DAX_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="e51a94401c0511eacd07fae8ac130d0e" sp="-1" caption="ZZZ_I_DAX_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="e51a94401c0511eacd07fae8ac130d0e">
@@ -33000,7 +33000,7 @@
 						<elem>urn:vendor:po:i:HCM:CA:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="ZZZ_I_HCM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="f1368ff00b9c11eaa808fae8ac130d0e">
@@ -33020,7 +33020,7 @@
 						<elem>urn:vendor:po:i:HCM:CA:Barcode</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="ZZZ_I_HCM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="f1368ff00b9c11eaa808fae8ac130d0e">
@@ -33040,7 +33040,7 @@
 						<elem>urn:vendor:po:i:HCM:CA:SearchHelp</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="ZZZ_I_HCM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="f1368ff00b9c11eaa808fae8ac130d0e">
@@ -33060,7 +33060,7 @@
 						<elem>urn:vendor:po:i:HCM:CA:Calendar</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="CSC_I_HCM_CA, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="f1368ff00b9c11eaa808fae8ac130d0e" sp="-1" caption="ZZZ_I_HCM_CA, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="f1368ff00b9c11eaa808fae8ac130d0e">
@@ -33080,7 +33080,7 @@
 						<elem>urn:vendor:po:i:ECM:DMS:Barcode</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="0998fb40257a11eabb65fae8ac130d0e" sp="-1" caption="CSC_I_ECM_DMS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="0998fb40257a11eabb65fae8ac130d0e" sp="-1" caption="ZZZ_I_ECM_DMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="0998fb40257a11eabb65fae8ac130d0e">
@@ -33100,7 +33100,7 @@
 						<elem>urn:vendor:po:i:ECM:DMS:ECMLink</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="0998fb40257a11eabb65fae8ac130d0e" sp="-1" caption="CSC_I_ECM_DMS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="0998fb40257a11eabb65fae8ac130d0e" sp="-1" caption="ZZZ_I_ECM_DMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="0998fb40257a11eabb65fae8ac130d0e">
@@ -33557,10 +33557,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:Host-To-Host:FI:Payment:Sberbank</elem>
+						<elem>urn:vendor:po:A:POZZZ:Host-To-Host:FI:Payment:Sberbank</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="37068d705fbf11eab66fd84eac130d0e" sp="-1" caption="SC_A_POCSC_HOST-TO-HOST, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="37068d705fbf11eab66fd84eac130d0e" sp="-1" caption="SC_A_POZZZ_HOST-TO-HOST, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="37068d705fbf11eab66fd84eac130d0e">
@@ -34280,7 +34280,7 @@
 						<elem>urn:vendor:po:i:DMS:DMS:Contract</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="0091f060257f11ea95bcfae8ac130d0e" sp="-1" caption="CSC_I_DMS_DMS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="0091f060257f11ea95bcfae8ac130d0e" sp="-1" caption="ZZZ_I_DMS_DMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="0091f060257f11ea95bcfae8ac130d0e">
@@ -34357,10 +34357,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:END:Employee</elem>
+						<elem>urn:vendor:po:A:POZZZ:END:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="6b4de930bfc611ebc780fd13ac130d0e" sp="-1" caption="SC_A_POCSC_END, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="6b4de930bfc611ebc780fd13ac130d0e" sp="-1" caption="SC_A_POZZZ_END, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="6b4de930bfc611ebc780fd13ac130d0e">
@@ -34380,7 +34380,7 @@
 						<elem>urn:vendor:po:i:THPortal:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="561996b00b9d11eacf3bfae8ac130d0e" sp="-1" caption="CSC_I_THPORTAL_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="561996b00b9d11eacf3bfae8ac130d0e" sp="-1" caption="ZZZ_I_THPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="561996b00b9d11eacf3bfae8ac130d0e">
@@ -34400,7 +34400,7 @@
 						<elem>urn:vendor:po:i:THPortal:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="561996b00b9d11eacf3bfae8ac130d0e" sp="-1" caption="CSC_I_THPORTAL_HR, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="561996b00b9d11eacf3bfae8ac130d0e" sp="-1" caption="ZZZ_I_THPORTAL_HR, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="561996b00b9d11eacf3bfae8ac130d0e">
@@ -34417,10 +34417,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:a:CSCPortal:Test:TestDocument</elem>
+						<elem>urn:vendor:po:a:ZZZPortal:Test:TestDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3e0dc150146611eaabf9fae8ac130d0e" sp="-1" caption="CSC_A_CSCPORTAL_TEST, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="3e0dc150146611eaabf9fae8ac130d0e" sp="-1" caption="ZZZ_A_ZZZPORTAL_TEST, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3e0dc150146611eaabf9fae8ac130d0e">
@@ -34440,7 +34440,7 @@
 						<elem>urn:vendor:po:i:Test:HR:TestDocument</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c025da20146511eac69ffae8ac130d0e" sp="-1" caption="CSC_I_TEST, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c025da20146511eac69ffae8ac130d0e" sp="-1" caption="ZZZ_I_TEST, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c025da20146511eac69ffae8ac130d0e">
@@ -34460,7 +34460,7 @@
 						<elem>urn:vendor:po:i:Test:HR:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c025da20146511eac69ffae8ac130d0e" sp="-1" caption="CSC_I_TEST, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c025da20146511eac69ffae8ac130d0e" sp="-1" caption="ZZZ_I_TEST, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c025da20146511eac69ffae8ac130d0e">
@@ -34477,10 +34477,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:a:CSCPortal:Test:Payslip</elem>
+						<elem>urn:vendor:po:a:ZZZPortal:Test:Payslip</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="3e0dc150146611eaabf9fae8ac130d0e" sp="-1" caption="CSC_A_CSCPORTAL_TEST, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="3e0dc150146611eaabf9fae8ac130d0e" sp="-1" caption="ZZZ_A_ZZZPORTAL_TEST, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="3e0dc150146611eaabf9fae8ac130d0e">
@@ -34880,7 +34880,7 @@
 						<elem>urn:vendor:po:i:DMZ:Proxy:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="ZZZ_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34900,7 +34900,7 @@
 						<elem>urn:vendor:po:i:DMZ:Proxy:RFC</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="ZZZ_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34920,7 +34920,7 @@
 						<elem>urn:vendor:po:i:DMZ:Proxy:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="ZZZ_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34940,7 +34940,7 @@
 						<elem>urn:vendor:po:i:DMZ:Proxy:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="ZZZ_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34960,7 +34960,7 @@
 						<elem>urn:vendor:po:i:DMZ:Proxy:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="CSC_I_DMZ_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1" caption="ZZZ_I_DMZ_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="c3a7f1f0048011eaaf65df1eac130d0e">
@@ -34980,7 +34980,7 @@
 						<elem>urn:vendor:po:i:HCM:PT:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="9dbd59900b9b11ea9d1dfae8ac130d0e" sp="-1" caption="CSC_I_HCM_PT, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="9dbd59900b9b11ea9d1dfae8ac130d0e" sp="-1" caption="ZZZ_I_HCM_PT, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="9dbd59900b9b11ea9d1dfae8ac130d0e">
@@ -36100,7 +36100,7 @@
 						<elem>urn:vendor:po:al:Common:FileProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="ZZZ_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36120,7 +36120,7 @@
 						<elem>urn:vendor:po:al:Common:HTTPProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="ZZZ_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36140,7 +36140,7 @@
 						<elem>urn:vendor:po:al:Common:MailProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="ZZZ_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36160,7 +36160,7 @@
 						<elem>urn:vendor:po:al:Common:XMLProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="ZZZ_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36180,7 +36180,7 @@
 						<elem>urn:vendor:po:al:Common:TextProcessing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="ZZZ_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -36197,10 +36197,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:EKP:CA:User:SF:UserStatus</elem>
+						<elem>urn:vendor:po:A:POZZZ:EKP:CA:User:SF:UserStatus</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="2f25eb105d5c11eac986d84eac130d0e" sp="-1" caption="SC_A_POCSC_EKP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="2f25eb105d5c11eac986d84eac130d0e" sp="-1" caption="SC_A_POZZZ_EKP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="2f25eb105d5c11eac986d84eac130d0e">
@@ -36217,10 +36217,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:EKP:MBO:MBOBonusDetails</elem>
+						<elem>urn:vendor:po:A:POZZZ:EKP:MBO:MBOBonusDetails</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="2f25eb105d5c11eac986d84eac130d0e" sp="-1" caption="SC_A_POCSC_EKP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="2f25eb105d5c11eac986d84eac130d0e" sp="-1" caption="SC_A_POZZZ_EKP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="2f25eb105d5c11eac986d84eac130d0e">
@@ -36280,7 +36280,7 @@
 						<elem>urn:vendor:po:al:Common:XI30Processing</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="CSC_AL_COMMON, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="cf739be00b9e11ea89ddfae8ac130d0e" sp="-1" caption="ZZZ_AL_COMMON, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="cf739be00b9e11ea89ddfae8ac130d0e">
@@ -40080,7 +40080,7 @@
 						<elem>urn:vendor:po:i:PGK:Proxy:RFC</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="ZZZ_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40100,7 +40100,7 @@
 						<elem>urn:vendor:po:i:PGK:Proxy:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="ZZZ_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40120,7 +40120,7 @@
 						<elem>urn:vendor:po:i:PGK:Proxy:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="ZZZ_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40140,7 +40140,7 @@
 						<elem>urn:vendor:po:i:PGK:Proxy:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="ZZZ_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40180,7 +40180,7 @@
 						<elem>urn:vendor:po:a:DMZ:PGK:HR:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_PGK, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="ZZZ_A_DMZ_PGK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4be7f2700c3a11eab482fae8ac130d0e">
@@ -40220,7 +40220,7 @@
 						<elem>urn:vendor:po:i:PGK:Proxy:IDoc</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="CSC_I_PGK_PROXY, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="58479840046011eab6d5df1eac130d0e" sp="-1" caption="ZZZ_I_PGK_PROXY, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="58479840046011eab6d5df1eac130d0e">
@@ -40260,7 +40260,7 @@
 						<elem>urn:vendor:po:a:DMZ:PGK:HR:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_PGK, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="ZZZ_A_DMZ_PGK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4be7f2700c3a11eab482fae8ac130d0e">
@@ -40280,7 +40280,7 @@
 						<elem>urn:vendor:po:a:DMZ:PGK:HR:OrganisationalStructure</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="CSC_A_DMZ_PGK, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="4be7f2700c3a11eab482fae8ac130d0e" sp="-1" caption="ZZZ_A_DMZ_PGK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="4be7f2700c3a11eab482fae8ac130d0e">
@@ -40437,10 +40437,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:END-DOLOMIT:Employee</elem>
+						<elem>urn:vendor:po:A:POZZZ:END-DOLOMIT:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="7785d350506911ecb8aff353ac130d0e" sp="-1" caption="SC_A_POCSC_END-DOLOMIT, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="7785d350506911ecb8aff353ac130d0e" sp="-1" caption="SC_A_POZZZ_END-DOLOMIT, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="7785d350506911ecb8aff353ac130d0e">
@@ -41557,10 +41557,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:STARTEXAM:HRBusinessEntity</elem>
+						<elem>urn:vendor:po:A:POZZZ:STARTEXAM:HRBusinessEntity</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="a3b60200123e11ed950fd23cac130d0e" sp="-1" caption="SC_A_POCSC_STARTEXAM, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="a3b60200123e11ed950fd23cac130d0e" sp="-1" caption="SC_A_POZZZ_STARTEXAM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="a3b60200123e11ed950fd23cac130d0e">
@@ -42757,10 +42757,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C-TMS:BP:Replication</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C-TMS:BP:Replication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b7c93f206e0611ea8351d4ffac130d0e" sp="-1" caption="SC_A_POCSC_1C-TMS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="b7c93f206e0611ea8351d4ffac130d0e" sp="-1" caption="SC_A_POZZZ_1C-TMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b7c93f206e0611ea8351d4ffac130d0e">
@@ -42777,10 +42777,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C-TMS:Employee</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C-TMS:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b7c93f206e0611ea8351d4ffac130d0e" sp="-1" caption="SC_A_POCSC_1C-TMS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="b7c93f206e0611ea8351d4ffac130d0e" sp="-1" caption="SC_A_POZZZ_1C-TMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b7c93f206e0611ea8351d4ffac130d0e">
@@ -42797,10 +42797,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:1C-TMS:EmployeeWorkSchedule</elem>
+						<elem>urn:vendor:po:A:POZZZ:1C-TMS:EmployeeWorkSchedule</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="b7c93f206e0611ea8351d4ffac130d0e" sp="-1" caption="SC_A_POCSC_1C-TMS, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="b7c93f206e0611ea8351d4ffac130d0e" sp="-1" caption="SC_A_POZZZ_1C-TMS, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="b7c93f206e0611ea8351d4ffac130d0e">
@@ -44577,10 +44577,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:SrmLom:BusinessPartners</elem>
+						<elem>urn:vendor:po:A:POZZZ:SrmLom:BusinessPartners</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="60acbed0fb9711ec8d94d23cac130d0e" sp="-1" caption="SC_A_POCSC_SRM_LOM, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="60acbed0fb9711ec8d94d23cac130d0e" sp="-1" caption="SC_A_POZZZ_SRM_LOM, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="60acbed0fb9711ec8d94d23cac130d0e">
@@ -45057,10 +45057,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:CIC:BPReplication</elem>
+						<elem>urn:vendor:po:A:POZZZ:CIC:BPReplication</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="61fd5840d51711ec8b39d23cac130d0e" sp="-1" caption="SC_A_POCSC_CIC, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="61fd5840d51711ec8b39d23cac130d0e" sp="-1" caption="SC_A_POZZZ_CIC, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="61fd5840d51711ec8b39d23cac130d0e">
@@ -45077,10 +45077,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:ASOP:EmployeeTime</elem>
+						<elem>urn:vendor:po:A:POZZZ:ASOP:EmployeeTime</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="56dfc780636e11ea8ad8d84eac130d0e" sp="-1" caption="SC_A_POCSC_ASOP, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="56dfc780636e11ea8ad8d84eac130d0e" sp="-1" caption="SC_A_POZZZ_ASOP, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="56dfc780636e11ea8ad8d84eac130d0e">
@@ -45677,10 +45677,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:END-SGOK:Employee</elem>
+						<elem>urn:vendor:po:A:POZZZ:END-SGOK:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="2755f2502ccb11ecbeb6f353ac130d0e" sp="-1" caption="SC_A_POCSC_END-SGOK, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="2755f2502ccb11ecbeb6f353ac130d0e" sp="-1" caption="SC_A_POZZZ_END-SGOK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="2755f2502ccb11ecbeb6f353ac130d0e">
@@ -47337,10 +47337,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:TRANSPORTHUB-SGOK:Bank</elem>
+						<elem>urn:vendor:po:A:POZZZ:TRANSPORTHUB-SGOK:Bank</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="ffdd8ce0b41311ebb1b1fd13ac130d0e" sp="-1" caption="SC_A_POCSC_TRANSPORTHUB-SGOK, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="ffdd8ce0b41311ebb1b1fd13ac130d0e" sp="-1" caption="SC_A_POZZZ_TRANSPORTHUB-SGOK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="ffdd8ce0b41311ebb1b1fd13ac130d0e">
@@ -52537,10 +52537,10 @@
 			<c>
 				<nsp isUL="false">
 					<key typeID="namespace">
-						<elem>urn:vendor:po:A:POCSC:END-STAGDOK:Employee</elem>
+						<elem>urn:vendor:po:A:POZZZ:END-STAGDOK:Employee</elem>
 					</key>
 					<ref>
-						<vc vcType="S" swcGuid="626e4490506711ec8a9cf353ac130d0e" sp="-1" caption="SC_A_POCSC_END-STAGDOK, 1.0 of vendor.com">
+						<vc vcType="S" swcGuid="626e4490506711ec8a9cf353ac130d0e" sp="-1" caption="SC_A_POZZZ_END-STAGDOK, 1.0 of vendor.com">
 							<clCxt consider="A"/>
 						</vc>
 						<key typeID="swc" oid="626e4490506711ec8a9cf353ac130d0e">

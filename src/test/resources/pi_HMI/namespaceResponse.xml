@@ -965,7 +965,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PY, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_PY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -975,7 +975,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PY</strg>
+					<strg>zzz_I_HCM_PY</strg>
 				</simple>
 			</c>
 			<c>
@@ -985,7 +985,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PY, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_PY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1350,7 +1350,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CA, 1.0 of vendor.com</strg>
+					<strg>zzz_I_ERP_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1360,7 +1360,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CA</strg>
+					<strg>zzz_I_ERP_CA</strg>
 				</simple>
 			</c>
 			<c>
@@ -1370,7 +1370,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CA, 1.0 of vendor.com</strg>
+					<strg>zzz_I_ERP_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1570,7 +1570,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_ERP_DMS, 1.0 of vendor.com</strg>
+					<strg>zzz_A_ERP_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1580,7 +1580,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_ERP_DMS</strg>
+					<strg>zzz_A_ERP_DMS</strg>
 				</simple>
 			</c>
 			<c>
@@ -1590,7 +1590,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_ERP_DMS, 1.0 of vendor.com</strg>
+					<strg>zzz_A_ERP_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1845,7 +1845,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_DAX, 1.0 of vendor.com</strg>
+					<strg>zzz_A_DMZ_DAX, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -1855,7 +1855,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_DAX</strg>
+					<strg>zzz_A_DMZ_DAX</strg>
 				</simple>
 			</c>
 			<c>
@@ -1865,7 +1865,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_DAX, 1.0 of vendor.com</strg>
+					<strg>zzz_A_DMZ_DAX, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -2835,7 +2835,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_HCM_NONABAP, 1.0 of vendor.com</strg>
+					<strg>zzz_AL_HCM_NONABAP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -2845,7 +2845,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_HCM_NONABAP</strg>
+					<strg>zzz_AL_HCM_NONABAP</strg>
 				</simple>
 			</c>
 			<c>
@@ -2855,7 +2855,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_HCM_NONABAP, 1.0 of vendor.com</strg>
+					<strg>zzz_AL_HCM_NONABAP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3055,7 +3055,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_DMZ, 1.0 of vendor.com</strg>
+					<strg>zzz_A_HCM_DMZ, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3065,7 +3065,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_DMZ</strg>
+					<strg>zzz_A_HCM_DMZ</strg>
 				</simple>
 			</c>
 			<c>
@@ -3075,7 +3075,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_DMZ, 1.0 of vendor.com</strg>
+					<strg>zzz_A_HCM_DMZ, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3605,7 +3605,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_CA, 1.0 of vendor.com</strg>
+					<strg>zzz_I_ECM_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -3615,7 +3615,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_CA</strg>
+					<strg>zzz_I_ECM_CA</strg>
 				</simple>
 			</c>
 			<c>
@@ -3625,7 +3625,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_CA, 1.0 of vendor.com</strg>
+					<strg>zzz_I_ECM_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4045,7 +4045,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CORE, 1.0 of vendor.com</strg>
+					<strg>zzz_I_ERP_CORE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4055,7 +4055,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CORE</strg>
+					<strg>zzz_I_ERP_CORE</strg>
 				</simple>
 			</c>
 			<c>
@@ -4065,7 +4065,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ERP_CORE, 1.0 of vendor.com</strg>
+					<strg>zzz_I_ERP_CORE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4210,7 +4210,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_CSCPORTAL_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_I_zzzPORTAL_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4220,7 +4220,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_CSCPORTAL_HR</strg>
+					<strg>zzz_I_zzzPORTAL_HR</strg>
 				</simple>
 			</c>
 			<c>
@@ -4230,7 +4230,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_CSCPORTAL_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_I_zzzPORTAL_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4375,7 +4375,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PA, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_PA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4385,7 +4385,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PA</strg>
+					<strg>zzz_I_HCM_PA</strg>
 				</simple>
 			</c>
 			<c>
@@ -4395,7 +4395,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PA, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_PA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4870,7 +4870,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com</strg>
+					<strg>zzz_A_HCM_zzzPORTAL, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -4880,7 +4880,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_CSCPORTAL</strg>
+					<strg>zzz_A_HCM_zzzPORTAL</strg>
 				</simple>
 			</c>
 			<c>
@@ -4890,7 +4890,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_HCM_CSCPORTAL, 1.0 of vendor.com</strg>
+					<strg>zzz_A_HCM_zzzPORTAL, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -5035,7 +5035,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SUCCESSFACTORS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -5045,7 +5045,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SUCCESSFACTORS</strg>
+					<strg>SC_A_POzzz_SUCCESSFACTORS</strg>
 				</simple>
 			</c>
 			<c>
@@ -5055,7 +5055,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SUCCESSFACTORS, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SUCCESSFACTORS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -5255,7 +5255,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ECC-EU, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ECC-EU, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -5265,7 +5265,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ECC-EU</strg>
+					<strg>SC_A_POzzz_ECC-EU</strg>
 				</simple>
 			</c>
 			<c>
@@ -5275,7 +5275,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ECC-EU, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ECC-EU, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -6850,7 +6850,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ERP, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -6860,7 +6860,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ERP</strg>
+					<strg>SC_A_POzzz_ERP</strg>
 				</simple>
 			</c>
 			<c>
@@ -6870,7 +6870,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ERP, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -7235,7 +7235,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PPS, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_PPS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -7245,7 +7245,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PPS</strg>
+					<strg>SC_A_POzzz_PPS</strg>
 				</simple>
 			</c>
 			<c>
@@ -7255,7 +7255,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PPS, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_PPS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -8995,7 +8995,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_MES_EUROPE, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_MES_EUROPE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -9005,7 +9005,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_MES_EUROPE</strg>
+					<strg>SC_A_POzzz_MES_EUROPE</strg>
 				</simple>
 			</c>
 			<c>
@@ -9015,7 +9015,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_MES_EUROPE, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_MES_EUROPE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -11690,7 +11690,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ECM, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ECM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -11700,7 +11700,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ECM</strg>
+					<strg>SC_A_POzzz_ECM</strg>
 				</simple>
 			</c>
 			<c>
@@ -11710,7 +11710,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ECM, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ECM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -11800,7 +11800,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_BANK_OF_IDEAS, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_BANK_OF_IDEAS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -11810,7 +11810,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_BANK_OF_IDEAS</strg>
+					<strg>SC_A_POzzz_BANK_OF_IDEAS</strg>
 				</simple>
 			</c>
 			<c>
@@ -11820,7 +11820,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_BANK_OF_IDEAS, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_BANK_OF_IDEAS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12130,7 +12130,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SCPI, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SCPI, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12140,7 +12140,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SCPI</strg>
+					<strg>SC_A_POzzz_SCPI</strg>
 				</simple>
 			</c>
 			<c>
@@ -12150,7 +12150,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SCPI, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SCPI, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12185,7 +12185,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PACS-RUSGUARD, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_PACS-RUSGUARD, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12195,7 +12195,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PACS-RUSGUARD</strg>
+					<strg>SC_A_POzzz_PACS-RUSGUARD</strg>
 				</simple>
 			</c>
 			<c>
@@ -12205,7 +12205,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PACS-RUSGUARD, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_PACS-RUSGUARD, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12240,7 +12240,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PLANNINGPRODUCTION, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_PLANNINGPRODUCTION, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12250,7 +12250,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PLANNINGPRODUCTION</strg>
+					<strg>SC_A_POzzz_PLANNINGPRODUCTION</strg>
 				</simple>
 			</c>
 			<c>
@@ -12260,7 +12260,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PLANNINGPRODUCTION, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_PLANNINGPRODUCTION, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12625,7 +12625,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_TRANSPORTHUB, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_TRANSPORTHUB, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12635,7 +12635,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_TRANSPORTHUB</strg>
+					<strg>SC_A_POzzz_TRANSPORTHUB</strg>
 				</simple>
 			</c>
 			<c>
@@ -12645,7 +12645,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_TRANSPORTHUB, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_TRANSPORTHUB, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12680,7 +12680,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SRM, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SRM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12690,7 +12690,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SRM</strg>
+					<strg>SC_A_POzzz_SRM</strg>
 				</simple>
 			</c>
 			<c>
@@ -12700,7 +12700,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SRM, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SRM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12790,7 +12790,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PACS-RUSGUARD-ALTAY, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_PACS-RUSGUARD-ALTAY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12800,7 +12800,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PACS-RUSGUARD-ALTAY</strg>
+					<strg>SC_A_POzzz_PACS-RUSGUARD-ALTAY</strg>
 				</simple>
 			</c>
 			<c>
@@ -12810,7 +12810,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_PACS-RUSGUARD-ALTAY, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_PACS-RUSGUARD-ALTAY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12845,7 +12845,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_POCSC, 1.0 of vendor.com</strg>
+					<strg>SC_I_POzzz, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12855,7 +12855,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_POCSC</strg>
+					<strg>SC_I_POzzz</strg>
 				</simple>
 			</c>
 			<c>
@@ -12865,7 +12865,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_I_POCSC, 1.0 of vendor.com</strg>
+					<strg>SC_I_POzzz, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12900,7 +12900,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_IDM-ONEIDENTITY, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_IDM-ONEIDENTITY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -12910,7 +12910,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_IDM-ONEIDENTITY</strg>
+					<strg>SC_A_POzzz_IDM-ONEIDENTITY</strg>
 				</simple>
 			</c>
 			<c>
@@ -12920,7 +12920,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_IDM-ONEIDENTITY, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_IDM-ONEIDENTITY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -13560,7 +13560,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ISOTIPB, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ISOTIPB, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -13570,7 +13570,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ISOTIPB</strg>
+					<strg>SC_A_POzzz_ISOTIPB</strg>
 				</simple>
 			</c>
 			<c>
@@ -13580,7 +13580,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ISOTIPB, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ISOTIPB, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -13945,7 +13945,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_COMMON, 1.0 of vendor.com</strg>
+					<strg>zzz_IL_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -13955,7 +13955,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_COMMON</strg>
+					<strg>zzz_IL_COMMON</strg>
 				</simple>
 			</c>
 			<c>
@@ -13965,7 +13965,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_COMMON, 1.0 of vendor.com</strg>
+					<strg>zzz_IL_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -14275,7 +14275,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CA, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -14285,7 +14285,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CA</strg>
+					<strg>zzz_I_HCM_CA</strg>
 				</simple>
 			</c>
 			<c>
@@ -14295,7 +14295,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CA, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_CA, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -14715,7 +14715,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ISECOLOGY, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ISECOLOGY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -14725,7 +14725,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ISECOLOGY</strg>
+					<strg>SC_A_POzzz_ISECOLOGY</strg>
 				</simple>
 			</c>
 			<c>
@@ -14735,7 +14735,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ISECOLOGY, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ISECOLOGY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15155,7 +15155,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_CIC, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_CIC, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15165,7 +15165,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_CIC</strg>
+					<strg>SC_A_POzzz_CIC</strg>
 				</simple>
 			</c>
 			<c>
@@ -15175,7 +15175,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_CIC, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_CIC, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15650,7 +15650,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SRM_LOM, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SRM_LOM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15660,7 +15660,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SRM_LOM</strg>
+					<strg>SC_A_POzzz_SRM_LOM</strg>
 				</simple>
 			</c>
 			<c>
@@ -15670,7 +15670,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SRM_LOM, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SRM_LOM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15925,7 +15925,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_COMMON, 1.0 of vendor.com</strg>
+					<strg>zzz_AL_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15935,7 +15935,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_COMMON</strg>
+					<strg>zzz_AL_COMMON</strg>
 				</simple>
 			</c>
 			<c>
@@ -15945,7 +15945,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_AL_COMMON, 1.0 of vendor.com</strg>
+					<strg>zzz_AL_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15980,7 +15980,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ASOP, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ASOP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -15990,7 +15990,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ASOP</strg>
+					<strg>SC_A_POzzz_ASOP</strg>
 				</simple>
 			</c>
 			<c>
@@ -16000,7 +16000,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_ASOP, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_ASOP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16035,7 +16035,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_PGK_PROXY, 1.0 of vendor.com</strg>
+					<strg>zzz_I_PGK_PROXY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16045,7 +16045,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_PGK_PROXY</strg>
+					<strg>zzz_I_PGK_PROXY</strg>
 				</simple>
 			</c>
 			<c>
@@ -16055,7 +16055,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_PGK_PROXY, 1.0 of vendor.com</strg>
+					<strg>zzz_I_PGK_PROXY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16530,7 +16530,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_TEST, 1.0 of vendor.com</strg>
+					<strg>zzz_I_TEST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16540,7 +16540,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_TEST</strg>
+					<strg>zzz_I_TEST</strg>
 				</simple>
 			</c>
 			<c>
@@ -16550,7 +16550,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_TEST, 1.0 of vendor.com</strg>
+					<strg>zzz_I_TEST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16585,7 +16585,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_CSCPORTAL_TEST, 1.0 of vendor.com</strg>
+					<strg>zzz_A_zzzPORTAL_TEST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -16595,7 +16595,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_CSCPORTAL_TEST</strg>
+					<strg>zzz_A_zzzPORTAL_TEST</strg>
 				</simple>
 			</c>
 			<c>
@@ -16605,7 +16605,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_CSCPORTAL_TEST, 1.0 of vendor.com</strg>
+					<strg>zzz_A_zzzPORTAL_TEST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -17410,7 +17410,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_COMMON, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -17420,7 +17420,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_COMMON</strg>
+					<strg>SC_A_POzzz_COMMON</strg>
 				</simple>
 			</c>
 			<c>
@@ -17430,7 +17430,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_COMMON, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_COMMON, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -17905,7 +17905,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_STARTEXAM, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_STARTEXAM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -17915,7 +17915,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_STARTEXAM</strg>
+					<strg>SC_A_POzzz_STARTEXAM</strg>
 				</simple>
 			</c>
 			<c>
@@ -17925,7 +17925,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_STARTEXAM, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_STARTEXAM, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18235,7 +18235,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_NONABAP_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_IL_NONABAP_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18245,7 +18245,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_NONABAP_HR</strg>
+					<strg>zzz_IL_NONABAP_HR</strg>
 				</simple>
 			</c>
 			<c>
@@ -18255,7 +18255,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_IL_NONABAP_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_IL_NONABAP_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18290,7 +18290,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMZ_PROXY, 1.0 of vendor.com</strg>
+					<strg>zzz_I_DMZ_PROXY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18300,7 +18300,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMZ_PROXY</strg>
+					<strg>zzz_I_DMZ_PROXY</strg>
 				</simple>
 			</c>
 			<c>
@@ -18310,7 +18310,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMZ_PROXY, 1.0 of vendor.com</strg>
+					<strg>zzz_I_DMZ_PROXY, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18455,7 +18455,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_1C-ERP_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_I_1C-ERP_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18465,7 +18465,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_1C-ERP_HR</strg>
+					<strg>zzz_I_1C-ERP_HR</strg>
 				</simple>
 			</c>
 			<c>
@@ -18475,7 +18475,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_1C-ERP_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_I_1C-ERP_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18675,7 +18675,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMS_DMS, 1.0 of vendor.com</strg>
+					<strg>zzz_I_DMS_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18685,7 +18685,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMS_DMS</strg>
+					<strg>zzz_I_DMS_DMS</strg>
 				</simple>
 			</c>
 			<c>
@@ -18695,7 +18695,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DMS_DMS, 1.0 of vendor.com</strg>
+					<strg>zzz_I_DMS_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18840,7 +18840,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CORE, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_CORE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18850,7 +18850,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CORE</strg>
+					<strg>zzz_I_HCM_CORE</strg>
 				</simple>
 			</c>
 			<c>
@@ -18860,7 +18860,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_CORE, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_CORE, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18895,7 +18895,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_HOST-TO-HOST, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_HOST-TO-HOST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -18905,7 +18905,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_HOST-TO-HOST</strg>
+					<strg>SC_A_POzzz_HOST-TO-HOST</strg>
 				</simple>
 			</c>
 			<c>
@@ -18915,7 +18915,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_HOST-TO-HOST, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_HOST-TO-HOST, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -19060,7 +19060,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_PGK, 1.0 of vendor.com</strg>
+					<strg>zzz_A_DMZ_PGK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -19070,7 +19070,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_PGK</strg>
+					<strg>zzz_A_DMZ_PGK</strg>
 				</simple>
 			</c>
 			<c>
@@ -19080,7 +19080,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_PGK, 1.0 of vendor.com</strg>
+					<strg>zzz_A_DMZ_PGK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -19115,7 +19115,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_EKP, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_EKP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -19125,7 +19125,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_EKP</strg>
+					<strg>SC_A_POzzz_EKP</strg>
 				</simple>
 			</c>
 			<c>
@@ -19135,7 +19135,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_EKP, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_EKP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -20160,7 +20160,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_END, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -20170,7 +20170,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END</strg>
+					<strg>SC_A_POzzz_END</strg>
 				</simple>
 			</c>
 			<c>
@@ -20180,7 +20180,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_END, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -20435,7 +20435,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END-SGOK, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_END-SGOK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -20445,7 +20445,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END-SGOK</strg>
+					<strg>SC_A_POzzz_END-SGOK</strg>
 				</simple>
 			</c>
 			<c>
@@ -20455,7 +20455,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END-SGOK, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_END-SGOK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -20930,7 +20930,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END-STAGDOK, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_END-STAGDOK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -20940,7 +20940,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END-STAGDOK</strg>
+					<strg>SC_A_POzzz_END-STAGDOK</strg>
 				</simple>
 			</c>
 			<c>
@@ -20950,7 +20950,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END-STAGDOK, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_END-STAGDOK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21095,7 +21095,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_1C, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_1C, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21105,7 +21105,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_1C</strg>
+					<strg>SC_A_POzzz_1C</strg>
 				</simple>
 			</c>
 			<c>
@@ -21115,7 +21115,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_1C, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_1C, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21370,7 +21370,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PT, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_PT, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21380,7 +21380,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PT</strg>
+					<strg>zzz_I_HCM_PT</strg>
 				</simple>
 			</c>
 			<c>
@@ -21390,7 +21390,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_HCM_PT, 1.0 of vendor.com</strg>
+					<strg>zzz_I_HCM_PT, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21425,7 +21425,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_1C-ERP, 1.0 of vendor.com</strg>
+					<strg>zzz_A_DMZ_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -21435,7 +21435,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_1C-ERP</strg>
+					<strg>zzz_A_DMZ_1C-ERP</strg>
 				</simple>
 			</c>
 			<c>
@@ -21445,7 +21445,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_1C-ERP, 1.0 of vendor.com</strg>
+					<strg>zzz_A_DMZ_1C-ERP, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -22470,7 +22470,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END-DOLOMIT, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_END-DOLOMIT, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -22480,7 +22480,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END-DOLOMIT</strg>
+					<strg>SC_A_POzzz_END-DOLOMIT</strg>
 				</simple>
 			</c>
 			<c>
@@ -22490,7 +22490,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_END-DOLOMIT, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_END-DOLOMIT, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23020,7 +23020,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_1C-TMS, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_1C-TMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23030,7 +23030,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_1C-TMS</strg>
+					<strg>SC_A_POzzz_1C-TMS</strg>
 				</simple>
 			</c>
 			<c>
@@ -23040,7 +23040,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_1C-TMS, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_1C-TMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23130,7 +23130,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_DMS, 1.0 of vendor.com</strg>
+					<strg>zzz_I_ECM_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23140,7 +23140,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_DMS</strg>
+					<strg>zzz_I_ECM_DMS</strg>
 				</simple>
 			</c>
 			<c>
@@ -23150,7 +23150,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_ECM_DMS, 1.0 of vendor.com</strg>
+					<strg>zzz_I_ECM_DMS, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23460,7 +23460,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_JEFFIT, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_JEFFIT, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -23470,7 +23470,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_JEFFIT</strg>
+					<strg>SC_A_POzzz_JEFFIT</strg>
 				</simple>
 			</c>
 			<c>
@@ -23480,7 +23480,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_JEFFIT, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_JEFFIT, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -24285,7 +24285,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_1C-TMS-vendor, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_1C-TMS-vendor, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -24295,7 +24295,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_1C-TMS-vendor</strg>
+					<strg>SC_A_POzzz_1C-TMS-vendor</strg>
 				</simple>
 			</c>
 			<c>
@@ -24305,7 +24305,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_1C-TMS-vendor, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_1C-TMS-vendor, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25275,7 +25275,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_THPORTAL_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_I_THPORTAL_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25285,7 +25285,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_THPORTAL_HR</strg>
+					<strg>zzz_I_THPORTAL_HR</strg>
 				</simple>
 			</c>
 			<c>
@@ -25295,7 +25295,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_THPORTAL_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_I_THPORTAL_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25495,7 +25495,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_THPORTAL, 1.0 of vendor.com</strg>
+					<strg>zzz_A_DMZ_THPORTAL, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25505,7 +25505,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_THPORTAL</strg>
+					<strg>zzz_A_DMZ_THPORTAL</strg>
 				</simple>
 			</c>
 			<c>
@@ -25515,7 +25515,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_A_DMZ_THPORTAL, 1.0 of vendor.com</strg>
+					<strg>zzz_A_DMZ_THPORTAL, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25770,7 +25770,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DAX_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_I_DAX_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25780,7 +25780,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DAX_HR</strg>
+					<strg>zzz_I_DAX_HR</strg>
 				</simple>
 			</c>
 			<c>
@@ -25790,7 +25790,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>CSC_I_DAX_HR, 1.0 of vendor.com</strg>
+					<strg>zzz_I_DAX_HR, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25935,7 +25935,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SUPR-SGOK, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SUPR-SGOK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25945,7 +25945,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SUPR-SGOK</strg>
+					<strg>SC_A_POzzz_SUPR-SGOK</strg>
 				</simple>
 			</c>
 			<c>
@@ -25955,7 +25955,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_SUPR-SGOK, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_SUPR-SGOK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -25990,7 +25990,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_TRANSPORTHUB-SGOK, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_TRANSPORTHUB-SGOK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -26000,7 +26000,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_TRANSPORTHUB-SGOK</strg>
+					<strg>SC_A_POzzz_TRANSPORTHUB-SGOK</strg>
 				</simple>
 			</c>
 			<c>
@@ -26010,7 +26010,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_TRANSPORTHUB-SGOK, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_TRANSPORTHUB-SGOK, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -26430,7 +26430,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_GRC, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_GRC, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>
@@ -26440,7 +26440,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_GRC</strg>
+					<strg>SC_A_POzzz_GRC</strg>
 				</simple>
 			</c>
 			<c>
@@ -26450,7 +26450,7 @@
 			</c>
 			<c>
 				<simple>
-					<strg>SC_A_POCSC_GRC, 1.0 of vendor.com</strg>
+					<strg>SC_A_POzzz_GRC, 1.0 of vendor.com</strg>
 				</simple>
 			</c>
 			<c>

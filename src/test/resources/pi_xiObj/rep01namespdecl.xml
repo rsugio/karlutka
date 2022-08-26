@@ -2,7 +2,7 @@
 <p1:xiObj xmlns:p1="urn:sap-com:xi">
 	<p1:idInfo VID="980677cc1b9911ea9bad000000417ca6">
 		<p1:vc vcType="S" swcGuid="3f38b2400b9e11ea9c32fae8ac130d0e" sp="-1"
-			caption="CSC_A_DMZ_1C-ERP, 1.0 of vendor.com">
+			caption="ZZZ_A_DMZ_1C-ERP, 1.0 of vendor.com">
 			<p1:clCxt consider="A"/>
 		</p1:vc>
 		<p1:key typeID="namespdecl" oid="3f38b2400b9e11ea9c32fae8ac130d0e">
