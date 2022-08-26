@@ -1,10 +1,12 @@
 package karlutka.parsers.pi
+
+import karlutka.models.MPI
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
+import nl.adaptivity.xmlutil.Namespace
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
@@ -14,7 +16,7 @@ import nl.adaptivity.xmlutil.util.CompactFragment
 
 @Serializable
 @XmlSerialName("xiObj", "urn:sap-com:xi", "xi")
-class XiObj (
+class XiObj(
     @XmlElement(true)
     val idInfo: IdInfo,
     @XmlElement(true)
@@ -59,8 +61,8 @@ class XiObj (
         @Serializable
         @XmlSerialName("textObj", "urn:sap-com:xi", "xi")
         class TextObj(
-            val id: String = "c9fa2aec3da1451aacea970d8d441062",
-            val masterL: String = "EN",
+            val id: String = "",
+            val masterL: String = "",
             val type: Int = 0,
             @XmlElement(true)
             val texts: Texts
@@ -122,22 +124,17 @@ class XiObj (
             @XmlElement(true)
             val vc: PCommon.VC? = null
         )
-
-//        @Serializable
-//        @XmlSerialName("content", "urn:sap-com:xi", "")
-//        class XiObjContent(
-//            @XmlElement(true)
-//            val trafo: XiTrafo?
-//        )
-
     }
 
+    fun toNamespaces(swc: MPI.Swcv): List<MPI.Namespace> {
+        require(idInfo.key.typeID=="namespdecl")
+        require(idInfo.vc.swcGuid==swc.id)
+        return generic.textInfo.textObj.texts.list.map{MPI.Namespace(it.label, swc, it.value)}
+    }
 
     companion object {
         private val xiobjxml = SerializersModule {
             polymorphic(Any::class) {
-                subclass(Hm.Instance::class, kotlinx.serialization.serializer())
-                subclass(String::class, String.serializer())
             }
         }
         val xioserializer = XML(xiobjxml) {
@@ -145,6 +142,6 @@ class XiObj (
             autoPolymorphic = true
         }
 
-        fun decodeFromString(sxml:String): XiObj = xioserializer.decodeFromString(sxml)
+        fun decodeFromString(sxml: String): XiObj = xioserializer.decodeFromString(sxml)
     }
 }

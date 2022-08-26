@@ -52,7 +52,7 @@ class KPiTests {
         runBlocking {
             pi.hmiGetRegistered()
             pi.hmiAskSWCV()
-//            pi.askNamespaces()
+            pi.askNamespaces()
             pi.dirReadHmiServerDetails("user")
 
             val xml = """<ns0:XiPatternMessage1 xmlns:ns0="http://sap.com/xi/XI/System/Patterns">
@@ -88,17 +88,7 @@ class KPiTests {
         runBlocking {
             pi.hmiGetRegistered()
             pi.hmiAskSWCV()
-
-            val ref = Hm.Ref(
-                PCommon.VC("3f38b2400b9e11ea9c32fae8ac130d0e", "S", -1),
-                PCommon.Key("namespdecl", null, listOf("3f38b2400b9e11ea9c32fae8ac130d0e"))
-            )
-            val type = Hm.Type("namespdecl", true, false, "7.0", "EN", ref)
-            val list = Hm.ReadListRequest(type)
-
-            val s = pi.hmiRead(list.encodeToString())
-            println(s)
-
+            pi.askNamespaces2()
 
             if (false) {
                 val lst = pi.swcv
@@ -111,7 +101,6 @@ class KPiTests {
                     .map { it["TEXT"]!!.simple!!.strg }
                     .filter { it!!.isNotBlank() }
                 println(texts.size)
-
             }
         }
     }

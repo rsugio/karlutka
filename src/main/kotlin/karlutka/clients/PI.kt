@@ -7,9 +7,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import karlutka.models.MPI
 import karlutka.models.MTarget
-import karlutka.parsers.pi.AdapterMessageMonitoringVi
-import karlutka.parsers.pi.Hm
-import karlutka.parsers.pi.PerfMonitorServlet
+import karlutka.parsers.pi.*
 import karlutka.server.Server
 import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
@@ -183,7 +181,7 @@ class PI(
         return Hm.QueryResult.parse(resp.MethodOutput!!.Return)
     }
 
-    suspend fun hmiRead(bodyXml: String, vc: String = "SWC", sp: String = "-1", uc: Boolean = true): String {
+    suspend fun hmiRead(bodyXml: String, vc: String = "SWC", sp: String = "-1", uc: Boolean = true): XiObj {
         val serv = findHmiServiceMethod("read", "plain")
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
@@ -201,8 +199,9 @@ class PI(
             "1.0"
         )
         val resp = hmiPost(serv.url(), req)
+        //TODO переделать возврат ответа
         require(resp.MethodOutput!!.ContentType == "text/xml")
-        return resp.MethodOutput.Return
+        return XiObj.decodeFromString(resp.MethodOutput.Return)
     }
 
     suspend fun hmiGeneralQuery(req: Hm.GeneralQueryRequest) = hmiGeneralQuery(req.encodeToString())
@@ -210,36 +209,31 @@ class PI(
     suspend fun hmiAskSWCV() {
         swcv = hmiGeneralQuery(Hm.GeneralQueryRequest.swcv()).toSwcv()
     }
-//
-//        val serv = findHmiServiceMethod("query", "generic")
-//        val req = Hm.HmiRequest(
-//            uuid(hmiClientId),
-//            uuid(UUID.randomUUID()),
-//            serv.applCompLevel(),
-//            Hm.HmiMethodInput("QUERY_REQUEST_XML", Hm.GeneralQueryRequest.swcv()),
-//            serv.methodid.uppercase(),
-//            serv.serviceid,
-//            "dummy",
-//            "dummy",
-//            "EN",
-//            false,
-//            null,
-//            null,
-//            "1.0"
-//        )
-//        val resp = hmiPost(serv.url(), req)
-//        swcv = Hm.QueryResult.parse(resp.MethodOutput!!.Return).toSwcv()
-//    }
 
     suspend fun askNamespaces() {
+        require(!swcv.isEmpty())
         val srq = Hm.GeneralQueryRequest.namespaces(swcv.map { it.id })
         namespaces = hmiGeneralQuery(srq).toNamespace(swcv)
     }
 
     suspend fun askNamespaces2() {
-        val sxml = ""
-        val resp = hmiRead(sxml)
-        println(resp)
+        require(!swcv.isEmpty())
+        swcv.forEach { s ->
+            println(s)
+            val ref = Hm.Ref(
+                PCommon.VC(s.id, "S", -1),
+                PCommon.Key("namespdecl", null, listOf(s.id))
+            )
+            val type = Hm.Type("namespdecl", true, false, "7.0", "EN", ref)
+            val sxml = Hm.ReadListRequest(type).encodeToString()
+            try {
+                val resp = hmiRead(sxml).toNamespaces(s)
+                println(resp)
+            } catch (e: Exception) {
+                System.err.println(e.message)
+            }
+        }
+
 
 //        //namespaces = hmiGeneralQuery(srq).toNamespace2(swcv)
     }
