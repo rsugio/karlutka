@@ -252,7 +252,6 @@ class PI(
         return trsp
     }
 
-    // http://ld-s-devpih.ao.nlmk:50000/dir/hmi_server_details/int?container=any
     suspend fun dirReadHmiServerDetails(userAlias: String) {
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
