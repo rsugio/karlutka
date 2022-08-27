@@ -121,6 +121,7 @@ class XiObj(
             @XmlSerialName("key", "urn:sap-com:xi", "xi")
             val key: PCommon.Key,
             @XmlElement(true)
+            @XmlSerialName("vc", "urn:sap-com:xi", "xi")
             val vc: PCommon.VC? = null
         )
     }
