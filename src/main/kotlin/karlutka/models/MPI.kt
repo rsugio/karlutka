@@ -6,10 +6,12 @@ class MPI {
     enum class RepTypes {
         namespdecl,
         namespace,
+        AdapterMetaData,
+
         rfc, idoc,  //импортированное
         ifmuitexts, ifmextdef,
         ifmtypedef, ifmmessif, ifmfaultm, ifmmessage, ifmtypeenh, ifmcontobj,
-        MAP_TEMPLATE, TRAFO_JAR, XI_TRAFO, FUNC_LIB, MAPPING, AdapterMetaData,
+        MAP_TEMPLATE, TRAFO_JAR, XI_TRAFO, FUNC_LIB, MAPPING,
         FOLDER
     }
 

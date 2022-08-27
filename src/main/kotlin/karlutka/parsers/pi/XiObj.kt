@@ -6,7 +6,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
-import nl.adaptivity.xmlutil.Namespace
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
@@ -127,9 +126,9 @@ class XiObj(
     }
 
     fun toNamespaces(swc: MPI.Swcv): List<MPI.Namespace> {
-        require(idInfo.key.typeID=="namespdecl")
-        require(idInfo.vc.swcGuid==swc.id)
-        return generic.textInfo.textObj.texts.list.map{MPI.Namespace(it.label, swc, it.value)}
+        require(idInfo.key.typeID == "namespdecl")
+        require(idInfo.vc.swcGuid == swc.id)
+        return generic.textInfo.textObj.texts.list.map { MPI.Namespace(it.label, swc, it.value) }
     }
 
     companion object {
