@@ -11,8 +11,10 @@ class KXiObjTests {
         require(!namespdecl.isEmpty())
 
         val ad = XiObj.decodeFromString(s("/pi_xiObj/rep02adaptermeta.xml"))
-//        require(!ad.content.isEmpty)
+        require(!ad.content.isEmpty)
         val mmap = XiObj.decodeFromString(s("/pi_xiObj/rep03mmap.xml"))
         println(ad)
+        val om = XiObj.decodeFromString(s("/pi_xiObj/rep04om.xml"))
+        println(om)
     }
 }

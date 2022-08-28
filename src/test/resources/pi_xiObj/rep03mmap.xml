@@ -6,40 +6,40 @@
 		</p1:vc>
 		<p1:key typeID="XI_TRAFO" oid="3a5a5aaa89ab32db95d2bf123a55a1e2">
 			<p1:elem>DMZ_EmployeeInformation_To_1C_ERP_EmployeeInformation</p1:elem>
-			<p1:elem>urn:cscentr:po:a:DMZ:1C-ERP:HR:Employee</p1:elem>
+			<p1:elem>urn:vendor:po:a:DMZ:1C-ERP:HR:Employee</p1:elem>
 		</p1:key>
 	</p1:idInfo>
 	<p1:generic>
 		<p1:admInf>
-			<p1:modifBy>petin_an</p1:modifBy>
+			<p1:modifBy>aaaa_an</p1:modifBy>
 			<p1:modifAt>2019-12-11 16:04:52.685</p1:modifAt>
 			<modifAtLong>1576069492685</modifAtLong>
-			<p1:owner>petin_an</p1:owner>
+			<p1:owner>aaaaa_an</p1:owner>
 		</p1:admInf>
 		<p1:lnks>
 			<p1:lnkRole role="TARGET_IFR_MESS" kpos="1">
 				<p1:lnk rMode="A">
 					<p1:vc vcType="S" swcGuid="1207e8d0058c11eabdcfdf1eac130d0e" sp="-1"
-						caption="CSC_I_1C-ERP_HR, 1.0 of cscentr.com">
+						caption="SC_I_1C-ERP_HR, 1.0 of vendor.com">
 						<p1:clCxt consider="A"/>
 					</p1:vc>
 					<p1:key typeID="ifmextmes" oid="5d1fc72bd8c93e98ac889968bd6c4961">
 						<p1:elem>rspb_EmployeeInformation_Req</p1:elem>
-						<p1:elem>urn:cscentr:po:i:1C-ERP:HR:Employee</p1:elem>
+						<p1:elem>urn:vendor:po:i:1C-ERP:HR:Employee</p1:elem>
 						<p1:elem>rspb_EmployeeInformation_InRequestMessage</p1:elem>
-						<p1:elem>urn:cscentr:po:i:1C-ERP:HR:Employee</p1:elem>
+						<p1:elem>urn:vendor:po:i:1C-ERP:HR:Employee</p1:elem>
 					</p1:key>
 				</p1:lnk>
 			</p1:lnkRole>
 			<p1:lnkRole role="SOURCE_IFR_MESS" kpos="1">
 				<p1:lnk rMode="A">
 					<p1:vc vcType="S" swcGuid="c3a7f1f0048011eaaf65df1eac130d0e" sp="-1"
-						caption="CSC_I_DMZ_PROXY, 1.0 of cscentr.com">
+						caption="SC_I_DMZ_PROXY, 1.0 of vendor.com">
 						<p1:clCxt consider="A"/>
 					</p1:vc>
 					<p1:key typeID="ifmmessage" oid="347c64972af13c3699f8d3d8cc635067">
 						<p1:elem>EmployeeInformation</p1:elem>
-						<p1:elem>urn:cscentr:po:i:DMZ:Proxy:HR:Employee</p1:elem>
+						<p1:elem>urn:vendor:po:i:DMZ:Proxy:HR:Employee</p1:elem>
 					</p1:key>
 				</p1:lnk>
 			</p1:lnkRole>
