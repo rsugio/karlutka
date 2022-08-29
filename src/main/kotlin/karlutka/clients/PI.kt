@@ -1,6 +1,7 @@
 package karlutka.clients
 
 import io.ktor.client.*
+import io.ktor.client.plugins.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -13,6 +14,7 @@ import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
 import kotlinx.serialization.decodeFromString
 import java.net.URL
 import java.net.URLEncoder
@@ -31,8 +33,8 @@ class PI(
     val afs = mutableListOf<String>()
     val hmiClientId = UUID.randomUUID()
     lateinit var hmiServices: List<Hm.HmiService>
-    var swcv: List<MPI.Swcv> = listOf()
-    var namespaces: List<MPI.Namespace> = listOf()
+    val swcv: MutableList<MPI.Swcv> = mutableListOf()
+    val namespaces: MutableList<MPI.Namespace> = mutableListOf()
 
     lateinit var dirConfiguration: Hm.DirConfiguration
 
@@ -181,7 +183,13 @@ class PI(
         return Hm.QueryResult.parse(resp.MethodOutput!!.Return)
     }
 
-    suspend fun hmiRead(bodyXml: String, vc: String = "SWC", sp: String = "-1", uc: Boolean = true): XiObj {
+    // для асинхронности, эта функция не бросает исключений
+    suspend fun hmiRead(
+        bodyXml: String,
+        vc: String = "SWC",
+        sp: String = "-1",
+        uc: Boolean = true
+    ): Pair<XiObj?, Exception?> {
         val serv = findHmiServiceMethod("read", "plain")
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
@@ -193,53 +201,82 @@ class PI(
             "dummy",
             "dummy",
             "EN",
-            false,
+            true,
             null,
             null,
             "1.0"
         )
-        val resp = hmiPost(serv.url(), req)
-        if (resp.MethodFault!=null || resp.CoreException!=null) {
+        val resp = hmiPost2(serv.url(), req)
+        var exception: Exception? = null
+        var xiObj: XiObj? = null
+        if (resp.MethodFault != null || resp.CoreException != null) {
             val s = resp.MethodFault?.LocalizedMessage ?: resp.CoreException?.LocalizedMessage ?: ""
             val beforeStackTrace = s.split("Server stack trace")[0]
-            throw MPI.HmiException(beforeStackTrace)
+            exception = MPI.HmiException(beforeStackTrace)
+            Paths.get("C:\\data\\tmp\\read_req.xml").writeText(req.encodeToString())
+        } else {
+            require(resp.MethodOutput!!.ContentType == "text/xml")
+            xiObj = XiObj.decodeFromString(resp.MethodOutput.Return)
+//            println("Успешно: ${xiObj.idInfo.key.typeID}")
         }
-        require(resp.MethodOutput!!.ContentType == "text/xml")
-        return XiObj.decodeFromString(resp.MethodOutput.Return)
+        return Pair(xiObj, exception)
     }
 
     suspend fun hmiGeneralQuery(req: Hm.GeneralQueryRequest) = hmiGeneralQuery(req.encodeToString())
 
     suspend fun hmiAskSWCV() {
-        swcv = hmiGeneralQuery(Hm.GeneralQueryRequest.swcv()).toSwcv()
+        val swcv = hmiGeneralQuery(Hm.GeneralQueryRequest.swcv()).toSwcv().sortedBy { it.name }
+        this.swcv.addAll(swcv)
     }
 
     suspend fun askNamespaces() {
         require(!swcv.isEmpty())
         val srq = Hm.GeneralQueryRequest.namespaces(swcv.map { it.id })
-        namespaces = hmiGeneralQuery(srq).toNamespace(swcv)
+        namespaces.addAll(hmiGeneralQuery(srq).toNamespace(swcv))
     }
 
-    suspend fun askNamespaces2() {
+    suspend fun askNamespaceDecls(scope: CoroutineScope, predicate: (MPI.Swcv) -> Boolean = { true }) {
         require(!swcv.isEmpty())
-        swcv.filter { it.name == "MESSAGING" }.forEach { s ->
+        val deferred: MutableList<Deferred<Pair<XiObj?, Exception?>>> = mutableListOf()
+        val req: MutableList<String> = mutableListOf()
+        swcv.filter(predicate).forEach { s ->
             val ref = Hm.Ref(
-                PCommon.VC(s.id, "S", -1),
+                PCommon.VC(s.id, 'S', -1),  //почему-то нельзя брать исходный тип SWCV
                 PCommon.Key("namespdecl", null, listOf(s.id))
             )
-            val type = Hm.Type("namespdecl", true, false, "7.0", "EN", ref)
+            val type = Hm.Type("namespdecl", ref, true, false, "7.0", "EN")
             val sxml = Hm.ReadListRequest(type).encodeToString()
-            try {
-                val resp = hmiRead(sxml).toNamespaces(s)
-
-            } catch (e: Exception) {
-
-                System.err.println("$s $e")
+            deferred.add(scope.async { hmiRead(sxml) })
+            req.add(sxml)
+        }
+        deferred.forEachIndexed { idx, it ->
+            val pair = it.await()
+            var retry = false
+            if (pair.first != null && pair.second == null) {
+                val xiobj = pair.first!!
+                val sw = swcv.find { it.id == xiobj.idInfo.vc.swcGuid }
+                requireNotNull(sw)
+                val resp = xiobj.toNamespaces(sw)
+                this.namespaces.addAll(resp)    //TODO проверка на то, есть уже или ещё нет, чтобы не задваивалось
+            } else if (pair.second is MPI.HmiException) {
+                // бывают нормальные SWCV без неймспейсов, без паники
+                val msg = (pair.second as MPI.HmiException).message!!
+                // две ошибки ниже не могут быть обработаны при повторе
+                // Это случай когда нет неймспейсов вообще
+                val no = msg.contains(Regex("Key Namespace Definition .+ does not contain an object ID"))
+                // Это случай когда namespace definition находится в changelist
+                val errhmi = msg == "COULD_NOT_CREATE_HMIOUTPUT"
+                retry = !(no || errhmi)
+            } else {
+                retry = true
+            }
+            if (retry) {
+                println(req[idx])
+                val a = hmiRead(req[idx])
+                println(a)
             }
         }
 
-
-//        //namespaces = hmiGeneralQuery(srq).toNamespace2(swcv)
     }
 
     suspend fun executeOMtest(testRequest: Hm.TestExecutionRequest): Hm.TestExecutionResponse {
@@ -323,12 +360,44 @@ class PI(
             Paths.get("c:/data/tmp/posthmi.request").writeText(t)
             setBody(t)
         }
-        require(a.status.isSuccess() && a.contentType()!!.match("text/xml"))
         val t = a.bodyAsText()
+        if (!a.status.isSuccess() || !a.contentType()!!.match("text/xml")) {
+            Paths.get("c:/data/tmp/posthmi_error.html").writeText(t)
+            throw Exception("кака")
+        }
         Paths.get("c:/data/tmp/posthmi.response").writeText(t)
         val hr = Hm.parseResponse(t)
         if (hr.MethodOutput != null) Paths.get("c:/data/tmp/hmo.xml").writeText(hr.MethodOutput.Return)
         return hr
+    }
+
+
+    suspend fun hmiPost2(
+        uri: String,
+        req: Hm.HmiRequest,
+        attempts: Int = 5
+    ): Hm.HmiResponse {
+        var retry = 0
+        while (retry < attempts) {
+            try {
+                val resp = client.post(uri) {
+                    contentType(ContentType.Text.Xml)
+                    val t = req.encodeToString()
+                    setBody(t)
+                }
+                val t = resp.bodyAsText()
+                Paths.get("C:\\data\\tmp\\hmiPost2_response.xml").writeText(t)
+                if (resp.status.isSuccess() && resp.contentType()!!.match("text/xml")) {
+                    val hr = Hm.parseResponse(t)
+                    return hr
+                }
+                System.err.println("Повтор#$retry из-за ${resp.contentType()}")
+            } catch (e: ClientRequestException) {
+                System.err.println("Повтор#$retry из-за rc=${e.response.status}")
+            }
+            retry++
+        }
+        throw Exception("кака")
     }
 
     companion object {

@@ -120,10 +120,10 @@ class KHmiTests {
     @Test
     fun read() {
         val ref = Ref(
-            PCommon.VC("3f38b2400b9e11ea9c32fae8ac130d0e", "S", -1),
+            PCommon.VC("3f38b2400b9e11ea9c32fae8ac130d0e", 'S', -1),
             PCommon.Key("namespdecl", null, listOf("3f38b2400b9e11ea9c32fae8ac130d0e"))
         )
-        val type = Type("namespdecl", true, false, "7.0", "EN", ref)
+        val type = Type("namespdecl", ref, true, false, "7.0", "EN")
         val list = ReadListRequest(type)
         println(list.encodeToString())
 

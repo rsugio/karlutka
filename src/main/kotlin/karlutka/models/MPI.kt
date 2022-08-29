@@ -7,24 +7,24 @@ class MPI {
 
     enum class RepTypes {
         namespdecl,         // список неймспейсов с описаниями на языках
-        namespace,          // отдельный неймспейс
+        //namespace,          // отдельный неймспейс - практически бесполезная вещь, в общих запросах использовать нельзя
         AdapterMetaData,
         rfc, idoc,          // импортированное
 
+        ifmtypedef,         //Data type, есть метод XSD
         ifmuitexts,         //TODO
         ifmextdef,          //TODO
-        ifmtypedef,         //TODO
         ifmmessif,          //TODO
         ifmfaultm,          //TODO
         ifmmessage,         //TODO
         ifmtypeenh,         //TODO
         ifmcontobj,         //TODO
 
-        MAP_TEMPLATE,       // эта штука из DT делает DT
-        TRAFO_JAR,          // ?
-        XI_TRAFO,           // ?
-        FUNC_LIB,
-        MAPPING,            // ?
+        MAP_TEMPLATE,       // Mapping template (DT -> DT)
+        TRAFO_JAR,          // Imported archive
+        XI_TRAFO,           // Message mapping
+        FUNC_LIB,           // Functional library
+        MAPPING,            // Operation mapping
 
         FOLDER
     }
@@ -51,10 +51,10 @@ class MPI {
         override fun toString() = "Namespace($value,$description)"
     }
 
-    data class RepositoryObject(
+    class RepositoryObject(
         val type: RepTypes,
         val swcv: Swcv,
-        val namespace: Namespace,
+        val namespace: Namespace?,
         val oid: String,
         val name: String,
         val text: String?

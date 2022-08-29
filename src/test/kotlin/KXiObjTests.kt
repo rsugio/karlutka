@@ -13,7 +13,7 @@ class KXiObjTests {
         val ad = XiObj.decodeFromString(s("/pi_xiObj/rep02adaptermeta.xml"))
         require(!ad.content.isEmpty)
         val mmap = XiObj.decodeFromString(s("/pi_xiObj/rep03mmap.xml"))
-        println(ad)
+        println(mmap)
         val om = XiObj.decodeFromString(s("/pi_xiObj/rep04om.xml"))
         println(om)
     }

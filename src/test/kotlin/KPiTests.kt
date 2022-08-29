@@ -3,7 +3,7 @@ import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.PCommon
 import karlutka.server.Server
 import karlutka.util.*
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import java.nio.file.Paths
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ class KPiTests {
         Server.kfpasswds = KfPasswds.parse(Paths.get("C:\\data\\passwd.yaml"))
         Server.kfg = Kfg.parse(Paths.get("c:\\data\\karla.yaml"))
         KKeystore.load(Server.kfpasswds.keystore.path, Server.kfpasswds.keystore.passwd)
-        KTorUtils.createClientEngine()
+        KTorUtils.createClientEngine(4)
         KTorUtils.tempFolder = Paths.get(Server.kfg.tmpdir)
 
         target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
@@ -60,7 +60,7 @@ class KPiTests {
 </ns0:XiPatternMessage1>"""
 
             val om1 = Hm.TestExecutionRequest.create(
-                PCommon.VC("0050568f0aac1ed4a6e56926325e2eb3", "S"),
+                PCommon.VC("0050568f0aac1ed4a6e56926325e2eb3", 'S'),
                 "MAPPING", "XiPatternInterface1ToInterface2", "http://sap.com/xi/XI/System/Patterns",
                 xml
             )
@@ -68,14 +68,14 @@ class KPiTests {
             println(r1.outputXML)
 
             val om2 = Hm.TestExecutionRequest.create(
-                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", "L"),
+                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'),
                 "MAPPING", "OM_Ume", "http://test.com", "<a/>"
             )
             val r2 = pi.executeOMtest(om2)
             println(r2.outputXML)
 
             val mm1 = Hm.TestExecutionRequest.create(
-                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", "L"),
+                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'),
                 "XI_TRAFO", "MM_Test", "http://test.com", "<a/>"
             )
             val rm1 = pi.executeMMtest(mm1)
@@ -83,24 +83,26 @@ class KPiTests {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun repTypes() {
         runBlocking {
-            pi.hmiGetRegistered()
-            pi.hmiAskSWCV()
-            pi.askNamespaces2()
-
-            if (false) {
-                val lst = pi.swcv
-                    .filter { it.vendor.startsWith("n") }
-                    .map { it.id }
-                val a = pi.hmiGeneralQuery(Hm.GeneralQueryRequest.requestDataTypesList(lst))
-                val objects = a.toTable().map { it["RA_XILINK"]!!.qref!!.ref.key }
-                println(objects.size)
-                val texts = a.toTable()
-                    .map { it["TEXT"]!!.simple!!.strg }
-                    .filter { it!!.isNotBlank() }
-                println(texts.size)
+            val disp = Dispatchers.IO.limitedParallelism(4)
+            withContext(disp) {
+                pi.hmiGetRegistered()
+                println("hmiGetRegistered ok")
+                pi.hmiAskSWCV()
+                println("askSWCV ok: ${pi.swcv.size}")
+                pi.askNamespaceDecls(this) //, {it.id=="e08d0ce00b9e11ea9f27fae8ac130d0e"})
+                println("namespaces ok")
+                if (false) {
+                    val lst = pi.swcv
+//                        .filter { it.vendor.startsWith("n") }
+                    val a = pi.hmiGeneralQuery(Hm.GeneralQueryRequest.requestRepositoryDataTypesList(lst))
+                    val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(lst, pi.namespaces, a)
+                    println(objs.size)
+                }
+                println("done")
             }
         }
     }

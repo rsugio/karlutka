@@ -483,25 +483,75 @@ class Hm {
 //                )
                 return req
             }
-            fun namespaces2(swc: List<String>, user: String = "dummyuser"): GeneralQueryRequest {
-                val req = GeneralQueryRequest(Types.of("namespdecl"),
-                    QC("S", "N", PCommon.ClCxt("S", user),
-                        SwcListDef ("G",  SwcInfoList.of(swc))),
-                    Condition(null, null),
-                    Result(listOf("RA_XILINK", "TEXT"))
+//            fun namespaces2(swc: List<String>, user: String = "dummyuser"): GeneralQueryRequest {
+//                val req = GeneralQueryRequest(Types.of("namespdecl"),
+//                    QC("S", "N", PCommon.ClCxt("S", user),
+//                        SwcListDef ("G",  SwcInfoList.of(swc))),
+//                    Condition(null, null),
+//                    Result(listOf("RA_XILINK", "TEXT"))
+//                )
+//                return req
+//            }
+
+            fun requestRepositoryDataTypesList(
+                swcv: List<MPI.Swcv>,
+                cond: Condition = Condition()
+            ): GeneralQueryRequest {
+                val repdatatypes = Types.of(
+                    MPI.RepTypes.values().map { it.toString() }
                 )
-                return req
+                val qc = QC(
+                    "S", "N",
+                    PCommon.ClCxt("A", "dummyuser"),
+                    SwcListDef("G", SwcInfoList.of(swcv.map { it.id }))
+                )
+                return GeneralQueryRequest(
+                    repdatatypes, qc, cond,
+                    Result.of("RA_XILINK", "TEXT", "FOLDERREF")
+                )    //MODIFYDATE, MODIFYUSER
             }
 
-            fun requestDataTypesList(swcv: List<String>, cond: Condition = Condition()): GeneralQueryRequest {
-                val repdatatypes = Types.of(
-                    MPI.RepTypes.values().map{it.toString()}
-                )
-                val qc = QC("S", "N",
-                    PCommon.ClCxt("A", "dummyuser"),
-                    SwcListDef("G", SwcInfoList.of(swcv)))
-                return GeneralQueryRequest(repdatatypes, qc, cond,
-                    Result.of("RA_XILINK", "TEXT", "FOLDERREF"))    //MODIFYDATE, MODIFYUSER
+            fun parseRepositoryDataTypesList(
+                swcv: List<MPI.Swcv>,
+                namespaces: List<MPI.Namespace>,
+                queryResult: QueryResult
+            ): List<MPI.RepositoryObject> {
+                val repolist: MutableList<MPI.RepositoryObject> = mutableListOf()
+
+                queryResult.toTable().forEach {
+                    val ra_xilink = it["RA_XILINK"]!!.qref!!.ref
+                    val vc = ra_xilink.vc   // vc.swcGuid, vc.caption, vc.vcType
+                    val swc = swcv.find { it.id == vc.swcGuid }
+                    requireNotNull(swc)
+
+                    val type = ra_xilink.key.typeID
+                    if (type != "namespdecl" && type != "FOLDER") {
+                        val oid = ra_xilink.key.oid!!
+                        val name = ra_xilink.key.elem[0]
+                        require(ra_xilink.key.elem.size > 1) {
+                            "Не хватает данных для типа $type, oid=$oid"
+                        }
+
+                        val namespace = ra_xilink.key.elem[1]
+                        val text = it["TEXT"]!!.simple!!.strg
+                        val folder = it["FOLDERREF"]!!.simple!!.bin
+                        require(folder!!.isNotEmpty())
+
+                        // для айдоков в urn:sap-com:document:sap:idoc:messages и rfc нет областей имён
+                        var namespaceobj: MPI.Namespace? = null
+                        if (type != "rfc" && type != "idoc")
+                            namespaceobj = namespaces.find { it.swcv == swc && it.value == namespace }
+
+                        val repobj = MPI.RepositoryObject(
+                            MPI.RepTypes.valueOf(type),
+                            swc,
+                            namespaceobj,
+                            oid, name, text
+                        )
+                        repolist.add(repobj)
+                    }
+                }
+                return repolist
             }
         }
     }
@@ -555,28 +605,7 @@ class Hm {
         fun toNamespace(swcv: List<MPI.Swcv>): List<MPI.Namespace> {
             val t = toTable().map { x ->
                 val c = x["RA_NSP_STRING"]!!
-                val text = "?"
-                val nsp = c.nsp!!
-                val namespaceurl = nsp.key.elem[0]
-                val oid = nsp.ref.key.oid
-                require(nsp.key.typeID == "namespace")
-                requireNotNull(nsp.ref)
-                if (namespaceurl.isNotBlank()) {
-                    // почему-то есть неймспейсы с пустыми значениями
-                    val sw = swcv.find { it.id == oid }
-                    requireNotNull(sw) { "SWCV oid=$oid title=${nsp.ref.vc.caption} не найден для неймспейса '$namespaceurl'" }
-                    MPI.Namespace(namespaceurl, sw, text)
-                } else {
-                    null
-                }
-            }
-            return t.filterNotNull()
-        }
-
-        fun toNamespace2(swcv: List<MPI.Swcv>): List<MPI.Namespace> {
-            val t = toTable().map { x ->
-                val c = x["RA_XILINK"]!!
-                val text = x["TEXT"]!!.simple?.strg ?: ""
+                val text = ""                   // текстов нет
                 val nsp = c.nsp!!
                 val namespaceurl = nsp.key.elem[0]
                 val oid = nsp.ref.key.oid
@@ -971,11 +1000,23 @@ class Hm {
     @XmlSerialName("type", "", "")
     data class Type(
         val id: String,
-        val ADD_IFR_PROPERTIES: Boolean,
-        val STOP_ON_FIRST_ERROR: Boolean,
+        @XmlElement(true)
+        val ref: Ref,
+
+        val ADD_IFR_PROPERTIES: Boolean = true,
+        val STOP_ON_FIRST_ERROR: Boolean = true,
         val RELEASE: String = "7.0",
         val DOCU_LANG: String = "EN",
-        @XmlElement(true)
-        val ref: Ref
+        val XSD_VERSION: String = "http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/",
+        val WITH_UI_TEXTS: Boolean = false,
+        val ADD_ENHANCEMENTS: Boolean = false,
+        val WSDL_XSD_GEN_MODE: String = "EXTERNAL",
     )
+
+    // общие: DOCU_LANG, RELEASE, DOCU_LANG
+    // namespdecl: ADD_IFR_PROPERTIES=true, STOP_ON_FIRST_ERROR = true|false
+    // ifmtypedef: XSD_VERSION="http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/"
+    //          WITH_UI_TEXTS="false" ADD_ENHANCEMENTS="false" WSDL_XSD_GEN_MODE="EXTERNAL"
+    // XI_TRAFO:
+    // MAPPING:
 }
