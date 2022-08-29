@@ -199,7 +199,11 @@ class PI(
             "1.0"
         )
         val resp = hmiPost(serv.url(), req)
-        //TODO переделать возврат ответа
+        if (resp.MethodFault!=null || resp.CoreException!=null) {
+            val s = resp.MethodFault?.LocalizedMessage ?: resp.CoreException?.LocalizedMessage ?: ""
+            val beforeStackTrace = s.split("Server stack trace")[0]
+            throw MPI.HmiException(beforeStackTrace)
+        }
         require(resp.MethodOutput!!.ContentType == "text/xml")
         return XiObj.decodeFromString(resp.MethodOutput.Return)
     }
@@ -218,8 +222,7 @@ class PI(
 
     suspend fun askNamespaces2() {
         require(!swcv.isEmpty())
-        swcv.forEach { s ->
-            println(s)
+        swcv.filter { it.name == "MESSAGING" }.forEach { s ->
             val ref = Hm.Ref(
                 PCommon.VC(s.id, "S", -1),
                 PCommon.Key("namespdecl", null, listOf(s.id))
@@ -228,9 +231,10 @@ class PI(
             val sxml = Hm.ReadListRequest(type).encodeToString()
             try {
                 val resp = hmiRead(sxml).toNamespaces(s)
-                println(resp)
+
             } catch (e: Exception) {
-                System.err.println(e.message)
+
+                System.err.println("$s $e")
             }
         }
 

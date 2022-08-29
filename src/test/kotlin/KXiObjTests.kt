@@ -17,4 +17,9 @@ class KXiObjTests {
         val om = XiObj.decodeFromString(s("/pi_xiObj/rep04om.xml"))
         println(om)
     }
+
+    @Test
+    fun xi_trafo() {
+        XiObj.decodeFromString(s("/pi_xiObj/rep03mmap.xml")).content
+    }
 }

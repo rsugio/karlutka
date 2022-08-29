@@ -1,17 +1,31 @@
 package karlutka.models
 
 class MPI {
+    class HmiException(message: String) : Exception(message)
+
     enum class DIRECTION { INBOUND, OUTBOUND }
 
     enum class RepTypes {
-        namespdecl,
-        namespace,
+        namespdecl,         // список неймспейсов с описаниями на языках
+        namespace,          // отдельный неймспейс
         AdapterMetaData,
+        rfc, idoc,          // импортированное
 
-        rfc, idoc,  //импортированное
-        ifmuitexts, ifmextdef,
-        ifmtypedef, ifmmessif, ifmfaultm, ifmmessage, ifmtypeenh, ifmcontobj,
-        MAP_TEMPLATE, TRAFO_JAR, XI_TRAFO, FUNC_LIB, MAPPING,
+        ifmuitexts,         //TODO
+        ifmextdef,          //TODO
+        ifmtypedef,         //TODO
+        ifmmessif,          //TODO
+        ifmfaultm,          //TODO
+        ifmmessage,         //TODO
+        ifmtypeenh,         //TODO
+        ifmcontobj,         //TODO
+
+        MAP_TEMPLATE,       // эта штука из DT делает DT
+        TRAFO_JAR,          // ?
+        XI_TRAFO,           // ?
+        FUNC_LIB,
+        MAPPING,            // ?
+
         FOLDER
     }
 

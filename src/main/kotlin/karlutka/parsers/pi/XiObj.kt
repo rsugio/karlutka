@@ -126,6 +126,8 @@ class XiObj(
         )
     }
 
+
+    // --------------- место для функций ---------------
     fun toNamespaces(swc: MPI.Swcv): List<MPI.Namespace> {
         require(idInfo.key.typeID == "namespdecl")
         require(idInfo.vc.swcGuid == swc.id)
@@ -137,11 +139,12 @@ class XiObj(
             polymorphic(Any::class) {
             }
         }
-        val xioserializer = XML(xiobjxml) {
+        private val xioserializer = XML(xiobjxml) {
             xmlDeclMode = XmlDeclMode.None
             autoPolymorphic = true
         }
 
         fun decodeFromString(sxml: String): XiObj = xioserializer.decodeFromString(sxml)
     }
+
 }
