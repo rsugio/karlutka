@@ -20,7 +20,8 @@ class KHmiTests {
             "user",
             "password",
             "EN",
-            true, null,
+            true,
+            null,
             null,
             "1.0", 0
         )
@@ -50,7 +51,7 @@ class KHmiTests {
         require(x1.MethodOutput!!.Return.length > 100)
 
         val x2 = Hm.parseResponse(s("/pi_HMI/rep_gqresp_wksp.xml"))
-        require(x2.MethodOutput!!.Return.length > 10000) //длинный ответ
+        require(x2.MethodOutput!!.Return.length > 10000)                //длинный ответ
 
         val x3 = Hm.parseResponse(s("/pi_HMI/rep_query_1.xml"))
         require(x3.MethodOutput!!.Return.length > 10000)
@@ -94,22 +95,6 @@ class KHmiTests {
     }
 
     @Test
-    fun repQuery() {
-        val repdatatypes = GeneralQueryRequest.Types.of(
-            "rfc", "ifmextdef", "ifmtypedef", "ifmmessif", "ifmfaultm", "ifmmessage", "idoc",
-            "ifmuitexts", "ifmtypeenh"
-        )
-        val qc = GeneralQueryRequest.QC(
-            "S", "N",
-            PCommon.ClCxt("A", "dummyuser"),
-            GeneralQueryRequest.SwcListDef("G", GeneralQueryRequest.SwcInfoList.of("c0f91671b1a511e8b1c4d4f2ac130d0e"))
-        )
-        val cond = GeneralQueryRequest.Condition(null, null)
-        val q = GeneralQueryRequest(repdatatypes, qc, cond, GeneralQueryRequest.Result.of("RA_XILINK", "FOLDERREF"))
-        println(q.encodeToString())
-    }
-
-    @Test
     fun dirConfiguration() {
         val conf = DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration.xml"))
         require(conf.FEATURES.FEATURE.size == 30)
@@ -126,6 +111,5 @@ class KHmiTests {
         val type = Type("namespdecl", ref, true, false, "7.0", "EN")
         val list = ReadListRequest(type)
         println(list.encodeToString())
-
     }
 }

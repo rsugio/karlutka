@@ -35,6 +35,7 @@ class PI(
     lateinit var hmiServices: List<Hm.HmiService>
     val swcv: MutableList<MPI.Swcv> = mutableListOf()
     val namespaces: MutableList<MPI.Namespace> = mutableListOf()
+    val repolist: MutableList<MPI.RepositoryObject> = mutableListOf()
 
     lateinit var dirConfiguration: Hm.DirConfiguration
 
@@ -174,7 +175,7 @@ class PI(
             "dummy",
             "dummy",
             "EN",
-            false,
+            true,
             null,
             null,
             "1.0"
@@ -229,6 +230,7 @@ class PI(
         this.swcv.addAll(swcv)
     }
 
+    @Deprecated("не читает тексты, иногда возвращает пустоту", ReplaceWith("askNamespaceDecls"))
     suspend fun askNamespaces() {
         require(!swcv.isEmpty())
         val srq = Hm.GeneralQueryRequest.namespaces(swcv.map { it.id })
@@ -276,7 +278,34 @@ class PI(
                 println(a)
             }
         }
+    }
 
+    suspend fun askRepoList() {
+        // длинный запрос-ответ
+        val repdatatypes = Hm.GeneralQueryRequest.Types.of(
+            MPI.RepTypes.values().map { it.toString() }
+        )
+        val a = hmiGeneralQuery(Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcv, repdatatypes))
+        val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, a)
+        repolist.addAll(objs)
+    }
+
+    suspend fun askRepoList2(scope: CoroutineScope) {
+        // параллельно
+        val deferred: MutableList<Deferred<Hm.QueryResult>> = mutableListOf()
+
+        MPI.parts().forEach {
+            val t = Hm.GeneralQueryRequest.Types.of(it)
+            val req = scope.async {
+                hmiGeneralQuery(Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcv, t))
+            }
+            deferred.add(req)
+        }
+        deferred.forEach {
+            val resp = it.await()
+            val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, resp)
+            repolist.addAll(objs)
+        }
     }
 
     suspend fun executeOMtest(testRequest: Hm.TestExecutionRequest): Hm.TestExecutionResponse {
@@ -370,7 +399,6 @@ class PI(
         if (hr.MethodOutput != null) Paths.get("c:/data/tmp/hmo.xml").writeText(hr.MethodOutput.Return)
         return hr
     }
-
 
     suspend fun hmiPost2(
         uri: String,

@@ -3,7 +3,9 @@ import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.PCommon
 import karlutka.server.Server
 import karlutka.util.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.nio.file.Paths
 import kotlin.test.Test
 
@@ -17,7 +19,7 @@ class KPiTests {
         Server.kfpasswds = KfPasswds.parse(Paths.get("C:\\data\\passwd.yaml"))
         Server.kfg = Kfg.parse(Paths.get("c:\\data\\karla.yaml"))
         KKeystore.load(Server.kfpasswds.keystore.path, Server.kfpasswds.keystore.passwd)
-        KTorUtils.createClientEngine(4)
+        KTorUtils.createClientEngine()
         KTorUtils.tempFolder = Paths.get(Server.kfg.tmpdir)
 
         target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
@@ -83,25 +85,19 @@ class KPiTests {
         }
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun repTypes() {
         runBlocking {
-            val disp = Dispatchers.IO.limitedParallelism(4)
-            withContext(disp) {
+//            val disp = Dispatchers.IO.limitedParallelism(2)
+            withContext(Dispatchers.IO) {
                 pi.hmiGetRegistered()
                 println("hmiGetRegistered ok")
                 pi.hmiAskSWCV()
                 println("askSWCV ok: ${pi.swcv.size}")
-                pi.askNamespaceDecls(this) //, {it.id=="e08d0ce00b9e11ea9f27fae8ac130d0e"})
+                pi.askNamespaceDecls(this)
                 println("namespaces ok")
-                if (false) {
-                    val lst = pi.swcv
-//                        .filter { it.vendor.startsWith("n") }
-                    val a = pi.hmiGeneralQuery(Hm.GeneralQueryRequest.requestRepositoryDataTypesList(lst))
-                    val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(lst, pi.namespaces, a)
-                    println(objs.size)
-                }
+                pi.askRepoList2(this)
+                println(pi.repolist.size)
                 println("done")
             }
         }

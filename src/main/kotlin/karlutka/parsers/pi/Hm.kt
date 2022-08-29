@@ -483,32 +483,21 @@ class Hm {
 //                )
                 return req
             }
-//            fun namespaces2(swc: List<String>, user: String = "dummyuser"): GeneralQueryRequest {
-//                val req = GeneralQueryRequest(Types.of("namespdecl"),
-//                    QC("S", "N", PCommon.ClCxt("S", user),
-//                        SwcListDef ("G",  SwcInfoList.of(swc))),
-//                    Condition(null, null),
-//                    Result(listOf("RA_XILINK", "TEXT"))
-//                )
-//                return req
-//            }
 
             fun requestRepositoryDataTypesList(
                 swcv: List<MPI.Swcv>,
-                cond: Condition = Condition()
+                repdatatypes: Types,
+                cond: Condition = Condition(),
+                user: String = "_"
             ): GeneralQueryRequest {
-                val repdatatypes = Types.of(
-                    MPI.RepTypes.values().map { it.toString() }
-                )
                 val qc = QC(
                     "S", "N",
-                    PCommon.ClCxt("A", "dummyuser"),
+                    PCommon.ClCxt("A", user),
                     SwcListDef("G", SwcInfoList.of(swcv.map { it.id }))
                 )
-                return GeneralQueryRequest(
-                    repdatatypes, qc, cond,
-                    Result.of("RA_XILINK", "TEXT", "FOLDERREF")
-                )    //MODIFYDATE, MODIFYUSER
+                return GeneralQueryRequest(repdatatypes, qc, cond,
+                    Result.of("RA_XILINK", "TEXT", "FOLDERREF", "MODIFYDATE", "MODIFYUSER")
+                )
             }
 
             fun parseRepositoryDataTypesList(
@@ -537,6 +526,9 @@ class Hm {
                         val folder = it["FOLDERREF"]!!.simple!!.bin
                         require(folder!!.isNotEmpty())
 
+                        val MODIFYDATE = it["MODIFYDATE"]!!.simple!!.date!!   //TODO - разбирать 2029-12-31T23:59:59
+                        val MODIFYUSER = it["MODIFYUSER"]!!.simple!!.strg!!
+
                         // для айдоков в urn:sap-com:document:sap:idoc:messages и rfc нет областей имён
                         var namespaceobj: MPI.Namespace? = null
                         if (type != "rfc" && type != "idoc")
@@ -546,7 +538,8 @@ class Hm {
                             MPI.RepTypes.valueOf(type),
                             swc,
                             namespaceobj,
-                            oid, name, text
+                            oid, name, text,
+                            MODIFYDATE, MODIFYUSER
                         )
                         repolist.add(repobj)
                     }

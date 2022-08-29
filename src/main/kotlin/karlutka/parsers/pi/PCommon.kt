@@ -9,7 +9,7 @@ class PCommon {
     @Serializable
     class VC(
         val swcGuid: String,
-        val vcType: Char,
+        val vcType: Char,           //S, L
         val sp: Int? = null,
         val caption: String? = null,
         @XmlElement(true)
