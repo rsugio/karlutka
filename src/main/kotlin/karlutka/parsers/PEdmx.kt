@@ -2,6 +2,7 @@ package karlutka.parsers
 
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
+import nl.adaptivity.xmlutil.ExperimentalXmlUtilApi
 import nl.adaptivity.xmlutil.QName
 import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.*
@@ -155,7 +156,9 @@ class PEdmx {
         class End2(val EntitySet: String, val Role: String)
     }
 
+    @OptIn(ExperimentalXmlUtilApi::class)
     class U: UnknownChildHandler {
+        @OptIn(ExperimentalXmlUtilApi::class)
         override fun handleUnknownChildRecovering(
             input: XmlReader,
             inputKind: InputKind,
@@ -169,6 +172,7 @@ class PEdmx {
     }
 
     companion object {
+        @OptIn(ExperimentalXmlUtilApi::class)
         fun parseEdmx(edm: String, ignoreNonstandard: Boolean = false): Edmx {
             val xml2 = XML() {
                 autoPolymorphic = false

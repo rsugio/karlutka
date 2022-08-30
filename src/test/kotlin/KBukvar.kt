@@ -85,9 +85,4 @@ class KBukvar {
         println(b)
     }
 
-    @Test
-    fun вопрос() {
-        val a = listOf<Any?>(1, 2, 3, null, 4)
-        val b = a.filterNotNull().filterIsInstance<Int>()
-    }
 }

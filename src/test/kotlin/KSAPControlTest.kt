@@ -13,6 +13,6 @@ class KSAPControlTest {
         val rlf = SAPControl.ReadLogFileResponse.parseSOAP(s("/pi_SAPControl/02readlogfile.xml"), fault)
         require(fault.isSuccess() && rlf!!.format.startsWith("Version"))
         val e = SAPControl.ReadLogFileResponse.parseSOAP(s("/pi_SAPControl/03readlogfile_fault.xml"), fault)
-        require(fault.isFailure() && fault.faultcode == "Invalid filename" && e == null)
+        require(!fault.isSuccess() && fault.faultcode == "Invalid filename" && e == null)
     }
 }

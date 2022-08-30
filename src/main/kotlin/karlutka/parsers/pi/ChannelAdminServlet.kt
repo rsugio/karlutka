@@ -24,7 +24,6 @@ class ChannelAdminServlet {
         var description: String,
     ) {
         fun isSuccess() = description.isEmpty()
-        fun isFailure() = description.isNotBlank()
 
         companion object {
             fun parse(sxml: String): ErrorInformationType = xmlserializer.decodeFromString(sxml)

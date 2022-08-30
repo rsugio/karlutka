@@ -87,7 +87,7 @@ class KAdapterMessageMonitoringTests {
         s = GetMessagesByIDs(ArrayOfStrings("7b761582-1227-11ed-8bad-0000004c2912")).composeSOAP()
         require(s.isNotBlank())
         var ids = GetMessagesByIDsResponse.parseSOAP(s("/pi_AdapterMM/18ids.xml"), fault)
-        require(fault.isFailure() && fault.faultstring.startsWith("Cannot find the required parameter [referenceIds]") && ids == null)
+        require(!fault.isSuccess() && fault.faultstring.startsWith("Cannot find the required parameter [referenceIds]") && ids == null)
         ids = GetMessagesByIDsResponse.parseSOAP(s("/pi_AdapterMM/19ids.xml"), fault)
         require(fault.isSuccess() && ids != null && ids.number == 0)
         ids = GetMessagesByIDsResponse.parseSOAP(s("/pi_AdapterMM/20ids.xml"), fault)
@@ -111,7 +111,7 @@ class KAdapterMessageMonitoringTests {
         var fail = FailEoioMessageResponse.parseSOAP(s("/pi_AdapterMM/23fail.xml"), fault)
         require(fault.isSuccess() && fail!!.resultCode == "02")
         fail = FailEoioMessageResponse.parseSOAP(s("/pi_AdapterMM/24fail.xml"), fault)
-        require(fault.isFailure() && fail == null)
+        require(!fault.isSuccess() && fail == null)
 
         s = GetAllAvailableStatusDetails(LocaleAMM("en")).composeSOAP()
         require(s.isNotBlank())

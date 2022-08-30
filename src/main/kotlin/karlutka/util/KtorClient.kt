@@ -15,7 +15,8 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.*
 import io.ktor.utils.io.*
 import io.ktor.utils.io.core.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.StringFormat
 import nl.adaptivity.xmlutil.PlatformXmlReader
 import nl.adaptivity.xmlutil.XmlReader
@@ -29,7 +30,6 @@ import kotlin.io.path.reader
 object KtorClient {
     lateinit var clientEngine: HttpClientEngine
     val clients = mutableListOf<HttpClient>()
-
 
     fun createClientEngine(
         threads: Int = 4,
@@ -110,7 +110,7 @@ object KtorClient {
             return s
         }
 
-        fun bodyAsXmlReader() : XmlReader {
+        fun bodyAsXmlReader(): XmlReader {
             requireNotNull(resp)
             requireNotNull(os)
             // В паре с bodyAsXmlReader() надо вызывать close()
@@ -142,11 +142,24 @@ object KtorClient {
         }
     }
 
-    suspend fun taskPost(
+    suspend fun taskGet(
         client: HttpClient,
         url: String,
         headers: Map<String, String> = mapOf(),
+    ): Task {
+        val t = Task(client.prepareGet(url) {
+            headers.forEach { (k, v) ->
+                header(k, v)
+            }
+        })
+        return t
+    }
+
+    suspend fun taskPost(
+        client: HttpClient,
+        url: String,
         payload: String,
+        headers: Map<String, String> = mapOf("content-type" to "text/xml"),
     ): Task {
         val post = client.preparePost(url) {
             headers.forEach { (k, v) ->
@@ -155,31 +168,5 @@ object KtorClient {
             }
         }
         return Task(post)
-    }
-
-    suspend fun taskPost(
-        scope: CoroutineScope,
-        client: HttpClient,
-        url: String,
-        headers: Map<String, String> = mapOf(),
-        payload: String,
-    ): Deferred<Task> {
-        val post = client.preparePost(url) {
-            headers.forEach { (k, v) ->
-                header(k, v)
-                setBody(payload)
-            }
-        }
-        val t = Task(post)
-        return scope.async { t.execute() }
-    }
-
-    suspend fun taskGet(
-        scope: CoroutineScope,
-        client: HttpClient,
-        url: String,
-    ): Deferred<Task> {
-        val t = Task(client.prepareGet(url))
-        return scope.async { t.execute() }
     }
 }

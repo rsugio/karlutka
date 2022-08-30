@@ -48,12 +48,12 @@ class Hm {
         /**
          * Из списка инстансов делает список значений с номерами (0,1,..)
          */
-        fun valueList(instances: List<Instance?>): List<Value> {
-            return instances.mapIndexed { ix, v ->
-                if (v == null) Value(ix, true)
-                else Value(ix, false, listOf(v))
-            }
-        }
+//        fun valueList(instances: List<Instance?>): List<Value> {
+//            return instances.mapIndexed { ix, v ->
+//                if (v == null) Value(ix, true)
+//                else Value(ix, false, listOf(v))
+//            }
+//        }
 
     }
 
@@ -102,11 +102,12 @@ class Hm {
 
         init {
             require(value.isNotEmpty())
-            if (leave_typeid == "string" && !value[0].isnull && value[0].value.size > 0) string =
-                value[0].value[0] as String
-            if (leave_typeid == null) {
-                val x = value.filter { it.isnull == false }
-                    .flatMap { m -> m.value.filter { it is Instance } as List<Instance> }//TODO filterIsInstance
+            if (leave_typeid == "string" && !value[0].isnull && value[0].value.size > 0)
+                string = value[0].value[0] as String
+            else if (leave_typeid == null) {
+                val x = value
+                    .filter { it.isnull == false }
+                    .flatMap { m -> m.value.filterIsInstance<Instance>()}
                 if (x.isNotEmpty()) instance = x[0]
             }
         }
@@ -560,7 +561,8 @@ class Hm {
                             MPI.RepTypes.valueOf(type),
                             swc,
                             namespaceobj,
-                            oid, name, text)
+                            oid, name, text
+                        )
                         repolist.add(repobj)
                     }
                 }

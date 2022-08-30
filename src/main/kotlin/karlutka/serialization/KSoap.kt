@@ -51,7 +51,6 @@ class KSoap {
         private val detail: CompactFragment? = null,
     ) {
         fun isSuccess() = faultcode == ""
-        fun isFailure() = faultcode.isNotBlank()
     }
 
 

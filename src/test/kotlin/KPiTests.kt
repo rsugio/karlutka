@@ -87,8 +87,7 @@ class KPiTests {
     @Test
     fun repTypes() {
         runBlocking {
-//            val disp = Dispatchers.IO.limitedParallelism(2)
-            withContext(Dispatchers.IO) {
+            withContext(Dispatchers.IO) {       //.limitedParallelism(4)
                 pi.hmiGetRegistered(this)
                 println("hmiGetRegistered ok")
                 pi.hmiAskSWCV(this)
@@ -97,9 +96,9 @@ class KPiTests {
                 println("namespaces asked")
                 pi.parseNamespaceDecls(def)
                 println("... namespaces ok: ${pi.namespaces.size}")
-                val def2 = pi.askRepoList2(this)
+                val def2 = pi.askRepoList(this)
                 println("repolist asked")
-                pi.parseRepoList2(def2)
+                pi.parseRepoList(def2)
                 println("... repolist ok: ${pi.repolist.size}")
                 println("done")
             }

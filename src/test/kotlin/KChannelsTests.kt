@@ -26,7 +26,7 @@ class KChannelsTests {
     fun ChannelAdminServletTest() {
         val ei = ChannelAdminServlet.ErrorInformationType(null, null, "")
         val err00 = ChannelAdminServlet.Companion.parse(s("/pi_ChannelAdmin/00error.xml"), ei)
-        require(ei.isFailure() && err00.isEmpty())
+        require(!ei.isSuccess() && err00.isEmpty())
         require(ei.usage == "http://h:50000/AdapterFramework/ChannelAdminServlet?action={start|stop|status}&party=<party>&service=<service>&channel=<channelName>[&showProcessLog={true|false}][&showAdminHistory={true|false}][&status={all|ok|error|stopped|inactive|unknown|unregistered}]")
         val a01 = ChannelAdminServlet.Companion.parse(s("/pi_ChannelAdmin/01list.xml"), ei)
         require(ei.isSuccess() && a01.size == 2)
