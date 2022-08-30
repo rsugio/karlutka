@@ -10,7 +10,6 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import java.util.*
 
 class AdapterMessageMonitoringVi {
-
     // ---------------
     @Serializable
     @XmlSerialName("cancelMessages", "urn:AdapterMessageMonitoringVi", "amvi")

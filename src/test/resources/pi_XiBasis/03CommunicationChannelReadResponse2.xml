@@ -1,0 +1,15 @@
+﻿<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SOAP-ENV:Body>
+		<ns2:CommunicationChannelReadResponse xmlns:ns2='http://sap.com/xi/BASIS'>
+			<LogMessageCollection>
+				<LogMessageCommunicationChannel>
+					<LogMessageItem>
+						<SeverityCode>2</SeverityCode>
+						<ClassificationCode>INVALID_PARAMETER_VALUE</ClassificationCode>
+						<Message languageCode='en'>Enter at least one object key for operation 'read'</Message>
+					</LogMessageItem>
+				</LogMessageCommunicationChannel>
+			</LogMessageCollection>
+		</ns2:CommunicationChannelReadResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -1,12 +1,10 @@
 import karlutka.clients.CPINEO
 import karlutka.util.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.nio.file.Files
 import java.nio.file.Paths
-import kotlin.io.path.exists
 import kotlin.test.Test
 
 class KCpiNeoTests {

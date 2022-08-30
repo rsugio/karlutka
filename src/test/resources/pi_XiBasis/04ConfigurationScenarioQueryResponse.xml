@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Body>
+        <ns2:ConfigurationScenarioQueryResponse xmlns:ns2='http://sap.com/xi/BASIS'>
+            <ConfigurationScenarioID>ERP_HCM_Integration</ConfigurationScenarioID>
+            <ConfigurationScenarioID>CS_ROSBANK_HR_PayList</ConfigurationScenarioID>
+            <ConfigurationScenarioID>CS_Cust_MBO_FORMRESULT</ConfigurationScenarioID>
+            <ConfigurationScenarioID>CS_Sberbank_GetDict</ConfigurationScenarioID>
+            <ConfigurationScenarioID>CS_URA_TranspBW</ConfigurationScenarioID>
+            <ConfigurationScenarioID>CS_ContragentInfo_GetCompanyExtendedReportUA</ConfigurationScenarioID>
+            <ConfigurationScenarioID>CS_ContragentInfo_FindCompanyByCode</ConfigurationScenarioID>
+            <ConfigurationScenarioID>CS_GetLastDownloadFileInfo</ConfigurationScenarioID>
+            <ConfigurationScenarioID>CS_Cust_LMS_Students</ConfigurationScenarioID>
+            <ConfigurationScenarioID>CS_Europe_EDI_SCPI_EU_ORDERS</ConfigurationScenarioID>
+            <LogMessageCollection></LogMessageCollection>
+        </ns2:ConfigurationScenarioQueryResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

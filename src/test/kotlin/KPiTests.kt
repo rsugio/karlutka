@@ -52,10 +52,6 @@ class KPiTests {
     @Test
     fun hmi() {
         runBlocking {
-            pi.hmiGetRegistered(this)
-            pi.hmiAskSWCV(this)
-            pi.dirReadHmiServerDetails("user")
-
             val xml = """<ns0:XiPatternMessage1 xmlns:ns0="http://sap.com/xi/XI/System/Patterns">
 <Person><Id>Русскiй языкъ прекрасенъ</Id><LastName/><FirstName/><TelephoneNumber/><CountryCode/></Person>
 </ns0:XiPatternMessage1>"""

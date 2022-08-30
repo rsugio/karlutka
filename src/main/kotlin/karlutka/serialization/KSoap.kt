@@ -3,6 +3,7 @@ package karlutka.serialization
 import karlutka.parsers.pi.AdapterMessageMonitoringVi
 import karlutka.parsers.pi.IChannelAdmin
 import karlutka.parsers.pi.SAPControl
+import karlutka.parsers.pi.XiBasis
 import kotlinx.serialization.*
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
@@ -20,39 +21,30 @@ class KSoap {
     @Serializable
     @XmlSerialName("Envelope", "http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV")
     class Envelope<BODYTYPE>(
-        @XmlElement(true)
-        @Contextual
-        @XmlSerialName("Header", "http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV")
-        val header: CompactFragment? = null,    // пока только для парсинга
+        @XmlElement(true) @Contextual @XmlSerialName(
+            "Header",
+            "http://schemas.xmlsoap.org/soap/envelope/",
+            "SOAP-ENV"
+        ) val header: CompactFragment? = null,    // пока только для парсинга
         val body: Body<BODYTYPE>,
     ) {
         @Serializable
         @XmlSerialName("Body", "http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV")
         class Body<BODYTYPE>(
-            @Polymorphic
-            val data: BODYTYPE?,
-            @XmlElement(true)
-            val fault: Fault? = null,           // только для парсинга
+            @Polymorphic val data: BODYTYPE?,
+            @XmlElement(true) val fault: Fault? = null,           // только для парсинга
         )
     }
 
     @Serializable
     @XmlSerialName("Fault", "http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV")
     data class Fault(
-        @XmlElement(true)
-        @XmlSerialName("faultcode", "", "")
-        var faultcode: String = "",
-        @XmlElement(true)
-        @XmlSerialName("faultstring", "", "")
-        var faultstring: String = "",
-        @XmlElement(true)
-        @XmlSerialName("detail", "", "")
-        @Contextual
-        private val detail: CompactFragment? = null,
+        @XmlElement(true) @XmlSerialName("faultcode", "", "") var faultcode: String = "",
+        @XmlElement(true) @XmlSerialName("faultstring", "", "") var faultstring: String = "",
+        @XmlElement(true) @XmlSerialName("detail", "", "") @Contextual private val detail: CompactFragment? = null,
     ) {
         fun isSuccess() = faultcode == ""
     }
-
 
     companion object {
         val xmlmodule = SerializersModule {
@@ -83,8 +75,7 @@ class KSoap {
                 subclass(AdapterMessageMonitoringVi.GetMessageBytesJavaLangStringBooleanResponse::class, serializer())
                 subclass(AdapterMessageMonitoringVi.GetMessageBytesJavaLangStringIntBoolean::class, serializer())
                 subclass(
-                    AdapterMessageMonitoringVi.GetMessageBytesJavaLangStringIntBooleanResponse::class,
-                    serializer()
+                    AdapterMessageMonitoringVi.GetMessageBytesJavaLangStringIntBooleanResponse::class, serializer()
                 )
                 subclass(AdapterMessageMonitoringVi.GetMessageList::class, serializer())
                 subclass(AdapterMessageMonitoringVi.GetMessageListResponse::class, serializer())
@@ -125,6 +116,24 @@ class KSoap {
                 subclass(SAPControl.ListLogFilesResponse::class, serializer())
                 subclass(SAPControl.ReadLogFile::class, serializer())
                 subclass(SAPControl.ReadLogFileResponse::class, serializer())
+
+                subclass(XiBasis.CommunicationChannelQueryRequest::class, serializer())
+                subclass(XiBasis.CommunicationChannelQueryResponse::class, serializer())
+                subclass(XiBasis.CommunicationChannelReadRequest::class, serializer())
+                subclass(XiBasis.CommunicationChannelReadResponse::class, serializer())
+                subclass(XiBasis.ValueMappingQueryRequest::class, serializer())
+                subclass(XiBasis.ValueMappingQueryResponse::class, serializer())
+                subclass(XiBasis.ValueMappingReadRequest::class, serializer())
+                subclass(XiBasis.ValueMappingReadResponse::class, serializer())
+                subclass(XiBasis.ConfigurationScenarioQueryRequest::class, serializer())
+                subclass(XiBasis.ConfigurationScenarioQueryResponse::class, serializer())
+                subclass(XiBasis.ConfigurationScenarioReadRequest::class, serializer())
+                subclass(XiBasis.ConfigurationScenarioReadResponse::class, serializer())
+                subclass(XiBasis.IntegratedConfigurationQueryRequest::class, serializer())
+                subclass(XiBasis.IntegratedConfigurationQueryResponse::class, serializer())
+                subclass(XiBasis.IntegratedConfigurationReadRequest::class, serializer())
+                subclass(XiBasis.IntegratedConfiguration750ReadResponse::class, serializer())
+                subclass(XiBasis.IntegratedConfigurationReadResponse::class, serializer())
             }
         }
         val xmlserializer = XML(xmlmodule) {

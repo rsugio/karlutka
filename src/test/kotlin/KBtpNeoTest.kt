@@ -49,7 +49,7 @@ class KBtpNeoTest {
 
     @Test
     fun dynamic() {
-        var bn = BTPNEO(target)
+        val bn = BTPNEO(target)
         runBlocking {
             withContext(Dispatchers.IO) {
                 val scim = bn.authorizationV1AccountsUsers()
