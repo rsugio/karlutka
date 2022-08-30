@@ -59,7 +59,9 @@ object KtorClient {
     ): HttpClient {
         requireNotNull(clientEngine)
         val client = HttpClient(clientEngine) {
-            expectSuccess = true
+// expectSuccess:=true очень опасная штука
+// То-ли вынести её в параметры функции и включать точечно, то-ли не использовать вообще.
+            expectSuccess = false
             developmentMode = true
             install(HttpTimeout)
             install(HttpCookies)
@@ -98,7 +100,9 @@ object KtorClient {
         lateinit var os: OutputStream
         lateinit var resp: HttpResponse
         var retries: Int = 0
-        var remark = ""         // используется для идентификации
+        var remark = ""         // используется для отладки
+        var contentType: ContentType? = null
+        var contentDisposition: ContentDisposition? = null      // для скачивания файлов
 
         @Deprecated("Для XML не надо", ReplaceWith("bodyAsXmlReader"))
         fun bodyAsText(): String {
@@ -125,6 +129,12 @@ object KtorClient {
             retries++
             stat.execute { resp ->
                 this.resp = resp
+                this.contentType = resp.contentType()
+                val cd = resp.headers.get("content-disposition")
+                if (cd != null) {
+                    this.contentDisposition = ContentDisposition.parse(cd)
+                }
+
                 os = path.outputStream().buffered()
                 val channel: ByteReadChannel = resp.body()
                 withContext(Dispatchers.IO) {

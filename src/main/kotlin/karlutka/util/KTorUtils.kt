@@ -2,19 +2,7 @@
 
 package karlutka.util
 
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.*
-import io.ktor.client.engine.java.*
-import io.ktor.client.plugins.*
-import io.ktor.client.plugins.auth.*
-import io.ktor.client.plugins.auth.providers.*
-import io.ktor.client.plugins.cookies.*
-import io.ktor.client.plugins.logging.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.serialization.kotlinx.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
@@ -32,31 +20,15 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.ktor.utils.io.*
-import io.ktor.utils.io.core.*
 import karlutka.server.DatabaseFactory
 import karlutka.server.Server
-import kotlinx.coroutines.*
 import kotlinx.html.head
 import kotlinx.html.title
-import kotlinx.serialization.StringFormat
 import org.slf4j.event.Level
-import java.io.OutputStream
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-import java.time.Duration
-import kotlin.io.path.outputStream
-import kotlin.io.path.readText
 
 object KTorUtils {
-    val useLocalFolder = true               // локальная отладка из ./static
+    private const val useLocalFolder = true               // локальная отладка из ./static
     lateinit var server: ApplicationEngine
-    var tempFolder: Path = Paths.get(System.getProperty("java.io.tmpdir") + "/karlutka2")  //по умолчанию
-
-    init {
-        if (!Files.isDirectory(tempFolder)) Files.createDirectory(tempFolder)   //TODO права линукс
-    }
 
     // см https://github.com/ktorio/ktor-documentation/blob/2.1.0/codeSnippets/snippets/auth-form-session/src/main/kotlin/com/example/Application.kt
     //    data class UserServerSession(val name: String, val count: Int) : Principal

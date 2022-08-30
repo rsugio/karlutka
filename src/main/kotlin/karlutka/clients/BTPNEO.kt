@@ -13,7 +13,6 @@ import io.ktor.serialization.kotlinx.json.*
 import karlutka.models.MCommon
 import karlutka.models.MTarget
 import karlutka.parsers.cpi.PBtpNeo
-import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
 import kotlinx.coroutines.runBlocking

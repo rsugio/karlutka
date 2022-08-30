@@ -4,11 +4,9 @@ import karlutka.models.MTarget
 import karlutka.server.DatabaseFactory
 import karlutka.server.Server
 import karlutka.util.*
-import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.Duration
-import kotlin.io.path.forEachDirectoryEntry
 
 fun main(args: Array<String>) {
     val pid = ProcessHandle.current().pid()
@@ -44,15 +42,9 @@ fun main(args: Array<String>) {
     Server.kfpasswds = pw
     Server.pkfg = pkfg
     Server.ppw = ppw
-    KTorUtils.tempFolder = Paths.get(kfg.tmpdir)
-    if (Files.isDirectory(KTorUtils.tempFolder)) {
-        KTorUtils.tempFolder.forEachDirectoryEntry {
-            Files.delete(it)
-        }
-    } else {
-        Files.createDirectory(KTorUtils.tempFolder) //TODO для линупса прописать права rw-rw-r--
-    }
-    println("Вре́менные файлы в ${KTorUtils.tempFolder}")
+    KTempFile.tempFolder = Paths.get(kfg.tmpdir)
+    KTempFile.start()
+    println("Вре́менные файлы в ${KTempFile.tempFolder}")
 
     KtorClient.createClientEngine(
         Server.kfg.httpClientThreads,

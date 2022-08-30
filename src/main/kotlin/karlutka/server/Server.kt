@@ -6,7 +6,6 @@ import io.ktor.server.routing.*
 import karlutka.clients.PI
 import karlutka.models.MTarget
 import karlutka.parsers.pi.PerfMonitorServlet
-import karlutka.util.KTorUtils
 import karlutka.util.KfPasswds
 import karlutka.util.Kfg
 import karlutka.util.KtorClient

@@ -1,8 +1,12 @@
 import karlutka.clients.CPINEO
 import karlutka.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.nio.file.Files
 import java.nio.file.Paths
+import kotlin.io.path.exists
 import kotlin.test.Test
 
 class KCpiNeoTests {
@@ -24,19 +28,22 @@ class KCpiNeoTests {
     @Test
     fun dynamic() {
         runBlocking {
-            cpineo.login()
+            withContext(Dispatchers.IO) {
+                cpineo.login()
+                cpineo.userCredentialsList()
 
-            cpineo.userCredentialsList()
-
-            if (false) {
-                //cpineo.integrationPackagePut("test220825", Paths.get("C:\\data\\tmp\\test220825.zip").readBytes())
                 val packs = cpineo.integrationPackagesList()
-                packs.filter { it.Id == "test220825" }.forEach { p ->
-                    val med = cpineo.downloadMedia(p.__metadata!!.media_src!!)
-                    println("${p.Id} $med")
-                    if (med.error == null) {
+                val def = cpineo.downloadMedia(packs.map { it.__metadata!!.media_src!! })
+                def.forEachIndexed { idx, td ->
+                    val med = td.await()
+                    if (med.contentDisposition != null) {
                         val newname = med.contentDisposition!!.parameter("filename")
-                        Files.move(med.tempFile!!, med.tempFile!!.resolveSibling(newname!!))
+                        val newp = med.path.resolveSibling(newname!!)
+                        Files.deleteIfExists(newp)
+                        Files.move(med.path, newp)
+                        println("ok ${packs[idx].Id}")
+                    } else {
+                        println("error ${packs[idx].Id}")
                     }
                 }
             }

@@ -1,7 +1,6 @@
 package karlutka.clients
 
 import io.ktor.client.*
-import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.auth.*
 import io.ktor.client.plugins.auth.providers.*
@@ -11,23 +10,15 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.util.*
-import io.ktor.utils.io.*
-import io.ktor.utils.io.core.*
 import karlutka.models.MCommon
 import karlutka.models.MTarget
 import karlutka.parsers.PEdmx
 import karlutka.parsers.cpi.PCpi
-import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import java.nio.file.Files
-import java.nio.file.Path
-import kotlin.io.path.outputStream
 
 class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
     val client: HttpClient
@@ -109,49 +100,16 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
         println(resp)
     }
 
-    class Downloaded(
-        val error: PCpi.Error? = null,
-        val contentType: ContentType? = null,
-        val contentDisposition: ContentDisposition? = null,
-        val tempFile: Path? = null
-    ) {
-        override fun toString() = "Downloaded($error,$contentDisposition)"
-    }
-
-    suspend fun downloadMedia(media_src: String): Downloaded {
-        val statement = client.prepareGet(media_src) {
-            accept(ContentType.Application.Json)   // для сообщений об ошибках в JSON
-        }
-        var dl: Downloaded? = null
-        try {
-            statement.execute { resp ->
-                val path: Path = Files.createTempFile(KTorUtils.tempFolder, "download", ".bin")
-                val os = path.outputStream().buffered()
-                val ct = resp.contentType()!!
-                val cd = ContentDisposition.parse(resp.headers.get("CONTENT-DISPOSITION")!!)
-                val channel: ByteReadChannel = resp.body()
-                withContext(Dispatchers.IO) {
-                    while (!channel.isClosedForRead) {
-                        val packet = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong())
-                        while (!packet.isEmpty) {
-                            val bytes = packet.readBytes()
-                            os.write(bytes)
-                        }
-                    }
-                    os.close()
-                }
-                dl = Downloaded(null, ct, cd, path)
+    suspend fun downloadMedia(media_src: List<String>): List<Deferred<KtorClient.Task>> {
+        return media_src.map {
+            val statement = client.prepareGet(it) {
+                accept(ContentType.Application.Json)   // для сообщений об ошибках в JSON
             }
-        } catch (e: ServerResponseException) {
-            require(e.response.contentType()!!.match(ContentType.Application.Json)) { "Ошибка не в формате JSON" }
-            val er = PCpi.parseError(e.response.bodyAsText())
-            dl = Downloaded(er)
+            withContext(Dispatchers.IO) {
+                val task = KtorClient.Task(statement)
+                async { task.execute() }
+            }
         }
-        requireNotNull(dl)
-        return dl!!
     }
 
-    fun integrationPackageValue(media_src: String, content_type: String) {
-
-    }
 }
