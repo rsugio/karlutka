@@ -17,8 +17,8 @@ class KBtpCfTest {
 
     init {
         KKeystore.load(kfp.keystore.path, kfp.keystore.passwd)
-        KTorUtils.createClientEngine()
-        KTorUtils.tempFolder = Paths.get("C:/data/tmp")
+        KtorClient.createClientEngine()
+        KTempFile.tempFolder = Paths.get("C:/data/tmp")
 
         target = kfg.targets.find { it.sid == "bc09a195trial" }!! as KfTarget.BTPCF
         target.loadAuths(kfp.securityMaterials)

@@ -23,7 +23,7 @@ object KInflux {
     }
 
     fun connect(host: String, token: CharArray): String {
-        client = HttpClient(KTorUtils.clientEngine) {
+        client = HttpClient(KtorClient.clientEngine) {
             expectSuccess = true
             install(HttpRequestRetry) {
                 retryOnServerErrors(maxRetries = 5)

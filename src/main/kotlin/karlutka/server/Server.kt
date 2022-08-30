@@ -9,6 +9,7 @@ import karlutka.parsers.pi.PerfMonitorServlet
 import karlutka.util.KTorUtils
 import karlutka.util.KfPasswds
 import karlutka.util.Kfg
+import karlutka.util.KtorClient
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitAll
@@ -108,7 +109,7 @@ object Server {
 
         withContext(Dispatchers.IO) {
             // все махом запрашиваем
-            val tasks = mutableMapOf<PI, Deferred<KTorUtils.Task>>()
+            val tasks = mutableMapOf<PI, Deferred<KtorClient.Task>>()
             targets.values.filter { it is PI }.forEach { t ->
                 require(t is PI)
                 if (t.afs.isEmpty()) {

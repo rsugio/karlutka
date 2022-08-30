@@ -52,120 +52,10 @@ import kotlin.io.path.readText
 object KTorUtils {
     val useLocalFolder = true               // локальная отладка из ./static
     lateinit var server: ApplicationEngine
-    lateinit var clientEngine: HttpClientEngine
-    val clients = mutableListOf<HttpClient>()
     var tempFolder: Path = Paths.get(System.getProperty("java.io.tmpdir") + "/karlutka2")  //по умолчанию
 
     init {
         if (!Files.isDirectory(tempFolder)) Files.createDirectory(tempFolder)   //TODO права линукс
-    }
-
-    fun createClientEngine(
-        threads: Int = 4,
-        connectionTimeo: Duration = Duration.ofSeconds(5),
-    ) {
-        clientEngine = Java.create {
-            threadsCount = threads
-            pipelining = false
-            protocolVersion = java.net.http.HttpClient.Version.HTTP_1_1
-            config {
-                connectTimeout(connectionTimeo)
-                sslContext(KKeystore.getSslContext())
-//                sslParameters(SSLParameters())
-            }
-        }
-    }
-
-    /**
-     * Создаёт базовый HTTP1.1 клиент, без особых плагинов
-     */
-    fun createClient(
-        defaultHostPort: String,
-        retries: Int = 2,
-        logLevel: LogLevel = LogLevel.NONE,
-        headers: Map<String, String> = mapOf(),
-        format: StringFormat? = null
-    ): HttpClient {
-        requireNotNull(clientEngine)
-        val client = HttpClient(clientEngine) {
-            expectSuccess = true
-            developmentMode = true
-            install(HttpTimeout)
-            install(HttpCookies)
-            install(HttpRequestRetry) {
-                retryOnServerErrors(maxRetries = retries)
-                exponentialDelay()
-            }
-            install(Logging) {
-                logger = Logger.DEFAULT
-                level = logLevel
-            }
-            install(io.ktor.client.plugins.contentnegotiation.ContentNegotiation) {
-                if (format!=null) serialization(ContentType.Application.Json, format) // DefaultJson)
-            }
-            install(Auth)   //конфигурация будет позднее
-            install(DefaultRequest) {
-                url(defaultHostPort)
-                headers.forEach { (k, v) ->
-                    header(k, v)
-                }
-            }
-        }
-        clients.add(client)
-        return client
-    }
-
-    fun setBasicAuth(client: HttpClient, login: String, passwd: CharArray, preemptive: Boolean = true) {
-        client.plugin(Auth).basic {
-            credentials { BasicAuthCredentials(login, String(passwd)) }
-            sendWithoutRequest { preemptive }
-        }
-    }
-
-    // пока для гет. Для поста, пута и проч надо пейлоад и заголовки ещё хранить в другом файле.
-    class Task(
-        val stat: HttpStatement,
-    ) {
-        val path: Path = Files.createTempFile(tempFolder, "task", ".bin")
-        lateinit var os: OutputStream
-        lateinit var resp: HttpResponse
-        var retries: Int = 0
-
-        fun bodyAsText(): String {
-            requireNotNull(resp)
-            //TODO добавить charset из response
-            val s = path.readText(Charsets.UTF_8)
-            return s
-        }
-
-        suspend fun execute(): Task {
-            retries++
-            stat.execute { resp ->
-                this.resp = resp
-                os = path.outputStream().buffered()
-                val channel: ByteReadChannel = resp.body()
-                withContext(Dispatchers.IO) {
-                    while (!channel.isClosedForRead) {
-                        val packet = channel.readRemaining(DEFAULT_BUFFER_SIZE.toLong())
-                        while (!packet.isEmpty) {
-                            val bytes = packet.readBytes()
-                            os.write(bytes)
-                        }
-                    }
-                    os.close()
-                }
-            }
-            return this
-        }
-    }
-
-    suspend fun taskGet(
-        client: HttpClient,
-        url: String,
-        scope: CoroutineScope,
-    ): Deferred<Task> {
-        val t = Task(client.prepareGet(url))
-        return scope.async { t.execute() }
     }
 
     // см https://github.com/ktorio/ktor-documentation/blob/2.1.0/codeSnippets/snippets/auth-form-session/src/main/kotlin/com/example/Application.kt
@@ -180,7 +70,7 @@ object KTorUtils {
                 shutDownUrl = "/shutdown"
                 exitCodeSupplier = {
                     println("С ЦУПа поступил /shutdown")
-                    clients.forEach { it.close() }
+                    KtorClient.clients.forEach { it.close() }
                     DatabaseFactory.close()
                     println("Приземление - штатное")
                     0

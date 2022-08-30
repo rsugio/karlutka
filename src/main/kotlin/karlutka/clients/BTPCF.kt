@@ -14,6 +14,7 @@ import karlutka.models.MTarget
 import karlutka.parsers.cpi.PBtpCf
 import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
+import karlutka.util.KtorClient
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 
@@ -23,7 +24,7 @@ class BTPCF(override val konfig: KfTarget.BTPCF) : MTarget {
     var json: Json = DefaultJson    // на случай кастомного json
 
     init {
-        client = KTorUtils.createClient("", 1, LogLevel.INFO, mapOf(), json)
+        client = KtorClient.createClient("", 1, LogLevel.INFO, mapOf(), json)
 
         runBlocking { loadToken() }
         client.plugin(Auth).bearer {

@@ -1,6 +1,7 @@
 ﻿package karlutka.parsers.pi
 
 import karlutka.models.MPI
+import karlutka.util.KtorClient
 import kotlinx.serialization.*
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.modules.SerializersModule
@@ -284,8 +285,15 @@ class PerfMonitorServlet {
         )
 
         companion object {
+            @Deprecated("только для тестов")
             fun parse(sxml: String) = xmlserializer.decodeFromString<PerformanceDataQueryResults>(sxml)
-            fun parse(r: XmlReader) = xmlserializer.decodeFromReader<PerformanceDataQueryResults>(r)
+
+            fun parse(xmlReader: XmlReader) = xmlserializer.decodeFromReader<PerformanceDataQueryResults>(xmlReader)
+            fun parse(task: KtorClient.Task): PerformanceDataQueryResults {
+                val o = xmlserializer.decodeFromReader<PerformanceDataQueryResults>(task.bodyAsXmlReader())
+                task.close()
+                return o
+            }
         }
 
         fun render() = xmlserializer.encodeToString(this)
@@ -387,9 +395,18 @@ class PerfMonitorServlet {
         )
 
         companion object {
+            @Deprecated("Только для тестов")
             fun parse(sxml: String) = xmlserializer.decodeFromString<MessageStatisticsQueryResults>(sxml)
-            fun parse(r: XmlReader) = xmlserializer.decodeFromReader<MessageStatisticsQueryResults>(r)
 
+            fun parse(task: KtorClient.Task): MessageStatisticsQueryResults {
+                val o = xmlserializer.decodeFromReader<MessageStatisticsQueryResults>(task.bodyAsXmlReader())
+                task.close()
+                return o
+            }
+
+            fun parse(xmlReader: XmlReader): MessageStatisticsQueryResults {
+                return xmlserializer.decodeFromReader<MessageStatisticsQueryResults>(xmlReader)
+            }
         }
     }
 

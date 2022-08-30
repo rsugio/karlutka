@@ -18,8 +18,8 @@ class KBtpNeoTest {
 
     init {
         KKeystore.load(kfp.keystore.path, kfp.keystore.passwd)
-        KTorUtils.createClientEngine()
-        KTorUtils.tempFolder = Paths.get("C:/data/tmp")
+        KtorClient.createClientEngine()
+        KTempFile.tempFolder = Paths.get("C:/data/tmp")
 
         target = kfg.targets.find { it.sid == "eu3prod" }!! as KfTarget.BTPNEO
         target.loadAuths(kfp.securityMaterials)

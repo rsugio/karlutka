@@ -1,11 +1,13 @@
 package karlutka.parsers.pi
 
 import karlutka.models.MPI
+import karlutka.util.KtorClient
 import kotlinx.serialization.*
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import nl.adaptivity.xmlutil.XmlDeclMode
+import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
@@ -291,6 +293,12 @@ class Hm {
         val ControlFlag: Int = 0,
         val HmiSpecVersion: String? = null
     ) {
+        fun toQueryResult(): QueryResult {
+            requireNotNull(MethodOutput)
+            val queryResult = hmserializer.decodeFromString<QueryResult>(MethodOutput.Return)
+            return queryResult
+        }
+
         companion object {
             fun from(i: Instance): HmiResponse {
                 require(i.typeid == "com.sap.aii.utilxi.hmi.core.msg.HmiResponse")
@@ -302,6 +310,19 @@ class Hm {
                 val hmf = HmiMethodFault.from(i.attribute("MethodFault").instance)
                 val hce = HmiCoreException.from(i.attribute("CoreException").instance)
                 return HmiResponse(clientId, requestId, hmo, hmf, hce, cf, hv)
+            }
+
+            // Обычно XmlReader рождается из временного файла. Коллбек нужен для его удаления
+            fun parse(xmlReader: XmlReader, callback: () -> Unit): HmiResponse {
+                val instance: Instance = hmserializer.decodeFromReader(xmlReader)
+                callback.invoke()
+                return from(instance)
+            }
+
+            fun parse(task: KtorClient.Task, autoclose: Boolean = true): HmiResponse {
+                val instance: Instance = hmserializer.decodeFromReader(task.bodyAsXmlReader())
+                if (autoclose) task.close()
+                return from(instance)
             }
         }
     }
@@ -495,8 +516,9 @@ class Hm {
                     PCommon.ClCxt("A", user),
                     SwcListDef("G", SwcInfoList.of(swcv.map { it.id }))
                 )
-                return GeneralQueryRequest(repdatatypes, qc, cond,
-                    Result.of("RA_XILINK", "TEXT", "FOLDERREF", "MODIFYDATE", "MODIFYUSER")
+                return GeneralQueryRequest(
+                    repdatatypes, qc, cond,
+                    Result.of("RA_XILINK", "TEXT", "FOLDERREF") //, "MODIFYDATE", "MODIFYUSER")
                 )
             }
 
@@ -526,8 +548,8 @@ class Hm {
                         val folder = it["FOLDERREF"]!!.simple!!.bin
                         require(folder!!.isNotEmpty())
 
-                        val MODIFYDATE = it["MODIFYDATE"]!!.simple!!.date!!   //TODO - разбирать 2029-12-31T23:59:59
-                        val MODIFYUSER = it["MODIFYUSER"]!!.simple!!.strg!!
+//                        val MODIFYDATE = it["MODIFYDATE"]!!.simple!!.date!!   //TODO - разбирать 2029-12-31T23:59:59
+//                        val MODIFYUSER = it["MODIFYUSER"]!!.simple!!.strg!!
 
                         // для айдоков в urn:sap-com:document:sap:idoc:messages и rfc нет областей имён
                         var namespaceobj: MPI.Namespace? = null
@@ -538,9 +560,7 @@ class Hm {
                             MPI.RepTypes.valueOf(type),
                             swc,
                             namespaceobj,
-                            oid, name, text,
-                            MODIFYDATE, MODIFYUSER
-                        )
+                            oid, name, text)
                         repolist.add(repobj)
                     }
                 }
@@ -712,7 +732,6 @@ class Hm {
         )
 
         companion object {
-            // на входе чистый xml
             fun parse(sxml: String): QueryResult {
                 return hmserializer.decodeFromString(sxml)
             }

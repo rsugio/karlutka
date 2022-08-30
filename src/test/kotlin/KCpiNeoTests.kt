@@ -13,8 +13,8 @@ class KCpiNeoTests {
 
     init {
         KKeystore.load(kfp.keystore.path, kfp.keystore.passwd)
-        KTorUtils.createClientEngine()
-        KTorUtils.tempFolder = Paths.get("C:/data/tmp")
+        KtorClient.createClientEngine()
+        KTempFile.tempFolder = Paths.get("C:/data/tmp")
 
         target = kfg.targets.find { it.sid == "e500230" }!! as KfTarget.CPINEO
         target.loadAuths(kfp.securityMaterials)

@@ -1,7 +1,6 @@
 package karlutka.clients
 
 import io.ktor.client.*
-import io.ktor.client.plugins.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -10,17 +9,15 @@ import karlutka.models.MPI
 import karlutka.models.MTarget
 import karlutka.parsers.pi.*
 import karlutka.server.Server
-import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
+import karlutka.util.KtorClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.serialization.decodeFromString
 import java.net.URL
 import java.net.URLEncoder
-import java.nio.file.Paths
 import java.util.*
-import kotlin.io.path.writeText
 
 class PI(
     override val konfig: KfTarget,
@@ -42,12 +39,10 @@ class PI(
     init {
         require(konfig is KfTarget.PIAF)
         httpHostPort = URL(konfig.url)
-        client = KTorUtils.createClient(
-            konfig.url,
-            Server.kfg.httpClientRetryOnServerErrors,
-            LogLevel.valueOf(Server.kfg.httpClientLogLevel)
+        client = KtorClient.createClient(
+            konfig.url, Server.kfg.httpClientRetryOnServerErrors, LogLevel.valueOf(Server.kfg.httpClientLogLevel)
         )
-        KTorUtils.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
+        KtorClient.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
     }
 
     fun hmiServices(sxml: String) {
@@ -70,13 +65,12 @@ class PI(
         return s.last()
     }
 
-    suspend fun perfServletListOfComponents(scope: CoroutineScope) =
-        KTorUtils.taskGet(client, mdtperfservlet, scope)
+    suspend fun perfServletListOfComponents(scope: CoroutineScope) = KtorClient.taskGet(scope, client, mdtperfservlet)
 
-    suspend fun perfServletListOfComponents(td: Deferred<KTorUtils.Task>): List<String> {
+    suspend fun perfServletListOfComponents(td: Deferred<KtorClient.Task>): List<String> {
         val t = td.await()
         require(t.resp.status.isSuccess() && t.resp.contentType()!!.match("text/xml"))
-        val p = PerfMonitorServlet.PerformanceDataQueryResults.parse(t.bodyAsText())
+        val p = PerfMonitorServlet.PerformanceDataQueryResults.parse(t)
         return p.components()
     }
 
@@ -87,18 +81,20 @@ class PI(
         val output: MutableMap<String, MutableList<PerfMonitorServlet.PerformanceTableRow>> = mutableMapOf()
 
         // перечень интервалов хотим сразу
-        val iv = KTorUtils.taskGet(client, mdtperfservlet + "?component=$comp", scope).await()
+        val iv = KtorClient.taskGet(scope, client, mdtperfservlet + "?component=$comp").await()
         require(iv.resp.status.isSuccess() && iv.resp.contentType()!!.match("text/xml"))
-        val p = PerfMonitorServlet.PerformanceDataQueryResults.parse(iv.bodyAsText())
+        val p = PerfMonitorServlet.PerformanceDataQueryResults.parse(iv)
         if (p.Result.Code == "MISSING_PARAM" && p.Periods != null) {
-            val m = mutableMapOf<String, Deferred<KTorUtils.Task>>()
+            val m = mutableMapOf<String, Deferred<KtorClient.Task>>()
             for (_Period in p.Periods.value) {
                 for (_Interval in _Period.Interval) {
                     val s = "${_Period.Type} ${_Interval.Begin}"
-                    val s2 = "$mdtperfservlet?component=$comp" +
-                            "&begin=${URLEncoder.encode(_Interval.Begin, Charsets.UTF_8)}" +
-                            "&end=${URLEncoder.encode(_Interval.End, Charsets.UTF_8)}"
-                    m[s] = KTorUtils.taskGet(client, s2, scope)
+                    val s2 = "$mdtperfservlet?component=$comp" + "&begin=${
+                        URLEncoder.encode(
+                            _Interval.Begin, Charsets.UTF_8
+                        )
+                    }" + "&end=${URLEncoder.encode(_Interval.End, Charsets.UTF_8)}"
+                    m[s] = KtorClient.taskGet(scope, client, s2)
                 }
             }
             m.forEach { (begin, td) ->
@@ -109,7 +105,7 @@ class PI(
                     t.execute()
                     ok = t.resp.status.isSuccess() && t.resp.contentType()!!.match("text/xml")
                 }
-                val p2 = PerfMonitorServlet.PerformanceDataQueryResults.parse(t.bodyAsText())
+                val p2 = PerfMonitorServlet.PerformanceDataQueryResults.parse(t)
                 output[begin] = mutableListOf()
             }
         } else {
@@ -143,7 +139,7 @@ class PI(
 
     fun uuid(u: UUID) = u.toString().replace("-", "")
 
-    suspend fun hmiGetRegistered() {
+    suspend fun hmiGetRegistered(scope: CoroutineScope) {
         val rep = Hm.HmiRequest(
             uuid(hmiClientId),
             uuid(UUID.randomUUID()),
@@ -154,16 +150,22 @@ class PI(
             "dummy",
             "dummy",
             "EN",
-            false,
+            true,           //?
             null,
             null,
             "1.0"
         )
-        val repRegistered = hmiPost("/rep/getregisteredhmimethods/int?container=any", rep)
-        this.hmiServices(repRegistered.MethodOutput!!.Return)
+        val td = KtorClient.taskPost(
+            scope,
+            client,
+            "/rep/getregisteredhmimethods/int?container=any",
+            mapOf("content-type" to "text/xml"),
+            rep.encodeToString()
+        )
+        this.hmiServices(hmiPost3(td).MethodOutput!!.Return)
     }
 
-    suspend fun hmiGeneralQuery(sxml: String): Hm.QueryResult {
+    suspend fun hmiGeneralQueryTask(scope: CoroutineScope, sxml: String): Deferred<KtorClient.Task> {
         val serv = findHmiServiceMethod("query", "generic")
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
@@ -180,17 +182,22 @@ class PI(
             null,
             "1.0"
         )
-        val resp = hmiPost(serv.url(), req)
+        val sxml = req.encodeToString()
+        val task = KtorClient.taskPost(client, serv.url(), mapOf("content-type" to "text/xml"), sxml)
+        task.remark = sxml
+        return scope.async { task.execute() }
+    }
+
+    @Deprecated("лучше hmiGeneralQueryTask")
+    suspend fun hmiGeneralQuery(scope: CoroutineScope, sxml: String): Hm.QueryResult {
+        val td = hmiGeneralQueryTask(scope, sxml)
+        val resp = hmiPost3(td)
         return Hm.QueryResult.parse(resp.MethodOutput!!.Return)
     }
 
-    // для асинхронности, эта функция не бросает исключений
     suspend fun hmiRead(
-        bodyXml: String,
-        vc: String = "SWC",
-        sp: String = "-1",
-        uc: Boolean = true
-    ): Pair<XiObj?, Exception?> {
+        scope: CoroutineScope, bodyXml: String, vc: String = "SWC", sp: String = "-1", uc: Boolean = true
+    ): Deferred<KtorClient.Task> {
         val serv = findHmiServiceMethod("read", "plain")
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
@@ -202,109 +209,135 @@ class PI(
             "dummy",
             "dummy",
             "EN",
-            true,
+            true,           // очень важно, иначе тормоза и сбои в работе
             null,
             null,
             "1.0"
         )
-        val resp = hmiPost2(serv.url(), req)
-        var exception: Exception? = null
-        var xiObj: XiObj? = null
-        if (resp.MethodFault != null || resp.CoreException != null) {
-            val s = resp.MethodFault?.LocalizedMessage ?: resp.CoreException?.LocalizedMessage ?: ""
-            val beforeStackTrace = s.split("Server stack trace")[0]
-            exception = MPI.HmiException(beforeStackTrace)
-            Paths.get("C:\\data\\tmp\\read_req.xml").writeText(req.encodeToString())
-        } else {
-            require(resp.MethodOutput!!.ContentType == "text/xml")
-            xiObj = XiObj.decodeFromString(resp.MethodOutput.Return)
-//            println("Успешно: ${xiObj.idInfo.key.typeID}")
-        }
-        return Pair(xiObj, exception)
+        val deftask =
+            KtorClient.taskPost(scope, client, serv.url(), mapOf("content-type" to "text/xml"), req.encodeToString())
+        return deftask
     }
 
-    suspend fun hmiGeneralQuery(req: Hm.GeneralQueryRequest) = hmiGeneralQuery(req.encodeToString())
-
-    suspend fun hmiAskSWCV() {
-        val swcv = hmiGeneralQuery(Hm.GeneralQueryRequest.swcv()).toSwcv().sortedBy { it.name }
-        this.swcv.addAll(swcv)
+    suspend fun hmiAskSWCV(scope: CoroutineScope) {
+        val td = hmiGeneralQueryTask(scope, Hm.GeneralQueryRequest.swcv())
+        val resp = hmiPost3(td)
+        requireNotNull(resp.MethodOutput)   //TODO проверить на пустой системе при случае, или эмуляторе
+        val lst = resp.toQueryResult().toSwcv().sortedBy { it.name }
+        this.swcv.addAll(lst)
     }
 
-    @Deprecated("не читает тексты, иногда возвращает пустоту", ReplaceWith("askNamespaceDecls"))
-    suspend fun askNamespaces() {
-        require(!swcv.isEmpty())
-        val srq = Hm.GeneralQueryRequest.namespaces(swcv.map { it.id })
-        namespaces.addAll(hmiGeneralQuery(srq).toNamespace(swcv))
-    }
-
-    suspend fun askNamespaceDecls(scope: CoroutineScope, predicate: (MPI.Swcv) -> Boolean = { true }) {
-        require(!swcv.isEmpty())
-        val deferred: MutableList<Deferred<Pair<XiObj?, Exception?>>> = mutableListOf()
-        val req: MutableList<String> = mutableListOf()
+    suspend fun askNamespaceDecls(
+        scope: CoroutineScope, predicate: (MPI.Swcv) -> Boolean
+    ): MutableList<Deferred<KtorClient.Task>> {
+        // Делаем столько taskPost-задач, сколько есть SWCV по предикату
+        val deferred: MutableList<Deferred<KtorClient.Task>> = mutableListOf()
         swcv.filter(predicate).forEach { s ->
             val ref = Hm.Ref(
                 PCommon.VC(s.id, 'S', -1),  //почему-то нельзя брать исходный тип SWCV
                 PCommon.Key("namespdecl", null, listOf(s.id))
             )
             val type = Hm.Type("namespdecl", ref, true, false, "7.0", "EN")
-            val sxml = Hm.ReadListRequest(type).encodeToString()
-            deferred.add(scope.async { hmiRead(sxml) })
-            req.add(sxml)
+            val td = hmiRead(scope, Hm.ReadListRequest(type).encodeToString())
+            deferred.add(td)
         }
-        deferred.forEachIndexed { idx, it ->
-            val pair = it.await()
-            var retry = false
-            if (pair.first != null && pair.second == null) {
-                val xiobj = pair.first!!
-                val sw = swcv.find { it.id == xiobj.idInfo.vc.swcGuid }
-                requireNotNull(sw)
-                val resp = xiobj.toNamespaces(sw)
-                this.namespaces.addAll(resp)    //TODO проверка на то, есть уже или ещё нет, чтобы не задваивалось
-            } else if (pair.second is MPI.HmiException) {
-                // бывают нормальные SWCV без неймспейсов, без паники
-                val msg = (pair.second as MPI.HmiException).message!!
-                // две ошибки ниже не могут быть обработаны при повторе
-                // Это случай когда нет неймспейсов вообще
-                val no = msg.contains(Regex("Key Namespace Definition .+ does not contain an object ID"))
-                // Это случай когда namespace definition находится в changelist
-                val errhmi = msg == "COULD_NOT_CREATE_HMIOUTPUT"
-                retry = !(no || errhmi)
+        return deferred
+    }
+
+    suspend fun parseNamespaceDecls(deferred: MutableList<Deferred<KtorClient.Task>>) {
+        deferred.forEachIndexed { idx, taskdef ->
+            val retry: Boolean
+            val task = taskdef.await()
+            if (task.resp.status.isSuccess() && task.resp.contentType()!!.match("text/xml")) {
+                val hr = Hm.HmiResponse.parse(task)
+                if (hr.MethodFault != null || hr.CoreException != null) {
+                    val s = hr.MethodFault?.LocalizedMessage ?: hr.CoreException?.LocalizedMessage ?: ""
+                    val msg = s.split("Server stack trace")[0]
+                    // две ошибки ниже не могут быть обработаны при повторе
+                    // Это случай когда нет неймспейсов вообще
+                    val no = msg.contains(Regex("Key Namespace Definition .+ does not contain an object ID"))
+                    // Это случай когда namespace definition находится в changelist
+                    val errhmi = msg == "COULD_NOT_CREATE_HMIOUTPUT"
+                    retry = !(no || errhmi)
+                } else {
+                    require(hr.MethodOutput!!.ContentType == "text/xml")
+                    val xiObj = XiObj.decodeFromString(hr.MethodOutput.Return)
+                    val sw = swcv.find { it.id == xiObj.idInfo.vc.swcGuid }
+                    requireNotNull(sw)
+                    val resp = xiObj.toNamespaces(sw)
+                    this.namespaces.addAll(resp)    //TODO проверка на то, есть уже или ещё нет, чтобы не задваивалось
+                    retry = false
+                }
             } else {
                 retry = true
             }
             if (retry) {
-                println(req[idx])
-                val a = hmiRead(req[idx])
-                println(a)
+                System.err.println("Ошибка при чтении неймспейса")
             }
         }
     }
 
-    suspend fun askRepoList() {
-        // длинный запрос-ответ
-        val repdatatypes = Hm.GeneralQueryRequest.Types.of(
-            MPI.RepTypes.values().map { it.toString() }
+//    suspend fun askRepoList(scope: CoroutineScope) {
+//        // длинный запрос-ответ
+//        val repdatatypes = Hm.GeneralQueryRequest.Types.of(MPI.RepTypes.values().map { it.toString() })
+//        val a = hmiGeneralQuery(
+//            scope,
+//            Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcv, repdatatypes).encodeToString()
+//        )
+//        val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, a)
+//        repolist.addAll(objs)
+//    }
+
+    suspend fun askRepoList2(scope: CoroutineScope): MutableList<Deferred<KtorClient.Task>> {
+        val deferred: MutableList<Deferred<KtorClient.Task>> = mutableListOf()
+        val p1 = listOf(MPI.RepTypes.AdapterMetaData, MPI.RepTypes.rfc, MPI.RepTypes.idoc)
+        val p2 = listOf(MPI.RepTypes.ifmextdef, MPI.RepTypes.ifmmessif, MPI.RepTypes.ifmoper)
+        val p3 = listOf(
+            MPI.RepTypes.ifmfaultm, MPI.RepTypes.ifmmessage, MPI.RepTypes.ifmtypeenh, MPI.RepTypes.ifmcontobj
         )
-        val a = hmiGeneralQuery(Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcv, repdatatypes))
-        val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, a)
-        repolist.addAll(objs)
+        val p4 = listOf(
+            MPI.RepTypes.MAP_TEMPLATE,
+            MPI.RepTypes.TRAFO_JAR,
+            MPI.RepTypes.XI_TRAFO,
+            MPI.RepTypes.FUNC_LIB,
+            MPI.RepTypes.MAPPING
+        )
+        val parts = listOf(p1, p2, p3, p4)
+        // swcns - где есть хоть один неймспейс
+        val swcns = swcv.filter { s -> namespaces.find { ns -> ns.swcv == s } != null }
+
+        parts.forEach {
+            val t = Hm.GeneralQueryRequest.Types.of(it.map { it.toString() })
+            val sxml = Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcns, t).encodeToString()
+            val r = hmiGeneralQueryTask(scope, sxml)
+            deferred.add(r)
+        }
+        // Это дата-типы которых больше всего в системе. Их читаем - отдельно каждый sap.com и чохом все остальные
+        val t = Hm.GeneralQueryRequest.Types.of("ifmtypedef")
+        val nonsap = Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcns.filter { it.vendor != "sap.com" }, t)
+        deferred.add(hmiGeneralQueryTask(scope, nonsap.encodeToString()))
+        swcv.filter { it.vendor == "sap.com" }.forEach { swc ->
+            val sap = Hm.GeneralQueryRequest.requestRepositoryDataTypesList(listOf(swc), t)
+            deferred.add(hmiGeneralQueryTask(scope, sap.encodeToString()))
+        }
+        return deferred
     }
 
-    suspend fun askRepoList2(scope: CoroutineScope) {
-        // параллельно
-        val deferred: MutableList<Deferred<Hm.QueryResult>> = mutableListOf()
-
-        MPI.parts().forEach {
-            val t = Hm.GeneralQueryRequest.Types.of(it)
-            val req = scope.async {
-                hmiGeneralQuery(Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcv, t))
+    suspend fun parseRepoList2(deferred: MutableList<Deferred<KtorClient.Task>>) {
+        deferred.forEach { taskdef ->
+            val task = taskdef.await()
+            if (task.resp.status.isSuccess() && task.resp.contentType()!!.match("text/xml")) {
+                val hr = Hm.HmiResponse.parse(task, false)
+                if (hr.CoreException != null && hr.MethodOutput == null) {
+                    System.err.println("error ${task.path} ${task.remark}")
+                }
+                val queryResult = hr.toQueryResult()
+                val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, queryResult)
+                task.close()
+                repolist.addAll(objs)   //TODO проверка
+            } else {
+                TODO()
             }
-            deferred.add(req)
-        }
-        deferred.forEach {
-            val resp = it.await()
-            val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, resp)
-            repolist.addAll(objs)
         }
     }
 
@@ -326,9 +359,10 @@ class PI(
             null,
             "1.0"
         )
-        val resp = hmiPost(serv.url(), req)
-        val trsp = Hm.TestExecutionResponse.decodeFromString(resp.MethodOutput!!.Return)
-        return trsp
+        TODO()
+//        val resp = hmiPost(serv.url(), req)
+//        val trsp = Hm.TestExecutionResponse.decodeFromString(resp.MethodOutput!!.Return)
+//        return trsp
     }
 
     suspend fun executeMMtest(testRequest: Hm.TestExecutionRequest): Hm.TestExecutionResponse {
@@ -349,9 +383,10 @@ class PI(
             null,
             "1.0"
         )
-        val resp = hmiPost(serv.url(), req)
-        val trsp = Hm.TestExecutionResponse.decodeFromString(resp.MethodOutput!!.Return)
-        return trsp
+        TODO()
+//        val resp = hmiPost(serv.url(), req)
+//        val trsp = Hm.TestExecutionResponse.decodeFromString(resp.MethodOutput!!.Return)
+//        return trsp
     }
 
     suspend fun dirReadHmiServerDetails(userAlias: String) {
@@ -371,61 +406,63 @@ class PI(
             "1.0",
             0
         )
-        val resp = hmiPost("/dir/hmi_server_details/int?container=any", req)
-        require(resp.MethodOutput!!.ContentType == "text/xml")
-        dirConfiguration = Hm.DirConfiguration.decodeFromString(resp.MethodOutput.Return)
+        TODO()
+//        val resp = hmiPost("/dir/hmi_server_details/int?container=any", req)
+//        require(resp.MethodOutput!!.ContentType == "text/xml")
+//        dirConfiguration = Hm.DirConfiguration.decodeFromString(resp.MethodOutput.Return)
     }
 
-    suspend fun hmiPost(
-        uri: String,
-        req: Hm.HmiRequest
-    ): Hm.HmiResponse {
-        if (req.HmiMethodInput.input.contains("QUERY_REQUEST_XML")) {
-            Paths.get("c:/data/tmp/QUERY_REQUEST_XML.xml").writeText(req.HmiMethodInput.input["QUERY_REQUEST_XML"]!!)
-        }
-        val a = client.post(uri) {
-            contentType(ContentType.Text.Xml)
-            val t = req.encodeToString()
-            Paths.get("c:/data/tmp/posthmi.request").writeText(t)
-            setBody(t)
-        }
-        val t = a.bodyAsText()
-        if (!a.status.isSuccess() || !a.contentType()!!.match("text/xml")) {
-            Paths.get("c:/data/tmp/posthmi_error.html").writeText(t)
-            throw Exception("кака")
-        }
-        Paths.get("c:/data/tmp/posthmi.response").writeText(t)
-        val hr = Hm.parseResponse(t)
-        if (hr.MethodOutput != null) Paths.get("c:/data/tmp/hmo.xml").writeText(hr.MethodOutput.Return)
-        return hr
-    }
+//    @Deprecated("удоли")
+//    suspend fun hmiPost(
+//        uri: String, req: Hm.HmiRequest
+//    ): Hm.HmiResponse {
+//        // синхронный тупой вариант в ОЗУ
+//        if (req.HmiMethodInput.input.contains("QUERY_REQUEST_XML")) {
+//            Paths.get("c:/data/tmp/QUERY_REQUEST_XML.xml").writeText(req.HmiMethodInput.input["QUERY_REQUEST_XML"]!!)
+//        }
+//        val a = client.post(uri) {
+//            contentType(ContentType.Text.Xml)
+//            val t = req.encodeToString()
+//            Paths.get("c:/data/tmp/posthmi.request").writeText(t)
+//            setBody(t)
+//        }
+//        val t = a.bodyAsText()
+//        if (!a.status.isSuccess() || !a.contentType()!!.match("text/xml")) {
+//            Paths.get("c:/data/tmp/posthmi_error.html").writeText(t)
+//            throw Exception("кака")
+//        }
+//        Paths.get("c:/data/tmp/posthmi.response").writeText(t)
+//        val hr = Hm.parseResponse(t)
+//        if (hr.MethodOutput != null) Paths.get("c:/data/tmp/hmo.xml").writeText(hr.MethodOutput.Return)
+//        return hr
+//    }
 
-    suspend fun hmiPost2(
-        uri: String,
-        req: Hm.HmiRequest,
-        attempts: Int = 5
-    ): Hm.HmiResponse {
-        var retry = 0
-        while (retry < attempts) {
-            try {
-                val resp = client.post(uri) {
-                    contentType(ContentType.Text.Xml)
-                    val t = req.encodeToString()
-                    setBody(t)
-                }
-                val t = resp.bodyAsText()
-                Paths.get("C:\\data\\tmp\\hmiPost2_response.xml").writeText(t)
-                if (resp.status.isSuccess() && resp.contentType()!!.match("text/xml")) {
-                    val hr = Hm.parseResponse(t)
-                    return hr
-                }
-                System.err.println("Повтор#$retry из-за ${resp.contentType()}")
-            } catch (e: ClientRequestException) {
-                System.err.println("Повтор#$retry из-за rc=${e.response.status}")
+//    suspend fun hmiPost2(
+//        scope: CoroutineScope, uri: String, req: Hm.HmiRequest
+//    ): Hm.HmiResponse {
+//        // пара асинхронов на диске с повторами
+//        val td = KtorClient.taskPost(scope, client, uri, mapOf("content-type" to "text/xml"), req.encodeToString())
+//        val task = td.await()
+//        while (task.retries < 10) {
+//            if (task.resp.status.isSuccess() && task.resp.contentType()!!.match("text/xml")) {
+//                val hr = Hm.HmiResponse.parse(task)
+//                return hr
+//            }
+//            task.execute()
+//        }
+//        throw Exception("HMI POST - ошибка после повторов")
+//    }
+
+    suspend fun hmiPost3(td: Deferred<KtorClient.Task>): Hm.HmiResponse {
+        val task = td.await()
+        while (task.retries < 10) {
+            if (task.resp.status.isSuccess() && task.resp.contentType()!!.match("text/xml")) {
+                val hr = Hm.HmiResponse.parse(task)
+                return hr
             }
-            retry++
+            task.execute()
         }
-        throw Exception("кака")
+        throw Exception("HMI POST - ошибка после повторов")
     }
 
     companion object {

@@ -1,6 +1,7 @@
 import KT.Companion.testInflux
 import karlutka.util.KInflux
 import karlutka.util.KTorUtils
+import karlutka.util.KtorClient
 import kotlinx.coroutines.runBlocking
 import java.time.Instant
 import kotlin.math.PI
@@ -13,7 +14,7 @@ class KInfluxTests {
 
     init {
         if (testInflux) {
-            KTorUtils.createClientEngine()
+            KtorClient.createClientEngine()
             KInflux.connect("http://localhost:8086", token.toCharArray())
             KInflux.org = "test"
             KInflux.bucket = "test1"

@@ -59,32 +59,9 @@ class MPI {
         val oid: String,
         val name: String,
         var text: String?,              // текст и проч могут меняться на ходу
-        var modifyDate: String,
-        var modifyUser: String,
-        var vid: String = ""
+        var modifyDate: String? = null,
+        var modifyUser: String? = null,
+        var vid: String? = null
     )
 
-    companion object {
-        // Для запроса объектов
-        fun parts(): List<List<String>> {
-            val p1 = listOf(RepTypes.AdapterMetaData, RepTypes.rfc, RepTypes.idoc)
-
-            val p2 = listOf(RepTypes.ifmtypedef,
-                RepTypes.ifmextdef,
-                RepTypes.ifmmessif,
-                RepTypes.ifmoper)
-
-            val p3 = listOf(RepTypes.ifmfaultm,
-                RepTypes.ifmmessage,
-                RepTypes.ifmtypeenh,
-                RepTypes.ifmcontobj)
-
-
-            val p4 = listOf(RepTypes.MAP_TEMPLATE, RepTypes.TRAFO_JAR, RepTypes.XI_TRAFO,
-                RepTypes.FUNC_LIB, RepTypes.MAPPING)
-
-            return listOf(p1.map { it.toString() }, p2.map { it.toString() }, p3.map { it.toString() }, p4.map { it.toString() })
-        }
-
-    }
 }

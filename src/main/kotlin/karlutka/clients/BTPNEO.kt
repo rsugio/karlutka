@@ -15,6 +15,7 @@ import karlutka.models.MTarget
 import karlutka.parsers.cpi.PBtpNeo
 import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
+import karlutka.util.KtorClient
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -25,7 +26,7 @@ class BTPNEO(override val konfig: KfTarget.BTPNEO) : MTarget {
     lateinit var token: MCommon.AuthToken
 
     init {
-        client = KTorUtils.createClient(konfig.apihost, 1, LogLevel.INFO, mapOf(), json)
+        client = KtorClient.createClient(konfig.apihost, 1, LogLevel.INFO, mapOf(), json)
         runBlocking { loadToken() }
         client.plugin(Auth).bearer {
             loadTokens {

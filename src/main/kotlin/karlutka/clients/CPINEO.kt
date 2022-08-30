@@ -19,6 +19,7 @@ import karlutka.parsers.PEdmx
 import karlutka.parsers.cpi.PCpi
 import karlutka.util.KTorUtils
 import karlutka.util.KfTarget
+import karlutka.util.KtorClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -35,7 +36,7 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
     lateinit var token: MCommon.AuthToken
 
     init {
-        client = KTorUtils.createClient(konfig.tmn, 2, LogLevel.HEADERS, headers, null)
+        client = KtorClient.createClient(konfig.tmn, 2, LogLevel.HEADERS, headers, null)
 
         if (konfig.basic != null) {
             client.plugin(Auth).basic {

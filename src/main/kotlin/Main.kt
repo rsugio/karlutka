@@ -54,7 +54,7 @@ fun main(args: Array<String>) {
     }
     println("Вре́менные файлы в ${KTorUtils.tempFolder}")
 
-    KTorUtils.createClientEngine(
+    KtorClient.createClientEngine(
         Server.kfg.httpClientThreads,
         Duration.ofMillis(Server.kfg.httpClientConnectionTimeoutMillis)
     )
