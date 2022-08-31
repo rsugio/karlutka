@@ -46,7 +46,7 @@ class KPerformanceServletTests {
                     x.MAX_RETRY_COUNTER + x.MIN_RETRY_COUNTER + x.AVG_PROCESSING_TIME + x.TOTAL_PROCESSING_TIME
             require(z > 0)
             require(x.AVG_RETRY_COUNTER.isNotBlank())
-            require(!x.stages.isEmpty())
+            require(x.stages.isNotEmpty())
             x.stages.forEach { s ->
                 require(s.Avg + s.Max + s.Min + s.Sequence > 0)
             }

@@ -14,7 +14,7 @@ fun main(args: Array<String>) {
 
     val pkfg: Path
     val ppw: Path
-    if (args.size < 1) {
+    if (args.isEmpty()) {
         pkfg = Paths.get("karla.yaml")
     } else {
         pkfg = Paths.get(args[0])
@@ -63,18 +63,26 @@ fun main(args: Array<String>) {
     Server.kfg.targets.forEach { konf ->
         konf.loadAuths(Server.kfpasswds.securityMaterials)
         val target: MTarget
-        if (konf is KfTarget.ABAP) {
-            target = AbapJCo(konf)
-        } else if (konf is KfTarget.PIAF) {
-            target = PI(konf)
-        } else if (konf is KfTarget.BTPNEO) {
-            target = BTPNEO(konf)
-        } else if (konf is KfTarget.BTPCF) {
-            target = BTPCF(konf)
-        } else if (konf is KfTarget.CPINEO) {
-            target = CPINEO(konf)
-        } else {
-            TODO("UNKNOWN")
+        when (konf) {
+            is KfTarget.ABAP -> {
+                target = AbapJCo(konf)
+            }
+
+            is KfTarget.PIAF -> {
+                target = PI(konf)
+            }
+
+            is KfTarget.BTPNEO -> {
+                target = BTPNEO(konf)
+            }
+
+            is KfTarget.BTPCF -> {
+                target = BTPCF(konf)
+            }
+
+            is KfTarget.CPINEO -> {
+                target = CPINEO(konf)
+            }
         }
         Server.targets[target.getSid()] = target
         println("\tзагружен ${konf.sid}(${konf.getKind()})")

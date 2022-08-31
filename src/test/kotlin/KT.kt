@@ -13,7 +13,7 @@ class KT {
             return InputStreamReader(BOMInputStream(x), Charsets.UTF_8).readText()
         }
 
-        val testInflux = false
-        val testBtpCf = false
+        const val testInflux = false
+        const val testBtpCf = false
     }
 }

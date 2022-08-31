@@ -243,7 +243,7 @@ class PerfMonitorServlet {
              */
             fun text(): String {
                 require(data.size < 2, { "Entry должно быть без вложенных тегов" })
-                return if (data.size == 0)
+                return if (data.isEmpty())
                     ""
                 else {
                     val x = data[0]
@@ -305,7 +305,7 @@ class PerfMonitorServlet {
             val rez = mutableListOf<PerformanceTableRow>()
             if (Data == null)
                 return rez
-            require(Data.ColumnNames.value.size > 0) // 22 для PI 7.4, 23 для PO 7.5
+            require(Data.ColumnNames.value.isNotEmpty()) // 22 для PI 7.4, 23 для PO 7.5
             val mx = mutableMapOf<String, Int>()
             var ix = 0
             Data.ColumnNames.value.forEach { k ->

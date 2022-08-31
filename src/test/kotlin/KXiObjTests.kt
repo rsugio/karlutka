@@ -8,7 +8,7 @@ class KXiObjTests {
     fun repository() {
         val swc = MPI.Swcv("3f38b2400b9e11ea9c32fae8ac130d0e", "zz", "?", "?", 'S', "EN", "?")
         val namespdecl = XiObj.decodeFromString(s("/pi_xiObj/rep01namespdecl.xml")).toNamespaces(swc)
-        require(!namespdecl.isEmpty())
+        require(namespdecl.isNotEmpty())
 
         val ad = XiObj.decodeFromString(s("/pi_xiObj/rep02adaptermeta.xml"))
         require(!ad.content.isEmpty)

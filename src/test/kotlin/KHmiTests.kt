@@ -65,7 +65,7 @@ class KHmiTests {
         val q2 = QueryResult.parse(s("/pi_HMI/queryResult_swcv2.xml")).toSwcv()
         require(q2.size > 100)
         val t = Hm.hmserializer.decodeFromString<QueryResult>(s("/pi_HMI/namespaceResponse2.xml")).toNamespace(q1)
-        require(t.size > 0)
+        require(t.isNotEmpty())
 
         val types = QueryResult.parse(s("/pi_HMI/rep1_query_resp.xml"))
         types.toTable().forEach { m ->
@@ -108,7 +108,12 @@ class KHmiTests {
             PCommon.VC("3f38b2400b9e11ea9c32fae8ac130d0e", 'S', -1),
             PCommon.Key("namespdecl", null, listOf("3f38b2400b9e11ea9c32fae8ac130d0e"))
         )
-        val type = Type("namespdecl", ref, true, false, "7.0", "EN")
+        val type = Type("namespdecl", ref,
+            ADD_IFR_PROPERTIES = true,
+            STOP_ON_FIRST_ERROR = false,
+            RELEASE = "7.0",
+            DOCU_LANG = "EN"
+        )
         val list = ReadListRequest(type)
         println(list.encodeToString())
     }

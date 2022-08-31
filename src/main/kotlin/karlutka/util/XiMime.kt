@@ -34,15 +34,19 @@ class XiMime {
                 val bp = mm.getBodyPart(1)
                 payloadContentId = bp.getHeader("CoNTeNt-id").toString()
                 payloadContentType = bp.getHeader("CoNTeNt-tYPE").toString()
-                if (bp.content is InputStream) {
-                    payload = (bp.content as InputStream).readBytes()
-                } else if (bp.content is String) {
-                    //TODO добавить тест и обработку на случай другой кодировки. Нужно сперва отправить иксай-сообщение вручную
-                    payload = (bp.content as String).toByteArray(Charsets.UTF_8)
-                } else if (bp.content is ByteArray)
-                    payload = bp.content as ByteArray
-                else
-                    TODO("надо разобрать этот случай: ${bp.content.javaClass}")
+                when (bp.content) {
+                    is InputStream -> {
+                        payload = (bp.content as InputStream).readBytes()
+                    }
+
+                    is String -> {
+                        //TODO добавить тест и обработку на случай другой кодировки. Нужно сперва отправить иксай-сообщение вручную
+                        payload = (bp.content as String).toByteArray(Charsets.UTF_8)
+                    }
+
+                    is ByteArray -> payload = bp.content as ByteArray
+                    else -> TODO("надо разобрать этот случай: ${bp.content.javaClass}")
+                }
             }
             var i = 2
             while (i < mm.count) {

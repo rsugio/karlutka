@@ -8,7 +8,7 @@ import nl.adaptivity.xmlutil.serialization.XmlValue
 
 class XiBasis {
     companion object {
-        val url = "/CommunicationChannelInService/CommunicationChannelInImplBean"
+        const val url = "/CommunicationChannelInService/CommunicationChannelInImplBean"
     }
 
     @Serializable
@@ -117,7 +117,7 @@ class XiBasis {
     @Serializable
     @XmlSerialName("Description", "", "")
     class Description(
-        val languageCode: String,
+        @Serializable val languageCode: String,
         @XmlValue(true)
         val text: String? = null,
     )
@@ -245,8 +245,8 @@ class XiBasis {
     // у идентификаторов динамическое имя, сюда не пишем
     @Serializable
     class Identifier(
-        val schemeAgencyID: String = "", //sap.com/com.sap.aii.af.soapadapter/XISOAPAdapterBean
-        val schemeID: String = "",       //Local Enterprise Bean
+        @Serializable val schemeAgencyID: String = "", //sap.com/com.sap.aii.af.soapadapter/XISOAPAdapterBean
+        @Serializable val schemeID: String = "",       //Local Enterprise Bean
         @XmlValue(true)
         inline val text: String = "",
     )
@@ -315,7 +315,7 @@ class XiBasis {
     class ValueMapping(
         @XmlElement(true)
         val MasterLanguage: String,
-        val AdministrativeData: AdministrativeData,
+        @Serializable val AdministrativeData: AdministrativeData,
         @XmlElement(true)
         val ValueMappingID: String,
         @XmlElement(true)
@@ -613,7 +613,7 @@ class XiBasis {
     /**
      * у Receiver в версии до 750 одни поля, в 750 другие
      */
-    @kotlinx.serialization.Serializable
+    @Serializable
     @XmlSerialName("Receiver", "", "")
     class Receiver(
         // PartyID и ComponentID это для <750

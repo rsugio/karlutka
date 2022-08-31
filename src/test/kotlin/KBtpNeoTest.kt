@@ -53,12 +53,12 @@ class KBtpNeoTest {
         runBlocking {
             withContext(Dispatchers.IO) {
                 val scim = bn.authorizationV1AccountsUsers()
-                require(scim.resources.size > 0)
+                require(scim.resources.isNotEmpty())
 
                 val lst = bn.authorizationV1AccountsGroups().names()
                 lst.forEach {
                     val gr = bn.authorizationV1AccountsGroupRolesBy(it)
-                    if (gr.names().size > 0) {
+                    if (gr.names().isNotEmpty()) {
                         val app = gr.roles[0]["applicationName"]!!
                         val providerAccount = gr.roles[0]["providerAccount"]!!
                         val a = bn.authorizationV1AccountsAppsRolesBy(app, providerAccount)

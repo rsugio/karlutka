@@ -24,7 +24,7 @@ class KAdapterMessageMonitoringTests {
         require(fault.isSuccess() && f2!!.Response.AttributeMetadata.size == 2)
 
         val filter = AdapterFilter()
-        require(filter.archive == false)
+        require(!filter.archive)
         var s = GetMessageList(filter).composeSOAP()
         require(s != "")
         var l = KSoap.parseSOAP<GetMessageListResponse>(s("/pi_AdapterMM/04.xml"), fault)
@@ -52,7 +52,7 @@ class KAdapterMessageMonitoringTests {
         )
         require(log1.composeSOAP().isNotBlank())
         var log2 = KSoap.parseSOAP<GetLogEntriesResponse>(s("/pi_AdapterMM/10log.xml"), fault)
-        require(log2!!.get().size == 0)
+        require(log2!!.get().isEmpty())
         log2 = KSoap.parseSOAP<GetLogEntriesResponse>(s("/pi_AdapterMM/11log.xml"), fault)
         require(log2!!.get().size > 10)
 
@@ -99,7 +99,7 @@ class KAdapterMessageMonitoringTests {
         val sbir = KSoap.parseSOAP<GetMessageBytesJavaLangStringIntBooleanResponse>(
             s("/pi_AdapterMM/22sbir.xml"), fault
         )
-        require(sbir!!.Response.length > 0 && fault.isSuccess())
+        require(sbir!!.Response.isNotEmpty() && fault.isSuccess())
 
         s = FailEoioMessage(mkey, true).composeSOAP()
         require(s.isNotBlank())

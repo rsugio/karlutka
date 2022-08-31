@@ -125,12 +125,18 @@ sealed class KfTarget {
         override fun loadAuths(auths: List<KfAuth>) {
             val kfa = auths.find { it.id == auth }
             require(kfa != null, { "для $sid не найден пароль $auth" })
-            if (kfa is KfAuth.Basic) {
-                basic = kfa
-            } else if (kfa is KfAuth.OAuth) {
-                oauth = kfa
-            } else {
-                error("Unsupported")
+            when (kfa) {
+                is KfAuth.Basic -> {
+                    basic = kfa
+                }
+
+                is KfAuth.OAuth -> {
+                    oauth = kfa
+                }
+
+                else -> {
+                    error("Unsupported")
+                }
             }
         }
 
@@ -165,11 +171,11 @@ data class Kfg(
 
     companion object {
         val cfg = YamlConfiguration(
-            true, true, null,
-            PolymorphismStyle.Property,
-            "type",
-            2, 120, SequenceStyle.Block,
-            SingleLineStringStyle.Plain
+            encodeDefaults = true, strictMode = true, extensionDefinitionPrefix = null,
+            polymorphismStyle = PolymorphismStyle.Property,
+            polymorphismPropertyName = "type",
+            encodingIndentationSize = 2, breakScalarsAt = 120, sequenceStyle = SequenceStyle.Block,
+            singleLineStringStyle = SingleLineStringStyle.Plain
         )
         val kaml = Yaml(EmptySerializersModule(), cfg)
 
@@ -256,11 +262,11 @@ data class KfPasswds(
 
     companion object {
         val cfg = YamlConfiguration(
-            true, true, null,
-            PolymorphismStyle.Property,
-            "type",
-            2, 120, SequenceStyle.Block,
-            SingleLineStringStyle.Plain
+            encodeDefaults = true, strictMode = true, extensionDefinitionPrefix = null,
+            polymorphismStyle = PolymorphismStyle.Property,
+            polymorphismPropertyName = "type",
+            encodingIndentationSize = 2, breakScalarsAt = 120, sequenceStyle = SequenceStyle.Block,
+            singleLineStringStyle = SingleLineStringStyle.Plain
         )
         val kaml = Yaml(EmptySerializersModule(), cfg)
 

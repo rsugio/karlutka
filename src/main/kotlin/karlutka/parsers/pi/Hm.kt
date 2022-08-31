@@ -102,11 +102,11 @@ class Hm {
 
         init {
             require(value.isNotEmpty())
-            if (leave_typeid == "string" && !value[0].isnull && value[0].value.size > 0)
+            if (leave_typeid == "string" && !value[0].isnull && value[0].value.isNotEmpty())
                 string = value[0].value[0] as String
             else if (leave_typeid == null) {
                 val x = value
-                    .filter { it.isnull == false }
+                    .filter { !it.isnull }          // это кастомные наллы
                     .flatMap { m -> m.value.filterIsInstance<Instance>() }
                 if (x.isNotEmpty()) instance = x[0]
             }
@@ -158,7 +158,7 @@ class Hm {
         val methodid: String,   //executemappingmethod
         val release: String,    //7.31
         val SP: String,         //0 или *
-        val subrelease: String, //*
+        @Serializable val subrelease: String, //*
         val patchlevel: String, //*
     ) {
         fun applCompLevel(): ApplCompLevel = ApplCompLevel(release, SP)
@@ -183,14 +183,11 @@ class Hm {
             }
             val params = Attribute(false, null, "Parameters", lst)
             val inst = Instance("com.sap.aii.util.hmi.api.HmiMethodInput", listOf(params))
-            val at = Attribute(
+            return Attribute(
                 false, null, name, listOf(
-                    Value(
-                        0, false, listOf(inst)
-                    )
+                    Value(0, false, listOf(inst))
                 )
             )
-            return at
         }
     }
 
@@ -204,6 +201,7 @@ class Hm {
         }
     }
 
+    @Suppress("unused")
     class HmiMethodFault(
         val LocalizedMessage: String,
         val Severity: String,
@@ -226,6 +224,7 @@ class Hm {
         }
     }
 
+    @Suppress("unused")
     class HmiCoreException(
         val LocalizedMessage: String,
         val Severity: String,
@@ -296,8 +295,7 @@ class Hm {
     ) {
         fun toQueryResult(): QueryResult {
             requireNotNull(MethodOutput)
-            val queryResult = hmserializer.decodeFromString<QueryResult>(MethodOutput.Return)
-            return queryResult
+            return hmserializer.decodeFromString(MethodOutput.Return)
         }
 
         companion object {
@@ -357,15 +355,15 @@ class Hm {
         @Serializable
         @XmlSerialName("swcListDef", "", "")
         class SwcListDef(
-            val def: String,
-            val swcInfoList: SwcInfoList? = null,
+            @Serializable val def: String,
+            @Serializable val swcInfoList: SwcInfoList? = null,
         )
 
         @Serializable
         @XmlSerialName("qc", "", "")
         class QC(
-            val qcType: String = "S",
-            val delMode: String = "N",
+            @Serializable val qcType: String = "S",
+            @Serializable val delMode: String = "N",
             @XmlElement(true)
             @XmlSerialName("clCxt", "", "")
             var clCxt: PCommon.ClCxt,
@@ -418,9 +416,8 @@ class Hm {
             @XmlElement(true) val bool: Boolean? = null,
             @XmlElement(true) val date: String? = null, //2022-01-12T10:19:12
             @XmlElement(true) val bin: String? = null,  //00000000000000000000000000000000
-        ) {
-            constructor(a: String) : this(a, null, null)
-        }
+        )
+//       {     constructor(a: String) : this(a, null, null) }
 
         @Serializable
         @XmlSerialName("result", "", "")
@@ -446,9 +443,9 @@ class Hm {
         @Serializable
         @XmlSerialName("swc", "", "")
         class SWC(
-            val id: String,
-            val sp: String?,
-            val underL: Boolean,
+            @Serializable val id: String,
+            @Serializable val sp: String?,
+            @Serializable val underL: Boolean,
         )
 
         @Serializable
@@ -466,20 +463,20 @@ class Hm {
         )
 
         companion object {
-            fun ofArg(lst: List<String>, cond: Condition?, vararg result: String): GeneralQueryRequest {
-                val lst2 = lst.map { Type(it) }
-                val res = Result(result.toList())
+//            fun ofArg(lst: List<String>, cond: Condition?, vararg result: String): GeneralQueryRequest {
+//                val lst2 = lst.map { Type(it) }
+//                val res = Result(result.toList())
+//
+//                return GeneralQueryRequest(
+//                    Types(lst2), QC("S", "N", PCommon.ClCxt("S", "U"), SwcListDef("A")), cond ?: Condition(), res
+//                )
+//            }
 
-                return GeneralQueryRequest(
-                    Types(lst2), QC("S", "N", PCommon.ClCxt("S", "U"), SwcListDef("A")), cond ?: Condition(), res
-                )
-            }
+//            fun ofType(type: String, cond: Condition?, vararg result: String): GeneralQueryRequest {
+//                return ofArg(listOf(type), cond, *result)
+//            }
 
-            fun ofType(type: String, cond: Condition?, vararg result: String): GeneralQueryRequest {
-                return ofArg(listOf(type), cond, *result)
-            }
-
-            fun elementary(key: String, op: String, c: Simple): Condition {
+            private fun elementary(key: String, op: String, c: Simple): Condition {
                 return Condition(null, Elementary(Single(key, Val(c), op)))
             }
 
@@ -491,19 +488,12 @@ class Hm {
 
             fun namespaces(swc: List<String>): GeneralQueryRequest {
                 val swcinfolist = SwcInfoList(swc.map { x -> SWC(x, "-1", false) })
-                val req = GeneralQueryRequest(
+                return GeneralQueryRequest(
                     Types(listOf(Type("namespace"))),
                     QC("S", "N", PCommon.ClCxt("S", "User"), SwcListDef("G", swcinfolist)),
                     elementary("QA_NSP_ADD_CLASSIC", "EQ", Simple(null, null, false)),
                     Result(listOf("RA_NSP_STRING", "TEXT"))
                 )
-//                val req2 = GeneralQueryRequest(
-//                    Types(listOf(Type("namespdecl"))),
-//                    QC("S", "N", ClCxt("S", "User"), SwcListDef("G", swcinfolist)),
-//                    elementary("OBJECTID", "NOT_EQ", Simple("")),
-//                    Result(listOf("Namespace", "OBJECTID", "RA_XILINK", "MODIFYDATE", "MODIFYUSER", "VERSIONID"))
-//                )
-                return req
             }
 
             fun requestRepositoryDataTypesList(
@@ -530,8 +520,8 @@ class Hm {
             ): List<MPI.RepositoryObject> {
                 val repolist: MutableList<MPI.RepositoryObject> = mutableListOf()
 
-                queryResult.toTable().forEach {
-                    val ra_xilink = it["RA_XILINK"]!!.qref!!.ref
+                queryResult.toTable().forEach { row ->
+                    val ra_xilink = row["RA_XILINK"]!!.qref!!.ref
                     val vc = ra_xilink.vc   // vc.swcGuid, vc.caption, vc.vcType
                     val swc = swcv.find { it.id == vc.swcGuid }
                     requireNotNull(swc)
@@ -545,8 +535,8 @@ class Hm {
                         }
 
                         val namespace = ra_xilink.key.elem[1]
-                        val text = it["TEXT"]!!.simple!!.strg
-                        val folder = it["FOLDERREF"]!!.simple!!.bin
+                        val text = row["TEXT"]!!.simple!!.strg
+                        val folder = row["FOLDERREF"]!!.simple!!.bin
                         require(folder!!.isNotEmpty())
 
 //                        val MODIFYDATE = it["MODIFYDATE"]!!.simple!!.date!!   //TODO - разбирать 2029-12-31T23:59:59
@@ -589,7 +579,7 @@ class Hm {
             matrix.r.forEach { row ->
                 val res = mutableMapOf<String, C>()
                 row.c.forEachIndexed { cx, col ->
-                    val cn = posTypeMapping.get(cx)
+                    val cn = posTypeMapping[cx]
                     requireNotNull(cn)
                     if (cn.isNotBlank()) {
                         res[cn] = col
@@ -609,7 +599,7 @@ class Hm {
                     x["VENDOR"]!!.strvalue()!!,
                     x["NAME"]!!.strvalue()!!,
                     x["VERSION"]!!.strvalue()!!,
-                    x["WS_TYPE"]!!.strvalue()!!.get(0),
+                    x["WS_TYPE"]!!.strvalue()!![0],
                     x["ORIGINAL_LANGUAGE"]!!.strvalue()!!,
                     x["WS_NAME"]!!.strvalue()!!
                 )
@@ -691,15 +681,11 @@ class Hm {
             @XmlElement(true) val nsp: Nsp? = null
         ) {
             fun strvalue(): String? {
-                if (qref != null) {
-                    return "qref=" + qref.ref.key.typeID
+                return if (qref != null) {
+                    "qref=" + qref.ref.key.typeID
                 } else if (nsp != null) {
-                    return nsp.key.elem[0]      //неймспейсы
-                } else if (wkID != null) {
-                    return wkID.id
-                } else if (simple != null) {
-                    return simple.strg
-                } else return null
+                    nsp.key.elem[0]      //неймспейсы
+                } else wkID?.id ?: simple?.strg
             }
 
             override fun toString() = "C(${strvalue()})"
@@ -728,8 +714,8 @@ class Hm {
         @Serializable
         @XmlSerialName("qref", "", "")
         class Qref(
-            val isMod: Boolean,
-            val isInUnderL: Boolean,
+            @Serializable val isMod: Boolean,
+            @Serializable val isInUnderL: Boolean,
             @XmlElement(true) val ref: Ref,
         )
 
@@ -753,9 +739,9 @@ class Hm {
         @Serializable
         @XmlSerialName("vspec", "", "")
         class VSpec(
-            val type: Int,
-            val id: String,
-            val deleted: Boolean,
+            @Serializable val type: Int,
+            @Serializable val id: String,
+            @Serializable val deleted: Boolean,
         )
 
         override fun toString() = "Ref($key)"
@@ -862,8 +848,7 @@ class Hm {
                         )
                     ), TestParameters("REQUEST", 0, 0), 3
                 )
-                val t = TestExecutionRequest(ref, td)
-                return t
+                return TestExecutionRequest(ref, td)
             }
         }
     }
@@ -894,7 +879,8 @@ class Hm {
     @Serializable
     @XmlSerialName("message", "", "")
     class TestMessage(
-        val level: String? = "INFO", @XmlValue(true) val text2: String? = null
+        val level: String? = "INFO",
+        @Serializable @XmlValue(true) val text2: String? = null
     )
 
     @Serializable
@@ -951,7 +937,7 @@ class Hm {
         @Serializable
         @XmlSerialName("FEATURE", "", "")
         class Feature(
-            val FEATUREID: String
+            @Serializable val FEATUREID: String
         )
 
         @Serializable
@@ -963,7 +949,7 @@ class Hm {
         @Serializable
         @XmlSerialName("Role", "", "")
         class Role(
-            val RoleID: String
+            @Serializable val RoleID: String
         )
 
         @Serializable
@@ -1017,14 +1003,14 @@ class Hm {
         @XmlElement(true)
         val ref: Ref,
 
-        val ADD_IFR_PROPERTIES: Boolean = true,
-        val STOP_ON_FIRST_ERROR: Boolean = true,
-        val RELEASE: String = "7.0",
-        val DOCU_LANG: String = "EN",
-        val XSD_VERSION: String = "http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/",
-        val WITH_UI_TEXTS: Boolean = false,
-        val ADD_ENHANCEMENTS: Boolean = false,
-        val WSDL_XSD_GEN_MODE: String = "EXTERNAL",
+        @Serializable val ADD_IFR_PROPERTIES: Boolean = true,
+        @Serializable val STOP_ON_FIRST_ERROR: Boolean = true,
+        @Serializable val RELEASE: String = "7.0",
+        @Serializable val DOCU_LANG: String = "EN",
+        @Serializable val XSD_VERSION: String = "http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/",
+        @Serializable val WITH_UI_TEXTS: Boolean = false,
+        @Serializable val ADD_ENHANCEMENTS: Boolean = false,
+        @Serializable val WSDL_XSD_GEN_MODE: String = "EXTERNAL",
     )
 
     // общие: DOCU_LANG, RELEASE, DOCU_LANG

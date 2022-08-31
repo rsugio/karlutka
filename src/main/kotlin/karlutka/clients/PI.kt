@@ -14,6 +14,7 @@ import karlutka.util.KtorClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import java.net.URL
 import java.net.URLEncoder
@@ -28,7 +29,7 @@ class PI(
 
     // список адаптер фреймворков, вида af.sid.host-db
     val afs = mutableListOf<String>()
-    val hmiClientId = UUID.randomUUID()
+    val hmiClientId: UUID = UUID.randomUUID()!!
     lateinit var hmiServices: List<Hm.HmiService>
     val swcv: MutableList<MPI.Swcv> = mutableListOf()
     val namespaces: MutableList<MPI.Namespace> = mutableListOf()
@@ -82,7 +83,12 @@ class PI(
         val output: MutableMap<String, MutableList<PerfMonitorServlet.PerformanceTableRow>> = mutableMapOf()
 
         // перечень интервалов хотим сразу
-        val iv = scope.async { KtorClient.taskGet(client, mdtperfservlet + "?component=$comp") }.await()
+        val iv = withContext(scope.coroutineContext) {
+            KtorClient.taskGet(
+                client,
+                mdtperfservlet + "?component=$comp"
+            )
+        }
         require(iv.resp.status.isSuccess() && iv.resp.contentType()!!.match("text/xml"))
         val p = PerfMonitorServlet.PerformanceDataQueryResults.parse(iv)
         if (p.Result.Code == "MISSING_PARAM" && p.Periods != null) {
@@ -237,7 +243,12 @@ class PI(
                 PCommon.VC(s.id, 'S', -1),  //почему-то нельзя брать исходный тип SWCV
                 PCommon.Key("namespdecl", null, listOf(s.id))
             )
-            val type = Hm.Type("namespdecl", ref, true, false, "7.0", "EN")
+            val type = Hm.Type("namespdecl", ref,
+                ADD_IFR_PROPERTIES = true,
+                STOP_ON_FIRST_ERROR = false,
+                RELEASE = "7.0",
+                DOCU_LANG = "EN"
+            )
             val td = hmiRead(scope, Hm.ReadListRequest(type).encodeToString())
             deferred.add(td)
         }
@@ -404,6 +415,6 @@ class PI(
     }
 
     companion object {
-        val mdtperfservlet = "/mdt/performancedataqueryservlet"
+        const val mdtperfservlet = "/mdt/performancedataqueryservlet"
     }
 }

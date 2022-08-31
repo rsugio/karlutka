@@ -154,18 +154,18 @@ class ChannelAdminServlet {
             error.exception = null
             error.usage = null
             error.description = ""
-            if (sxml.contains("<!DOCTYPE ErrorInformation")) {
+            return if (sxml.contains("<!DOCTYPE ErrorInformation")) {
                 val e = ErrorInformationType.parse(sxml)
                 error.exception = e.exception
                 error.usage = e.usage
                 error.description = e.description
-                return mutableListOf()
+                mutableListOf()
             } else if (sxml.contains("<!DOCTYPE ChannelAdminResult")) {
                 val ds = xmlserializer.decodeFromString<ChannelAdminResult>(sxml)
-                return ds.channels!!.channels
+                ds.channels!!.channels
             } else {
                 val ds = xmlserializer.decodeFromString<ChannelStatusResult>(sxml)
-                return ds.channels!!.channels
+                ds.channels!!.channels
             }
         }
     }
