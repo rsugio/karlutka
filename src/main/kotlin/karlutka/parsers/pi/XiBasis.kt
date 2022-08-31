@@ -21,7 +21,7 @@ class XiBasis {
     data class CommunicationChannelQueryResponse(
         @XmlElement(true)
         @XmlSerialName("CommunicationChannelID", "", "")
-        val channels: List<CommunicationChannelID> = mutableListOf(),
+        val channels: List<CommunicationChannelID> = listOf(),
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
@@ -40,17 +40,17 @@ class XiBasis {
     class LogMessageCollection(
         @XmlElement(true)
         @XmlSerialName("LogMessageCommunicationChannel", "", "")
-        val channelLogs: List<LogMessage> = mutableListOf(),
+        val channelLogs: List<LogMessage> = listOf(),
         @XmlElement(true)
         @XmlSerialName("LogMessageOthers", "", "")
-        val otherLogs: List<LogMessage> = mutableListOf(),
+        val otherLogs: List<LogMessage> = listOf(),
     )
 
     @Serializable
     class LogMessage(
         @XmlElement(true)
         @XmlSerialName("LogMessageItem", "", "")
-        val LogMessageItem: List<LogMessageItem> = mutableListOf(),
+        val LogMessageItem: List<LogMessageItem> = listOf(),
     )
 
     @Serializable
@@ -110,7 +110,7 @@ class XiBasis {
         val ReadContext: String = "User",
         @XmlElement(true)
         @XmlSerialName("CommunicationChannelID", "", "")
-        val channel: List<CommunicationChannelID> = mutableListOf(),
+        val channel: List<CommunicationChannelID> = listOf(),
     ) : KSoap.ComposeSOAP()
 
 
@@ -213,7 +213,7 @@ class XiBasis {
             @Serializable
             class ValueTableRow(
                 @XmlElement(true)
-                val valueTableCell: List<ValueTableCell> = mutableListOf(),
+                val valueTableCell: List<ValueTableCell> = listOf(),
             )
 
             @Serializable
@@ -228,8 +228,8 @@ class XiBasis {
         @Serializable
         @XmlSerialName("ModuleProcess", "", "")
         class ModuleProcess(
-            val process: List<ProcessStep> = mutableListOf(),
-            val params: List<ParameterGroup> = mutableListOf(),
+            val process: List<ProcessStep> = listOf(),
+            val params: List<ParameterGroup> = listOf(),
         )
 
         @Serializable
@@ -249,7 +249,7 @@ class XiBasis {
             @XmlElement(true)
             val ParameterGroupID: String, //request
             @XmlElement(true)
-            val parameters: List<Parameter> = mutableListOf(),
+            val parameters: List<Parameter> = listOf(),
         )
 
         @Serializable
@@ -297,7 +297,7 @@ class XiBasis {
     class ValueMappingQueryResponse(
         @XmlElement(true)
         @XmlSerialName("ValueMappingID", "", "")
-        val ValueMappingID: List<String> = mutableListOf(),
+        val ValueMappingID: List<String> = listOf(),
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: String?,
@@ -320,7 +320,7 @@ class XiBasis {
         val ReadContext: String? = null,
         @XmlElement(true)
         @XmlSerialName("ValueMappingID", "", "")
-        val channel: List<String> = mutableListOf(),
+        val channel: List<String> = listOf(),
     ) : KSoap.ComposeSOAP() {
 
         companion object {
@@ -332,7 +332,7 @@ class XiBasis {
     @XmlSerialName("ValueMappingReadResponse", "http://sap.com/xi/BASIS", "b")
     class ValueMappingReadResponse(
         @XmlElement(true)
-        val ValueMapping: List<ValueMapping> = mutableListOf(),
+        val ValueMapping: List<ValueMapping> = listOf(),
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
@@ -359,7 +359,7 @@ class XiBasis {
         val GroupName: String,
         @XmlElement(true)
         @XmlSerialName("Representation", "", "")
-        val Representation: List<Identifier> = mutableListOf(),
+        val Representation: List<Identifier> = listOf(),
     )
 
     @Serializable
@@ -376,7 +376,7 @@ class XiBasis {
     class ConfigurationScenarioQueryResponse(
         @XmlElement(true)
         @XmlSerialName("ConfigurationScenarioID", "", "")
-        val ConfigurationScenarioID: List<String> = mutableListOf(),
+        val ConfigurationScenarioID: List<String> = listOf(),
 
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
@@ -401,7 +401,7 @@ class XiBasis {
 
         @XmlElement(true)
         @XmlSerialName("ConfigurationScenarioID", "", "")
-        val ConfigurationScenarioID: List<String> = mutableListOf(),
+        val ConfigurationScenarioID: List<String> = listOf(),
     ) : KSoap.ComposeSOAP() {
 
         companion object {
@@ -414,7 +414,7 @@ class XiBasis {
     class ConfigurationScenarioReadResponse(
         @XmlElement(true)
         @XmlSerialName("ConfigurationScenario", "", "")
-        val ConfigurationScenario: List<ConfigurationScenario> = mutableListOf(),
+        val ConfigurationScenario: List<ConfigurationScenario> = listOf(),
 
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
@@ -440,13 +440,13 @@ class XiBasis {
         @XmlElement(true)
         val ConfigurationScenarioID: String,
         @XmlElement(true)
-        val BusinessSystem: List<BusinessSystemID> = mutableListOf(),
+        val BusinessSystem: List<BusinessSystemID> = listOf(),
         @XmlElement(true)
         @XmlSerialName("CommunicationChannel", "", "")
-        val CommunicationChannel: List<CommunicationChannelID> = mutableListOf(),
+        val CommunicationChannel: List<CommunicationChannelID> = listOf(),
         @XmlElement(true)
         @XmlSerialName("IntegratedConfiguration", "", "")
-        val IntegratedConfiguration: List<IntegratedConfigurationID> = mutableListOf(),
+        val IntegratedConfiguration: List<IntegratedConfigurationID> = listOf(),
     )
 
     @Serializable
@@ -463,7 +463,7 @@ class XiBasis {
     class IntegratedConfigurationQueryResponse(
         @XmlElement(true)
         @XmlSerialName("IntegratedConfigurationID", "", "")
-        val IntegratedConfigurationID: List<IntegratedConfigurationID> = mutableListOf(),
+        val IntegratedConfigurationID: List<IntegratedConfigurationID> = listOf(),
 
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
@@ -487,7 +487,7 @@ class XiBasis {
         val ReadContext: String = "User",
         @XmlElement(true)
         @XmlSerialName("IntegratedConfigurationID", "", "")
-        val IntegratedConfigurationID: List<IntegratedConfigurationID> = mutableListOf(),
+        val IntegratedConfigurationID: List<IntegratedConfigurationID> = listOf(),
     ) : KSoap.ComposeSOAP() {
         companion object {
             fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
@@ -500,7 +500,7 @@ class XiBasis {
     class IntegratedConfiguration750ReadResponse(
         @XmlElement(true)
         @XmlSerialName("IntegratedConfiguration", "", "")
-        val IntegratedConfiguration: List<IntegratedConfiguration> = mutableListOf(),
+        val IntegratedConfiguration: List<IntegratedConfiguration> = listOf(),
 
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
@@ -521,7 +521,7 @@ class XiBasis {
     class IntegratedConfigurationReadResponse(
         @XmlElement(true)
         @XmlSerialName("IntegratedConfiguration", "", "")
-        val IntegratedConfiguration: List<IntegratedConfiguration> = mutableListOf(),
+        val IntegratedConfiguration: List<IntegratedConfiguration> = listOf(),
 
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
@@ -555,10 +555,10 @@ class XiBasis {
         val Receivers: Receivers,
         @XmlElement(true)
         @XmlSerialName("ReceiverInterfaces", "", "")
-        val ReceiverInterfaces: List<ReceiverInterfaces> = mutableListOf(),
+        val ReceiverInterfaces: List<ReceiverInterfaces> = listOf(),
         @XmlElement(true)
         @XmlSerialName("OutboundProcessing", "", "")
-        val OutboundProcessing: List<OutboundProcessing> = mutableListOf(),
+        val OutboundProcessing: List<OutboundProcessing> = listOf(),
         @XmlElement(true)
         val PrefixNamespaceMapping: PrefixNamespaceMapping? = null,
         @XmlElement(true)
@@ -612,7 +612,7 @@ class XiBasis {
         val DynamicReceiverRule: DynamicReceiverRule? = null,
         @XmlElement(true)
         @XmlSerialName("ReceiverRule", "", "")
-        val ReceiverRule: List<ReceiverRule> = mutableListOf(),
+        val ReceiverRule: List<ReceiverRule> = listOf(),
         @XmlElement(true)
         @XmlSerialName("NoReceiverBehaviour", "", "")
         val NoReceiverBehaviour: String,
@@ -630,7 +630,7 @@ class XiBasis {
         val Mapping: RepositoryReferenceID,
         @XmlElement(true)
         @XmlSerialName("MappingParamters", "", "")
-        val MappingParamters: List<MappingParameters> = mutableListOf(),
+        val MappingParamters: List<MappingParameters> = listOf(),
     )
 
     @Serializable
@@ -649,7 +649,7 @@ class XiBasis {
     class ReceiverRuleCondition(
         @XmlElement(true)
         @XmlSerialName("AtomicConditionBlock", "", "")
-        val AtomicConditionBlock: List<AtomicConditionBlock> = mutableListOf(),
+        val AtomicConditionBlock: List<AtomicConditionBlock> = listOf(),
     )
 
     @Serializable
@@ -759,7 +759,7 @@ class XiBasis {
         val Mapping: RepositoryReferenceID? = null,
         @XmlElement(true)
         @XmlSerialName("MappingParameters", "", "")
-        val MappingParameters: List<MappingParameters> = mutableListOf(),
+        val MappingParameters: List<MappingParameters> = listOf(),
         @XmlElement(true)
         @XmlSerialName("Interface", "", "")
         val Interface: RepositoryReferenceID,
