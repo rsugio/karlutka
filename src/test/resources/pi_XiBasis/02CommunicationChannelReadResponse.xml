@@ -5,7 +5,7 @@
             <CommunicationChannel>
                 <MasterLanguage>EN</MasterLanguage>
                 <AdministrativeData>
-                    <ResponsibleUserAccountID>aaaaaaaaaaaa</ResponsibleUserAccountID>
+                    <ResponsibleUserAccountID>РУССЯЗ</ResponsibleUserAccountID>
                     <LastChangeUserAccountID>bbbbbbbbbbbbb</LastChangeUserAccountID>
                     <LastChangeDateTime>2020-04-28T11:18:51.118+03:00</LastChangeDateTime>
                     <FolderPathID>/SCPI/SAP_HYBRIS/Entities/SendStations/</FolderPathID>
