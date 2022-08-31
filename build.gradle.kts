@@ -20,11 +20,10 @@ repositories {
 //    maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers") }
 }
 val ktor_version: String = "2.1.0"
-val kotlinx_html_jvm_version = "0.8.0"    //было 0.7.3
 val kotlinx_serialization_version = "1.4.0"
-val exposed_version: String = "0.39.2"  //было 0.39.1
+val exposed_version: String = "0.39.2"
 val xmlutil_version: String = "0.84.2"
-val kaml_version: String = "0.47.0"     //было 0.46
+val kaml_version: String = "0.47.0"
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -66,7 +65,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
 
 //    implementation("io.micrometer:micrometer-registry-prometheus:1.6.3")
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinx_html_jvm_version")
+//    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.8.0")        ???
 
 //  если захотим кликхаус
 //  implementation("com.clickhouse:clickhouse-jdbc:0.3.2-patch1")

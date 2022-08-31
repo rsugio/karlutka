@@ -25,7 +25,7 @@
                 <TransportProtocolVersion></TransportProtocolVersion>
                 <MessageProtocol>SOAP</MessageProtocol>
                 <MessageProtocolVersion></MessageProtocolVersion>
-                <AdapterEngineName>??????????????????????</AdapterEngineName>
+                <AdapterEngineName>af.sid.host</AdapterEngineName>
                 <AdapterSpecificAttribute>
                     <Name>enableDynConfigReceiver</Name>
                     <Namespace></Namespace>
