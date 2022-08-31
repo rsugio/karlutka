@@ -139,7 +139,7 @@ class KSoap {
             autoPolymorphic = true
         }
 
-        @Deprecated("Использовать не рекомендуется", ReplaceWith("parseSOAP", "XmlReader"))
+        @Deprecated("Использовать в крайнем случае", ReplaceWith("parseSOAP", "XmlReader"))
         inline fun <reified T> parseSOAP(sxml: String, f: Fault): T? {
             val x = xmlserializer.decodeFromString<Envelope<T>>(sxml)
             f.faultcode = x.body.fault?.faultcode ?: ""

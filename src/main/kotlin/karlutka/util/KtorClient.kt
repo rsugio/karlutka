@@ -135,7 +135,6 @@ object KtorClient {
                 if (cd != null) {
                     this.contentDisposition = ContentDisposition.parse(cd)
                 }
-
                 os = path.outputStream().buffered()
                 val channel: ByteReadChannel = resp.body()
                 withContext(Dispatchers.IO) {

@@ -1,6 +1,7 @@
 import karlutka.clients.PI
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.PCommon
+import karlutka.server.DatabaseFactory
 import karlutka.server.Server
 import karlutka.util.*
 import kotlinx.coroutines.Dispatchers
@@ -22,9 +23,16 @@ class KPiTests {
         KtorClient.createClientEngine()
         KTempFile.tempFolder = Paths.get(Server.kfg.tmpdir)
 
+        DatabaseFactory.init(Server.kfg.h2connection)
+
         target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
         target.loadAuths(Server.kfpasswds.securityMaterials)
         pi = PI(target)
+    }
+
+    @Test
+    fun nop() {
+        println("NOP 00240")
     }
 
     @Test
@@ -48,7 +56,6 @@ class KPiTests {
             }
         }
     }
-
     @Test
     fun hmi() {
         runBlocking {
@@ -108,8 +115,15 @@ class KPiTests {
                 val cc = pi.requestCommunicationChannelsAsync(this)
                 val ico75 = pi.requestICo75Async(this)
                 pi.parseCommunicationChannelsResponse(cc)
+                val ccd = pi.readCommunicationChannelAsync(this, pi.dir_cc)
+
                 pi.parseICoResponse(ico75)
+                pi.readCommunicationChannelResponse(ccd)
+                val icod = pi.readICo75Async(this, pi.dir_ico)
+                pi.parseICo750ReadResponse(icod)
             }
         }
     }
+
+    // сюда новое
 }

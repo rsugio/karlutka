@@ -9,6 +9,7 @@ import karlutka.models.MPI
 import karlutka.models.MTarget
 import karlutka.parsers.pi.*
 import karlutka.serialization.KSoap
+import karlutka.server.DatabaseFactory
 import karlutka.server.Server
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
@@ -17,6 +18,10 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 import java.net.URL
 import java.net.URLEncoder
 import java.util.*
@@ -37,8 +42,12 @@ class PI(
     val namespaces: MutableList<MPI.Namespace> = mutableListOf()
     val repolist: MutableList<MPI.RepositoryObject> = mutableListOf()
     val dir_cc: MutableList<XiBasis.CommunicationChannelID> = mutableListOf()
+    val dir_ico: MutableList<XiBasis.IntegratedConfigurationID> = mutableListOf()
+    val dir_confscenario: MutableList<XiBasis.ConfigurationScenario> = mutableListOf()
 
     lateinit var dirConfiguration: Hm.DirConfiguration
+
+    val contextuser = "_"                   // пользователь, использующийся в контекстных запросах
 
     init {
         require(konfig is KfTarget.PIAF)
@@ -47,6 +56,15 @@ class PI(
             konfig.url, Server.kfg.httpClientRetryOnServerErrors, LogLevel.valueOf(Server.kfg.httpClientLogLevel)
         )
         KtorClient.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
+
+        transaction {
+            val exist = DatabaseFactory.PI.select(DatabaseFactory.PI.sid eq konfig.sid).execute(this)
+            if (exist == null) {
+                DatabaseFactory.PI.insert {
+                    it[sid] = konfig.sid
+                }
+            }
+        }
     }
 
     fun hmiServices(sxml: String) {
@@ -425,15 +443,40 @@ class PI(
         return scope.async { task.execute() }
     }
 
+    suspend fun readCommunicationChannelAsync(
+        scope: CoroutineScope,
+        ccl: List<XiBasis.CommunicationChannelID>
+    ): Deferred<KtorClient.Task> {
+        val task = KtorClient.taskPost(client, XiBasis.CommunicationChannelReadRequest(contextuser, ccl))
+        return scope.async { task.execute() }
+    }
+
     suspend fun parseCommunicationChannelsResponse(td: Deferred<KtorClient.Task>) {
         val task = taskAwait(td, ContentType.Text.Xml)
         val fault = KSoap.Fault()
         val t = KSoap.parseSOAP<XiBasis.CommunicationChannelQueryResponse>(task.bodyAsXmlReader(), fault)
         require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
-        t!!.channels.forEach { cc ->
-            if (!dir_cc.contains(cc)) dir_cc.add(cc)
-            //TODO добавить сюда запуск чтения данных канала
+        transaction {
+            t!!.channels.forEach { cc ->
+                if (!dir_cc.contains(cc)) {
+                    dir_cc.add(cc)
+                    DatabaseFactory.PICC.insert {
+                        it[sid] = konfig.sid
+                        it[PartyID] = cc.PartyID
+                        it[ComponentID] = cc.ComponentID
+                        it[ChannelID] = cc.ChannelID
+                    }
+                }
+            }
         }
+    }
+
+    suspend fun readCommunicationChannelResponse(td: Deferred<KtorClient.Task>) {
+        val task = taskAwait(td, ContentType.Text.Xml)
+        val fault = KSoap.Fault()
+        val t = KSoap.parseSOAP<XiBasis.CommunicationChannelReadResponse>(task.bodyAsXmlReader(), fault)
+        require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
+        println("channels: ${t!!.channels.size}")
     }
 
     suspend fun requestICo75Async(scope: CoroutineScope): Deferred<KtorClient.Task> {
@@ -448,9 +491,29 @@ class PI(
         val t = KSoap.parseSOAP<XiBasis.IntegratedConfigurationQueryResponse>(task.bodyAsXmlReader(), fault)
         require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
         t!!.IntegratedConfigurationID.forEach { ico ->
-
+            if (!dir_ico.contains(ico)) {
+                dir_ico.add(ico)
+            }
         }
+        println("ico: ${t.IntegratedConfigurationID.size}")
     }
 
+    suspend fun readICo75Async(
+        scope: CoroutineScope,
+        icol: List<XiBasis.IntegratedConfigurationID>
+    ): Deferred<KtorClient.Task> {
+        val task = KtorClient.taskPost(
+            client,
+            XiBasis.uriICo750,
+            XiBasis.IntegratedConfigurationReadRequest(contextuser, icol).composeSOAP()
+        )
+        return scope.async { task.execute() }
+    }
 
+    suspend fun parseICo750ReadResponse(td: Deferred<KtorClient.Task>) {
+        val task = taskAwait(td, ContentType.Text.Xml)
+        val fault = KSoap.Fault()
+        val t = KSoap.parseSOAP<XiBasis.IntegratedConfiguration750ReadResponse>(task.bodyAsXmlReader(), fault)
+        require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
+    }
 }
