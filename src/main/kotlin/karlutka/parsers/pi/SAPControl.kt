@@ -20,20 +20,20 @@ class SAPControl {
 
     @Serializable
     @XmlSerialName("ListLogFilesResponse", "urn:SAPControl", "urn")
-    data class ListLogFilesResponse(
+    class ListLogFilesResponse(
         @XmlElement(true)
         val file: File,
     ) {
         @Serializable
         @XmlSerialName("file", "", "")
-        data class File(
+        class File(
             @XmlElement(true)
             val item: MutableList<Item> = mutableListOf(),
         )
 
         @Serializable
         @XmlSerialName("item", "", "")
-        data class Item(
+        class Item(
             @XmlElement(true)
             val filename: String,
             @XmlElement(true)
@@ -72,7 +72,7 @@ class SAPControl {
 
     @Serializable
     @XmlSerialName("ReadLogFileResponse", "urn:SAPControl", "urn")
-    data class ReadLogFileResponse(
+    class ReadLogFileResponse(
         @XmlElement(true)
         @XmlSerialName("format", "", "")
         val format: String,

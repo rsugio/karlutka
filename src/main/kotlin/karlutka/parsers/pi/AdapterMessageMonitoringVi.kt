@@ -1,13 +1,10 @@
 package karlutka.parsers.pi
 
 import karlutka.models.MPI
-import karlutka.serialization.KSoap.*
-import karlutka.serialization.KSoap.Companion.xmlserializer
+import karlutka.serialization.KSoap.ComposeSOAP
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
-import java.util.*
 
 class AdapterMessageMonitoringVi {
     // ---------------
@@ -25,21 +22,12 @@ class AdapterMessageMonitoringVi {
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Resp: AdminActionResultMap,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): AdminActionResultMap? {
-                val x = xmlserializer.decodeFromString<Envelope<CancelMessagesResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Resp
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
     @XmlSerialName("failEoioMessage", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class FailEoioMessage(
+    class FailEoioMessage(
         @XmlElement(true)
         @XmlSerialName("messageKey", "urn:AdapterMessageMonitoringVi", "amvi")
         val messageKey: String,
@@ -50,25 +38,16 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("failEoioMessageResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class FailEoioMessageResponse(
+    class FailEoioMessageResponse(
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Response: AdminActionResult,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): AdminActionResult? {
-                val x = xmlserializer.decodeFromString<Envelope<FailEoioMessageResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
     @XmlSerialName("getAllAvailableStatusDetails", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetAllAvailableStatusDetails(
+    class GetAllAvailableStatusDetails(
         @XmlElement(true)
         @XmlSerialName("locale", "urn:AdapterMessageMonitoringVi", "amvi")
         val locale: LocaleAMM,
@@ -76,20 +55,11 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getAllAvailableStatusDetailsResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetAllAvailableStatusDetailsResponse(
+    class GetAllAvailableStatusDetailsResponse(
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Response: ArrayOfStatusDetail,
-    ) : ComposeSOAP() {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): MutableList<StatusDetail> {
-                val x = xmlserializer.decodeFromString<Envelope<GetAllAvailableStatusDetailsResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response?.list ?: mutableListOf()
-            }
-        }
-    }
+    ) : ComposeSOAP()
 
     // ---------------
     @Serializable
@@ -98,25 +68,16 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getConnectionsResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetConnectionsResponse(
+    class GetConnectionsResponse(
         @XmlElement(true)
         @XmlSerialName("Response", "urn:AdapterMessageMonitoringVi", "amvi")
         val Response: ArrayOfStrings,
-    ) : ComposeSOAP() {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): MutableList<String> {
-                val x = xmlserializer.decodeFromString<Envelope<GetConnectionsResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response?.strings ?: mutableListOf()
-            }
-        }
-    }
+    ) : ComposeSOAP()
 
     // ---------------
     @Serializable
     @XmlSerialName("getErrorCodes", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetErrorCodes(
+    class GetErrorCodes(
         @XmlElement(true)
         @XmlSerialName("errorLabelID", "urn:AdapterMessageMonitoringVi", "amvi")
         val errorLabelID: Int,
@@ -124,20 +85,11 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getErrorCodesResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetErrorCodesResponse(
+    class GetErrorCodesResponse(
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Response: ArrayOfStrings,
-    ) : ComposeSOAP() {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): MutableList<String> {
-                val x = xmlserializer.decodeFromString<Envelope<GetErrorCodesResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response?.strings ?: mutableListOf()
-            }
-        }
-    }
+    ) : ComposeSOAP()
 
     // ---------------
     @Serializable
@@ -156,13 +108,13 @@ class AdapterMessageMonitoringVi {
         val Response: ArrayOfIntegrationFlow,
     ) : ComposeSOAP() {
         @Serializable
-        data class ArrayOfIntegrationFlow(
-            val list: MutableList<IntegrationFlow> = mutableListOf(),
+        class ArrayOfIntegrationFlow(
+            val list: List<IntegrationFlow> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("IntegrationFlow", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
-        data class IntegrationFlow(
+        class IntegrationFlow(
             @XmlElement(true)
             @XmlSerialName("name", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
             val name: String? = null,
@@ -173,15 +125,6 @@ class AdapterMessageMonitoringVi {
             @XmlSerialName("id", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
             val id: String? = null,
         )
-
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): MutableList<IntegrationFlow> {
-                val x = xmlserializer.decodeFromString<Envelope<GetIntegrationFlowResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response?.list ?: mutableListOf()
-            }
-        }
     }
 
     // ---------------
@@ -195,21 +138,12 @@ class AdapterMessageMonitoringVi {
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Response: String?,   //TODO он пустой и нужны нормальные тестовые данные
-    ) : ComposeSOAP() {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): String? {
-                val x = xmlserializer.decodeFromString<Envelope<GetInterfacesResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response //TODO изменить
-            }
-        }
-    }
+    ) : ComposeSOAP()
 
     // ---------------
     @Serializable
     @XmlSerialName("getLogEntries", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetLogEntries(
+    class GetLogEntries(
         @XmlElement(true)
         @XmlSerialName("messageKey", "urn:AdapterMessageMonitoringVi", "amvi")
         val messageKey: String,
@@ -227,23 +161,25 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getLogEntriesResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetLogEntriesResponse(
+    class GetLogEntriesResponse(
         // бага в сервисе - может вернутся Response в одном из двух неймспейсов
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
-        private val Response: ArrayOfAuditLogEntryData?,
+        val Response: ArrayOfAuditLogEntryData?,
         @XmlElement(true)
         @XmlSerialName("Response", "urn:AdapterMessageMonitoringVi", "amvi")
-        private val Response2: ArrayOfAuditLogEntryData?,
+        val Response2: ArrayOfAuditLogEntryData?,
     ) {
+        fun get() = Response?.AuditLogEntryData ?: Response2?.AuditLogEntryData ?: listOf()
+
         @Serializable
-        data class ArrayOfAuditLogEntryData(
-            val AuditLogEntryData: MutableList<AuditLogEntryData>?,
+        class ArrayOfAuditLogEntryData(
+            val AuditLogEntryData: List<AuditLogEntryData> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("AuditLogEntryData", "urn:com.sap.aii.mdt.api.data", "mdt")
-        data class AuditLogEntryData(
+        class AuditLogEntryData(
             @XmlElement(true)
             @XmlSerialName("timeStamp", "urn:com.sap.aii.mdt.api.data", "mdt")
             val timeStamp: String?, //xs:dateTime
@@ -260,22 +196,12 @@ class AdapterMessageMonitoringVi {
             @XmlSerialName("localizedText", "urn:com.sap.aii.mdt.api.data", "mdt")
             val localizedText: String?,
         )
-
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): MutableList<AuditLogEntryData> {
-                val x = xmlserializer.decodeFromString<Envelope<GetLogEntriesResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response?.AuditLogEntryData ?: x.body.data?.Response2?.AuditLogEntryData
-                ?: mutableListOf()
-            }
-        }
     }
 
     // ---------------
     @Serializable
     @XmlSerialName("getLoggedMessageBytes", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetLoggedMessageBytes(
+    class GetLoggedMessageBytes(
         @XmlElement(true)
         @XmlSerialName("messageKey", "urn:AdapterMessageMonitoringVi", "amvi")
         val messageKey: String,
@@ -289,25 +215,16 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getLoggedMessageBytesResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetLoggedMessageBytesResponse(
+    class GetLoggedMessageBytesResponse(
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
-        private val Response: String = "", //xs:base64Binary
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): ByteArray {
-                val x = xmlserializer.decodeFromString<Envelope<GetLoggedMessageBytesResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return Base64.getDecoder().decode(x.body.data?.Response ?: "")
-            }
-        }
-    }
+        val Response: String = "", //xs:base64Binary
+    )
 
     // ---------------
     @Serializable
     @XmlSerialName("getMessageBytesJavaLangStringBoolean", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetMessageBytesJavaLangStringBoolean(
+    class GetMessageBytesJavaLangStringBoolean(
         @XmlElement(true)
         @XmlSerialName("messageKey", "urn:AdapterMessageMonitoringVi", "amvi")
         val messageKey: String,
@@ -318,25 +235,16 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getMessageBytesJavaLangStringBooleanResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetMessageBytesJavaLangStringBooleanResponse(
+    class GetMessageBytesJavaLangStringBooleanResponse(
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
-        private val Response: String = "", //xs:base64Binary
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): ByteArray {
-                val x = xmlserializer.decodeFromString<Envelope<GetMessageBytesJavaLangStringBooleanResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return Base64.getDecoder().decode(x.body.data?.Response ?: "")
-            }
-        }
-    }
+        val Response: String = "", //xs:base64Binary
+    )
 
     // ---------------
     @Serializable
     @XmlSerialName("getMessageBytesJavaLangStringIntBoolean", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetMessageBytesJavaLangStringIntBoolean(
+    class GetMessageBytesJavaLangStringIntBoolean(
         @XmlElement(true)
         @XmlSerialName("messageKey", "urn:AdapterMessageMonitoringVi", "amvi")
         val messageKey: String,
@@ -350,20 +258,11 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getMessageBytesJavaLangStringIntBooleanResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetMessageBytesJavaLangStringIntBooleanResponse(
+    class GetMessageBytesJavaLangStringIntBooleanResponse(
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
-        private val Response: String = "", //xs:base64Binary
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): ByteArray {
-                val x = xmlserializer.decodeFromString<Envelope<GetMessageBytesJavaLangStringIntBooleanResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return Base64.getDecoder().decode(x.body.data?.Response ?: "")
-            }
-        }
-    }
+        val Response: String = "", //xs:base64Binary
+    )
 
     // ---------------
     @Serializable
@@ -382,16 +281,7 @@ class AdapterMessageMonitoringVi {
     class GetMessageListResponse(
         // имя не в XML
         val Resp: Response,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): Response? {
-                val x = xmlserializer.decodeFromString<Envelope<GetMessageListResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Resp
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
@@ -415,16 +305,7 @@ class AdapterMessageMonitoringVi {
     @XmlSerialName("getMessagesByIDsResponse", "urn:AdapterMessageMonitoringVi", "amvi")
     class GetMessagesByIDsResponse(
         val Resp: Response,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): Response? {
-                val x = xmlserializer.decodeFromString<Envelope<GetMessagesByIDsResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Resp
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
@@ -442,21 +323,12 @@ class AdapterMessageMonitoringVi {
     @XmlSerialName("getMessagesByKeysResponse", "urn:AdapterMessageMonitoringVi", "amvi")
     class GetMessagesByKeysResponse(
         val Resp: Response,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): Response? {
-                val x = xmlserializer.decodeFromString<Envelope<GetMessagesByKeysResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Resp
-            }
-        }
-    }
+    )
 // ---------------
 
     @Serializable
     @XmlSerialName("getMessagesWithSuccessors", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetMessagesWithSuccessors(
+    class GetMessagesWithSuccessors(
         @XmlElement(true)
         @XmlSerialName("messageIds", "urn:AdapterMessageMonitoringVi", "amvi")
         val messageIds: ArrayOfStrings,
@@ -467,18 +339,9 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getMessagesWithSuccessorsResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetMessagesWithSuccessorsResponse(
+    class GetMessagesWithSuccessorsResponse(
         val Resp: Response,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): Response? {
-                val x = xmlserializer.decodeFromString<Envelope<GetMessagesWithSuccessorsResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Resp
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
@@ -491,16 +354,7 @@ class AdapterMessageMonitoringVi {
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Response: String?,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): String? {
-                val x = xmlserializer.decodeFromString<Envelope<GetPredecessorMessageIdResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return null //TODO
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
@@ -516,20 +370,11 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getPredecessorMessageIdResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetPredecessorMessageIdResponse(
+    class GetPredecessorMessageIdResponse(
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Response: String?,
-    ) : ComposeSOAP() {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): String? {
-                val x = xmlserializer.decodeFromString<Envelope<GetPredecessorMessageIdResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response
-            }
-        }
-    }
+    ) : ComposeSOAP()
 
     // ---------------
     @Serializable
@@ -542,21 +387,12 @@ class AdapterMessageMonitoringVi {
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Response: String?,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): String? {
-                val x = xmlserializer.decodeFromString<Envelope<GetPredecessorMessageIdResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return null //TODO
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
     @XmlSerialName("getStatusDetails", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetStatusDetails(
+    class GetStatusDetails(
         @XmlElement(true)
         @XmlSerialName("errorCodes", "urn:AdapterMessageMonitoringVi", "amvi")
         val errorCodes: ArrayOfStrings,
@@ -571,21 +407,12 @@ class AdapterMessageMonitoringVi {
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Response: ArrayOfStatusDetail,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): MutableList<StatusDetail> {
-                val x = xmlserializer.decodeFromString<Envelope<GetStatusDetailsResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response?.list ?: mutableListOf()
-            }
-        }
-    }
+    )
 // ---------------
 
     @Serializable
     @XmlSerialName("getUserDefinedSearchAttributes", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetUserDefinedSearchAttributes(
+    class GetUserDefinedSearchAttributes(
         @XmlElement(true)
         @XmlSerialName("messageKey", "urn:AdapterMessageMonitoringVi", "amvi")
         val messageKey: String,
@@ -596,25 +423,16 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getUserDefinedSearchAttributesResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetUserDefinedSearchAttributesResponse(
+    class GetUserDefinedSearchAttributesResponse(
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Resp: ArrayOfBusinessAttribute,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): MutableList<BusinessAttribute> {
-                val x = xmlserializer.decodeFromString<Envelope<GetUserDefinedSearchAttributesResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Resp?.list ?: mutableListOf()
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
     @XmlSerialName("getUserDefinedSearchExtractors", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetUserDefinedSearchExtractors(
+    class GetUserDefinedSearchExtractors(
         @XmlElement(true)
         @XmlSerialName("name", "urn:AdapterMessageMonitoringVi", "amvi")
         val name: String,
@@ -625,24 +443,15 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getUserDefinedSearchExtractorsResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetUserDefinedSearchExtractorsResponse(
+    class GetUserDefinedSearchExtractorsResponse(
         @XmlElement(true)
-        private val Response: _RplResponse,
+        val Response: _RplResponse,
     ) {
         @Serializable
         @XmlSerialName("Response", "urn:AdapterMessageMonitoringVi", "amvi")
-        data class _RplResponse(
-            val AttributeMetadata: MutableList<AttributeMetadata>,
+        class _RplResponse(
+            val AttributeMetadata: List<AttributeMetadata>,
         )
-
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): MutableList<AttributeMetadata> {
-                val x = xmlserializer.decodeFromString<Envelope<GetUserDefinedSearchExtractorsResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response?.AttributeMetadata ?: mutableListOf()
-            }
-        }
     }
 
     // ---------------
@@ -652,24 +461,15 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("getUserDefinedSearchFiltersResponse", "urn:AdapterMessageMonitoringVi", "amvi")
-    data class GetUserDefinedSearchFiltersResponse(
+    class GetUserDefinedSearchFiltersResponse(
         @XmlElement(true)
-        private val Response: _RplResponse,
+        val Response: _RplResponse,
     ) {
         @Serializable
         @XmlSerialName("Response", "urn:AdapterMessageMonitoringVi", "amvi")
-        data class _RplResponse(
-            val MessageInterface: MutableList<MessageInterface>,
+        class _RplResponse(
+            val MessageInterface: List<MessageInterface>,
         )
-
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): MutableList<MessageInterface> {
-                val x = xmlserializer.decodeFromString<Envelope<GetUserDefinedSearchFiltersResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Response?.MessageInterface ?: mutableListOf()
-            }
-        }
     }
 
     // ---------------
@@ -695,16 +495,7 @@ class AdapterMessageMonitoringVi {
     class GetUserDefinedSearchMessagesResponse(
         // имя не в XML
         val Resp: Response,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): Response? {
-                val x = xmlserializer.decodeFromString<Envelope<GetUserDefinedSearchMessagesResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Resp
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
@@ -721,20 +512,11 @@ class AdapterMessageMonitoringVi {
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Resp: AdminActionResultMap,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: Fault): AdminActionResultMap? {
-                val x = xmlserializer.decodeFromString<Envelope<ResendMessagesResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data?.Resp
-            }
-        }
-    }
+    )
 
     // ---------------
     @Serializable
-    data class LocaleAMM(
+    class LocaleAMM(
         @XmlElement(true)
         @XmlSerialName("language", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
         val language: String? = null,
@@ -747,13 +529,13 @@ class AdapterMessageMonitoringVi {
     )
 
     @Serializable
-    data class ArrayOfStatusDetail(
+    class ArrayOfStatusDetail(
         @XmlSerialName("StatusDetail", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
-        val list: MutableList<StatusDetail> = mutableListOf(),
+        val list: List<StatusDetail> = listOf(),
     )
 
     @Serializable
-    data class StatusDetail(
+    class StatusDetail(
         @XmlElement(true)
         @XmlSerialName("errorLabelID", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
         val errorLabelID: String? = null,
@@ -1182,7 +964,7 @@ class AdapterMessageMonitoringVi {
     )
 
     @Serializable
-    data class AdminActionResultMap(
+    class AdminActionResultMap(
         @XmlElement(true)
         @XmlSerialName("keyList", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
         val keyList: ArrayOfStrings,
@@ -1192,14 +974,14 @@ class AdapterMessageMonitoringVi {
     )
 
     @Serializable
-    data class AdminActionResultList(
+    class AdminActionResultList(
         @XmlElement(true)
         @XmlSerialName("AdminActionResult", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
-        val list: MutableList<AdminActionResult>,
+        val list: List<AdminActionResult>,
     )
 
     @Serializable
-    data class AdminActionResult(
+    class AdminActionResult(
         @XmlElement(true)
         @XmlSerialName("resultCode", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
         val resultCode: String?,
@@ -1212,14 +994,14 @@ class AdapterMessageMonitoringVi {
     )
 
     @Serializable
-    data class ArrayOfBusinessAttribute(
+    class ArrayOfBusinessAttribute(
         @XmlElement(true)
-        val list: MutableList<BusinessAttribute>?,
+        val list: List<BusinessAttribute> = listOf(),
     )
 
     @Serializable
     @XmlSerialName("BusinessAttribute", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
-    data class BusinessAttribute(
+    class BusinessAttribute(
         @XmlElement(true)
         @XmlSerialName("name", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
         val name: String,
@@ -1230,7 +1012,7 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("MessageInterface", "urn:com.sap.aii.mdt.api.data", "rn2")
-    data class MessageInterface(
+    class MessageInterface(
         @XmlElement(true)
         @XmlSerialName("name", "urn:com.sap.aii.mdt.api.data", "rn2")
         val name: String,
@@ -1253,7 +1035,7 @@ class AdapterMessageMonitoringVi {
 
     @Serializable
     @XmlSerialName("AttributeMetadata", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
-    data class AttributeMetadata(
+    class AttributeMetadata(
         @XmlElement(true)
         @XmlSerialName("name", "urn:com.sap.aii.mdt.server.adapterframework.ws", "afw")
         val name: String,
@@ -1290,9 +1072,9 @@ class AdapterMessageMonitoringVi {
     class ArrayOfStrings(
         @XmlElement(true)
         @XmlSerialName("String", "urn:java/lang", "rn6")
-        val strings: MutableList<String> = mutableListOf(),
+        val strings: List<String> = listOf(),
     ) {
-        constructor(vararg s: String) : this(s.toMutableList())
+        constructor(vararg s: String) : this(s.toList())
     }
 
     @Serializable

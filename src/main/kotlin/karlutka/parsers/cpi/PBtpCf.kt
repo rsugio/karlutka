@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 class PBtpCf {
     @Serializable
-    data class Role(
+    class Role(
         val roleTemplateName: String,
         val roleTemplateAppId: String,
         val name: String,
@@ -18,7 +18,7 @@ class PBtpCf {
     )
 
     @Serializable
-    data class Scope(
+    class Scope(
         val name: String,
         val description: String = "",
         @SerialName("granted-apps")
@@ -28,7 +28,7 @@ class PBtpCf {
     )
 
     @Serializable
-    data class RoleCollection(
+    class RoleCollection(
         val name: String,
         val description: String = "",
         val isReadOnly: Boolean,
@@ -36,7 +36,7 @@ class PBtpCf {
     )
 
     @Serializable
-    data class RoleReference(
+    class RoleReference(
         val name: String,
         val description: String = "",
         val roleTemplateAppId: String,
@@ -44,7 +44,7 @@ class PBtpCf {
     )
 
     @Serializable
-    data class App(
+    class App(
         val appid: String,
         val serviceinstanceid: String,
         val planId: String,
@@ -64,7 +64,7 @@ class PBtpCf {
     )
 
     @Serializable
-    data class Oauth2Configuration(
+    class Oauth2Configuration(
         @SerialName("token-validity")
         val token_validity: Int,
         @SerialName("refresh-token-validity")

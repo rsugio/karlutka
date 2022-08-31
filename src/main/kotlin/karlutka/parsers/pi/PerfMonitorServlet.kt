@@ -53,7 +53,7 @@ class PerfMonitorServlet {
         }
     }
 
-    data class PerformanceTableRow(
+    class PerformanceTableRow(
         val INBOUND_CHANNEL: String,
         val OUTBOUND_CHANNEL: String,
         val DIRECTION: MPI.DIRECTION,
@@ -93,12 +93,12 @@ class PerfMonitorServlet {
     /**
      * Затраты времени на модуль - MS:module_in:CallSapAdapter, 2, 908, 563, 401
      */
-    data class Stages(val Name: String, val Sequence: Int, val Max: Long, val Avg: Long, val Min: Long)
+    class Stages(val Name: String, val Sequence: Int, val Max: Long, val Avg: Long, val Min: Long)
 
 
     @Serializable
     @XmlSerialName("PerformanceDataQueryResults", "", "")
-    data class PerformanceDataQueryResults(
+    class PerformanceDataQueryResults(
         @XmlElement(true)
         val Result: _Result,
         @XmlElement(true)
@@ -112,7 +112,7 @@ class PerfMonitorServlet {
     ) {
         @Serializable
         @XmlSerialName("Result", "", "")
-        data class _Result(
+        class _Result(
             @XmlElement(true)
             val Code: String,
             @XmlElement(true)
@@ -132,7 +132,7 @@ class PerfMonitorServlet {
         )
 
         @Serializable
-        data class _Time(
+        class _Time(
             val timezone: String,
             @XmlValue(true)
             val value: String,
@@ -148,13 +148,13 @@ class PerfMonitorServlet {
 
         @Serializable
         @XmlSerialName("UsageTypes", "", "")
-        data class _UsageTypes(
+        class _UsageTypes(
             val value: MutableList<_Usage> = mutableListOf(),
         )
 
         @Serializable
         @XmlSerialName("Usage", "", "")
-        data class _Usage(
+        class _Usage(
             @XmlElement(true)
             val URL: String,
             @XmlElement(true)
@@ -163,20 +163,20 @@ class PerfMonitorServlet {
 
         @Serializable
         @XmlSerialName("XIComponents", "", "")
-        data class _XIComponents(
+        class _XIComponents(
             @XmlSerialName("Component", "", "")
             val value: MutableList<String> = mutableListOf(),
         )
 
         @Serializable
         @XmlSerialName("Periods", "", "")
-        data class _Periods(
+        class _Periods(
             val value: MutableList<_Period> = mutableListOf(),
         )
 
         @Serializable
         @XmlSerialName("Period", "", "")
-        data class _Period(
+        class _Period(
             @XmlElement(true)
             val Type: String,
             @XmlElement(true)
@@ -185,7 +185,7 @@ class PerfMonitorServlet {
 
         @Serializable
         @XmlSerialName("Interval", "", "")
-        data class _Interval(
+        class _Interval(
             @XmlElement(true)
             val Begin: String,
             @XmlElement(true)
@@ -205,7 +205,7 @@ class PerfMonitorServlet {
 
         @Serializable
         @XmlSerialName("Data", "", "")
-        data class _Data(
+        class _Data(
             @XmlElement(true)
             val ColumnNames: _ColumnNames,
             @XmlElement(true)
@@ -214,28 +214,28 @@ class PerfMonitorServlet {
 
         @Serializable
         @XmlSerialName("ColumnNames", "", "")
-        data class _ColumnNames(
+        class _ColumnNames(
             @XmlSerialName("Column", "", "")
             val value: MutableList<String> = mutableListOf(),
         )
 
         @Serializable
         @XmlSerialName("DataRows", "", "")
-        data class _DataRows(
+        class _DataRows(
 //        @XmlSerialName("Row", "", "")
             val value: MutableList<_Row> = mutableListOf(),
         )
 
         @Serializable
         @XmlSerialName("Row", "", "")
-        data class _Row(
+        class _Row(
 //        @XmlSerialName("Entry", "", "")
             val value: MutableList<_Entry> = mutableListOf(),
         )
 
         @Serializable
         @XmlSerialName("Entry", "", "")
-        data class _Entry(
+        class _Entry(
             @XmlValue(true) val data: List<@Polymorphic Any> = listOf(),
         ) {
             /**
@@ -268,7 +268,7 @@ class PerfMonitorServlet {
 
         @Serializable
         @XmlSerialName("MeasuringPoints", "", "")
-        data class _MeasuringPoints(
+        class _MeasuringPoints(
             @XmlElement(true)
             @XmlSerialName("MP", "", "")
             val value: MutableList<_MP> = mutableListOf(),
@@ -276,7 +276,7 @@ class PerfMonitorServlet {
 
         @Serializable
         @XmlSerialName("MP", "", "")
-        data class _MP(
+        class _MP(
             @XmlElement(true) val Name: String,
             @XmlElement(true) val Sequence: Int,
             @XmlElement(true) val Max: Long,
@@ -364,7 +364,7 @@ class PerfMonitorServlet {
      */
     @Serializable
     @XmlSerialName("MessageStatisticsQueryResults", "", "")
-    data class MessageStatisticsQueryResults(
+    class MessageStatisticsQueryResults(
         @XmlElement(true)
         val Result: PerformanceDataQueryResults._Result,
         @XmlElement(true)
@@ -380,14 +380,14 @@ class PerfMonitorServlet {
     ) {
         @Serializable
         @XmlSerialName("Views", "", "")
-        data class _Views(
+        class _Views(
             @XmlElement(true)
             @XmlSerialName("View", "", "")
             val value: MutableList<_View> = mutableListOf(),
         )
 
         @Serializable
-        data class _View(
+        class _View(
             @XmlElement(true)
             val NameKey: String,
             @XmlElement(true)

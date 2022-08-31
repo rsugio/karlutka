@@ -11,7 +11,7 @@ import nl.adaptivity.xmlutil.serialization.structure.XmlDescriptor
 class PEdmx {
     @Serializable
     @XmlSerialName("Edmx", "http://schemas.microsoft.com/ado/2007/06/edmx", "edmx")
-    data class Edmx(
+    class Edmx(
         val DataServices: DataServices,
         val Version: String
     )

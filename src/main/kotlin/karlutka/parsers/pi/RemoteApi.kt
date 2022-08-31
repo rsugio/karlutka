@@ -13,7 +13,7 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 class RemoteApi {
     @Serializable
     @XmlSerialName("scenario", "", "")
-    data class Scenario(
+    class Scenario(
         // результат {{host}}/remoteapi/channelselftest?channel=qqqq&service=BC_TEST1
         @XmlElement(true)
         val scenname: String = "",
@@ -31,7 +31,7 @@ class RemoteApi {
 
     @Serializable
     @XmlSerialName("component", "", "")
-    data class Component(
+    class Component(
         @XmlElement(true)
         val compname: String = "",
         @XmlElement(true)
@@ -44,7 +44,7 @@ class RemoteApi {
 
     @Serializable
     @XmlSerialName("property", "", "")
-    data class Property(
+    class Property(
         @XmlElement(true)
         val propname: String,
         @XmlElement(true)

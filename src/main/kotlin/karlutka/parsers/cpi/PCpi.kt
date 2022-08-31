@@ -6,12 +6,12 @@ import kotlinx.serialization.json.Json.Default.decodeFromJsonElement
 
 class PCpi {
     @Serializable
-    data class Error(
+    class Error(
         val code: String,
         val message: Message
     ) {
         @Serializable
-        data class Message(
+        class Message(
             val lang: String,
             val value: String
         )
@@ -28,7 +28,7 @@ class PCpi {
     )
 
     @Serializable
-    data class __Deferred<T>(
+    class __Deferred<T>(
         val __deferred: Uri? = null,
         val results: List<T> = listOf()
     )
@@ -44,7 +44,7 @@ class PCpi {
     )
 
     @Serializable
-    data class SecurityArtifactDescriptor(
+    class SecurityArtifactDescriptor(
         val Type: String, //"CREDENTIALS",
         val DeployedBy: String, //"S0020379160",
         val DeployedOn: String, //TODO переделать на Jsondate.serializer() "/Date(1563279368554)/",
@@ -52,7 +52,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    data class UserCredential(
+    class UserCredential(
         val Name: String, //"SalesCloudCredential",
         val Kind: String, //"default",
         val Description: String, //"ServiceRequestCollection",
@@ -63,7 +63,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    data class DataStore(
+    class DataStore(
         val DataStoreName: String,
         val IntegrationFlow: String,
         val Type: String,
@@ -74,7 +74,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    data class DataStoreEntry(
+    class DataStoreEntry(
         val Id: String,  //SAPCpiOutboundOrder_10496001A_ZTD
         val DataStoreName: String, //HYBRISCOMMERCE
         val IntegrationFlow: String?, //
@@ -87,7 +87,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    data class IntegrationPackage(
+    class IntegrationPackage(
         val Id: String, // CommerceCloudwithS4HANAmodified
         val Name: String, // Commerce Cloud with S4HANA - modified
         val ResourceId: String, //ef44d444d648433a8da21a3bfe3ba247
@@ -116,7 +116,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    data class IntegrationArtifact(
+    class IntegrationArtifact(
         val Id: String,
         val Name: String,
         val Type: String,
@@ -125,7 +125,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    data class IntegrationDesigntimeArtifact(
+    class IntegrationDesigntimeArtifact(
         val Id: String, //"Create-Delivery-From-SAP-Commerce-Cloud-To-SAP-S4HANA"
         val Version: String, //"1.0.7" or "Active"
         val PackageId: String, //"SALES05"
@@ -139,7 +139,7 @@ class PCpi {
     ): ODataJson()
 
     @Serializable
-    data class ValueMappingDesigntimeArtifact(
+    class ValueMappingDesigntimeArtifact(
         val Id: String, //"OtherPartyMapping",
         val Version: String, //"1.0.2",
         val PackageId: String, //"C4Custom",
@@ -150,7 +150,7 @@ class PCpi {
     ): ODataJson()
 
     @Serializable
-    data class ServiceEndpoint(
+    class ServiceEndpoint(
         val Name: String,    // "Create follow up document from ServiceRequest in S4HANA from Sales Cloud",
         val Id: String,             // "UpdateServiceRequest$endpointAddress=UpdateServiceRequest",
         val Title: String,             // "UpdateServiceRequest",
@@ -164,7 +164,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    data class EntryPoint(
+    class EntryPoint(
         val Name: String, //"UpdateServiceRequest",
         val Url: String, //"https://e45-iflmap.hcisbt.ru1.hana.ondemand.com/cxf/UpdateServiceRequest",
         val Type: String, //"PROD",
@@ -172,13 +172,13 @@ class PCpi {
     ): ODataJson()
 
     @Serializable
-    data class ApiDefinition(
+    class ApiDefinition(
         val Url: String, //"https://../Operations/api/WSDLDownload?artifactName=UpdateServiceRequest&servicePath=/UpdateServiceRequest&domainName=hcisbt.ru1.hana.ondemand.com&includePolicies=false",
         val Name: String, //"WSDL_POLICIES",
     ): ODataJson()
 
     @Serializable
-    data class MessageProcessingLog(
+    class MessageProcessingLog(
         val MessageGuid: String,
         val CorrelationId: String,
         val ApplicationMessageId: String?,
@@ -213,7 +213,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    data class MessageProcessingLogCustomHeaderProperties(
+    class MessageProcessingLogCustomHeaderProperties(
         val Id: String,
         val Name: String,
         val Value: String,
@@ -221,7 +221,7 @@ class PCpi {
     ) : ODataJson()
 
     @Serializable
-    data class LogFile(
+    class LogFile(
         val Name: String,               //"http_access_2f39eb6_2021-03-13.log",
         val Application: String,        //"e4500iflmap",
         val LastModified: String,       //"/Date(1615679941000)/",
@@ -232,7 +232,7 @@ class PCpi {
     ): ODataJson()
 
     @Serializable
-    data class LogFileArchive(
+    class LogFileArchive(
         val Scope: String,              // "all",
         val LogFileType: String,        // "UpdateServiceRequest$endpointAddress=UpdateServiceRequest",
         val NodeScope: String,          // "UpdateServiceRequest",

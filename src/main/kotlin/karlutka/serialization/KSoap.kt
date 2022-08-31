@@ -7,6 +7,7 @@ import karlutka.parsers.pi.XiBasis
 import kotlinx.serialization.*
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
+import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
@@ -18,13 +19,12 @@ class KSoap {
         fun composeSOAP() = xmlserializer.encodeToString(Envelope(null, Envelope.Body(this)))
     }
 
+
     @Serializable
     @XmlSerialName("Envelope", "http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV")
     class Envelope<BODYTYPE>(
         @XmlElement(true) @Contextual @XmlSerialName(
-            "Header",
-            "http://schemas.xmlsoap.org/soap/envelope/",
-            "SOAP-ENV"
+            "Header", "http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV"
         ) val header: CompactFragment? = null,    // пока только для парсинга
         val body: Body<BODYTYPE>,
     ) {
@@ -38,7 +38,7 @@ class KSoap {
 
     @Serializable
     @XmlSerialName("Fault", "http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV")
-    data class Fault(
+    class Fault(
         @XmlElement(true) @XmlSerialName("faultcode", "", "") var faultcode: String = "",
         @XmlElement(true) @XmlSerialName("faultstring", "", "") var faultstring: String = "",
         @XmlElement(true) @XmlSerialName("detail", "", "") @Contextual private val detail: CompactFragment? = null,
@@ -140,6 +140,18 @@ class KSoap {
             autoPolymorphic = true
         }
 
+        inline fun <reified T> parseSOAP(sxml: String, f: Fault): T? {
+            val x = xmlserializer.decodeFromString<Envelope<T>>(sxml)
+            f.faultcode = x.body.fault?.faultcode ?: ""
+            f.faultstring = x.body.fault?.faultstring ?: ""
+            return x.body.data
+        }
+        inline fun <reified T> parseSOAP(xmlReader: XmlReader, f: Fault): T? {
+            val x = xmlserializer.decodeFromReader<Envelope<T>>(xmlReader)
+            f.faultcode = x.body.fault?.faultcode ?: ""
+            f.faultstring = x.body.fault?.faultstring ?: ""
+            return x.body.data
+        }
 
     }
 }

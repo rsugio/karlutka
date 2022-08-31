@@ -10,27 +10,27 @@ import java.time.ZonedDateTime
 class PBtpNeo {
     // см /src/test/resources/btpNeo/04groups.json - в ключе только name
     @Serializable
-    data class Groups(val groups: List<Map<String, String>>) {
+    class Groups(val groups: List<Map<String, String>>) {
         fun names() = groups.map { it["name"]!! }
     }
 
     // в ключе: name, applicationName, providerAccount
     // в ключе2: name, type, applicationRole, shared
     @Serializable
-    data class Roles(val roles: List<Map<String, String>>) {
+    class Roles(val roles: List<Map<String, String>>) {
         fun names() = roles.map { it["name"]!! }
     }
 
     // в ключе только name
     @Serializable
-    data class Users(val users: List<Map<String, String>>) {
+    class Users(val users: List<Map<String, String>>) {
         fun names() = users.map { it["name"]!! }
     }
 
     // Реализация здесь временная и по месту, не весь SCIM а просто под Neo.
     // надо это переделать под общий стандарт RFC7643
     @Serializable
-    data class Scim @OptIn(ExperimentalSerializationApi::class) constructor(
+    class Scim @OptIn(ExperimentalSerializationApi::class) constructor(
         @JsonNames("resources", "Resources")
         val resources: List<ScimUser>,
         val totalResults: Int,
@@ -40,7 +40,7 @@ class PBtpNeo {
     )
 
     @Serializable
-    data class ScimUser(
+    class ScimUser(
         val id: String,
         val externalId: String? = null,
         val meta: ScimMeta,
@@ -60,7 +60,7 @@ class PBtpNeo {
     class ScimEmail(val value: String, val primary: Boolean)
 
     @Serializable
-    data class ScimMeta(
+    class ScimMeta(
         @Serializable(with = KZonedDateTimeSerializer::class)
         val created: ZonedDateTime,
         @Serializable(with = KZonedDateTimeSerializer::class)
@@ -69,7 +69,7 @@ class PBtpNeo {
     )
 
     @Serializable
-    data class ScimRole(
+    class ScimRole(
         val value: String,
         val primary: Boolean,
         val type: String,

@@ -34,7 +34,7 @@ class MPI {
         FOLDER
     }
 
-    data class Swcv(
+    class Swcv(
         val id: String,         //гуид
         val vendor: String,
         val name: String,       // SC_I_END

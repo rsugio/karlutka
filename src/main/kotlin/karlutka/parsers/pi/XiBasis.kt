@@ -18,23 +18,14 @@ class XiBasis {
 
     @Serializable
     @XmlSerialName("CommunicationChannelQueryResponse", "http://sap.com/xi/BASIS", "b")
-    data class CommunicationChannelQueryResponse(
+    class CommunicationChannelQueryResponse(
         @XmlElement(true)
         @XmlSerialName("CommunicationChannelID", "", "")
         val channels: List<CommunicationChannelID> = listOf(),
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: KSoap.Fault): CommunicationChannelQueryResponse? {
-                val x = KSoap.xmlserializer.decodeFromString<KSoap.Envelope<CommunicationChannelQueryResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data
-            }
-        }
-    }
+    )
 
     @Serializable
     class LogMessageCollection(
@@ -122,16 +113,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: KSoap.Fault): CommunicationChannelReadResponse? {
-                val x = KSoap.xmlserializer.decodeFromString<KSoap.Envelope<CommunicationChannelReadResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data
-            }
-        }
-    }
+    )
 
     @Serializable
     @XmlSerialName("Description", "", "")
@@ -301,16 +283,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: String?,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: KSoap.Fault): ValueMappingQueryResponse? {
-                val x = KSoap.xmlserializer.decodeFromString<KSoap.Envelope<ValueMappingQueryResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data
-            }
-        }
-    }
+    )
 
     @Serializable
     @XmlSerialName("ValueMappingReadRequest", "http://sap.com/xi/BASIS", "b")
@@ -336,16 +309,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: KSoap.Fault): ValueMappingReadResponse? {
-                val x = KSoap.xmlserializer.decodeFromString<KSoap.Envelope<ValueMappingReadResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data
-            }
-        }
-    }
+    )
 
     @Serializable
     @XmlSerialName("ValueMapping", "", "")
@@ -365,7 +329,6 @@ class XiBasis {
     @Serializable
     @XmlSerialName("ConfigurationScenarioQueryRequest", "http://sap.com/xi/BASIS", "b")
     class ConfigurationScenarioQueryRequest : KSoap.ComposeSOAP() {
-
         companion object {
             fun getUrl(host: String) = "$host/ConfigurationScenarioInService/ConfigurationScenarioInImplBean"
         }
@@ -381,16 +344,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: KSoap.Fault): ConfigurationScenarioQueryResponse? {
-                val x = KSoap.xmlserializer.decodeFromString<KSoap.Envelope<ConfigurationScenarioQueryResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data
-            }
-        }
-    }
+    )
 
     @Serializable
     @XmlSerialName("ConfigurationScenarioReadRequest", "http://sap.com/xi/BASIS", "b")
@@ -419,16 +373,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: KSoap.Fault): ConfigurationScenarioReadResponse? {
-                val x = KSoap.xmlserializer.decodeFromString<KSoap.Envelope<ConfigurationScenarioReadResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data
-            }
-        }
-    }
+    )
 
     @Serializable
     @XmlSerialName("ConfigurationScenario", "http://sap.com/xi/BASIS", "b")
@@ -468,16 +413,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: KSoap.Fault): IntegratedConfigurationQueryResponse? {
-                val x = KSoap.xmlserializer.decodeFromString<KSoap.Envelope<IntegratedConfigurationQueryResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data
-            }
-        }
-    }
+    )
 
     @Serializable
     @XmlSerialName("IntegratedConfigurationReadRequest", "http://sap.com/xi/BASIS", "b")
@@ -505,16 +441,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: KSoap.Fault): IntegratedConfiguration750ReadResponse? {
-                val x = KSoap.xmlserializer.decodeFromString<KSoap.Envelope<IntegratedConfiguration750ReadResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data
-            }
-        }
-    }
+    )
 
     @Serializable
     @XmlSerialName("IntegratedConfigurationReadResponse", "http://sap.com/xi/BASIS", "b")
@@ -526,16 +453,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
-    ) {
-        companion object {
-            fun parseSOAP(sxml: String, f: KSoap.Fault): IntegratedConfigurationReadResponse? {
-                val x = KSoap.xmlserializer.decodeFromString<KSoap.Envelope<IntegratedConfigurationReadResponse>>(sxml)
-                f.faultcode = x.body.fault?.faultcode ?: ""
-                f.faultstring = x.body.fault?.faultstring ?: ""
-                return x.body.data
-            }
-        }
-    }
+    )
 
     @Serializable
     @XmlSerialName("IntegratedConfiguration", "http://sap.com/xi/BASIS", "b")

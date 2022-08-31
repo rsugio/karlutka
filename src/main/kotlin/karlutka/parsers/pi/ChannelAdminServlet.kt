@@ -12,7 +12,7 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 class ChannelAdminServlet {
     @Serializable
     @XmlSerialName("ErrorInformation", "", "")
-    data class ErrorInformationType(
+    class ErrorInformationType(
         @XmlElement(true)
         @XmlSerialName("Exception", "", "")
         var exception: String? = null,
@@ -32,28 +32,28 @@ class ChannelAdminServlet {
 
     @Serializable
     @XmlSerialName("ChannelStatusResult", "", "")
-    data class ChannelStatusResult(
+    class ChannelStatusResult(
         @XmlElement(true)
         val channels: Channels? = null,
     )
 
     @Serializable
     @XmlSerialName("ChannelAdminResult", "", "")
-    data class ChannelAdminResult(
+    class ChannelAdminResult(
         @XmlElement(true)
         val channels: Channels? = null,
     )
 
     @Serializable
     @XmlSerialName("Channels", "", "")
-    data class Channels(
+    class Channels(
         @XmlElement(true)
         val channels: MutableList<ChannelType> = mutableListOf(),
     )
 
     @Serializable
     @XmlSerialName("Channel", "", "")
-    data class ChannelType(
+    class ChannelType(
         @XmlElement(true)
         val Party: String,
         @XmlElement(true)
@@ -84,14 +84,14 @@ class ChannelAdminServlet {
 
     @Serializable
     @XmlSerialName("ProcessLog", "", "")
-    data class ProcessLogType(
+    class ProcessLogType(
         @XmlElement(true)
         @XmlSerialName("LogEntry", "", "")
         val logEntry: MutableList<LogEntryType> = mutableListOf(),
     )
 
     @Serializable
-    data class LogEntryType(
+    class LogEntryType(
         @XmlElement(true)
         val Time: String,
         @XmlElement(true)
@@ -106,14 +106,14 @@ class ChannelAdminServlet {
 
     @Serializable
     @XmlSerialName("AdminHistory", "", "")
-    data class AdminHistoryType(
+    class AdminHistoryType(
         @XmlElement(true)
         @XmlSerialName("AdminEntry", "", "")
         val adminEntries: MutableList<AdminEntryType> = mutableListOf(),
     )
 
     @Serializable
-    data class AdminEntryType(
+    class AdminEntryType(
         @XmlElement(true)
         val Time: String,
         @XmlElement(true)
@@ -126,14 +126,14 @@ class ChannelAdminServlet {
 
     @Serializable
     @XmlSerialName("AdminErrors", "", "")
-    data class AdminErrorsType(
+    class AdminErrorsType(
         @XmlElement(true)
         @XmlSerialName("ErrorEntry", "", "")
         val errorEntries: MutableList<ErrorEntryType> = mutableListOf(),
     )
 
     @Serializable
-    data class ErrorEntryType(
+    class ErrorEntryType(
         @XmlElement(true)
         val Time: String,
         @XmlElement(true)
