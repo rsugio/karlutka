@@ -1,7 +1,7 @@
 import com.sap.conn.jco.JCo
 import karlutka.clients.*
 import karlutka.models.MTarget
-import karlutka.server.DatabaseFactory
+import karlutka.server.DB
 import karlutka.server.Server
 import karlutka.util.*
 import java.nio.file.Path
@@ -51,7 +51,7 @@ fun main(args: Array<String>) {
         Duration.ofMillis(Server.kfg.httpClientConnectionTimeoutMillis)
     )
 
-    DatabaseFactory.init(kfg.h2connection)
+    DB.init(kfg.h2connection)
     if (kfg.influxdb != null) {
         val info = KInflux.init(kfg.influxdb, pw.securityMaterials)
         println("Influx по ${kfg.influxdb.host} подключен: $info")

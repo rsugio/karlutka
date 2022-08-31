@@ -1,7 +1,7 @@
 import karlutka.clients.PI
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.PCommon
-import karlutka.server.DatabaseFactory
+import karlutka.server.DB
 import karlutka.server.Server
 import karlutka.util.*
 import kotlinx.coroutines.Dispatchers
@@ -23,9 +23,9 @@ class KPiTests {
         KtorClient.createClientEngine()
         KTempFile.tempFolder = Paths.get(Server.kfg.tmpdir)
 
-        DatabaseFactory.init(Server.kfg.h2connection)
+        DB.init(Server.kfg.h2connection)
 
-        target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
+        target = Server.kfg.targets.find { it.sid == "QPH" }!! as KfTarget.PIAF
         target.loadAuths(Server.kfpasswds.securityMaterials)
         pi = PI(target)
     }
@@ -114,13 +114,16 @@ class KPiTests {
             withContext(Dispatchers.IO) {
                 val cc = pi.requestCommunicationChannelsAsync(this)
                 val ico75 = pi.requestICo75Async(this)
-                pi.parseCommunicationChannelsResponse(cc)
-                val ccd = pi.readCommunicationChannelAsync(this, pi.dir_cc)
-
-                pi.parseICoResponse(ico75)
-                pi.readCommunicationChannelResponse(ccd)
-                val icod = pi.readICo75Async(this, pi.dir_ico)
-                pi.parseICo750ReadResponse(icod)
+                val newcc = pi.parseCommunicationChannelsResponse(cc)
+                if (newcc.isNotEmpty()) {
+                    val ccd = pi.readCommunicationChannelAsync(this, newcc)
+                    pi.readCommunicationChannelResponse(ccd)
+                }
+                val newicos = pi.parseICoResponse(ico75)
+                if (newicos.isNotEmpty()) {
+                    val icod = pi.readICo75Async(this, newicos)
+                    pi.parseICo750ReadResponse(icod)
+                }
             }
         }
     }

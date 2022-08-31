@@ -9,7 +9,7 @@ import karlutka.models.MPI
 import karlutka.models.MTarget
 import karlutka.parsers.pi.*
 import karlutka.serialization.KSoap
-import karlutka.server.DatabaseFactory
+import karlutka.server.DB
 import karlutka.server.Server
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
@@ -18,9 +18,6 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.net.URL
 import java.net.URLEncoder
@@ -58,12 +55,9 @@ class PI(
         KtorClient.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
 
         transaction {
-            val exist = DatabaseFactory.PI.select(DatabaseFactory.PI.sid eq konfig.sid).execute(this)
-            if (exist == null) {
-                DatabaseFactory.PI.insert {
-                    it[sid] = konfig.sid
-                }
-            }
+            if (!DB.PI.exists(konfig.sid)) DB.PI.insert(konfig.sid)
+            dir_cc.addAll(DB.PICC.channels(konfig.sid))
+            dir_ico.addAll(DB.PIICO.icos(konfig.sid))
         }
     }
 
@@ -451,24 +445,23 @@ class PI(
         return scope.async { task.execute() }
     }
 
-    suspend fun parseCommunicationChannelsResponse(td: Deferred<KtorClient.Task>) {
+    suspend fun parseCommunicationChannelsResponse(td: Deferred<KtorClient.Task>): List<XiBasis.CommunicationChannelID> {
         val task = taskAwait(td, ContentType.Text.Xml)
         val fault = KSoap.Fault()
         val t = KSoap.parseSOAP<XiBasis.CommunicationChannelQueryResponse>(task.bodyAsXmlReader(), fault)
         require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
-        transaction {
-            t!!.channels.forEach { cc ->
-                if (!dir_cc.contains(cc)) {
-                    dir_cc.add(cc)
-                    DatabaseFactory.PICC.insert {
-                        it[sid] = konfig.sid
-                        it[PartyID] = cc.PartyID
-                        it[ComponentID] = cc.ComponentID
-                        it[ChannelID] = cc.ChannelID
-                    }
-                }
+        val newcc = mutableListOf<XiBasis.CommunicationChannelID>()
+        t!!.channels.forEach { cc ->
+            if (!dir_cc.contains(cc)) {
+                newcc.add(cc)
             }
         }
+        transaction {
+            DB.PICC.insert(konfig.sid, newcc)
+            dir_cc.addAll(newcc)
+        }
+        task.close()
+        return newcc
     }
 
     suspend fun readCommunicationChannelResponse(td: Deferred<KtorClient.Task>) {
@@ -476,7 +469,7 @@ class PI(
         val fault = KSoap.Fault()
         val t = KSoap.parseSOAP<XiBasis.CommunicationChannelReadResponse>(task.bodyAsXmlReader(), fault)
         require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
-        println("channels: ${t!!.channels.size}")
+//        println("channels: ${t!!.channels.size}")
     }
 
     suspend fun requestICo75Async(scope: CoroutineScope): Deferred<KtorClient.Task> {
@@ -485,17 +478,23 @@ class PI(
         return scope.async { task.execute() }
     }
 
-    suspend fun parseICoResponse(td: Deferred<KtorClient.Task>) {
+    suspend fun parseICoResponse(td: Deferred<KtorClient.Task>): List<XiBasis.IntegratedConfigurationID> {
         val task = taskAwait(td, ContentType.Text.Xml)
         val fault = KSoap.Fault()
         val t = KSoap.parseSOAP<XiBasis.IntegratedConfigurationQueryResponse>(task.bodyAsXmlReader(), fault)
         require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
+        val newicos = mutableListOf<XiBasis.IntegratedConfigurationID>()
         t!!.IntegratedConfigurationID.forEach { ico ->
             if (!dir_ico.contains(ico)) {
-                dir_ico.add(ico)
+                newicos.add(ico)
             }
         }
-        println("ico: ${t.IntegratedConfigurationID.size}")
+        transaction {
+            DB.PIICO.insert(konfig.sid, newicos)
+            dir_ico.addAll(newicos)
+        }
+        task.close()
+        return newicos
     }
 
     suspend fun readICo75Async(

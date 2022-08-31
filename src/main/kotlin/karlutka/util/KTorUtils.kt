@@ -20,7 +20,7 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import karlutka.server.DatabaseFactory
+import karlutka.server.DB
 import karlutka.server.Server
 import kotlinx.html.head
 import kotlinx.html.title
@@ -43,7 +43,7 @@ object KTorUtils {
                 exitCodeSupplier = {
                     println("С ЦУПа поступил /shutdown")
                     KtorClient.clients.forEach { it.close() }
-                    DatabaseFactory.close()
+                    DB.close()
                     println("Приземление - штатное")
                     0
                 }
