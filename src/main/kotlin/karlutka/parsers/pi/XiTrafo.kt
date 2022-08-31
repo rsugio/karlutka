@@ -358,9 +358,8 @@ class XiTrafo(
         val Maxoccurs: String
     )
 
-
     companion object {
-        val xitrafoxml = XML() {
+        private val xitrafoxml = XML {
             indentString = "\t"
             xmlDeclMode = XmlDeclMode.None
             autoPolymorphic = true

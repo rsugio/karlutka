@@ -15,10 +15,9 @@ import nl.adaptivity.xmlutil.util.CompactFragment
 
 class KSoap {
     @Serializable
-    open class ComposeSOAP {
+    open class ComposeSOAP(val uri:String = "") {
         fun composeSOAP() = xmlserializer.encodeToString(Envelope(null, Envelope.Body(this)))
     }
-
 
     @Serializable
     @XmlSerialName("Envelope", "http://schemas.xmlsoap.org/soap/envelope/", "SOAP-ENV")
@@ -140,6 +139,7 @@ class KSoap {
             autoPolymorphic = true
         }
 
+        @Deprecated("Использовать не рекомендуется", ReplaceWith("parseSOAP", "XmlReader"))
         inline fun <reified T> parseSOAP(sxml: String, f: Fault): T? {
             val x = xmlserializer.decodeFromString<Envelope<T>>(sxml)
             f.faultcode = x.body.fault?.faultcode ?: ""

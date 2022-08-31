@@ -8,23 +8,14 @@ import nl.adaptivity.xmlutil.serialization.XmlValue
 
 class XiBasis {
     companion object {
-        const val url = "/CommunicationChannelInService/CommunicationChannelInImplBean"
+        const val uriCommunicationChannel = "/CommunicationChannelInService/CommunicationChannelInImplBean"
+        const val uriValueMapping = "/ValueMappingInService/ValueMappingInImplBean"
+        const val uriConfigurationScenario = "/ConfigurationScenarioInService/ConfigurationScenarioInImplBean"
+
+        //TODO ИКо есть обычные и специальные для 7.5, подумать надо ли раздублировать классы?
+        const val uriICo750 = "/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
+        const val uriICo = "/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"
     }
-
-    @Serializable
-    @XmlSerialName("CommunicationChannelQueryRequest", "http://sap.com/xi/BASIS", "b")
-    class CommunicationChannelQueryRequest : KSoap.ComposeSOAP()
-
-    @Serializable
-    @XmlSerialName("CommunicationChannelQueryResponse", "http://sap.com/xi/BASIS", "b")
-    class CommunicationChannelQueryResponse(
-        @XmlElement(true)
-        @XmlSerialName("CommunicationChannelID", "", "")
-        val channels: List<CommunicationChannelID> = listOf(),
-        @XmlElement(true)
-        @XmlSerialName("LogMessageCollection", "", "")
-        val LogMessageCollection: LogMessageCollection,
-    )
 
     @Serializable
     class LogMessageCollection(
@@ -34,7 +25,9 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("LogMessageOthers", "", "")
         val otherLogs: List<LogMessage> = listOf(),
-    )
+    ) {
+        fun isEmpty() = channelLogs.isEmpty() && otherLogs.isEmpty()
+    }
 
     @Serializable
     class LogMessage(
@@ -66,7 +59,8 @@ class XiBasis {
     )
 
     @Serializable
-    class CommunicationChannelID(
+    data class CommunicationChannelID(
+        //data нужен для .equals()
         @XmlElement(true)
         val PartyID: String,
         @XmlElement(true)
@@ -76,7 +70,7 @@ class XiBasis {
     )
 
     @Serializable
-    class IntegratedConfigurationID(
+    data class IntegratedConfigurationID(       //data по делу
         @XmlElement(true)
         val SenderPartyID: String,
         @XmlElement(true)
@@ -93,7 +87,6 @@ class XiBasis {
 
     @Serializable
     @XmlSerialName("CommunicationChannelReadRequest", "http://sap.com/xi/BASIS", "b")
-    // /CommunicationChannelInService/CommunicationChannelInImplBean
     class CommunicationChannelReadRequest(
         @XmlElement(true)
         @XmlSerialName("ReadContext", "", "")
@@ -101,7 +94,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("CommunicationChannelID", "", "")
         val channel: List<CommunicationChannelID> = listOf(),
-    ) : KSoap.ComposeSOAP()
+    ) : KSoap.ComposeSOAP(uriCommunicationChannel)
 
 
     @Serializable
@@ -264,47 +257,17 @@ class XiBasis {
         val FolderPathID: String, ///SCPI/SAP_HYBRIS/Entities/SendStations/
     )
 
-    @Serializable
-    @XmlSerialName("ValueMappingQueryRequest", "http://sap.com/xi/BASIS", "b")
-    class ValueMappingQueryRequest : KSoap.ComposeSOAP() {
-        companion object {
-            fun getUrl(host: String) = "$host/ValueMappingInService/ValueMappingInImplBean"
-        }
-
-    }
 
     @Serializable
-    @XmlSerialName("ValueMappingQueryResponse", "http://sap.com/xi/BASIS", "b")
-    class ValueMappingQueryResponse(
-        @XmlElement(true)
-        @XmlSerialName("ValueMappingID", "", "")
-        val ValueMappingID: List<String> = listOf(),
-        @XmlElement(true)
-        @XmlSerialName("LogMessageCollection", "", "")
-        val LogMessageCollection: String?,
-    )
+    @XmlSerialName("CommunicationChannelQueryRequest", "http://sap.com/xi/BASIS", "b")
+    class CommunicationChannelQueryRequest : KSoap.ComposeSOAP(uriCommunicationChannel)
 
     @Serializable
-    @XmlSerialName("ValueMappingReadRequest", "http://sap.com/xi/BASIS", "b")
-    class ValueMappingReadRequest(
+    @XmlSerialName("CommunicationChannelQueryResponse", "http://sap.com/xi/BASIS", "b")
+    class CommunicationChannelQueryResponse(
         @XmlElement(true)
-        @XmlSerialName("ReadContext", "", "")
-        val ReadContext: String? = null,
-        @XmlElement(true)
-        @XmlSerialName("ValueMappingID", "", "")
-        val channel: List<String> = listOf(),
-    ) : KSoap.ComposeSOAP() {
-
-        companion object {
-            fun getUrl(host: String) = "$host/ValueMappingInService/ValueMappingInImplBean"
-        }
-    }
-
-    @Serializable
-    @XmlSerialName("ValueMappingReadResponse", "http://sap.com/xi/BASIS", "b")
-    class ValueMappingReadResponse(
-        @XmlElement(true)
-        val ValueMapping: List<ValueMapping> = listOf(),
+        @XmlSerialName("CommunicationChannelID", "", "")
+        val channels: List<CommunicationChannelID> = listOf(),
         @XmlElement(true)
         @XmlSerialName("LogMessageCollection", "", "")
         val LogMessageCollection: LogMessageCollection,
@@ -326,12 +289,44 @@ class XiBasis {
     )
 
     @Serializable
+    @XmlSerialName("ValueMappingQueryRequest", "http://sap.com/xi/BASIS", "b")
+    class ValueMappingQueryRequest : KSoap.ComposeSOAP(uriValueMapping)
+
+    @Serializable
+    @XmlSerialName("ValueMappingQueryResponse", "http://sap.com/xi/BASIS", "b")
+    class ValueMappingQueryResponse(
+        @XmlElement(true)
+        @XmlSerialName("ValueMappingID", "", "")
+        val ValueMappingID: List<String> = listOf(),
+        @XmlElement(true)
+        @XmlSerialName("LogMessageCollection", "", "")
+        val LogMessageCollection: String?,
+    )
+
+    @Serializable
+    @XmlSerialName("ValueMappingReadRequest", "http://sap.com/xi/BASIS", "b")
+    class ValueMappingReadRequest(
+        @XmlElement(true)
+        @XmlSerialName("ReadContext", "", "")
+        val ReadContext: String? = null,
+        @XmlElement(true)
+        @XmlSerialName("ValueMappingID", "", "")
+        val channel: List<String> = listOf(),
+    ) : KSoap.ComposeSOAP(uriValueMapping)
+
+    @Serializable
+    @XmlSerialName("ValueMappingReadResponse", "http://sap.com/xi/BASIS", "b")
+    class ValueMappingReadResponse(
+        @XmlElement(true)
+        val ValueMapping: List<ValueMapping> = listOf(),
+        @XmlElement(true)
+        @XmlSerialName("LogMessageCollection", "", "")
+        val LogMessageCollection: LogMessageCollection,
+    )
+
+    @Serializable
     @XmlSerialName("ConfigurationScenarioQueryRequest", "http://sap.com/xi/BASIS", "b")
-    class ConfigurationScenarioQueryRequest : KSoap.ComposeSOAP() {
-        companion object {
-            fun getUrl(host: String) = "$host/ConfigurationScenarioInService/ConfigurationScenarioInImplBean"
-        }
-    }
+    class ConfigurationScenarioQueryRequest : KSoap.ComposeSOAP(uriConfigurationScenario)
 
     @Serializable
     @XmlSerialName("ConfigurationScenarioQueryResponse", "http://sap.com/xi/BASIS", "b")
@@ -355,12 +350,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("ConfigurationScenarioID", "", "")
         val ConfigurationScenarioID: List<String> = listOf(),
-    ) : KSoap.ComposeSOAP() {
-
-        companion object {
-            fun getUrl(host: String) = "$host/ConfigurationScenarioInService/ConfigurationScenarioInImplBean"
-        }
-    }
+    ) : KSoap.ComposeSOAP(uriConfigurationScenario)
 
     @Serializable
     @XmlSerialName("ConfigurationScenarioReadResponse", "http://sap.com/xi/BASIS", "b")
@@ -395,14 +385,7 @@ class XiBasis {
 
     @Serializable
     @XmlSerialName("IntegratedConfigurationQueryRequest", "http://sap.com/xi/BASIS", "b")
-    class IntegratedConfigurationQueryRequest : KSoap.ComposeSOAP() {
-        companion object {
-            fun getUrl750(host: String) =
-                "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
-
-            fun getUrl(host: String) = "$host/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"
-        }
-    }
+    class IntegratedConfigurationQueryRequest : KSoap.ComposeSOAP("выбирай между 750 и обычной")
 
     @Serializable
     @XmlSerialName("IntegratedConfigurationQueryResponse", "http://sap.com/xi/BASIS", "b")
@@ -425,14 +408,7 @@ class XiBasis {
         @XmlElement(true)
         @XmlSerialName("IntegratedConfigurationID", "", "")
         val IntegratedConfigurationID: List<IntegratedConfigurationID> = listOf(),
-    ) : KSoap.ComposeSOAP() {
-        companion object {
-            fun getUrl750(host: String) =
-                "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
-
-            fun getUrl(host: String) = "$host/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"
-        }
-    }
+    ) : KSoap.ComposeSOAP("выбирай между 750 и обычной")
 
     @Serializable
     @XmlSerialName("IntegratedConfiguration750ReadResponse", "http://sap.com/xi/BASIS", "b")
@@ -777,5 +753,4 @@ class XiBasis {
         @XmlSerialName("SpecificConfiguration", "", "")
         val SpecificConfiguration: String? = null,
     )
-
 }

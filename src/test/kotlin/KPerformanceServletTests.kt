@@ -1,4 +1,4 @@
-import KT.Companion.s
+import KT.Companion.x
 import karlutka.models.MPI
 import karlutka.models.MPerfStat
 import karlutka.parsers.pi.PerfMonitorServlet.MessageStatisticsQueryResults
@@ -9,29 +9,30 @@ import kotlin.io.path.*
 import kotlin.test.Test
 
 class KPerformanceServletTests {
-    private fun show(a: Any?) {
-        if (false) println(a?.toString())
+    private fun show(a: Any) {
+        require(a.toString().isNotEmpty())
+//        println(a.toString())
     }
 
     @Test
     fun static() {
-        val p1 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/01empty.xml"))
+        val p1 = PerformanceDataQueryResults.parse(x("/pi_PerformanceDataQuery/01empty.xml"))
         show(p1.components())
-        val p2 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/02intervals.xml"))
+        val p2 = PerformanceDataQueryResults.parse(x("/pi_PerformanceDataQuery/02intervals.xml"))
         show(p2.Periods!!.value.size)
         p2.UsageTypes!!.value.forEach {
             require(it.URL.isNotBlank())
             require(it.Description.isNotBlank())
         }
-        val p3 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/03data.xml"))
+        val p3 = PerformanceDataQueryResults.parse(x("/pi_PerformanceDataQuery/03data.xml"))
         show(p3.perfdata().size)
         requireNotNull(p3.Result.BeginTime)
         requireNotNull(p3.Result.EndTime)
-        val p4 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/04datamin.xml"))
+        val p4 = PerformanceDataQueryResults.parse(x("/pi_PerformanceDataQuery/04datamin.xml"))
         show(p4.perfdata().size)
-        val p5 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/05intervals.xml"))
+        val p5 = PerformanceDataQueryResults.parse(x("/pi_PerformanceDataQuery/05intervals.xml"))
         show(p5.Periods!!.value.size)
-        val p6 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/06nodata.xml"))
+        val p6 = PerformanceDataQueryResults.parse(x("/pi_PerformanceDataQuery/06nodata.xml"))
         show(p6)
         p6.perfdata().forEach { x ->
             require(x.INBOUND_CHANNEL.isNotBlank())
@@ -92,6 +93,8 @@ class KPerformanceServletTests {
             )
         )
         val s: String = p.render()
+
+        @Suppress("DEPRECATION")
         val q = PerformanceDataQueryResults.parse(s)
         show(q.Result.Code)
         require(q.Result.Code == "⅀♣◘ЪФЫВ>&<")
@@ -101,10 +104,10 @@ class KPerformanceServletTests {
     fun performancemassload() {
         val d = Paths.get("C:\\data\\PerformanceDataQuery")
         if (d.exists()) {
-            d.listDirectoryEntries("*.xml").forEach {
-                val x = PlatformXmlReader(it.inputStream(), Charsets.UTF_8.toString())
-                val p = PerformanceDataQueryResults.parse(x)    //it.readText(Charsets.UTF_8)
-                show("$it\t${p.Result.Code}\t${p.perfdata().size}")
+            d.listDirectoryEntries("*.xml").forEach { xml ->
+                val x = PlatformXmlReader(xml.inputStream(), Charsets.UTF_8.toString())
+                val p = PerformanceDataQueryResults.parse(x)
+                show("$p\t${p.Result.Code}\t${p.perfdata().size}")
                 p.perfdata().find { it.anomaly() }
             }
         }
@@ -113,26 +116,22 @@ class KPerformanceServletTests {
     @Test
     fun overviewmassload() {
         val d = Paths.get("C:\\data\\MessageOverviewQuery")
-        if (d.exists()) {
-            d.listDirectoryEntries("*.xml").forEach {
-                val x = PlatformXmlReader(it.inputStream(), Charsets.UTF_8.toString())
-                val q = MessageStatisticsQueryResults.parse(x)
-                val p = MessageStatisticsQueryResults.parse(it.readText(Charsets.UTF_8))
-                assert(p == q)
-                show("$it\t${p.Result.Code}")
-                if (p.Data != null) {
-                    show("\t${p.Data!!.DataRows.value.size}")
-                } else {
-                    show("\t - no data")
-                }
+        if (!d.exists()) return
+        d.listDirectoryEntries("*.xml").forEach {
+            val p = MessageStatisticsQueryResults.parse(x(it))
+            show("$it\t${p.Result.Code}")
+            if (p.Data != null) {
+                show("\t${p.Data!!.DataRows.value.size}")
+            } else {
+                show("\t - no data")
             }
         }
     }
 
     @Test
     fun influx_v1() {
-        val d = Paths.get("C:\\data\\PerformanceDataQuery\\dayli_pph.xml").readText()
-        val t = PerformanceDataQueryResults.parse(d)
+        val d = Paths.get("C:\\data\\PerformanceDataQuery\\dayli_pph.xml")
+        val t = PerformanceDataQueryResults.parse(x(d))
         val a = t.Result.BeginTime!!.inst().toEpochSecond() * 1000    //загружать в ms
         val rez = StringBuilder()
         val lines = t.perfdata()
@@ -153,7 +152,7 @@ class KPerformanceServletTests {
         val csv = StringBuilder()
         csv.append("hour\tQOS\tqty\tAVG_MESSAGE_SIZE\tMIN_MESSAGE_SIZE\tMAX_MESSAGE_SIZE\n")
         Paths.get("C:\\data\\PerformanceDataQuery\\pph\\hourly").forEachDirectoryEntry("*.xml") { p ->
-            val p3 = PerformanceDataQueryResults.parse(p.readText())
+            val p3 = PerformanceDataQueryResults.parse(x(p))
             val hour = p3.Result.BeginTime!!.inst().hour
             println(hour)
             p3.perfdata().filter { !it.anomaly() }.forEach { pr ->
@@ -167,11 +166,9 @@ class KPerformanceServletTests {
     fun stat_aggr() {
         val raw = mutableListOf<PerformanceDataQueryResults>()
         Paths.get("C:\\data\\PerformanceDataQuery\\pph\\hourly").forEachDirectoryEntry("*.xml") { p ->
-            raw.add(PerformanceDataQueryResults.parse(p.readText()))
+            raw.add(PerformanceDataQueryResults.parse(x(p)))
         }
         // определяем размеры сообщений
-
-
         val strates = MPerfStat.makeHourly(raw)
         val js = MPerfStat.makeJS(strates, "титул")
         Paths.get("C:\\data\\PerformanceDataQuery\\report\\chart1.html").writeText(js)

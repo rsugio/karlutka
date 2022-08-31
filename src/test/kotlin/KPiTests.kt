@@ -58,22 +58,22 @@ class KPiTests {
 
             val om1 = Hm.TestExecutionRequest.create(
                 PCommon.VC("0050568f0aac1ed4a6e56926325e2eb3", 'S'),
-                "MAPPING", "XiPatternInterface1ToInterface2", "http://sap.com/xi/XI/System/Patterns",
+                "MAPPING",
+                "XiPatternInterface1ToInterface2",
+                "http://sap.com/xi/XI/System/Patterns",
                 xml
             )
             val r1 = pi.executeOMtest(om1)
             println(r1.outputXML)
 
             val om2 = Hm.TestExecutionRequest.create(
-                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'),
-                "MAPPING", "OM_Ume", "http://test.com", "<a/>"
+                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'), "MAPPING", "OM_Ume", "http://test.com", "<a/>"
             )
             val r2 = pi.executeOMtest(om2)
             println(r2.outputXML)
 
             val mm1 = Hm.TestExecutionRequest.create(
-                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'),
-                "XI_TRAFO", "MM_Test", "http://test.com", "<a/>"
+                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'), "XI_TRAFO", "MM_Test", "http://test.com", "<a/>"
             )
             val rm1 = pi.executeMMtest(mm1)
             println(rm1.outputXML)
@@ -88,7 +88,7 @@ class KPiTests {
                 println("hmiGetRegistered ok")
                 pi.hmiAskSWCV(this)
                 println("askSWCV ok: ${pi.swcv.size}")
-                val def = pi.askNamespaceDecls(this, {true})
+                val def = pi.askNamespaceDecls(this, { true })
                 println("namespaces asked")
                 pi.parseNamespaceDecls(def)
                 println("... namespaces ok: ${pi.namespaces.size}")
@@ -105,7 +105,10 @@ class KPiTests {
     fun xibasis() {
         runBlocking {
             withContext(Dispatchers.IO) {
-
+                val cc = pi.requestCommunicationChannelsAsync(this)
+                val ico75 = pi.requestICo75Async(this)
+                pi.parseCommunicationChannelsResponse(cc)
+                pi.parseICoResponse(ico75)
             }
         }
     }

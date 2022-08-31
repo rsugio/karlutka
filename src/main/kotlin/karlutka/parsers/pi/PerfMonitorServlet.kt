@@ -20,6 +20,8 @@ import java.time.temporal.TemporalAccessor
 
 class PerfMonitorServlet {
     companion object {
+        const val uriPerfServlet = "/mdt/performancedataqueryservlet"
+
         // Mixed content для Entry требует, чтобы строки мешались с MeasuringPoints
         private val xmlmodule = SerializersModule {
             polymorphic(Any::class) {

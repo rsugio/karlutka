@@ -15,6 +15,7 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.*
 import io.ktor.utils.io.*
 import io.ktor.utils.io.core.*
+import karlutka.serialization.KSoap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.StringFormat
@@ -165,6 +166,9 @@ object KtorClient {
         return t
     }
 
+    /**
+     * Сырой произвольный POST-запрос, вместо этого можно легко использовать ktor-client.HttpStatement
+     */
     suspend fun taskPost(
         client: HttpClient,
         url: String,
@@ -178,5 +182,9 @@ object KtorClient {
             }
         }
         return Task(post)
+    }
+
+    suspend fun taskPost(client: HttpClient, soap: KSoap.ComposeSOAP): Task {
+        return taskPost(client, soap.uri, soap.composeSOAP(), mapOf("content-type" to "text/xml"))
     }
 }

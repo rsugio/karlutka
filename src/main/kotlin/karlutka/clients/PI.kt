@@ -8,6 +8,7 @@ import io.ktor.http.*
 import karlutka.models.MPI
 import karlutka.models.MTarget
 import karlutka.parsers.pi.*
+import karlutka.serialization.KSoap
 import karlutka.server.Server
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
@@ -24,16 +25,18 @@ class PI(
     override val konfig: KfTarget,
 ) : MTarget {
 
-    val httpHostPort: URL
-    val client: HttpClient
+    private val httpHostPort: URL
+    private val client: HttpClient
+
+    private val hmiClientId: UUID = UUID.randomUUID()!!
+    private lateinit var hmiServices: List<Hm.HmiService>
 
     // список адаптер фреймворков, вида af.sid.host-db
     val afs = mutableListOf<String>()
-    val hmiClientId: UUID = UUID.randomUUID()!!
-    lateinit var hmiServices: List<Hm.HmiService>
     val swcv: MutableList<MPI.Swcv> = mutableListOf()
     val namespaces: MutableList<MPI.Namespace> = mutableListOf()
     val repolist: MutableList<MPI.RepositoryObject> = mutableListOf()
+    val dir_cc: MutableList<XiBasis.CommunicationChannelID> = mutableListOf()
 
     lateinit var dirConfiguration: Hm.DirConfiguration
 
@@ -67,7 +70,7 @@ class PI(
     }
 
     suspend fun perfServletListOfComponents(scope: CoroutineScope) =
-        scope.async { KtorClient.taskGet(client, mdtperfservlet) }
+        scope.async { KtorClient.taskGet(client, PerfMonitorServlet.uriPerfServlet) }
 
     suspend fun perfServletListOfComponents(td: Deferred<KtorClient.Task>): List<String> {
         val t = td.await()
@@ -84,10 +87,7 @@ class PI(
 
         // перечень интервалов хотим сразу
         val iv = withContext(scope.coroutineContext) {
-            KtorClient.taskGet(
-                client,
-                mdtperfservlet + "?component=$comp"
-            )
+            KtorClient.taskGet(client, "${PerfMonitorServlet.uriPerfServlet}?component=$comp")
         }
         require(iv.resp.status.isSuccess() && iv.resp.contentType()!!.match("text/xml"))
         val p = PerfMonitorServlet.PerformanceDataQueryResults.parse(iv)
@@ -96,7 +96,7 @@ class PI(
             for (_Period in p.Periods.value) {
                 for (_Interval in _Period.Interval) {
                     val s = "${_Period.Type} ${_Interval.Begin}"
-                    val s2 = "$mdtperfservlet?component=$comp" + "&begin=${
+                    val s2 = "${PerfMonitorServlet.uriPerfServlet}?component=$comp" + "&begin=${
                         URLEncoder.encode(
                             _Interval.Begin, Charsets.UTF_8
                         )
@@ -113,9 +113,10 @@ class PI(
                     ok = t.resp.status.isSuccess() && t.resp.contentType()!!.match("text/xml")
                 }
                 val p2 = PerfMonitorServlet.PerformanceDataQueryResults.parse(t)
-                output[begin] = mutableListOf()
+                output[begin] = mutableListOf() //TODO p2 сюда
             }
         } else {
+            //TODO переделать на возврат из метода
             System.err.println("Не включен сбор статистики на $comp: ${p.Result.Code}")
         }
         return output
@@ -169,7 +170,7 @@ class PI(
             mapOf("content-type" to "text/xml")
         )
         val td = scope.async { task.execute() }
-        this.hmiServices(hmiPost(td).MethodOutput!!.Return)
+        this.hmiServices(hmiTaskAwait(td).MethodOutput!!.Return)
     }
 
     suspend fun hmiGeneralQueryTask(scope: CoroutineScope, sxml: String): Deferred<KtorClient.Task> {
@@ -198,11 +199,11 @@ class PI(
     @Deprecated("лучше hmiGeneralQueryTask")
     suspend fun hmiGeneralQuery(scope: CoroutineScope, sxml: String): Hm.QueryResult {
         val td = hmiGeneralQueryTask(scope, sxml)
-        val resp = hmiPost(td)
+        val resp = hmiTaskAwait(td)
         return Hm.QueryResult.parse(resp.MethodOutput!!.Return)
     }
 
-    suspend fun hmiRead(
+    private suspend fun hmiReadAsync(
         scope: CoroutineScope, bodyXml: String, vc: String = "SWC", sp: String = "-1", uc: Boolean = true
     ): Deferred<KtorClient.Task> {
         val serv = findHmiServiceMethod("read", "plain")
@@ -225,9 +226,27 @@ class PI(
         return scope.async { task.execute() }
     }
 
+    // подумать, может быть в HmiResponse добавить ссылку на Task и здесь её заполнять
+    // это удобно чтобы не удалять файл после успешного разбора
+    private suspend fun taskAwait(td: Deferred<KtorClient.Task>, expected: ContentType): KtorClient.Task {
+        val task = td.await()
+        while (task.retries < 10) {
+            // если здесь task.resp==null значит не был вызван метод execute
+            if (task.resp.status.isSuccess() && task.resp.contentType()!!.match(expected)) {
+                return task
+            }
+            task.execute()      //TODO несколько коряво что синхронно, возможно переделать?
+        }
+        throw Exception("HMI POST - ошибка после 10 повторов")
+    }
+
+    private suspend fun hmiTaskAwait(td: Deferred<KtorClient.Task>): Hm.HmiResponse {
+        return Hm.HmiResponse.parse(taskAwait(td, ContentType.Text.Xml))
+    }
+
     suspend fun hmiAskSWCV(scope: CoroutineScope) {
         val td = hmiGeneralQueryTask(scope, Hm.GeneralQueryRequest.swcv())
-        val resp = hmiPost(td)
+        val resp = hmiTaskAwait(td)
         requireNotNull(resp.MethodOutput)   //TODO проверить на пустой системе при случае, или эмуляторе
         val lst = resp.toQueryResult().toSwcv().sortedBy { it.name }
         this.swcv.addAll(lst)
@@ -243,13 +262,14 @@ class PI(
                 PCommon.VC(s.id, 'S', -1),  //почему-то нельзя брать исходный тип SWCV
                 PCommon.Key("namespdecl", null, listOf(s.id))
             )
-            val type = Hm.Type("namespdecl", ref,
+            val type = Hm.Type(
+                "namespdecl", ref,
                 ADD_IFR_PROPERTIES = true,
                 STOP_ON_FIRST_ERROR = false,
                 RELEASE = "7.0",
                 DOCU_LANG = "EN"
             )
-            val td = hmiRead(scope, Hm.ReadListRequest(type).encodeToString())
+            val td = hmiReadAsync(scope, Hm.ReadListRequest(type).encodeToString())
             deferred.add(td)
         }
         return deferred
@@ -258,7 +278,7 @@ class PI(
     suspend fun parseNamespaceDecls(deferred: MutableList<Deferred<KtorClient.Task>>) {
         deferred.forEach { taskdef ->
             val retry: Boolean
-            val hr = hmiPost(taskdef)
+            val hr = hmiTaskAwait(taskdef)
 
             if (hr.MethodFault != null || hr.CoreException != null) {
                 val s = hr.MethodFault?.LocalizedMessage ?: hr.CoreException?.LocalizedMessage ?: ""
@@ -321,7 +341,7 @@ class PI(
 
     suspend fun parseRepoList(deferred: MutableList<Deferred<KtorClient.Task>>) {
         deferred.forEach { taskdef ->
-            val hr = hmiPost(taskdef)
+            val hr = hmiTaskAwait(taskdef)
             require(hr.CoreException == null && hr.MethodOutput != null)
             val queryResult = hr.toQueryResult()
             val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, queryResult)
@@ -400,21 +420,37 @@ class PI(
 //        dirConfiguration = Hm.DirConfiguration.decodeFromString(resp.MethodOutput.Return)
     }
 
-    // подумать, может быть в HmiResponse добавить ссылку на Task и здесь её заполнять
-    // это удобно чтобы не удалять файл после успешного разбора
-    suspend fun hmiPost(td: Deferred<KtorClient.Task>): Hm.HmiResponse {
-        val task = td.await()
-        while (task.retries < 10) {
-            if (task.resp.status.isSuccess() && task.resp.contentType()!!.match("text/xml")) {
-                val hr = Hm.HmiResponse.parse(task)
-                return hr
-            }
-            task.execute()      //TODO несколько коряво что синхронно, возможно переделать?
-        }
-        throw Exception("HMI POST - ошибка после повторов")
+    suspend fun requestCommunicationChannelsAsync(scope: CoroutineScope): Deferred<KtorClient.Task> {
+        val task = KtorClient.taskPost(client, XiBasis.CommunicationChannelQueryRequest())
+        return scope.async { task.execute() }
     }
 
-    companion object {
-        const val mdtperfservlet = "/mdt/performancedataqueryservlet"
+    suspend fun parseCommunicationChannelsResponse(td: Deferred<KtorClient.Task>) {
+        val task = taskAwait(td, ContentType.Text.Xml)
+        val fault = KSoap.Fault()
+        val t = KSoap.parseSOAP<XiBasis.CommunicationChannelQueryResponse>(task.bodyAsXmlReader(), fault)
+        require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
+        t!!.channels.forEach { cc ->
+            if (!dir_cc.contains(cc)) dir_cc.add(cc)
+            //TODO добавить сюда запуск чтения данных канала
+        }
     }
+
+    suspend fun requestICo75Async(scope: CoroutineScope): Deferred<KtorClient.Task> {
+        val req = XiBasis.IntegratedConfigurationQueryRequest()
+        val task = KtorClient.taskPost(client, XiBasis.uriICo750, req.composeSOAP())
+        return scope.async { task.execute() }
+    }
+
+    suspend fun parseICoResponse(td: Deferred<KtorClient.Task>) {
+        val task = taskAwait(td, ContentType.Text.Xml)
+        val fault = KSoap.Fault()
+        val t = KSoap.parseSOAP<XiBasis.IntegratedConfigurationQueryResponse>(task.bodyAsXmlReader(), fault)
+        require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
+        t!!.IntegratedConfigurationID.forEach { ico ->
+
+        }
+    }
+
+
 }
