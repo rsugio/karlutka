@@ -15,14 +15,11 @@ object DB {
         println("H2 соединён на $url")
         transaction(h2db) {
             SchemaUtils.create(PI)
-            //SchemaUtils.create(PIAF)
+            SchemaUtils.create(PIAF)
             SchemaUtils.create(PICC)
             SchemaUtils.create(PIICO)
         }
     }
-
-//    suspend fun <T> dbQuery(block: suspend () -> T): T =
-//        newSuspendedTransaction(Dispatchers.IO) { block() }
 
     fun close() {
         println("H2 отсоединён")
@@ -42,6 +39,7 @@ object DB {
     object PIAF : Table() {
         val sid = varchar("sid", len)
         val af = varchar("af", len)
+        // очевидно здесь будут ещё атрибуты
         override val primaryKey = PrimaryKey(sid, af)
     }
 
