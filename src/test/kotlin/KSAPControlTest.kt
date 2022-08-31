@@ -8,11 +8,11 @@ class KSAPControlTest {
     fun v1() {
         val fault = KSoap.Fault()
         require(SAPControl.ListLogFiles().composeSOAP().isNotBlank())
-        val llfr = SAPControl.ListLogFilesResponse.parseSOAP(s("/pi_SAPControl/01listlogfiles.xml"), fault)
+        val llfr = KSoap.parseSOAP<SAPControl.ListLogFilesResponse>(s("/pi_SAPControl/01listlogfiles.xml"), fault)
         require(fault.isSuccess() && llfr!!.file.item.size == 755)
-        val rlf = SAPControl.ReadLogFileResponse.parseSOAP(s("/pi_SAPControl/02readlogfile.xml"), fault)
+        val rlf = KSoap.parseSOAP<SAPControl.ReadLogFileResponse>(s("/pi_SAPControl/02readlogfile.xml"), fault)
         require(fault.isSuccess() && rlf!!.format.startsWith("Version"))
-        val e = SAPControl.ReadLogFileResponse.parseSOAP(s("/pi_SAPControl/03readlogfile_fault.xml"), fault)
-        require(!fault.isSuccess() && fault.faultcode == "Invalid filename" && e == null)
+        val e = KSoap.parseSOAP<SAPControl.ReadLogFileResponse>(s("/pi_SAPControl/03readlogfile_fault.xml"), fault)
+        require(!fault.isSuccess() && fault.faultstring == "Invalid filename" && e == null)
     }
 }

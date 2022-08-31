@@ -1,11 +1,8 @@
 package karlutka.parsers.pi
 
 import karlutka.serialization.KLocalDateTimeSerializer
-import karlutka.serialization.KSoap
-import karlutka.serialization.KSoap.Companion.xmlserializer
 import karlutka.serialization.KSoap.ComposeSOAP
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import java.time.LocalDateTime
@@ -28,7 +25,7 @@ class SAPControl {
         @XmlSerialName("file", "", "")
         class File(
             @XmlElement(true)
-            val item: MutableList<Item> = mutableListOf(),
+            val item: List<Item> = listOf(),
         )
 
         @Serializable
@@ -44,15 +41,6 @@ class SAPControl {
             @XmlElement(true)
             val format: String,
         )
-
-        companion object {
-            fun parseSOAP(soapXml: String, fault: KSoap.Fault): ListLogFilesResponse? {
-                val b = xmlserializer.decodeFromString<KSoap.Envelope<ListLogFilesResponse>>(soapXml).body
-                fault.faultcode = b.fault?.faultcode ?: ""
-                fault.faultcode = b.fault?.faultstring ?: ""
-                return b.data
-            }
-        }
     }
 
     @Serializable
@@ -89,19 +77,9 @@ class SAPControl {
         @Serializable
         class Fields(
             @XmlElement(true)
-            val item: MutableList<String> = mutableListOf(),
+            val item: List<String> = listOf(),
         )
-
-        companion object {
-            fun parseSOAP(soapXml: String, fault: KSoap.Fault): ReadLogFileResponse? {
-                val b = xmlserializer.decodeFromString<KSoap.Envelope<ReadLogFileResponse>>(soapXml).body
-                fault.faultcode = b.fault?.faultcode ?: ""
-                fault.faultcode = b.fault?.faultstring ?: ""
-                return b.data
-            }
-        }
     }
-
 
 //    @Serializable
 //    @XmlSerialName("GetProcessParameter", "urn:SAPControl", "urn")
@@ -141,9 +119,5 @@ class SAPControl {
 //            @XmlElement(true) @XmlSerialName("int-max", "", "") val intmax: Int?,
 //        )
 //
-//        companion object {
-//            fun parseSOAP(soapXml: String) =
-//                xmlserializer.decodeFromString<EnvelopeH<GetProcessParameterResponse>>(soapXml).body.data
-//        }
 //    }
 }
