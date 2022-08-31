@@ -14,7 +14,7 @@ class IChannelAdmin {
     @XmlSerialName("startChannels", "urn:com:sap:netweaver:pi:monitoring", "ica")
     class StartChannels(
         @XmlElement(true)
-        val channel: MutableList<ChannelAdminDescriptor> = mutableListOf(),
+        val channel: List<ChannelAdminDescriptor> = listOf(),
         @XmlElement(true)
         @XmlSerialName("language", "", "")
         val language: String? = null,
@@ -26,7 +26,7 @@ class IChannelAdmin {
         val name: String,
         val service: String,
         val party: String = "",
-        val status: MutableList<ChannelAdminStatus> = mutableListOf(),
+        val status: List<ChannelAdminStatus> = listOf(),
     )
 
     @Serializable
@@ -45,7 +45,7 @@ class IChannelAdmin {
     @XmlSerialName("stopChannels", "urn:com:sap:netweaver:pi:monitoring", "ica")
     class StopChannels(
         @XmlElement(true)
-        val channel: MutableList<ChannelAdminDescriptor> = mutableListOf(),
+        val channel: List<ChannelAdminDescriptor> = listOf(),
         @XmlElement(true)
         @XmlSerialName("language", "", "")
         val language: String? = null,
@@ -55,7 +55,7 @@ class IChannelAdmin {
     @XmlSerialName("getChannelAdminHistory", "urn:com:sap:netweaver:pi:monitoring", "ica")
     class GetChannelAdminHistory(
         @XmlElement(true)
-        val channels: MutableList<ChannelAdminDescriptor> = mutableListOf(),
+        val channels: List<ChannelAdminDescriptor> = listOf(),
         @XmlElement(true)
         @XmlSerialName("language", "", "")
         val language: String? = null,

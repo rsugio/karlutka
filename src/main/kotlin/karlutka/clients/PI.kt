@@ -311,7 +311,7 @@ class PI(
     suspend fun parseRepoList(deferred: MutableList<Deferred<KtorClient.Task>>) {
         deferred.forEach { taskdef ->
             val hr = hmiPost(taskdef)
-            require (hr.CoreException == null && hr.MethodOutput != null)
+            require(hr.CoreException == null && hr.MethodOutput != null)
             val queryResult = hr.toQueryResult()
             val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, queryResult)
             repolist.addAll(objs)   //TODO проверка

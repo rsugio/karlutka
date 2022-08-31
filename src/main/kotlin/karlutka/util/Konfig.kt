@@ -118,6 +118,7 @@ sealed class KfTarget {
     ) : KfTarget() {
         @Transient
         var basic: KfAuth.Basic? = null
+
         @Transient
         var oauth: KfAuth.OAuth? = null
 

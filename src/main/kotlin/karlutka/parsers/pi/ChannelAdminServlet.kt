@@ -48,7 +48,7 @@ class ChannelAdminServlet {
     @XmlSerialName("Channels", "", "")
     class Channels(
         @XmlElement(true)
-        val channels: MutableList<ChannelType> = mutableListOf(),
+        val channels: List<ChannelType> = listOf(),
     )
 
     @Serializable
@@ -87,7 +87,7 @@ class ChannelAdminServlet {
     class ProcessLogType(
         @XmlElement(true)
         @XmlSerialName("LogEntry", "", "")
-        val logEntry: MutableList<LogEntryType> = mutableListOf(),
+        val logEntry: List<LogEntryType> = listOf(),
     )
 
     @Serializable
@@ -109,7 +109,7 @@ class ChannelAdminServlet {
     class AdminHistoryType(
         @XmlElement(true)
         @XmlSerialName("AdminEntry", "", "")
-        val adminEntries: MutableList<AdminEntryType> = mutableListOf(),
+        val adminEntries: List<AdminEntryType> = listOf(),
     )
 
     @Serializable
@@ -129,7 +129,7 @@ class ChannelAdminServlet {
     class AdminErrorsType(
         @XmlElement(true)
         @XmlSerialName("ErrorEntry", "", "")
-        val errorEntries: MutableList<ErrorEntryType> = mutableListOf(),
+        val errorEntries: List<ErrorEntryType> = listOf(),
     )
 
     @Serializable
@@ -149,7 +149,7 @@ class ChannelAdminServlet {
             autoPolymorphic = true
         }
 
-        fun parse(sxml: String, error: ErrorInformationType): MutableList<ChannelType> {
+        fun parse(sxml: String, error: ErrorInformationType): List<ChannelType> {
             //TODO костыль переписать на сериализатор, смотрящий на корневой элемент
             error.exception = null
             error.usage = null

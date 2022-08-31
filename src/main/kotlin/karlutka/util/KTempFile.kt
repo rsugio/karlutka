@@ -20,12 +20,14 @@ object KTempFile {
         }
 
     }
+
     fun task(): Path {
         val path: Path = Files.createTempFile(tempFolder, "task", ".xml")
         // может быть какая-то логика здесь
         return path
     }
-    fun delete(p:Path) {
+
+    fun delete(p: Path) {
         // может быть какая-то логика здесь
         Files.delete(p)
     }

@@ -146,6 +146,7 @@ class KSoap {
             f.faultstring = x.body.fault?.faultstring ?: ""
             return x.body.data
         }
+
         inline fun <reified T> parseSOAP(xmlReader: XmlReader, f: Fault): T? {
             val x = xmlserializer.decodeFromReader<Envelope<T>>(xmlReader)
             f.faultcode = x.body.fault?.faultcode ?: ""

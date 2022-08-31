@@ -136,7 +136,7 @@ class PCpi {
         val ArtifactContent: String?, //null
         val Configurations: __Deferred<ODataJson>,
         val Resources: __Deferred<ODataJson>,
-    ): ODataJson()
+    ) : ODataJson()
 
     @Serializable
     class ValueMappingDesigntimeArtifact(
@@ -146,8 +146,8 @@ class PCpi {
         val Name: String, //"OtherPartyMapping",
         val Description: String?, //" ",
         val ArtifactContent: String?, //null,
-        val ValMapSchema:__Deferred<ODataJson>,
-    ): ODataJson()
+        val ValMapSchema: __Deferred<ODataJson>,
+    ) : ODataJson()
 
     @Serializable
     class ServiceEndpoint(
@@ -169,13 +169,13 @@ class PCpi {
         val Url: String, //"https://e45-iflmap.hcisbt.ru1.hana.ondemand.com/cxf/UpdateServiceRequest",
         val Type: String, //"PROD",
         val AdditionalInformation: String? = "", //null
-    ): ODataJson()
+    ) : ODataJson()
 
     @Serializable
     class ApiDefinition(
         val Url: String, //"https://../Operations/api/WSDLDownload?artifactName=UpdateServiceRequest&servicePath=/UpdateServiceRequest&domainName=hcisbt.ru1.hana.ondemand.com&includePolicies=false",
         val Name: String, //"WSDL_POLICIES",
-    ): ODataJson()
+    ) : ODataJson()
 
     @Serializable
     class MessageProcessingLog(
@@ -229,7 +229,7 @@ class PCpi {
         val LogFileType: String,        //"http",
         val NodeScope: String,          //"worker",
         val Size: String,               //"7988"
-    ): ODataJson()
+    ) : ODataJson()
 
     @Serializable
     class LogFileArchive(
@@ -237,7 +237,7 @@ class PCpi {
         val LogFileType: String,        // "UpdateServiceRequest$endpointAddress=UpdateServiceRequest",
         val NodeScope: String,          // "UpdateServiceRequest",
         val ContentType: String,        // com.sap.hci.api.Definition
-    ): ODataJson()
+    ) : ODataJson()
 
 
     companion object {
@@ -284,7 +284,7 @@ class PCpi {
             val out = mutableListOf<T>()
             results.forEach { j ->
                 val s = decodeFromJsonElement(serializerFromMetadata(j), j)
-                require(s is T) {"запрошен разбор типа ${T::class} но обнаружен ${s::class}"}
+                require(s is T) { "запрошен разбор типа ${T::class} но обнаружен ${s::class}" }
                 out.add(s)
             }
             return Pair(out, d.d.__next)
@@ -294,13 +294,14 @@ class PCpi {
             val src = Json.decodeFromString<JsonObject>(sjson)
             val j = src["d"]!!
             val s = decodeFromJsonElement(serializerFromMetadata(j), j)
-            require(s is T) {"запрошен разбор типа ${T::class} но обнаружен ${s::class}"}
+            require(s is T) { "запрошен разбор типа ${T::class} но обнаружен ${s::class}" }
             return s
         }
 
         @Serializable
         private class X(val error: Error)
-        fun parseError(sjson:String) : Error {
+
+        fun parseError(sjson: String): Error {
             return Json.decodeFromString<X>(sjson).error
         }
     }

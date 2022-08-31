@@ -1,4 +1,5 @@
 import KT.Companion.s
+import karlutka.models.MPI
 import karlutka.models.MPerfStat
 import karlutka.parsers.pi.PerfMonitorServlet.MessageStatisticsQueryResults
 import karlutka.parsers.pi.PerfMonitorServlet.PerformanceDataQueryResults
@@ -18,14 +19,38 @@ class KPerformanceServletTests {
         show(p1.components())
         val p2 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/02intervals.xml"))
         show(p2.Periods!!.value.size)
+        p2.UsageTypes!!.value.forEach {
+            require(it.URL.isNotBlank())
+            require(it.Description.isNotBlank())
+        }
         val p3 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/03data.xml"))
         show(p3.perfdata().size)
+        requireNotNull(p3.Result.BeginTime)
+        requireNotNull(p3.Result.EndTime)
         val p4 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/04datamin.xml"))
         show(p4.perfdata().size)
         val p5 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/05intervals.xml"))
         show(p5.Periods!!.value.size)
         val p6 = PerformanceDataQueryResults.parse(s("/pi_PerformanceDataQuery/06nodata.xml"))
         show(p6)
+        p6.perfdata().forEach { x ->
+            require(x.INBOUND_CHANNEL.isNotBlank())
+            require(x.OUTBOUND_CHANNEL.isNotBlank())
+            require(x.DIRECTION == MPI.DIRECTION.INBOUND || x.DIRECTION == MPI.DIRECTION.OUTBOUND)
+            require(x.SERVER_NODE.isNotBlank())
+            require(x.ACTION_NAME.isNotBlank())
+            require(x.ACTION_TYPE.isNotBlank())
+            require(x.SCENARIO_IDENTIFIER.isNotBlank())
+            require("${x.FROM_PARTY_NAME}${x.FROM_SERVICE_NAME}${x.TO_PARTY_NAME}${x.TO_SERVICE_NAME}".isNotBlank())
+            val z = x.MESSAGE_COUNTER + x.MAX_MESSAGE_SIZE + x.MIN_MESSAGE_SIZE + x.AVG_MESSAGE_SIZE +
+                    x.MAX_RETRY_COUNTER + x.MIN_RETRY_COUNTER + x.AVG_PROCESSING_TIME + x.TOTAL_PROCESSING_TIME
+            require(z > 0)
+            require(x.AVG_RETRY_COUNTER.isNotBlank())
+            require(!x.stages.isEmpty())
+            x.stages.forEach { s ->
+                require(s.Avg + s.Max + s.Min + s.Sequence > 0)
+            }
+        }
     }
 
     @Test
@@ -33,16 +58,16 @@ class KPerformanceServletTests {
         val p = PerformanceDataQueryResults(
             PerformanceDataQueryResults._Result("⅀♣◘ЪФЫВ>&<", "2", "3", null, null, null, null),
             PerformanceDataQueryResults._UsageTypes(
-                mutableListOf(
+                listOf(
                     PerformanceDataQueryResults._Usage("4", "⅀♣◘"),
                     PerformanceDataQueryResults._Usage("6", "ЪФЫВ")
                 )
             ),
-            PerformanceDataQueryResults._XIComponents(mutableListOf("рус1", "англ2")),
+            PerformanceDataQueryResults._XIComponents(listOf("рус1", "англ2")),
             PerformanceDataQueryResults._Periods(
-                mutableListOf(
+                listOf(
                     PerformanceDataQueryResults._Period(
-                        "HOURLY", mutableListOf(
+                        "HOURLY", listOf(
                             PerformanceDataQueryResults._Interval(
                                 "2022-12-30T23:59:59.999+03:00",
                                 "2022-12-31T23:59:59.999+03:00"
@@ -53,13 +78,13 @@ class KPerformanceServletTests {
                 )
             ),
             PerformanceDataQueryResults._Data(
-                PerformanceDataQueryResults._ColumnNames(mutableListOf("INBOUND_CHANNEL", "OUTBOUND_CHANNEL")),
+                PerformanceDataQueryResults._ColumnNames(listOf("INBOUND_CHANNEL", "OUTBOUND_CHANNEL")),
                 PerformanceDataQueryResults._DataRows(
-                    mutableListOf(
+                    listOf(
                         PerformanceDataQueryResults._Row(
-                            mutableListOf(
-                                PerformanceDataQueryResults._Entry(mutableListOf("x")),
-                                PerformanceDataQueryResults._Entry(mutableListOf("y"))
+                            listOf(
+                                PerformanceDataQueryResults._Entry(listOf("x")),
+                                PerformanceDataQueryResults._Entry(listOf("y"))
                             )
                         )
                     )
@@ -68,9 +93,8 @@ class KPerformanceServletTests {
         )
         val s: String = p.render()
         val q = PerformanceDataQueryResults.parse(s)
-        require(p == q)
-        show(p.Result.Code)
-        require(p.Result.Code == "⅀♣◘ЪФЫВ>&<")
+        show(q.Result.Code)
+        require(q.Result.Code == "⅀♣◘ЪФЫВ>&<")
     }
 
     @Test

@@ -39,7 +39,7 @@ class RemoteApi {
         @XmlElement(true)
         val compversion: String = "",
         @XmlElement(true)
-        val property: MutableList<Property> = mutableListOf(),
+        val property: List<Property> = listOf(),
     )
 
     @Serializable
@@ -50,6 +50,4 @@ class RemoteApi {
         @XmlElement(true)
         val propvalue: String,
     )
-
-
 }

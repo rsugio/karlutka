@@ -107,7 +107,7 @@ class Hm {
             else if (leave_typeid == null) {
                 val x = value
                     .filter { it.isnull == false }
-                    .flatMap { m -> m.value.filterIsInstance<Instance>()}
+                    .flatMap { m -> m.value.filterIsInstance<Instance>() }
                 if (x.isNotEmpty()) instance = x[0]
             }
         }

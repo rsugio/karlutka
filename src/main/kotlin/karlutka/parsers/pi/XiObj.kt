@@ -143,6 +143,7 @@ class XiObj(
             xmlDeclMode = XmlDeclMode.None
             autoPolymorphic = true
         }
+
         fun decodeFromString(sxml: String): XiObj = xioserializer.decodeFromString(sxml)
     }
 }

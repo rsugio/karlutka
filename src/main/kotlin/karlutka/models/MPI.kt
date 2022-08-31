@@ -1,7 +1,7 @@
 package karlutka.models
 
 class MPI {
-    class HmiException(message: String) : Exception(message)
+//    class HmiException(message: String) : Exception(message)
 
     enum class DIRECTION { INBOUND, OUTBOUND }
 

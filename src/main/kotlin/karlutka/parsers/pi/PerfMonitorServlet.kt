@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter
 import java.time.format.DateTimeParseException
 import java.time.temporal.TemporalAccessor
 
-// /mdt/performancedataqueryservlet
 class PerfMonitorServlet {
     companion object {
         // Mixed content для Entry требует, чтобы строки мешались с MeasuringPoints
@@ -51,6 +50,8 @@ class PerfMonitorServlet {
             }
             error("Нет подходящего шаблона разбора даты для `${s}'")
         }
+
+
     }
 
     class PerformanceTableRow(
@@ -76,7 +77,7 @@ class PerfMonitorServlet {
         val AVG_RETRY_COUNTER: String,
         val AVG_PROCESSING_TIME: Long,
         val TOTAL_PROCESSING_TIME: Long,
-        val stages: MutableList<Stages>,
+        val stages: List<Stages>,
     ) {
         init {
             require(listOf("EO", "EOIO", "BE", "").contains(DELIVERY_SEMANTICS))
@@ -141,15 +142,14 @@ class PerfMonitorServlet {
                 val dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")
                 val ldt = LocalDateTime.from(dtf.parse(value))
                 val zid = ZoneId.of(timezone)
-                val zdt = ldt.atZone(zid)
-                return zdt
+                return ldt.atZone(zid)
             }
         }
 
         @Serializable
         @XmlSerialName("UsageTypes", "", "")
         class _UsageTypes(
-            val value: MutableList<_Usage> = mutableListOf(),
+            val value: List<_Usage> = listOf(),
         )
 
         @Serializable
@@ -165,13 +165,13 @@ class PerfMonitorServlet {
         @XmlSerialName("XIComponents", "", "")
         class _XIComponents(
             @XmlSerialName("Component", "", "")
-            val value: MutableList<String> = mutableListOf(),
+            val value: List<String> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("Periods", "", "")
         class _Periods(
-            val value: MutableList<_Period> = mutableListOf(),
+            val value: List<_Period> = listOf(),
         )
 
         @Serializable
@@ -180,7 +180,7 @@ class PerfMonitorServlet {
             @XmlElement(true)
             val Type: String,
             @XmlElement(true)
-            val Interval: MutableList<_Interval> = mutableListOf(),
+            val Interval: List<_Interval> = listOf(),
         )
 
         @Serializable
@@ -216,21 +216,21 @@ class PerfMonitorServlet {
         @XmlSerialName("ColumnNames", "", "")
         class _ColumnNames(
             @XmlSerialName("Column", "", "")
-            val value: MutableList<String> = mutableListOf(),
+            val value: List<String> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("DataRows", "", "")
         class _DataRows(
 //        @XmlSerialName("Row", "", "")
-            val value: MutableList<_Row> = mutableListOf(),
+            val value: List<_Row> = listOf(),
         )
 
         @Serializable
         @XmlSerialName("Row", "", "")
         class _Row(
 //        @XmlSerialName("Entry", "", "")
-            val value: MutableList<_Entry> = mutableListOf(),
+            val value: List<_Entry> = listOf(),
         )
 
         @Serializable
@@ -243,12 +243,12 @@ class PerfMonitorServlet {
              */
             fun text(): String {
                 require(data.size < 2, { "Entry должно быть без вложенных тегов" })
-                if (data.size == 0)
-                    return ""
+                return if (data.size == 0)
+                    ""
                 else {
                     val x = data[0]
                     require(x is String)
-                    return x
+                    x
                 }
             }
 
@@ -256,7 +256,7 @@ class PerfMonitorServlet {
              * Возвращает замеры
              * //TODO переписать функционально
              */
-            fun mplist(): MutableList<_MP> {
+            fun mplist(): List<_MP> {
                 for (x in data) {
                     if (x is _MeasuringPoints) {
                         return x.value
@@ -271,7 +271,7 @@ class PerfMonitorServlet {
         class _MeasuringPoints(
             @XmlElement(true)
             @XmlSerialName("MP", "", "")
-            val value: MutableList<_MP> = mutableListOf(),
+            val value: List<_MP> = listOf(),
         )
 
         @Serializable
@@ -301,7 +301,7 @@ class PerfMonitorServlet {
         /**
          * Из текста делает структурную статистику
          */
-        fun perfdata(): MutableList<PerformanceTableRow> {
+        fun perfdata(): List<PerformanceTableRow> {
             val rez = mutableListOf<PerformanceTableRow>()
             if (Data == null)
                 return rez
@@ -352,7 +352,7 @@ class PerfMonitorServlet {
         /**
          * Вызывается только из первого (пустого) пейлоада, и там должен быть XIComponents
          */
-        fun components(): MutableList<String> {
+        fun components(): List<String> {
             require(XIComponents != null)
             return XIComponents.value
         }
@@ -360,7 +360,7 @@ class PerfMonitorServlet {
 
     /**
      * Разбор /mdt/messageoverviewqueryservlet
-     * Не очень полезный класс но пусть будет
+     * Не очень полезный класс но пусть будет заготовка на будущее
      */
     @Serializable
     @XmlSerialName("MessageStatisticsQueryResults", "", "")
@@ -383,7 +383,7 @@ class PerfMonitorServlet {
         class _Views(
             @XmlElement(true)
             @XmlSerialName("View", "", "")
-            val value: MutableList<_View> = mutableListOf(),
+            val value: List<_View> = listOf(),
         )
 
         @Serializable

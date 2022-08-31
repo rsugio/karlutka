@@ -2,7 +2,6 @@ package karlutka.parsers.pi
 
 import karlutka.serialization.KSoap
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
@@ -398,7 +397,9 @@ class XiBasis {
     @XmlSerialName("IntegratedConfigurationQueryRequest", "http://sap.com/xi/BASIS", "b")
     class IntegratedConfigurationQueryRequest : KSoap.ComposeSOAP() {
         companion object {
-            fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
+            fun getUrl750(host: String) =
+                "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
+
             fun getUrl(host: String) = "$host/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"
         }
     }
@@ -426,7 +427,9 @@ class XiBasis {
         val IntegratedConfigurationID: List<IntegratedConfigurationID> = listOf(),
     ) : KSoap.ComposeSOAP() {
         companion object {
-            fun getUrl750(host: String) = "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
+            fun getUrl750(host: String) =
+                "$host/IntegratedConfiguration750InService/IntegratedConfiguration750InImplBean"
+
             fun getUrl(host: String) = "$host/IntegratedConfigurationInService/IntegratedConfigurationInImplBean"
         }
     }

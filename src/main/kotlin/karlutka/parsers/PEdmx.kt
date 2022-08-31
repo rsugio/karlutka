@@ -157,7 +157,7 @@ class PEdmx {
     }
 
     @OptIn(ExperimentalXmlUtilApi::class)
-    class U: UnknownChildHandler {
+    class U : UnknownChildHandler {
         @OptIn(ExperimentalXmlUtilApi::class)
         override fun handleUnknownChildRecovering(
             input: XmlReader,
