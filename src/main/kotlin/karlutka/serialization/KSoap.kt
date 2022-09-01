@@ -140,14 +140,14 @@ class KSoap {
         }
 
         @Deprecated("Использовать в крайнем случае", ReplaceWith("parseSOAP", "XmlReader"))
-        inline fun <reified T> parseSOAP(sxml: String, f: Fault): T? {
+        inline fun <reified T> parseSOAP(sxml: String, f: Fault = Fault()): T? {
             val x = xmlserializer.decodeFromString<Envelope<T>>(sxml)
             f.faultcode = x.body.fault?.faultcode ?: ""
             f.faultstring = x.body.fault?.faultstring ?: ""
             return x.body.data
         }
 
-        inline fun <reified T> parseSOAP(xmlReader: XmlReader, f: Fault): T? {
+        inline fun <reified T> parseSOAP(xmlReader: XmlReader, f: Fault = Fault()): T? {
             val x = xmlserializer.decodeFromReader<Envelope<T>>(xmlReader)
             f.faultcode = x.body.fault?.faultcode ?: ""
             f.faultstring = x.body.fault?.faultstring ?: ""
