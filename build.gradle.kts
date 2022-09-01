@@ -28,6 +28,7 @@ val kaml_version: String = "0.47.0"
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")   // версия не совпадает с котлином
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_version")
 //    implementation("org.jetbrains.kotlinx:kotlinx-serialization-cbor:$kotlinx_serialization_version")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$kotlinx_serialization_version")
@@ -72,9 +73,8 @@ dependencies {
 
     implementation("com.h2database:h2:2.1.214")
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+//    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")  я использую DSL без DAO
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-//    implementation("com.influxdb:influxdb-client-kotlin:6.4+")  //бесполезная штука
 
     testImplementation(kotlin("test"))
     testImplementation("commons-io:commons-io:2.11.0")    //BOMInputStream

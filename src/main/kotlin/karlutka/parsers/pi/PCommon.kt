@@ -24,7 +24,7 @@ class PCommon {
 
     @Serializable
     class ClCxt(
-        val consider: String = "", val user: String = ""
+        val consider: Char, val user: String = ""
     )
 
     @Serializable

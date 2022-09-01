@@ -161,8 +161,9 @@ class Hm {
         @Serializable val subrelease: String, //*
         val patchlevel: String, //*
     ) {
+        var url: String = ""
         fun applCompLevel(): ApplCompLevel = ApplCompLevel(release, SP)
-        fun url() = "/rep/$serviceid/int?container=any"
+//        fun url() = "/rep/$serviceid/int?container=any"
     }
 
     class HmiMethodInput(val input: Map<String, String?>) {
@@ -246,19 +247,19 @@ class Hm {
     }
 
     class HmiRequest(
-        val ClientId: String,                  //IGUID
-        val RequestId: String,
-        val ClientLevel: ApplCompLevel, //UriElement
-        val HmiMethodInput: HmiMethodInput, //UriElement
-        val MethodId: String, //HmiMethodInput
+        val ClientId: String,               // IGUID
+        val RequestId: String,              // IGUID
+        val ClientLevel: ApplCompLevel,     // UriElement
+        val HmiMethodInput: HmiMethodInput, // UriElement
+        val MethodId: String,               // HmiMethodInput
         val ServiceId: String,
         val ClientUser: String = "",
-        val ClientPassword: String = "",                     //IGUID
+        val ClientPassword: String = "",
         val ClientLanguage: String = "EN",
-        val RequiresSession: Boolean = false,
+        val RequiresSession: Boolean = true,
         val ServerLogicalSystemName: String? = null,
         val ServerApplicationId: String? = null,
-        val HmiSpecVersion: String? = null,
+        val HmiSpecVersion: String = "1.0",
         val ControlFlag: Int = 0
     ) {
         fun instance(): Instance {
@@ -367,7 +368,7 @@ class Hm {
             @XmlElement(true)
             @XmlSerialName("clCxt", "", "")
             var clCxt: PCommon.ClCxt,
-            @XmlElement(true) var swcListDef: SwcListDef,
+            @XmlElement(true) var swcListDef: SwcListDef? = null,   //для /dir его нет
         )
 
         @Serializable
@@ -490,7 +491,7 @@ class Hm {
                 val swcinfolist = SwcInfoList(swc.map { x -> SWC(x, "-1", false) })
                 return GeneralQueryRequest(
                     Types(listOf(Type("namespace"))),
-                    QC("S", "N", PCommon.ClCxt("S", "User"), SwcListDef("G", swcinfolist)),
+                    QC("S", "N", PCommon.ClCxt('S', "User"), SwcListDef("G", swcinfolist)),
                     elementary("QA_NSP_ADD_CLASSIC", "EQ", Simple(null, null, false)),
                     Result(listOf("RA_NSP_STRING", "TEXT"))
                 )
@@ -504,7 +505,7 @@ class Hm {
             ): GeneralQueryRequest {
                 val qc = QC(
                     "S", "N",
-                    PCommon.ClCxt("A", user),
+                    PCommon.ClCxt('A', user),
                     SwcListDef("G", SwcInfoList.of(swcv.map { it.id }))
                 )
                 return GeneralQueryRequest(
@@ -984,6 +985,7 @@ class Hm {
 
         companion object {
             fun decodeFromString(sxml: String) = hmserializer.decodeFromString<DirConfiguration>(sxml)
+//            fun decodeFromXmlReader(xmlReader: XmlReader) = hmserializer.decodeFromReader<DirConfiguration>(xmlReader)
         }
     }
 

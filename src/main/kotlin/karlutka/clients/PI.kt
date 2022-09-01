@@ -31,7 +31,7 @@ class PI(
     private val client: HttpClient
 
     private val hmiClientId: UUID = UUID.randomUUID()!!
-    private lateinit var hmiServices: List<Hm.HmiService>
+    val hmiServices: MutableList<Hm.HmiService> = mutableListOf()
 
     // список адаптер фреймворков, вида af.sid.host-db
     val afs = mutableListOf<String>()
@@ -59,26 +59,6 @@ class PI(
             dir_cc.addAll(DB.PICC.channels(konfig.sid))
             dir_ico.addAll(DB.PIICO.icos(konfig.sid))
         }
-    }
-
-    fun hmiServices(sxml: String) {
-        hmiServices = Hm.hmserializer.decodeFromString<Hm.HmiServices>(sxml).list
-        val services = hmiServices.map { it.serviceid }.distinct().sorted()
-        val log = StringBuffer()
-        services.forEach { x ->
-            val sublist = hmiServices.filter { it.serviceid == x }.sortedBy { it.methodid }
-            log.append(x).append("\n")
-            sublist.forEach { s ->
-                log.append("\t${s.methodid}\t${s.release}/${s.SP}\n")
-            }
-        }
-        if (false) println(log)
-    }
-
-    private fun findHmiServiceMethod(service: String, method: String): Hm.HmiService {
-        val s = hmiServices.filter { it.serviceid == service && it.methodid == method }.sortedBy { it.release }
-        require(s.isNotEmpty())
-        return s.last()
     }
 
     suspend fun perfServletListOfComponents(scope: CoroutineScope) =
@@ -153,13 +133,51 @@ class PI(
         require(resptext.contains(expected), { resptext })
     }
 
-    suspend fun amm(filter: AdapterMessageMonitoringVi.AdapterFilter?) {
-        val url = "/AdapterMessageMonitoring/basic"
-    }
+//    suspend fun amm(filter: AdapterMessageMonitoringVi.AdapterFilter?) {
+//        val url = "/AdapterMessageMonitoring/basic"
+//    }
 
     fun uuid(u: UUID) = u.toString().replace("-", "")
 
+    // подумать, может быть в HmiResponse добавить ссылку на Task и здесь её заполнять
+    // это удобно чтобы не удалять файл после успешного разбора
+    private suspend fun taskAwait(td: Deferred<KtorClient.Task>, expected: ContentType): KtorClient.Task {
+        val task = td.await()
+        while (task.retries < 10) {
+            // если здесь task.resp==null значит не был вызван метод execute
+            if (task.resp.status.isSuccess() && task.resp.contentType()!!.match(expected)) {
+                return task
+            }
+            task.execute()      //TODO несколько коряво что синхронно, возможно переделать?
+        }
+        throw Exception("HMI POST - ошибка после 10 повторов")
+    }
+
+    @Deprecated("подумать об удалении")
+    fun hmiServices(sxml: String) {
+//        hmiServices = Hm.hmserializer.decodeFromString<Hm.HmiServices>(sxml).list
+//        val services = hmiServices.map { it.serviceid }.distinct().sorted()
+//        val log = StringBuffer()
+//        services.forEach { x ->
+//            val sublist = hmiServices.filter { it.serviceid == x }.sortedBy { it.methodid }
+//            log.append(x).append("\n")
+//            sublist.forEach { s ->
+//                log.append("\t${s.methodid}\t${s.release}/${s.SP}\n")
+//            }
+//        }
+//        if (false) println(log)
+    }
+
+    private fun findHmiServiceMethod(service: String, method: String, uri: String = "/rep"): Hm.HmiService {
+        val s = hmiServices
+            .filter { it.serviceid == service && it.methodid == method && it.url.startsWith(uri) }
+            .sortedBy { it.release }
+        require(s.isNotEmpty())
+        return s.last()
+    }
+
     suspend fun hmiGetRegistered(scope: CoroutineScope) {
+        require(hmiServices.isEmpty()) { "планируется на пустой системе" }
         val rep = Hm.HmiRequest(
             uuid(hmiClientId),
             uuid(UUID.randomUUID()),
@@ -167,26 +185,29 @@ class PI(
             Hm.HmiMethodInput(mapOf("release" to "7.5")),
             "DEFAULT",
             "getregisteredhmimethods",
-            "dummy",
-            "dummy",
-            "EN",
-            true,           //?
-            null,
-            null,
-            "1.0"
+            contextuser
         )
-        val task = KtorClient.taskPost(
-            client,
-            "/rep/getregisteredhmimethods/int?container=any",
-            rep.encodeToString(),
-            mapOf("content-type" to "text/xml")
-        )
+        val task = KtorClient.taskPost(client, "/rep/getregisteredhmimethods/int?container=any", rep)
         val td = scope.async { task.execute() }
-        this.hmiServices(hmiTaskAwait(td).MethodOutput!!.Return)
+        val sxml = hmiTaskAwait(td).MethodOutput!!.Return
+        Hm.hmserializer.decodeFromString<Hm.HmiServices>(sxml).list.forEach {
+            it.url = "/rep/${it.serviceid}/int?container=any"
+            hmiServices.add(it)
+        }
+        // для директори добавляем методы против Кости Сапрыкина
+        val d0 = Hm.HmiService("hmi_server_details", "read_server_details", "7.0", "*", "*", "*")
+        d0.url = "/dir/${d0.serviceid}/int?container=any"
+        hmiServices.add(d0)
+        val d1 = Hm.HmiService("query", "generic", "7.0", "*", "*", "*")
+        d1.url = "/dir/${d1.serviceid}/int?container=any"
+        hmiServices.add(d1)
     }
 
-    suspend fun hmiGeneralQueryTask(scope: CoroutineScope, sxml: String): Deferred<KtorClient.Task> {
-        val serv = findHmiServiceMethod("query", "generic")
+    //TODO второй аргумент сделать GeneralQuery, третий - метод
+    suspend fun hmiGeneralQueryTask(
+        scope: CoroutineScope, sxml: String, uri: String = "/rep"
+    ): Deferred<KtorClient.Task> {
+        val serv = findHmiServiceMethod("query", "generic", uri)
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
             uuid(UUID.randomUUID()),
@@ -194,21 +215,13 @@ class PI(
             Hm.HmiMethodInput("QUERY_REQUEST_XML", sxml),
             serv.methodid.uppercase(),
             serv.serviceid,
-            "dummy",
-            "dummy",
-            "EN",
-            true,
-            null,
-            null,
-            "1.0"
+            contextuser
         )
-        val sxml2 = req.encodeToString()
-        val task = KtorClient.taskPost(client, serv.url(), sxml2, mapOf("content-type" to "text/xml"))
-        task.remark = sxml2
+        val task = KtorClient.taskPost(client, serv.url, req)
         return scope.async { task.execute() }
     }
 
-    @Deprecated("лучше hmiGeneralQueryTask")
+    @Deprecated("Это удалить. Лучше hmiGeneralQueryTask")
     suspend fun hmiGeneralQuery(scope: CoroutineScope, sxml: String): Hm.QueryResult {
         val td = hmiGeneralQueryTask(scope, sxml)
         val resp = hmiTaskAwait(td)
@@ -226,30 +239,10 @@ class PI(
             Hm.HmiMethodInput(mapOf("body" to bodyXml, "VC" to vc, sp to sp, "UC" to uc.toString())),
             serv.methodid.uppercase(),
             serv.serviceid,
-            "dummy",
-            "dummy",
-            "EN",
-            true,           // очень важно, иначе тормоза и сбои в работе
-            null,
-            null,
-            "1.0"
+            contextuser
         )
-        val task = KtorClient.taskPost(client, serv.url(), req.encodeToString(), mapOf("content-type" to "text/xml"))
+        val task = KtorClient.taskPost(client, serv.url, req)
         return scope.async { task.execute() }
-    }
-
-    // подумать, может быть в HmiResponse добавить ссылку на Task и здесь её заполнять
-    // это удобно чтобы не удалять файл после успешного разбора
-    private suspend fun taskAwait(td: Deferred<KtorClient.Task>, expected: ContentType): KtorClient.Task {
-        val task = td.await()
-        while (task.retries < 10) {
-            // если здесь task.resp==null значит не был вызван метод execute
-            if (task.resp.status.isSuccess() && task.resp.contentType()!!.match(expected)) {
-                return task
-            }
-            task.execute()      //TODO несколько коряво что синхронно, возможно переделать?
-        }
-        throw Exception("HMI POST - ошибка после 10 повторов")
     }
 
     private suspend fun hmiTaskAwait(td: Deferred<KtorClient.Task>): Hm.HmiResponse {
@@ -264,7 +257,7 @@ class PI(
         this.swcv.addAll(lst)
     }
 
-    suspend fun askNamespaceDecls(
+    suspend fun askNamespaceDeclsAsync(
         scope: CoroutineScope, predicate: (MPI.Swcv) -> Boolean
     ): MutableList<Deferred<KtorClient.Task>> {
         // Делаем столько taskPost-задач, сколько есть SWCV по предикату
@@ -275,7 +268,8 @@ class PI(
                 PCommon.Key("namespdecl", null, listOf(s.id))
             )
             val type = Hm.Type(
-                "namespdecl", ref,
+                "namespdecl",
+                ref,
                 ADD_IFR_PROPERTIES = true,
                 STOP_ON_FIRST_ERROR = false,
                 RELEASE = "7.0",
@@ -409,28 +403,6 @@ class PI(
 //        return trsp
     }
 
-    suspend fun dirReadHmiServerDetails(userAlias: String) {
-        val req = Hm.HmiRequest(
-            uuid(hmiClientId),
-            uuid(UUID.randomUUID()),
-            Hm.ApplCompLevel(),
-            Hm.HmiMethodInput("user_alias", userAlias),
-            "read_server_details",
-            "hmi_server_details",
-            "dummy",
-            "dummy",
-            "EN",
-            true,
-            null,           //hostname ?
-            null,
-            "1.0",
-            0
-        )
-        TODO()
-//        val resp = hmiPost("/dir/hmi_server_details/int?container=any", req)
-//        require(resp.MethodOutput!!.ContentType == "text/xml")
-//        dirConfiguration = Hm.DirConfiguration.decodeFromString(resp.MethodOutput.Return)
-    }
 
     suspend fun requestCommunicationChannelsAsync(scope: CoroutineScope): Deferred<KtorClient.Task> {
         val task = KtorClient.taskPost(client, XiBasis.CommunicationChannelQueryRequest())
@@ -438,8 +410,7 @@ class PI(
     }
 
     suspend fun readCommunicationChannelAsync(
-        scope: CoroutineScope,
-        ccl: List<XiBasis.CommunicationChannelID>
+        scope: CoroutineScope, ccl: List<XiBasis.CommunicationChannelID>
     ): Deferred<KtorClient.Task> {
         val task = KtorClient.taskPost(client, XiBasis.CommunicationChannelReadRequest(contextuser, ccl))
         return scope.async { task.execute() }
@@ -473,6 +444,7 @@ class PI(
     }
 
     suspend fun requestICo75Async(scope: CoroutineScope): Deferred<KtorClient.Task> {
+        //TODO переделать на получше
         val req = XiBasis.IntegratedConfigurationQueryRequest()
         val task = KtorClient.taskPost(client, XiBasis.uriICo750, req.composeSOAP())
         return scope.async { task.execute() }
@@ -498,13 +470,10 @@ class PI(
     }
 
     suspend fun readICo75Async(
-        scope: CoroutineScope,
-        icol: List<XiBasis.IntegratedConfigurationID>
+        scope: CoroutineScope, icol: List<XiBasis.IntegratedConfigurationID>
     ): Deferred<KtorClient.Task> {
         val task = KtorClient.taskPost(
-            client,
-            XiBasis.uriICo750,
-            XiBasis.IntegratedConfigurationReadRequest(contextuser, icol).composeSOAP()
+            client, XiBasis.uriICo750, XiBasis.IntegratedConfigurationReadRequest(contextuser, icol).composeSOAP()
         )
         return scope.async { task.execute() }
     }
@@ -514,5 +483,49 @@ class PI(
         val fault = KSoap.Fault()
         val t = KSoap.parseSOAP<XiBasis.IntegratedConfiguration750ReadResponse>(task.bodyAsXmlReader(), fault)
         require(fault.isSuccess() && t!!.LogMessageCollection.isEmpty())
+    }
+
+    suspend fun hmiDirConfiguration(scope: CoroutineScope) {
+        val serv = findHmiServiceMethod("hmi_server_details", "read_server_details", "/dir")
+        val rep = Hm.HmiRequest(
+            uuid(hmiClientId),
+            uuid(UUID.randomUUID()),
+            serv.applCompLevel(),
+            Hm.HmiMethodInput(mapOf("user_alias" to contextuser)),
+            serv.methodid,
+            serv.serviceid,
+            contextuser
+        )
+        val task = KtorClient.taskPost(client, serv.url, rep)
+        val td = scope.async { task.execute() }
+        this.dirConfiguration = Hm.DirConfiguration.decodeFromString(hmiTaskAwait(td).MethodOutput!!.Return)
+    }
+
+    val m = mapOf(
+        "Party"           to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY",
+        "Service"         to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY,SERVICE",
+        "Channel"         to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY,SERVICE,CHANNEL,ENGINENAME",
+        "DirectoryView"   to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,DIRVIEW,DIR_VIEW_NAME",
+        "ValueMapping"    to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,AGENCY,SCHEME,VMVALUE",
+        "DOCU"            to "RA_XILINK,OBJECTID,VERSIONID,FOLDERREF,MODIFYUSER,MODIFYDATE,NAME,NAMESPACE",
+        "AlertRule"       to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PAYLOAD", //BLOCKALERTTIME,RULETYPE,CONSUMER,RUNTIMESTATE,ERRORLABEL,RUNTIME,SEVERITY,SUPPRESSTIME,
+        "RoutingRule"     to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,ROUTINGRULE",
+        //InboundBinding == Sender Agreement
+        "InboundBinding"  to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FORAAE",
+    )
+
+    suspend fun hmiDirEverythingRequest(scope: CoroutineScope) : List<Deferred<KtorClient.Task>> {
+        val qc = Hm.GeneralQueryRequest.QC("D", "N", PCommon.ClCxt('L'))
+        val rez = mutableListOf<Deferred<KtorClient.Task>>()
+        m.forEach{(type, attrs) ->
+            val query = Hm.GeneralQueryRequest(
+                Hm.GeneralQueryRequest.Types.of(type),
+                qc,
+                Hm.GeneralQueryRequest.Condition(),
+                Hm.GeneralQueryRequest.Result(attrs.split(","))
+            )
+            rez.add(hmiGeneralQueryTask(scope, query.encodeToString(), "/dir"))
+        }
+        return rez
     }
 }

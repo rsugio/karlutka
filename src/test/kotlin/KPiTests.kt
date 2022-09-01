@@ -5,16 +5,15 @@ import karlutka.server.DB
 import karlutka.server.Server
 import karlutka.util.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.nio.file.Paths
 import kotlin.test.Test
 
 class KPiTests {
-    val detailed = false
-
-    var target: KfTarget.PIAF
-    var pi: PI
+    private var target: KfTarget.PIAF
+    private var pi: PI
 
     init {
         Server.kfpasswds = KfPasswds.parse(Paths.get("C:\\data\\passwd.yaml"))
@@ -25,21 +24,15 @@ class KPiTests {
 
         DB.init(Server.kfg.h2connection)
 
-        target = Server.kfg.targets.find { it.sid == "QPH" }!! as KfTarget.PIAF
+        target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
         target.loadAuths(Server.kfpasswds.securityMaterials)
         pi = PI(target)
-    }
-
-    @Test
-    fun nop() {
-        println("NOP 00240")
-    }
-
-    @Test
-    fun ping() {
         runBlocking {
-            println(pi.pingNoAuth())
-            pi.checkAuth("/rwb", "Runtime Workbench")
+            withContext(Dispatchers.Default) {
+                println(pi.pingNoAuth())
+                pi.checkAuth("/rwb", "Runtime Workbench")
+                pi.hmiGetRegistered(this)
+            }
         }
     }
 
@@ -48,7 +41,7 @@ class KPiTests {
         runBlocking {
             val afs = pi.perfServletListOfComponents(pi.perfServletListOfComponents(this))
             println(afs)
-            if (detailed) {
+            if (true) {
                 val ints = pi.perfServletByComponent(afs[0], this)
                 ints.forEach { (begin, lst) ->
                     println("=$begin ${lst.size}")
@@ -91,11 +84,9 @@ class KPiTests {
     fun repTypes() {
         runBlocking {
             withContext(Dispatchers.IO) {       //.limitedParallelism(4)
-                pi.hmiGetRegistered(this)
-                println("hmiGetRegistered ok")
                 pi.hmiAskSWCV(this)
                 println("askSWCV ok: ${pi.swcv.size}")
-                val def = pi.askNamespaceDecls(this, { true })
+                val def = pi.askNamespaceDeclsAsync(this, { true })
                 println("namespaces asked")
                 pi.parseNamespaceDecls(def)
                 println("... namespaces ok: ${pi.namespaces.size}")
@@ -128,5 +119,15 @@ class KPiTests {
         }
     }
 
-    // сюда новое
+    @Test
+    fun dirtypes() {
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                pi.hmiDirConfiguration(this)
+                val td = pi.hmiDirEverythingRequest(this)
+                td.awaitAll()
+
+            }
+        }
+    }
 }
