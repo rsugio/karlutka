@@ -8,12 +8,8 @@ import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.XmlReader
-import nl.adaptivity.xmlutil.serialization.XML
-import nl.adaptivity.xmlutil.serialization.XmlElement
-import nl.adaptivity.xmlutil.serialization.XmlSerialName
-import nl.adaptivity.xmlutil.serialization.XmlValue
+import nl.adaptivity.xmlutil.serialization.*
 import nl.adaptivity.xmlutil.util.CompactFragment
-import java.io.InputStreamReader
 
 class Hm {
     companion object {
@@ -102,11 +98,10 @@ class Hm {
 
         init {
             require(value.isNotEmpty())
-            if (leave_typeid == "string" && !value[0].isnull && value[0].value.isNotEmpty())
-                string = value[0].value[0] as String
+            if (leave_typeid == "string" && !value[0].isnull && value[0].value.isNotEmpty()) string =
+                value[0].value[0] as String
             else if (leave_typeid == null) {
-                val x = value
-                    .filter { !it.isnull }          // это кастомные наллы
+                val x = value.filter { !it.isnull }          // это кастомные наллы
                     .flatMap { m -> m.value.filterIsInstance<Instance>() }
                 if (x.isNotEmpty()) instance = x[0]
             }
@@ -270,7 +265,7 @@ class Hm {
             a.add(HmString(ClientUser).attr("ClientUser"))
             a.add(HmString(ClientPassword).attr("ClientPassword"))
             a.add(HmString(ControlFlag.toString()).attr("ControlFlag"))
-            if (HmiSpecVersion != null) a.add(HmString(HmiSpecVersion).attr("HmiSpecVersion"))
+            a.add(HmString(HmiSpecVersion).attr("HmiSpecVersion"))
             a.add(HmString(MethodId).attr("MethodId"))
             a.add(HmiMethodInput.attr())
 
@@ -294,9 +289,16 @@ class Hm {
         val ControlFlag: Int = 0,
         val HmiSpecVersion: String? = null
     ) {
-        fun toQueryResult(): QueryResult {
-            requireNotNull(MethodOutput)
-            return hmserializer.decodeFromString(MethodOutput.Return)
+        fun toQueryResult(task: KtorClient.Task): QueryResult {
+            //TODO надо подумать как чинить такое
+            requireNotNull(MethodOutput) { "Нет данных в запросе $RequestId задача ${task.path} remark=${task.remark}" }
+            try {
+                val v = hmserializer.decodeFromString<QueryResult>(MethodOutput.Return)
+                return v
+            } catch (e: UnknownXmlFieldException) {
+                System.err.println("Ошибка разбора запроса $RequestId задача ${task.path} remark=${task.remark}")
+                throw e
+            }
         }
 
         companion object {
@@ -365,9 +367,7 @@ class Hm {
         class QC(
             @Serializable val qcType: Char = 'S',   //D-dir, S-rep
             @Serializable val delMode: Char = 'N',  //N-неудалённые, D-удалённые, B-both
-            @XmlElement(true)
-            @XmlSerialName("clCxt", "", "")
-            var clCxt: PCommon.ClCxt,
+            @XmlElement(true) @XmlSerialName("clCxt", "", "") var clCxt: PCommon.ClCxt,
             @XmlElement(true) var swcListDef: SwcListDef? = null,   //для /dir его нет
         )
 
@@ -477,86 +477,70 @@ class Hm {
 //                return ofArg(listOf(type), cond, *result)
 //            }
 
-            private fun elementary(key: String, op: String, c: Simple): Condition {
-                return Condition(null, Elementary(Single(key, Val(c), op)))
-            }
-
-            fun swcv(): String {
-                val res = Companion::class.java.getResourceAsStream("/hmi/swcv.xml")
-                requireNotNull(res)
-                return InputStreamReader(res, Charsets.UTF_8).readText()
-            }
+//            @Deprecated("удоли")
+//            private fun elementary(key: String, op: String, c: Simple): Condition {
+//                return Condition(null, Elementary(Single(key, Val(c), op)))
+//            }
 
             fun namespaces(swc: List<String>): GeneralQueryRequest {
                 val swcinfolist = SwcInfoList(swc.map { x -> SWC(x, "-1", false) })
                 return GeneralQueryRequest(
                     Types(listOf(Type("namespace"))),
                     QC('S', 'N', PCommon.ClCxt('S', "User"), SwcListDef('G', swcinfolist)),
-                    elementary("QA_NSP_ADD_CLASSIC", "EQ", Simple(null, null, false)),
+                    Condition(),
                     Result(listOf("RA_NSP_STRING", "TEXT"))
                 )
             }
 
             fun requestRepositoryDataTypesList(
-                swcv: List<MPI.Swcv>,
-                repdatatypes: Types,
-                cond: Condition = Condition(),
-                user: String = "_"
+                swcv: List<MPI.Swcv>, repdatatypes: Types, cond: Condition = Condition(), user: String = "_"
             ): GeneralQueryRequest {
                 val qc = QC(
-                    'S', 'N',
-                    PCommon.ClCxt('A', user),
-                    SwcListDef('G', SwcInfoList.of(swcv.map { it.id }))
+                    'S', 'B', PCommon.ClCxt('A', user), SwcListDef('G', SwcInfoList.of(swcv.map { it.id }))
                 )
                 return GeneralQueryRequest(
-                    repdatatypes, qc, cond,
-                    Result.of("RA_XILINK", "TEXT", "FOLDERREF") //, "MODIFYDATE", "MODIFYUSER")
+                    repdatatypes, qc, cond, Result.of("RA_XILINK", "TEXT", "FOLDERREF") //, "MODIFYDATE", "MODIFYUSER")
                 )
             }
 
             fun parseRepositoryDataTypesList(
-                swcv: List<MPI.Swcv>,
-                namespaces: List<MPI.Namespace>,
-                queryResult: QueryResult
+                swcv: List<MPI.Swcv>, namespaces: List<MPI.Namespace>, queryResult: QueryResult
             ): List<MPI.RepositoryObject> {
                 val repolist: MutableList<MPI.RepositoryObject> = mutableListOf()
 
-                queryResult.toTable().forEach { row ->
-                    val ra_xilink = row["RA_XILINK"]!!.qref!!.ref
-                    val vc = ra_xilink.vc   // vc.swcGuid, vc.caption, vc.vcType
-                    val swc = swcv.find { it.id == vc.swcGuid }
-                    requireNotNull(swc)
-
-                    val type = ra_xilink.key.typeID
-                    if (type != "namespdecl" && type != "FOLDER") {
-                        val oid = ra_xilink.key.oid!!
-                        val name = ra_xilink.key.elem[0]
-                        require(ra_xilink.key.elem.size > 1) {
-                            "Не хватает данных для типа $type, oid=$oid"
-                        }
-
-                        val namespace = ra_xilink.key.elem[1]
-                        val text = row["TEXT"]!!.simple!!.strg
-                        val folder = row["FOLDERREF"]!!.simple!!.bin
-                        require(folder!!.isNotEmpty())
-
-//                        val MODIFYDATE = it["MODIFYDATE"]!!.simple!!.date!!   //TODO - разбирать 2029-12-31T23:59:59
-//                        val MODIFYUSER = it["MODIFYUSER"]!!.simple!!.strg!!
-
-                        // для айдоков в urn:sap-com:document:sap:idoc:messages и rfc нет областей имён
-                        var namespaceobj: MPI.Namespace? = null
-                        if (type != "rfc" && type != "idoc")
-                            namespaceobj = namespaces.find { it.swcv == swc && it.value == namespace }
-
-                        val repobj = MPI.RepositoryObject(
-                            MPI.RepTypes.valueOf(type),
-                            swc,
-                            namespaceobj,
-                            oid, name, text
-                        )
-                        repolist.add(repobj)
-                    }
-                }
+//                queryResult.toList().forEach { row ->
+//                    val ra_xilink = row["RA_XILINK"]!!.qref!!.ref
+//                    val vc = ra_xilink.vc   // vc.swcGuid, vc.caption, vc.vcType
+//                    val swc = swcv.find { it.id == vc.swcGuid }
+//                    requireNotNull(swc)
+//
+//                    val type = ra_xilink.key.typeID
+//                    if (type != "namespdecl" && type != "FOLDER") {
+//                        val oid = ra_xilink.key.oid!!
+//                        val name = ra_xilink.key.elem[0]
+//                        require(ra_xilink.key.elem.size > 1) {
+//                            "Не хватает данных для типа $type, oid=$oid"
+//                        }
+//
+//                        val namespace = ra_xilink.key.elem[1]
+//                        val text = row["TEXT"]!!.simple!!.strg
+//                        val folder = row["FOLDERREF"]!!.simple!!.bin
+//                        require(folder!!.isNotEmpty())
+//
+////                        val MODIFYDATE = it["MODIFYDATE"]!!.simple!!.date!!   //TODO - разбирать 2029-12-31T23:59:59
+////                        val MODIFYUSER = it["MODIFYUSER"]!!.simple!!.strg!!
+//
+//                        // для айдоков в urn:sap-com:document:sap:idoc:messages и rfc нет областей имён
+//                        var namespaceobj: MPI.Namespace? = null
+//                        if (type != "rfc" && type != "idoc") namespaceobj =
+//                            namespaces.find { it.swcv == swc && it.value == namespace }
+//
+//                        val repobj = MPI.RepositoryObject(
+//                            MPI.RepTypes.valueOf(type), swc, namespaceobj, oid, name, text
+//                        )
+//                        repolist.add(repobj)
+//                    }
+//                }
                 return repolist
             }
         }
@@ -573,7 +557,7 @@ class Hm {
         @XmlElement(true) val matrix: Matrix,
         @XmlElement(true) val messages: String? = null
     ) {
-        fun toTable(): List<MutableMap<String, C>> {
+        private fun toTable(): List<MutableMap<String, C>> {
             val lines = mutableListOf<MutableMap<String, C>>()
             val posTypeMapping =
                 headerInfo.colDef.def.associate { Pair(it.pos, it.type) }    // 0:"", 1:RA_WORKSPACE_ID, 2:WS_NAME
@@ -627,6 +611,60 @@ class Hm {
                 }
             }
             return t.filterNotNull()
+        }
+
+        fun toList(): List<MPI.HmiType> {
+            val rez = mutableListOf<MPI.HmiType>()
+            val posTypeMapping = headerInfo.colDef.def.associate { Pair(it.pos, it.type) }
+            matrix.r.forEach { row ->
+                lateinit var ref: Ref
+                val att1 = mutableMapOf<String, String>()
+                val att2 = mutableMapOf<String, String>()
+                row.c.forEachIndexed { cx, col ->
+                    val cn = posTypeMapping[cx]         //RA_XILINK, MODIFYDATE и прочие атрибуты
+                    requireNotNull(cn)
+                    require(cn.isNotBlank())
+                    when (cn) {
+                        "RA_WORKSPACE_ID" -> {
+                            // это namespdecl у которого нет RA_XILINK. Собираем суррогатную ссылку.
+                            val swcguid = col.wkID!!.id
+                            ref = Ref(
+                                PCommon.VC(null, '?'), PCommon.Key("namespdecl", swcguid),
+                                Ref.VSpec(4, swcguid, false)    //versionid := objectid := swcguid
+                            )
+                        }
+
+                        "RA_XILINK" -> ref = col.qref!!.ref
+                        "TEXT", "MODIFYUSER" -> att1[cn] = col.simple!!.strg!!
+                        "FOLDERREF" -> att1[cn] = col.simple!!.bin!!
+                        "MODIFYDATE" -> att1[cn] = col.simple!!.date!!
+                        "EDITABLE", "ORIGINAL" -> requireNotNull(col.simple!!.bool) //пока эти атрибуты namespdecl никуда не пишем
+                        // все прикладные атрибуты в другой словарь
+                        else -> {
+                            if (col.simple != null && col.simple.strg != null) {
+                                att2[cn] = col.simple.strg
+                            } else if (col.simple != null) {
+                                error(cn)
+                            }
+                        }
+                    } // смотрим какие атрибуты
+                } // цикл по столбцам
+                val h = MPI.HmiType(
+                    ref.key.typeID,
+                    ref.key.oid!!,
+                    ref.key.elem,
+                    ref.vspec!!.id,
+                    ref.vspec!!.deleted,
+                    att1["TEXT"],
+                    att1["FOLDERREF"],
+                    att1["MODIFYUSER"],
+                    att1["MODIFYDATE"],
+                    att2
+                )
+                rez.add(h)
+            }
+            require(rez.size == headerInfo.rows.count) { "Должно быть ${headerInfo.rows.count} строк но получено ${rez.size}" }
+            return rez
         }
 
         @Serializable
@@ -704,12 +742,8 @@ class Hm {
         @XmlSerialName("nsp", "", "")
         class Nsp(
             val isUL: Boolean,
-            @XmlElement(true)
-            @XmlSerialName("key", "", "")
-            val key: PCommon.Key,
-            @XmlElement(true)
-            @XmlSerialName("ref", "", "")
-            val ref: Ref,
+            @XmlElement(true) @XmlSerialName("key", "", "") val key: PCommon.Key,
+            @XmlElement(true) @XmlSerialName("ref", "", "") val ref: Ref,
         )
 
         @Serializable
@@ -730,11 +764,8 @@ class Hm {
     @Serializable
     @XmlSerialName("ref", "", "")
     class Ref(
-        @XmlElement(true)
-        @XmlSerialName("vc", "", "")
-        val vc: PCommon.VC,
-        @XmlSerialName("key", "", "")
-        val key: PCommon.Key,
+        @XmlElement(true) @XmlSerialName("vc", "", "") val vc: PCommon.VC,
+        @XmlSerialName("key", "", "") val key: PCommon.Key,
         @XmlElement(true) val vspec: VSpec? = null,
     ) {
         @Serializable
@@ -881,8 +912,7 @@ class Hm {
     @Serializable
     @XmlSerialName("message", "", "")
     class TestMessage(
-        val level: String? = "INFO",
-        @Serializable @XmlValue(true) val text2: String? = null
+        val level: String? = "INFO", @Serializable @XmlValue(true) val text2: String? = null
     )
 
     @Serializable
@@ -993,8 +1023,7 @@ class Hm {
     @Serializable
     @XmlSerialName("list", "", "")
     class ReadListRequest(
-        @XmlElement(true)
-        val type: Type,
+        @XmlElement(true) val type: Type,
     ) {
         fun encodeToString() = hmserializer.encodeToString(this)
     }
@@ -1003,8 +1032,7 @@ class Hm {
     @XmlSerialName("type", "", "")
     class Type(
         val id: String,
-        @XmlElement(true)
-        val ref: Ref,
+        @XmlElement(true) val ref: Ref,
 
         @Serializable val ADD_IFR_PROPERTIES: Boolean = true,
         @Serializable val STOP_ON_FIRST_ERROR: Boolean = true,
@@ -1016,10 +1044,10 @@ class Hm {
         @Serializable val WSDL_XSD_GEN_MODE: String = "EXTERNAL",
     )
 
-    // общие: DOCU_LANG, RELEASE, DOCU_LANG
-    // namespdecl: ADD_IFR_PROPERTIES=true, STOP_ON_FIRST_ERROR = true|false
-    // ifmtypedef: XSD_VERSION="http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/"
-    //          WITH_UI_TEXTS="false" ADD_ENHANCEMENTS="false" WSDL_XSD_GEN_MODE="EXTERNAL"
-    // XI_TRAFO:
-    // MAPPING:
+// общие: DOCU_LANG, RELEASE, DOCU_LANG
+// namespdecl: ADD_IFR_PROPERTIES=true, STOP_ON_FIRST_ERROR = true|false
+// ifmtypedef: XSD_VERSION="http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/"
+//          WITH_UI_TEXTS="false" ADD_ENHANCEMENTS="false" WSDL_XSD_GEN_MODE="EXTERNAL"
+// XI_TRAFO:
+// MAPPING:
 }

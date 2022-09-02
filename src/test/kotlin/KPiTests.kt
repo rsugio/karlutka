@@ -1,11 +1,11 @@
 import karlutka.clients.PI
+import karlutka.models.MPI
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.PCommon
 import karlutka.server.DB
 import karlutka.server.Server
 import karlutka.util.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import java.nio.file.Paths
@@ -24,7 +24,7 @@ class KPiTests {
 
         DB.init(Server.kfg.h2connection)
 
-        target = Server.kfg.targets.find { it.sid == "PPI" }!! as KfTarget.PIAF
+        target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
         target.loadAuths(Server.kfpasswds.securityMaterials)
         pi = PI(target)
         runBlocking {
@@ -90,10 +90,9 @@ class KPiTests {
                 println("namespaces asked")
                 pi.parseNamespaceDecls(def)
                 println("... namespaces ok: ${pi.namespaces.size}")
-                val def2 = pi.askRepoList(this)
+                val def2 = pi.askRepoListCustom(this)
                 println("repolist asked")
-                pi.parseRepoList(def2)
-                println("... repolist ok: ${pi.repolist.size}")
+                pi.hmiResponseParse(def2)
                 println("done")
             }
         }
@@ -120,14 +119,25 @@ class KPiTests {
     }
 
     @Test
-    fun dirtypes() {
+    fun everything() {
+        val obj = mutableListOf<MPI.HmiType>()
         runBlocking {
             withContext(Dispatchers.IO) {
+                pi.hmiAskSWCV(this)
                 pi.hmiDirConfiguration(this)
-                val td = pi.hmiDirEverythingRequest(this)
-                pi.hmiDirResponseParse(td)
 
+                val nsask = pi.askNamespaceDeclsAsync(this, { true })
+                val repoask = pi.askRepoListCustom(this)
+                val dirask = pi.hmiDirEverythingRequest(this)
+
+                pi.parseNamespaceDecls(nsask)
+                val rep = pi.hmiResponseParse(repoask)
+                val dir = pi.hmiResponseParse(dirask)
+                obj.addAll(rep)
+                obj.addAll(dir)
+                println("done! ${obj.size} rep+dir")
             }
         }
     }
+
 }

@@ -24,13 +24,13 @@ class PCommon {
 
     @Serializable
     class ClCxt(
-        val consider: Char, val user: String = ""
+        val consider: Char, val user: String? = null
     )
 
     @Serializable
     class Key(
         val typeID: String,
-        val oid: String? = null,
+        val oid: String? = null,        //TODO найти пример где он необязателен и вписать сюда
         @XmlElement(true) val elem: List<String> = listOf(),
     ) {
         override fun toString() = "$typeID|$oid|$elem"

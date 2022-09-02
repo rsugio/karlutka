@@ -34,6 +34,19 @@ class MPI {
         FOLDER
     }
 
+    data class HmiType(                 //data пока временно для наглядности
+        val typeId: String,
+        val oid: String,
+        val elem: List<String>,
+        val vid: String,
+        val deleted: Boolean = false,
+        val text: String? = null,
+        val folderref: String? = null,
+        val modifyUser: String? = null,
+        val modifyDate: String? = null,
+        val attrs: Map<String,String>       // прикладные атрибуты
+    )
+
     class Swcv(
         val id: String,         //гуид
         val vendor: String,

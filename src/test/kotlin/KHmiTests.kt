@@ -1,5 +1,4 @@
 import KT.Companion.s
-import KT.Companion.x
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.Hm.*
 import karlutka.parsers.pi.PCommon
@@ -18,13 +17,7 @@ class KHmiTests {
             HmiMethodInput(mapOf("user_alias" to "aasasa", "body" to null, "VC" to "SWCV")),
             "methodId",
             "serviceId",
-            "user",
-            "password",
-            "EN",
-            true,
-            null,
-            null,
-            "1.0", 0
+            "user"
         )
         req.encodeToString()
 
@@ -60,7 +53,6 @@ class KHmiTests {
 
     @Test
     fun queryservice() {
-        require(GeneralQueryRequest.swcv().isNotBlank())
         val q1 = QueryResult.parse(s("/pi_HMI/queryResult_swcv1.xml")).toSwcv() //DPH
         require(q1.size == 481)
         val q2 = QueryResult.parse(s("/pi_HMI/queryResult_swcv2.xml")).toSwcv()
@@ -69,10 +61,7 @@ class KHmiTests {
         require(t.isNotEmpty())
 
         val types = QueryResult.parse(s("/pi_HMI/rep1_query_resp.xml"))
-        types.toTable().forEach { m ->
-            val ref = m["RA_XILINK"]!!.qref!!.ref
-            println(ref)
-        }
+        types.toList()
     }
 
     @Test
@@ -83,16 +72,16 @@ class KHmiTests {
         val req2 = GeneralQueryRequest.namespaces(listOf("b82055b0897311e6b783c9af0aa2b0df"))
         require(req2.result.attrib.isNotEmpty())
 
-        Hm.hmserializer.decodeFromString<QueryResult>(s("/pi_HMI/namespaceResponse.xml")).toTable()
+        Hm.hmserializer.decodeFromString<QueryResult>(s("/pi_HMI/namespaceResponse.xml")).toList()
     }
 
     @Test
     fun omtest() {
         TestExecutionRequest.decodeFromString(s("/pi_HMI/unescaped/testExecutionRequest.xml"))
         val r3 = TestExecutionResponse.decodeFromString(s("/pi_HMI/omtest_response3.xml"))
-        println(r3.messages!!.message)
+        r3.messages!!.message
         val r4 = TestExecutionResponse.decodeFromString(s("/pi_HMI/omtest_response4.xml"))
-        println(r4.exception!!.message.contentString.trim())
+        r4.exception!!.message.contentString.trim()
     }
 
     @Test
@@ -109,7 +98,8 @@ class KHmiTests {
             PCommon.VC("3f38b2400b9e11ea9c32fae8ac130d0e", 'S', -1),
             PCommon.Key("namespdecl", null, listOf("3f38b2400b9e11ea9c32fae8ac130d0e"))
         )
-        val type = Type("namespdecl", ref,
+        val type = Type(
+            "namespdecl", ref,
             ADD_IFR_PROPERTIES = true,
             STOP_ON_FIRST_ERROR = false,
             RELEASE = "7.0",

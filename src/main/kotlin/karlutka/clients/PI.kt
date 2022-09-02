@@ -203,30 +203,30 @@ class PI(
         hmiServices.add(d1)
     }
 
-    //TODO второй аргумент сделать GeneralQuery, третий - метод
     suspend fun hmiGeneralQueryTask(
-        scope: CoroutineScope, sxml: String, uri: String = "/rep"
+        scope: CoroutineScope, qry: Hm.GeneralQueryRequest, uri: String = "/rep", remark: String = ""
     ): Deferred<KtorClient.Task> {
         val serv = findHmiServiceMethod("query", "generic", uri)
         val req = Hm.HmiRequest(
             uuid(hmiClientId),
             uuid(UUID.randomUUID()),
             serv.applCompLevel(),
-            Hm.HmiMethodInput("QUERY_REQUEST_XML", sxml),
+            Hm.HmiMethodInput("QUERY_REQUEST_XML", qry.encodeToString()),
             serv.methodid.uppercase(),
             serv.serviceid,
             contextuser
         )
         val task = KtorClient.taskPost(client, serv.url, req)
+        task.remark = remark
         return scope.async { task.execute() }
     }
 
-    @Deprecated("Это удалить. Лучше hmiGeneralQueryTask")
-    suspend fun hmiGeneralQuery(scope: CoroutineScope, sxml: String): Hm.QueryResult {
-        val td = hmiGeneralQueryTask(scope, sxml)
-        val resp = hmiTaskAwait(td)
-        return Hm.QueryResult.parse(resp.MethodOutput!!.Return)
-    }
+//    @Deprecated("Это удалить. Лучше hmiGeneralQueryTask")
+//    suspend fun hmiGeneralQuery(scope: CoroutineScope, sxml: String): Hm.QueryResult {
+//        val td = hmiGeneralQueryTask(scope, sxml)
+//        val resp = hmiTaskAwait(td)
+//        return Hm.QueryResult.parse(resp.MethodOutput!!.Return)
+//    }
 
     private suspend fun hmiReadAsync(
         scope: CoroutineScope, bodyXml: String, vc: String = "SWC", sp: String = "-1", uc: Boolean = true
@@ -245,26 +245,44 @@ class PI(
         return scope.async { task.execute() }
     }
 
+    @Deprecated("ne nado")
     private suspend fun hmiTaskAwait(td: Deferred<KtorClient.Task>): Hm.HmiResponse {
         return Hm.HmiResponse.parse(taskAwait(td, ContentType.Text.Xml))
     }
 
     suspend fun hmiAskSWCV(scope: CoroutineScope) {
-        val td = hmiGeneralQueryTask(scope, Hm.GeneralQueryRequest.swcv())
-        val resp = hmiTaskAwait(td)
-        requireNotNull(resp.MethodOutput)   //TODO проверить на пустой системе при случае, или эмуляторе
-        val lst = resp.toQueryResult().toSwcv().sortedBy { it.name }
-        this.swcv.addAll(lst)
+        val swcv = Hm.GeneralQueryRequest(
+            Hm.GeneralQueryRequest.Types.of("workspace"),
+            Hm.GeneralQueryRequest.QC(
+                'S', 'N', PCommon.ClCxt('L'),
+                Hm.GeneralQueryRequest.SwcListDef('A')
+            ),
+            Hm.GeneralQueryRequest.Condition(),
+            Hm.GeneralQueryRequest.Result.of(
+                "RA_WORKSPACE_ID", "WS_NAME", "VENDOR", "NAME",
+                "VERSION", "CAPTION", "WS_TYPE", "ORIGINAL_LANGUAGE", "EDITABLE", "BACKENDCOMPMODE", "ORIGINAL"
+            )
+        )
+        val td = hmiGeneralQueryTask(scope, swcv)
+        val task = taskAwait(td, ContentType.Text.Xml)
+        val resp = Hm.HmiResponse.parse(task, false)
+        if (resp.MethodFault == null && resp.MethodOutput != null) {
+            val lst = resp.toQueryResult(task).toSwcv().sortedBy { it.name }
+            this.swcv.addAll(lst)
+            task.close()
+        } else {
+            error("Ошибка в обработке SWCV задача ${task.path}: ${resp.MethodFault!!.LocalizedMessage}")
+        }
     }
 
     suspend fun askNamespaceDeclsAsync(
         scope: CoroutineScope, predicate: (MPI.Swcv) -> Boolean
-    ): MutableList<Deferred<KtorClient.Task>> {
+    ): List<Deferred<KtorClient.Task>> {
         // Делаем столько taskPost-задач, сколько есть SWCV по предикату
         val deferred: MutableList<Deferred<KtorClient.Task>> = mutableListOf()
         swcv.filter(predicate).forEach { s ->
             val ref = Hm.Ref(
-                PCommon.VC(s.id, 'S', -1),  //почему-то нельзя брать исходный тип SWCV
+                PCommon.VC(s.id, 'S', -1),
                 PCommon.Key("namespdecl", null, listOf(s.id))
             )
             val type = Hm.Type(
@@ -281,7 +299,7 @@ class PI(
         return deferred
     }
 
-    suspend fun parseNamespaceDecls(deferred: MutableList<Deferred<KtorClient.Task>>) {
+    suspend fun parseNamespaceDecls(deferred: List<Deferred<KtorClient.Task>>) {
         deferred.forEach { taskdef ->
             val retry: Boolean
             val hr = hmiTaskAwait(taskdef)
@@ -311,7 +329,7 @@ class PI(
         }
     }
 
-    suspend fun askRepoList(scope: CoroutineScope): MutableList<Deferred<KtorClient.Task>> {
+    suspend fun askRepoList(scope: CoroutineScope): List<Deferred<KtorClient.Task>> {
         val deferred: MutableList<Deferred<KtorClient.Task>> = mutableListOf()
         val p1 = listOf(MPI.RepTypes.rfc, MPI.RepTypes.idoc)
         val p2 = listOf(MPI.RepTypes.ifmextdef, MPI.RepTypes.ifmmessif, MPI.RepTypes.ifmoper)
@@ -330,30 +348,65 @@ class PI(
 
         parts.forEach {
             val t = Hm.GeneralQueryRequest.Types.of(it.map { it.toString() })
-            val sxml = Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcv, t).encodeToString()
+            val sxml = Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcv, t)
             val r = hmiGeneralQueryTask(scope, sxml)
             deferred.add(r)
         }
         // Это дата-типы которых больше всего в системе. Их читаем - отдельно каждый sap.com и чохом все остальные
         val t = Hm.GeneralQueryRequest.Types.of("ifmtypedef")
         val nonsap = Hm.GeneralQueryRequest.requestRepositoryDataTypesList(swcv.filter { it.vendor != "sap.com" }, t)
-        deferred.add(hmiGeneralQueryTask(scope, nonsap.encodeToString()))
+        deferred.add(hmiGeneralQueryTask(scope, nonsap))
         swcv.filter { it.vendor == "sap.com" }.forEach { swc ->
             val sap = Hm.GeneralQueryRequest.requestRepositoryDataTypesList(listOf(swc), t)
-            deferred.add(hmiGeneralQueryTask(scope, sap.encodeToString()))
+            deferred.add(hmiGeneralQueryTask(scope, sap))
         }
         return deferred
     }
 
-    suspend fun parseRepoList(deferred: MutableList<Deferred<KtorClient.Task>>) {
-        deferred.forEach { taskdef ->
-            val hr = hmiTaskAwait(taskdef)
-            require(hr.CoreException == null && hr.MethodOutput != null)
-            val queryResult = hr.toQueryResult()
-            val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, queryResult)
-            repolist.addAll(objs)   //TODO проверка, есть ли уже объект
+    suspend fun askRepoListCustom(scope: CoroutineScope): List<Deferred<KtorClient.Task>> {
+        require(swcv.isNotEmpty())
+        val deferred: MutableList<Deferred<KtorClient.Task>> = mutableListOf()
+        val reptypes = listOf(
+            "rfc", "idoc", "ifmtypedef", "ifmextdef", "ifmmessif", "ifmoper", "ifmfaultm", "ifmmessage",
+            "ifmtypeenh", "ifmcontobj", "AdapterMetaData", "MAP_TEMPLATE", "TRAFO_JAR", "XI_TRAFO", "FUNC_LIB",
+            "MAPPING"
+        )
+        swcv.filter{it.vendor!="sap.com"}.forEach { swc ->
+            val qc = Hm.GeneralQueryRequest.QC(
+                'S',
+                'B',
+                PCommon.ClCxt('L'),
+                Hm.GeneralQueryRequest.SwcListDef('G', Hm.GeneralQueryRequest.SwcInfoList.of(swc.id))
+            )
+            val req = Hm.GeneralQueryRequest(
+                Hm.GeneralQueryRequest.Types.of(reptypes),
+                qc,
+                Hm.GeneralQueryRequest.Condition(),
+                Hm.GeneralQueryRequest.Result.of(
+                    "RA_XILINK",
+                    "TEXT",
+                    "FOLDERREF",
+                    "MODIFYUSER",
+                    "MODIFYDATE"
+                )
+            )
+            val r = hmiGeneralQueryTask(scope, req, "/rep", "запрос всего по ${swc.ws_name}")
+            deferred.add(r)
         }
+        return deferred
     }
+
+//    suspend fun parseRepoList(deferred: MutableList<Deferred<KtorClient.Task>>) {
+//        deferred.forEach { taskdef ->
+//            val task = taskAwait(taskdef, ContentType.Text.Xml)
+//            val hr = Hm.HmiResponse.parse(task, false)
+//            require(hr.CoreException == null && hr.MethodOutput != null)
+//            val queryResult = hr.toQueryResult(task)
+//            val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, queryResult)
+//            task.close()
+//            repolist.addAll(objs)   //TODO проверка, есть ли уже объект
+//        }
+//    }
 
     suspend fun executeOMtest(testRequest: Hm.TestExecutionRequest): Hm.TestExecutionResponse {
         val serv = findHmiServiceMethod("mappingtestservice", "executeoperationmappingmethod")
@@ -489,66 +542,57 @@ class PI(
         this.dirConfiguration = Hm.DirConfiguration.decodeFromString(hmiTaskAwait(td).MethodOutput!!.Return)
     }
 
-    val m = mapOf(
-        "Party"           to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY",
-        "Service"         to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY,SERVICE",
-        "Channel"         to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,ENGINENAME",
+    val dirTypes = mapOf(
+        "Party" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY",
+        "Service" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY,SERVICE",
+        "Channel" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,ENGINENAME",
         // DirectoryView == Conf scenario
-        "DirectoryView"   to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,DIRVIEW,DIR_VIEW_NAME",
+        "DirectoryView" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,DIRVIEW,DIR_VIEW_NAME",
         // AllInOne == ICo
-        "AllInOne"        to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FROMPARTY,FROMSRVC,FROMACTION,FROMACTIONNS,TOPARTY,TOSRVC",
-        "ValueMapping"    to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,AGENCY,SCHEME,VMVALUE",
-        "AlertRule"       to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PAYLOAD", //BLOCKALERTTIME,RULETYPE,CONSUMER,RUNTIMESTATE,ERRORLABEL,RUNTIME,SEVERITY,SUPPRESSTIME,
+        "AllInOne" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FROMPARTY,FROMSRVC,FROMACTION,FROMACTIONNS,TOPARTY,TOSRVC",
+        "ValueMapping" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,AGENCY,SCHEME,VMVALUE",
+        "AlertRule" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PAYLOAD", //BLOCKALERTTIME,RULETYPE,CONSUMER,RUNTIMESTATE,ERRORLABEL,RUNTIME,SEVERITY,SUPPRESSTIME,
         // RoutingRule == Receiver Rule
-        "RoutingRule"     to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,ROUTINGRULE",
+        "RoutingRule" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,ROUTINGRULE",
         // InboundBinding == Sender Agreement. FORAAE для классических не работает - может быть удалить из выборки
-        "InboundBinding"  to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FORAAE",
+        "InboundBinding" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE",  //,FORAAE
         // MappingRelation == Interface Determination
         "MappingRelation" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FROMPARTY,FROMSRVC,FROMACTION,FROMACTIONNS,TOPARTY,TOSRVC",
         // OutboundBinding == Receiver Agreement
         "OutboundBinding" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FROMPARTY,FROMSRVC,TOPARTY,TOSRVC",
         // RoutingRelation == Receiver Determination
         "RoutingRelation" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FROMPARTY,FROMSRVC,FROMACTION,FROMACTIONNS,TOPARTY,TOSRVC",
-        "DOCU"            to "RA_XILINK,FOLDERREF,MODIFYUSER,MODIFYDATE,NAME,NAMESPACE",
+        "DOCU" to "RA_XILINK,FOLDERREF,MODIFYUSER,MODIFYDATE,NAME,NAMESPACE",
     )
 
-    suspend fun hmiDirEverythingRequest(scope: CoroutineScope) : List<Deferred<KtorClient.Task>> {
-        val qc = Hm.GeneralQueryRequest.QC('D', 'N', PCommon.ClCxt('L'))
+    suspend fun hmiDirEverythingRequest(scope: CoroutineScope): List<Deferred<KtorClient.Task>> {
+        val qc = Hm.GeneralQueryRequest.QC('D', 'B', PCommon.ClCxt('L'))
         val rez = mutableListOf<Deferred<KtorClient.Task>>()
-        m.forEach{(type, attrs) ->
+        dirTypes.forEach { (type, attrs) ->
             val query = Hm.GeneralQueryRequest(
                 Hm.GeneralQueryRequest.Types.of(type),
                 qc,
                 Hm.GeneralQueryRequest.Condition(),
                 Hm.GeneralQueryRequest.Result(attrs.split(","))
             )
-            rez.add(hmiGeneralQueryTask(scope, query.encodeToString(), "/dir"))
+            rez.add(hmiGeneralQueryTask(scope, query, "/dir"))
         }
         return rez
     }
 
-    suspend fun hmiDirResponseParse(tdl: List<Deferred<KtorClient.Task>>) {
-        tdl.forEach{td ->
-            val h = hmiTaskAwait(td).toQueryResult()
-            val types = h.typeInfo.type.map{it.id}
-            require(types.size==1)
-            val type = types[0]
-            val table = h.toTable()
-            println("$type: ${table.size}")
-            table.forEach {r ->
-                val ref = r["RA_XILINK"]!!.qref!!.ref
-                val typeID = ref.key.typeID
-                require(typeID==type)
-                val pk = ref.key.elem
-                val oid = ref.key.oid!!
-                require(ref.vspec!!.type==4)
-                val vid = ref.vspec.id
-                val deleted = ref.vspec.deleted
-
-
-            }
-
+    suspend fun hmiResponseParse(tdl: List<Deferred<KtorClient.Task>>): List<MPI.HmiType> {
+        val lst = mutableListOf<MPI.HmiType>()
+        tdl.forEach { td ->
+            val task = taskAwait(td, ContentType.Text.Xml)
+            val hmiResponse = Hm.HmiResponse.parse(task, false)
+            val queryResult = hmiResponse.toQueryResult(task)
+            val types = queryResult.typeInfo.type.map { it.id }
+            val list = queryResult.toList()
+            //if (list.isNotEmpty()) println("$types: ${list.size}")
+            task.close()
+            lst.addAll(list)
         }
-
+        //println("total: ${lst.size}")
+        return lst
     }
 }
