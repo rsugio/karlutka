@@ -64,10 +64,10 @@ fun main(args: Array<String>) {
         konf.loadAuths(Server.kfpasswds.securityMaterials)
         val target: MTarget
         when (konf) {
-            is KfTarget.ABAP -> target = AbapJCo(konf)
-            is KfTarget.PIAF -> target = PI(konf)
+            is KfTarget.ABAP   -> target = AbapJCo(konf)
+            is KfTarget.PIAF   -> target = PI(konf)
             is KfTarget.BTPNEO -> target = BTPNEO(konf)
-            is KfTarget.BTPCF -> target = BTPCF(konf)
+            is KfTarget.BTPCF  -> target = BTPCF(konf)
             is KfTarget.CPINEO -> target = CPINEO(konf)
         }
         Server.targets[target.getSid()] = target
