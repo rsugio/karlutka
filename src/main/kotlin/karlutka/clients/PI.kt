@@ -43,7 +43,6 @@ class PI(
 //    val dir_confscenario: MutableList<XiBasis.ConfigurationScenario> = mutableListOf()
 
     lateinit var dirConfiguration: Hm.DirConfiguration
-
     val contextuser = "_"                   // пользователь, использующийся в контекстных запросах
 
     init {
@@ -191,8 +190,8 @@ class PI(
         val td = scope.async { task.execute() }
         task = taskAwait(td, ContentType.Text.Xml)
         val hr = Hm.HmiResponse.parse(task)
-        require(hr.MethodFault==null && hr.CoreException==null)
-        require(hr.MethodOutput!=null && hr.MethodOutput.Return.isNotBlank())
+        require(hr.MethodFault == null && hr.CoreException == null)
+        require(hr.MethodOutput != null && hr.MethodOutput.Return.isNotBlank())
         Hm.hmserializer.decodeFromString<Hm.HmiServices>(hr.MethodOutput.Return).list.forEach {
             it.url = "/rep/${it.serviceid}/int?container=any"
             hmiServices.add(it)
@@ -509,8 +508,8 @@ class PI(
         val td = scope.async { task.execute() }
         task = taskAwait(td, ContentType.Text.Xml)
         val hr = Hm.HmiResponse.parse(task)
-        require(hr.CoreException==null && hr.MethodFault==null)
-        require(hr.MethodOutput!=null && hr.MethodOutput.Return.isNotBlank())
+        require(hr.CoreException == null && hr.MethodFault == null)
+        require(hr.MethodOutput != null && hr.MethodOutput.Return.isNotBlank())
         this.dirConfiguration = Hm.DirConfiguration.decodeFromString(hr.MethodOutput.Return)
     }
 
@@ -561,6 +560,10 @@ class PI(
             val list = queryResult.toList()
             task.close()
             lst.addAll(list)
+            // здесь надо подумать как асинхронно читать неизвестные объекты
+            transaction {
+                DB.PIOBJ.merge(list, this)
+            }
         }
         return lst
     }
