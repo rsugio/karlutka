@@ -356,15 +356,15 @@ class Hm {
         @Serializable
         @XmlSerialName("swcListDef", "", "")
         class SwcListDef(
-            @Serializable val def: String,
+            @Serializable val def: Char,
             @Serializable val swcInfoList: SwcInfoList? = null,
         )
 
         @Serializable
         @XmlSerialName("qc", "", "")
         class QC(
-            @Serializable val qcType: String = "S",
-            @Serializable val delMode: String = "N",
+            @Serializable val qcType: Char = 'S',   //D-dir, S-rep
+            @Serializable val delMode: Char = 'N',  //N-неудалённые, D-удалённые, B-both
             @XmlElement(true)
             @XmlSerialName("clCxt", "", "")
             var clCxt: PCommon.ClCxt,
@@ -491,7 +491,7 @@ class Hm {
                 val swcinfolist = SwcInfoList(swc.map { x -> SWC(x, "-1", false) })
                 return GeneralQueryRequest(
                     Types(listOf(Type("namespace"))),
-                    QC("S", "N", PCommon.ClCxt('S', "User"), SwcListDef("G", swcinfolist)),
+                    QC('S', 'N', PCommon.ClCxt('S', "User"), SwcListDef('G', swcinfolist)),
                     elementary("QA_NSP_ADD_CLASSIC", "EQ", Simple(null, null, false)),
                     Result(listOf("RA_NSP_STRING", "TEXT"))
                 )
@@ -504,9 +504,9 @@ class Hm {
                 user: String = "_"
             ): GeneralQueryRequest {
                 val qc = QC(
-                    "S", "N",
+                    'S', 'N',
                     PCommon.ClCxt('A', user),
-                    SwcListDef("G", SwcInfoList.of(swcv.map { it.id }))
+                    SwcListDef('G', SwcInfoList.of(swcv.map { it.id }))
                 )
                 return GeneralQueryRequest(
                     repdatatypes, qc, cond,
@@ -739,10 +739,11 @@ class Hm {
     ) {
         @Serializable
         @XmlSerialName("vspec", "", "")
+        // Версия объекта
         class VSpec(
-            @Serializable val type: Int,
-            @Serializable val id: String,
-            @Serializable val deleted: Boolean,
+            @Serializable val type: Int,        // 4 для CC. Или это номер версии?
+            @Serializable val id: String,       // versionid
+            @Serializable val deleted: Boolean, // признак удаления
         )
 
         override fun toString() = "Ref($key)"
@@ -912,8 +913,8 @@ class Hm {
         class Repository(
             @XmlElement(true) val type: String,
             @XmlElement(true) val host: String,
-            @XmlElement(true) val httpport: Int,
-            @XmlElement(true) val httpsport: Int,
+            @XmlElement(true) val httpport: String, // могут быть 50000 или "@com.sap.aii.server.httpsport.repository@"
+            @XmlElement(true) val httpsport: String,
         )
 
         @Serializable

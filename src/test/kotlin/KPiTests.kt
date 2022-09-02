@@ -24,7 +24,7 @@ class KPiTests {
 
         DB.init(Server.kfg.h2connection)
 
-        target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
+        target = Server.kfg.targets.find { it.sid == "PPI" }!! as KfTarget.PIAF
         target.loadAuths(Server.kfpasswds.securityMaterials)
         pi = PI(target)
         runBlocking {
@@ -125,7 +125,7 @@ class KPiTests {
             withContext(Dispatchers.IO) {
                 pi.hmiDirConfiguration(this)
                 val td = pi.hmiDirEverythingRequest(this)
-                td.awaitAll()
+                pi.hmiDirResponseParse(td)
 
             }
         }

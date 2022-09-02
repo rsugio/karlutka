@@ -351,7 +351,7 @@ class PI(
             require(hr.CoreException == null && hr.MethodOutput != null)
             val queryResult = hr.toQueryResult()
             val objs = Hm.GeneralQueryRequest.parseRepositoryDataTypesList(swcv, namespaces, queryResult)
-            repolist.addAll(objs)   //TODO проверка
+            repolist.addAll(objs)   //TODO проверка, есть ли уже объект
         }
     }
 
@@ -365,13 +365,7 @@ class PI(
             Hm.HmiMethodInput("body", testRequest.encodeToString()),
             serv.methodid.uppercase(),
             serv.serviceid,
-            "dummy",
-            "dummy",
-            "EN",
-            false,
-            null,
-            null,
-            "1.0"
+            contextuser
         )
         TODO()
 //        val resp = hmiPost(serv.url(), req)
@@ -389,13 +383,7 @@ class PI(
             Hm.HmiMethodInput("body", testRequest.encodeToString()),
             serv.methodid.uppercase(),
             serv.serviceid,
-            "dummy",
-            "dummy",
-            "EN",
-            false,
-            null,
-            null,
-            "1.0"
+            contextuser
         )
         TODO()
 //        val resp = hmiPost(serv.url(), req)
@@ -502,20 +490,30 @@ class PI(
     }
 
     val m = mapOf(
-        "Party"           to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY",
-        "Service"         to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY,SERVICE",
-        "Channel"         to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY,SERVICE,CHANNEL,ENGINENAME",
-        "DirectoryView"   to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,DIRVIEW,DIR_VIEW_NAME",
-        "ValueMapping"    to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,AGENCY,SCHEME,VMVALUE",
-        "DOCU"            to "RA_XILINK,OBJECTID,VERSIONID,FOLDERREF,MODIFYUSER,MODIFYDATE,NAME,NAMESPACE",
-        "AlertRule"       to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PAYLOAD", //BLOCKALERTTIME,RULETYPE,CONSUMER,RUNTIMESTATE,ERRORLABEL,RUNTIME,SEVERITY,SUPPRESSTIME,
-        "RoutingRule"     to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,ROUTINGRULE",
-        //InboundBinding == Sender Agreement
-        "InboundBinding"  to "RA_XILINK,OBJECTID,VERSIONID,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FORAAE",
+        "Party"           to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY",
+        "Service"         to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PARTY,SERVICE",
+        "Channel"         to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,ENGINENAME",
+        // DirectoryView == Conf scenario
+        "DirectoryView"   to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,DIRVIEW,DIR_VIEW_NAME",
+        // AllInOne == ICo
+        "AllInOne"        to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FROMPARTY,FROMSRVC,FROMACTION,FROMACTIONNS,TOPARTY,TOSRVC",
+        "ValueMapping"    to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,AGENCY,SCHEME,VMVALUE",
+        "AlertRule"       to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,PAYLOAD", //BLOCKALERTTIME,RULETYPE,CONSUMER,RUNTIMESTATE,ERRORLABEL,RUNTIME,SEVERITY,SUPPRESSTIME,
+        // RoutingRule == Receiver Rule
+        "RoutingRule"     to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,ROUTINGRULE",
+        // InboundBinding == Sender Agreement. FORAAE для классических не работает - может быть удалить из выборки
+        "InboundBinding"  to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FORAAE",
+        // MappingRelation == Interface Determination
+        "MappingRelation" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FROMPARTY,FROMSRVC,FROMACTION,FROMACTIONNS,TOPARTY,TOSRVC",
+        // OutboundBinding == Receiver Agreement
+        "OutboundBinding" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FROMPARTY,FROMSRVC,TOPARTY,TOSRVC",
+        // RoutingRelation == Receiver Determination
+        "RoutingRelation" to "RA_XILINK,TEXT,FOLDERREF,MODIFYUSER,MODIFYDATE,FROMPARTY,FROMSRVC,FROMACTION,FROMACTIONNS,TOPARTY,TOSRVC",
+        "DOCU"            to "RA_XILINK,FOLDERREF,MODIFYUSER,MODIFYDATE,NAME,NAMESPACE",
     )
 
     suspend fun hmiDirEverythingRequest(scope: CoroutineScope) : List<Deferred<KtorClient.Task>> {
-        val qc = Hm.GeneralQueryRequest.QC("D", "N", PCommon.ClCxt('L'))
+        val qc = Hm.GeneralQueryRequest.QC('D', 'N', PCommon.ClCxt('L'))
         val rez = mutableListOf<Deferred<KtorClient.Task>>()
         m.forEach{(type, attrs) ->
             val query = Hm.GeneralQueryRequest(
@@ -527,5 +525,30 @@ class PI(
             rez.add(hmiGeneralQueryTask(scope, query.encodeToString(), "/dir"))
         }
         return rez
+    }
+
+    suspend fun hmiDirResponseParse(tdl: List<Deferred<KtorClient.Task>>) {
+        tdl.forEach{td ->
+            val h = hmiTaskAwait(td).toQueryResult()
+            val types = h.typeInfo.type.map{it.id}
+            require(types.size==1)
+            val type = types[0]
+            val table = h.toTable()
+            println("$type: ${table.size}")
+            table.forEach {r ->
+                val ref = r["RA_XILINK"]!!.qref!!.ref
+                val typeID = ref.key.typeID
+                require(typeID==type)
+                val pk = ref.key.elem
+                val oid = ref.key.oid!!
+                require(ref.vspec!!.type==4)
+                val vid = ref.vspec.id
+                val deleted = ref.vspec.deleted
+
+
+            }
+
+        }
+
     }
 }
