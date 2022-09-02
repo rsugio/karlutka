@@ -26,7 +26,7 @@ import kotlinx.html.head
 import kotlinx.html.title
 import org.slf4j.event.Level
 
-object KTorUtils {
+object KtorServer {
     private const val useLocalFolder = true               // локальная отладка из ./static
     lateinit var server: ApplicationEngine
 
@@ -115,7 +115,8 @@ object KTorUtils {
                     }
                 }
                 static("/") {
-                    resources("s")      // берёт всё из /main/resources/s/*
+                    // запросы http://localhost/styles.css будут попадать сюда
+                    resources("/karlutka/s")      // берёт всё из /main/resources/karlutka/s/*
                     if (useLocalFolder) { // берёт из локального файла, не из ресурсов. Только для отладки.
                         files("static")
                     }

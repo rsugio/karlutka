@@ -168,9 +168,9 @@ class KAdapterMessageMonitoringTests {
             val bp = mm.getBodyPart(i)
             for (hd in bp.allHeaders) {
                 require(hd is Header)
-                if (false) println("${hd.name}\t${hd.value}")
+                println("${hd.name}\t${hd.value}")
             }
-            if (false) println(bp.inputStream.readAllBytes().size)
+            println(bp.inputStream.readAllBytes().size)
             i++
         }
         require(i == 2)

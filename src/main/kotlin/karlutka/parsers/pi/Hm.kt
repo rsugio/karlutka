@@ -7,7 +7,6 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import nl.adaptivity.xmlutil.XmlDeclMode
-import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.*
 import nl.adaptivity.xmlutil.util.CompactFragment
 
@@ -77,8 +76,6 @@ class Hm {
             requireNotNull(a) //TODO описание ошибки здесь
             return a
         }
-
-        fun encodeToString() = hmserializer.encodeToString(this)
     }
 
     @Serializable
@@ -314,17 +311,8 @@ class Hm {
                 return HmiResponse(clientId, requestId, hmo, hmf, hce, cf, hv)
             }
 
-            // Обычно XmlReader рождается из временного файла. Коллбек нужен для его удаления
-            fun parse(xmlReader: XmlReader, callback: () -> Unit): HmiResponse {
-                val instance: Instance = hmserializer.decodeFromReader(xmlReader)
-                callback.invoke()
-                return from(instance)
-            }
-
-            fun parse(task: KtorClient.Task, autoclose: Boolean = true): HmiResponse {
-                val instance: Instance = hmserializer.decodeFromReader(task.bodyAsXmlReader())
-                if (autoclose) task.close()
-                return from(instance)
+            fun parse(task: KtorClient.Task): HmiResponse {
+                return from(hmserializer.decodeFromReader(task.bodyAsXmlReader()))
             }
         }
     }
@@ -490,58 +478,6 @@ class Hm {
                     Condition(),
                     Result(listOf("RA_NSP_STRING", "TEXT"))
                 )
-            }
-
-            fun requestRepositoryDataTypesList(
-                swcv: List<MPI.Swcv>, repdatatypes: Types, cond: Condition = Condition(), user: String = "_"
-            ): GeneralQueryRequest {
-                val qc = QC(
-                    'S', 'B', PCommon.ClCxt('A', user), SwcListDef('G', SwcInfoList.of(swcv.map { it.id }))
-                )
-                return GeneralQueryRequest(
-                    repdatatypes, qc, cond, Result.of("RA_XILINK", "TEXT", "FOLDERREF") //, "MODIFYDATE", "MODIFYUSER")
-                )
-            }
-
-            fun parseRepositoryDataTypesList(
-                swcv: List<MPI.Swcv>, namespaces: List<MPI.Namespace>, queryResult: QueryResult
-            ): List<MPI.RepositoryObject> {
-                val repolist: MutableList<MPI.RepositoryObject> = mutableListOf()
-
-//                queryResult.toList().forEach { row ->
-//                    val ra_xilink = row["RA_XILINK"]!!.qref!!.ref
-//                    val vc = ra_xilink.vc   // vc.swcGuid, vc.caption, vc.vcType
-//                    val swc = swcv.find { it.id == vc.swcGuid }
-//                    requireNotNull(swc)
-//
-//                    val type = ra_xilink.key.typeID
-//                    if (type != "namespdecl" && type != "FOLDER") {
-//                        val oid = ra_xilink.key.oid!!
-//                        val name = ra_xilink.key.elem[0]
-//                        require(ra_xilink.key.elem.size > 1) {
-//                            "Не хватает данных для типа $type, oid=$oid"
-//                        }
-//
-//                        val namespace = ra_xilink.key.elem[1]
-//                        val text = row["TEXT"]!!.simple!!.strg
-//                        val folder = row["FOLDERREF"]!!.simple!!.bin
-//                        require(folder!!.isNotEmpty())
-//
-////                        val MODIFYDATE = it["MODIFYDATE"]!!.simple!!.date!!   //TODO - разбирать 2029-12-31T23:59:59
-////                        val MODIFYUSER = it["MODIFYUSER"]!!.simple!!.strg!!
-//
-//                        // для айдоков в urn:sap-com:document:sap:idoc:messages и rfc нет областей имён
-//                        var namespaceobj: MPI.Namespace? = null
-//                        if (type != "rfc" && type != "idoc") namespaceobj =
-//                            namespaces.find { it.swcv == swc && it.value == namespace }
-//
-//                        val repobj = MPI.RepositoryObject(
-//                            MPI.RepTypes.valueOf(type), swc, namespaceobj, oid, name, text
-//                        )
-//                        repolist.add(repobj)
-//                    }
-//                }
-                return repolist
             }
         }
     }

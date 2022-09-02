@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 
 class KonfigTests {
     fun show(a: Any) {
-        if (true) println(a)
+        require(a.toString().isNotBlank())
     }
 
     @Test

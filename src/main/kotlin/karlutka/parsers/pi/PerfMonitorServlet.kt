@@ -407,7 +407,7 @@ class PerfMonitorServlet {
             }
 
             fun parse(xmlReader: XmlReader): MessageStatisticsQueryResults {
-                return xmlserializer.decodeFromReader<MessageStatisticsQueryResults>(xmlReader)
+                return xmlserializer.decodeFromReader(xmlReader)
             }
         }
     }

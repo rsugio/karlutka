@@ -34,7 +34,7 @@ fun main(args: Array<String>) {
     val pw = KfPasswds.parse(ppw)
     KKeystore.load(pw.keystore.path, pw.keystore.passwd)
 
-    KTorUtils.createServer(kfg.httpServerListenPort, kfg.httpServerListenAddress)
+    KtorServer.createServer(kfg.httpServerListenPort, kfg.httpServerListenAddress)
     // println("ktor.application.developmentMode: ${KTorUtils.server.application.developmentMode}")
     // прописывать свойства Server можно лишь только после создания сервера, если включен development mode
     // иначе синглтон будет инициализирован заново
@@ -64,33 +64,19 @@ fun main(args: Array<String>) {
         konf.loadAuths(Server.kfpasswds.securityMaterials)
         val target: MTarget
         when (konf) {
-            is KfTarget.ABAP -> {
-                target = AbapJCo(konf)
-            }
-
-            is KfTarget.PIAF -> {
-                target = PI(konf)
-            }
-
-            is KfTarget.BTPNEO -> {
-                target = BTPNEO(konf)
-            }
-
-            is KfTarget.BTPCF -> {
-                target = BTPCF(konf)
-            }
-
-            is KfTarget.CPINEO -> {
-                target = CPINEO(konf)
-            }
+            is KfTarget.ABAP -> target = AbapJCo(konf)
+            is KfTarget.PIAF -> target = PI(konf)
+            is KfTarget.BTPNEO -> target = BTPNEO(konf)
+            is KfTarget.BTPCF -> target = BTPCF(konf)
+            is KfTarget.CPINEO -> target = CPINEO(konf)
         }
         Server.targets[target.getSid()] = target
         println("\tзагружен ${konf.sid}(${konf.getKind()})")
     }
 
     println("Протяжка продувка на ${kfg.httpServerListenAddress}:${kfg.httpServerListenPort}")
-    KTorUtils.server.start(wait = false)
+    KtorServer.server.start(wait = false)
     println("ПОЕХАЛИ!")
-    KTorUtils.server.start(wait = true)
+    KtorServer.server.start(wait = true)
     // здесь больше ничего писать нельзя - dead code
 }
