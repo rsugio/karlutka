@@ -17,6 +17,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import kotlinx.serialization.decodeFromString
 import org.jetbrains.exposed.sql.transactions.transaction
 import java.net.URL
@@ -35,8 +37,10 @@ class PI(
 
     // список адаптер фреймворков, вида af.sid.host-db
     val afs = mutableListOf<String>()
-    val swcv: MutableList<MPI.Swcv> = mutableListOf()
-    val namespaces: MutableList<MPI.Namespace> = mutableListOf()
+    val state = MPI.State()
+
+//    val swcv: MutableList<MPI.Swcv> = mutableListOf()
+//    val namespaces: MutableList<MPI.Namespace> = mutableListOf()
 //    val repolist: MutableList<MPI.RepositoryObject> = mutableListOf()
 //    val dir_cc: MutableList<XiBasis.CommunicationChannelID> = mutableListOf()
 //    val dir_ico: MutableList<XiBasis.IntegratedConfigurationID> = mutableListOf()
@@ -52,12 +56,6 @@ class PI(
             konfig.url, Server.kfg.httpClientRetryOnServerErrors, LogLevel.valueOf(Server.kfg.httpClientLogLevel)
         )
         KtorClient.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
-
-        transaction {
-            if (!DB.PI.exists(konfig.sid)) DB.PI.insert(konfig.sid)
-//            dir_cc.addAll(DB.PICC.channels(konfig.sid))
-//            dir_ico.addAll(DB.PIICO.icos(konfig.sid))
-        }
     }
 
     suspend fun perfServletListOfComponents(scope: CoroutineScope) =
@@ -269,7 +267,7 @@ class PI(
         val resp = Hm.HmiResponse.parse(task)
         if (resp.MethodFault == null && resp.MethodOutput != null) {
             val lst = resp.toQueryResult(task).toSwcv().sortedBy { it.name }
-            this.swcv.addAll(lst)
+            this.state.swcv.addAll(lst) //TODO проверка на уникальность
             task.close()
         } else {
             error("Ошибка в обработке SWCV задача ${task.path}: ${resp.MethodFault!!.LocalizedMessage}")
@@ -281,7 +279,7 @@ class PI(
     ): List<Deferred<KtorClient.Task>> {
         // Делаем столько taskPost-задач, сколько есть SWCV по предикату
         val deferred: MutableList<Deferred<KtorClient.Task>> = mutableListOf()
-        swcv.filter(predicate).forEach { s ->
+        state.swcv.filter(predicate).forEach { s ->
             val ref = Hm.Ref(
                 PCommon.VC(s.id, 'S', -1), PCommon.Key("namespdecl", null, listOf(s.id))
             )
@@ -317,10 +315,10 @@ class PI(
             } else {
                 require(hr.MethodOutput!!.ContentType == "text/xml")
                 val xiObj = XiObj.decodeFromString(hr.MethodOutput.Return)
-                val sw = swcv.find { it.id == xiObj.idInfo.vc.swcGuid }
+                val sw = state.swcv.find { it.id == xiObj.idInfo.vc.swcGuid }
                 requireNotNull(sw)
                 val resp = xiObj.toNamespaces(sw)
-                this.namespaces.addAll(resp)    //TODO проверка на то, есть уже или ещё нет, чтобы не задваивалось
+                this.state.namespaces.addAll(resp)    //TODO проверка на то, есть уже или ещё нет, чтобы не задваивалось
                 retry = false
             }
             if (!retry) {
@@ -336,7 +334,7 @@ class PI(
      * В саповских так делать нельзя: 1) дата тайпов очень много 2) даты модификации битые
      */
     suspend fun askRepoListCustom(scope: CoroutineScope): List<Deferred<KtorClient.Task>> {
-        require(swcv.isNotEmpty())
+        require(state.swcv.isNotEmpty())
         val deferred: MutableList<Deferred<KtorClient.Task>> = mutableListOf()
         val reptypes = listOf(
             "rfc",
@@ -356,7 +354,7 @@ class PI(
             "FUNC_LIB",
             "MAPPING"
         )
-        swcv.filter { it.vendor != "sap.com" }.forEach { swc ->
+        state.swcv.filter { it.vendor != "sap.com" }.forEach { swc ->
             val qc = Hm.GeneralQueryRequest.QC(
                 'S',
                 'B',
@@ -560,10 +558,6 @@ class PI(
             val list = queryResult.toList()
             task.close()
             lst.addAll(list)
-            // здесь надо подумать как асинхронно читать неизвестные объекты
-            transaction {
-                DB.PIOBJ.merge(list, this)
-            }
         }
         return lst
     }

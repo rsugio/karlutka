@@ -19,11 +19,13 @@ repositories {
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 //    maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers") }
 }
-val ktor_version: String = "2.1.0"
+val ktor_version = "2.1.0"
 val kotlinx_serialization_version = "1.4.0"
-val exposed_version: String = "0.39.2"
-val xmlutil_version: String = "0.84.2"
-val kaml_version: String = "0.47.0"
+val exposed_version = "0.39.2"
+val xmlutil_version = "0.84.2"
+val kaml_version = "0.47.0"
+val h2_version = "2.1.214"
+val jooq_version = "3.17.3"
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -71,10 +73,11 @@ dependencies {
 //  если захотим кликхаус
 //  implementation("com.clickhouse:clickhouse-jdbc:0.3.2-patch1")
 
-    implementation("com.h2database:h2:2.1.214")
+    implementation("com.h2database:h2:$h2_version")
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
 //    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")  я использую DSL без DAO
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+//    implementation("org.jooq:jooq:$jooq_version")
 
     testImplementation(kotlin("test"))
     testImplementation("commons-io:commons-io:2.11.0")    //BOMInputStream

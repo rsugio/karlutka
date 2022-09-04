@@ -24,7 +24,7 @@ class KPiTests {
 
         DB.init(Server.kfg.h2connection)
 
-        target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
+        target = Server.kfg.targets.find { it.sid == "DPI" }!! as KfTarget.PIAF
         target.loadAuths(Server.kfpasswds.securityMaterials)
         pi = PI(target)
         runBlocking {
@@ -85,11 +85,11 @@ class KPiTests {
         runBlocking {
             withContext(Dispatchers.IO) {       //.limitedParallelism(4)
                 pi.hmiAskSWCV(this)
-                println("askSWCV ok: ${pi.swcv.size}")
+                println("askSWCV ok: ${pi.state.swcv.size}")
                 val def = pi.askNamespaceDeclsAsync(this, { true })
                 println("namespaces asked")
                 pi.parseNamespaceDecls(def)
-                println("... namespaces ok: ${pi.namespaces.size}")
+                println("... namespaces ok: ${pi.state.namespaces.size}")
                 val def2 = pi.askRepoListCustom(this)
                 println("repolist asked")
                 pi.hmiResponseParse(def2)
@@ -124,6 +124,9 @@ class KPiTests {
         runBlocking {
             withContext(Dispatchers.IO) {
                 pi.hmiAskSWCV(this)
+                pi.state.swcv.forEach{
+
+                }
                 pi.hmiDirConfiguration(this)
 
                 val nsask = pi.askNamespaceDeclsAsync(this, { true })
@@ -140,4 +143,8 @@ class KPiTests {
         }
     }
 
+    @Test
+    fun nop() {
+
+    }
 }
