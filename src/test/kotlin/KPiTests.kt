@@ -81,24 +81,6 @@ class KPiTests {
     }
 
     @Test
-    fun repTypes() {
-        runBlocking {
-            withContext(Dispatchers.IO) {       //.limitedParallelism(4)
-                pi.hmiAskSWCV(this)
-                println("askSWCV ok: ${pi.state.swcv.size}")
-                val def = pi.askNamespaceDeclsAsync(this, { true })
-                println("namespaces asked")
-                pi.parseNamespaceDecls(def)
-                println("... namespaces ok: ${pi.state.namespaces.size}")
-                val def2 = pi.askRepoListCustom(this)
-                println("repolist asked")
-                pi.hmiResponseParse(def2)
-                println("done")
-            }
-        }
-    }
-
-    @Test
     fun xibasis() {
         runBlocking {
             withContext(Dispatchers.IO) {
@@ -120,13 +102,9 @@ class KPiTests {
 
     @Test
     fun everything() {
-        val obj = mutableListOf<MPI.HmiType>()
         runBlocking {
             withContext(Dispatchers.IO) {
                 pi.hmiAskSWCV(this)
-                pi.state.swcv.forEach{
-
-                }
                 pi.hmiDirConfiguration(this)
 
                 val nsask = pi.askNamespaceDeclsAsync(this, { true })
@@ -134,11 +112,10 @@ class KPiTests {
                 val dirask = pi.hmiDirEverythingRequest(this)
 
                 pi.parseNamespaceDecls(nsask)
-                val rep = pi.hmiResponseParse(repoask)
-                val dir = pi.hmiResponseParse(dirask)
-                obj.addAll(rep)
-                obj.addAll(dir)
-                println("done! ${obj.size} rep+dir")
+                pi.hmiResponseParse(repoask)
+                pi.hmiResponseParse(dirask)
+                pi.storeState()
+                println("done! ${pi.state.objlist.size} rep+dir")
             }
         }
     }

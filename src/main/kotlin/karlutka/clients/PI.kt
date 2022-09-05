@@ -17,10 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import kotlinx.serialization.decodeFromString
-import org.jetbrains.exposed.sql.transactions.transaction
 import java.net.URL
 import java.net.URLEncoder
 import java.util.*
@@ -37,16 +34,7 @@ class PI(
 
     // список адаптер фреймворков, вида af.sid.host-db
     val afs = mutableListOf<String>()
-    val state = MPI.State()
-
-//    val swcv: MutableList<MPI.Swcv> = mutableListOf()
-//    val namespaces: MutableList<MPI.Namespace> = mutableListOf()
-//    val repolist: MutableList<MPI.RepositoryObject> = mutableListOf()
-//    val dir_cc: MutableList<XiBasis.CommunicationChannelID> = mutableListOf()
-//    val dir_ico: MutableList<XiBasis.IntegratedConfigurationID> = mutableListOf()
-//    val dir_confscenario: MutableList<XiBasis.ConfigurationScenario> = mutableListOf()
-
-    lateinit var dirConfiguration: Hm.DirConfiguration
+    var state = MPI.State(mutableListOf(), mutableListOf(), mutableListOf())
     val contextuser = "_"                   // пользователь, использующийся в контекстных запросах
 
     init {
@@ -56,6 +44,16 @@ class PI(
             konfig.url, Server.kfg.httpClientRetryOnServerErrors, LogLevel.valueOf(Server.kfg.httpClientLogLevel)
         )
         KtorClient.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
+        val st = DB.readStore("pisel", konfig.sid)
+        if (st==null) {
+            DB.writeStore("piins", konfig.sid, state)
+        } else {
+            state = st
+        }
+    }
+
+    fun storeState() {
+        DB.writeStore("piupd", konfig.sid, state)
     }
 
     suspend fun perfServletListOfComponents(scope: CoroutineScope) =
@@ -267,7 +265,10 @@ class PI(
         val resp = Hm.HmiResponse.parse(task)
         if (resp.MethodFault == null && resp.MethodOutput != null) {
             val lst = resp.toQueryResult(task).toSwcv().sortedBy { it.name }
-            this.state.swcv.addAll(lst) //TODO проверка на уникальность
+            lst.forEach {new ->
+                // изменяемых атрибутов нет
+                if (!this.state.swcv.contains(new)) this.state.swcv.add(new)
+            }
             task.close()
         } else {
             error("Ошибка в обработке SWCV задача ${task.path}: ${resp.MethodFault!!.LocalizedMessage}")
@@ -318,7 +319,14 @@ class PI(
                 val sw = state.swcv.find { it.id == xiObj.idInfo.vc.swcGuid }
                 requireNotNull(sw)
                 val resp = xiObj.toNamespaces(sw)
-                this.state.namespaces.addAll(resp)    //TODO проверка на то, есть уже или ещё нет, чтобы не задваивалось
+                resp.forEach {new ->
+                    val prev = this.state.namespaces.find{it == new}
+                    if (prev==null)
+                        this.state.namespaces.add(new)
+                    else {
+                        prev.description = new.description
+                    }
+                }
                 retry = false
             }
             if (!retry) {
@@ -366,7 +374,7 @@ class PI(
                 qc,
                 Hm.GeneralQueryRequest.Condition(),
                 Hm.GeneralQueryRequest.Result.of(
-                    "RA_XILINK", "TEXT", "FOLDERREF", "MODIFYUSER", "MODIFYDATE"
+                    "RA_XILINK", "TEXT", "FOLDERREF", "MODIFYUSER" //, "MODIFYDATE"
                 )
             )
             val r = hmiGeneralQueryTask(scope, req, "/rep", "запрос всего по ${swc.ws_name}")
@@ -508,7 +516,8 @@ class PI(
         val hr = Hm.HmiResponse.parse(task)
         require(hr.CoreException == null && hr.MethodFault == null)
         require(hr.MethodOutput != null && hr.MethodOutput.Return.isNotBlank())
-        this.dirConfiguration = Hm.DirConfiguration.decodeFromString(hr.MethodOutput.Return)
+        state.dirConfiguration = Hm.DirConfiguration.decodeFromString(hr.MethodOutput.Return)
+        task.close()
     }
 
     val dirTypes = mapOf(
@@ -549,16 +558,22 @@ class PI(
         return rez
     }
 
-    suspend fun hmiResponseParse(tdl: List<Deferred<KtorClient.Task>>): List<MPI.HmiType> {
-        val lst = mutableListOf<MPI.HmiType>()
+    suspend fun hmiResponseParse(tdl: List<Deferred<KtorClient.Task>>) {
         tdl.forEach { td ->
             val task = taskAwait(td, ContentType.Text.Xml)
             val hmiResponse = Hm.HmiResponse.parse(task)
             val queryResult = hmiResponse.toQueryResult(task)
             val list = queryResult.toList()
             task.close()
-            lst.addAll(list)
+
+            list.forEach { new ->
+                val prev = state.objlist.find{it==new}
+                if (prev==null)
+                    state.objlist.add(new)
+                else {
+                    prev.update(new)
+                }
+            }
         }
-        return lst
     }
 }
