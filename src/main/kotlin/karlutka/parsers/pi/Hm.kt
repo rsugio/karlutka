@@ -7,6 +7,7 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import nl.adaptivity.xmlutil.XmlDeclMode
+import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.*
 import nl.adaptivity.xmlutil.util.CompactFragment
 
@@ -25,6 +26,9 @@ class Hm {
 
         fun parseInstance(sxml: String): Instance {
             return hmserializer.decodeFromString(sxml)
+        }
+        fun parseInstance(xmlReader: XmlReader): Instance {
+            return hmserializer.decodeFromReader(xmlReader)
         }
 
         fun parseResponse(sxml: String): HmiResponse {
@@ -549,7 +553,7 @@ class Hm {
             return t.filterNotNull()
         }
 
-        fun toList(): List<MPI.HmiType> {
+        fun toList(swcv: List<MPI.Swcv>): List<MPI.HmiType> {
             val rez = mutableListOf<MPI.HmiType>()
             val posTypeMapping = headerInfo.colDef.def.associate { Pair(it.pos, it.type) }
             matrix.r.forEach { row ->
@@ -569,7 +573,6 @@ class Hm {
                                 Ref.VSpec(4, swcguid, false)    //versionid := objectid := swcguid
                             )
                         }
-
                         "RA_XILINK" -> ref = col.qref!!.ref
                         "TEXT", "MODIFYUSER" -> att1[cn] = col.simple!!.strg!!
                         "FOLDERREF" -> att1[cn] = col.simple!!.bin!!
@@ -585,6 +588,13 @@ class Hm {
                         }
                     } // смотрим какие атрибуты
                 } // цикл по столбцам
+                var swcref: MPI.Swcv? = null
+                if (ref.vc.swcGuid!=null) {
+                    //TODO добавить SP в чтение SWCV
+                    val sublist = swcv.filter { it.id==ref.vc.swcGuid }
+                    require(sublist.size==1) {"Для SWCV ${ref.vc.swcGuid} более одного объекта"}
+                    swcref = sublist[0]
+                }
                 val h = MPI.HmiType(
                     ref.key.typeID,
                     ref.key.oid!!,
@@ -595,7 +605,8 @@ class Hm {
                     att1["FOLDERREF"],
                     att1["MODIFYUSER"],
                     att1["MODIFYDATE"],
-                    att2
+                    att2,
+                    swcref
                 )
                 rez.add(h)
             }

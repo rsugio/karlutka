@@ -19,21 +19,32 @@ class XiObj(
     @XmlElement(true)
     val idInfo: IdInfo,
     @XmlElement(true)
-    val documentation: String? = null,
+    val documentation: String? = null,      //TODO нужен пример на непустую документацию
     @XmlElement(true)
     val generic: Generic,
     @XmlElement(true)
     @Contextual
     @XmlSerialName("content", "urn:sap-com:xi", "xi")
     val content: CompactFragment,
+    @XmlElement(true)                       //TODO подумать, можно ли обойтись без inner
+    @XmlSerialName("inner", "urn:sap-com:xi", "xi")
+    val inner: Inner? = null
 ) {
+    @Serializable
+    class Inner(
+        @XmlValue(true)
+        @XmlElement(true)
+        val value: XiObj? = null
+    )
+
     @Serializable
     @XmlSerialName("idInfo", "urn:sap-com:xi", "xi")
     class IdInfo(
-        val VID: String,
+        @Serializable
+        val VID: String? = null,    // пусто для вложенных (inner)
         @XmlElement(true)
         @XmlSerialName("vc", "urn:sap-com:xi", "xi")
-        val vc: PCommon.VC,
+        val vc: PCommon.VC? = null, // пусто для вложенных (inner)
         @XmlElement(true)
         @XmlSerialName("key", "urn:sap-com:xi", "xi")
         val key: PCommon.Key,
@@ -45,7 +56,9 @@ class XiObj(
     @Serializable
     @XmlSerialName("generic", "urn:sap-com:xi", "xi")
     class Generic(
-        val admInf: AdmInf,
+        @Serializable
+        val admInf: AdmInf? = null, // пусто для вложенных (inner)
+        @Serializable
         val lnks: Lnks?,
         val textInfo: TextInfo,
     ) {
@@ -61,6 +74,7 @@ class XiObj(
         @XmlSerialName("textObj", "urn:sap-com:xi", "xi")
         class TextObj(
             val id: String = "",
+            @Serializable
             val masterL: String = "",
             val type: Int = 0,
             @XmlElement(true)
@@ -107,15 +121,18 @@ class XiObj(
         @Serializable
         @XmlSerialName("lnkRole", "urn:sap-com:xi", "xi")
         class LnkRole(
+            @Serializable
             val kpos: Int,
             @XmlElement(false)
             val role: String,
+            @Serializable
             val lnk: Lnk
         )
 
         @Serializable
         @XmlSerialName("lnk", "urn:sap-com:xi", "xi")
         class Lnk(
+            @Serializable
             val rMode: String,
             @XmlElement(true)
             @XmlSerialName("key", "urn:sap-com:xi", "xi")
@@ -130,7 +147,7 @@ class XiObj(
     // --------------- место для функций ---------------
     fun toNamespaces(swc: MPI.Swcv): List<MPI.Namespace> {
         require(idInfo.key.typeID == "namespdecl")
-        require(idInfo.vc.swcGuid == swc.id)
+        require(idInfo.vc!!.swcGuid == swc.id)
         return generic.textInfo.textObj.texts.list.map { MPI.Namespace(it.label, swc, it.value) }
     }
 

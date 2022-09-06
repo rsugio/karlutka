@@ -15,32 +15,34 @@ import java.util.zip.GZIPOutputStream
 // см https://habr.com/ru/company/otus/blog/555134/ с некоторой докой
 object DB {
     lateinit var conn: Connection
-    val sqls: MutableMap<String, PreparedStatement> = mutableMapOf()
+    val sq: MutableMap<String, PreparedStatement> = mutableMapOf()
 
     fun init(url: String) {
         conn = DriverManager.getConnection(url)
         val sq = """CREATE TABLE IF NOT EXISTS PI(
-  SID CHARACTER VARYING(128) not null primary key,
+  SID CHARACTER VARYING(32) not null primary key,
   store BINARY LARGE OBJECT not null
 );
 CREATE TABLE IF NOT EXISTS XIOBJ(
+  foreign key (sid) references PI(SID), 
   SID CHARACTER VARYING(128) not null,
   OID CHARACTER(32) not null,
   VID CHARACTER(32) not null,
   serv CHARACTER VARYING(32) not null,
-  store BINARY LARGE OBJECT not null,
+  obj CHARACTER VARYING(655360),
   primary key (SID,OID,VID,serv)
 );
 """
         conn.prepareStatement(sq).execute()
         require(conn.isValid(3))
-        sqls["pisel"] = conn.prepareStatement("SELECT store FROM PI where SID=?1")
-        sqls["piins"] = conn.prepareStatement("INSERT INTO PI(SID, store) VALUES(?1, ?2)")
-        sqls["piupd"] = conn.prepareStatement("UPDATE PI SET store=?2 WHERE sid=?1")
+        this.sq["pisel"] = conn.prepareStatement("SELECT store FROM PI where SID=?1")
+        this.sq["piins"] = conn.prepareStatement("INSERT INTO PI(SID, store) VALUES(?1, ?2)")
+        this.sq["piupd"] = conn.prepareStatement("UPDATE PI SET store=?2 WHERE sid=?1")
 
-        sqls["xi1"] = conn.prepareStatement("SELECT store FROM XIOBJ where SID=?1 and OID=?2 and VID=?3 and serv=?4")
-        sqls["xiv"] = conn.prepareStatement("SELECT VID,serv,store FROM XIOBJ where SID=?1 and OID=?2")
-        sqls["xim"] = conn.prepareStatement("INSERT INTO XIOBJ (SID,OID,VID,serv,store) VALUES (?1,?2,?3,?4,?5)")
+        this.sq["xi1"] = conn.prepareStatement("SELECT obj FROM XIOBJ where SID=?1 and OID=?2 and VID=?3 and serv=?4")
+        this.sq["xiv"] = conn.prepareStatement("SELECT VID,serv,obj FROM XIOBJ where SID=?1 and OID=?2")
+        this.sq["xim"] = conn.prepareStatement("INSERT INTO XIOBJ (SID,OID,VID,serv,obj) VALUES (?1,?2,?3,?4,?5)")
+        this.sq["xi2"] = conn.prepareStatement("SELECT OID,VID FROM XIOBJ where SID=?1")
 
         println("H2 соединён на $url")
     }
@@ -51,8 +53,8 @@ CREATE TABLE IF NOT EXISTS XIOBJ(
     }
 
     fun readStore(sql: String, arg1: String): MPI.State? {
-        require(sqls.containsKey(sql))
-        val ps = sqls[sql]!!
+        require(sq.containsKey(sql))
+        val ps = sq[sql]!!
         ps.setString(1, arg1)
         if (ps.execute() && ps.resultSet.first()) {
             val bis = ps.resultSet.getBinaryStream("store")
@@ -64,8 +66,8 @@ CREATE TABLE IF NOT EXISTS XIOBJ(
     }
 
     fun writeStore(sql: String, arg1: String, arg2: MPI.State) {
-        require(sqls.containsKey(sql))
-        val ps = sqls[sql]!!
+        require(sq.containsKey(sql))
+        val ps = sq[sql]!!
         ps.setString(1, arg1)
         val bao = ByteArrayOutputStream()
         val gzo = GZIPOutputStream(bao)

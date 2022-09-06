@@ -2,6 +2,7 @@ package karlutka.models
 
 import karlutka.parsers.pi.Hm
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class MPI {
     enum class DIRECTION { INBOUND, OUTBOUND }
@@ -25,7 +26,9 @@ class MPI {
         var folderref: String? = null,
         var modifyUser: String? = null,
         var modifyDate: String? = null,
-        val attrs: MutableMap<String,String> = mutableMapOf()       // прикладные атрибуты
+        val attrs: MutableMap<String,String> = mutableMapOf(),  // прикладные атрибуты
+        val swcv: Swcv? = null,                                 // ссылка валидна только для repository-типов
+        @Transient var exist: Boolean = false                   //будет перечитываться при старте
     ) {
         override fun equals(other: Any?): Boolean {
             require(other is HmiType)

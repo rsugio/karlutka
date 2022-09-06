@@ -1,6 +1,16 @@
 import KT.Companion.s
 import karlutka.models.MPI
+import karlutka.parsers.pi.Hm
+import karlutka.parsers.pi.Hm.Companion.parseInstance
 import karlutka.parsers.pi.XiObj
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
+import nl.adaptivity.xmlutil.PlatformXmlReader
+import java.nio.file.Paths
+import kotlin.io.path.forEachDirectoryEntry
+import kotlin.io.path.reader
+import kotlin.io.path.writeText
 import kotlin.test.Test
 
 class KXiObjTests {
@@ -21,5 +31,28 @@ class KXiObjTests {
     @Test
     fun xi_trafo() {
         XiObj.decodeFromString(s("/pi_xiObj/rep03mmap.xml")).content
+    }
+
+    @Test
+    fun mass() {
+        var ix = 10000000
+        runBlocking {
+            withContext(Dispatchers.Default) {
+                Paths.get("C:\\data\\notbad").forEachDirectoryEntry("*.xml") { p ->
+                    val xr = PlatformXmlReader(p.reader())
+                    val hr = Hm.HmiResponse.from(parseInstance(xr))
+                    try {
+                        val xo = XiObj.decodeFromString(hr.MethodOutput!!.Return)
+                        val type = xo.idInfo.key.typeID
+                        Paths.get("c:\\data\\tmp\\${ix}_$type.xml").writeText(hr.MethodOutput!!.Return)
+                        if (xo.documentation!=null) println(xo.documentation)
+                    } catch (e: Exception) {
+                        System.err.println(p)
+                        e.printStackTrace()
+                    }
+                    ix++
+                }
+            }
+        }
     }
 }

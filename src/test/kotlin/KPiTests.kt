@@ -121,6 +121,16 @@ class KPiTests {
     }
 
     @Test
+    fun update() {
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                val z = pi.dokach(this)
+                pi.parseReadTask(z)
+            }
+        }
+    }
+
+    @Test
     fun nop() {
 
     }

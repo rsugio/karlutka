@@ -61,7 +61,7 @@ class KHmiTests {
         require(t.isNotEmpty())
 
         val types = QueryResult.parse(s("/pi_HMI/rep1_query_resp.xml"))
-        types.toList()
+        types.toList(q1)
     }
 
     @Test
@@ -72,7 +72,8 @@ class KHmiTests {
         val req2 = GeneralQueryRequest.namespaces(listOf("b82055b0897311e6b783c9af0aa2b0df"))
         require(req2.result.attrib.isNotEmpty())
 
-        Hm.hmserializer.decodeFromString<QueryResult>(s("/pi_HMI/namespaceResponse.xml")).toList()
+        val q1 = QueryResult.parse(s("/pi_HMI/queryResult_swcv1.xml")).toSwcv() //DPH
+        Hm.hmserializer.decodeFromString<QueryResult>(s("/pi_HMI/namespaceResponse.xml")).toList(q1)
     }
 
     @Test

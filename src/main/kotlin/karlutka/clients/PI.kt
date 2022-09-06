@@ -13,10 +13,7 @@ import karlutka.server.DB
 import karlutka.server.Server
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import kotlinx.serialization.decodeFromString
 import java.net.URL
 import java.net.URLEncoder
@@ -319,7 +316,7 @@ class PI(
             } else {
                 require(hr.MethodOutput!!.ContentType == "text/xml")
                 val xiObj = XiObj.decodeFromString(hr.MethodOutput.Return)
-                val sw = state.swcv.find { it.id == xiObj.idInfo.vc.swcGuid }
+                val sw = state.swcv.find { it.id == xiObj.idInfo.vc!!.swcGuid }
                 requireNotNull(sw)
                 val resp = xiObj.toNamespaces(sw)
                 resp.forEach { new ->
@@ -358,6 +355,7 @@ class PI(
             "ifmmessage",
             "ifmtypeenh",
             "ifmcontobj",
+            "ifmextmes",
             "AdapterMetaData",
             "MAP_TEMPLATE",
             "TRAFO_JAR",
@@ -566,7 +564,7 @@ class PI(
             val task = taskAwait(td, ContentType.Text.Xml)
             val hmiResponse = Hm.HmiResponse.parse(task)
             val queryResult = hmiResponse.toQueryResult(task)
-            val list = queryResult.toList()
+            val list = queryResult.toList(state.swcv)
             task.close()
 
             list.forEach { new ->
@@ -609,4 +607,55 @@ class PI(
         //task.close()
     }
 
+    suspend fun dokach(scope: CoroutineScope):List<Deferred<KtorClient.Task>> {
+        val ps = DB.sq["xi2"]!!
+        ps.setString(1, konfig.sid)
+        val rs = ps.executeQuery()
+        while (rs.next()) {
+            val oid = rs.getString("OID")
+            val vid = rs.getString("VID")
+            val hmilst = this.state.objlist.filter { it.oid==oid && it.vid==vid }
+            require(hmilst.size < 2) {"для oid=$oid vid=$vid более одного объекта, нарушение целостности"}
+            if (hmilst.isNotEmpty()) {
+                hmilst[0].exist = true
+            }
+        }
+        val taskdef = mutableListOf<Deferred<KtorClient.Task>>()
+        // группируем запросы на чтение по SWCV
+        this.state.swcv.forEach { swc ->
+            println(swc.ws_name)
+            this.state.objlist.filter { it.swcv == swc && !it.exist && !it.deleted}.forEach { hmi ->
+                val type = Hm.Type(
+                    hmi.typeId,
+                    Hm.Ref(PCommon.VC(swc.id, 'S', -1), PCommon.Key(hmi.typeId, hmi.oid, hmi.elem)),
+                    ADD_IFR_PROPERTIES = false, //true
+                    STOP_ON_FIRST_ERROR = false,
+                    RELEASE = "7.5",            //7.0
+                    DOCU_LANG = "EN"
+                )
+                val td = hmiReadRepAsync(scope, Hm.ReadListRequest(type).encodeToString())
+                taskdef.add(td)
+            }
+            taskdef.awaitAll()
+        }
+        return taskdef
+    }
+
+    suspend fun parseReadTask(deferred: List<Deferred<KtorClient.Task>>) {
+        val cnt = 1
+        deferred.forEach { taskdef ->
+            val task = taskAwait(taskdef, ContentType.Text.Xml)
+            val hr = Hm.HmiResponse.parse(task)
+            var retry = true
+            if (hr.MethodFault != null || hr.CoreException != null) {
+                val s = hr.MethodFault?.LocalizedMessage ?: hr.CoreException?.LocalizedMessage ?: ""
+            } else {
+                require(hr.MethodOutput!!.ContentType == "text/xml")
+                val xiObj = XiObj.decodeFromString(hr.MethodOutput.Return)
+
+                task.close()
+                //
+            }
+        }
+    }
 }
