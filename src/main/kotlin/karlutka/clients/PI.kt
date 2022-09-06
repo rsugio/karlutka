@@ -45,7 +45,7 @@ class PI(
         )
         KtorClient.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
         val st = DB.readStore("pisel", konfig.sid)
-        if (st==null) {
+        if (st == null) {
             DB.writeStore("piins", konfig.sid, state)
         } else {
             state = st
@@ -193,13 +193,16 @@ class PI(
             hmiServices.add(it)
         }
         task.close()
-        // для директори добавляем методы против Кости Сапрыкина
+        //для директори добавляем методы против Кости Сапрыкина вручную
         val d0 = Hm.HmiService("hmi_server_details", "read_server_details", "7.0", "*", "*", "*")
         d0.url = "/dir/${d0.serviceid}/int?container=any"
         hmiServices.add(d0)
         val d1 = Hm.HmiService("query", "generic", "7.0", "*", "*", "*")
         d1.url = "/dir/${d1.serviceid}/int?container=any"
         hmiServices.add(d1)
+        val d2 = Hm.HmiService("read", "plain", "7.0", "*", "*", "*")
+        d2.url = "/dir/${d2.serviceid}/int?container=any"
+        hmiServices.add(d2)
     }
 
     suspend fun hmiGeneralQueryTask(
@@ -220,7 +223,7 @@ class PI(
         return scope.async { task.execute() }
     }
 
-    private suspend fun hmiReadAsync(
+    suspend fun hmiReadRepAsync(
         scope: CoroutineScope, bodyXml: String, vc: String = "SWC", sp: String = "-1", uc: Boolean = true
     ): Deferred<KtorClient.Task> {
         val serv = findHmiServiceMethod("read", "plain")
@@ -265,7 +268,7 @@ class PI(
         val resp = Hm.HmiResponse.parse(task)
         if (resp.MethodFault == null && resp.MethodOutput != null) {
             val lst = resp.toQueryResult(task).toSwcv().sortedBy { it.name }
-            lst.forEach {new ->
+            lst.forEach { new ->
                 // изменяемых атрибутов нет
                 if (!this.state.swcv.contains(new)) this.state.swcv.add(new)
             }
@@ -292,7 +295,7 @@ class PI(
                 RELEASE = "7.0",
                 DOCU_LANG = "EN"
             )
-            val td = hmiReadAsync(scope, Hm.ReadListRequest(type).encodeToString())
+            val td = hmiReadRepAsync(scope, Hm.ReadListRequest(type).encodeToString())
             deferred.add(td)
         }
         return deferred
@@ -319,9 +322,9 @@ class PI(
                 val sw = state.swcv.find { it.id == xiObj.idInfo.vc.swcGuid }
                 requireNotNull(sw)
                 val resp = xiObj.toNamespaces(sw)
-                resp.forEach {new ->
-                    val prev = this.state.namespaces.find{it == new}
-                    if (prev==null)
+                resp.forEach { new ->
+                    val prev = this.state.namespaces.find { it == new }
+                    if (prev == null)
                         this.state.namespaces.add(new)
                     else {
                         prev.description = new.description
@@ -567,8 +570,8 @@ class PI(
             task.close()
 
             list.forEach { new ->
-                val prev = state.objlist.find{it==new}
-                if (prev==null)
+                val prev = state.objlist.find { it == new }
+                if (prev == null)
                     state.objlist.add(new)
                 else {
                     prev.update(new)
@@ -576,4 +579,34 @@ class PI(
             }
         }
     }
+
+    suspend fun hmiReadDirAsync(scope: CoroutineScope, t: MPI.HmiType) {
+        val serv = findHmiServiceMethod("read", "plain", "/dir")
+        // Чтение КК
+        // serviceId=hmi_channel_xml, method=read_channel_xml, /dir/hmi_channel_xml/int?container=any
+        val cc1 = mapOf<String, String>(
+            "readAllData" to "true",
+            "com.sap.xpi.features.channel.ref.cleanup" to "true",
+            "id" to "/BS_ENERGO_D/CC_SOAPSender_Async"
+        )
+
+        val rep = Hm.HmiRequest(
+            uuid(hmiClientId),
+            uuid(UUID.randomUUID()),
+            serv.applCompLevel(),
+            Hm.HmiMethodInput(mapOf()),
+            serv.methodid,
+            serv.serviceid,
+            contextuser
+        )
+        var task = KtorClient.taskPost(client, serv.url, rep)
+        val td = scope.async { task.execute() }
+        task = taskAwait(td, ContentType.Text.Xml)
+        val hr = Hm.HmiResponse.parse(task)
+        require(hr.CoreException == null && hr.MethodFault == null)
+        require(hr.MethodOutput != null && hr.MethodOutput.Return.isNotBlank())
+
+        //task.close()
+    }
+
 }
