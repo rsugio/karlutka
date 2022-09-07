@@ -3,10 +3,12 @@ import karlutka.models.MPI
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.Hm.Companion.parseInstance
 import karlutka.parsers.pi.XiObj
+import karlutka.parsers.pi.Zatupka
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import nl.adaptivity.xmlutil.PlatformXmlReader
+import java.nio.file.Files
 import java.nio.file.Paths
 import kotlin.io.path.forEachDirectoryEntry
 import kotlin.io.path.reader
@@ -59,6 +61,9 @@ class KXiObjTests {
     @Test
     fun tpt() {
         val p = Paths.get(javaClass.getResource("/pi_Tpz/XI7_1_SAP_ABA_7.50-sp22.tpt")!!.toURI())
-        println(p)
+        val tmp = Files.createTempFile("tpt", ".bin")
+        println(tmp)
+        Zatupka.unpage(p, tmp)
+        Zatupka.list(tmp)
     }
 }

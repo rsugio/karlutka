@@ -7,6 +7,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import nl.adaptivity.xmlutil.XmlDeclMode
+import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
@@ -162,5 +163,6 @@ class XiObj(
         }
 
         fun decodeFromString(sxml: String): XiObj = xioserializer.decodeFromString(sxml)
+        fun decodeFromXmlReader(xmlReader: XmlReader): XiObj = xioserializer.decodeFromReader(xmlReader)
     }
 }
