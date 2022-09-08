@@ -75,7 +75,9 @@ class KXiObjTests {
         val e = zf.entries().toList().find { it.name.lowercase().endsWith(".tpt") && !it.isDirectory }
         if (e==null) return
         val tmp = Files.createTempFile("tpt_", ".bin")
-        Zatupka.unpage(zf.getInputStream(e), tmp.outputStream())
+        val zis = zf.getInputStream(e)
+        Zatupka.unpage(zis, tmp.outputStream())
+        zis.close()
         val objs = Zatupka.list2(tmp)
         Files.delete(tmp)
     }

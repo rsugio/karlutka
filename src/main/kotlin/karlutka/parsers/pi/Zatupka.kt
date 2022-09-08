@@ -15,8 +15,10 @@ import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.nio.file.Files
 import java.nio.file.Path
+import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
 import kotlin.io.path.createFile
+import kotlin.io.path.outputStream
 import kotlin.io.path.writeBytes
 
 class Zatupka {
@@ -68,7 +70,7 @@ class Zatupka {
         fun decodeFromString(sxml: String) = XML.decodeFromString<Catalog>(sxml)
 
         /**
-         * //TODO написать документацию, почему так. И попробовать поискать CRC32.
+         * //TODO написать документацию, почему так. И попробовать отревёрсить местный CRC32
          */
         fun unpage(pis: InputStream, bos: OutputStream) {
             val pageSize = 0x100000
@@ -97,7 +99,6 @@ class Zatupka {
             pis.close()
             bos.close()
         }
-
 
         /**
          * Мапим файл на буфер, поэтому на входе не поток
@@ -194,6 +195,18 @@ class Zatupka {
                 }
             raf.close()
             return rez
+        }
+
+        // полный фарш
+        fun meatball(srctpz: Path) : List<Path> {
+            val zip = ZipFile(srctpz.toFile())
+            val e = zip.entries().toList().find { it.name.lowercase().endsWith(".tpt") && !it.isDirectory }
+            if (e==null) return listOf()
+            val tpt = KTempFile.getTempFileTpt()
+            unpage(zip.getInputStream(e), tpt.outputStream())
+            val lst = list2(tpt)
+            Files.delete(tpt)
+            return lst
         }
     }
 }

@@ -1,5 +1,6 @@
 package karlutka.clients
 
+import karlutka.parsers.pi.Zatupka
 import kotlinx.serialization.Serializable
 import java.io.IOException
 import java.nio.file.FileVisitResult
@@ -16,6 +17,7 @@ import kotlin.io.path.name
 object Ztp : FileVisitor<Path> {
     val stack: Stack<String> = Stack()
     val root = mutableListOf<Tpz>()
+    val currentTpzs = mutableListOf<TpzObject>()
 
     @Serializable
     class Tpz(
@@ -41,12 +43,18 @@ object Ztp : FileVisitor<Path> {
 
     override fun preVisitDirectory(dir: Path?, attrs: BasicFileAttributes?): FileVisitResult {
         stack.push(dir!!.name)
+        currentTpzs.clear()
         println(stack)
         return FileVisitResult.CONTINUE
     }
 
     override fun visitFile(file: Path?, attrs: BasicFileAttributes?): FileVisitResult {
-        println("\t${file!!.name}")
+        val name = file!!.name
+        if (name.lowercase().endsWith(".tpz")) {
+            println("\t$name")
+            val lst = Zatupka.meatball(file)
+            println(lst)
+        }
         return FileVisitResult.CONTINUE
     }
 
@@ -56,6 +64,8 @@ object Ztp : FileVisitor<Path> {
 
     override fun postVisitDirectory(dir: Path?, exc: IOException?): FileVisitResult {
         stack.pop()
+
+
         return FileVisitResult.CONTINUE
     }
 }
