@@ -17,6 +17,8 @@ import nl.adaptivity.xmlutil.util.CompactFragment
 @Serializable
 @XmlSerialName("xiObj", "urn:sap-com:xi", "xi")
 class XiObj(
+    @XmlElement(false)
+    val vers: String? = null,               //заполнено в документациях внутри tpz
     @XmlElement(true)
     val idInfo: IdInfo,
     @XmlElement(true)
@@ -27,10 +29,14 @@ class XiObj(
     @Contextual
     @XmlSerialName("content", "urn:sap-com:xi", "xi")
     val content: CompactFragment,
-    @XmlElement(true)                       //TODO подумать, можно ли обойтись без inner
+    @XmlElement(true)                       //TODO подумать, можно ли обойтись без inner. Или может он есть в TPZ?
     @XmlSerialName("inner", "urn:sap-com:xi", "xi")
     val inner: Inner? = null
 ) {
+    fun key():String {
+        return "${idInfo.key.typeID}_${idInfo.key.oid}_${idInfo.VID}"
+    }
+
     @Serializable
     class Inner(
         @XmlValue(true)
@@ -79,7 +85,7 @@ class XiObj(
             val masterL: String = "",
             val type: Int = 0,
             @XmlElement(true)
-            val texts: Texts
+            val texts: Texts? = null
         )
 
         @Serializable
@@ -149,7 +155,7 @@ class XiObj(
     fun toNamespaces(swc: MPI.Swcv): List<MPI.Namespace> {
         require(idInfo.key.typeID == "namespdecl")
         require(idInfo.vc!!.swcGuid == swc.id)
-        return generic.textInfo.textObj.texts.list.map { MPI.Namespace(it.label, swc, it.value) }
+        return generic.textInfo.textObj.texts!!.list.map { MPI.Namespace(it.label, swc, it.value) }
     }
 
     companion object {

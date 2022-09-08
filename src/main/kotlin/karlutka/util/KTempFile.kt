@@ -8,7 +8,6 @@ import kotlin.io.path.forEachDirectoryEntry
 object KTempFile {
     //по умолчанию
     var tempFolder: Path = Paths.get(System.getProperty("java.io.tmpdir") + "/karlutka2")
-
     fun start() {
         if (Files.isDirectory(tempFolder)) {
             tempFolder.forEachDirectoryEntry {
@@ -20,6 +19,8 @@ object KTempFile {
         }
 
     }
+
+    fun getTempFileXiObj() = Files.createTempFile(tempFolder, "xiobj_", ".xml")
 
     fun task(): Path {
         val path: Path = Files.createTempFile(tempFolder, "task", ".xml")

@@ -1,4 +1,5 @@
 import KT.Companion.s
+import karlutka.clients.Ztp
 import karlutka.models.MPI
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.Hm.Companion.parseInstance
@@ -8,11 +9,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import nl.adaptivity.xmlutil.PlatformXmlReader
-import java.nio.file.Files
-import java.nio.file.Paths
-import kotlin.io.path.forEachDirectoryEntry
-import kotlin.io.path.reader
-import kotlin.io.path.writeText
+import java.io.IOException
+import java.nio.file.*
+import java.nio.file.attribute.BasicFileAttributes
+import java.util.zip.ZipFile
+import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
+import kotlin.io.path.*
 import kotlin.test.Test
 
 class KXiObjTests {
@@ -60,10 +63,26 @@ class KXiObjTests {
 
     @Test
     fun tpt() {
-        val p = Paths.get(javaClass.getResource("/pi_Tpz/XI7_1_SAP_ABA_7.50-sp22.tpt")!!.toURI())
-        val tmp = Files.createTempFile("tpt", ".bin")
+        val p = javaClass.getResourceAsStream("/pi_Tpz/XI7_1_SAP_ABA_7.50-sp22.tpt")!!
+        val tmp = Files.createTempFile("tpt_", ".bin")
         println(tmp)
-        Zatupka.unpage(p, tmp)
+        Zatupka.unpage(p, tmp.outputStream())
         Zatupka.list(tmp)
+    }
+
+    fun tpz(p: Path) {
+        val zf = ZipFile(p.toFile())
+        val e = zf.entries().toList().find { it.name.lowercase().endsWith(".tpt") && !it.isDirectory }
+        if (e==null) return
+        val tmp = Files.createTempFile("tpt_", ".bin")
+        Zatupka.unpage(zf.getInputStream(e), tmp.outputStream())
+        val objs = Zatupka.list2(tmp)
+        Files.delete(tmp)
+    }
+
+    @Test
+    fun johnny() {
+        Ztp.reindex(Paths.get("Y:\\Tpz"))
+
     }
 }
