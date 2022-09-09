@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
+import nl.adaptivity.xmlutil.PlatformXmlReader
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
@@ -13,6 +14,8 @@ import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
+import java.nio.file.Path
+import kotlin.io.path.inputStream
 
 @Serializable
 @XmlSerialName("xiObj", "urn:sap-com:xi", "xi")
@@ -170,5 +173,7 @@ class XiObj(
 
         fun decodeFromString(sxml: String): XiObj = xioserializer.decodeFromString(sxml)
         fun decodeFromXmlReader(xmlReader: XmlReader): XiObj = xioserializer.decodeFromReader(xmlReader)
+
+        fun decodeFromPath(path: Path) : XiObj = xioserializer.decodeFromReader(PlatformXmlReader(path.inputStream(), "UTF-8"))
     }
 }

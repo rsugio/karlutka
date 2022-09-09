@@ -13,6 +13,7 @@ import kotlinx.serialization.modules.polymorphic
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import java.util.*
 import kotlin.test.Test
 
 @Serializable(with = ColorAsStringSerializer::class)
@@ -83,6 +84,13 @@ class KBukvar {
         println(a.encodeToStringJSON())
         val b = A.decodeFromStringJSON("\"444\"")
         println(b)
+    }
+
+    @Test
+    fun random() {
+        for (i in 1..10) {
+            println(UUID.randomUUID()!!)
+        }
     }
 
 }

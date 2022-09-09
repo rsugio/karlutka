@@ -172,7 +172,7 @@ class PI(
         require(hmiServices.isEmpty()) { "планируется на пустой системе" }
         val rep = Hm.HmiRequest(
             uuid(hmiClientId),
-            uuid(UUID.randomUUID()),
+            uuid(UUID.randomUUID()!!),
             Hm.ApplCompLevel("*", "*"),
             Hm.HmiMethodInput(mapOf("release" to "7.5")),
             "DEFAULT",
