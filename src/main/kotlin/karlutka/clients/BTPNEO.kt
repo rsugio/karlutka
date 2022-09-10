@@ -2,6 +2,14 @@ package karlutka.clients
 
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.call.body
+import io.ktor.client.call.body
+import io.ktor.client.call.body
+import io.ktor.client.call.body
+import io.ktor.client.call.body
+import io.ktor.client.call.body
+import io.ktor.client.call.body
+import io.ktor.client.call.body
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.auth.*
 import io.ktor.client.plugins.auth.providers.*

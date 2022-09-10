@@ -1,6 +1,7 @@
 package karlutka.clients
 
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.auth.*
 import io.ktor.client.plugins.auth.providers.*
@@ -55,7 +56,9 @@ class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
         headers["x-csrf-token"] = rsp.headers["X-CSRF-Token"]!!
         require(headers["x-csrf-token"]!!.length > 16)    // не Fetch а гуид или что-то вроде
         require(rsp.status.isSuccess())
-        rsp = client.get("/api/v1/") { header("accept", "application/json") }
+        rsp = client.get("/api/v1/") {
+            header("accept", "application/json")
+        }.body()
         require(rsp.status.isSuccess())
         val edmx: PEdmx.Edmx = PEdmx.parseEdmx(client.get("/api/v1/\$metadata") {
             contentType(ContentType.Application.Xml)
