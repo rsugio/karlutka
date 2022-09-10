@@ -1,6 +1,8 @@
 package karlutka.clients
 
 import io.ktor.client.*
+import io.ktor.client.call.body
+import io.ktor.client.call.body
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -607,15 +609,15 @@ class PI(
         //task.close()
     }
 
-    suspend fun dokach(scope: CoroutineScope):List<Deferred<KtorClient.Task>> {
+    suspend fun dokach(scope: CoroutineScope): List<Deferred<KtorClient.Task>> {
         val ps = DB.sq["xi2"]!!
         ps.setString(1, konfig.sid)
         val rs = ps.executeQuery()
         while (rs.next()) {
             val oid = rs.getString("OID")
             val vid = rs.getString("VID")
-            val hmilst = this.state.objlist.filter { it.oid==oid && it.vid==vid }
-            require(hmilst.size < 2) {"для oid=$oid vid=$vid более одного объекта, нарушение целостности"}
+            val hmilst = this.state.objlist.filter { it.oid == oid && it.vid == vid }
+            require(hmilst.size < 2) { "для oid=$oid vid=$vid более одного объекта, нарушение целостности" }
             if (hmilst.isNotEmpty()) {
                 hmilst[0].exist = true
             }
@@ -624,7 +626,7 @@ class PI(
         // группируем запросы на чтение по SWCV
         this.state.swcv.forEach { swc ->
             println(swc.ws_name)
-            this.state.objlist.filter { it.swcv == swc && !it.exist && !it.deleted}.forEach { hmi ->
+            this.state.objlist.filter { it.swcv == swc && !it.exist && !it.deleted }.forEach { hmi ->
                 val type = Hm.Type(
                     hmi.typeId,
                     Hm.Ref(PCommon.VC(swc.id, 'S', -1), PCommon.Key(hmi.typeId, hmi.oid, hmi.elem)),

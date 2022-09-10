@@ -23,7 +23,7 @@ class KBtpNeoTest {
 
         target = kfg.targets.find { it.sid == "eu3prod" }!! as KfTarget.BTPNEO
         target.loadAuths(kfp.securityMaterials)
-   }
+    }
 
     @Test
     fun static() {

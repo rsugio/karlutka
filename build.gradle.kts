@@ -19,7 +19,7 @@ repositories {
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 //    maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers") }
 }
-val ktor_version = "2.1.0"
+val ktor_version = "2.1.1"
 val kotlinx_serialization_version = "1.4.0"
 val exposed_version = "0.39.2"
 val xmlutil_version = "0.84.2"
@@ -41,10 +41,7 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.2.11")
     implementation("org.apache.commons:commons-email:1.5")
 
-    implementation("io.ktor:ktor-client-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-client-java-jvm:$ktor_version")
-    implementation("io.ktor:ktor-client-auth-jvm:$ktor_version")
-    implementation("io.ktor:ktor-client-logging-jvm:$ktor_version")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
 
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
@@ -77,6 +74,9 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
 //    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")  я использую DSL без DAO
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+    implementation("io.ktor:ktor-client-core-jvm:2.1.1")
+    implementation("io.ktor:ktor-client-auth-jvm:2.1.1")
+    implementation("io.ktor:ktor-client-logging-jvm:2.1.1")
 //    implementation("org.jooq:jooq:$jooq_version")
 
     testImplementation(kotlin("test"))
