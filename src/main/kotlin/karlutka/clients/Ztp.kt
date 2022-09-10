@@ -9,12 +9,13 @@ import java.nio.file.FileVisitor
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.attribute.BasicFileAttributes
+import java.sql.Connection
+import java.sql.DriverManager
 import java.util.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.io.path.name
 import kotlin.io.path.outputStream
-import kotlin.io.path.readBytes
 
 /**
  * Джонни TPZ ходок
@@ -22,32 +23,16 @@ import kotlin.io.path.readBytes
 object Ztp : FileVisitor<Path> {
     lateinit var rootPath: Path
     val stack: Stack<String> = Stack()
-    val root = mutableListOf<Tpz>()
-    val currentTpzs = mutableListOf<TpzObject>()
     lateinit var zos: ZipOutputStream
 
-    @Serializable
-    class Tpz(
-        val tpzName: String,
-        val path: String,
-        val objects: List<TpzObject>
-    )
-
-    @Serializable
-    class TpzObject(
-        val key: String,
-        val typeID: String,
-//        val oid: String,
-//        val vid: String
-    )
-
-    fun reindex(from: Path) {
+    // из одного TPZ один ZIP
+    fun reindexTpzsToZips(from: Path) {
         rootPath = from
         require(Files.isDirectory(rootPath))
         val idxZip = rootPath.resolve("idx.zip")
         zos = ZipOutputStream(idxZip.outputStream())
         stack.clear()
-        root.clear()
+
         Files.walkFileTree(from, this)
         require(stack.isEmpty())
         zos.close()
@@ -60,7 +45,7 @@ object Ztp : FileVisitor<Path> {
             val ze = ZipEntry(stack.joinToString("/") + "/")
             zos.putNextEntry(ze)
             zos.closeEntry()
-            currentTpzs.clear()
+            println(ze.name)
         }
         return FileVisitResult.CONTINUE
     }
@@ -72,17 +57,18 @@ object Ztp : FileVisitor<Path> {
             val ze = ZipEntry(stack.joinToString("/") + "/" + name + "/")
             zos.putNextEntry(ze)
             zos.closeEntry()
-            val lst = Zatupka.meatball(file)
-            lst.forEach {
-                val xiobj = XiObj.decodeFromPath(it)
-                val key = xiobj.key()
-                val zef = ZipEntry(ze.name + key)
-                zos.putNextEntry(zef)
-                zos.write(it.readBytes())
-                zos.closeEntry()
-                Files.delete(it)
-            }
-            zos.flush()
+//            val lst = Zatupka.meatball(file)
+//            lst.forEach {
+//                val xiobj = XiObj.decodeFromPath(it)
+//                val key = xiobj.key()
+//                val zef = ZipEntry(ze.name + key)
+//                zos.putNextEntry(zef)
+//                zos.write(it.readBytes())
+//                zos.closeEntry()
+//                Files.delete(it)
+//            }
+
+
         }
         return FileVisitResult.CONTINUE
     }

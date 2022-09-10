@@ -78,6 +78,8 @@ dependencies {
     implementation("io.ktor:ktor-client-auth-jvm:2.1.1")
     implementation("io.ktor:ktor-client-logging-jvm:2.1.1")
 //    implementation("org.jooq:jooq:$jooq_version")
+//    implementation("org.apache.commons:commons-compress:1.21")
+
 
     testImplementation(kotlin("test"))
     testImplementation("commons-io:commons-io:2.11.0")    //BOMInputStream

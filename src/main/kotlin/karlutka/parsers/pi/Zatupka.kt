@@ -157,7 +157,7 @@ class Zatupka {
         }
 
         // разбирает нестраничный TPT на отдельные временные файлы с xiObj
-        fun list2(tpt: Path): List<Path> {
+        fun list2(tpt: Path, callback: (XiObj, ByteArray) -> Unit) {
             val len = Files.size(tpt)
             val raf = RandomAccessFile(tpt.toFile(), "r")
             val catalogBeginReal = readLong(raf, len - 8)
@@ -173,7 +173,7 @@ class Zatupka {
             val xmlcatalog = ByteArray(catalogLengthXml.toInt())
             raf.seek(catalogBeginXml); raf.read(xmlcatalog)
             val catalogObj = decodeFromString(String(xmlcatalog))
-            val rez = mutableListOf<Path>()
+
             catalogObj.segments.objectList.segment
                 .filter { it.etype() == ESegmentType.modelElement }
                 .forEach { segment ->
@@ -184,9 +184,7 @@ class Zatupka {
                     try {
                         // Читаем и парсим XML чтобы проверить структуру, но возвращаем назад всё равно зип
                         val xo = XiObj.decodeFromXmlReader(PlatformXmlReader(ByteArrayInputStream(slice), "UTF-8"))
-                        val w = KTempFile.getTempFileXiObj()
-                        w.writeBytes(slice)
-                        rez.add(w)
+                        callback.invoke(xo, slice)
                     } catch (e: UnknownXmlFieldException) {
                         // подумать как возвращать ошибки. Пока для диагностики так.
                         Files.createTempFile("xiobj_error_", ".xml").writeBytes(slice)
@@ -194,19 +192,23 @@ class Zatupka {
                     }
                 }
             raf.close()
-            return rez
         }
 
-        // полный фарш
-        fun meatball(srctpz: Path) : List<Path> {
+        // полный фарш - пример распаковки, скорее здесь для демо
+        fun meatball(srctpz: Path, callback: (XiObj, ByteArray) -> Unit) : String? {
             val zip = ZipFile(srctpz.toFile())
             val e = zip.entries().toList().find { it.name.lowercase().endsWith(".tpt") && !it.isDirectory }
-            if (e==null) return listOf()
+            if (e==null) return null
             val tpt = KTempFile.getTempFileTpt()
             unpage(zip.getInputStream(e), tpt.outputStream())
-            val lst = list2(tpt)
+            list2(tpt, callback)
             Files.delete(tpt)
-            return lst
+            return e.name
+/*
+            val w = KTempFile.getTempFileXiObj()
+            w.writeBytes(slice)
+            rez.add(w)
+ */
         }
     }
 }

@@ -84,7 +84,6 @@ class KXiObjTests {
 
     @Test
     fun johnny() {
-        Ztp.reindex(Paths.get("Y:\\Tpz"))
-
+//        Ztp.reindex(Paths.get("Y:\\Tpz"))
     }
 }

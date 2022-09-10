@@ -3,10 +3,13 @@ package karlutka.models
 import karlutka.parsers.pi.Hm
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import java.util.*
 
 class MPI {
     enum class DIRECTION { INBOUND, OUTBOUND }
+    enum class XiEsr {namespdecl, ifmtypedef}
 
+    @Deprecated("рефактор")
     @Serializable
     class State (
         val swcv: MutableList<Swcv>,
@@ -15,6 +18,7 @@ class MPI {
         var dirConfiguration: Hm.DirConfiguration? = null
         )
 
+    @Deprecated("рефактор")
     @Serializable
     class HmiType(
         val typeId: String,
@@ -55,6 +59,7 @@ class MPI {
         val type: Char,         // S, L
         val language: String,
         val ws_name: String,    // SC_I_END, 1.0 of vendor.com
+        val sp: Int = -1        //TODO написать парсер
     ) {
         override fun equals(other: Any?): Boolean {
             require(other is Swcv)
@@ -75,4 +80,25 @@ class MPI {
         override fun toString() = "Namespace($value,$description)"
     }
 
+    /**
+     * В объекте ESR есть тип и идентификатор но нет содержимого
+     */
+    class EsrObject(
+        val swcvid: UUID, val swcsp: Int,
+        val typeID: String, // enum
+        val oid: UUID,
+        val key: String, //elem0|elem1|...
+    )
+
+    /**
+     * В версии есть VID, даты изменения, ссылки и контент
+     */
+    class EsrObjectVersion(
+        val obj: EsrObject,
+        val vid: UUID,
+        val modifBy: String,
+        val modifAtLong: Int,
+        val links: List<EsrObject>,
+        val content: ByteArray
+    )
 }
