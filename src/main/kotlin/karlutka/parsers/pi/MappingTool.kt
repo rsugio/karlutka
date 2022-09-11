@@ -341,9 +341,6 @@ class MappingTool(
         @XmlElement(true) val le: Boolean?,
     )
 
-
-
-
     @Serializable
     @XmlSerialName("libref", "", "")
     class LibRef(

@@ -58,7 +58,7 @@ object Ztp : FileVisitor<Path> {
             zos.closeEntry()
             Zatupka.meatball(file) {xiobj, bytearray ->
                 val key = xiobj.key()
-                var zef = ZipEntry(ze.name + key)
+                val zef = ZipEntry(ze.name + key)
                 zos.putNextEntry(zef)
                 zos.write(bytearray)
                 zos.closeEntry()
@@ -66,17 +66,19 @@ object Ztp : FileVisitor<Path> {
                 // пишем контент
                 val typeID = xiobj.idInfo.key.typeID
                 if (typeID == "XI_TRAFO") {
-//                    zef = ZipEntry(ze.name + key + ".xi_trafo")
-//                    println(zef.name)
                     val tr = XiTrafo.decodeFromString(xiobj.content.contentString)
                     if (tr.MetaData.blob != null) {
+                        val ba = tr.MetaData.blob.content()!!
+                        // запись для массового тестирования
                         try {
                             val mt = tr.toMappingTool()
+                            KTempFile.getTempFileXml("mappingtool_").writeBytes(tr.MetaData.blob.content()!!)
                         } catch (e: Exception) {
-                            val ba = tr.MetaData.blob!!.content()!!
-                            KTempFile.getTempFileXml("mappingtool_").writeBytes(ba)
+                            KTempFile.getTempFileXml("error_mappingtool_").writeBytes(ba)
                             throw e
                         }
+                    } else {
+                        System.err.println(xiobj.key())
                     }
                 }
             }

@@ -88,7 +88,7 @@ class KXiObjTests {
 
     @Test
     fun trafos() {
-        val dir = Paths.get(javaClass.getResource("/pi_xiObj/xi_trafo")?.toURI()!!)
+        val dir = Paths.get(javaClass.getResource("/pi_xiObj/xi_trafo")!!.toURI())
         Files.newDirectoryStream(dir).forEach {
             if (Files.isRegularFile(it)) {
                 println(it.name)
