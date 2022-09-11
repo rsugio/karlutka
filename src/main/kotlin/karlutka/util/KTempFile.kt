@@ -20,6 +20,7 @@ object KTempFile {
 
     }
 
+    fun getTempFileXml(prefix: String) = Files.createTempFile(tempFolder, prefix, ".xml")
     fun getTempFileXiObj() = Files.createTempFile(tempFolder, "xiobj_", ".xml")
     fun getTempFileTpt() = Files.createTempFile(tempFolder, "tpt_", ".bin")
     fun getTempFileZip() = Files.createTempFile(tempFolder, "zip_", ".zip")

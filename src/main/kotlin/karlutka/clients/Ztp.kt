@@ -2,6 +2,7 @@ package karlutka.clients
 
 import karlutka.parsers.pi.XiTrafo
 import karlutka.parsers.pi.Zatupka
+import karlutka.util.KTempFile
 import java.io.IOException
 import java.nio.file.FileVisitResult
 import java.nio.file.FileVisitor
@@ -13,6 +14,8 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.io.path.name
 import kotlin.io.path.outputStream
+import kotlin.io.path.readText
+import kotlin.io.path.writeBytes
 
 /**
  * Джонни TPZ ходок
@@ -59,12 +62,22 @@ object Ztp : FileVisitor<Path> {
                 zos.putNextEntry(zef)
                 zos.write(bytearray)
                 zos.closeEntry()
+                zos.flush()
                 // пишем контент
                 val typeID = xiobj.idInfo.key.typeID
                 if (typeID == "XI_TRAFO") {
-                    zef = ZipEntry(ze.name + key + ".xi_trafo")
-                    println(zef.name)
-                    XiTrafo.decodeFromString(xiobj.content.contentString)
+//                    zef = ZipEntry(ze.name + key + ".xi_trafo")
+//                    println(zef.name)
+                    val tr = XiTrafo.decodeFromString(xiobj.content.contentString)
+                    if (tr.MetaData.blob != null) {
+                        try {
+                            val mt = tr.toMappingTool()
+                        } catch (e: Exception) {
+                            val ba = tr.MetaData.blob!!.content()!!
+                            KTempFile.getTempFileXml("mappingtool_").writeBytes(ba)
+                            throw e
+                        }
+                    }
                 }
             }
         }

@@ -3,8 +3,10 @@ import karlutka.clients.Ztp
 import karlutka.models.MPI
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.Hm.Companion.parseInstance
+import karlutka.parsers.pi.MappingTool
 import karlutka.parsers.pi.XiObj
 import karlutka.parsers.pi.XiTrafo
+import karlutka.util.KTempFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -90,9 +92,28 @@ class KXiObjTests {
         Files.newDirectoryStream(dir).forEach {
             if (Files.isRegularFile(it)) {
                 println(it.name)
-                val tr = XiTrafo.decodeFromString(it.readText())
-                if (tr.MetaData.blob != null)
-                    tr.MetaData.blob!!.content()
+                val xo = XiObj.decodeFromPath(it)
+                val tr = XiTrafo.decodeFromString(xo.content.contentString)
+                if (tr.MetaData.blob != null) {
+                    try {
+                        val mt = tr.toMappingTool()
+                    } catch (e: Exception) {
+                        val ba = tr.MetaData.blob!!.content()!!
+                        KTempFile.getTempFileXml("mappingtool_").writeBytes(ba)
+                        System.err.println(e)
+                    }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun mappingTool() {
+        val dir = Paths.get(javaClass.getResource("/pi_xiObj/mappingtool")?.toURI()!!)
+        Files.newDirectoryStream(dir).forEach {
+            if (Files.isRegularFile(it)) {
+                println(it.name)
+                val tr = MappingTool.decodeFromStream(it.inputStream())
             }
         }
     }

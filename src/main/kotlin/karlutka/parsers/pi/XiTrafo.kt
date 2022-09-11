@@ -4,6 +4,7 @@ import io.ktor.util.*
 import karlutka.util.KTempFile
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
+import nl.adaptivity.xmlutil.PlatformXmlReader
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
@@ -104,10 +105,18 @@ class XiTrafo(
                 require(value.name=="value")
                 val zis2 = ZipInputStream(zis)
                 val en = zis2.nextEntry
-                val xiObj = KTempFile.getTempFileXiObj()
-                xiObj.writeBytes(zis2.readBytes())
+                val ba2 = zis2.readBytes()
+                require(ba2.isNotEmpty())
+                requireNotNull(en)
+                if (false) {
+                    val xiObj = KTempFile.getTempFileXiObj()
+                    xiObj.writeBytes(ba2)
+                }
+                require(zis2.nextEntry==null)
+                require(zis.nextEntry==null)
+                return ba2
             }
-            return null
+            error("ошибка разбора zip")
         }
     }
 
@@ -163,6 +172,13 @@ class XiTrafo(
         val Maxoccurs: String
     )
 
+    fun toMappingTool(): MappingTool {
+        require(MetaData.blob!=null)
+        val ba = MetaData.blob.content()
+        requireNotNull(ba)
+        //KTempFile.getTempFileXiObj().writeBytes(ba)
+        return MappingTool.decodeFromStream(ByteArrayInputStream(ba))
+    }
 
     companion object {
         private val xitrafoxml = XML {
