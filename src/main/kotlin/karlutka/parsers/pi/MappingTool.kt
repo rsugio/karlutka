@@ -149,7 +149,9 @@ class MappingTool(
             class Functionmodel(
                 val classname: String?,
                 @XmlElement(true)
-                val signature: Signature,
+                val argcount: Int?,
+                @XmlElement(true)
+                val signature: Signature?,
                 @XmlElement(true)
                 @XmlSerialName("name", "", "")
                 val name: String,
@@ -351,7 +353,8 @@ class MappingTool(
     class Mapping(
         val classname: String,  // Mapping
         val destPath: String,   // /ns0:HR_GB_EFI_GetMessageBoxResponse
-        val model: Model
+        val model: Model,
+        val properties: Project.Properties?
     )
     @Serializable
     @XmlSerialName("model", "", "")
@@ -362,6 +365,7 @@ class MappingTool(
         val namespace: String?,
         val x: Int?,
         val y: Int?,
+        val context: String?,
         @XmlElement(true)
         val link: Link?,
         @XmlElement(true)
