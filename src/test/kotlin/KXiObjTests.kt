@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import nl.adaptivity.xmlutil.PlatformXmlReader
+import nl.adaptivity.xmlutil.serialization.writeAsXML
 import java.nio.file.*
 import kotlin.io.path.*
 import kotlin.test.Test
@@ -30,7 +31,8 @@ class KXiObjTests {
 
     @Test
     fun xi_trafo() {
-        XiObj.decodeFromString(s("/pi_xiObj/rep03mmap.xml")).content
+        val s = XiObj.decodeFromString(s("/pi_xiObj/XI_TRAFO_c3f3562c66603a839cad1befc0faaa6a_6bce2b0c432911e0c8c400000fff767a"))
+        XiTrafo.decodeFromString(s.content.contentString)
     }
 
     @Test
@@ -79,15 +81,19 @@ class KXiObjTests {
 
     @Test
     fun johnny() {
-        Ztp.index(Paths.get("Y:\\Tpz"))
+        Ztp.index(Paths.get("Y:\\Tpz.old"))
     }
 
     @Test
     fun trafos() {
         val dir = Paths.get(javaClass.getResource("/pi_xiObj/xi_trafo")?.toURI()!!)
         Files.newDirectoryStream(dir).forEach {
-            println(it.name)
-            val tr = XiTrafo.decodeFromString(it.readText())
+            if (Files.isRegularFile(it)) {
+                println(it.name)
+                val tr = XiTrafo.decodeFromString(it.readText())
+                if (tr.MetaData.blob != null)
+                    tr.MetaData.blob!!.content()
+            }
         }
     }
 }

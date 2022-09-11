@@ -63,10 +63,8 @@ object Ztp : FileVisitor<Path> {
                 val typeID = xiobj.idInfo.key.typeID
                 if (typeID == "XI_TRAFO") {
                     zef = ZipEntry(ze.name + key + ".xi_trafo")
-                    zos.putNextEntry(zef)
-                    zos.write(xiobj.content.contentString.toByteArray())
-                    zos.closeEntry()
-//                    XiTrafo.decodeFromString(xiobj.content.contentString)
+                    println(zef.name)
+                    XiTrafo.decodeFromString(xiobj.content.contentString)
                 }
             }
         }
@@ -74,7 +72,7 @@ object Ztp : FileVisitor<Path> {
     }
 
     override fun visitFileFailed(file: Path?, exc: IOException?): FileVisitResult {
-        error("failed")
+        return FileVisitResult.CONTINUE
     }
 
     override fun postVisitDirectory(dir: Path?, exc: IOException?): FileVisitResult {

@@ -22,6 +22,7 @@ object KTempFile {
 
     fun getTempFileXiObj() = Files.createTempFile(tempFolder, "xiobj_", ".xml")
     fun getTempFileTpt() = Files.createTempFile(tempFolder, "tpt_", ".bin")
+    fun getTempFileZip() = Files.createTempFile(tempFolder, "zip_", ".zip")
 
     fun task(): Path {
         val path: Path = Files.createTempFile(tempFolder, "task", ".xml")
