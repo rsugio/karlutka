@@ -331,7 +331,17 @@ class MappingTool(
         @XmlElement(true) val name: String,
         @XmlElement(true) val type: String,
         @XmlElement(true) val default: String?,
+        @XmlElement(true) val calend_props: CalendProps?
     )
+    @Serializable
+    @XmlSerialName("calend_props", "", "")
+    class CalendProps(
+        @XmlElement(true) val fd: String?,
+        @XmlElement(true) val md: String?,
+        @XmlElement(true) val le: Boolean?,
+    )
+
+
 
 
     @Serializable
