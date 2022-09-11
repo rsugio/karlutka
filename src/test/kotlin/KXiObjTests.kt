@@ -4,17 +4,12 @@ import karlutka.models.MPI
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.Hm.Companion.parseInstance
 import karlutka.parsers.pi.XiObj
-import karlutka.parsers.pi.Zatupka
+import karlutka.parsers.pi.XiTrafo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import nl.adaptivity.xmlutil.PlatformXmlReader
-import java.io.IOException
 import java.nio.file.*
-import java.nio.file.attribute.BasicFileAttributes
-import java.util.zip.ZipFile
-import java.util.zip.ZipInputStream
-import java.util.zip.ZipOutputStream
 import kotlin.io.path.*
 import kotlin.test.Test
 
@@ -84,6 +79,15 @@ class KXiObjTests {
 
     @Test
     fun johnny() {
-//        Ztp.reindex(Paths.get("Y:\\Tpz"))
+        Ztp.index(Paths.get("Y:\\Tpz"))
+    }
+
+    @Test
+    fun trafos() {
+        val dir = Paths.get(javaClass.getResource("/pi_xiObj/xi_trafo")?.toURI()!!)
+        Files.newDirectoryStream(dir).forEach {
+            println(it.name)
+            val tr = XiTrafo.decodeFromString(it.readText())
+        }
     }
 }

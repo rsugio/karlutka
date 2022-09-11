@@ -16,8 +16,6 @@ import java.nio.channels.FileChannel
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.zip.ZipFile
-import java.util.zip.ZipOutputStream
-import kotlin.io.path.createFile
 import kotlin.io.path.outputStream
 import kotlin.io.path.writeBytes
 
@@ -204,11 +202,6 @@ class Zatupka {
             list2(tpt, callback)
             Files.delete(tpt)
             return e.name
-/*
-            val w = KTempFile.getTempFileXiObj()
-            w.writeBytes(slice)
-            rez.add(w)
- */
         }
     }
 }

@@ -2,6 +2,7 @@ package karlutka.parsers.pi
 
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
 import nl.adaptivity.xmlutil.XmlDeclMode
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
@@ -16,22 +17,57 @@ class XiTrafo(
     val JdkVersion: String? = null,
     @XmlSerialName("MetaData", "urn:sap-com:xi:mapping:xitrafo", "tr")
     @XmlElement(true)
-    val MetaData: MappingTool,
+    val MetaData: _MetaData,
     @XmlSerialName("ByteCodeJar", "urn:sap-com:xi:mapping:xitrafo", "tr")
     @XmlElement(true)
-    val ByteCodeJar: String,
+    val ByteCodeJar: _ByteCodeJar,
+    @XmlSerialName("SourceCode", "urn:sap-com:xi:mapping:xitrafo", "tr")
+    @XmlElement(true)
+    val SourceCode: _SourceCode,
     @XmlSerialName("SourceStructure", "urn:sap-com:xi:mapping:xitrafo", "tr")
     @XmlElement(true)
-    val SourceStructure: String,
+    val SourceStructure: String? = null,
     @XmlSerialName("TargetStructure", "urn:sap-com:xi:mapping:xitrafo", "tr")
     @XmlElement(true)
-    val TargetStructure: String,
+    val TargetStructure: String? = null,
     @XmlSerialName("Multiplicity", "urn:sap-com:xi:mapping:xitrafo", "tr")
     @XmlElement(true)
     val Multiplicity: String,
+    @XmlSerialName("SourceParameters", "urn:sap-com:xi:mapping:xitrafo", "tr")
+    @XmlElement(true)
     val SourceParameters: _SourceParameters,
-    val TargetParameters: _TargetParameters
+    @XmlSerialName("TargetParameters", "urn:sap-com:xi:mapping:xitrafo", "tr")
+    @XmlElement(true)
+    val TargetParameters: _TargetParameters,
+    @XmlSerialName("AdditionalMetaData", "urn:sap-com:xi:mapping:xitrafo", "tr")
+    @XmlElement(true)
+    val AdditionalMetaData: _MetaData
 ) {
+    @Serializable
+    class _MetaData(
+        @XmlElement(true)
+        val blob: Blob
+    )
+    @Serializable
+    class _ByteCodeJar(
+        @XmlElement(true)
+        val blob: Blob
+    )
+
+    @Serializable
+    class _SourceCode(
+        @XmlElement(true)
+        val blob: Blob
+    )
+
+    @Serializable
+    @XmlSerialName("blob", "urn:sap-com:xi:mapping:xitrafo", "tr")
+    class Blob(
+        val type: String,
+        val zipped: Boolean,
+        @XmlValue(true) val content: String
+    )
+
     @Serializable
     @XmlSerialName("mappingtool", "", "")
     class MappingTool(
@@ -364,5 +400,7 @@ class XiTrafo(
             xmlDeclMode = XmlDeclMode.None
             autoPolymorphic = true
         }
+
+        fun decodeFromString(sxml: String) = xitrafoxml.decodeFromString<XiTrafo>(sxml)
     }
 }
