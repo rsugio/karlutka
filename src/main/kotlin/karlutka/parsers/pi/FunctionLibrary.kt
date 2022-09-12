@@ -5,11 +5,14 @@ import nl.adaptivity.xmlutil.PlatformXmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import java.io.ByteArrayInputStream
 import java.io.InputStream
 
 @Serializable
 @XmlSerialName("FunctionLibrary", "urn:sap-com:xi:flib", "fl")
 class FunctionLibrary(
+    @XmlElement(true)
+    val JdkVersion: String?,
     @XmlElement(true)
     val MetaData: _MetaData,
     @XmlElement(true)
@@ -31,8 +34,11 @@ class FunctionLibrary(
         val blob: XiTrafo.Blob
     )
 
-    fun a(): MappingTool.Project.FunctionStorage? {
-        return null
+    fun toFunctionStorage(): MappingTool.Project.FunctionStorage {
+        val ba = MetaData.blob.content()
+        requireNotNull(ba)
+        val xr = PlatformXmlReader(ByteArrayInputStream(ba), "UTF-8")
+        return XML.decodeFromReader(xr)
     }
 
     companion object {

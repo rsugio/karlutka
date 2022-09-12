@@ -35,7 +35,7 @@ class MappingTool(
         val version: String?,
         val libstorage: Libstorage?,
         @XmlElement(true)
-        @XmlSerialName("functionstorage", "", "")
+//        @XmlSerialName("functionstorage", "", "")
         val functionstorage: FunctionStorage?,
         @XmlSerialName("transformation", "", "")
         val transformation: Transformation,
@@ -96,6 +96,7 @@ class MappingTool(
         }
 
         @Serializable
+        @XmlSerialName("functionstorage", "", "")   //возможно придётся убрать имя отсюда
         class FunctionStorage(
             val version: String?,
             @XmlElement(true)
@@ -106,7 +107,8 @@ class MappingTool(
             @XmlSerialName("package", "", "")
             val package_: String?,
             @XmlElement(true)
-            val jdkVersion: String? = null,
+            @XmlSerialName("jdkVersion", "", "")
+            val jdkVersion: String?,
             @XmlElement(true)
             val imports: String?,
             @XmlElement(true)
@@ -116,10 +118,17 @@ class MappingTool(
             @XmlElement(true)
             val cleanup: Cleanup?,
             @XmlElement(true)
-            val functionmodel: Functionmodel?,
+            val functionmodel: List<Functionmodel>,
             @XmlElement(true)
-            val usedjars: String?
+            val usedjars: Usedjars?
         ) {
+            @Serializable
+            @XmlSerialName("usedjars", "", "")
+            class Usedjars (
+                @XmlElement(true)
+                @XmlSerialName("ref", "", "")
+                val ref: List<LibRef.Ref>
+            )
 
             @Serializable
             @XmlSerialName("globals", "", "")

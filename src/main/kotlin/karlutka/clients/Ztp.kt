@@ -1,5 +1,6 @@
 package karlutka.clients
 
+import karlutka.parsers.pi.FunctionLibrary
 import karlutka.parsers.pi.XiTrafo
 import karlutka.parsers.pi.Zatupka
 import karlutka.util.KTempFile
@@ -72,13 +73,29 @@ object Ztp : FileVisitor<Path> {
                         // запись для массового тестирования
                         try {
                             val mt = tr.toMappingTool()
-                            KTempFile.getTempFileXml("mappingtool_").writeBytes(tr.MetaData.blob.content()!!)
+//                            KTempFile.getTempFileXml("mappingtool_").writeBytes(ba)
                         } catch (e: Exception) {
                             KTempFile.getTempFileXml("error_mappingtool_").writeBytes(ba)
                             throw e
                         }
                     } else {
                         System.err.println(xiobj.key())
+                    }
+                } else if (typeID == "FUNC_LIB") {
+                    val s = xiobj.content.contentString
+                    try {
+                        val fl = FunctionLibrary.decodeFromString(s)
+                        val ba = fl.MetaData.blob.content()!!
+                        try {
+                            val fs = fl.toFunctionStorage()
+                            KTempFile.getTempFileXml("functionstorage_").writeBytes(ba)
+                        } catch (e: Exception) {
+                            KTempFile.getTempFileXml("error_functionstorage_").writeBytes(ba)
+                            throw e
+                        }
+                    } catch (e: Exception) {
+                        System.err.println(s)
+                        throw e
                     }
                 }
             }

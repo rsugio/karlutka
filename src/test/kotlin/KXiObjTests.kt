@@ -112,9 +112,13 @@ class KXiObjTests {
                 println(it.name)
                 val xo = XiObj.decodeFromPath(it)
                 val fl = FunctionLibrary.decodeFromString(xo.content.contentString)
-                if (fl.MetaData.blob != null) {
+                try {
+                    fl.toFunctionStorage()
+                } catch (e:Exception) {
                     KTempFile.getTempFileXml("functionstorage_").writeBytes(fl.MetaData.blob.content()!!)
+                    throw e
                 }
+
             }
         }
     }
