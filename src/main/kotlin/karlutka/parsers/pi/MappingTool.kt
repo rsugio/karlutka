@@ -107,7 +107,6 @@ class MappingTool(
             @XmlSerialName("package", "", "")
             val package_: String?,
             @XmlElement(true)
-            @XmlSerialName("jdkVersion", "", "")
             val jdkVersion: String?,
             @XmlElement(true)
             val imports: String?,

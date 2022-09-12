@@ -1,5 +1,6 @@
 import KT.Companion.s
 import karlutka.clients.Ztp
+import karlutka.clients.ZtpDB
 import karlutka.models.MPI
 import karlutka.parsers.pi.*
 import karlutka.parsers.pi.Hm.Companion.parseInstance
@@ -57,30 +58,14 @@ class KXiObjTests {
         }
     }
 
-//    @Test
-//    fun tpt() {
-//        val p = javaClass.getResourceAsStream("/pi_Tpz/XI7_1_SAP_ABA_7.50-sp22.tpt")!!
-//        val tmp = Files.createTempFile("tpt_", ".bin")
-//        println(tmp)
-//        Zatupka.unpage(p, tmp.outputStream())
-//        Zatupka.list(tmp)
-//    }
-
-//    fun tpz(p: Path) {
-//        val zf = ZipFile(p.toFile())
-//        val e = zf.entries().toList().find { it.name.lowercase().endsWith(".tpt") && !it.isDirectory }
-//        if (e==null) return
-//        val tmp = Files.createTempFile("tpt_", ".bin")
-//        val zis = zf.getInputStream(e)
-//        Zatupka.unpage(zis, tmp.outputStream())
-//        zis.close()
-//        val objs = Zatupka.list2(tmp)
-//        Files.delete(tmp)
-//    }
-
     @Test
     fun johnny() {
         Ztp.index(Paths.get("Y:\\Tpz.old"))
+    }
+
+    @Test
+    fun db() {
+        ZtpDB.index(Paths.get("Y:\\Tpz"))
     }
 
     @Test

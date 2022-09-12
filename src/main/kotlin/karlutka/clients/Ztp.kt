@@ -15,7 +15,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.io.path.name
 import kotlin.io.path.outputStream
-import kotlin.io.path.readText
 import kotlin.io.path.writeBytes
 
 /**
@@ -88,7 +87,7 @@ object Ztp : FileVisitor<Path> {
                         val ba = fl.MetaData.blob.content()!!
                         try {
                             val fs = fl.toFunctionStorage()
-                            KTempFile.getTempFileXml("functionstorage_").writeBytes(ba)
+                            //KTempFile.getTempFileXml("functionstorage_").writeBytes(ba)
                         } catch (e: Exception) {
                             KTempFile.getTempFileXml("error_functionstorage_").writeBytes(ba)
                             throw e
