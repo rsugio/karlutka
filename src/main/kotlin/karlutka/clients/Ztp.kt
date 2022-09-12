@@ -71,7 +71,7 @@ object Ztp : FileVisitor<Path> {
                         val ba = tr.MetaData.blob.content()!!
                         // запись для массового тестирования
                         try {
-                            val mt = tr.toMappingTool()
+                            tr.toMappingTool()
 //                            KTempFile.getTempFileXml("mappingtool_").writeBytes(ba)
                         } catch (e: Exception) {
                             KTempFile.getTempFileXml("error_mappingtool_").writeBytes(ba)
@@ -86,7 +86,7 @@ object Ztp : FileVisitor<Path> {
                         val fl = FunctionLibrary.decodeFromString(s)
                         val ba = fl.MetaData.blob.content()!!
                         try {
-                            val fs = fl.toFunctionStorage()
+                            fl.toFunctionStorage()
                             //KTempFile.getTempFileXml("functionstorage_").writeBytes(ba)
                         } catch (e: Exception) {
                             KTempFile.getTempFileXml("error_functionstorage_").writeBytes(ba)

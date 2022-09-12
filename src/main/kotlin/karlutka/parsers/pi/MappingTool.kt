@@ -253,6 +253,7 @@ class MappingTool(
             val fns: String? = null,
             val object_uid: String?,
             val context: String?,
+            @Serializable
             val asXml: String?,
             @XmlElement(true)
             val viewData: ViewData = ViewData(-1, -1),

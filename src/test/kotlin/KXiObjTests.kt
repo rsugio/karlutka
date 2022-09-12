@@ -9,7 +9,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import nl.adaptivity.xmlutil.PlatformXmlReader
-import nl.adaptivity.xmlutil.serialization.writeAsXML
 import java.nio.file.*
 import kotlin.io.path.*
 import kotlin.test.Test
@@ -78,7 +77,7 @@ class KXiObjTests {
                 val tr = XiTrafo.decodeFromString(xo.content.contentString)
                 if (tr.MetaData.blob != null) {
                     try {
-                        val mt = tr.toMappingTool()
+                        tr.toMappingTool()
                     } catch (e: Exception) {
                         val ba = tr.MetaData.blob!!.content()!!
                         KTempFile.getTempFileXml("mappingtool_").writeBytes(ba)
@@ -114,7 +113,7 @@ class KXiObjTests {
         Files.newDirectoryStream(dir).forEach {
             if (Files.isRegularFile(it)) {
                 println(it.name)
-                val tr = MappingTool.decodeFromStream(it.inputStream())
+                MappingTool.decodeFromStream(it.inputStream())
             }
         }
     }
