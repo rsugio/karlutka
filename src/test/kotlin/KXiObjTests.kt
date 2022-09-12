@@ -1,11 +1,8 @@
 import KT.Companion.s
 import karlutka.clients.Ztp
 import karlutka.models.MPI
-import karlutka.parsers.pi.Hm
+import karlutka.parsers.pi.*
 import karlutka.parsers.pi.Hm.Companion.parseInstance
-import karlutka.parsers.pi.MappingTool
-import karlutka.parsers.pi.XiObj
-import karlutka.parsers.pi.XiTrafo
 import karlutka.util.KTempFile
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -102,6 +99,21 @@ class KXiObjTests {
                         KTempFile.getTempFileXml("mappingtool_").writeBytes(ba)
                         System.err.println(e)
                     }
+                }
+            }
+        }
+    }
+
+    @Test
+    fun func_lib() {
+        val dir = Paths.get(javaClass.getResource("/pi_xiObj/func_lib")!!.toURI())
+        Files.newDirectoryStream(dir).forEach {
+            if (Files.isRegularFile(it)) {
+                println(it.name)
+                val xo = XiObj.decodeFromPath(it)
+                val fl = FunctionLibrary.decodeFromString(xo.content.contentString)
+                if (fl.MetaData.blob != null) {
+                    KTempFile.getTempFileXml("functionstorage_").writeBytes(fl.MetaData.blob.content()!!)
                 }
             }
         }
