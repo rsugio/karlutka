@@ -3,7 +3,6 @@ package karlutka.models
 import karlutka.parsers.pi.Hm
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-import java.util.*
 
 class MPI {
     enum class DIRECTION { INBOUND, OUTBOUND }
@@ -14,18 +13,22 @@ class MPI {
         FUNC_LIB,
         MAPPING,
         MAP_TEMPLATE,
-        MAP_FILE_NAME,      //встречалось пока лишь в ссылках
-        MAP_ARCHIVE_PRG,    //встречалось пока лишь в ссылках
-        MAP_IDENTY_PROG,    //встречалось пока лишь в ссылках
+        MAP_FILE_NAME,      // встречалось пока лишь в ссылках
+        MAP_ARCHIVE_PRG,    // встречалось пока лишь в ссылках
+        MAP_IDENTY_PROG,    // встречалось пока лишь в ссылках
+        MAP_IMP_XSD_XML,    // встречалось пока только в ссылках
         RepBProcess,
         TRAFO_JAR,
         XI_TRAFO,
-        ariscommonfile,
-        arisfilter,
-        arisfssheet,
-        arisreport,
-        aristemplate,
+        ariscommonfile,     // шлак
+        arisfilter,         // шлак
+        arisfssheet,        // шлак
+        arisreport,         // шлак
+        aristemplate,       // шлак
         idoc,
+        rfcmsg,             // встречалось пока только в ссылках
+        ifmextcmplx,        // встречалось пока только в ссылках
+        icmplx,             // встречалось пока только в ссылках
         ifmcontobj,
         ifmextdef,
         ifmfaultm,
@@ -33,23 +36,19 @@ class MPI {
         ifmmessif,
         ifmextmes,          // встречалось пока лишь в ссылках
         ifmoper,
-        ifmtypedef,
+        ifmtypedef,         // дата тип
         ifmtypeenh,
         ifmuitexts,
         imsg,
         iseg,
         ityp,
         namespdecl,
-        process,
-        processstep,
+        process,            // не парсить
+        processstep,        // не парсить
         rfc,
         swc,
         type,
-        BO_Query,           //пока только в ссылках. шлак - сделать потом отлуп
-        rfcmsg,             //пока только в ссылках
-        ifmextcmplx,        //пока только в ссылках
-        icmplx,             //пока только в ссылках
-        MAP_IMP_XSD_XML,    //пока только в ссылках
+        BO_Query,           // встречалось пока только в ссылках
     }
 
     @Deprecated("рефактор")
