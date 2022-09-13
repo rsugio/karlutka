@@ -36,9 +36,30 @@ class XiObj(
     @XmlSerialName("inner", "urn:sap-com:xi", "xi")
     val inner: Inner? = null
 ) {
-    fun key():String {
+    fun key(): String {
         return "${idInfo.key.typeID}_${idInfo.key.oid}_${idInfo.VID}"
     }
+
+    fun text(): String? {
+        if (generic.textInfo.textObj.id != idInfo.VID) return null  //редко но бывают такие непонятные
+
+        if (generic.textInfo.textObj.texts != null && generic.textInfo.textObj.type == 0 && generic.textInfo.textObj.texts.list.isNotEmpty()) {
+            return generic.textInfo.textObj.texts.list.find { it.label == "" }?.value
+        }
+        return null
+    }
+
+    fun esrobject(): MPI.EsrObj {
+        require(idInfo.key.oid!!.length==32)
+        require(idInfo.vc!!.swcGuid!!.length==32)
+        require(idInfo.vc.sp!! == -1 || idInfo.vc.sp > 0)
+        return MPI.EsrObj(
+            MPI.ETypeID.valueOf(idInfo.key.typeID), idInfo.key.oid,
+            idInfo.vc.swcGuid!!, idInfo.vc.sp,
+            idInfo.key.elem.joinToString("|")
+        )
+    }
+
 
     @Serializable
     class Inner(
@@ -60,35 +81,38 @@ class XiObj(
         val key: PCommon.Key,
         @XmlElement(true)
         @XmlSerialName("version", "urn:sap-com:xi", "")
-        val version: String? = null
+        val version: String?
     )
 
     @Serializable
     @XmlSerialName("generic", "urn:sap-com:xi", "xi")
     class Generic(
         @Serializable
-        val admInf: AdmInf? = null, // пусто для вложенных (inner)
+        val admInf: AdmInf?, // пусто для вложенных (inner)
         @Serializable
         val lnks: Lnks?,
         val textInfo: TextInfo,
     ) {
         @Serializable
         @XmlSerialName("lnks", "urn:sap-com:xi", "xi")
-        class Lnks(val x: List<LnkRole> = listOf())
+        class Lnks(val x: List<LnkRole>)
 
         @Serializable
         @XmlSerialName("textInfo", "urn:sap-com:xi", "xi")
-        class TextInfo(val loadedL: String = "EN", val textObj: TextObj)
+        class TextInfo(
+            val loadedL: String?,
+            val textObj: TextObj
+        )
 
         @Serializable
         @XmlSerialName("textObj", "urn:sap-com:xi", "xi")
         class TextObj(
-            val id: String = "",
+            val id: String,
             @Serializable
-            val masterL: String = "",
+            val masterL: String,
             val type: Int = 0,
             @XmlElement(true)
-            val texts: Texts? = null
+            val texts: Texts?
         )
 
         @Serializable
@@ -150,7 +174,30 @@ class XiObj(
             @XmlElement(true)
             @XmlSerialName("vc", "urn:sap-com:xi", "xi")
             val vc: PCommon.VC? = null
-        )
+        ) {
+            fun esrobject(parent: MPI.EsrObj): MPI.EsrObj {
+                require(key.oid!!.length==32) {key.oid}
+                val swcGuid: String
+                val swcSp: Int
+                if (vc!=null) {
+                    // ссылка на чужой SWCV
+                    requireNotNull(vc.swcGuid)
+                    require(vc.swcGuid.length == 32) { vc.swcGuid }
+                    require(vc.sp!! == -1 || vc.sp > 0)
+                    swcGuid = vc.swcGuid
+                    swcSp = vc.sp
+                } else {
+                    // ссылка на объект внутри того же SWCV
+                    swcGuid = parent.swcvid
+                    swcSp = parent.swcvsp
+                }
+                return MPI.EsrObj(
+                    MPI.ETypeID.valueOf(key.typeID), key.oid,
+                    swcGuid, swcSp,
+                    key.elem.joinToString("|")
+                )
+            }
+        }
     }
 
 
@@ -174,6 +221,7 @@ class XiObj(
         fun decodeFromString(sxml: String): XiObj = xioserializer.decodeFromString(sxml)
         fun decodeFromXmlReader(xmlReader: XmlReader): XiObj = xioserializer.decodeFromReader(xmlReader)
 
-        fun decodeFromPath(path: Path) : XiObj = xioserializer.decodeFromReader(PlatformXmlReader(path.inputStream(), "UTF-8"))
+        fun decodeFromPath(path: Path): XiObj =
+            xioserializer.decodeFromReader(PlatformXmlReader(path.inputStream(), "UTF-8"))
     }
 }

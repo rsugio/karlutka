@@ -59,7 +59,7 @@ class KXiObjTests {
 
     @Test
     fun johnny() {
-        Ztp.index(Paths.get("Y:\\Tpz.old"))
+        Ztp.index(Paths.get("Y:\\Tpz"))
     }
 
     @Test

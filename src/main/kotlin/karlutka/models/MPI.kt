@@ -7,7 +7,50 @@ import java.util.*
 
 class MPI {
     enum class DIRECTION { INBOUND, OUTBOUND }
-    enum class XiEsr {namespdecl, ifmtypedef}
+    enum class ETypeID {AdapterMetaData,
+        ChannelTemplate,
+        DOCU,
+        FOLDER,
+        FUNC_LIB,
+        MAPPING,
+        MAP_TEMPLATE,
+        MAP_FILE_NAME,      //встречалось пока лишь в ссылках
+        MAP_ARCHIVE_PRG,    //встречалось пока лишь в ссылках
+        MAP_IDENTY_PROG,    //встречалось пока лишь в ссылках
+        RepBProcess,
+        TRAFO_JAR,
+        XI_TRAFO,
+        ariscommonfile,
+        arisfilter,
+        arisfssheet,
+        arisreport,
+        aristemplate,
+        idoc,
+        ifmcontobj,
+        ifmextdef,
+        ifmfaultm,
+        ifmmessage,
+        ifmmessif,
+        ifmextmes,          // встречалось пока лишь в ссылках
+        ifmoper,
+        ifmtypedef,
+        ifmtypeenh,
+        ifmuitexts,
+        imsg,
+        iseg,
+        ityp,
+        namespdecl,
+        process,
+        processstep,
+        rfc,
+        swc,
+        type,
+        BO_Query,           //пока только в ссылках. шлак - сделать потом отлуп
+        rfcmsg,             //пока только в ссылках
+        ifmextcmplx,        //пока только в ссылках
+        icmplx,             //пока только в ссылках
+        MAP_IMP_XSD_XML,    //пока только в ссылках
+    }
 
     @Deprecated("рефактор")
     @Serializable
@@ -83,22 +126,34 @@ class MPI {
     /**
      * В объекте ESR есть тип и идентификатор но нет содержимого
      */
-    class EsrObject(
-        val swcvid: UUID, val swcsp: Int,
-        val typeID: String, // enum
-        val oid: UUID,
-        val key: String, //elem0|elem1|...
-    )
+    class EsrObj(
+        val typeID: ETypeID,
+        val oid: String,
+        val swcvid: String,
+        val swcvsp: Int,
+        val key: String,    // elem0|elem1|...
+        var num: Int = 0    // номер в тентуре
+    ) {
+        override fun equals(x: Any?): Boolean {
+            require(x is EsrObj)
+            // нет swcvsp и num!
+            return x.typeID==typeID && x.oid==oid && x.swcvid==swcvid && x.key == key
+        }
 
-    /**
-     * В версии есть VID, даты изменения, ссылки и контент
-     */
-    class EsrObjectVersion(
-        val obj: EsrObject,
-        val vid: UUID,
-        val modifBy: String,
-        val modifAtLong: Int,
-        val links: List<EsrObject>,
-        val content: ByteArray
-    )
+        override fun toString(): String {
+            return "$typeID:$oid:$key"
+        }
+    }
+
+//    /**
+//     * В версии есть VID, даты изменения, ссылки и контент
+//     */
+//    class EsrObjectVersion(
+//        val obj: EsrObject,
+//        val vid: UUID,
+//        val modifBy: String,
+//        val modifAtLong: Int,
+//        val links: List<EsrObject>,
+//        val content: ByteArray
+//    )
 }

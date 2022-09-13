@@ -1,5 +1,7 @@
 package karlutka.clients
 
+import karlutka.models.MPI
+import karlutka.parsers.pi.XiObj
 import karlutka.parsers.pi.Zatupka
 import java.io.IOException
 import java.nio.file.FileVisitResult
@@ -21,68 +23,161 @@ object ZtpDB : FileVisitor<Path> {
     lateinit var rootPath: Path
     lateinit var conn: Connection
     val stack: Stack<String> = Stack()
-    val sq: MutableMap<String, PreparedStatement> = mutableMapOf()
+    val swcv = mutableMapOf<String, String>()
+    val esrobjects = mutableListOf<MPI.EsrObj>()
 
     const val sqInit = """
+CREATE TABLE IF NOT EXISTS PUBLIC.SWCV(
+  GUID   CHAR(32) not null primary key,
+  CAPTION VARCHAR(128) not null
+);
+
 CREATE TABLE IF NOT EXISTS PUBLIC.TPZ(
-  NUM INT4 auto_increment not null primary key,
-  PATH varchar(128) not null unique 
+  NUM    INT auto_increment not null primary key,
+  PATH   VARCHAR(128) not null unique 
 );
         
 CREATE TABLE IF NOT EXISTS PUBLIC.ESROBJ(
-  TPZNUM INT4 REFERENCES TPZ(NUM),
-  TYPEID CHAR VARYING(16) not null,
-  OID CHAR(32) not null,
-  SWCVID CHAR(32) not null,
-  SWCVSP TINYINT NOT NULL,                  // -128 to 127 
-  KEY_ CHARACTER VARYING(256) not null,     // имя через палки
-  TEXT CHAR VARYING(128),                   // текстовое описание, пока только на языке EN или первое попавшееся
-  primary key (TPZNUM,TYPEID,OID)
+  NUM    INT auto_increment not null primary key,
+  TYPEID VARCHAR(16) not null,
+  OID    CHAR(32) not null,
+  SWCVID CHAR(32) references PUBLIC.SWCV(GUID),
+  SWCVSP TINYINT NOT NULL,                    // -128 to 127 
+  KEY_   VARCHAR(256) not null,               // имя через палки
+  constraint EU unique(typeid, oid, swcvid, key_)
+);
+
+CREATE TABLE IF NOT EXISTS PUBLIC.ESRVER(    // ESR OBJECT VERSIONS
+  NUM    INT auto_increment not null primary key,
+  TPZNUM INT references PUBLIC.TPZ(NUM),
+  OBJNUM INT references PUBLIC.ESROBJ(NUM),
+  VID    CHAR(32) not null,
+  TEXT   VARCHAR(256)                         // текстовое описание
+);
+
+CREATE TABLE IF NOT EXISTS PUBLIC.ESRVL(      //ESR VERSION LINK
+  VERNUM INT references PUBLIC.ESRVER(NUM),
+  ROLE   VARCHAR(32) not null,                // .
+  KPOS   INT not null,
+  OBJNUM INT references PUBLIC.ESROBJ(NUM)
 );
 """
+    lateinit var swcvIns: PreparedStatement
+    lateinit var tpzIns: PreparedStatement
+    lateinit var esrobjIns: PreparedStatement
+
+    lateinit var esrverIns: PreparedStatement
+    lateinit var esrlinkIns: PreparedStatement
+
     fun index(from: Path) {
         rootPath = from
         require(Files.isDirectory(from))
+
         conn = DriverManager.getConnection("jdbc:h2:$from/h2")
         conn.prepareStatement(sqInit).execute()
-//        this.sq["pisel"] = conn.prepareStatement("SELECT store FROM PI where SID=?1")
-        this.sq["tpzins"] = conn.prepareStatement("INSERT INTO PUBLIC.TPZ(PATH) VALUES(?1)", RETURN_GENERATED_KEYS)
-        this.sq["eoins"] = conn.prepareStatement("INSERT INTO PUBLIC.ESROBJ(TPZNUM,TYPEID,OID,SWCVID,SWCVSP,KEY_,TEXT) VALUES(?1,?2,?3,?4,?5,?6,?7)")
-//        this.sq["piupd"] = conn.prepareStatement("UPDATE PI SET store=?2 WHERE sid=?1")
+        swcvIns = conn.prepareStatement("INSERT INTO PUBLIC.SWCV(GUID,CAPTION) VALUES(?1,?2)")
+        tpzIns = conn.prepareStatement("INSERT INTO PUBLIC.TPZ(PATH) VALUES(?1)", RETURN_GENERATED_KEYS)
+        esrobjIns = conn.prepareStatement(
+            "INSERT INTO PUBLIC.ESROBJ(TYPEID,OID,SWCVID,SWCVSP,KEY_) VALUES(?1,?2,?3,?4,?5)",
+            RETURN_GENERATED_KEYS
+        )
+        esrverIns = conn.prepareStatement(
+            "INSERT INTO PUBLIC.ESRVER(TPZNUM,OBJNUM,VID,TEXT) VALUES(?1,?2,?3,?4)",
+            RETURN_GENERATED_KEYS
+        )
+        esrlinkIns = conn.prepareStatement("INSERT INTO PUBLIC.ESRVL(VERNUM,ROLE,KPOS,OBJNUM) VALUES(?1,?2,?3,?4)")
+
         stack.clear()
         Files.walkFileTree(from, this)
         require(stack.isEmpty())
     }
 
     fun visitTpz(file: Path) {
-        val path = stack.joinToString("/")+"/${file.name}"
+        val path = stack.joinToString("/") + "/${file.name}"
         println(path)
-        val p = sq["tpzins"]!!
-        p.setString(1, path)
-        require(p.executeUpdate()==1)
-        val rs = p.generatedKeys
+        conn.beginRequest()
+
+        tpzIns.setString(1, path)
+        require(tpzIns.executeUpdate() == 1)
+        val rs = tpzIns.generatedKeys
         require(rs.next())
         val tpznum = rs.getInt(1)
-        val ps = sq["eoins"]!!
-        Zatupka.meatball(file) {xiobj, bytearray ->
-            // пишем контент
-            val typeID = xiobj.idInfo.key.typeID
-            val oid = xiobj.idInfo.key.oid!!
-            val swcvid = xiobj.idInfo.vc!!.swcGuid!!
-            require(swcvid.length==32)
-            val swcvsp = xiobj.idInfo.vc.sp!!
-            require(swcvsp==-1 || swcvsp>0)
-            val key = xiobj.idInfo.key.elem
-            ps.setInt(1, tpznum)
-            ps.setString(2, typeID)
-            ps.setString(3, oid)
-            ps.setString(4, swcvid)
-            ps.setInt(5, swcvsp)
-            ps.setString(6, key.joinToString("|"))
-            ps.setString(7, "")
-            require(ps.executeUpdate()==1)
-        }
+        Zatupka.meatball(file) { xiobj, bytearray ->
+            val banned = listOf("process", "processstep").contains(xiobj.idInfo.key.typeID)
+            if (!banned) {
+                val text = xiobj.text()
+                val esrobj = xiobj.esrobject()
+                val vid = xiobj.idInfo.VID!!
 
+                if (!swcv.containsKey(esrobj.swcvid)) {
+                    val swcvcaption = xiobj.idInfo.vc!!.caption!!
+                    swcv[esrobj.swcvid] = swcvcaption
+                    swcvIns.setString(1, esrobj.swcvid)
+                    swcvIns.setString(2, swcvcaption)
+                    require(swcvIns.executeUpdate() == 1)
+                }
+                // Перечень ESR-объектов
+                val esr2 = esrobjects.find { it == esrobj }
+                if (esr2 == null) {
+                    esrobjIns.setString(1, esrobj.typeID.toString())
+                    esrobjIns.setString(2, esrobj.oid)
+                    esrobjIns.setString(3, esrobj.swcvid)
+                    esrobjIns.setInt(4, esrobj.swcvsp)
+                    esrobjIns.setString(5, esrobj.key)
+                    require(esrobjIns.executeUpdate() == 1)
+                    require(esrobjIns.generatedKeys.next())
+                    esrobj.num = esrobjIns.generatedKeys.getInt(1)
+                    esrobjects.add(esrobj)
+                } else {
+                    esrobj.num = esr2.num
+                }
+                // пишем версию
+                esrverIns.setInt(1, tpznum)
+                esrverIns.setInt(2, esrobj.num)
+                esrverIns.setString(3, vid)
+                esrverIns.setString(4, text)
+                require(esrverIns.executeUpdate() == 1)
+                require(esrverIns.generatedKeys.next())
+                val vernum = esrverIns.generatedKeys.getInt(1)
+                xiobj.generic.lnks?.x
+                    ?.filter { it.role != "_inner" && it.role != "_original" }
+                    ?.forEach { lnk: XiObj.Generic.LnkRole ->
+                        val linked = lnk.lnk.esrobject(esrobj)
+                        // есть ли такой swcv в списке?
+                        if (!swcv.containsKey(linked.swcvid)) {
+                            if (lnk.lnk.vc == null || lnk.lnk.vc.caption == null) {
+                                error("У $esrobj ссылочный объект корявый (role=${lnk.role})")
+                            }
+                            val swcvcaption = lnk.lnk.vc.caption
+                            swcv[linked.swcvid] = swcvcaption
+                            swcvIns.setString(1, linked.swcvid)
+                            swcvIns.setString(2, swcvcaption)
+                            require(swcvIns.executeUpdate() == 1)
+                        }
+                        // есть ли ссылочный объект в списке?
+                        val linkedesr2 = esrobjects.find { it == linked }
+                        if (linkedesr2 == null) {
+                            esrobjIns.setString(1, linked.typeID.toString())
+                            esrobjIns.setString(2, linked.oid)
+                            esrobjIns.setString(3, linked.swcvid)
+                            esrobjIns.setInt(4, linked.swcvsp)
+                            esrobjIns.setString(5, linked.key)
+                            require(esrobjIns.executeUpdate() == 1)
+                            require(esrobjIns.generatedKeys.next())
+                            linked.num = esrobjIns.generatedKeys.getInt(1)
+                            esrobjects.add(linked)
+                        } else {
+                            linked.num = linkedesr2.num
+                        }
+                        esrlinkIns.setInt(1, vernum)
+                        esrlinkIns.setString(2, lnk.role)
+                        esrlinkIns.setInt(3, lnk.kpos)
+                        esrlinkIns.setInt(4, linked.num)
+                        require(esrlinkIns.executeUpdate() == 1)
+                    } // цикл по ссылкам-ролям
+            } //if (!banned)
+        }
+        conn.endRequest()
     }
 
     override fun preVisitDirectory(dir: Path?, attrs: BasicFileAttributes?): FileVisitResult {
