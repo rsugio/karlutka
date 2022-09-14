@@ -1,10 +1,12 @@
 package karlutka.clients
 
 import kotlinx.serialization.Serializable
+import nl.adaptivity.xmlutil.PlatformXmlReader
 import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import java.util.zip.ZipInputStream
 
 // очень простой набор для SLD, минималистичный
 class SLD_CIM {
@@ -64,7 +66,7 @@ class SLD_CIM {
     class _QUALIFIER(
         val NAME: String,
         val TYPE: String,
-        val TOSUBCLASS: Boolean,
+        val TOSUBCLASS: Boolean?,
         val TOINSTANCE: Boolean,
         @XmlElement(true)
         val VALUE: String
@@ -91,6 +93,19 @@ class SLD_CIM {
     companion object {
         fun decodeFromReader(xr: XmlReader): CIM {
             return XML.decodeFromReader(xr)
+        }
+
+        fun decodeFromZip(zins: ZipInputStream, callback: (CIM) -> Unit) {
+            // для стандартного экспорта из SAP SLD
+            val gn = Regex("export[0-9]+.xml")
+            var ze = zins.nextEntry
+            while (ze!=null) {
+                if (ze.name.matches(gn)) {
+                    val cim = decodeFromReader(PlatformXmlReader(zins, "UTF-8"))
+                    callback.invoke(cim)
+                }
+                ze = zins.nextEntry
+            }
         }
     }
 }

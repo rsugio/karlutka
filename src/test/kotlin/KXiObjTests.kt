@@ -1,20 +1,15 @@
 import KT.Companion.s
 import KT.Companion.x
 import karlutka.clients.SLD_CIM
-import karlutka.clients.ZtpDB
 import karlutka.models.MPI
 import karlutka.parsers.pi.FunctionLibrary
 import karlutka.parsers.pi.MappingTool
 import karlutka.parsers.pi.XiObj
 import karlutka.parsers.pi.XiTrafo
-import karlutka.server.DB
-import karlutka.server.Server
-import karlutka.util.KKeystore
 import karlutka.util.KTempFile
-import karlutka.util.KfPasswds
-import karlutka.util.Kfg
 import java.nio.file.Files
 import java.nio.file.Paths
+import java.util.zip.ZipInputStream
 import kotlin.io.path.inputStream
 import kotlin.io.path.name
 import kotlin.io.path.writeBytes
@@ -103,7 +98,52 @@ class KXiObjTests {
     @Test
     fun sld() {
         val z = SLD_CIM.decodeFromReader(x("/pi_SLD/export17.xml"))
+        val lst = z.DECLARATION.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT
+            .filter { it.INSTANCE.CLASSNAME == "SAP_SoftwareComponent" }
+            .map { it.INSTANCE }
+        lst.forEach { i ->
+            val vendor = i.PROPERTY.find { it.NAME == "Vendor" }?.VALUE
+            val version = i.PROPERTY.find { it.NAME == "Version" }?.VALUE
+            val name = i.PROPERTY.find { it.NAME == "Name" }?.VALUE
+            val PPMSNumber = i.PROPERTY.find { it.NAME == "PPMSNumber" }?.VALUE
+            val caption = i.PROPERTY.find { it.NAME == "Caption" }?.VALUE
+            val description = i.PROPERTY.find { it.NAME == "Description" }?.VALUE
+            val technologyType = i.PROPERTY.find { it.NAME == "TechnologyType" }?.VALUE
+            var guid = i.PROPERTY.find { it.NAME == "GUID" }?.VALUE
+            if (guid != null) {
+                guid = guid.replace("-", "")
+                require(guid.length == 32)
+                println("$guid $vendor  $technologyType     $version\t\t$caption|$name")
+            }
+        }
     }
 
+    @Test
+    fun sld2() {
+        val p = Paths.get("C:\\Temp\\2022-09-13\\sld\\DPH_export_20220914_180804.zip")
+        val zis = ZipInputStream(p.inputStream())
+        SLD_CIM.decodeFromZip(zis) { cim ->
+            cim.DECLARATION.DECLGROUP_WITHNAME
+                .VALUE_NAMEDOBJECT
+                .filter { it.INSTANCE.CLASSNAME == "SAP_SoftwareComponent" }
+                .map { it.INSTANCE }.forEach { i ->
+                    val vendor = i.PROPERTY.find { it.NAME == "Vendor" }?.VALUE
+                    val version = i.PROPERTY.find { it.NAME == "Version" }?.VALUE
+                    val name = i.PROPERTY.find { it.NAME == "Name" }?.VALUE
+                    val ppmsnumber = i.PROPERTY.find { it.NAME == "PPMSNumber" }?.VALUE
+                    val caption = i.PROPERTY.find { it.NAME == "Caption" }?.VALUE
+                    val description = i.PROPERTY.find { it.NAME == "Description" }?.VALUE
+                    val technologyType = i.PROPERTY.find { it.NAME == "TechnologyType" }?.VALUE
+                    val type = i.PROPERTY.find { it.NAME == "Type" }?.VALUE
+                    val runtimeType = i.PROPERTY.find { it.NAME == "RuntimeType" }?.VALUE
+                    var guid = i.PROPERTY.find { it.NAME == "GUID" }?.VALUE
+                    if (guid != null && vendor=="sap.com") {
+                        guid = guid.replace("-", "")
+                        require(guid.length == 32)
+                        println("$guid\t$version\t$caption|$name")
+                    }
+                }
+        }
+    }
 
 }
