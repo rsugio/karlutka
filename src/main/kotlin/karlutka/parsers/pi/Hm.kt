@@ -521,13 +521,13 @@ class Hm {
             return toTable().map { x ->
                 MPI.Swcv(
                     x["RA_WORKSPACE_ID"]!!.strvalue()!!,
-                    x["VENDOR"]!!.strvalue()!!,
-                    x["NAME"]!!.strvalue()!!,
-                    x["VERSION"]!!.strvalue()!!,
-                    x["WS_TYPE"]!!.strvalue()!![0],
-                    x["ORIGINAL_LANGUAGE"]!!.strvalue()!!,
-                    x["WS_NAME"]!!.strvalue()!!
-                )
+                    x["NAME"]!!.strvalue(),
+                    x["WS_NAME"]!!.strvalue(),
+                    x["VENDOR"]!!.strvalue(),
+                    x["VERSION"]!!.strvalue())
+//                    x["WS_TYPE"]!!.strvalue()!![0],
+//                    x["ORIGINAL_LANGUAGE"]!!.strvalue()!!,
+//                )
             }
         }
 
@@ -543,7 +543,7 @@ class Hm {
                 requireNotNull(nsp.ref)
                 if (namespaceurl.isNotBlank()) {
                     // почему-то есть неймспейсы с пустыми значениями
-                    val sw = swcv.find { it.id == oid }
+                    val sw = swcv.find { it.guid == oid }
                     requireNotNull(sw) { "SWCV oid=$oid title=${nsp.ref.vc.caption} не найден для неймспейса '$namespaceurl'" }
                     MPI.Namespace(namespaceurl, sw, text)
                 } else {
@@ -591,7 +591,7 @@ class Hm {
                 var swcref: MPI.Swcv? = null
                 if (ref.vc.swcGuid!=null) {
                     //TODO добавить SP в чтение SWCV
-                    val sublist = swcv.filter { it.id==ref.vc.swcGuid }
+                    val sublist = swcv.filter { it.guid==ref.vc.swcGuid }
                     require(sublist.size==1) {"Для SWCV ${ref.vc.swcGuid} более одного объекта"}
                     swcref = sublist[0]
                 }

@@ -204,7 +204,7 @@ class XiObj(
     // --------------- место для функций ---------------
     fun toNamespaces(swc: MPI.Swcv): List<MPI.Namespace> {
         require(idInfo.key.typeID == "namespdecl")
-        require(idInfo.vc!!.swcGuid == swc.id)
+        require(idInfo.vc!!.swcGuid == swc.guid)
         return generic.textInfo.textObj.texts!!.list.map { MPI.Namespace(it.label, swc, it.value) }
     }
 

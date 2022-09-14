@@ -1,5 +1,4 @@
 import karlutka.clients.PI
-import karlutka.models.MPI
 import karlutka.parsers.pi.Hm
 import karlutka.parsers.pi.PCommon
 import karlutka.server.DB
@@ -49,6 +48,7 @@ class KPiTests {
             }
         }
     }
+
     @Test
     fun hmi() {
         runBlocking {
@@ -114,8 +114,8 @@ class KPiTests {
                 pi.parseNamespaceDecls(nsask)
                 pi.hmiResponseParse(repoask)
                 pi.hmiResponseParse(dirask)
-                pi.storeState()
-                println("done! ${pi.state.objlist.size} rep+dir")
+//                pi.storeState()
+//                println("done! ${pi.state.objlist.size} rep+dir")
             }
         }
     }

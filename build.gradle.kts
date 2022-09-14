@@ -21,12 +21,12 @@ repositories {
 }
 val ktor_version = "2.1.1"
 val kotlinx_serialization_version = "1.4.0"
-val exposed_version = "0.39.2"
+//val exposed_version = "0.39.2"
 val xmlutil_version = "0.84.2"
 val kaml_version = "0.47.0"
 //val h2_version = "2.1.214"
 val h2_version = "1.4.200"
-val jooq_version = "3.17.3"
+//val jooq_version = "3.17.3"
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -72,9 +72,9 @@ dependencies {
 //  implementation("com.clickhouse:clickhouse-jdbc:0.3.2-patch1")
 
     implementation("com.h2database:h2:$h2_version")
-    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
+//    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
 //    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")  я использую DSL без DAO
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+//    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("io.ktor:ktor-client-core-jvm:2.1.1")
     implementation("io.ktor:ktor-client-auth-jvm:2.1.1")
     implementation("io.ktor:ktor-client-logging-jvm:2.1.1")

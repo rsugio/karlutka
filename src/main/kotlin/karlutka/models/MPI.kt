@@ -17,7 +17,7 @@ class MPI {
         MAP_ARCHIVE_PRG,    // встречалось пока лишь в ссылках
         MAP_IDENTY_PROG,    // встречалось пока лишь в ссылках
         MAP_IMP_XSD_XML,    // встречалось пока только в ссылках
-        RepBProcess,
+        RepBProcess,        // шлак
         TRAFO_JAR,
         XI_TRAFO,
         ariscommonfile,     // шлак
@@ -92,20 +92,25 @@ class MPI {
         }
     }
 
-    @Serializable
+    @Serializable               // убрать
     class Swcv(
-        val id: String,         //гуид
-        val vendor: String,
-        val name: String,       // SC_I_END
-        val version: String,
-        val type: Char,         // S, L
-        val language: String,
-        val ws_name: String,    // SC_I_END, 1.0 of vendor.com
-        val sp: Int = -1        //TODO написать парсер
+        // во встречающихся ссылках на SWCV есть только гуид и название, поэтому они константы
+        // Остальные атрибуты будут заполнены по мере встречи и чтения SWC
+        val guid: String,
+        var caption: String?,   // SC_I_END
+        var ws_name: String?,   // SC_I_END, 1.0 of vendor.com
+        var vendor: String?,
+        var version: String?,
+//        var type: Char,       // S, L
+//        val language: String,
+//        val sp: Int = -1
     ) {
+        val attrs: MutableMap<String, String> = mutableMapOf()  //прочие атрибуты, в разборе и анализе есть, в БД нет
+
         override fun equals(other: Any?): Boolean {
+            requireNotNull(other)
             require(other is Swcv)
-            return id==other.id
+            return guid==other.guid
         }
     }
 
