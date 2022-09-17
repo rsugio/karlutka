@@ -51,9 +51,7 @@ class AbapJCo(override val konfig: KfTarget) : MTarget {
         STFC_CONNECTION.importParameterList.setValue("REQUTEXT", request)
         STFC_CONNECTION.execute(runtime)
         val resp = STFC_CONNECTION.exportParameterList.getString("ECHOTEXT")
-        require(
-            request == resp,
-            { "Предположительно проверка юникода с ошибкой: ожидалось '$request', получено '$resp'" })
+        require(request == resp, { "Предположительно проверка юникода с ошибкой: ожидалось '$request', получено '$resp'" })
         val info = STFC_CONNECTION.exportParameterList.getString("RESPTEXT")
         return info
     }
@@ -150,9 +148,7 @@ class AbapJCo(override val konfig: KfTarget) : MTarget {
         } while (T_IDOCINFO.nextRow())
     }
 
-    fun RFC_READ_TABLE_EDIDS(
-        docnum: String,
-    ) {
+    fun RFC_READ_TABLE_EDIDS(docnum: String) {
         val RFC_READ_TABLE = repository.getFunction("RFC_READ_TABLE")
         RFC_READ_TABLE.importParameterList.setValue("QUERY_TABLE", "EDIDS")
         RFC_READ_TABLE.importParameterList.setValue("DELIMITER", "\t")
@@ -185,6 +181,58 @@ class AbapJCo(override val konfig: KfTarget) : MTarget {
             println(a)
         } while (data.nextRow())
     }
+
+    fun SPRX_GET_SPROXDAT(): String {
+        val SPRX_GET_SPROXDAT = repository.getFunction("SPRX_GET_SPROXDAT")
+        val obj = SPRX_GET_SPROXDAT.importParameterList.getTable("OBJECTS")
+        obj.appendRows(1)
+        obj.setValue(0, "CLAS")
+        obj.setValue(1, "ZCO_CO_SI_EXPENSES_COST_CENTRE")
+        SPRX_GET_SPROXDAT.execute(runtime)
+        val data = SPRX_GET_SPROXDAT.exportParameterList.getTable("SPROXDAT")
+        data.firstRow()
+        do {
+            val type4 = data.getString("OBJECT")    //CLAS
+            val obj_name = data.getString("OBJ_NAME")
+            val id = data.getString("ID")
+            val ifr_type = data.getString("IFR_TYPE")   //portType, operation, output
+            val ifr_name = data.getString("IFR_NAME")   //portType, operation, output
+        } while (data.nextRow())
+        return ""
+    }
+
+    fun readtable_SXMSINTERFACE() {
+        val RFC_READ_TABLE = repository.getFunction("RFC_READ_TABLE")
+        RFC_READ_TABLE.importParameterList.setValue("QUERY_TABLE", "SXMSINTERFACE")
+        RFC_READ_TABLE.importParameterList.setValue("DELIMITER", "\t")
+        val fields = RFC_READ_TABLE.tableParameterList.getTable("FIELDS")
+        fields.appendRows(13)
+        fields.firstRow()
+        fields.setValue("FIELDNAME", "OBJECT"); fields.nextRow()
+        fields.setValue("FIELDNAME", "OBJ_NAME"); fields.nextRow()
+        fields.setValue("FIELDNAME", "OBJECT1"); fields.nextRow()
+        fields.setValue("FIELDNAME", "OBJ_NAME1"); fields.nextRow()
+        fields.setValue("FIELDNAME", "IMPL_CLASS"); fields.nextRow()
+        fields.setValue("FIELDNAME", "IFR_TYPE"); fields.nextRow()
+        fields.setValue("FIELDNAME", "IFR_NSPCE"); fields.nextRow()
+        fields.setValue("FIELDNAME", "IFR_INTF"); fields.nextRow()
+        fields.setValue("FIELDNAME", "IFR_OPERATION"); fields.nextRow()
+        fields.setValue("FIELDNAME", "IFR_GNSPCE"); fields.nextRow()
+        fields.setValue("FIELDNAME", "GEN_VERS"); fields.nextRow()
+        fields.setValue("FIELDNAME", "IFR_IDEMPOTENT"); fields.nextRow()
+        fields.setValue("FIELDNAME", "CHANGED_ON"); fields.nextRow()
+        RFC_READ_TABLE.execute(runtime)
+        val data = RFC_READ_TABLE.tableParameterList.getTable("DATA")
+        data.firstRow()
+        do {
+            val s = data.getString(0)
+            val a = s.split("\t").map { it.trim() }
+            require(a.size == 13)
+            println(a)
+        } while (data.nextRow())
+    }
+
+
 
     /*
     0000000118760717

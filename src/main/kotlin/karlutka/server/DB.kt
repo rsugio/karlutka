@@ -1,6 +1,10 @@
 package karlutka.server
 
 import karlutka.models.MPI
+import karlutka.parsers.pi.SLD_CIM
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
 import java.nio.file.Path
 import java.sql.Connection
 import java.sql.DriverManager
@@ -12,7 +16,8 @@ object DB {
     lateinit var readSrc: PreparedStatement
     lateinit var insSrc: PreparedStatement
     lateinit var insswcv: PreparedStatement
-    lateinit var readswcv: PreparedStatement
+    lateinit var readSwcvList: PreparedStatement
+    lateinit var readSwcv: PreparedStatement
     lateinit var insobj: PreparedStatement
     lateinit var readObj: PreparedStatement
     lateinit var insvers: PreparedStatement
@@ -25,22 +30,23 @@ object DB {
         conn = DriverManager.getConnection(url)
         val schema = javaClass.getResource("/database/h2.sql")!!.readText()
         conn.prepareStatement(schema).execute()
-        require(conn.isValid(3))
-        readSrc = conn.prepareStatement("SELECT num FROM PUBLIC.SRC where ONLINE=?2 and path=?1")
-        insSrc = conn.prepareStatement("INSERT INTO PUBLIC.SRC(PATH,ONLINE) VALUES (?1,?2)", 1)
-        insswcv =
-            conn.prepareStatement("INSERT INTO PUBLIC.SWCV(GUID,CAPTION,WS_NAME,VENDOR,VERSION) VALUES(?1,?2,?3,?4,?5)")
-        readswcv = conn.prepareStatement("SELECT * FROM PUBLIC.SWCV")
-        insobj = conn.prepareStatement(
-            "INSERT INTO PUBLIC.ESROBJ(TYPEID,OID,SWCVID,SWCVSP,KEY_) VALUES(?1,?2,?3,?4,?5)", 1
-        )
-        readObj = conn.prepareStatement("SELECT NUM,TYPEID,OID,SWCVID,SWCVSP,KEY_ FROM PUBLIC.ESROBJ")
-        insvers = conn.prepareStatement("INSERT INTO PUBLIC.ESRVER(SRCNUM,OBJNUM,VID,TEXT) VALUES(?1,?2,?3,?4)", 1)
-        inslink = conn.prepareStatement("INSERT INTO PUBLIC.ESRVLINK(VERNUM,ROLE,KPOS,OBJNUM) VALUES(?1,?2,?3,?4)")
+        readSrc = conn.prepareStatement("select num from PUBLIC.SRC where online=?2 and path=?1")
+        insSrc = conn.prepareStatement("insert into PUBLIC.SRC(path,online) values (?1,?2)", 1)
+        insswcv = conn.prepareStatement("insert into PUBLIC.SWCV(guid,caption,ws_name,vendor,version,description) values(?1,?2,?3,?4,?5,?6)")
+        readSwcvList = conn.prepareStatement("select guid,caption,ws_name,vendor,version,description from PUBLIC.SWCV")
+        readSwcv = conn.prepareStatement("select caption,ws_name,vendor,version,description from PUBLIC.SWCV where guid=?1")
+        insobj = conn.prepareStatement("insert into PUBLIC.ESROBJ(typeid,oid,swcvid,swcvsp,key_) values(?1,?2,?3,?4,?5)", 1)
+        readObj = conn.prepareStatement("select num,typeid,oid,swcvid,swcvsp,key_ from PUBLIC.ESROBJ")
+        insvers = conn.prepareStatement("insert into PUBLIC.ESRVER(srcnum,objnum,vid,text) values(?1,?2,?3,?4)", 1)
+        inslink = conn.prepareStatement("insert into PUBLIC.ESRVLINK(vernum,role,kpos,objnum) values(?1,?2,?3,?4)")
         println("H2 соединён на $url")
 
-        readSwcv()
-        readEsrObj()
+        readSwcvList()
+        println("прочитаны SWCV")
+        val usedSw = readEsrObjList()
+        println("прочитаны ESROBJ")
+        // чтобы в памяти не держать бессмысленные ссылки, удаляем ненужные SWCV но сохраняем
+        swcv.removeIf { !usedSw.contains(it.guid) }
     }
 
     fun close() {
@@ -54,12 +60,9 @@ object DB {
             // может есть готовый метод?
             if (arg == null) {
                 ps.setNull(ix++, java.sql.Types.VARCHAR)
-            } else if (arg is String)
-                ps.setString(ix++, arg)
-            else if (arg is Boolean)
-                ps.setBoolean(ix++, arg)
-            else if (arg is Int)
-                ps.setInt(ix++, arg)
+            } else if (arg is String) ps.setString(ix++, arg)
+            else if (arg is Boolean) ps.setBoolean(ix++, arg)
+            else if (arg is Int) ps.setInt(ix++, arg)
             else error(arg.javaClass)
         }
     }
@@ -97,26 +100,45 @@ object DB {
         return new
     }
 
-    private fun readSwcv() {
-        val rs = executeQuery(readswcv)
+    @OptIn(ExperimentalSerializationApi::class)
+    private fun readSwcvList() {
+        val rs = executeQuery(readSwcvList)
         while (rs.next()) {
-            val sw = MPI.Swcv(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5))
-            require(!swcv.contains(sw))
+            val sw = MPI.Swcv(
+                rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)
+            )
+//            require(!swcv.contains(sw))   на больших списках пипец
             swcv.add(sw)
         }
+        val js = javaClass.getResourceAsStream("/database/swcv.json")!!
+        val _swc = Json.decodeFromStream<List<SLD_CIM.SAP_SoftwareComponent>>(js)
+        // смотрим какие стандартные SWCV не в списке и их пишем
+        conn.beginRequest()
+        _swc.forEach { st ->
+            val exist = swcv.find { it.guid == st.GUID }
+            if (exist == null) {
+                val sw = MPI.Swcv(st.GUID, st.Caption, st.Name, st.Vendor, st.Version, st.Description)
+                writeSwcv(sw)
+            }
+        }
+        conn.endRequest()
+        conn.commit()
     }
 
     fun writeSwcv(sw: MPI.Swcv) {
-        require(!swcv.contains(sw))
-        executeInsert(insswcv, sw.guid, sw.caption, sw.ws_name, sw.vendor, sw.version)
+//        require(!swcv.contains(sw))
+        try {
+            executeInsert(insswcv, sw.guid, sw.caption, sw.ws_name, sw.vendor, sw.version, sw.description)
+        } catch (_: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException) {
+            // Уже есть в БД. Читать не пробуем чтобы не тормозило.
+        }
         swcv.add(sw)
-        require(swcv.contains(sw))
+//        require(swcv.contains(sw))
     }
 
-    private fun readEsrObj() {
-        readObj = conn.prepareStatement("SELECT NUM,TYPEID,OID,SWCVID,SWCVSP,KEY_ FROM PUBLIC.ESROBJ")
-
+    private fun readEsrObjList(): Set<String> {
         val rs = executeQuery(readObj)
+        val usedsw = hashSetOf<String>()
         while (rs.next()) {
             val eo = MPI.EsrObj(
                 MPI.ETypeID.valueOf(rs.getString(2)),
@@ -126,22 +148,23 @@ object DB {
                 rs.getString(6),
                 rs.getInt(1),
             )
-            requireNotNull(swcv.find { it.guid == eo.swcvid })       //TODO на равенство одному
-            require(!esrobjects.contains(eo))
+//            requireNotNull(swcv.find { it.guid == eo.swcvid })
+//            require(!esrobjects.contains(eo))
             esrobjects.add(eo)
+            usedsw.add(eo.swcvid)
         }
+        return usedsw
     }
 
     fun writeEsrObj(esrobj: MPI.EsrObj) {
-        require(!esrobjects.contains(esrobj))
-        esrobj.num =
-            executeInsertG(insobj, esrobj.typeID.toString(), esrobj.oid, esrobj.swcvid, esrobj.swcvsp, esrobj.key)
+//        require(!esrobjects.contains(esrobj))
+        esrobj.num = executeInsertG(insobj, esrobj.typeID.toString(), esrobj.oid, esrobj.swcvid, esrobj.swcvsp, esrobj.key)
         esrobjects.add(esrobj)
-        require(esrobjects.contains(esrobj))
+//        require(esrobjects.contains(esrobj))
     }
 
     fun writeEsrObjVersion(esrobj: MPI.EsrObj, srcNum: Int, vid: String, text: String?): Int {
-        require(esrobjects.contains(esrobj))
+//        require(esrobjects.contains(esrobj))
         require(esrobj.num != 0)
         require(srcNum != 0)
         val vernum = executeInsertG(insvers, srcNum, esrobj.num, vid, text)

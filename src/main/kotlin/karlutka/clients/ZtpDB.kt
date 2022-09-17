@@ -37,10 +37,10 @@ object ZtpDB : FileVisitor<Path> {
 
         var swcv = DB.swcv.find { it.guid == esrobj.swcvid }
         if (swcv == null) {
-            swcv = MPI.Swcv(esrobj.swcvid, xiobj.idInfo.vc!!.caption!!, null, null, null)
+            swcv = MPI.Swcv(esrobj.swcvid, xiobj.idInfo.vc!!.caption!!, null, null, null, null)
             DB.writeSwcv(swcv)
-
         }
+
         // Перечень ESR-объектов
         val esr2 = DB.esrobjects.find { it == esrobj }
         if (esr2 == null) {
@@ -62,7 +62,7 @@ object ZtpDB : FileVisitor<Path> {
                     error("Ссылочный объект корявый: у $esrobj (role=${lnk.role})")
                 }
                 val swcvcaption = lnk.lnk.vc.caption
-                swcvlinked = MPI.Swcv(linked.swcvid, swcvcaption, null, null, null)
+                swcvlinked = MPI.Swcv(linked.swcvid, swcvcaption, null, null, null, null)
                 DB.writeSwcv(swcvlinked)
             }
             // есть ли ссылочный объект в списке?

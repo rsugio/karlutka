@@ -101,6 +101,7 @@ class MPI {
         var ws_name: String?,   // SC_I_END, 1.0 of vendor.com
         var vendor: String?,
         var version: String?,
+        var description: String?
 //        var type: Char,       // S, L
 //        val language: String,
 //        val sp: Int = -1

@@ -1,8 +1,28 @@
+import karlutka.clients.AbapJCo
+import karlutka.server.Server
+import karlutka.util.*
+import java.nio.file.Paths
+import kotlin.io.path.writeText
 import kotlin.test.Test
 
 class KAbapTests {
+    private var target: KfTarget.ABAP
+    private var jco: AbapJCo
+
+    init {
+        Server.kfpasswds = KfPasswds.parse(Paths.get("C:\\data\\passwd.yaml"))
+        Server.kfg = Kfg.parse(Paths.get("c:\\data\\karla.yaml"))
+        KTempFile.tempFolder = Paths.get(Server.kfg.tmpdir)
+        target = Server.kfg.targets.find { it.sid == "TER400" }!! as KfTarget.ABAP
+        target.loadAuths(Server.kfpasswds.securityMaterials)
+        jco = AbapJCo(target)
+    }
+
     @Test
     fun az() {
+        jco.SPRX_GET_SPROXDAT()
+//        Paths.get("C:\\data\\tmp\\jco\\SPRX_GET_SPROXDAT4.json").writeText(s)
+
 //        val ter400 = AbapJCo("TER400", null)
 //        val idocs = ter400.IDOC_DATE_TIME_GET(
 //            "00000000", "CPQCLIENT",

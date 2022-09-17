@@ -1,32 +1,35 @@
 import KT.Companion.s
 import KT.Companion.x
-import karlutka.clients.SLD_CIM
+import karlutka.clients.ZtpDB
+import karlutka.parsers.pi.SLD_CIM
 import karlutka.models.MPI
 import karlutka.parsers.pi.FunctionLibrary
 import karlutka.parsers.pi.MappingTool
 import karlutka.parsers.pi.XiObj
 import karlutka.parsers.pi.XiTrafo
-import karlutka.util.KTempFile
+import karlutka.server.DB
+import karlutka.server.Server
+import karlutka.util.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.util.zip.ZipInputStream
-import kotlin.io.path.inputStream
-import kotlin.io.path.name
-import kotlin.io.path.writeBytes
+import kotlin.io.path.*
 import kotlin.test.Test
 
 class KXiObjTests {
     init {
-//        Server.kfpasswds = KfPasswds.parse(Paths.get("C:\\data\\passwd.yaml"))
-//        Server.kfg = Kfg.parse(Paths.get("c:\\data\\karla.yaml"))
-//        KKeystore.load(Server.kfpasswds.keystore.path, Server.kfpasswds.keystore.passwd)
-//        KTempFile.tempFolder = Paths.get(Server.kfg.tmpdir)
-//        DB.init(Server.kfg.h2connection)
+        Server.kfpasswds = KfPasswds.parse(Paths.get("C:\\data\\passwd.yaml"))
+        Server.kfg = Kfg.parse(Paths.get("c:\\data\\karla.yaml"))
+        KKeystore.load(Server.kfpasswds.keystore.path, Server.kfpasswds.keystore.passwd)
+        KTempFile.tempFolder = Paths.get(Server.kfg.tmpdir)
+        DB.init(Server.kfg.h2connection)
     }
 
     @Test
     fun repository() {
-        val swc = MPI.Swcv("3f38b2400b9e11ea9c32fae8ac130d0e", null, null, null, null)
+        val swc = MPI.Swcv("3f38b2400b9e11ea9c32fae8ac130d0e", null, null, null, null, null)
         val namespdecl = XiObj.decodeFromString(s("/pi_xiObj/rep01namespdecl.xml")).toNamespaces(swc)
         require(namespdecl.isNotEmpty())
 
@@ -41,7 +44,7 @@ class KXiObjTests {
     @Test
     fun johnny() {
 //      Ztp.index(Paths.get("Y:\\Tpz"))
-//      ZtpDB.index(Paths.get("Y:\\Tpz.old"))
+      ZtpDB.index(Paths.get("Y:\\Tpz"))
 //      DB.dot1()
     }
 
@@ -120,30 +123,17 @@ class KXiObjTests {
 
     @Test
     fun sld2() {
-        val p = Paths.get("C:\\Temp\\2022-09-13\\sld\\DPH_export_20220914_180804.zip")
+        val p = Paths.get("C:\\Temp\\2022-09-13\\sld\\SID_export_20220914_180804.zip")
         val zis = ZipInputStream(p.inputStream())
+        val lst = mutableListOf<SLD_CIM.SAP_SoftwareComponent>()
         SLD_CIM.decodeFromZip(zis) { cim ->
-            cim.DECLARATION.DECLGROUP_WITHNAME
-                .VALUE_NAMEDOBJECT
-                .filter { it.INSTANCE.CLASSNAME == "SAP_SoftwareComponent" }
-                .map { it.INSTANCE }.forEach { i ->
-                    val vendor = i.PROPERTY.find { it.NAME == "Vendor" }?.VALUE
-                    val version = i.PROPERTY.find { it.NAME == "Version" }?.VALUE
-                    val name = i.PROPERTY.find { it.NAME == "Name" }?.VALUE
-                    val ppmsnumber = i.PROPERTY.find { it.NAME == "PPMSNumber" }?.VALUE
-                    val caption = i.PROPERTY.find { it.NAME == "Caption" }?.VALUE
-                    val description = i.PROPERTY.find { it.NAME == "Description" }?.VALUE
-                    val technologyType = i.PROPERTY.find { it.NAME == "TechnologyType" }?.VALUE
-                    val type = i.PROPERTY.find { it.NAME == "Type" }?.VALUE
-                    val runtimeType = i.PROPERTY.find { it.NAME == "RuntimeType" }?.VALUE
-                    var guid = i.PROPERTY.find { it.NAME == "GUID" }?.VALUE
-                    if (guid != null && vendor=="sap.com") {
-                        guid = guid.replace("-", "")
-                        require(guid.length == 32)
-                        println("$guid\t$version\t$caption|$name")
-                    }
-                }
+            cim.DECLARATION.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT.forEach{
+                val s = SLD_CIM.SAP_SoftwareComponent.from(it)
+                if (s!=null && s.Vendor=="sap.com") lst.add(s)
+            }
         }
+        val q = p.resolveSibling("swcv.json")
+        q.writeText(Json.encodeToString(lst))
     }
 
 }
