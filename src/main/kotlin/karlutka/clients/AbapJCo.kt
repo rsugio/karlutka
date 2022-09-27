@@ -182,12 +182,16 @@ class AbapJCo(override val konfig: KfTarget) : MTarget {
         } while (data.nextRow())
     }
 
-    fun SPRX_GET_SPROXDAT(): String {
+    fun SPRX_GET_SPROXDAT(classes: List<String> = listOf()): String {
         val SPRX_GET_SPROXDAT = repository.getFunction("SPRX_GET_SPROXDAT")
         val obj = SPRX_GET_SPROXDAT.importParameterList.getTable("OBJECTS")
-        obj.appendRows(1)
-        obj.setValue(0, "CLAS")
-        obj.setValue(1, "ZCO_CO_SI_EXPENSES_COST_CENTRE")
+        if (classes.isNotEmpty()) {
+            obj.appendRows(classes.size)
+            classes.forEach {
+                obj.setValue(0, "CLAS") //для остальных фильтров пока смысла нет
+                obj.setValue(1, it)
+            }
+        }
         SPRX_GET_SPROXDAT.execute(runtime)
         val data = SPRX_GET_SPROXDAT.exportParameterList.getTable("SPROXDAT")
         data.firstRow()
