@@ -22,7 +22,7 @@ repositories {
 val ktor_version = "2.1.1"
 val kotlinx_serialization_version = "1.4.0"
 //val exposed_version = "0.39.2"
-val xmlutil_version = "0.84.2"
+val xmlutil_version = "0.84.3"
 val kaml_version = "0.47.0"
 //val h2_version = "2.1.214"
 val h2_version = "1.4.200"
