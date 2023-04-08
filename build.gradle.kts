@@ -2,8 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.10"
-    kotlin("plugin.serialization") version "1.7.10"
+    kotlin("jvm") version "1.8.20"
+    kotlin("plugin.serialization") version "1.8.20"
     application
     java
     id("com.github.johnrengelman.shadow") version "7.0.0"
@@ -19,11 +19,11 @@ repositories {
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 //    maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers") }
 }
-val ktor_version = "2.1.1"
-val kotlinx_serialization_version = "1.4.0"
+val ktor_version = "2.1.3"	//TODO 2.2.4
+val kotlinx_serialization_version = "1.5.0"
 //val exposed_version = "0.39.2"
-val xmlutil_version = "0.84.3"
-val kaml_version = "0.47.0"
+val xmlutil_version = "0.85+"
+val kaml_version = "0.51+"
 //val h2_version = "2.1.214"
 val h2_version = "1.4.200"
 //val jooq_version = "3.17.3"
@@ -75,28 +75,25 @@ dependencies {
 //    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
 //    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")  я использую DSL без DAO
 //    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-    implementation("io.ktor:ktor-client-core-jvm:2.1.1")
-    implementation("io.ktor:ktor-client-auth-jvm:2.1.1")
-    implementation("io.ktor:ktor-client-logging-jvm:2.1.1")
+    implementation("io.ktor:ktor-client-core-jvm:$ktor_version")
+    implementation("io.ktor:ktor-client-auth-jvm:$ktor_version")
+    implementation("io.ktor:ktor-client-logging-jvm:$ktor_version")
 //    implementation("org.jooq:jooq:$jooq_version")
 //    implementation("org.apache.commons:commons-compress:1.21")
 
     testImplementation(kotlin("test"))
     testImplementation("commons-io:commons-io:2.11.0")    //BOMInputStream
     //testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.test {
     useJUnitPlatform()
 }
 
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
-}
+//tasks.withType<KotlinCompile> {
+//    kotlinOptions.jvmTarget = "11"
+//}
 
 application {
     applicationDefaultJvmArgs = listOf("-Xms64m -Xmx196m")
@@ -119,4 +116,17 @@ val shadowJar: ShadowJar by tasks
 shadowJar.apply {
 //    dependencies {
 //    }
+}
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
+val compileKotlin: KotlinCompile by tasks
+compileKotlin.kotlinOptions {
+    jvmTarget = "11"
+}
+val compileTestKotlin: KotlinCompile by tasks
+compileTestKotlin.kotlinOptions {
+    jvmTarget = "11"
 }

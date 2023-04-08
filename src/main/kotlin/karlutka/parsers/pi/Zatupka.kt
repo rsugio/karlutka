@@ -101,51 +101,51 @@ class Zatupka {
         /**
          * Мапим файл на буфер, поэтому на входе не поток
          */
-        @Deprecated("для памяти")
-        fun list(tpt: Path): List<XiObj> {
-            fun readLong(bb: ByteBuffer, pos: Long): Long {
-                val b = ByteArray(8)
-                bb.get(pos.toInt(), b)
-                return ((b[0].toLong() shl 56) or (b[1].toLong() and 0xffL shl 48) or (b[2].toLong() and 0xffL shl 40) or (b[3].toLong() and 0xffL shl 32) or (b[4].toLong() and 0xffL shl 24) or (b[5].toLong() and 0xffL shl 16) or (b[6].toLong() and 0xffL shl 8) or (b[7].toLong() and 0xffL))
-            }
-
-            val len = Files.size(tpt)
-            val raf = RandomAccessFile(tpt.toFile(), "r")
-            val ch = raf.channel
-            var m = ch.map(FileChannel.MapMode.READ_ONLY, 0, len)
-            val catalogBeginReal = readLong(m, len - 8)
-            val catalogBeginXml = catalogBeginReal + 8
-            val catalogLengthXml = len - catalogBeginReal - 16
-
-            val lt: Long = readLong(m, catalogBeginReal)
-            require(lt <= 0xFFFFFFFFL) {
-                "crc32=0x" + java.lang.Long.toHexString(lt) + " at pos=0x" + java.lang.Long.toHexString(
-                    catalogBeginReal
-                )
-            }
-
-            val xmlcatalog = ByteArray(catalogLengthXml.toInt())
-            m.get(catalogBeginXml.toInt(), xmlcatalog)
-            val catalogObj = decodeFromString(String(xmlcatalog))
-            val rez = mutableListOf<XiObj>()
-            catalogObj.segments.objectList.segment.filter { it.etype() == ESegmentType.modelElement }
-                .forEach { segment ->
-                    val slice = ByteArray(segment.length - 8)
-                    m.get(segment.offset.toInt() + 8, slice)
-                    try {
-                        val xo = XiObj.decodeFromXmlReader(PlatformXmlReader(ByteArrayInputStream(slice), "UTF-8"))
-                        rez.add(xo)
-                    } catch (e: UnknownXmlFieldException) {
-                        Files.createTempFile("xiobj_error_", ".xml").writeBytes(slice)
-                        throw e
-                    }
-                }
-            m = null
-            ch.close()
-            require(!ch.isOpen)
-            raf.close()
-            return rez
-        }
+//        @Deprecated("для памяти")
+//        fun list(tpt: Path): List<XiObj> {
+//            fun readLong(bb: ByteBuffer, pos: Long): Long {
+//                val b = ByteArray(8)
+//                bb.get(pos.toInt(), b)
+//                return ((b[0].toLong() shl 56) or (b[1].toLong() and 0xffL shl 48) or (b[2].toLong() and 0xffL shl 40) or (b[3].toLong() and 0xffL shl 32) or (b[4].toLong() and 0xffL shl 24) or (b[5].toLong() and 0xffL shl 16) or (b[6].toLong() and 0xffL shl 8) or (b[7].toLong() and 0xffL))
+//            }
+//
+//            val len = Files.size(tpt)
+//            val raf = RandomAccessFile(tpt.toFile(), "r")
+//            val ch = raf.channel
+//            var m = ch.map(FileChannel.MapMode.READ_ONLY, 0, len)
+//            val catalogBeginReal = readLong(m, len - 8)
+//            val catalogBeginXml = catalogBeginReal + 8
+//            val catalogLengthXml = len - catalogBeginReal - 16
+//
+//            val lt: Long = readLong(m, catalogBeginReal)
+//            require(lt <= 0xFFFFFFFFL) {
+//                "crc32=0x" + java.lang.Long.toHexString(lt) + " at pos=0x" + java.lang.Long.toHexString(
+//                    catalogBeginReal
+//                )
+//            }
+//
+//            val xmlcatalog = ByteArray(catalogLengthXml.toInt())
+//            m.get(catalogBeginXml.toInt(), xmlcatalog)
+//            val catalogObj = decodeFromString(String(xmlcatalog))
+//            val rez = mutableListOf<XiObj>()
+//            catalogObj.segments.objectList.segment.filter { it.etype() == ESegmentType.modelElement }
+//                .forEach { segment ->
+//                    val slice = ByteArray(segment.length - 8)
+//                    m.get(segment.offset.toInt() + 8, slice)
+//                    try {
+//                        val xo = XiObj.decodeFromXmlReader(PlatformXmlReader(ByteArrayInputStream(slice), "UTF-8"))
+//                        rez.add(xo)
+//                    } catch (e: UnknownXmlFieldException) {
+//                        Files.createTempFile("xiobj_error_", ".xml").writeBytes(slice)
+//                        throw e
+//                    }
+//                }
+//            m = null
+//            ch.close()
+//            require(!ch.isOpen)
+//            raf.close()
+//            return rez
+//        }
 
         fun readLong(raf: RandomAccessFile, pos: Long): Long {
             val b = ByteArray(8)

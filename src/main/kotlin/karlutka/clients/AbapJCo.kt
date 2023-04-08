@@ -196,7 +196,7 @@ class AbapJCo(override val konfig: KfTarget) : MTarget {
         val data = SPRX_GET_SPROXDAT.exportParameterList.getTable("SPROXDAT")
         data.firstRow()
         do {
-            val type4 = data.getString("OBJECT")    //CLAS
+            val type4 = data.getString("OBJECT")        //CLAS
             val obj_name = data.getString("OBJ_NAME")
             val id = data.getString("ID")
             val ifr_type = data.getString("IFR_TYPE")   //portType, operation, output
