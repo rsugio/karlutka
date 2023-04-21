@@ -1,12 +1,22 @@
 import KT.Companion.ris
 import KT.Companion.x
 import karlutka.parsers.pi.XiMessage
-import karlutka.serialization.KSoap
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.modules.SerializersModule
 import nl.adaptivity.xmlutil.serialization.XML
 import java.io.ByteArrayOutputStream
+import java.net.Authenticator
 import java.net.HttpURLConnection
+import java.net.PasswordAuthentication
+import java.net.URI
 import java.net.URL
+import java.net.http.HttpClient
+import java.net.http.HttpRequest
+import java.net.http.HttpResponse
+import java.net.http.HttpResponse.BodyHandlers
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.time.Duration
 import java.util.*
 import javax.activation.DataHandler
 import javax.mail.Multipart
@@ -14,172 +24,74 @@ import javax.mail.Session
 import javax.mail.internet.*
 import javax.mail.util.ByteArrayDataSource
 import javax.net.ssl.HttpsURLConnection
+import kotlin.io.path.outputStream
 import kotlin.test.Test
 
 
 class KXiMessageTest {
-    val xmlserializer = XML(KSoap.xmlmodule) {
+    val xmlmodule = SerializersModule {
+    }
+
+    val xmlserializer = XML(xmlmodule) {
         autoPolymorphic = true
     }
 
-    @Test
-    fun constructor() {
-        val messageid = "00000000-0000-0000-0000-000000000025"
-        val datetime = "2023-04-14T11:31:01Z"
-        val sender = XiMessage.PartyService(XiMessage.Party(), "BC_TEST1")
-        val receiver = XiMessage.PartyService(XiMessage.Party(), "")
-        val iface = XiMessage.Interface("urn:none", "SI_OutAsync")
-        val payload = "<РусскиеБуквыПобеждаютЪ> С ПЯТНИЦЕЙ!  </РусскиеБуквыПобеждаютЪ>"
-        val dyn = XiMessage.DynamicConfiguration(listOf(
-            XiMessage.Record("urn:nlmk", "NLMK1", "РусскиеБуквы в DC"),
-            XiMessage.Record("urn:sapintegration", "FRIDAY_20230414", "РусскиеБуквы в DC"),
-            )
-        )
-        val _msid = messageid.replace("-", "")
-        val cidSoap = "soap-$_msid@sap.com"
-        val cidPayl = "payload-$_msid@sap.com"
-        val cidAttach1 = "attach1-$_msid@sap.com"
-        val cidAttach2 = "attach2-$_msid@sap.com"
-        val cidAttach3 = "attach3-$_msid@sap.com"
+    fun postXI(contentType: String, path: Path) {
+        val url = KT.urlS4
+        val auth = KT.authS4
 
-        val main = XiMessage.Main(
-            3, 1, 1, null, "ApplicationMessage", "asynchronous", messageid, null, datetime,
-            sender, receiver, iface
-        )
-
-        val eo = XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnce)
-        //val eoio = XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnceInOrder, "_FRIDAY")
-
-        val payload1 = XiMessage.Payload("simple", "cid:$cidPayl", "Main20230414", XiMessage.PayloadType.Application)
-        val attachment1 = XiMessage.Payload("simple", "cid:$cidAttach1", "Attachment1", XiMessage.PayloadType.ApplicationAttachment)
-        val attachment2 = XiMessage.Payload("simple", "cid:$cidAttach2", "Attachment2", XiMessage.PayloadType.ApplicationAttachment)
-        val attachment3 = XiMessage.Payload("simple", "cid:$cidAttach3", "Attachment3", XiMessage.PayloadType.ApplicationAttachment)
-        val manifest = XiMessage.Manifest(null, listOf(payload1, attachment1, attachment2, attachment3))
-        val envelope = XiMessage.Envelope(XiMessage.Header(main, eo, dyn), XiMessage.Body(manifest))
-        val smain = xmlserializer.encodeToString(envelope) + "\n"
-
-        val mp: MimeMultipart = MimeMultipart("related")
-        val ct = ContentType(mp.contentType)
-        val boundary = ct.getParameter("boundary")
-
-        val pSoap = MimeBodyPart(headers(cidSoap, "text/xml; charset=utf-8", "attachment; filename=\"$cidSoap.xml\""), smain.encodeToByteArray())
-        val pPayl = MimeBodyPart(headers(cidPayl, "application/xml; charset=utf-8", "attachment; filename=\"Payload.xml\""), payload.toByteArray())
-        val pAtt1 = MimeBodyPart(headers(cidAttach1, "text/plain; charset=utf-8", "attachment; filename=\"Att1.xml\""), "Русскiя  1111111111 аттача1".toByteArray())
-        val pAtt2 = MimeBodyPart(headers(cidAttach2, "text/plain; charset=utf-8", "attachment; filename=\"Att2.xml\""), "Русскiя 2 22222 аттача2".toByteArray())
-        val pAtt3 = MimeBodyPart(headers(cidAttach3, "text/plain; charset=utf-8", "attachment; filename=\"Att3.xml\""), "Русскiя 3333 аттача3".toByteArray())
-        mp.addBodyPart(pSoap)
-        mp.addBodyPart(pPayl)
-        mp.addBodyPart(pAtt1)
-        mp.addBodyPart(pAtt2)
-        mp.addBodyPart(pAtt3)
-
-        val ct2 = "multipart/related; boundary=\"$boundary\""
-        println()
-
-        val baos = ByteArrayOutputStream(16384)
-        mp.writeTo(baos)
-        baos.close()
-
-        println(messageid)
-        println(String(baos.toByteArray()))
-
-        if (true) {
-            println("************************************ Kotlin -> PO 7.5")
-            var con = URL(KT.testPO).openConnection() as HttpURLConnection
-            con.addRequestProperty("Content-Type", ct2)
-            con.addRequestProperty("Authorization", KT.authPO)
-            con.doOutput = true
-            con.connect()
-            var os = con.getOutputStream()
-            os.write(baos.toByteArray())
-            os.close()
-            var rc = con.responseCode
-            println(rc)
-
-            var iss = if (rc < 300) con.inputStream else con.errorStream
-            var ba = iss.readAllBytes()
-            println(String(ba))
-            iss.close()
-        }
-        if (false) {
-            println("************************************ Kotlin -> CPI Neo")
-            var con = URL(KT.testCPI).openConnection() as HttpsURLConnection
-            println(ct2)
-            con.addRequestProperty("Content-Type", ct2)
-            con.addRequestProperty("Authorization", KT.authCPI)
-            con.doOutput = true
-            con.connect()
-            var os = con.getOutputStream()
-            os.write(baos.toByteArray())
-            os.close()
-            var rc = con.responseCode
-            println(rc)
-
-            var iss = if (rc < 300) con.inputStream else con.errorStream
-            var ba = iss.readAllBytes()
-            println(String(ba))
-            iss.close()
-        }
-        if (false) {
-            println("************************************ Kotlin -> S4")
-            var con = URL(KT.testS4).openConnection() as HttpURLConnection
-            println(ct2)
-            con.addRequestProperty("Content-Type", ct2)
-            con.addRequestProperty("Authorization", KT.authS4)
-            con.doOutput = true
-            con.connect()
-            var os = con.getOutputStream()
-            os.write(baos.toByteArray())
-            os.close()
-            var rc = con.responseCode
-            println(rc)
-
-            var iss = if (rc < 300) con.inputStream else con.errorStream
-            var ba = iss.readAllBytes()
-            println(String(ba))
-            iss.close()
-        }
+        val client: HttpClient = HttpClient.newBuilder()
+            .version(HttpClient.Version.HTTP_1_1)
+            .followRedirects(HttpClient.Redirect.NORMAL)
+            .connectTimeout(Duration.ofSeconds(10))
+            .authenticator(auth)
+            .build()
+        val request: HttpRequest = HttpRequest.newBuilder()
+            .uri(URI.create(url))
+            .header("Content-Type", contentType)
+            .POST(HttpRequest.BodyPublishers.ofFile(path))
+            .build()
+        println(request.method() + " " + request.uri())
+        println(request.headers())
+        println("----------------------------------------------------")
+        val response: HttpResponse<String> = client.send(request, BodyHandlers.ofString())
+        println(response)
+        println(response.headers())
+        println(response.body())
     }
+
     @Test
     fun constructorS4() {
-        val messageid = "00000000-0000-0000-0000-000000000021"
-        val datetime = "2023-04-14T11:31:01Z"
-        val sender = XiMessage.PartyService(XiMessage.Party(), "TEST", XiMessage.Interface("", ""))
-        val iface = XiMessage.Interface("urn:nlmk:po:I:ERP-SD:Reports:Report", "SI_RequestReport_InAsync")
-        val receiver = XiMessage.PartyService(XiMessage.Party(), "DER200", iface)
-        val payload = """<ns0:MT_RequestReport xmlns:ns0="urn:nlmk:po:I:ERP-SD:Reports:Report">
-<SESSION_ID>$messageid</SESSION_ID>
-</ns0:MT_RequestReport>"""
-
-        val _msid = messageid.replace("-", "")
-        val cidSoap = "soap-$_msid@sap.com"
-        val cidPayl = "payload-$_msid@sap.com"
-
         val main = XiMessage.Main(
-            3, 1, 1, null, "ApplicationMessage", "asynchronous", messageid, null, datetime,
-            sender, null, iface
+            3, 1, XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.asynchronous,
+            "00000000-0000-0000-0000-000000000033", null, "2023-04-14T11:31:01Z",
+            XiMessage.PartyService(XiMessage.Party(), "TEST", XiMessage.Interface("", "")),
+            null,
+            XiMessage.Interface("urn:nlmk:po:I:ERP-SD:Reports:Report", "SI_RequestReport_InAsync")
         )
+        val ximsg = XiMessage(XiMessage.Header(null, main, XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnce)))
+        ximsg.setPayload("""<ns0:MT_RequestReport xmlns:ns0="urn:nlmk:po:I:ERP-SD:Reports:Report">
+<SESSION_ID>00000000-0000-0000-0000-000000000021</SESSION_ID></ns0:MT_RequestReport>""".toByteArray(), "text/xml; charset=utf-8")
+        val tmp = Paths.get("build/tmp.mime")
+        ximsg.writeTo(tmp.outputStream())
+        postXI(ximsg.getContentType(), tmp)
+    }
 
-        val eo = XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnce)
-
-        val payload1 = XiMessage.Payload("simple", "cid:$cidPayl", "MainDocument", XiMessage.PayloadType.Application)
-        val manifest = XiMessage.Manifest(null, listOf(payload1))
-        val envelope = XiMessage.Envelope(XiMessage.Header(main, eo), XiMessage.Body(manifest))
-        val smain = xmlserializer.encodeToString(envelope) + "\n"
-
-        val mp: MimeMultipart = MimeMultipart("related")
-        val ct = ContentType(mp.contentType)
-        val boundary = ct.getParameter("boundary")
-
-        val pSoap = MimeBodyPart(headers(cidSoap, "text/xml; charset=utf-8", "attachment; filename=\"$cidSoap.xml\""), smain.encodeToByteArray())
-        val pPayl = MimeBodyPart(headers(cidPayl, "application/xml; charset=utf-8", "attachment; filename=\"Payload.xml\""), payload.toByteArray())
-        mp.addBodyPart(pSoap)
-        mp.addBodyPart(pPayl)
-
-        val ct2 = "multipart/related; boundary=\"$boundary\""
-        println(messageid)
-        println(ct2)
-        mp.writeTo(System.out)
+    @Test
+    fun constructorPO() {
+        val main = XiMessage.Main(
+            3, 1, XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.asynchronous,
+            "00000000-0000-0000-0000-000000000030", null, "2023-04-14T11:31:01Z",
+            XiMessage.PartyService(XiMessage.Party(), "BC_TEST1"),
+            XiMessage.PartyService(XiMessage.Party(), ""),
+            XiMessage.Interface("urn:none", "SI_OutAsync")
+        )
+        val ximsg = XiMessage(XiMessage.Header(null, main, XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnce)))
+        ximsg.setPayload("""<ns0:MT_RequestReport xmlns:ns0="urn:nlmk:po:I:ERP-SD:Reports:Report">
+<SESSION_ID>00000000-0000-0000-0000-000000000021</SESSION_ID></ns0:MT_RequestReport>""".toByteArray(), "text/xml; charset=utf-8")
+        val tmp = Paths.get("build/tmp.mime")
+        ximsg.writeTo(tmp.outputStream())
+        postXI(ximsg.getContentType(), tmp)
     }
 
     fun headers(contentId: String, contentType: String, contentDisposition: String): InternetHeaders {
@@ -195,23 +107,8 @@ class KXiMessageTest {
         println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message1.xml")))
         println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message2.xml")))
         println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message3.xml")))
-    }
-
-    @Test
-    fun compose() {
-        val p1 = MimeBodyPart(ris("/pi_XI/message1.xml"))
-        val p2 = MimeBodyPart(ris("/pi_XI/message1.json"))
-        val mm = MimeMultipart(p1, p2)
-//        println(mm.contentType)
-//        mm.writeTo(System.out)
-        val ms = MimeMessage(Session.getDefaultInstance(Properties()))
-        val pa1 = MimeBodyPart()
-        val mpart: Multipart = MimeMultipart("related", pa1)
-        val soapPart = MimeBodyPart()
-        mpart.addBodyPart(soapPart)
-
-        println(mpart.toString())
-        mpart.writeTo(System.out)
+        println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/systemAck_PO75.xml")))
+        println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/systemAck_S4.xml")))
     }
 
     @Test
@@ -269,3 +166,131 @@ class KXiMessageTest {
     }
 
 }
+
+//    @Test
+//    fun constructor() {
+//        val messageid = "00000000-0000-0000-0000-000000000026"
+//        val datetime = "2023-04-14T11:31:01Z"
+//        val sender = XiMessage.PartyService(XiMessage.Party(), "BC_TEST1")
+//        val receiver = XiMessage.PartyService(XiMessage.Party(), "")
+//        val iface = XiMessage.Interface("urn:none", "SI_OutAsync")
+//        val payload = "<РусскиеБуквыВперёдЪ> Х </РусскиеБуквыВперёдЪ>"
+//        val dyn = XiMessage.DynamicConfiguration(
+//            mutableListOf(
+//                XiMessage.Record("urn:sapintegration", "FRIDAY_20230414", "РусскиеБуквы в DC"),
+//            )
+//        )
+//        val _msid = messageid.replace("-", "")
+//        val cidSoap = "soap-$_msid@sap.com"
+//        val cidPayl = "payload-$_msid@sap.com"
+//        val cidAttach1 = "attach1-$_msid@sap.com"
+//        val cidAttach2 = "attach2-$_msid@sap.com"
+//        val cidAttach3 = "attach3-$_msid@sap.com"
+//
+//        val main = XiMessage.Main(
+//            3, 1, XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.asynchronous, messageid, null, datetime,
+//            sender, receiver, iface
+//        )
+//
+//        val eo = XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnce)
+//        //val eoio = XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnceInOrder, "_FRIDAY")
+//
+//        val payload1 = XiMessage.Payload("simple", "cid:$cidPayl", "Main20230414", XiMessage.PayloadType.Application)
+//        val attachment1 = XiMessage.Payload("simple", "cid:$cidAttach1", "Attachment1", XiMessage.PayloadType.ApplicationAttachment)
+//        val attachment2 = XiMessage.Payload("simple", "cid:$cidAttach2", "Attachment2", XiMessage.PayloadType.ApplicationAttachment)
+//        val attachment3 = XiMessage.Payload("simple", "cid:$cidAttach3", "Attachment3", XiMessage.PayloadType.ApplicationAttachment)
+//        val manifest = XiMessage.Manifest(mutableListOf(payload1, attachment1, attachment2, attachment3))
+//        val envelope = XiMessage.Envelope(XiMessage.Header(main, eo, dyn), XiMessage.Body(manifest))
+//        val smain = xmlserializer.encodeToString(envelope) + "\n"
+//
+//        val mp: MimeMultipart = MimeMultipart("related")
+//        val ct = ContentType(mp.contentType)
+//        val boundary = ct.getParameter("boundary")
+//
+//        val pSoap = MimeBodyPart(headers(cidSoap, "text/xml; charset=utf-8", "attachment; filename=\"$cidSoap.xml\""), smain.encodeToByteArray())
+//        val pPayl = MimeBodyPart(headers(cidPayl, "application/xml; charset=utf-8", "attachment; filename=\"Payload.xml\""), payload.toByteArray())
+//        val pAtt1 = MimeBodyPart(
+//            headers(cidAttach1, "text/plain; charset=utf-8", "attachment; filename=\"Att1.xml\""),
+//            "Русскiя  1111111111 аттача1".toByteArray()
+//        )
+//        val pAtt2 = MimeBodyPart(
+//            headers(cidAttach2, "text/plain; charset=utf-8", "attachment; filename=\"Att2.xml\""),
+//            "Русскiя 2 22222 аттача2".toByteArray()
+//        )
+//        val pAtt3 =
+//            MimeBodyPart(headers(cidAttach3, "text/plain; charset=utf-8", "attachment; filename=\"Att3.xml\""), "Русскiя 3333 аттача3".toByteArray())
+//        mp.addBodyPart(pSoap)
+//        mp.addBodyPart(pPayl)
+//        mp.addBodyPart(pAtt1)
+//        mp.addBodyPart(pAtt2)
+//        mp.addBodyPart(pAtt3)
+//
+//        val ct2 = "multipart/related; boundary=\"$boundary\""
+//        println()
+//
+//        val baos = ByteArrayOutputStream(16384)
+//        mp.writeTo(baos)
+//        baos.close()
+//
+//        println(messageid)
+//        println(ct2)
+//
+//        //println(String(baos.toByteArray()))
+//
+//        if (false) {
+//            println("************************************ Kotlin -> PO 7.5")
+//            var con = URL(KT.testPO).openConnection() as HttpURLConnection
+//            con.addRequestProperty("Content-Type", ct2)
+//            con.addRequestProperty("Authorization", KT.authPO)
+//            con.doOutput = true
+//            con.connect()
+//            var os = con.getOutputStream()
+//            os.write(baos.toByteArray())
+//            os.close()
+//            var rc = con.responseCode
+//            println(rc)
+//
+//            var iss = if (rc < 300) con.inputStream else con.errorStream
+//            var ba = iss.readAllBytes()
+//            println(String(ba))
+//            iss.close()
+//        }
+//        if (true) {
+//            println("************************************ Kotlin -> CPI Neo")
+//            var con = URL(KT.testCPI).openConnection() as HttpsURLConnection
+//            println(ct2)
+//            con.addRequestProperty("Content-Type", ct2)
+//            con.addRequestProperty("Authorization", KT.authCPI)
+//            con.doOutput = true
+//            con.connect()
+//            var os = con.getOutputStream()
+//            os.write(baos.toByteArray())
+//            os.close()
+//            var rc = con.responseCode
+//            println(rc)
+//
+//            var iss = if (rc < 300) con.inputStream else con.errorStream
+//            var ba = iss.readAllBytes()
+//            println(String(ba))
+//            iss.close()
+//        }
+//        if (false) {
+//            println("************************************ Kotlin -> S4")
+//            var con = URL(KT.testS4).openConnection() as HttpURLConnection
+//            println(ct2)
+//            con.addRequestProperty("Content-Type", ct2)
+//            con.addRequestProperty("Authorization", KT.authS4)
+//            con.doOutput = true
+//            con.connect()
+//            var os = con.getOutputStream()
+//            os.write(baos.toByteArray())
+//            os.close()
+//            var rc = con.responseCode
+//            println(rc)
+//
+//            var iss = if (rc < 300) con.inputStream else con.errorStream
+//            var ba = iss.readAllBytes()
+//            println(String(ba))
+//            iss.close()
+//        }
+//    }

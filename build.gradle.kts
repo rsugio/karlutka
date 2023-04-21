@@ -91,10 +91,6 @@ tasks.test {
     useJUnitPlatform()
 }
 
-//tasks.withType<KotlinCompile> {
-//    kotlinOptions.jvmTarget = "11"
-//}
-
 application {
     applicationDefaultJvmArgs = listOf("-Xms64m -Xmx196m")
     mainClass.set("MainKt")
@@ -116,6 +112,12 @@ val shadowJar: ShadowJar by tasks
 shadowJar.apply {
 //    dependencies {
 //    }
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of("11"))
+    }
 }
 
 tasks.withType<JavaCompile> {

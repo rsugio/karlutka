@@ -1,20 +1,81 @@
 package karlutka.parsers.pi
 
+import karlutka.serialization.KSoap.Companion.xmlserializer
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
 import nl.adaptivity.xmlutil.dom.Element
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
+import java.io.OutputStream
+import javax.mail.internet.ContentType
+import javax.mail.internet.InternetHeaders
+import javax.mail.internet.MimeBodyPart
+import javax.mail.internet.MimeMultipart
 
 const val xmlnsSOAP: String = "http://schemas.xmlsoap.org/soap/envelope/"
 const val xmlnsXI30: String = "http://sap.com/xi/XI/Message/30"
 const val xmlnsXI30prefix: String = "SAP"
 
 class XiMessage {
-    enum class PayloadType {Application, ApplicationAttachment}
-    enum class QOS {ExactlyOnce, ExactlyOnceInOrder}
+    enum class PayloadType { Application, ApplicationAttachment }
+    enum class QOS { ExactlyOnce, ExactlyOnceInOrder, BestEffort }
+    enum class MessageClass { ApplicationMessage, ApplicationResponse, SystemAck }
+    enum class ProcessingMode { asynchronous, synchronous }
+
+    val mp = MimeMultipart("related")
+    private val ct = ContentType(mp.contentType)
+    val boundary = ct.getParameter("boundary")
+    val payloadHrefs = mutableMapOf<String, Payload>()
+    val header: Header
+    val payloadBodies = mutableMapOf<String, MimeBodyPart>()
+
+    private val _msid: String
+    private val _cidSAP: String
+    private val _cidPayload: String
+
+    constructor(h: Header) {
+        this.header = h
+        _msid = h.Main.MessageId.replace("-", "")
+        _cidSAP = "soap-$_msid@sap.com"
+        _cidPayload = "payload-$_msid@sap.com"
+    }
+
+    fun setPayload(body: ByteArray, contentType: String, description: String? = null) {
+        val payload = Payload("simple", "cid:$_cidPayload", "Payload", PayloadType.Application, description)
+        payloadHrefs.put(_cidPayload, payload)
+
+        val ih = InternetHeaders()
+        ih.addHeader("Content-ID", "<$_cidPayload>")
+        ih.addHeader("Content-Type", contentType)
+        ih.addHeader("Content-Disposition", "attachment; filename=\"Payload.xml\"")
+        payloadBodies.put(_cidPayload, MimeBodyPart(ih, body))
+    }
+
+    fun writeTo(o: OutputStream) {
+        val manifest = Manifest(payloadHrefs.values.toMutableList())
+        val envelope = Envelope(header, Body(manifest))
+        val smain = xmlserializer.encodeToString(envelope) + "\n"
+
+        val ih = InternetHeaders()
+        ih.addHeader("Content-ID", "<$_cidSAP>")
+        ih.addHeader("Content-Type", "text/xml; charset=utf-8")
+        ih.addHeader("Content-Disposition", "attachment; filename=\"soap-$_msid.xml\"")
+        val mbpSAP = MimeBodyPart(ih, smain.toByteArray())
+        mp.addBodyPart(mbpSAP)
+
+        payloadBodies.forEach { (k, mbp) ->
+            mp.addBodyPart(mbp)
+        }
+        mp.writeTo(o)
+    }
+
+    fun getContentType(): String {
+        val boundary = ct.getParameter("boundary")
+        return "multipart/related; boundary=\"$boundary\""
+    }
 
     @Serializable
     @XmlSerialName("Envelope", xmlnsSOAP, "SOAP")
@@ -29,38 +90,51 @@ class XiMessage {
     @XmlSerialName("Header", xmlnsSOAP, "SOAP")
     class Header(
         @XmlElement(true)
+        val Ack: Ack? = null,
+        @XmlElement(true)
         val Main: Main,
         @XmlElement(true)
-        val ReliableMessaging: ReliableMessaging,
+        val ReliableMessaging: ReliableMessaging? = null,           // нет для Ack
         @XmlElement(true)
-        val DynamicConfiguration: DynamicConfiguration? = null,
+        var DynamicConfiguration: DynamicConfiguration? = null,
         @XmlElement(true)
-        val System: System? = null,
+        var System: System? = null,
         @XmlElement(true)
-        val Diagnostic: Diagnostic? = null,
+        var Diagnostic: Diagnostic? = null,
         @XmlElement(true)
-        val HopList: HopList? = null,
+        var HopList: HopList? = null,
         @XmlElement(true)
-        val Passport: Passport? = null,
+        var Passport: Passport? = null,
         @XmlElement(true)
         @XmlSerialName("RunTime", xmlnsXI30, xmlnsXI30prefix)
         @Contextual
-        val RunTime: CompactFragment? = null,
+        var RunTime: CompactFragment? = null,
         @XmlElement(true)
         @XmlSerialName("PerformanceHeader", xmlnsXI30, xmlnsXI30prefix)
         @Contextual
-        val PerformanceHeader: CompactFragment? = null,
+        var PerformanceHeader: CompactFragment? = null,
         @XmlElement(true)
         @XmlSerialName("Trace", xmlnsXI30, xmlnsXI30prefix)
         @Contextual
-        val Trace: CompactFragment? = null,
+        var Trace: CompactFragment? = null,
     )
 
     @Serializable
     @XmlSerialName("Body", xmlnsSOAP, "SOAP")
     class Body(
         @XmlElement(true)
-        val Manifest: Manifest,
+        val Manifest: Manifest? = null          // нет для Ack
+    )
+
+    @Serializable
+    @XmlSerialName("Ack", xmlnsXI30, xmlnsXI30prefix)
+    class Ack(
+        @XmlElement(true)
+        val Status: String,                     // OK
+        @XmlElement(true)
+        val Category: String? = null,           // permanent for ABAP, null for Java
+        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
+        val soapMustUnderstand: Int = 1,
     )
 
     @Serializable
@@ -68,14 +142,12 @@ class XiMessage {
     class Main(
         val versionMajor: Int = 3,
         val versionMinor: Int = 1,
-        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
-        val soapMustUnderstand: Int = 1,
-        @XmlSerialName("Id", "http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", "wsu")
-        val wsuId: String? = null,
         @XmlElement(true)
-        val MessageClass: String, // = "ApplicationMessage",
+        @XmlSerialName("MessageClass", xmlnsXI30, xmlnsXI30prefix)
+        val MessageClass: MessageClass, // = "ApplicationMessage",
         @XmlElement(true)
-        val ProcessingMode: String, // = "asynchronous",
+        @XmlSerialName("ProcessingMode", xmlnsXI30, xmlnsXI30prefix)
+        val ProcessingMode: ProcessingMode, // = "asynchronous",
         @XmlElement(true)
         val MessageId: String,
         @XmlElement(true)
@@ -90,6 +162,11 @@ class XiMessage {
         val Receiver: PartyService? = null,
         @XmlElement(true)
         val Interface: Interface? = null,
+        // атрибуты по умолчанию - в конце
+        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
+        val soapMustUnderstand: Int = 1,
+        @XmlSerialName("Id", "http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", "wsu")
+        val wsuId: String? = null,
     )
 
     @Serializable
@@ -134,11 +211,11 @@ class XiMessage {
     @Serializable
     @XmlSerialName("System", xmlnsXI30, xmlnsXI30prefix)
     class System(
-        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
-        val soapMustUnderstand: Int = 1,
         @XmlElement(true)
         @XmlSerialName("Record", xmlnsXI30, xmlnsXI30prefix)
-        val Record: List<Record>
+        val Record: MutableList<Record> = mutableListOf(),
+        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
+        val soapMustUnderstand: Int = 1,
     )
 
     @Serializable
@@ -153,22 +230,22 @@ class XiMessage {
     @Serializable
     @XmlSerialName("Diagnostic", xmlnsXI30, xmlnsXI30prefix)
     class Diagnostic(
-        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
-        val soapMustUnderstand: Int = 1,
         @XmlElement(true)
         val TraceLevel: String,
         @XmlElement(true)
         val Logging: String,
+        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
+        val soapMustUnderstand: Int = 1,
     )
 
     @Serializable
     @XmlSerialName("HopList", xmlnsXI30, xmlnsXI30prefix)
     class HopList(
-        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
-        val soapMustUnderstand: Int = 1,
         @XmlElement(true)
         @XmlSerialName("Hop", xmlnsXI30, xmlnsXI30prefix)
-        val HopList: List<Hop>
+        val HopList: MutableList<Hop> = mutableListOf(),
+        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
+        val soapMustUnderstand: Int = 1,
     )
 
     @Serializable
@@ -214,7 +291,7 @@ class XiMessage {
     @XmlSerialName("DynamicConfiguration", xmlnsXI30, xmlnsXI30prefix)
     class DynamicConfiguration(
         @XmlElement(true)
-        val Record: List<Record>,
+        val Record: MutableList<Record> = mutableListOf(),
         @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
         val soapMustUnderstand: Int = 1,
     )
@@ -222,11 +299,11 @@ class XiMessage {
     @Serializable
     @XmlSerialName("Manifest", xmlnsXI30, xmlnsXI30prefix)
     class Manifest(
-        @XmlSerialName("Id", "http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", "wsu")
-        val wsuId: String? = null,
         @XmlElement(true)
         @XmlSerialName("Payload", xmlnsXI30, xmlnsXI30prefix)
-        val Payload: List<Payload>
+        val Payload: MutableList<Payload> = mutableListOf(),
+        @XmlSerialName("Id", "http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd", "wsu")
+        val wsuId: String? = null,
     )
 
     @Serializable
@@ -248,6 +325,6 @@ class XiMessage {
     @XmlSerialName("RunTime", xmlnsXI30, xmlnsXI30prefix)
     class RunTime(                      // Только в абапе
         @XmlValue(true)
-        val content: List<Element>
+        val content: MutableList<Element> = mutableListOf()
     )
 }
