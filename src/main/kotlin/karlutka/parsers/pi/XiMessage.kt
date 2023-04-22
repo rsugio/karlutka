@@ -29,7 +29,7 @@ class XiMessage {
     private val ct = ContentType(mp.contentType)
     val boundary = ct.getParameter("boundary")
     val payloadHrefs = mutableMapOf<String, Payload>()
-    val header: Header
+    val header: Header?                 // нет для Fault
     val payloadBodies = mutableMapOf<String, MimeBodyPart>()
 
     private val _msid: String
@@ -57,7 +57,7 @@ class XiMessage {
     fun writeTo(o: OutputStream) {
         val manifest = Manifest(payloadHrefs.values.toMutableList())
         val envelope = Envelope(header, Body(manifest))
-        val smain = xmlserializer.encodeToString(envelope) + "\n"
+        val smain = xmlserializer.encodeToString(envelope)
 
         val ih = InternetHeaders()
         ih.addHeader("Content-ID", "<$_cidSAP>")
@@ -81,22 +81,45 @@ class XiMessage {
     @XmlSerialName("Envelope", xmlnsSOAP, "SOAP")
     class Envelope(
         @XmlElement(true)
-        val Header: Header,
+        val Header: Header? = null,             // нет для Fault
         @XmlElement(true)
         val Body: Body,
+    )
+
+    @Serializable
+    @XmlSerialName("Body", xmlnsSOAP, "SOAP")
+    class Body(
+        @XmlElement(true)
+        val Manifest: Manifest? = null,          // нет для Ack и Fault
+        @XmlElement(true)
+        val Fault: Fault? = null
+    )
+
+    @Serializable
+    @XmlSerialName("Fault", xmlnsSOAP, "SOAP")
+    class Fault(
+        @XmlElement(true)
+        @XmlSerialName("faultcode", "", "")
+        val faultcode: String,
+        @XmlElement(true)
+        @XmlSerialName("faultstring", "", "")
+        val faultstring: String,
+        @XmlElement(true)
+        @XmlSerialName("detail", "", "")
+        val detail: Detail
     )
 
     @Serializable
     @XmlSerialName("Header", xmlnsSOAP, "SOAP")
     class Header(
         @XmlElement(true)
-        val Ack: Ack? = null,
-        @XmlElement(true)
         val Main: Main,
         @XmlElement(true)
         val ReliableMessaging: ReliableMessaging? = null,           // нет для Ack
         @XmlElement(true)
         var DynamicConfiguration: DynamicConfiguration? = null,
+        @XmlElement(true)
+        val Ack: Ack? = null,
         @XmlElement(true)
         var System: System? = null,
         @XmlElement(true)
@@ -120,11 +143,35 @@ class XiMessage {
     )
 
     @Serializable
-    @XmlSerialName("Body", xmlnsSOAP, "SOAP")
-    class Body(
+    class Detail(
         @XmlElement(true)
-        val Manifest: Manifest? = null          // нет для Ack
+        val error: Error? = null,
     )
+
+    @Serializable
+    @XmlSerialName("Error", xmlnsXI30, xmlnsXI30prefix)
+    class Error(
+        @XmlElement(true)
+        val Category: String,
+        @XmlElement(true)
+        val Code: String,
+        @XmlElement(true)
+        val P1: String,
+        @XmlElement(true)
+        val P2: String,
+        @XmlElement(true)
+        val P3: String,
+        @XmlElement(true)
+        val P4: String,
+        @XmlElement(true)
+        val AdditionalText: String,
+        @XmlElement(true)
+        val Stack: String,
+
+        @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
+        val soapMustUnderstand: Int = 1,
+    )
+
 
     @Serializable
     @XmlSerialName("Ack", xmlnsXI30, xmlnsXI30prefix)
@@ -204,6 +251,12 @@ class XiMessage {
         val QualityOfService: QOS,
         @XmlElement(true)
         val QueueId: String? = null,
+
+        val ApplicationAckRequested: Boolean? = null,
+        val ApplicationErrorAckRequested: Boolean? = null,
+        val SystemAckRequested: Boolean? = null,
+        val SystemErrorAckRequested: Boolean? = null,
+
         @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
         val soapMustUnderstand: Int = 1
     )

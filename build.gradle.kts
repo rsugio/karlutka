@@ -101,7 +101,7 @@ publishing {//https://docs.gradle.org/current/userguide/publishing_maven.html
         create<MavenPublication>("maven") {
             groupId = "io.rsug"
             artifactId = "karlutka"
-            version = "0.2.1alpha"
+            version = "0.2.2"
 
             from(components["java"])
         }
