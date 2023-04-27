@@ -39,7 +39,7 @@
 				<SAP:Info>3.0</SAP:Info>
 			</SAP:Hop>
 			<SAP:Hop timeStamp="2023-04-06T10:22:01Z" wasRead="false">
-				<SAP:Engine type="AE">af.dph.ld-s-devpihdb</SAP:Engine>
+				<SAP:Engine type="AE">af.dph.ld-s-vendordb</SAP:Engine>
 				<SAP:Adapter namespace="http://sap.com/xi/XI/System">XIRA</SAP:Adapter>
 				<SAP:MessageId>005056bf-38e0-1edd-b58c-9b5814a5e450</SAP:MessageId>
 			</SAP:Hop>
