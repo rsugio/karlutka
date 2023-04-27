@@ -50,10 +50,10 @@ object KtorServer {
             }
             install(Compression) {
                 gzip {
-                    priority = 1.0
+                    priority = 0.1
                 }
                 deflate {
-                    priority = 10.0
+                    priority = 0.1
                     minimumSize(1024) // condition
                 }
             }
@@ -61,11 +61,11 @@ object KtorServer {
             install(DefaultHeaders) {
                 header("engine", "karlutka2")
             }
-            install(PartialContent) {
-                // Maximum number of ranges that will be accepted from a HTTP request.
-                // If the HTTP request specifies more ranges, they will all be merged into a single range.
-                maxRangeCount = 10
-            }
+//            install(PartialContent) {
+//                // Maximum number of ranges that will be accepted from a HTTP request.
+//                // If the HTTP request specifies more ranges, they will all be merged into a single range.
+//                maxRangeCount = 10
+//            }
             install(CallLogging) {
                 level = Level.INFO
                 filter { call -> call.request.path().startsWith("/") }

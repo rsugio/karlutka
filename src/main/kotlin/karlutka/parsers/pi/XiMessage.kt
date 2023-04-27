@@ -1,19 +1,22 @@
 package karlutka.parsers.pi
 
-import karlutka.serialization.KSoap.Companion.xmlserializer
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.modules.SerializersModule
 import nl.adaptivity.xmlutil.PlatformXmlReader
 import nl.adaptivity.xmlutil.dom.Element
+import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
 import java.io.OutputStream
 import java.nio.charset.StandardCharsets
-import java.util.UUID
+import java.time.Instant
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import javax.mail.internet.ContentType
 import javax.mail.internet.InternetHeaders
 import javax.mail.internet.MimeBodyPart
@@ -26,12 +29,29 @@ const val xmlnsXI30prefix: String = "SAP"
 
 class XiMessage {
     enum class PayloadType { Application, ApplicationAttachment }
-    enum class QOS { ExactlyOnce, ExactlyOnceInOrder, BestEffort }
+    enum class QOS {
+        ExactlyOnce {
+            override fun isAsync() = true
+            override fun toShort() = "EO"
+        },
+        ExactlyOnceInOrder {
+            override fun isAsync() = true
+            override fun toShort() = "EOIO"
+        },
+        BestEffort {
+            override fun isAsync() = false
+            override fun toShort() = "BE"
+        };
+
+        abstract fun isAsync(): Boolean
+        abstract fun toShort(): String
+    }
+
     enum class MessageClass { ApplicationMessage, ApplicationResponse, SystemAck }
     enum class ProcessingMode { asynchronous, synchronous }
 
     val mp: MimeMultipart
-    val ct: ContentType
+    val ct: javax.mail.internet.ContentType
     val boundary: String
     val payloadHrefs = mutableMapOf<String, Payload>()
     val payloadBodies = mutableMapOf<String, MimeBodyPart>()
@@ -49,7 +69,17 @@ class XiMessage {
         this.header = h
         this.fault = null
         // Если требуется выдать ответ с ошибкой как из абапа, то _msid можно делать пустым и не выдавать multipart/related
-        this._msid = h.Main!!.MessageId.replace("-", "")
+        this._msid = header.Main!!.MessageId.replace("-", "")
+    }
+
+    constructor(e: Envelope) {
+        this.mp = MimeMultipart("related")
+        this.ct = ContentType(mp.contentType)
+        this.boundary = ct.getParameter("boundary")
+
+        this.header = e.Header
+        this.fault = null
+        this._msid = header!!.Main!!.MessageId.replace("-", "")
     }
 
     constructor(f: Fault) {
@@ -123,6 +153,39 @@ class XiMessage {
         payloadBodies.put(_cid, MimeBodyPart(ih, body))
     }
 
+    fun systemAck(messageId: String, timeSent: String, status: String): Envelope {
+        val ack = Ack(status)
+        val inpm = header!!.Main!!
+        val main = Main(
+            MessageClass.SystemAck, ProcessingMode.synchronous, messageId,
+            inpm.MessageId,
+            timeSent,
+            PartyService(Party(null), ""),
+            inpm.Sender,
+            inpm.Interface
+        )
+        return Envelope(Header(main, null, null, ack), Body())
+    }
+
+    fun applicationResponse(messageId: String, timeSent: String): XiMessage {
+        val inpm = header!!.Main!!
+        val main = Main(
+            MessageClass.ApplicationResponse, ProcessingMode.synchronous, messageId,
+            inpm.MessageId,
+            timeSent,
+            PartyService(Party(null), ""),
+            inpm.Sender,
+            inpm.Interface
+        )
+        val rm = ReliableMessaging(QOS.BestEffort)
+        val xiDC = DynamicConfiguration(mutableListOf(Record("urn:demo", "demo", "ДЕМО")))
+        val rez = Envelope(Header(main, rm, xiDC), Body(Manifest()))
+        val xi = XiMessage(rez)
+        xi.setPayload("<Результат/>".toByteArray(), "text/xml; charset=UTF-8")
+        xi.addAttachment("ЗАЗАЗАЗАЗАЗАЗАЗА".toByteArray(), "text/plain; charset=UTF-8")
+        return xi
+    }
+
     fun writeTo(o: OutputStream) {
         //TODO Нужна развилка для Fault и нет
         if (!writeFinished) {
@@ -146,6 +209,7 @@ class XiMessage {
     }
 
     fun getContentType(): String {
+        //TODO добавить сюда start и кодировку
         val boundary = ct.getParameter("boundary")
         return "multipart/related; boundary=\"$boundary\""
     }
@@ -157,7 +221,9 @@ class XiMessage {
         val Header: Header? = null,             // нет для Fault
         @XmlElement(true)
         val Body: Body,
-    )
+    ) {
+        fun encodeToString() = xmlserializer.encodeToString(this)
+    }
 
     @Serializable
     @XmlSerialName("Body", xmlnsSOAP, "SOAP")
@@ -465,4 +531,15 @@ class XiMessage {
         @XmlValue(true)
         val content: MutableList<Element> = mutableListOf()
     )
+
+    companion object {
+        private val xmlmodule = SerializersModule {
+        }
+        private val xmlserializer = XML(xmlmodule) {
+            autoPolymorphic = true
+        }
+
+        fun dateTimeSentNow() = DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MILLIS))
+
+    }
 }

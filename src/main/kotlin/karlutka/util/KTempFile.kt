@@ -11,19 +11,29 @@ object KTempFile {
     fun start() {
         if (Files.isDirectory(tempFolder)) {
             tempFolder.forEachDirectoryEntry {
-                Files.delete(it)
+                if (Files.isDirectory(it)) {
+                    it.forEachDirectoryEntry { Files.delete(it) }
+                } else
+                    Files.delete(it)
             }
         } else {
             //TODO для линупса прописать права rw-rw-r--
             Files.createDirectory(tempFolder)
         }
-
     }
 
     fun getTempFileXml(prefix: String) = Files.createTempFile(tempFolder, prefix, ".xml")
     fun getTempFileXiObj() = Files.createTempFile(tempFolder, "xiobj_", ".xml")
     fun getTempFileTpt() = Files.createTempFile(tempFolder, "tpt_", ".bin")
     fun getTempFileZip() = Files.createTempFile(tempFolder, "zip_", ".zip")
+    fun getTempFileXI(qos: String, queue: String? = null, messageId: String): Path {
+        val xif = tempFolder.resolve("XI")
+        if (!Files.isDirectory(xif)) Files.createDirectory(xif)
+        if (queue==null)
+            return xif.resolve("${qos}_$messageId.mime")
+        else
+            return xif.resolve("${qos}_${queue}_$messageId.mime")
+    }
 
     fun task(): Path {
         val path: Path = Files.createTempFile(tempFolder, "task", ".xml")

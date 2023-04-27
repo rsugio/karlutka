@@ -141,7 +141,8 @@ class KXiMessageTest {
 
     @Test
     fun parse_self() {
-        xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message1.xml"))
+        val e1 = xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message1.xml"))
+        println(e1.encodeToString())
         xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message2.xml"))
         xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message3.xml"))
         xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message4.xml"))

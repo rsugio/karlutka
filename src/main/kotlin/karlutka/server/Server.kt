@@ -1,11 +1,17 @@
 package karlutka.server
 
+import com.fasterxml.uuid.Generators
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import karlutka.clients.PI
 import karlutka.models.MTarget
 import karlutka.parsers.pi.PerfMonitorServlet
+import karlutka.parsers.pi.XiMessage
+import karlutka.util.KTempFile
 import karlutka.util.KfPasswds
 import karlutka.util.Kfg
 import karlutka.util.KtorClient
@@ -18,6 +24,8 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.Duration
 import java.time.Instant
+import kotlin.io.path.outputStream
+import kotlin.io.path.readBytes
 
 object Server {
     lateinit var pkfg: Path
@@ -25,6 +33,7 @@ object Server {
     lateinit var kfg: Kfg
     lateinit var kfpasswds: KfPasswds
     val targets = mutableMapOf<String, MTarget>()
+    val UUIDgenerator = Generators.timeBasedGenerator()
 
     fun installRoutings(app: Application) {
         app.routing {
@@ -36,6 +45,53 @@ object Server {
             }
             get("/PIAF/performance/{sid?}/{component?}") {
                 performance(call)
+            }
+            get("/XI") {
+                call.respondHtml {
+                    head {
+                        title("Сервлет XI-протокола")
+                        link(rel = "stylesheet", href = "/styles.css", type = "text/css")
+                        link(rel = "shortcut icon", href = "/favicon.ico")
+                    }
+                    body {
+                        pre {
+                            +"Привет! Это сервлет XI-протокола, который надо вызывать через POST а не GET.\n\nТӥледлы удалтон."
+                        }
+                    }
+                }
+            }
+
+            post("/XI") {
+                val contentType = call.request.contentType()
+                if (contentType.match("multipart/related")) {
+                    val ctt = contentType.toString()
+                    val ba = call.receive<ByteArray>()
+                    val xim = XiMessage(ctt, ba)
+                    val hm = xim.header!!
+                    val rm = hm.ReliableMessaging!!
+
+                    val xif = KTempFile.getTempFileXI(rm.QualityOfService.toShort(), rm.QueueId, hm.Main!!.MessageId)
+                    val os = xif.outputStream()
+                    os.write("Content-Type: $ctt\n---------------------------\n".toByteArray())
+                    os.write(ba)
+                    os.close()
+                    if (rm.QualityOfService.isAsync()) {
+                        val answ = xim.systemAck(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), "OK")
+                        call.respondText(answ.encodeToString(), ContentType.Application.Xml, HttpStatusCode.OK)
+                    } else {
+                        val appResp = xim.applicationResponse(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow())
+
+                        val xir = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_resp")
+                        val os = xir.outputStream()
+                        appResp.writeTo(os)
+                        os.close()
+                        call.response.status(HttpStatusCode.OK)
+                        call.response.headers.append("Content-Type", appResp.getContentType())
+                        call.respondBytes { xir.readBytes() }
+                    }
+                } else {
+                    call.respondText { "Wrong Content-Type: $contentType" }
+                }
             }
         }
     }
@@ -63,6 +119,9 @@ object Server {
                     li {
                         a("/PIAF/performance") { +"перформанс" }
                         +" PIAF /mdt/performancedataqueryservlet"
+                    }
+                    li {
+                        a("/XI") { +"XI-протокол" }
                     }
                     li {
                         a("/shutdown") { +"shutdown" }

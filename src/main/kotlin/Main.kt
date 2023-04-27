@@ -9,7 +9,7 @@ import java.nio.file.Paths
 import java.time.Duration
 
 fun main(args: Array<String>) {
-    val pid = "0" //ProcessHandle.current().pid()
+    val pid = ProcessHandle.current().pid()
     println("[ru-hello]Привет (∀x∈X)P(x), pid=$pid")
 
     val pkfg: Path
@@ -51,7 +51,8 @@ fun main(args: Array<String>) {
         Duration.ofMillis(Server.kfg.httpClientConnectionTimeoutMillis)
     )
 
-    DB.init(kfg.h2connection)
+    //DB.init(kfg.h2connection)
+
     if (kfg.influxdb != null) {
         val info = KInflux.init(kfg.influxdb, pw.securityMaterials)
         println("Influx по ${kfg.influxdb.host} подключен: $info")
