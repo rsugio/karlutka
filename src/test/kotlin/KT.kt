@@ -5,6 +5,7 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.Authenticator
 import java.net.PasswordAuthentication
+import java.nio.file.Files
 import java.nio.file.Path
 import java.util.*
 import kotlin.io.path.exists
@@ -50,6 +51,7 @@ class KT {
 
         // Читает тройку url, login, passw и делает двойку
         fun propAuth(p: Path): Map<String, Any> {
+            require(Files.isRegularFile(p), {"$p must be a regular file"})
             val prop = Properties()
             prop.load(p.inputStream())
             val url = prop.get("url") as String

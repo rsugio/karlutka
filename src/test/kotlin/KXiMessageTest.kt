@@ -1,5 +1,6 @@
 import KT.Companion.s
 import KT.Companion.x
+import com.fasterxml.uuid.Generators
 import karlutka.parsers.pi.XiMessage
 import kotlinx.serialization.modules.SerializersModule
 import nl.adaptivity.xmlutil.serialization.XML
@@ -12,6 +13,11 @@ import java.net.http.HttpResponse.BodyHandlers
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.Duration
+import java.time.Instant
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+import java.util.*
 import javax.mail.internet.InternetHeaders
 import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMultipart
@@ -19,8 +25,9 @@ import kotlin.io.path.outputStream
 import kotlin.io.path.readBytes
 import kotlin.test.Test
 
-
 class KXiMessageTest {
+    val UUIDgenerator = Generators.timeBasedGenerator()
+
     val propCPI = KT.propAuth(Paths.get(".etc/cpi.properties"))
     val urlCpiBeOk = "${propCPI.get("url")}/cxf/rsug/xi1/be_ok"
     val urlCpiBeError = "${propCPI.get("url")}/cxf/rsug/xi1/be_err"
@@ -33,7 +40,6 @@ class KXiMessageTest {
 
     private val xmlmodule = SerializersModule {
     }
-
     private val xmlserializer = XML(xmlmodule) {
         autoPolymorphic = true
     }
@@ -71,11 +77,13 @@ class KXiMessageTest {
         return null
     }
 
+    fun dateTimeSentNow() = DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MILLIS))
+
     @Test
     fun testCPI() {
         val main = XiMessage.Main(
             XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.synchronous,
-            "00000000-0000-0000-0000-000000000033", null, "2023-04-14T11:31:01Z",
+            UUIDgenerator.generate().toString(), null, dateTimeSentNow(),
             XiMessage.PartyService(XiMessage.Party(), "TEST", XiMessage.Interface("", "")),
             null,
             XiMessage.Interface("urn:test", "SI_Out")
@@ -100,7 +108,7 @@ class KXiMessageTest {
     fun testPO() {
         val main = XiMessage.Main(
             XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.asynchronous,
-            "00000000-0000-0000-0000-000000000034", null, "2023-04-14T11:31:01Z",
+            UUIDgenerator.generate().toString(), null, dateTimeSentNow(),
             XiMessage.PartyService(null, "BC_TEST1"),
             null,
             XiMessage.Interface("urn:none", "SI_OutAsync")
@@ -118,8 +126,8 @@ class KXiMessageTest {
         val iface = XiMessage.Interface("http://sap.com/xi/APPL/Global2", "PurchasingContractERPRequest_In_V1")
         val main = XiMessage.Main(
             XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.asynchronous,
-            "00000000-0000-0000-0000-000000000043", null, "2023-04-14T11:31:01Z",
-            XiMessage.PartyService(null, "TEST", null), // XiMessage.Interface("", "")),
+            UUIDgenerator.generate().toString(), null, dateTimeSentNow(),
+            XiMessage.PartyService(null, "TEST", null),
             null,
             iface
         )
@@ -133,15 +141,14 @@ class KXiMessageTest {
 
     @Test
     fun parse_self() {
-        println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message1.xml")))
-        println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message2.xml")))
-        println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message3.xml")))
-        println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message4.xml")))
-        println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/systemAck_PO75.xml")))
-        println(xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/systemAck_S4.xml")))
+        xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message1.xml"))
+        xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message2.xml"))
+        xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message3.xml"))
+        xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message4.xml"))
+        xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/systemAck_PO75.xml"))
+        xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/systemAck_S4.xml"))
         val be1 = xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/errorBE_CPI.xml"))
-        val be1cfde = be1.Body.Fault!!.detail.error
-        println(be1cfde)
+        println(be1.Body.Fault!!.faultstring)
     }
 
     @Test
@@ -183,4 +190,18 @@ class KXiMessageTest {
         mp.writeTo(System.out)
     }
 
+    @Test
+    fun guid() {
+        val v = DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MILLIS))
+        println(v)  //"2023-04-27T14:45:08.918Z"
+        println(ZonedDateTime.now().truncatedTo(ChronoUnit.MILLIS))
+
+        val s = "4f4d98db-e4be-11ed-c15d-0000004c2912"
+        println(UUID.fromString(s).version())       // для проверок чужих гуидов на версию
+        val gen = Generators.timeBasedGenerator()
+        repeat(2, {
+            val uuid = gen.generate()
+            println("$uuid: ${uuid.version()}")
+        })
+    }
 }

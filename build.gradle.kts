@@ -83,6 +83,8 @@ dependencies {
 //    implementation("org.jooq:jooq:$jooq_version")
 //    implementation("org.apache.commons:commons-compress:1.21")
     //implementation("org.apache.cxf:cxf-api:3.5.5")
+    implementation("com.fasterxml.uuid:java-uuid-generator:4.1.0")
+
 
 
     testImplementation(kotlin("test"))

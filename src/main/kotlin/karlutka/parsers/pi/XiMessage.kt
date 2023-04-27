@@ -13,6 +13,7 @@ import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
 import java.io.OutputStream
 import java.nio.charset.StandardCharsets
+import java.util.UUID
 import javax.mail.internet.ContentType
 import javax.mail.internet.InternetHeaders
 import javax.mail.internet.MimeBodyPart
