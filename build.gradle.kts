@@ -2,28 +2,28 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.20"
-    kotlin("plugin.serialization") version "1.8.20"
+    kotlin("jvm") version "1.8.10"
+    kotlin("plugin.serialization") version "1.8.10"
     application
     java
     id("com.github.johnrengelman.shadow") version "7.0.0"
-    //id("io.ktor.plugin") version "2.1.0"
+    id("io.ktor.plugin") version "2.3.0"
     `maven-publish`
 }
 
 group = "io.rsug"
-version = "0.2.1alpha"
+version = "0.2.2"
 
 repositories {
     mavenCentral()
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 //    maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers") }
 }
-val ktor_version = "2.1.3"	//TODO 2.2.4
+val ktor_version = "2.3.0"
 val kotlinx_serialization_version = "1.5.0"
 //val exposed_version = "0.39.2"
 val xmlutil_version = "0.85+"
-val kaml_version = "0.51+"
+val kaml_version = "0.53+"
 //val h2_version = "2.1.214"
 val h2_version = "1.4.200"
 //val jooq_version = "3.17.3"
@@ -40,7 +40,9 @@ dependencies {
     implementation("com.charleskorn.kaml:kaml:$kaml_version")
 
     implementation("ch.qos.logback:logback-classic:1.2.11")
-    implementation("org.apache.commons:commons-email:1.5")
+    //implementation("org.apache.commons:commons-email:1.5")
+    implementation("com.sun.mail:javax.mail:1.6.2")
+    implementation("commons-codec:commons-codec:1.15")
 
     implementation("io.ktor:ktor-client-java-jvm:$ktor_version")
     implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
@@ -80,6 +82,8 @@ dependencies {
     implementation("io.ktor:ktor-client-logging-jvm:$ktor_version")
 //    implementation("org.jooq:jooq:$jooq_version")
 //    implementation("org.apache.commons:commons-compress:1.21")
+    //implementation("org.apache.cxf:cxf-api:3.5.5")
+
 
     testImplementation(kotlin("test"))
     testImplementation("commons-io:commons-io:2.11.0")    //BOMInputStream
@@ -116,7 +120,7 @@ shadowJar.apply {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of("11"))
+        languageVersion.set(JavaLanguageVersion.of("11"))       //8 is too low
     }
 }
 
@@ -126,7 +130,7 @@ tasks.withType<JavaCompile> {
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "11"
+    jvmTarget = "11"        //1.8
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {

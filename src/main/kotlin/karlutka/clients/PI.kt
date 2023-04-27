@@ -76,9 +76,9 @@ class PI(
                     val s = "${_Period.Type} ${_Interval.Begin}"
                     val s2 = "${PerfMonitorServlet.uriPerfServlet}?component=$comp" + "&begin=${
                         URLEncoder.encode(
-                            _Interval.Begin, Charsets.UTF_8
+                            _Interval.Begin, "UTF-8"
                         )
-                    }" + "&end=${URLEncoder.encode(_Interval.End, Charsets.UTF_8)}"
+                    }" + "&end=${URLEncoder.encode(_Interval.End, "UTF-8")}"
                     m[s] = scope.async { KtorClient.taskGet(client, s2) }
                 }
             }

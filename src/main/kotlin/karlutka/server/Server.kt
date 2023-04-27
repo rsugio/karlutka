@@ -77,7 +77,7 @@ object Server {
                         a("/error2") { +"/error2" }
                         +" ошибка внутри html (самопроверка)"
                     }
-                    li { +"PID: ${ProcessHandle.current().pid()}" }
+//                    li { +"PID: ${ProcessHandle.current().pid()}" }
                     li { +"Текущая папка: ${Paths.get(".").toAbsolutePath()}" }
                     li { +"База данных: ${kfg.h2connection}" }
                     li { +"Keystore: ${kfpasswds.keystore.path}" }

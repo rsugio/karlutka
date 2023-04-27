@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<n0:PurchasingContractERPRequest_V1 xmlns:n0="http://sap.com/xi/SAPGlobal20/Global">
+	<MessageHeader>
+		<ID>00000000000000000000000004100147279</ID>
+		<CreationDateTime>2023-04-27T12:08:54Z</CreationDateTime>
+		<SenderBusinessSystemID>SID400</SenderBusinessSystemID>
+		<RecipientBusinessSystemID>SID400</RecipientBusinessSystemID>
+	</MessageHeader>
+	<PurchasingContract actionCode="01" itemListCompleteTransmissionIndicator="true">
+		<ID>4100147279</ID>
+		<CreationUserAccountID>ZZZZZ</CreationUserAccountID>
+		<ProcessingTypeCode>ZSMT</ProcessingTypeCode>
+		<ValidityPeriod>
+			<StartDate>2023-04-27</StartDate>
+			<EndDate>2024-04-24</EndDate>
+		</ValidityPeriod>
+		<TargetAmount currencyCode="RUB">500000.0</TargetAmount>
+		<OpenTargetAmount currencyCode="RUB">500000.0</OpenTargetAmount>
+		<SellerParty>
+			<InternalID>1000090254</InternalID>
+			<BuyerID>1000090254</BuyerID>
+			<SellerID>1000090254</SellerID>
+		</SellerParty>
+		<VendorParty>
+			<InternalID>34770</InternalID>
+			<BuyerID>1000090254</BuyerID>
+			<SellerID>1000090254</SellerID>
+		</VendorParty>
+		<ResponsiblePurchasingOrganisationParty>
+			<InternalID>1010</InternalID>
+			<BuyerID>1010</BuyerID>
+		</ResponsiblePurchasingOrganisationParty>
+		<ResponsiblePurchasingGroupParty>
+			<InternalID>F07</InternalID>
+			<BuyerID>F07</BuyerID>
+		</ResponsiblePurchasingGroupParty>
+		<DeliveryTerms>
+			<Incoterms>
+				<ClassificationCode>DDP</ClassificationCode>
+				<TransferLocationName>Склад</TransferLocationName>
+			</Incoterms>
+		</DeliveryTerms>
+		<CashDiscountTerms>
+			<Code>0045</Code>
+		</CashDiscountTerms>
+		<TextCollection actionCode="01">
+			<Text>
+				<TypeCode>K01</TypeCode>
+				<ContentText languageCode="RU">15 дней</ContentText>
+			</Text>
+		</TextCollection>
+		<Item actionCode="01">
+			<ID>0000000001</ID>
+			<TypeCode>18</TypeCode>
+			<CancelledIndicator/>
+			<BlockedIndicator/>
+			<TargetQuantity unitCode="PCE">135.0</TargetQuantity>
+			<FormattedName>0001</FormattedName>
+			<Product>
+				<InternalID>000000000000115075</InternalID>
+				<BuyerID>000000000000115075</BuyerID>
+				<TypeCode>01</TypeCode>
+				<Note>Кольцо поршневое</Note>
+			</Product>
+			<ProductCategory>
+				<InternalID>F07_02_02</InternalID>
+				<BuyerID>F07_02_02</BuyerID>
+			</ProductCategory>
+			<PriceSpecificationElement>
+				<TypeCode>PB00</TypeCode>
+				<CategoryCode>1</CategoryCode>
+				<ValidityPeriod>
+					<IntervalBoundaryTypeCode>3</IntervalBoundaryTypeCode>
+					<StartTimePoint>
+						<TypeCode>1</TypeCode>
+						<Date>2023-04-27</Date>
+					</StartTimePoint>
+					<EndTimePoint>
+						<TypeCode>1</TypeCode>
+						<Date>9999-12-31</Date>
+					</EndTimePoint>
+				</ValidityPeriod>
+				<PropertyValuation>
+					<IdentifyingIndicator/>
+					<PriceSpecificationElementPropertyReference>
+						<PriceSpecificationElementPropertyID> </PriceSpecificationElementPropertyID>
+					</PriceSpecificationElementPropertyReference>
+					<PriceSpecificationElementPropertyValue/>
+				</PropertyValuation>
+				<Rate>
+					<DecimalValue>980.0</DecimalValue>
+					<MeasureUnitCode>PCE</MeasureUnitCode>
+					<CurrencyCode>RUB</CurrencyCode>
+				</Rate>
+			</PriceSpecificationElement>
+			<ReceivingPlantID>1011</ReceivingPlantID>
+			<DeliveryTerms>
+				<QuantityTolerance>
+					<OverPercentUnlimitedIndicator>false</OverPercentUnlimitedIndicator>
+				</QuantityTolerance>
+			</DeliveryTerms>
+			<TextCollection>
+				<Text>
+					<TypeCode>ZSTL</TypeCode>
+					<ContentText>3094617</ContentText>
+				</Text>
+			</TextCollection>
+			<QuoteReference>
+				<ID>3000544607</ID>
+				<ItemID>0000000001</ItemID>
+			</QuoteReference>
+			<AccountingCodingBlockDistribution>
+				<AccountingCodingBlockAssignment>
+					<actionCode>01</actionCode>
+					<OrdinalNumberValue>1</OrdinalNumberValue>
+					<ProfitCentreID>0000</ProfitCentreID>
+					<CostCentreID>0000</CostCentreID>
+					<AccountingCodingBlockTypeCode>U</AccountingCodingBlockTypeCode>
+				</AccountingCodingBlockAssignment>
+			</AccountingCodingBlockDistribution>
+			<Description>Кольцо поршневое</Description>
+		</Item>
+	</PurchasingContract>
+</n0:PurchasingContractERPRequest_V1>

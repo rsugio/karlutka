@@ -3,5 +3,6 @@
 /tmp
 /out
 /build
+/.etc
 *.log
 .run

@@ -1,0 +1,20 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+	<soap:Body xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+		<soap:Fault xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+			<faultcode>soap:Server</faultcode>
+			<faultstring>An internal error occurred. For error details check MPL ID AGRKQZN8iBWPk2W86B_5JKJX-uwQ in message monitoring or use the URL https://e500230-tmn.hci.eu3.hana.ondemand.com:443/itspaces/shell/monitoring/MessageDetails/%7B%22messageGuid%22%3A%22AGRKQZN8iBWPk2W86B_5JKJX-uwQ%22%7D to directly access the error information.</faultstring>
+			<detail>
+				<SAP:Error xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" soap:mustUnderstand="1">
+					<SAP:Category>XIServer</SAP:Category>
+					<SAP:Code area="INTERNAL">MESSAGE</SAP:Code>
+					<SAP:P1/>
+					<SAP:P2/>
+					<SAP:P3/>
+					<SAP:P4/>
+					<SAP:AdditionalText/>
+					<SAP:Stack>An internal error occurred. For error details check MPL ID AGRKQZN8iBWPk2W86B_5JKJX-uwQ in message monitoring or use the URL https://e500230-tmn.hci.eu3.hana.ondemand.com:443/itspaces/shell/monitoring/MessageDetails/%7B%22messageGuid%22%3A%22AGRKQZN8iBWPk2W86B_5JKJX-uwQ%22%7D to directly access the error information.</SAP:Stack>
+				</SAP:Error>
+			</detail>
+		</soap:Fault>
+	</soap:Body>
+</soap:Envelope>

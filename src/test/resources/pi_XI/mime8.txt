@@ -1,0 +1,41 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP:Header xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+		<SAP:Main versionMajor="003" versionMinor="001" SOAP:mustUnderstand="1" wsu:Id="wsuid-main-92ABE13F5C59AB7FE10000000A1551F7" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+			<SAP:MessageClass>SystemAck</SAP:MessageClass>
+			<SAP:ProcessingMode>synchronous</SAP:ProcessingMode>
+			<SAP:MessageId>005056BF-38E0-1EED-B99F-DFDE27F0E658</SAP:MessageId>
+			<SAP:RefToMessageId>00000000-0000-0000-0000-000000000042</SAP:RefToMessageId>
+			<SAP:TimeSent>2023-04-14T11:31:01Z</SAP:TimeSent>
+			<SAP:Sender>
+				<SAP:Service/>
+			</SAP:Sender>
+			<SAP:Receiver>
+				<SAP:Party agency="" scheme=""/>
+				<SAP:Service>TEST</SAP:Service>
+			</SAP:Receiver>
+			<SAP:Interface namespace="http://sap.com/xi/XI/Message/30">Acknowledgment</SAP:Interface>
+		</SAP:Main>
+		<SAP:ReliableMessaging SystemAckRequested="true" SystemErrorAckRequested="true" ApplicationAckRequested="true" ApplicationErrorAckRequested="true" SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+			<SAP:QualityOfService>ExactlyOnce</SAP:QualityOfService>
+		</SAP:ReliableMessaging>
+		<SAP:Diagnostic SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+			<SAP:TraceLevel>Information</SAP:TraceLevel>
+			<SAP:Logging>On</SAP:Logging>
+		</SAP:Diagnostic>
+		<SAP:Ack SOAP:mustUnderstand="1" arrivedAtFinalReceiver="true" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+			<SAP:Status>OK</SAP:Status>
+			<SAP:Category>permanent</SAP:Category>
+		</SAP:Ack>
+		<SAP:HopList SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+			<SAP:Hop timeStamp="2023-04-27T13:25:37Z" wasRead="true">
+				<SAP:Engine type="BS">DER200</SAP:Engine>
+				<SAP:Adapter namespace="http://sap.com/xi/XI/System">XI</SAP:Adapter>
+				<SAP:MessageId>00000000-0000-0000-0000-000000000042</SAP:MessageId>
+				<SAP:Info>3.0</SAP:Info>
+			</SAP:Hop>
+		</SAP:HopList>
+	</SOAP:Header>
+	<SOAP:Body xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+		<SAP:Manifest wsu:Id="wsuid-manifest-5CABE13F5C59AB7FE10000000A1551F7" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"/>
+	</SOAP:Body>
+</SOAP:Envelope>

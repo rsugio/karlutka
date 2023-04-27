@@ -9,7 +9,7 @@ import java.nio.file.Paths
 import java.time.Duration
 
 fun main(args: Array<String>) {
-    val pid = ProcessHandle.current().pid()
+    val pid = "0" //ProcessHandle.current().pid()
     println("[ru-hello]Привет (∀x∈X)P(x), pid=$pid")
 
     val pkfg: Path

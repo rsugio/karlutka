@@ -3,17 +3,21 @@ package karlutka.parsers.pi
 import karlutka.serialization.KSoap.Companion.xmlserializer
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
+import nl.adaptivity.xmlutil.PlatformXmlReader
 import nl.adaptivity.xmlutil.dom.Element
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
 import java.io.OutputStream
+import java.nio.charset.StandardCharsets
 import javax.mail.internet.ContentType
 import javax.mail.internet.InternetHeaders
 import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMultipart
+import javax.mail.util.ByteArrayDataSource
 
 const val xmlnsSOAP: String = "http://schemas.xmlsoap.org/soap/envelope/"
 const val xmlnsXI30: String = "http://sap.com/xi/XI/Message/30"
@@ -25,25 +29,76 @@ class XiMessage {
     enum class MessageClass { ApplicationMessage, ApplicationResponse, SystemAck }
     enum class ProcessingMode { asynchronous, synchronous }
 
-    val mp = MimeMultipart("related")
-    private val ct = ContentType(mp.contentType)
-    val boundary = ct.getParameter("boundary")
+    val mp: MimeMultipart
+    val ct: ContentType
+    val boundary: String
     val payloadHrefs = mutableMapOf<String, Payload>()
-    val header: Header?                 // нет для Fault
     val payloadBodies = mutableMapOf<String, MimeBodyPart>()
 
-    private val _msid: String
-    private val _cidSAP: String
-    private val _cidPayload: String
+    val header: Header?                 // нет для Fault
+    val fault: Fault?
+    private val _msid: String?          // используется только для вывода в случае непустого Header (нет вывода при Fault)
+    private var writeFinished: Boolean = false
 
     constructor(h: Header) {
+        this.mp = MimeMultipart("related")
+        this.ct = ContentType(mp.contentType)
+        this.boundary = ct.getParameter("boundary")
+
         this.header = h
-        _msid = h.Main.MessageId.replace("-", "")
-        _cidSAP = "soap-$_msid@sap.com"
-        _cidPayload = "payload-$_msid@sap.com"
+        this.fault = null
+        // Если требуется выдать ответ с ошибкой как из абапа, то _msid можно делать пустым и не выдавать multipart/related
+        this._msid = h.Main!!.MessageId.replace("-", "")
+    }
+
+    constructor(f: Fault) {
+        this._msid = null
+        this.mp = MimeMultipart("related")
+        this.ct = ContentType(mp.contentType)
+        this.boundary = "" // ct.getParameter("boundary")
+
+        this.header = null
+        this.fault = f
+    }
+
+    constructor(contentType: String, ba: ByteArray) {
+        this._msid = null
+        ct = ContentType(contentType)
+        val e: Envelope
+        if (ct.match("multipart/*")) {
+            val ds = ByteArrayDataSource(ba, contentType)
+            this.mp = MimeMultipart(ds)
+            this.boundary = ct.getParameter("boundary")
+            val soap = this.mp.getBodyPart(this.ct.getParameter("start"))
+            e = xmlserializer.decodeFromString<Envelope>(soap.content as String)
+        } else {
+            mp = MimeMultipart()
+            this.boundary = ""
+            val x = PlatformXmlReader(ba.inputStream(), ct.getParameter("charset") ?: "UTF-8")
+            e = xmlserializer.decodeFromReader<Envelope>(x)
+        }
+        this.header = e.Header
+        if (this.header == null) {
+            this.fault = e.Body.Fault
+            // Ошибка
+        } else {
+            this.fault = null
+            // Манифеста нет для успешного ответа если это Ack
+            e.Body.Manifest?.Payload?.forEach { p ->
+                val part = mp.getBodyPart(p.getCid())
+                requireNotNull(part, { p.getCid() })
+                val cnt = part.inputStream.readAllBytes()
+                val scnt = String(cnt, StandardCharsets.UTF_8)              //TODO переделать на чтение из заголовка
+                println("${p.getCid()} contains ${cnt.size} bytes: $scnt")
+            }
+        }
     }
 
     fun setPayload(body: ByteArray, contentType: String, description: String? = null) {
+        require(!writeFinished)
+        requireNotNull(this.header, { "Установить пейлоад можно только для непустого заголовка" })
+        require(this.fault == null, { "Установить пейлоад нельзя для ошибки" })
+        val _cidPayload = "payload-$_msid@rsug.ru"
         val payload = Payload("simple", "cid:$_cidPayload", "Payload", PayloadType.Application, description)
         payloadHrefs.put(_cidPayload, payload)
 
@@ -54,20 +109,37 @@ class XiMessage {
         payloadBodies.put(_cidPayload, MimeBodyPart(ih, body))
     }
 
-    fun writeTo(o: OutputStream) {
-        val manifest = Manifest(payloadHrefs.values.toMutableList())
-        val envelope = Envelope(header, Body(manifest))
-        val smain = xmlserializer.encodeToString(envelope)
+    fun addAttachment(body: ByteArray, contentType: String, description: String? = null) {
+        require(!writeFinished)
+        val _cid = "attach-$_msid@rsug.ru"
+        val payload = Payload("simple", "cid:$_cid", "Attach", PayloadType.ApplicationAttachment, description)
+        payloadHrefs.put(_cid, payload)
 
         val ih = InternetHeaders()
-        ih.addHeader("Content-ID", "<$_cidSAP>")
-        ih.addHeader("Content-Type", "text/xml; charset=utf-8")
-        ih.addHeader("Content-Disposition", "attachment; filename=\"soap-$_msid.xml\"")
-        val mbpSAP = MimeBodyPart(ih, smain.toByteArray())
-        mp.addBodyPart(mbpSAP)
+        ih.addHeader("Content-ID", "<$_cid>")
+        ih.addHeader("Content-Type", contentType)
+        ih.addHeader("Content-Disposition", "attachment; filename=\"Attach.xml\"")
+        payloadBodies.put(_cid, MimeBodyPart(ih, body))
+    }
 
-        payloadBodies.forEach { (k, mbp) ->
-            mp.addBodyPart(mbp)
+    fun writeTo(o: OutputStream) {
+        //TODO Нужна развилка для Fault и нет
+        if (!writeFinished) {
+            val manifest = Manifest(payloadHrefs.values.toMutableList())
+            val envelope = Envelope(header, Body(manifest))
+            val smain = xmlserializer.encodeToString(envelope)
+
+            val ih = InternetHeaders()
+            ih.addHeader("Content-ID", "<soap-$_msid@rsug.ru>")
+            ih.addHeader("Content-Type", "text/xml; charset=utf-8")
+            ih.addHeader("Content-Disposition", "attachment; filename=\"soap-$_msid.xml\"")
+            val mbpSAP = MimeBodyPart(ih, smain.toByteArray())
+            mp.addBodyPart(mbpSAP)
+
+            payloadBodies.forEach { (k, mbp) ->
+                mp.addBodyPart(mbp)
+            }
+            writeFinished = true
         }
         mp.writeTo(o)
     }
@@ -105,6 +177,9 @@ class XiMessage {
         @XmlSerialName("faultstring", "", "")
         val faultstring: String,
         @XmlElement(true)
+        @XmlSerialName("faultactor", "", "")
+        val faultactor: String? = null,
+        @XmlElement(true)
         @XmlSerialName("detail", "", "")
         val detail: Detail
     )
@@ -113,7 +188,7 @@ class XiMessage {
     @XmlSerialName("Header", xmlnsSOAP, "SOAP")
     class Header(
         @XmlElement(true)
-        val Main: Main,
+        val Main: Main? = null,                                     // нет для ошибок в абапе
         @XmlElement(true)
         val ReliableMessaging: ReliableMessaging? = null,           // нет для Ack
         @XmlElement(true)
@@ -140,6 +215,8 @@ class XiMessage {
         @XmlSerialName("Trace", xmlnsXI30, xmlnsXI30prefix)
         @Contextual
         var Trace: CompactFragment? = null,
+        @XmlElement(true)
+        var Error: Error? = null,
     )
 
     @Serializable
@@ -156,17 +233,17 @@ class XiMessage {
         @XmlElement(true)
         val Code: String,
         @XmlElement(true)
-        val P1: String,
+        val P1: String? = null,
         @XmlElement(true)
-        val P2: String,
+        val P2: String? = null,
         @XmlElement(true)
-        val P3: String,
+        val P3: String? = null,
         @XmlElement(true)
-        val P4: String,
+        val P4: String? = null,
         @XmlElement(true)
-        val AdditionalText: String,
+        val AdditionalText: String? = null,
         @XmlElement(true)
-        val Stack: String,
+        val Stack: String? = null,
 
         @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
         val soapMustUnderstand: Int = 1,
@@ -180,6 +257,7 @@ class XiMessage {
         val Status: String,                     // OK
         @XmlElement(true)
         val Category: String? = null,           // permanent for ABAP, null for Java
+        val arrivedAtFinalReceiver: Boolean? = null,    // заполняется в абапе при запросе Ack
         @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
         val soapMustUnderstand: Int = 1,
     )
@@ -187,8 +265,6 @@ class XiMessage {
     @Serializable
     @XmlSerialName("Main", xmlnsXI30, xmlnsXI30prefix)
     class Main(
-        val versionMajor: Int = 3,
-        val versionMinor: Int = 1,
         @XmlElement(true)
         @XmlSerialName("MessageClass", xmlnsXI30, xmlnsXI30prefix)
         val MessageClass: MessageClass, // = "ApplicationMessage",
@@ -209,6 +285,9 @@ class XiMessage {
         val Receiver: PartyService? = null,
         @XmlElement(true)
         val Interface: Interface? = null,
+        // атрибуты
+        val versionMajor: Int = 3,
+        val versionMinor: Int = 1,
         // атрибуты по умолчанию - в конце
         @XmlSerialName("mustUnderstand", xmlnsSOAP, "SOAP")
         val soapMustUnderstand: Int = 1,
@@ -372,7 +451,12 @@ class XiMessage {
         val Type: PayloadType,
         @XmlElement(true)
         val Description: String? = null,
-    )
+    ) {
+        fun getCid(): String {
+            require(href.lowercase().startsWith("cid:"))
+            return "<" + href.substring(4).trim() + ">"
+        }
+    }
 
     @Serializable
     @XmlSerialName("RunTime", xmlnsXI30, xmlnsXI30prefix)
