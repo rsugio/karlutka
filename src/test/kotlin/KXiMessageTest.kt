@@ -23,6 +23,7 @@ import javax.mail.internet.MimeBodyPart
 import javax.mail.internet.MimeMultipart
 import kotlin.io.path.outputStream
 import kotlin.io.path.readBytes
+import kotlin.io.path.writeText
 import kotlin.test.Test
 
 class KXiMessageTest {
@@ -42,6 +43,24 @@ class KXiMessageTest {
     }
     private val xmlserializer = XML(xmlmodule) {
         autoPolymorphic = true
+    }
+
+    fun nextuuid() = UUIDgenerator.generate().toString()
+    fun dateTimeSentNow() = DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MILLIS))
+
+    fun writePayload(name: String, content: String) {
+        val payloads = Paths.get("build/payloads")
+        if (!Files.isDirectory(payloads)) Files.createDirectories(payloads)
+        payloads.resolve("$name.txt").writeText(content)
+    }
+
+    fun writePayload(name: String, xi: XiMessage) {
+        val payloads = Paths.get("build/payloads")
+        if (!Files.isDirectory(payloads)) Files.createDirectories(payloads)
+        val os = payloads.resolve("$name.txt").outputStream()
+        os.write("Content-Type: ${xi.getContentType()}\n-----------------------------------\n".toByteArray())
+        xi.writeTo(os)
+        os.close()
     }
 
     fun postXI(xin: XiMessage, url: String, auth: Authenticator): XiMessage? {
@@ -77,13 +96,12 @@ class KXiMessageTest {
         return null
     }
 
-    fun dateTimeSentNow() = DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MILLIS))
 
     @Test
     fun testCPI() {
         val main = XiMessage.Main(
             XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.synchronous,
-            UUIDgenerator.generate().toString(), null, dateTimeSentNow(),
+            nextuuid(), null, dateTimeSentNow(),
             XiMessage.PartyService(XiMessage.Party(), "TEST", XiMessage.Interface("", "")),
             null,
             XiMessage.Interface("urn:test", "SI_Out")
@@ -108,14 +126,14 @@ class KXiMessageTest {
     fun testPO() {
         val main = XiMessage.Main(
             XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.asynchronous,
-            UUIDgenerator.generate().toString(), null, dateTimeSentNow(),
+            nextuuid(), null, dateTimeSentNow(),
             XiMessage.PartyService(null, "BC_TEST1"),
             null,
             XiMessage.Interface("urn:none", "SI_OutAsync")
         )
         val eo = XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnce, null, false, false, false, false)
         val ximsg = XiMessage(XiMessage.Header(main, eo, xiDC))
-        ximsg.setPayload("""<n:A xmlns:ns0="urn:demo"></n:A>""".toByteArray(), "text/xml; charset=utf-8")
+        ximsg.setPayload("""<n:A xmlns:ns0="urn:demo">ЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪЪ</n:A>""".toByteArray(), "text/xml; charset=utf-8")
         ximsg.addAttachment("1русскиебуквы234ъ".toByteArray(), "text/plain; charset=utf-8")
         val xi2 = postXI(ximsg, propPO.get("url") as String, propPO.get("auth") as Authenticator)
         println(xi2)
@@ -126,35 +144,49 @@ class KXiMessageTest {
         val iface = XiMessage.Interface("http://sap.com/xi/APPL/Global2", "PurchasingContractERPRequest_In_V1")
         val main = XiMessage.Main(
             XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.asynchronous,
-            UUIDgenerator.generate().toString(), null, dateTimeSentNow(),
+            nextuuid(), null, dateTimeSentNow(),
             XiMessage.PartyService(null, "TEST", null),
             null,
             iface
         )
-        val eo = XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnce, null, true, true, true, true)
+        val eo = XiMessage.ReliableMessaging(XiMessage.QOS.ExactlyOnceInOrder, "ASYNC", true, true, true, true)
         val ximsg = XiMessage(XiMessage.Header(main, eo, xiDC))
         ximsg.setPayload(s("/pi_XI/payloadABAP.xml").toByteArray(), "text/xml; charset=utf-8")
         ximsg.addAttachment("1русскиебуквы234ъ".toByteArray(), "text/plain; charset=utf-8")
-        val xi2 = postXI(ximsg, propABAP.get("url") as String, propABAP.get("auth") as Authenticator)
-        println(xi2)
+        val xa = postXI(ximsg, propABAP.get("url") as String, propABAP.get("auth") as Authenticator)
+        println("${xa!!.header!!.Ack!!.Status} ${xa.header!!.Ack!!.Category}")
+
+        val iface2 = XiMessage.Interface("http://sap.com/xi/APPL/SE", "UnitOfMeasureByDimensionQueryResponse_In")
+        val main2 = XiMessage.Main(
+            XiMessage.MessageClass.ApplicationMessage, XiMessage.ProcessingMode.synchronous,
+            nextuuid(), null, dateTimeSentNow(),
+            XiMessage.PartyService(null, "TEST", null),
+            null,
+            iface2
+        )
+        val be = XiMessage.ReliableMessaging(XiMessage.QOS.BestEffort)
+        val ximsg2 = XiMessage(XiMessage.Header(main2, be, xiDC))
+        ximsg2.setPayload(s("/pi_XI/UnitOfMeasureByDimensionQuery_sync.xml").toByteArray(), "text/xml; charset=utf-8")
+        ximsg2.addAttachment("1русскиебуквы234ъ".toByteArray(), "text/plain; charset=utf-8")
+        val xa2 = postXI(ximsg2, propABAP.get("url") as String, propABAP.get("auth") as Authenticator)
+        println(xa2!!.header?.Error?.Stack)
+        xa2.manifest?.Payload?.forEach{
+            println(it.getCid())
+        }
     }
 
     @Test
-    fun parse_self() {
-        val e1 = xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message1.xml"))
-        println(e1.encodeToString())
+    fun parsers() {
+        xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message1.xml"))
         xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message2.xml"))
         xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message3.xml"))
         xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/message4.xml"))
         xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/systemAck_PO75.xml"))
         xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/systemAck_S4.xml"))
-        val be1 = xmlserializer.decodeFromReader<XiMessage.Envelope>(x("/pi_XI/errorBE_CPI.xml"))
-        println(be1.Body.Fault!!.faultstring)
-    }
 
-    @Test
-    fun mime() {
-        XiMessage(s("/pi_XI/mime1_contentType.txt"), s("/pi_XI/mime1.txt").toByteArray())
+        XiMessage("text/xml", s("/pi_XI/errorBE_CPI.xml").toByteArray())
+        val m1 = XiMessage(s("/pi_XI/mime1_contentType.txt"), s("/pi_XI/mime1.txt").toByteArray())
+        require(m1.header!!.ReliableMessaging!!.SystemAckRequested!!)
         XiMessage(s("/pi_XI/mime2_contentType.txt"), s("/pi_XI/mime2.txt").toByteArray())
         val m3 = XiMessage("text/xml;charset=UTF-8", s("/pi_XI/mime3.txt").toByteArray()).fault!!
         println("${m3.faultcode}||${m3.faultstring}")
@@ -165,7 +197,50 @@ class KXiMessageTest {
         XiMessage("text/xml", s("/pi_XI/mime6.txt").toByteArray())
         XiMessage("text/xml", s("/pi_XI/mime7.txt").toByteArray())
         XiMessage("text/xml", s("/pi_XI/mime8.txt").toByteArray())
+        val ea = XiMessage("text/xml", s("/pi_XI/errorBE_ABAP.xml").toByteArray())
+        println(ea.header!!.Error!!.AdditionalText)
     }
+
+    @Test
+    fun asyncAck() {
+        // На вход приходит асинхронное сообщение, выдаём SystemAck с разными вариантами
+        val src = XiMessage(s("/pi_XI/mime2_contentType.txt"), s("/pi_XI/mime2.txt").toByteArray())
+        require(src.header!!.ReliableMessaging!!.QualityOfService.isAsync())
+        val ok1 = src.systemAck(nextuuid(), dateTimeSentNow(), XiMessage.AckStatus.OK)
+        writePayload("asyncAckOk1", ok1.encodeToString())
+        writePayload("asyncAckOk1_mime", XiMessage(ok1))
+
+        val ok2 = src.systemAck(nextuuid(), dateTimeSentNow(), XiMessage.AckStatus.OK, XiMessage.AckCategory.permanent)
+        writePayload("asyncAckOk2", ok2.encodeToString())
+        val ok3 = src.systemAck(nextuuid(), dateTimeSentNow(), XiMessage.AckStatus.OK, XiMessage.AckCategory.transient)
+        writePayload("asyncAckOk3", ok3.encodeToString())
+        val error1 = src.systemAck(nextuuid(), dateTimeSentNow(), XiMessage.AckStatus.Error, XiMessage.AckCategory.permanent)
+        writePayload("asyncAckError1", error1.encodeToString())
+        val error2 = src.systemAck(nextuuid(), dateTimeSentNow(), XiMessage.AckStatus.Error, XiMessage.AckCategory.transient)
+        writePayload("asyncAckError2", error2.encodeToString())
+        val notSupported = src.systemAck(nextuuid(), dateTimeSentNow(), XiMessage.AckStatus.AckRequestNotSupported)
+        writePayload("asyncAckNotSupported", notSupported.encodeToString())
+    }
+
+    @Test
+    fun syncAnswers() {
+        // На вход приходит синхронное сообщение, выдаём разные варианты ответов
+        val src = XiMessage(s("/pi_XI/mime1_contentType.txt"), s("/pi_XI/mime1.txt").toByteArray())
+        require(!src.header!!.ReliableMessaging!!.QualityOfService.isAsync())
+        val e1 = XiMessage.Error(XiMessage.ErrorCategory.XIServer, XiMessage.ErrorCode("INTERNAL", "VALUE"), null, null, null, null, "Add", "Stack")
+        val f1 = src.fault("soap:Server", "123", "http://sap.com/xi/XI/Message/30", e1)
+        writePayload("syncFault1", f1.encodeToString())
+        // сюда можно добавить остальные варианты фолтов
+
+        val an1 = src.syncResponse(nextuuid(), dateTimeSentNow())
+        an1.setPayload("<Результат/>".toByteArray(), "text/xml; charset=UTF-8")
+        an1.addAttachment("ЗАЗАЗАЗАЗАЗАЗАЗА".toByteArray(), "text/plain; charset=UTF-8")
+        writePayload("syncAnswer1", an1)
+
+        val e2 = src.syncError(nextuuid(), dateTimeSentNow(), e1)
+        writePayload("syncError1", e2)
+    }
+
 
     @Test
     fun rfc_2() {

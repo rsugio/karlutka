@@ -20,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 import kotlinx.html.*
+import java.nio.charset.StandardCharsets
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.Duration
@@ -75,22 +76,83 @@ object Server {
                     os.write("Content-Type: $ctt\n---------------------------\n".toByteArray())
                     os.write(ba)
                     os.close()
-                    if (rm.QualityOfService.isAsync()) {
-                        val answ = xim.systemAck(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), "OK")
-                        call.respondText(answ.encodeToString(), ContentType.Application.Xml, HttpStatusCode.OK)
-                    } else {
-                        val appResp = xim.applicationResponse(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow())
+                    val part = xim.getPayload()
+                    val scnt = String(part.inputStream.readAllBytes(), StandardCharsets.UTF_8)              //TODO переделать на чтение из заголовка
 
-                        val xir = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_resp")
-                        val os = xir.outputStream()
+                    if (rm.QualityOfService == XiMessage.QOS.ExactlyOnce) {
+                        // выдача Ack с application/xml
+                        val answ = xim.systemAck(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), XiMessage.AckStatus.OK)
+                        call.respondText(answ.encodeToString(), ContentType.Application.Xml, HttpStatusCode.OK)
+                    } else if (rm.QualityOfService == XiMessage.QOS.ExactlyOnceInOrder) {
+                        val answ = xim.systemAck(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), XiMessage.AckStatus.Error, XiMessage.AckCategory.transient)
+                        call.respondText(answ.encodeToString(), ContentType.Application.Xml, HttpStatusCode.OK)
+
+//                        // выдача Ack с boundary -- похоже дохлый номер
+//                        val ack = xim.systemAck(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), XiMessage.AckStatus.OK, XiMessage.AckCategory.permanent)
+//                        val xi = XiMessage(ack)
+//                        val f = KTempFile.getTempFileXI(rm.QualityOfService.toShort(), rm.QueueId, hm.Main.MessageId + "_ack")
+//                        val os = f.outputStream()
+//                        xi.writeTo(os)
+//                        os.close()
+//                        call.response.status(HttpStatusCode.InternalServerError)
+//                        call.response.headers.append("Content-Type", "application/xml")
+//                        call.respondBytes { f.readBytes() }
+                    } else if (scnt.contains("Fault")) {
+                        // выдать Fault
+                        val e1 = XiMessage.Error(
+                            XiMessage.ErrorCategory.XIServer,
+                            XiMessage.ErrorCode("INTERNAL", "VALUE"),
+                            null,
+                            null,
+                            null,
+                            null,
+                            "Add",
+                            "Stack"
+                        )
+                        val fault = xim.fault("soap:Server", "123", "http://sap.com/xi/XI/Message/30", e1)
+                        val f = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_fault")
+                        val os = f.outputStream()
+                        os.write(fault.encodeToString().toByteArray())
+                        os.close()
+                        call.response.status(HttpStatusCode.InternalServerError)
+                        call.response.headers.append("Content-Type", "application/xml")
+                        call.respondBytes { f.readBytes() }
+                    } else if (scnt.contains("Error")) {
+                        // выдать SystemError через boundary
+                        val e1 = XiMessage.Error(
+                            XiMessage.ErrorCategory.XIServer,
+                            XiMessage.ErrorCode("INTERNAL", "INCORRECT_PAYLOAD_DATA"),
+                            null,
+                            null,
+                            null,
+                            null,
+                            "Дополнительная инфа",
+                            "Стек ошибок"
+                        )
+                        val syncError = xim.syncError(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), e1)
+                        syncError.header!!.DynamicConfiguration!!.Record.add(XiMessage.Record("urn:bad", "Bad", "_плохо_"))
+                        val f = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_error")
+                        val os = f.outputStream()
+                        syncError.writeTo(os)
+                        os.close()
+                        call.response.status(HttpStatusCode.InternalServerError)
+                        call.response.headers.append("Content-Type", syncError.getContentType())
+                        call.respondBytes { f.readBytes() }
+                    } else {
+                        // выдать успешный ответ на синхронный запрос
+                        val appResp = xim.syncResponse(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow())
+                        appResp.header!!.DynamicConfiguration!!.Record.add(XiMessage.Record("urn:successful", "Success", "ХАРАШО"))
+                        appResp.setPayload("<answer/>".toByteArray(), "text/xml; charset=utf-8")
+                        val f = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_resp")
+                        val os = f.outputStream()
                         appResp.writeTo(os)
                         os.close()
                         call.response.status(HttpStatusCode.OK)
                         call.response.headers.append("Content-Type", appResp.getContentType())
-                        call.respondBytes { xir.readBytes() }
+                        call.respondBytes { f.readBytes() }
                     }
                 } else {
-                    call.respondText { "Wrong Content-Type: $contentType" }
+                    call.respondText(ContentType.Application.Xml, HttpStatusCode.NotAcceptable) { "Wrong Content-Type: $contentType" }
                 }
             }
         }

@@ -11,7 +11,7 @@
 			<SAP:RefToMessageId>005056B4-7359-1EDD-B6C3-F9F6A98FA6E5</SAP:RefToMessageId>
 			<SAP:TimeSent>2023-04-13T17:22:48Z</SAP:TimeSent>
 			<SAP:Sender>
-				<SAP:Service>TER400</SAP:Service>
+				<SAP:Service>SID100</SAP:Service>
 				<SAP:Interface namespace="http://vendor-it.ru/sd/contract_approve_sync"
 					>SI_SD_CAS_GET_KNTRGNT_BY_ID_ERP_IN</SAP:Interface>
 			</SAP:Sender>
@@ -42,7 +42,7 @@
 				<SAP:Info>3.0</SAP:Info>
 			</SAP:Hop>
 			<SAP:Hop timeStamp="2023-04-13T17:22:48Z" wasRead="false">
-				<SAP:Engine type="BS">TER400</SAP:Engine>
+				<SAP:Engine type="BS">SID100</SAP:Engine>
 				<SAP:Adapter namespace="http://sap.com/xi/XI/System">XI</SAP:Adapter>
 				<SAP:MessageId>005056B4-7359-1EDD-B6C3-F9F6A98FA6E5</SAP:MessageId>
 				<SAP:Info>3.0</SAP:Info>
@@ -157,14 +157,14 @@
 		</SAP:Diagnostic>
 		<SAP:Trace xmlns:SAP="http://sap.com/xi/XI/Message/30">
 			<Trace level="1" type="T">XMB was called with URL /sap/xi/engine?type=entry</Trace>
-			<Trace level="1" type="T">Remote address = 172.19.7.76</Trace>
+			<Trace level="1" type="T">Remote address = 111111</Trace>
 			<Trace level="1" type="T">User = PIAPPLUSER</Trace>
 			<Trace level="1" type="T">Process ID: 31341</Trace>
 			<Trace level="1" type="T">Work Process ID: 84 </Trace>
 			<Trace level="1" type="T">Message ID = 005056B473591EDDB6C3F9F6A98FA6E5</Trace>
 			<Trace level="1" type="B" name="CL_XMS_MAIN-ENTER_XMS">
 				<Trace level="1" type="T">CL_XMS_MAIN-&gt;DETERMINE_EXT_PID: RECEIVER</Trace>
-				<Trace level="1" type="T">Hop engine name = TER400</Trace>
+				<Trace level="1" type="T">Hop engine name = SID100</Trace>
 				<Trace level="1" type="T">Hop engine type = BS</Trace>
 				<Trace level="1" type="T">Hop adapter name = XI</Trace>
 				<Trace level="1" type="T">Hop adapter namespace = http://sap.com/xi/XI/System</Trace>
