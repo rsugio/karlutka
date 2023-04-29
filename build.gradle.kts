@@ -17,21 +17,17 @@ version = "0.2.2"
 repositories {
     mavenCentral()
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
-//    maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers") }
 }
 val ktor_version = "2.3.0"
 val kotlinx_serialization_version = "1.5.0"
-//val exposed_version = "0.39.2"
 val xmlutil_version = "0.85+"
-val kaml_version = "0.53+"
-//val h2_version = "2.1.214"
+val kaml_version = "0.53.0"
 val h2_version = "1.4.200"
-//val jooq_version = "3.17.3"
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation("ch.qos.logback:logback-classic:1.2.11")
+    implementation("ch.qos.logback:logback-classic:1.4.7") //1.2.11
     implementation("com.fasterxml.uuid:java-uuid-generator:4.1.0")
     implementation("com.sun.mail:javax.mail:1.6.2")             //implementation("org.apache.commons:commons-email:1.5")
     implementation("commons-codec:commons-codec:1.15")
