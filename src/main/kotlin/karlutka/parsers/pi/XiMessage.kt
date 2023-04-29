@@ -307,9 +307,9 @@ class XiMessage {
     @XmlSerialName("Header", xmlnsSOAP, xmlnsSOAPprefix)
     class Header(
         @XmlElement(true)
-        val Main: Main? = null,                                     // нет для ошибок в абапе
+        val Main: Main? = null,                                 // нет для ошибок в абапе
         @XmlElement(true)
-        val ReliableMessaging: ReliableMessaging? = null,           // нет для Ack
+        val ReliableMessaging: ReliableMessaging? = null,       // нет для Ack
         @XmlElement(true)
         var DynamicConfiguration: DynamicConfiguration? = null,
         @XmlElement(true)
@@ -323,7 +323,7 @@ class XiMessage {
         @XmlElement(true)
         var HopList: HopList? = null,
         @XmlElement(true)
-        var Passport: Passport? = null,
+        var Passport: Passport? = null,                         //генерируется по приёму
         @XmlElement(true)
         @XmlSerialName("OutboundBinding", xmlnsXI30, xmlnsXI30prefix)
         @Contextual
@@ -602,6 +602,10 @@ class XiMessage {
         fun getCid(): String {
             require(href.lowercase().startsWith("cid:"))
             return "<" + href.substring(4).trim() + ">"
+        }
+
+        fun setPayload() {
+
         }
     }
 

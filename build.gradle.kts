@@ -31,21 +31,19 @@ val h2_version = "1.4.200"
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")   // версия не совпадает с котлином
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_version")
-//    implementation("org.jetbrains.kotlinx:kotlinx-serialization-cbor:$kotlinx_serialization_version")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$kotlinx_serialization_version")
+    implementation("ch.qos.logback:logback-classic:1.2.11")
+    implementation("com.fasterxml.uuid:java-uuid-generator:4.1.0")
+    implementation("com.sun.mail:javax.mail:1.6.2")             //implementation("org.apache.commons:commons-email:1.5")
+    implementation("commons-codec:commons-codec:1.15")
+
     implementation("io.github.pdvrieze.xmlutil:core-jvm:$xmlutil_version")
     implementation("io.github.pdvrieze.xmlutil:serialization-jvm:$xmlutil_version")
     implementation("com.charleskorn.kaml:kaml:$kaml_version")
 
-    implementation("ch.qos.logback:logback-classic:1.2.11")
-    //implementation("org.apache.commons:commons-email:1.5")
-    implementation("com.sun.mail:javax.mail:1.6.2")
-    implementation("commons-codec:commons-codec:1.15")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")   // версия не совпадает с котлином
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$kotlinx_serialization_version")
 
-    implementation("io.ktor:ktor-client-java-jvm:$ktor_version")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
 
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-cio-jvm:$ktor_version")
@@ -67,35 +65,21 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
 
-//    implementation("io.micrometer:micrometer-registry-prometheus:1.6.3")
-//    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.8.0")        ???
-
-//  если захотим кликхаус
-//  implementation("com.clickhouse:clickhouse-jdbc:0.3.2-patch1")
+    implementation("io.ktor:ktor-client-core-jvm:$ktor_version")
+    implementation("io.ktor:ktor-client-java-jvm:$ktor_version")
+    implementation("io.ktor:ktor-client-auth-jvm:$ktor_version")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-client-logging-jvm:$ktor_version")
 
     implementation("com.h2database:h2:$h2_version")
-//    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
-//    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")  я использую DSL без DAO
-//    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-    implementation("io.ktor:ktor-client-core-jvm:$ktor_version")
-    implementation("io.ktor:ktor-client-auth-jvm:$ktor_version")
-    implementation("io.ktor:ktor-client-logging-jvm:$ktor_version")
-//    implementation("org.jooq:jooq:$jooq_version")
-//    implementation("org.apache.commons:commons-compress:1.21")
-    //implementation("org.apache.cxf:cxf-api:3.5.5")
-    implementation("com.fasterxml.uuid:java-uuid-generator:4.1.0")
-
-
 
     testImplementation(kotlin("test"))
     testImplementation("commons-io:commons-io:2.11.0")    //BOMInputStream
-    //testImplementation("io.ktor:ktor-server-test-host:$ktor_version")
-    implementation(kotlin("stdlib-jdk8"))
+    testImplementation("org.apache.camel:camel-core:4.0.0-M2")
+    //testImplementation("org.apache.camel:camel-http:4.0.0-M2")
+    //testImplementation("org.apache.camel:camel-base:4.0.0-M2")
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
 
 application {
     applicationDefaultJvmArgs = listOf("-Xms64m -Xmx196m")
@@ -122,19 +106,23 @@ shadowJar.apply {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of("11"))       //8 is too low
+        languageVersion.set(JavaLanguageVersion.of(17))       //8 is too low
     }
-}
-
-tasks.withType<JavaCompile> {
-    options.encoding = "UTF-8"
 }
 
 val compileKotlin: KotlinCompile by tasks
 compileKotlin.kotlinOptions {
-    jvmTarget = "11"        //1.8
+    jvmTarget = "17"        //1.8
 }
 val compileTestKotlin: KotlinCompile by tasks
 compileTestKotlin.kotlinOptions {
-    jvmTarget = "11"
+    jvmTarget = "17"
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
 }
