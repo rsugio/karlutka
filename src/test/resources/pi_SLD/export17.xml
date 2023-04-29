@@ -1,0 +1,1805 @@
+<?xml version="1.0"?>
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+	<DECLARATION>
+		<DECLGROUP.WITHNAME>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007606</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>EAMMOBILEAPPSDKSRC</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>2.2</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170927205653.238000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20180108195130.157000+060</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007606</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>EAMMOBILEAPPSDKSRC</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>2.2</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>MA_DEV</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>MIXED</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20201231000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007606</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ed7-a8f6-b40a30dc2321</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>SAP EAM MOBILE APP SDK SRC 2.2</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>Mobile Apps OpenUI SDK Src 2.2</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170927000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OTHERS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007734</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>MSS_64_LIC</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>14</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171005154129.694000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171005161129.413000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007734</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>MSS_64_LIC</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>14</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>DB</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>GA</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>C/C++</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20271012000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007734</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-aaba-5c89fdcaa6d9</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>MS SQL SERVER X86_64 LIC 2017</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>MS SQL SERVER X86_64 incl. license check 2017</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20171005000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE/>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007647</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>SAP ET HUB SECOND</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>1710</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170927135150.550000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20180925194204.648000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007647</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>SAP ET HUB SECOND</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>1710</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>WEBSRV</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>FORGN</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20180301000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007647</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-a8ef-47e985f33c70</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>SAP ET HUB SECOND 1710</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>SAP Et Hub Second 1710</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170927000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OTHERS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007648</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>SAP ET HUB INVENTORY</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>1710</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170927135150.636000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20180925194204.856000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007648</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>SAP ET HUB INVENTORY</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>1710</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>WEBSRV</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>FORGN</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20180301000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007648</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-a8ef-47e985f35c70</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>SAP ET HUB INVENTORY 1710</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>SAP Et Hub Inventory 1710</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170927000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OTHERS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007607</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>SAPWMVEHICLESTOCK</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>6.5</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170927211153.230000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171219215140.691000+060</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007607</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>SAPWMVEHICLESTOCK</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>6.5</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>CONTNT</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>MIXED</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20201231000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007607</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ed7-a8f6-f71829c6a35f</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>WM VEHICLE STOCK COMPONENT 6.5</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>Work Manager Vehicle Stock Component 6.5</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170927000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OTHERS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007883</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>CDBASIS</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>050</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171012154609.729000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171012154610.579000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007883</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>CDBASIS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>050</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>PRJ_AP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string">
+						<VALUE>C</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>RCS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>ABAP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20251231000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007883</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-abea-7683c6682e45</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>CDBASIS 050</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>Custom Development Common Component, release 050</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20171012000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>ABAP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007781</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>MSS_64</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>14</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171005154129.844000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20180709093111.010000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007781</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>MSS_64</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>14</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>DB</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>GA</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>C/C++</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20271012000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007781</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-aaba-5c89fdcac6d9</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>MS SQL SERVER 2017/X86_64</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>MS SQL SERVER X86_64 MS SQL SERVER 2017/X86_64</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20171005000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string">
+						<VALUE/>
+					</PROPERTY>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE/>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007564</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>USER_MONITORING_SCRIPT_EDITOR</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>7.2</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170927150651.038000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20180524104211.168000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007564</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>USER_MONITORING_SCRIPT_EDITOR</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>7.2</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>BASIS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>JAVA</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20251231000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007564</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-a8f0-973f1b83fd9f</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>USER MONITORING SCRIPT ED 7.2</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>User eXperience Monitoring Script Editor 7.2</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170927000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>J2SE</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007782</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>C4C_ANDROID_EXT_BIN</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>1802</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171006000628.621000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171006000628.908000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007782</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>C4C_ANDROID_EXT_BIN</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>1802</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>MA_DEV</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>JAVA</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20180531000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007782</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-aac3-2dfc28cf6c81</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>C4C_ANDROID_EXT_BIN 1802</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>Cloud4cust Android Hybr Src 1802</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20171006000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>J2SE</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007725</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>DSN032</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>100_1610</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171003121158.155000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171003124657.565000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007725</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>DSN032</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>100_1610</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>INTEGR</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string">
+						<VALUE/>
+					</PROPERTY>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>3P_SB3</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>ABAP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20200612000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007725</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-aa84-694816b9fa07</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>DASSIAN ICR 100_1610</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>Dassian Icr 100_1610</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20171003000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>ABAP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>dassian.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007710</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>ALM_OCTANE_HP</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>12.55</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171016111135.544000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171122054148.706000+060</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007710</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>ALM_OCTANE_HP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>12.55</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>JSE</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>JAVA</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20201215000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007710</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-acca-404c837871a6</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>MICROFOCUS ALM OCTANE 12.55</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>HPE ALM OCTANE 12.55</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20171016000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string">
+						<VALUE>QM</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>J2SE</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>hp.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007901</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>QCSERVER</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>12.55</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171016111135.626000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171122053643.076000+060</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007901</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>QCSERVER</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>12.55</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>ND</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>JAVA</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20201215000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007901</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-acca-404c837891a6</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>MICROFOCUS QUALITYCENTER 12.55</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>MICROFOCUS QUALITY CENTER 12.55</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20171016000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string">
+						<VALUE/>
+					</PROPERTY>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OTHERS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>hp.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007400</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>XSAC_AC_SERV</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>1</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170904092629.232000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20180130094623.015000+060</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007400</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>XSAC_AC_SERV</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>1</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>EAOEXT</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>MIXED</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20210228000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007400</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ed7-a4a8-4bc596e4ae59</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>XSAC_ASSETCORE_SERV 1.0</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>XSAC_ASSETCORE_SERV 1.0</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170904000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>XSART</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007902</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>SAP_UFT_BY_HP</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>14.01</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171016112135.238000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171122054148.911000+060</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007902</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>SAP_UFT_BY_HP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>14.01</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>PRT_AP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>MIXED</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20201215000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007902</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-acca-6cfabc24b1c2</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>MICROFOCUS UFT 14.01</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>MICROFOCUS UFT 14.01</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20171016000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>J2EE</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>hp.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007438</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>COPIN_LIBRARY_UI</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>0.9</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170915093118.595000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20180905113632.119000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007438</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>COPIN_LIBRARY_UI</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>0.9</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>FRONT</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>PILOT</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>HTM/JS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20180630000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007438</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-a6bc-fba19018e88a</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>COPIN_LIBRARY_UI 0.9</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>COPIN_LIBRARY_UI 0.9&#xA;CoPIN specific Docu Library UI.</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170915000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007783</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>C4C_IOS_HYBR_SRC</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>1802</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171006001647.388000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20171006001649.275000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007783</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>C4C_IOS_HYBR_SRC</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>1802</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>MA_DEV</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>MIXED</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20180531000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007783</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-aac3-5c16325a6c9a</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>C4C_IOS_HYBR_SRC 1802</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>C4c_ios_hybr_src 1802</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20171006000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007477</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>XSAC_AC_MODELS</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>1</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170904133135.189000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20180130100126.715000+060</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007477</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>XSAC_AC_MODELS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>1</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>EAOEXT</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>MIXED</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20210228000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007477</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ed7-a4ac-9369017bd217</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>XSAC_ASSETCORE_MODELS 1.0</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>XSAC_ASSETCORE_MODELS 1.0</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170904000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>XSART</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007389</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>XSAC_AC_FLP</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>1</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170908095624.012000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20180130095625.600000+060</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007389</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>XSAC_AC_FLP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>1</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>EAOEXT</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string"/>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>MIXED</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime">
+						<VALUE>20210228000000.000000+060</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007389</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ee7-a58d-66b312df23eb</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>XSAC_ASSETCORE_FLP 1.0</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>Xsac_assetcore_flp 1.0</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170908000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string"/>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>OTHERS</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+			<VALUE.NAMEDOBJECT>
+				<INSTANCENAME CLASSNAME="SAP_SoftwareComponent">
+					<KEYBINDING NAME="ElementTypeID">
+						<KEYVALUE>73555000100200007577</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Name">
+						<KEYVALUE>SAP_BYD</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Vendor">
+						<KEYVALUE>sap.com</KEYVALUE>
+					</KEYBINDING>
+					<KEYBINDING NAME="Version">
+						<KEYVALUE>781</KEYVALUE>
+					</KEYBINDING>
+				</INSTANCENAME>
+				<INSTANCE CLASSNAME="SAP_SoftwareComponent">
+					<QUALIFIER NAME="SAP_CreationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170928104659.726000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastModificationTime" TYPE="datetime" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>20170928104700.134000+120</VALUE>
+					</QUALIFIER>
+					<QUALIFIER NAME="SAP_LastChangedBy" TYPE="string" TOSUBCLASS="false" TOINSTANCE="true">
+						<VALUE>fedorov_ps</VALUE>
+					</QUALIFIER>
+					<PROPERTY NAME="ElementTypeID" TYPE="string">
+						<VALUE>73555000100200007577</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Vendor" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Name" TYPE="string">
+						<VALUE>SAP_BYD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Version" TYPE="string">
+						<VALUE>781</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Type" TYPE="string">
+						<VALUE>SMB</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="HierarchyType" TYPE="string">
+						<VALUE>V</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="RevisionType" TYPE="string">
+						<VALUE>STD</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="MessagingType" TYPE="string"/>
+					<PROPERTY NAME="TechnologyType" TYPE="string">
+						<VALUE>ABAP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="UnicodeEnabled" TYPE="boolean"/>
+					<PROPERTY NAME="IsInternal" TYPE="boolean">
+						<VALUE>false</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="WarrantyEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="PatchEndDate" TYPE="datetime"/>
+					<PROPERTY NAME="ContainedObjectList" TYPE="string"/>
+					<PROPERTY NAME="PPMSNumber" TYPE="string">
+						<VALUE>73555000100200007577</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="GUID" TYPE="string">
+						<VALUE>0050568f-0aac-1ed7-a985-32e98787301c</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="SCAFileName" TYPE="string"/>
+					<PROPERTY NAME="Caption" TYPE="string">
+						<VALUE>SAP BYD 7.81</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Description" TYPE="string">
+						<VALUE>SAP Business ByDesign 7.81</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="InstallDate" TYPE="datetime">
+						<VALUE>20170928000000.000000+120</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="NativeLanguage" TYPE="string"/>
+					<PROPERTY NAME="TranslationDomain" TYPE="string">
+						<VALUE/>
+					</PROPERTY>
+					<PROPERTY NAME="RuntimeType" TYPE="string">
+						<VALUE>ABAP</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Manufacturer" TYPE="string">
+						<VALUE>sap.com</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Owner" TYPE="string">
+						<VALUE>SAP AG</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="ProductionState" TYPE="string">
+						<VALUE>released</VALUE>
+					</PROPERTY>
+					<PROPERTY NAME="Status" TYPE="string"/>
+					<PROPERTY NAME="HealthState" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16"/>
+					<PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string"/>
+					<PROPERTY NAME="ElementName" TYPE="string"/>
+				</INSTANCE>
+			</VALUE.NAMEDOBJECT>
+		</DECLGROUP.WITHNAME>
+	</DECLARATION>
+</CIM>
