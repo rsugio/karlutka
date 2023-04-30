@@ -7,6 +7,8 @@ import karlutka.util.*
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.Duration
+import java.util.*
+import kotlin.io.path.inputStream
 
 fun main(args: Array<String>) {
     val pid = ProcessHandle.current().pid()
@@ -42,6 +44,11 @@ fun main(args: Array<String>) {
     Server.kfpasswds = pw
     Server.pkfg = pkfg
     Server.ppw = ppw
+    //TODO - временно
+    val afprops = Properties()
+    afprops.load(Paths.get(".etc/af.properties").inputStream())
+    Server.afprops = afprops.toMap() as Map<String, String>
+
     KTempFile.tempFolder = Paths.get(kfg.tmpdir)
     KTempFile.start()
     println("Вре́менные файлы в ${KTempFile.tempFolder}")

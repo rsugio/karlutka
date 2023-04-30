@@ -22,7 +22,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 import kotlinx.html.*
-import nl.adaptivity.xmlutil.PlatformXmlReader
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -31,9 +30,6 @@ import java.time.Instant
 import kotlin.io.path.outputStream
 import kotlin.io.path.readBytes
 
-const val fqdn = "mp-l-5cg0366bml.ao.nlmk"
-const val shn = "mp-l-5cg0366bml"
-
 object Server {
     lateinit var pkfg: Path
     lateinit var ppw: Path
@@ -41,6 +37,7 @@ object Server {
     lateinit var kfpasswds: KfPasswds
     val targets = mutableMapOf<String, MTarget>()
     val UUIDgenerator = Generators.timeBasedGenerator()
+    lateinit var afprops: Map<String,String>
 
     fun installRoutings(app: Application) {
         app.routing {
@@ -172,9 +169,8 @@ object Server {
                 val resp: XIAdapterEngineRegistration.Scenario
                 if (action == "GetApplicationDetailsFromSLD") {
                     resp = XIAdapterEngineRegistration.GetApplicationDetailsFromSLD().answer(
-                        "af.tst.host",
-                        fqdn,
-                        "http://ld-s-devpih:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=<Mode>&consumer=af.tst.host"
+                        afprops["afname"]!!, afprops["fqdn"]!!, afprops["CAECPAurl"]!!
+
                     )
                 } else if (action == "RegisterAppWithSLD") {
                     resp = XIAdapterEngineRegistration.RegisterAppWithSLD().answer()
@@ -244,7 +240,7 @@ object Server {
             c.messages = XIAdapterEngineRegistration.Messages(
                 mutableListOf(
                     XIAdapterEngineRegistration.Message(
-                        "OKAY", "001", "XI_GRMG", "001", "AF", "SAP AG", fqdn, "80", "Ping Successful"
+                        "OKAY", "001", "XI_GRMG", "001", "AF", "SAP AG", afprops["fqdn"]!!, "80", "Ping Successful"
                     )
                 )
             )
@@ -267,7 +263,7 @@ object Server {
             resp.component.add(XIAdapterEngineRegistration.featureCheck("CompAFJobsStatus", "1"))
         } else if (action == "getSettings") {
             c.compname = "Exchange Profile"
-            c.addProperty("com.sap.aii.connect.integrationserver.name", shn)
+            c.addProperty("com.sap.aii.connect.integrationserver.name", afprops["shn"]!!)
         }
 
         call.respondText(
