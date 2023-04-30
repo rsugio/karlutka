@@ -174,7 +174,7 @@ object Server {
                     resp = XIAdapterEngineRegistration.GetApplicationDetailsFromSLD().answer(
                         "af.tst.host",
                         fqdn,
-                        "http://ld-s-devpih.ao.nlmk:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=<Mode>&consumer=af.tst.host"
+                        "http://ld-s-devpih:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=<Mode>&consumer=af.tst.host"
                     )
                 } else if (action == "RegisterAppWithSLD") {
                     resp = XIAdapterEngineRegistration.RegisterAppWithSLD().answer()
