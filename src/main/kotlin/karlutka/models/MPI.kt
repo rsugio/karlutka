@@ -1,6 +1,6 @@
 package karlutka.models
 
-import karlutka.parsers.pi.Hm
+import karlutka.parsers.pi.HmUsages
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
@@ -57,7 +57,7 @@ class MPI {
         val swcv: MutableList<Swcv>,
         val namespaces: MutableList<Namespace>,
         val objlist: MutableList<HmiType>,
-        var dirConfiguration: Hm.DirConfiguration? = null
+        var dirConfiguration: HmUsages.DirConfiguration? = null
         )
 
     @Deprecated("рефактор")

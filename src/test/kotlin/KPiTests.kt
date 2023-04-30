@@ -1,5 +1,5 @@
 import karlutka.clients.PI
-import karlutka.parsers.pi.Hm
+import karlutka.parsers.pi.HmUsages
 import karlutka.parsers.pi.PCommon
 import karlutka.server.DB
 import karlutka.server.Server
@@ -56,7 +56,7 @@ class KPiTests {
 <Person><Id>Русскiй языкъ прекрасенъ</Id><LastName/><FirstName/><TelephoneNumber/><CountryCode/></Person>
 </ns0:XiPatternMessage1>"""
 
-            val om1 = Hm.TestExecutionRequest.create(
+            val om1 = HmUsages.TestExecutionRequest.create(
                 PCommon.VC("0050568f0aac1ed4a6e56926325e2eb3", 'S'),
                 "MAPPING",
                 "XiPatternInterface1ToInterface2",
@@ -66,13 +66,13 @@ class KPiTests {
             val r1 = pi.executeOMtest(om1)
             println(r1.outputXML)
 
-            val om2 = Hm.TestExecutionRequest.create(
+            val om2 = HmUsages.TestExecutionRequest.create(
                 PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'), "MAPPING", "OM_Ume", "http://test.com", "<a/>"
             )
             val r2 = pi.executeOMtest(om2)
             println(r2.outputXML)
 
-            val mm1 = Hm.TestExecutionRequest.create(
+            val mm1 = HmUsages.TestExecutionRequest.create(
                 PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'), "XI_TRAFO", "MM_Test", "http://test.com", "<a/>"
             )
             val rm1 = pi.executeMMtest(mm1)

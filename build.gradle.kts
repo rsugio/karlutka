@@ -2,8 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.10"
-    kotlin("plugin.serialization") version "1.8.10"
+    kotlin("jvm") version "1.8.20"
+    kotlin("plugin.serialization") version "1.8.20"
     application
     java
     id("com.github.johnrengelman.shadow") version "7.0.0"
@@ -20,7 +20,7 @@ repositories {
 }
 val ktor_version = "2.3.0"
 val kotlinx_serialization_version = "1.5.0"
-val xmlutil_version = "0.85+"
+val xmlutil_version = "0.85.0"
 val kaml_version = "0.53.0"
 val h2_version = "1.4.200"
 
@@ -34,31 +34,21 @@ dependencies {
 
     implementation("io.github.pdvrieze.xmlutil:core-jvm:$xmlutil_version")
     implementation("io.github.pdvrieze.xmlutil:serialization-jvm:$xmlutil_version")
+    implementation("io.github.pdvrieze.xmlutil:serialutil-jvm:$xmlutil_version")
+    implementation("io.github.pdvrieze.xmlutil:xmlserializable:$xmlutil_version")
     implementation("com.charleskorn.kaml:kaml:$kaml_version")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")   // версия не совпадает с котлином
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_version")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$kotlinx_serialization_version")
 
-
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-cio-jvm:$ktor_version")
-//    implementation("io.ktor:ktor-server-sessions-jvm:$ktor_version")
-//    implementation("io.ktor:ktor-server-auth-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-auto-head-response-jvm:$ktor_version")
-//    implementation("io.ktor:ktor-server-locations-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-host-common-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-status-pages-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-status-pages-jvm:$ktor_version")    // обработка 404 и ошибок обработки
     implementation("io.ktor:ktor-server-compression-jvm:$ktor_version")
-//    implementation("io.ktor:ktor-server-conditional-headers-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-default-headers-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-partial-content-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-call-logging-jvm:$ktor_version")
-//    implementation("io.ktor:ktor-server-call-id-jvm:$ktor_version")
-//    implementation("io.ktor:ktor-server-metrics-jvm:$ktor_version")
-//    implementation("io.ktor:ktor-server-metrics-micrometer-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-html-builder-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
 
     implementation("io.ktor:ktor-client-core-jvm:$ktor_version")

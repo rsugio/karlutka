@@ -9,7 +9,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import karlutka.clients.PI
 import karlutka.models.MTarget
+import karlutka.parsers.pi.Hmi
 import karlutka.parsers.pi.PerfMonitorServlet
+import karlutka.parsers.pi.XIAdapterEngineRegistration
 import karlutka.parsers.pi.XiMessage
 import karlutka.util.KTempFile
 import karlutka.util.KfPasswds
@@ -20,6 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 import kotlinx.html.*
+import nl.adaptivity.xmlutil.PlatformXmlReader
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -27,6 +30,9 @@ import java.time.Duration
 import java.time.Instant
 import kotlin.io.path.outputStream
 import kotlin.io.path.readBytes
+
+const val fqdn = "mp-l-5cg0366bml.ao.nlmk"
+const val shn = "mp-l-5cg0366bml"
 
 object Server {
     lateinit var pkfg: Path
@@ -61,7 +67,6 @@ object Server {
                     }
                 }
             }
-
             post("/XI") {
                 val contentType = call.request.contentType()
                 if (contentType.match("multipart/related")) {
@@ -84,7 +89,12 @@ object Server {
                         val answ = xim.systemAck(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), XiMessage.AckStatus.OK)
                         call.respondText(answ.encodeToString(), ContentType.Application.Xml, HttpStatusCode.OK)
                     } else if (rm.QualityOfService == XiMessage.QOS.ExactlyOnceInOrder) {
-                        val answ = xim.systemAck(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), XiMessage.AckStatus.Error, XiMessage.AckCategory.transient)
+                        val answ = xim.systemAck(
+                            UUIDgenerator.generate().toString(),
+                            XiMessage.dateTimeSentNow(),
+                            XiMessage.AckStatus.Error,
+                            XiMessage.AckCategory.transient
+                        )
                         call.respondText(answ.encodeToString(), ContentType.Application.Xml, HttpStatusCode.OK)
 
 //                        // выдача Ack с boundary -- похоже дохлый номер
@@ -155,7 +165,116 @@ object Server {
                     call.respondText(ContentType.Application.Xml, HttpStatusCode.NotAcceptable) { "Wrong Content-Type: $contentType" }
                 }
             }
+            post("/AdapterFramework/regtest") {
+                val req = XIAdapterEngineRegistration.decodeFromString(call.receiveText())
+                val action = req.getAction()
+                println("/AdapterFramework/regtest with action $action")
+                val resp: XIAdapterEngineRegistration.Scenario
+                if (action == "GetApplicationDetailsFromSLD") {
+                    resp = XIAdapterEngineRegistration.GetApplicationDetailsFromSLD().answer(
+                        "af.tst.host",
+                        fqdn,
+                        "http://ld-s-devpih.ao.nlmk:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=<Mode>&consumer=af.tst.host"
+                    )
+                } else if (action == "RegisterAppWithSLD") {
+                    resp = XIAdapterEngineRegistration.RegisterAppWithSLD().answer()
+                } else
+                    TODO()
+                val t = resp.encodeToString()
+                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { t }
+            }
+            post("/rtc") {
+                rtc(call)
+            }
+            post("/run/rtc") {
+                rtc(call)
+            }
+            post("/AdapterFramework/rtc") {
+                rtc(call)
+            }
+            get("/mdt/version.jsp") {
+                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
+            }
+            post("/run/value_mapping_cache/int") {
+                hmi(call)
+            }
+            post("/AdapterFramework/rwbAdapterAccess/int") {
+                hmi(call)
+            }
         }
+    }
+
+    suspend fun hmi(call: ApplicationCall) {
+        val s = call.receiveText()
+        val i = Hmi.parseInstance(s)
+        val hr = i.toHmiRequest()
+        println("${call.request.path()} with service=${hr.ServiceId} methodId=${hr.MethodId} methodInput=${hr.MethodInput}")
+
+        var j: Hmi.HmiResponse = hr.toResponse("text/plain", "")
+        if (hr.ServiceId == "rwbAdapterAccess" && hr.MethodId == "select") {
+            val hitlist = hr.MethodInput!!["hitlist"]!!
+            val objid = hr.MethodInput["objid"]
+            if (hitlist=="parties")
+                j = hr.toResponse("text/plain", "1\n78aedc7d79c439938511d517c6d9a2c1\tP_1C_METIZ\n")
+            else if (hitlist=="party") {
+                j = hr.toResponse(
+                    "text/xml",
+                    "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGNwOlBhcnR5IHhtbG5zOmNwPSJ1cm46c2FwLWNvbTp4aTp4aVBhcnR5Ij48Y3A6UGFydHlPYmplY3RJZD43OGFlZGM3ZDc5YzQzOTkzODUxMWQ1MTdjNmQ5YTJjMTwvY3A6UGFydHlPYmplY3RJZD48Y3A6UGFydHlOYW1lPlBfMUNfTUVUSVo8L2NwOlBhcnR5TmFtZT48Y3A6UGFydHlJZGVudGlmaWVyPjxjcDpJZGVudGlmaWVyPlBfMUNfTUVUSVo8L2NwOklkZW50aWZpZXI+PGNwOkFnZW5jeT5odHRwOi8vc2FwLmNvbS94aS9YSTwvY3A6QWdlbmN5PjxjcDpTY2hlbWE+WElQYXJ0eTwvY3A6U2NoZW1hPjwvY3A6UGFydHlJZGVudGlmaWVyPjwvY3A6UGFydHk+"
+                )
+            } else if (hitlist=="services"||hitlist=="channels" || hitlist=="admds") {
+                j = hr.toResponse("text/plain", "0")
+            } else if (hitlist=="cache")
+                j = hr.toResponse("text/xml", "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPENhY2hlU3RhdGU+PFN0YXRlPlM8L1N0YXRlPjxFcnJvciAvPjxDb25maXJtYXRpb25YTUwgLz48Q2FjaGVVcGRhdGVYTUwgLz48Q29uZmlybWF0aW9uWE1MSW5kaWNhdG9yPmZhbHNlPC9Db25maXJtYXRpb25YTUxJbmRpY2F0b3I+PENhY2hlVXBkYXRlWE1MSW5kaWNhdG9yPmZhbHNlPC9DYWNoZVVwZGF0ZVhNTEluZGljYXRvcj48VGltZXN0YW1wPjE2ODI2Njc4OTM5Njc8L1RpbWVzdGFtcD48YWU+dHJ1ZTwvYWU+PC9DYWNoZVN0YXRlPg==")
+        } else if (hr.MethodId == "InvalidateCache")
+            j = hr.toResponse("text/plain", "R\tU\t\t1682667894485")
+        call.respondOutputStream(ContentType.Text.Xml, HttpStatusCode.OK) { j.toInstance().write(this) }
+    }
+
+    suspend fun rtc(call: ApplicationCall) {
+        val method = call.request.httpMethod
+        val req = XIAdapterEngineRegistration.decodeFromString(call.receiveText())
+        val action = req.getAction()
+        println("/${method.value} ${call.request.path()} ${call.request.contentType()} with action $action")
+        val resp = XIAdapterEngineRegistration.Scenario()
+        val c = XIAdapterEngineRegistration.Component(req.component[0].compname, req.component[0].compversion)
+        c.comphost = "host"
+        resp.component.add(c)
+        if (action == "ping") {
+            c.compinst = "1"
+            c.messages = XIAdapterEngineRegistration.Messages(
+                mutableListOf(
+                    XIAdapterEngineRegistration.Message(
+                        "OKAY", "001", "XI_GRMG", "001", "AF", "SAP AG", fqdn, "80", "Ping Successful"
+                    )
+                )
+            )
+        } else if (action == "selftest") {
+            c.addProperty("rezult", "OK")
+            resp.component.add(XIAdapterEngineRegistration.featureCheck("ProfileAccessible", "Is Exchange Profile Available?"))
+            resp.component.add(XIAdapterEngineRegistration.featureCheck("CompUserDefined", "Is a User Defined for Component AF?"))
+            resp.component.add(
+                XIAdapterEngineRegistration.featureCheck(
+                    "CompMessagingSystemRegistrations",
+                    "Are registrations of connections and protocol handler without errors?"
+                )
+            )
+            resp.component.add(XIAdapterEngineRegistration.featureCheck("CompAAERunning", "Is the Advanced Adapter Engine running?"))
+            resp.component.add(XIAdapterEngineRegistration.featureCheck("CompXIServiceStatus", "1"))
+            resp.component.add(XIAdapterEngineRegistration.featureCheck("CompMSJobsDelete", "1"))
+            resp.component.add(XIAdapterEngineRegistration.featureCheck("CompMSJobsArchive", "1"))
+            resp.component.add(XIAdapterEngineRegistration.featureCheck("CompMSJobsRestart", "1"))
+            resp.component.add(XIAdapterEngineRegistration.featureCheck("CompMSJobsRecover", "1"))
+            resp.component.add(XIAdapterEngineRegistration.featureCheck("CompAFJobsStatus", "1"))
+        } else if (action == "getSettings") {
+            c.compname = "Exchange Profile"
+            c.addProperty("com.sap.aii.connect.integrationserver.name", shn)
+        }
+
+        call.respondText(
+            ContentType.Text.Xml,
+            HttpStatusCode.OK
+        ) { resp.encodeToString() }
+
     }
 
     suspend fun index(call: ApplicationCall) {

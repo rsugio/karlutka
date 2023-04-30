@@ -2,143 +2,21 @@ package karlutka.parsers.pi
 
 import karlutka.models.MPI
 import karlutka.util.KtorClient
-import kotlinx.serialization.*
-import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.modules.SerializersModule
-import kotlinx.serialization.modules.polymorphic
-import nl.adaptivity.xmlutil.XmlDeclMode
-import nl.adaptivity.xmlutil.XmlReader
-import nl.adaptivity.xmlutil.serialization.*
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
+import nl.adaptivity.xmlutil.serialization.XmlElement
+import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
 
-class Hm {
-    companion object {
-        private val hmxml = SerializersModule {
-            polymorphic(Any::class) {
-                subclass(Instance::class, serializer())
-                subclass(String::class, String.serializer())
-            }
-        }
-        val hmserializer = XML(hmxml) {
-            xmlDeclMode = XmlDeclMode.None
-            autoPolymorphic = true
-        }
-
-        fun parseInstance(sxml: String): Instance {
-            return hmserializer.decodeFromString(sxml)
-        }
-        fun parseInstance(xmlReader: XmlReader): Instance {
-            return hmserializer.decodeFromReader(xmlReader)
-        }
-
-        fun parseResponse(sxml: String): HmiResponse {
-            return HmiResponse.from(hmserializer.decodeFromString(sxml))
-        }
-
-        // возвращает инстанс завёрнутый в атрибут
-        fun instance(name: String, typeid: String, vararg atts: Attribute): Attribute {
-            return Attribute(
-                false, null, name, listOf(
-                    Value(0, false, listOf(Instance(typeid, atts.toMutableList())))
-                )
-            )
-        }
-
-        /**
-         * Из списка инстансов делает список значений с номерами (0,1,..)
-         */
-//        fun valueList(instances: List<Instance?>): List<Value> {
-//            return instances.mapIndexed { ix, v ->
-//                if (v == null) Value(ix, true)
-//                else Value(ix, false, listOf(v))
-//            }
-//        }
-
-    }
-
-    @Serializable
-    @XmlSerialName("instance", "", "")
-    class Instance(
-        val typeid: String,
-        @XmlElement(true) val attribute: List<Attribute> = listOf(),
-    ) {
-        fun string(name: String): String? {
-            for (a in attribute) {
-                if (a.name == name) {
-                    require(a.leave_typeid == "string")
-                    return a.string
-                }
-            }
-            error("Not found string: $name")
-        }
-
-        /**
-         * Для данного инстанса находит атрибут с данным именем (обязательно)
-         */
-        fun attribute(name: String): Attribute {
-            val a = attribute.find { it.name == name }
-            requireNotNull(a) //TODO описание ошибки здесь
-            return a
-        }
-    }
-
-    @Serializable
-    @XmlSerialName("attribute", "", "")
-    class Attribute(
-        var isleave: Boolean = true,
-        var leave_typeid: String? = null,
-        var name: String,
-        // Если leave_typeid это строка то value это список из [0..1] строки, иначе список из объектов
-        @XmlElement(true) val value: List<Value> = listOf(),
-    ) {
-        @Transient
-        var string: String? = null
-
-        @Transient
-        var instance: Instance? = null
-
-        init {
-            require(value.isNotEmpty())
-            if (leave_typeid == "string" && !value[0].isnull && value[0].value.isNotEmpty()) string =
-                value[0].value[0] as String
-            else if (leave_typeid == null) {
-                val x = value.filter { !it.isnull }          // это кастомные наллы
-                    .flatMap { m -> m.value.filterIsInstance<Instance>() }
-                if (x.isNotEmpty()) instance = x[0]
-            }
-        }
-    }
-
-    @Serializable
-    @XmlSerialName("value", "", "")
-    class Value(
-        var index: Int = 0,
-        var isnull: Boolean = false,
-        @XmlValue(true) val value: List<@Polymorphic Any> = listOf(),
-    ) {
-        init {
-            value.forEach {
-                require(it is String || it is Instance) { "wrong type: ${it::class}" }
-            }
-        }
-    }
-
-    class HmString(val s: String?) {
-        fun attr(n: String) = Attribute(
-            true, "string", n, if (s == null) listOf(Value(0, true))
-            else listOf(Value(0, false, mutableListOf(s)))
-        )
-    }
+class HmUsages {
 
     class ApplCompLevel(
         val Release: String = "7.0", val SupportPackage: String = "*"
     ) {
-        fun attr(n: String = "ClientLevel") = instance(
-            n,
-            "com.sap.aii.util.applcomp.ApplCompLevel",
-            HmString(Release).attr("Release"),
-            HmString(SupportPackage).attr("SupportPackage")
-        )
+//        fun attr(n: String = "ClientLevel") =  instance(
+//            n, "com.sap.aii.util.applcomp.ApplCompLevel", HmString(Release).attr("Release"), HmString(SupportPackage).attr("SupportPackage")
+//        )
 
     }
 
@@ -165,35 +43,38 @@ class Hm {
     class HmiMethodInput(val input: Map<String, String?>) {
         constructor(key: String, value: String?) : this(mapOf(key to value))
 
-        fun attr(name: String = "MethodInput"): Attribute {
+        fun attr(name: String = "MethodInput"): Hmi.Attribute? {
             // пример на несколько - см /test/resources/pi_HMI/03many.xml
-            val lst = mutableListOf<Value>()
-            var ix = 0
-            input.map { e ->
-                val inst = Instance(
-                    "com.sap.aii.util.hmi.core.gdi2.EntryStringString", listOf(
-                        HmString(e.key).attr("Key"), HmString(e.value).attr("Value")
-                    )
-                )
-                lst.add(Value(ix++, false, listOf(inst)))
-
-            }
-            val params = Attribute(false, null, "Parameters", lst)
-            val inst = Instance("com.sap.aii.util.hmi.api.HmiMethodInput", listOf(params))
-            return Attribute(
-                false, null, name, listOf(
-                    Value(0, false, listOf(inst))
-                )
-            )
+            return null
+//            val lst = mutableListOf<Value>()
+//            var ix = 0
+//            input.map { e ->
+//                val inst = Instance(
+//                    //TODO тоже ошибка - хардкод имени класса
+//                    "com.sap.aii.util.hmi.core.gdi2.EntryStringString", listOf(
+//                        HmString(e.key).attr("Key"), HmString(e.value).attr("Value")
+//                    )
+//                )
+//                lst.add(Value(ix++, false, listOf(inst)))
+//
+//            }
+//            val params = Attribute(false, null, "Parameters", lst)
+//            //TODO здесь неправильно хардкодить имя класса, оно может слегка меняться в разных модулях
+//            val inst = Instance("com.sap.aii.util.hmi.api.HmiMethodInput", listOf(params))
+//            return Attribute(
+//                false, null, name, listOf(
+//                    Value(0, false, listOf(inst))
+//                )
+//            )
         }
     }
 
     class HmiMethodOutput(val ContentType: String, val Return: String) {
         companion object {
-            fun from(i: Instance?): HmiMethodOutput? {
+            fun from(i: Hmi.Instance?): HmiMethodOutput? {
                 if (i == null) return null
                 require(i.typeid == "com.sap.aii.utilxi.hmi.api.HmiMethodOutput")
-                return HmiMethodOutput(i.string("ContentType")!!, i.string("Return")!!)
+                return null // HmiMethodOutput(i.string("ContentType")!!, i.string("Return")!!)
             }
         }
     }
@@ -207,16 +88,17 @@ class Hm {
         val Details: String?,
     ) {
         companion object {
-            fun from(i: Instance?): HmiMethodFault? {
-                if (i == null) return null
-                require(i.typeid == "com.sap.aii.utilxi.hmi.api.HmiMethodFault")
-                return HmiMethodFault(
-                    i.string("LocalizedMessage")!!,
-                    i.string("Severity")!!,
-                    i.string("OriginalStackTrace"),
-                    i.string("RootCauseAsString"),
-                    i.string("Details")
-                )
+            fun from(i: Hmi.Instance?): HmiMethodFault? {
+                return null
+//                if (i == null) return null
+//                require(i.typeid == "com.sap.aii.utilxi.hmi.api.HmiMethodFault")
+//                return HmiMethodFault(
+//                    i.string("LocalizedMessage")!!,
+//                    i.string("Severity")!!,
+//                    i.string("OriginalStackTrace"),
+//                    i.string("RootCauseAsString"),
+//                    i.string("Details")
+//                )
             }
         }
     }
@@ -229,15 +111,13 @@ class Hm {
         val SubtypeId: String?,
     ) {
         companion object {
-            fun from(i: Instance?): HmiCoreException? {
-                if (i == null) return null
-                require(i.typeid == "com.sap.aii.utilxi.hmi.api.HmiCoreException")
-                return HmiCoreException(
-                    i.string("LocalizedMessage")!!,
-                    i.string("Severity")!!,
-                    i.string("OriginalStackTrace"),
-                    i.string("SubtypeId")
-                )
+            fun from(i: Hmi.Instance?): HmiCoreException? {
+                return null
+//                if (i == null) return null
+//                require(i.typeid == "com.sap.aii.utilxi.hmi.api.HmiCoreException")
+//                return HmiCoreException(
+//                    i.string("LocalizedMessage")!!, i.string("Severity")!!, i.string("OriginalStackTrace"), i.string("SubtypeId")
+//                )
             }
         }
     }
@@ -258,27 +138,28 @@ class Hm {
         val HmiSpecVersion: String = "1.0",
         val ControlFlag: Int = 0
     ) {
-        fun instance(): Instance {
-            val a = mutableListOf<Attribute>()
-            a.add(HmString(ClientId).attr("ClientId"))
-            a.add(HmString(ClientLanguage).attr("ClientLanguage"))
-            a.add(ClientLevel.attr())
-            a.add(HmString(ClientUser).attr("ClientUser"))
-            a.add(HmString(ClientPassword).attr("ClientPassword"))
-            a.add(HmString(ControlFlag.toString()).attr("ControlFlag"))
-            a.add(HmString(HmiSpecVersion).attr("HmiSpecVersion"))
-            a.add(HmString(MethodId).attr("MethodId"))
-            a.add(HmiMethodInput.attr())
-
-            a.add(HmString(RequestId).attr("RequestId"))
-            a.add(HmString(RequiresSession.toString()).attr("RequiresSession"))
-            a.add(HmString(ServerLogicalSystemName).attr("ServerLogicalSystemName"))
-            a.add(HmString(ServerApplicationId).attr("ServerApplicationId"))
-            a.add(HmString(ServiceId).attr("ServiceId"))
-            return Instance("com.sap.aii.util.hmi.core.msg.HmiRequest", a)
+        fun instance(): Hmi.Instance? {
+            return null
+//            val a = mutableListOf<Attribute>()
+//            a.add(HmString(ClientId).attr("ClientId"))
+//            a.add(HmString(ClientLanguage).attr("ClientLanguage"))
+//            //a.add(ClientLevel.attr())
+//            a.add(HmString(ClientUser).attr("ClientUser"))
+//            a.add(HmString(ClientPassword).attr("ClientPassword"))
+//            a.add(HmString(ControlFlag.toString()).attr("ControlFlag"))
+//            a.add(HmString(HmiSpecVersion).attr("HmiSpecVersion"))
+//            a.add(HmString(MethodId).attr("MethodId"))
+//            //a.add(HmiMethodInput.attr())
+//
+//            a.add(HmString(RequestId).attr("RequestId"))
+//            a.add(HmString(RequiresSession.toString()).attr("RequiresSession"))
+//            a.add(HmString(ServerLogicalSystemName).attr("ServerLogicalSystemName"))
+//            a.add(HmString(ServerApplicationId).attr("ServerApplicationId"))
+//            a.add(HmString(ServiceId).attr("ServiceId"))
+//            return Instance("com.sap.aii.util.hmi.core.msg.HmiRequest", a)
         }
 
-        fun encodeToString() = hmserializer.encodeToString(this.instance())
+        fun encodeToString():String = TODO() //Hm.hmserializer.encodeToString(this.instance())
     }
 
     class HmiResponse(
@@ -290,36 +171,40 @@ class Hm {
         val ControlFlag: Int = 0,
         val HmiSpecVersion: String? = null
     ) {
-        fun toQueryResult(task: KtorClient.Task): QueryResult {
-            //TODO надо подумать как чинить такое
-            requireNotNull(MethodOutput) { "Нет данных в запросе $RequestId задача ${task.path} remark=${task.remark}" }
-            try {
-                val v = hmserializer.decodeFromString<QueryResult>(MethodOutput.Return)
-                return v
-            } catch (e: UnknownXmlFieldException) {
-                System.err.println("Ошибка разбора запроса $RequestId задача ${task.path} remark=${task.remark}")
-                throw e
-            }
+        fun toQueryResult(task: KtorClient.Task): HmUsages.QueryResult {
+            TODO()
+//broken            requireNotNull(MethodOutput) { "Нет данных в запросе $RequestId задача ${task.path} remark=${task.remark}" }
+//            try {
+//                val v = Hm.hmserializer.decodeFromString<HmUsages.QueryResult>(MethodOutput.Return)
+//                return v
+//            } catch (e: UnknownXmlFieldException) {
+//                System.err.println("Ошибка разбора запроса $RequestId задача ${task.path} remark=${task.remark}")
+//                throw e
+//            }
         }
 
         companion object {
-            fun from(i: Instance): HmiResponse {
-                require(i.typeid == "com.sap.aii.utilxi.hmi.core.msg.HmiResponse")
-                val clientId = i.string("ClientId")
-                val requestId = i.string("RequestId")
-                val cf = i.string("ControlFlag")!!.toInt()
-                val hv = i.string("HmiSpecVersion")
-                val hmo = HmiMethodOutput.from(i.attribute("MethodOutput").instance)
-                val hmf = HmiMethodFault.from(i.attribute("MethodFault").instance)
-                val hce = HmiCoreException.from(i.attribute("CoreException").instance)
-                return HmiResponse(clientId, requestId, hmo, hmf, hce, cf, hv)
+            fun from(i: Hmi.Instance): HmiResponse? {
+                return null
+//                require(i.typeid == "com.sap.aii.utilxi.hmi.core.msg.HmiResponse")
+//                val clientId = i.string("ClientId")
+//                val requestId = i.string("RequestId")
+//                val cf = i.string("ControlFlag")!!.toInt()
+//                val hv = i.string("HmiSpecVersion")
+//                val hmo = HmiMethodOutput.from(i.attribute("MethodOutput").instance)
+//                val hmf = HmiMethodFault.from(i.attribute("MethodFault").instance)
+//                val hce = HmiCoreException.from(i.attribute("CoreException").instance)
+//                return HmiResponse(clientId, requestId, hmo, hmf, hce, cf, hv)
             }
 
             fun parse(task: KtorClient.Task): HmiResponse {
-                return from(hmserializer.decodeFromReader(task.bodyAsXmlReader()))
+                //return from(hmserializer.decodeFromReader(task.bodyAsXmlReader()))
+                return HmiResponse()
             }
         }
     }
+
+
 
     // Прикладные сервисы поверх HMI
 
@@ -334,7 +219,7 @@ class Hm {
         @XmlElement(true) val condition: Condition,
         @XmlElement(true) val result: Result,
     ) {
-        fun encodeToString() = hmserializer.encodeToString(this)
+        fun encodeToString():String = TODO() //Hm.hmserializer.encodeToString(this)
 
         @Serializable
         @XmlSerialName("types", "", "")
@@ -499,8 +384,7 @@ class Hm {
     ) {
         private fun toTable(): List<MutableMap<String, C>> {
             val lines = mutableListOf<MutableMap<String, C>>()
-            val posTypeMapping =
-                headerInfo.colDef.def.associate { Pair(it.pos, it.type) }    // 0:"", 1:RA_WORKSPACE_ID, 2:WS_NAME
+            val posTypeMapping = headerInfo.colDef.def.associate { Pair(it.pos, it.type) }    // 0:"", 1:RA_WORKSPACE_ID, 2:WS_NAME
             matrix.r.forEach { row ->
                 val res = mutableMapOf<String, C>()
                 row.c.forEachIndexed { cx, col ->
@@ -525,7 +409,8 @@ class Hm {
                     x["WS_NAME"]!!.strvalue(),
                     x["VENDOR"]!!.strvalue(),
                     x["VERSION"]!!.strvalue(),
-                null)   //TODO
+                    null
+                )   //TODO
 //                    x["WS_TYPE"]!!.strvalue()!![0],
 //                    x["ORIGINAL_LANGUAGE"]!!.strvalue()!!,
 //                )
@@ -570,10 +455,12 @@ class Hm {
                             // это namespdecl у которого нет RA_XILINK. Собираем суррогатную ссылку.
                             val swcguid = col.wkID!!.id
                             ref = Ref(
-                                PCommon.VC(null, '?'), PCommon.Key("namespdecl", swcguid),
+                                PCommon.VC(null, '?'),
+                                PCommon.Key("namespdecl", swcguid),
                                 Ref.VSpec(4, swcguid, false)    //versionid := objectid := swcguid
                             )
                         }
+
                         "RA_XILINK" -> ref = col.qref!!.ref
                         "TEXT", "MODIFYUSER" -> att1[cn] = col.simple!!.strg!!
                         "FOLDERREF" -> att1[cn] = col.simple!!.bin!!
@@ -590,10 +477,10 @@ class Hm {
                     } // смотрим какие атрибуты
                 } // цикл по столбцам
                 var swcref: MPI.Swcv? = null
-                if (ref.vc.swcGuid!=null) {
+                if (ref.vc.swcGuid != null) {
                     //TODO добавить SP в чтение SWCV
-                    val sublist = swcv.filter { it.guid==ref.vc.swcGuid }
-                    require(sublist.size==1) {"Для SWCV ${ref.vc.swcGuid} более одного объекта"}
+                    val sublist = swcv.filter { it.guid == ref.vc.swcGuid }
+                    require(sublist.size == 1) { "Для SWCV ${ref.vc.swcGuid} более одного объекта" }
                     swcref = sublist[0]
                 }
                 val h = MPI.HmiType(
@@ -704,7 +591,8 @@ class Hm {
 
         companion object {
             fun parse(sxml: String): QueryResult {
-                return hmserializer.decodeFromString(sxml)
+                TODO()
+                //broken return Hm.hmserializer.decodeFromString(sxml)
             }
         }
     }
@@ -783,11 +671,12 @@ class Hm {
             @XmlValue(true) val value: String = "",
         )
 
-        fun encodeToString() = hmserializer.encodeToString(this)
+        fun encodeToString():String = TODO() // Hm.hmserializer.encodeToString(this)
 
         companion object {
             fun decodeFromString(sxml: String): TestExecutionRequest {
-                return hmserializer.decodeFromString(sxml)
+                TODO()
+                //return Hm.hmserializer.decodeFromString(sxml)
             }
 
             fun create(
@@ -845,7 +734,7 @@ class Hm {
     ) {
         companion object {
             fun decodeFromString(sxml: String): TestExecutionResponse {
-                return hmserializer.decodeFromString(sxml)
+                TODO() //return Hm.hmserializer.decodeFromString(sxml)
             }
         }
     }
@@ -963,7 +852,7 @@ class Hm {
         )
 
         companion object {
-            fun decodeFromString(sxml: String) = hmserializer.decodeFromString<DirConfiguration>(sxml)
+            fun decodeFromString(sxml: String):DirConfiguration = TODO() //Hm.hmserializer.decodeFromString<DirConfiguration>(sxml)
 //            fun decodeFromXmlReader(xmlReader: XmlReader) = hmserializer.decodeFromReader<DirConfiguration>(xmlReader)
         }
     }
@@ -973,7 +862,7 @@ class Hm {
     class ReadListRequest(
         @XmlElement(true) val type: Type,
     ) {
-        fun encodeToString() = hmserializer.encodeToString(this)
+        fun encodeToString():String = TODO() // Hm.hmserializer.encodeToString(this)
     }
 
     @Serializable
@@ -998,4 +887,5 @@ class Hm {
 //          WITH_UI_TEXTS="false" ADD_ENHANCEMENTS="false" WSDL_XSD_GEN_MODE="EXTERNAL"
 // XI_TRAFO:
 // MAPPING:
+
 }

@@ -3,19 +3,14 @@
 package karlutka.util
 
 import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.cio.*
 import io.ktor.server.engine.*
 import io.ktor.server.html.*
 import io.ktor.server.http.content.*
-import io.ktor.server.plugins.autohead.*
 import io.ktor.server.plugins.callloging.*
 import io.ktor.server.plugins.compression.*
-import io.ktor.server.plugins.conditionalheaders.*
-import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.defaultheaders.*
-import io.ktor.server.plugins.partialcontent.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
@@ -50,45 +45,31 @@ object KtorServer {
             }
             install(Compression) {
                 gzip {
-                    priority = 0.1
+                    priority = 1.0
                 }
                 deflate {
-                    priority = 0.1
+                    priority = 10.0
                     minimumSize(1024) // condition
                 }
             }
-            install(ConditionalHeaders)
             install(DefaultHeaders) {
                 header("engine", "karlutka2")
             }
-//            install(PartialContent) {
-//                // Maximum number of ranges that will be accepted from a HTTP request.
-//                // If the HTTP request specifies more ranges, they will all be merged into a single range.
-//                maxRangeCount = 10
-//            }
             install(CallLogging) {
                 level = Level.INFO
                 filter { call -> call.request.path().startsWith("/") }
-//                callIdMdc("call-id")
+                println("Call logging: 66")
             }
-//            install(CallId) {
-//                header(HttpHeaders.XRequestId)
-//                verify { callId: String ->
-//                    callId.isNotEmpty()
-//                }
-//            }
-            install(AutoHeadResponse)
-//            install(Sessions) {
-//                cookie<UserServerSession>("user_session") {
-//                    cookie.path = "/"
-//                    cookie.maxAgeInSeconds = 60
-//                }
-//            }
+//            install(AutoHeadResponse)   //io.ktor:ktor-server-auto-head-response-jvm:$ktor_version
             install(StatusPages) {
                 status(HttpStatusCode.NotFound) { call, status ->
+                    val method = call.request.httpMethod
+                    println("404: ${method.value} ${call.request.path()} ${call.request.queryString()} ${call.request.contentType()}")
+                    if (method == HttpMethod.Post) {
+                        println(call.receiveText())
+                    }
                     call.respondText(text = "404: Page Not Found", status = status)
                 }
-
                 exception<Exception> { call, cause ->
                     val st = cause.stackTrace.joinToString("\n\t")
                     val s = "ОШИБКА ОБРАБОТКИ ЗАПРОСА ${call.request.httpMethod.value} ${call.request.uri}\n" +
@@ -96,14 +77,7 @@ object KtorServer {
                     call.respondText(s, ContentType.Text.Plain, HttpStatusCode.InternalServerError)
                 }
             }
-//            val appMicrometerRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
-//            install(MicrometerMetrics) {
-//                registry = appMicrometerRegistry
-//            }
             routing {
-//                get("/metrics") {
-//                    call.respondText(appMicrometerRegistry.scrape())
-//                }
                 get("/error") {
                     call.respondText("${1 / 0}")
                 }
@@ -122,9 +96,7 @@ object KtorServer {
                     }
                 }
             }
-            install(ContentNegotiation) {
-                json()
-            }
+            //install(ContentNegotiation) {json()} // io.ktor:ktor-server-content-negotiation-jvm:$ktor_version
             Server.installRoutings(this)
         }
     }
