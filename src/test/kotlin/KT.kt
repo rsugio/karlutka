@@ -49,18 +49,18 @@ class KT {
             return PlatformXmlReader(InputStreamReader(p.inputStream(), Charsets.UTF_8))
         }
 
-        // Читает тройку url, login, passw и делает двойку
+        // Читает свойства, преобразует в Map и добавляет аутентификатор
         fun propAuth(p: Path): Map<String, Any> {
             require(Files.isRegularFile(p), {"$p must be a regular file"})
             val prop = Properties()
             prop.load(p.inputStream())
-            val url = prop.get("url") as String
-            val auth = object : Authenticator() {
+            val m = prop.toMutableMap() as MutableMap<String,Any>
+            m["auth"] = object : Authenticator() {
                 override fun getPasswordAuthentication(): PasswordAuthentication {
-                    return PasswordAuthentication(prop.get("login") as String, (prop.get("passw") as String).toCharArray())
+                    return PasswordAuthentication(m["login"] as String, (m["passw"] as String).toCharArray())
                 }
             }
-            return mapOf("url" to url, "auth" to auth)
+            return m
         }
     }
 }

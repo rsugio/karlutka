@@ -9,14 +9,69 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import java.util.zip.ZipInputStream
 
 // очень простой набор для SLD, минималистичный
+// полное описание см https://www.dmtf.org/sites/default/files/standards/documents/CIM_XML_Mapping20.html
 class SLD_CIM {
     @Serializable
     @XmlSerialName("CIM", "", "")
     class CIM(
         val CIMVERSION: String,
         val DTDVERSION: String,
-        val DECLARATION: _DECLARATION
+        val DECLARATION: _DECLARATION? = null,      // для файлов
+        val MESSAGE: MESSAGE? = null
     )
+
+    @Serializable
+    @XmlSerialName("MESSAGE", "", "")
+    class MESSAGE(
+        val ID: Int,
+        val PROTOCOLVERSION: String,
+        val SIMPLEREQ: SIMPLEREQ? = null,
+        val MULTIREQ: MULTIREQ? = null,
+        val SIMPLERSP: SIMPLERSP? = null,
+        val MULTIRSP: MULTIRSP? = null
+    )
+    @Serializable
+    @XmlSerialName("SIMPLEREQ", "", "")
+    class SIMPLEREQ(
+        val METHODCALL: METHODCALL?=null,
+        val IMETHODCALL: IMETHODCALL?=null,
+    )
+    @Serializable
+    @XmlSerialName("MULTIREQ", "", "")
+    class MULTIREQ(
+    )
+    @Serializable
+    @XmlSerialName("SIMPLERSP", "", "")
+    class SIMPLERSP(
+    )
+    @Serializable
+    @XmlSerialName("MULTIRSP", "", "")
+    class MULTIRSP(
+    )
+    @Serializable
+    @XmlSerialName("METHODCALL", "", "")
+    class METHODCALL(
+        val NAME: String,
+        val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
+
+    )
+    @Serializable
+    @XmlSerialName("IMETHODCALL", "", "")
+    class IMETHODCALL(
+        val NAME: String,
+        val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
+    )
+    @Serializable
+    @XmlSerialName("LOCALNAMESPACEPATH", "", "")
+    class LOCALNAMESPACEPATH(
+        val NAMESPACE: List<NAMESPACE> = listOf(),
+    )
+    @Serializable
+    @XmlSerialName("NAMESPACE", "", "")
+    class NAMESPACE(
+        val NAME: String
+    )
+
 
     @Serializable
     @XmlSerialName("DECLARATION", "", "")
@@ -130,6 +185,7 @@ class SLD_CIM {
                     return null
             }
         }
+
     }
 
 
