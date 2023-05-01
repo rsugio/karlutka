@@ -59,14 +59,21 @@ class KSLDTests {
     val GetClass_SAPXIDomain = SLD_CIM.CIM(
         SLD_CIM.MESSAGE(
             messageid(),
-            SLD_CIM.SIMPLEREQ(SLD_CIM.IMETHODCALL("GetClass", sldactive, SLD_CIM.IPARAMVALUE("ClassName", SLD_CIM.JustName("SAP_XIDomain"))))
+            SLD_CIM.SIMPLEREQ(SLD_CIM.IMETHODCALL("GetClass", sldactive, listOf(SLD_CIM.IPARAMVALUE("ClassName", null, SLD_CIM.JustName("SAP_XIDomain")))))
+        )
+    )
+
+    val GetClass_CIM_ManagedElement = SLD_CIM.CIM(
+        SLD_CIM.MESSAGE(
+            messageid(),
+            SLD_CIM.SIMPLEREQ(SLD_CIM.IMETHODCALL("GetClass", sldactive, listOf(SLD_CIM.IPARAMVALUE("ClassName", null, SLD_CIM.JustName("CIM_ManagedElement")))))
         )
     )
 
     val EnumerateInstances_SAPXIDomain = SLD_CIM.CIM(
         SLD_CIM.MESSAGE(
             messageid(),
-            SLD_CIM.SIMPLEREQ(SLD_CIM.IMETHODCALL("EnumerateInstances", sldactive, SLD_CIM.IPARAMVALUE("ClassName", SLD_CIM.JustName("SAP_XIDomain"))))
+            SLD_CIM.SIMPLEREQ(SLD_CIM.IMETHODCALL("EnumerateInstances", sldactive, listOf(SLD_CIM.IPARAMVALUE("ClassName", null, SLD_CIM.JustName("SAP_XIDomain")))))
         )
     )
 
@@ -79,6 +86,8 @@ class KSLDTests {
         println(a2!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         val a3 = op(EnumerateInstances_SAPXIDomain)
         println(a3!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        val a4 = op(GetClass_CIM_ManagedElement)
+        println(a4!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
     }
 
     @Test
@@ -90,5 +99,7 @@ class KSLDTests {
         SLD_CIM.decodeFromReader(x("/pi_SLD/cim04getclass.xml"))
         SLD_CIM.decodeFromReader(x("/pi_SLD/cim05enuminstances.xml"))
         SLD_CIM.decodeFromReader(x("/pi_SLD/cim06enuminstances.xml"))
+        SLD_CIM.decodeFromReader(x("/pi_SLD/cim07getinstance.xml"))
+        SLD_CIM.decodeFromReader(x("/pi_SLD/cim08getinstance.xml"))
     }
 }

@@ -9,15 +9,15 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import java.util.zip.ZipInputStream
 
 // очень простой набор для SLD, минималистичный
-// полное описание см https://www.dmtf.org/sites/default/files/standards/documents/CIM_XML_Mapping20.html
+// полное описание см DSP0201_2.4.0.pdf
 class SLD_CIM {
     @Serializable
     @XmlSerialName("CIM", "", "")
     class CIM(
-        val MESSAGE: MESSAGE? = null,
-        val DECLARATION: DECLARATION? = null,      // для файлов
-        val CIMVERSION: String = "2.0",
-        val DTDVERSION: String = "2.0",
+        val MESSAGE: MESSAGE? = null,           // для обмена по HTTP
+        val DECLARATION: DECLARATION? = null,   // для файлов
+        val CIMVERSION: String = "2.3",
+        val DTDVERSION: String = "2.2",
     ) {
         fun encodeToString() = XML.encodeToString(this)
     }
@@ -61,23 +61,26 @@ class SLD_CIM {
     class METHODCALL(
         val NAME: String,
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
-
-        )
+    )
 
     @Serializable
     @XmlSerialName("IMETHODCALL", "", "")
     class IMETHODCALL(
         val NAME: String,
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
-        val IPARAMVALUE: IPARAMVALUE? = null
+        val IPARAMVALUE: List<IPARAMVALUE> = listOf()
     )
 
     @Serializable
     @XmlSerialName("IPARAMVALUE", "", "")
     class IPARAMVALUE(
         val NAME: String,
+        @XmlElement
+        @XmlSerialName("VALUE", "", "")
+        val VALUE: String? = null,
         @XmlSerialName("CLASSNAME", "", "")
-        val CLASSNAME: JustName?,
+        val CLASSNAME: JustName? = null,
+        val INSTANCENAME: INSTANCENAME? = null,
     )
 
     @Serializable
@@ -87,12 +90,24 @@ class SLD_CIM {
         val IRETURNVALUE: IRETURNVALUE,
     )
 
+    //    <!ELEMENT IRETURNVALUE (CLASSNAME* | INSTANCENAME* | VALUE* | VALUE.OBJECTWITHPATH* | VALUE.OBJECTWITHLOCALPATH* | VALUE.OBJECT* |
+    //    OBJECTPATH* | QUALIFIER.DECLARATION* | VALUE.ARRAY? | VALUE.REFERENCE? | CLASS* | INSTANCE* | INSTANCEPATH* | VALUE.NAMEDINSTANCE* |
+    //    VALUE.INSTANCEWITHPATH)>
     @Serializable
     @XmlSerialName("IRETURNVALUE", "", "")
     data class IRETURNVALUE(
-        @XmlElement val VALUE: String?,
+        //val CLASSNAME:,
+        val INSTANCENAME: List<INSTANCENAME> = listOf(),
+        @XmlSerialName("VALUE", "", "")
+        val VALUE: List<String> = listOf(),
+        //val VALUE_OBJECTWITHPATH: List<VALUE_OBJECTWITHPATH> = listOf(),
+        //val VALUE_OBJECTWITHLOCALPATH: List<VALUE_OBJECTWITHLOCALPATH> = listOf(),
+        //val VALUE_OBJECT: List<VALUE_OBJECT> = listOf(),
+        //val OBJECTPATH: List<OBJECTPATH> = listOf(),
+        val VALUE_NAMEDOBJECT: List<VALUE_NAMEDOBJECT> = listOf(),
         val CLASS: List<CLASS> = listOf(),
-        val VALUE_NAMEDINSTANCE: List<VALUE_NAMEDINSTANCE> = listOf()
+        val VALUE_NAMEDINSTANCE: List<VALUE_NAMEDINSTANCE> = listOf(),
+        val INSTANCE: List<INSTANCE> = listOf()
     )
 
     @Serializable
@@ -103,12 +118,6 @@ class SLD_CIM {
     ) {
         constructor(vararg a: String) : this(a.toList().map { JustName(it) })
     }
-
-    @Serializable
-    class JustName(
-        val NAME: String
-    )
-
 
     @Serializable
     @XmlSerialName("DECLARATION", "", "")
@@ -131,13 +140,15 @@ class SLD_CIM {
     @Serializable
     @XmlSerialName("INSTANCENAME", "", "")
     class INSTANCENAME(
-        val CLASSNAME: String, val KEYBINDING: List<KEYBINDING>
+        val CLASSNAME: String,
+        val KEYBINDING: List<KEYBINDING> = listOf()
     )
 
     @Serializable
     @XmlSerialName("KEYBINDING", "", "")
     class KEYBINDING(
-        val NAME: String, @XmlElement(true) val KEYVALUE: String
+        val NAME: String,
+        @XmlElement(true) val KEYVALUE: String
     )
 
     @Serializable
@@ -228,6 +239,12 @@ class SLD_CIM {
         val INSTANCE: INSTANCE,
     )
 
+    @Serializable
+    class JustName(
+        val NAME: String
+    )
+
+    // ------------------------------------------------------------------ по хорошему, надо разделить SLD_CIM на CIM (см.выше) и SLD (ниже)
     @Serializable
     class SAP_SoftwareComponent(
         // Первичный ключ: ElementTypeID, Name, Vendor, Version
