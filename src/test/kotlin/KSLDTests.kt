@@ -22,15 +22,15 @@ class KSLDTests {
 
     fun op(
         cim: SLD_CIM.CIM,
+//        cimmethod: String,
         cimoperation: String = "MethodCall",
-        cimmethod: String = "SAPExt_GetObjectServer",
         cimobject: String = "sld/active"
     ): SLD_CIM.CIM? {
         val request: HttpRequest = HttpRequest.newBuilder()
             .uri(URI.create(po["sld"] as String))
             .header("cimprotocolversion", "1.0")
             .header("cimoperation", cimoperation)
-            .header("cimmethod", cimmethod)
+            .header("cimmethod", cim.MESSAGE!!.SIMPLEREQ!!.IMETHODCALL!!.NAME)
             .header("cimobject", cimobject)
             .header("content-type", "application/xml; charset=utf-8")
             .POST(HttpRequest.BodyPublishers.ofString(cim.encodeToString()))
@@ -50,25 +50,35 @@ class KSLDTests {
 
     fun messageid() = 12345677
 
+    val sldactive = SLD_CIM.LOCALNAMESPACEPATH("sld", "active")
     val SAPExt_GetObjectServer = SLD_CIM.CIM(
         SLD_CIM.MESSAGE(
             messageid(),
-            SLD_CIM.SIMPLEREQ(null, SLD_CIM.IMETHODCALL("SAPExt_GetObjectServer", SLD_CIM.LOCALNAMESPACEPATH("sld", "active")))
+            SLD_CIM.SIMPLEREQ(null, SLD_CIM.IMETHODCALL("SAPExt_GetObjectServer", sldactive))
+        )
+    )
+    val GetClass_SAPXIDomain = SLD_CIM.CIM(
+        SLD_CIM.MESSAGE(
+            messageid(),
+            SLD_CIM.SIMPLEREQ(null, SLD_CIM.IMETHODCALL("GetClass", sldactive, SLD_CIM.IPARAMVALUE("ClassName", SLD_CIM.JustName("SAP_XIDomain"))))
         )
     )
 
     @Test
     fun runtime() {
-        val a1 = op(SAPExt_GetObjectServer)
-        println(a1!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE) // короткое имя сервера
-
-
+        val a1 = op(SAPExt_GetObjectServer) //, "SAPExt_GetObjectServer")
+        val shortname = a1!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE  // короткое имя сервера в VALUE
+        println(shortname)
+        val a2 = op(GetClass_SAPXIDomain)
+        println(a2!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
     }
 
     @Test
     fun parserPrinter() {
         SLD_CIM.decodeFromReader(x("/pi_SLD/cim01get.xml"))
         SLD_CIM.decodeFromReader(x("/pi_SLD/cim02get.xml"))
-        println(SAPExt_GetObjectServer.encodeToString())
+        SAPExt_GetObjectServer.encodeToString()
+        SLD_CIM.decodeFromReader(x("/pi_SLD/cim03getclass.xml"))
+        SLD_CIM.decodeFromReader(x("/pi_SLD/cim04getclass.xml"))
     }
 }

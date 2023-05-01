@@ -15,7 +15,7 @@ class SLD_CIM {
     @XmlSerialName("CIM", "", "")
     class CIM(
         val MESSAGE: MESSAGE? = null,
-        val DECLARATION: _DECLARATION? = null,      // для файлов
+        val DECLARATION: DECLARATION? = null,      // для файлов
         val CIMVERSION: String = "2.0",
         val DTDVERSION: String = "2.0",
     ) {
@@ -69,6 +69,15 @@ class SLD_CIM {
     class IMETHODCALL(
         val NAME: String,
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
+        val IPARAMVALUE: IPARAMVALUE? = null
+    )
+
+    @Serializable
+    @XmlSerialName("IPARAMVALUE", "", "")
+    class IPARAMVALUE(
+        val NAME: String,
+        @XmlSerialName("CLASSNAME", "", "")
+        val CLASSNAME: JustName?,
     )
 
     @Serializable
@@ -81,82 +90,143 @@ class SLD_CIM {
     @Serializable
     @XmlSerialName("IRETURNVALUE", "", "")
     data class IRETURNVALUE(
-        @XmlElement val VALUE: String,
+        @XmlElement val VALUE: String?,
+        @XmlElement val CLASS: CLASS?
     )
 
     @Serializable
     @XmlSerialName("LOCALNAMESPACEPATH", "", "")
     class LOCALNAMESPACEPATH(
-        val NAMESPACE: List<NAMESPACE> = listOf(),
+        @XmlSerialName("NAMESPACE", "", "")
+        val NAMESPACE: List<JustName> = listOf(),
     ) {
-        constructor(vararg a: String) : this(a.toList().map { NAMESPACE(it) })
+        constructor(vararg a: String) : this(a.toList().map { JustName(it) })
     }
 
     @Serializable
-    @XmlSerialName("NAMESPACE", "", "")
-    class NAMESPACE(
+    class JustName(
         val NAME: String
     )
 
 
     @Serializable
     @XmlSerialName("DECLARATION", "", "")
-    class _DECLARATION(
-        val DECLGROUP_WITHNAME: _DECLGROUP_WITHNAME
+    class DECLARATION(
+        val DECLGROUP_WITHNAME: DECLGROUP_WITHNAME
     )
 
     @Serializable
     @XmlSerialName("DECLGROUP.WITHNAME", "", "")
-    class _DECLGROUP_WITHNAME(
-        val VALUE_NAMEDOBJECT: List<_VALUE_NAMEDOBJECT>
+    class DECLGROUP_WITHNAME(
+        val VALUE_NAMEDOBJECT: List<VALUE_NAMEDOBJECT>
     )
 
     @Serializable
     @XmlSerialName("VALUE.NAMEDOBJECT", "", "")
-    class _VALUE_NAMEDOBJECT(
-        val INSTANCENAME: _INSTANCENAME, val INSTANCE: _INSTANCE
+    class VALUE_NAMEDOBJECT(
+        val INSTANCENAME: INSTANCENAME, val INSTANCE: INSTANCE
     )
 
     @Serializable
     @XmlSerialName("INSTANCENAME", "", "")
-    class _INSTANCENAME(
-        val CLASSNAME: String, val KEYBINDING: List<_KEYBINDING>
+    class INSTANCENAME(
+        val CLASSNAME: String, val KEYBINDING: List<KEYBINDING>
     )
 
     @Serializable
     @XmlSerialName("KEYBINDING", "", "")
-    class _KEYBINDING(
+    class KEYBINDING(
         val NAME: String, @XmlElement(true) val KEYVALUE: String
     )
 
     @Serializable
     @XmlSerialName("INSTANCE", "", "")
-    class _INSTANCE(
+    class INSTANCE(
         val CLASSNAME: String,
-        val QUALIFIER: List<_QUALIFIER>,
-        val PROPERTY: List<_PROPERTY>,
-        val PROPERTY_ARRAY: List<_PROPERTY_ARRAY>,
+        val QUALIFIER: List<QUALIFIER>,
+        val PROPERTY: List<PROPERTY>,
+        val PROPERTY_ARRAY: List<PROPERTY_ARRAY>,
     )
 
     @Serializable
     @XmlSerialName("QUALIFIER", "", "")
-    class _QUALIFIER(
-        val NAME: String, val TYPE: String, val TOSUBCLASS: Boolean?, val TOINSTANCE: Boolean, @XmlElement(true) val VALUE: String
+    class QUALIFIER(
+        val NAME: String,
+        val TYPE: String,
+        val TOSUBCLASS: Boolean?,
+        val TOINSTANCE: Boolean?,
+        val TRANSLATABLE: Boolean?,
+        val PROPAGATED: Boolean?,
+        val OVERRIDABLE: Boolean?,
+        @XmlElement(true)
+        val VALUE: String?,
+        val VALUE_ARRAY: VALUE_ARRAY?,
     )
 
     @Serializable
     @XmlSerialName("PROPERTY", "", "")
-    class _PROPERTY(
-        val NAME: String, val TYPE: String, @XmlElement(true) val VALUE: String?
+    class PROPERTY(
+        val NAME: String, val TYPE: String,
+        @XmlElement(true) val VALUE: String?
     )
 
     @Serializable
     @XmlSerialName("PROPERTY.ARRAY", "", "")
-    class _PROPERTY_ARRAY(
-        val NAME: String, val TYPE: String, @XmlElement(true) val VALUE: String?
+    class PROPERTY_ARRAY(
+        val NAME: String, val TYPE: String,
+        @XmlElement(true) val VALUE: String?
     )
 
     @Serializable
+    @XmlSerialName("VALUE.ARRAY", "", "")
+    class VALUE_ARRAY(
+        @XmlElement(true)
+        @XmlSerialName("VALUE", "", "")
+        val VALUE: List<String> = listOf()
+    )
+
+    @Serializable
+    @XmlSerialName("CLASS", "", "")
+    class CLASS(
+        val NAME: String,
+        val SUPERCLASS: String?,
+        @XmlSerialName("QUALIFIER", "", "")
+        val QUALIFIER: List<QUALIFIER> = listOf(),
+        @XmlSerialName("METHOD", "", "")
+        val METHOD: List<METHOD> = listOf()
+    )
+
+    @Serializable
+    @XmlSerialName("METHOD", "", "")
+    class METHOD(
+        val NAME: String,
+        val TYPE: String,
+        val PROPAGATED: Boolean,
+        //@XmlSerialName("QUALIFIER", "", "")
+        val QUALIFIER: List<QUALIFIER> = listOf(),
+        val PARAMETER: List<PARAMETER> = listOf(),
+        val METHOD: List<METHOD> = listOf(),
+        val PARAMETER_REFERENCE: List<PARAMETER_REFERENCE> = listOf()
+    )
+
+    @Serializable
+    @XmlSerialName("PARAMETER", "", "")
+    class PARAMETER(
+        val NAME: String,
+        val TYPE: String,
+        @XmlSerialName("QUALIFIER", "", "")
+        val QUALIFIER: List<QUALIFIER> = listOf(),
+    )
+    @Serializable
+    @XmlSerialName("PARAMETER.REFERENCE", "", "")
+    class PARAMETER_REFERENCE(
+        val NAME: String,
+        val REFERENCECLASS: String,
+        @XmlSerialName("QUALIFIER", "", "")
+        val QUALIFIER: List<QUALIFIER> = listOf(),
+    )
+
+        @Serializable
     class SAP_SoftwareComponent(
         // Первичный ключ: ElementTypeID, Name, Vendor, Version
         val ElementTypeID: String,
@@ -172,7 +242,7 @@ class SLD_CIM {
         val RuntimeType: String?
     ) {
         companion object {
-            fun from(vno: _VALUE_NAMEDOBJECT): SAP_SoftwareComponent? {
+            fun from(vno: VALUE_NAMEDOBJECT): SAP_SoftwareComponent? {
                 val ElementTypeID = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "ElementTypeID" }!!.KEYVALUE
                 val Vendor = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Vendor" }!!.KEYVALUE
                 val Name = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Name" }!!.KEYVALUE
