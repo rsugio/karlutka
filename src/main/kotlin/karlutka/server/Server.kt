@@ -163,21 +163,7 @@ object Server {
                 }
             }
             post("/AdapterFramework/regtest") {
-                val req = XIAdapterEngineRegistration.decodeFromString(call.receiveText())
-                val action = req.getAction()
-                println("/AdapterFramework/regtest with action $action")
-                val resp: XIAdapterEngineRegistration.Scenario
-                if (action == "GetApplicationDetailsFromSLD") {
-                    resp = XIAdapterEngineRegistration.GetApplicationDetailsFromSLD().answer(
-                        afprops["afname"]!!, afprops["fqdn"]!!, afprops["CAECPAurl"]!!
-
-                    )
-                } else if (action == "RegisterAppWithSLD") {
-                    resp = XIAdapterEngineRegistration.RegisterAppWithSLD().answer()
-                } else
-                    TODO()
-                val t = resp.encodeToString()
-                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { t }
+                rtc(call)
             }
             post("/rtc") {
                 rtc(call)
@@ -188,6 +174,9 @@ object Server {
             post("/AdapterFramework/rtc") {
                 rtc(call)
             }
+            post("/rwb/regtest") {
+                rtc(call)
+            }
             get("/mdt/version.jsp") {
                 call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
             }
@@ -196,6 +185,13 @@ object Server {
             }
             post("/AdapterFramework/rwbAdapterAccess/int") {
                 hmi(call)
+            }
+            post("/CPACache/invalidate") {
+                // content-Type application/x-www-form-urlencoded
+                // body is consumer=af.tst.host&consumer_mode=AE
+                val formParameters = call.receiveParameters()
+                println("/CPACache/invalidate got $formParameters")
+                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
             }
         }
     }
@@ -230,8 +226,8 @@ object Server {
         val method = call.request.httpMethod
         val req = XIAdapterEngineRegistration.decodeFromString(call.receiveText())
         val action = req.getAction()
-        println("/${method.value} ${call.request.path()} ${call.request.contentType()} with action $action")
-        val resp = XIAdapterEngineRegistration.Scenario()
+        println("/${method.value} ${call.request.path()} ${call.request.contentType()} with compname=${req.component[0].compname} action $action")
+        var resp = XIAdapterEngineRegistration.Scenario()
         val c = XIAdapterEngineRegistration.Component(req.component[0].compname, req.component[0].compversion)
         c.comphost = "host"
         resp.component.add(c)
@@ -263,7 +259,17 @@ object Server {
             resp.component.add(XIAdapterEngineRegistration.featureCheck("CompAFJobsStatus", "1"))
         } else if (action == "getSettings") {
             c.compname = "Exchange Profile"
-            c.addProperty("com.sap.aii.connect.integrationserver.name", afprops["shn"]!!)
+            afprops.filter { it.key.startsWith("com.sap.aii") }.forEach{(k,v) ->
+                c.addProperty(k, v)
+            }
+        } else if (action=="GetApplicationDetailsFromSLD") {
+            resp = XIAdapterEngineRegistration.GetApplicationDetailsFromSLD().answer(
+                afprops["afname"]!!, afprops["fqdn"]!!, afprops["CAECPAurl"]!!
+            )
+        } else if (action == "RegisterAppWithSLD") {
+            resp = XIAdapterEngineRegistration.RegisterAppWithSLD().answer()
+        } else {
+            TODO()
         }
 
         call.respondText(
