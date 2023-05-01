@@ -1,0 +1,11 @@
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+    <MESSAGE ID="717882128" PROTOCOLVERSION="1.0">
+        <SIMPLERSP>
+            <IMETHODRESPONSE NAME="SAPExt_GetObjectServer">
+                <IRETURNVALUE>
+                    <VALUE>shortname</VALUE>
+                </IRETURNVALUE>
+            </IMETHODRESPONSE>
+        </SIMPLERSP>
+    </MESSAGE>
+</CIM>

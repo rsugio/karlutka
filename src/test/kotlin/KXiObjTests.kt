@@ -101,7 +101,7 @@ class KXiObjTests {
     @Test
     fun sld() {
         val z = SLD_CIM.decodeFromReader(x("/pi_SLD/export17.xml"))
-        val lst = z.DECLARATION.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT
+        val lst = z.DECLARATION!!.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT
             .filter { it.INSTANCE.CLASSNAME == "SAP_SoftwareComponent" }
             .map { it.INSTANCE }
         lst.forEach { i ->
@@ -127,7 +127,7 @@ class KXiObjTests {
         val zis = ZipInputStream(p.inputStream())
         val lst = mutableListOf<SLD_CIM.SAP_SoftwareComponent>()
         SLD_CIM.decodeFromZip(zis) { cim ->
-            cim.DECLARATION.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT.forEach{
+            cim.DECLARATION!!.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT.forEach{
                 val s = SLD_CIM.SAP_SoftwareComponent.from(it)
                 if (s!=null && s.Vendor=="sap.com") lst.add(s)
             }

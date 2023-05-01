@@ -1,0 +1,12 @@
+<CIM CIMVERSION="2.0" DTDVERSION="2.0">
+    <MESSAGE ID="717882128" PROTOCOLVERSION="1.0">
+        <SIMPLEREQ>
+            <IMETHODCALL NAME="SAPExt_GetObjectServer">
+                <LOCALNAMESPACEPATH>
+                    <NAMESPACE NAME="sld"/>
+                    <NAMESPACE NAME="active"/>
+                </LOCALNAMESPACEPATH>
+            </IMETHODCALL>
+        </SIMPLEREQ>
+    </MESSAGE>
+</CIM>

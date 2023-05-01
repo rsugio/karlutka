@@ -14,58 +14,84 @@ class SLD_CIM {
     @Serializable
     @XmlSerialName("CIM", "", "")
     class CIM(
-        val CIMVERSION: String,
-        val DTDVERSION: String,
+        val MESSAGE: MESSAGE? = null,
         val DECLARATION: _DECLARATION? = null,      // для файлов
-        val MESSAGE: MESSAGE? = null
-    )
+        val CIMVERSION: String = "2.0",
+        val DTDVERSION: String = "2.0",
+    ) {
+        fun encodeToString() = XML.encodeToString(this)
+    }
 
     @Serializable
     @XmlSerialName("MESSAGE", "", "")
     class MESSAGE(
         val ID: Int,
-        val PROTOCOLVERSION: String,
         val SIMPLEREQ: SIMPLEREQ? = null,
         val MULTIREQ: MULTIREQ? = null,
         val SIMPLERSP: SIMPLERSP? = null,
-        val MULTIRSP: MULTIRSP? = null
+        val MULTIRSP: MULTIRSP? = null,
+        val PROTOCOLVERSION: String = "1.0",
     )
+
     @Serializable
     @XmlSerialName("SIMPLEREQ", "", "")
     class SIMPLEREQ(
-        val METHODCALL: METHODCALL?=null,
-        val IMETHODCALL: IMETHODCALL?=null,
+        val METHODCALL: METHODCALL? = null,
+        val IMETHODCALL: IMETHODCALL? = null,
     )
+
     @Serializable
     @XmlSerialName("MULTIREQ", "", "")
     class MULTIREQ(
     )
+
     @Serializable
     @XmlSerialName("SIMPLERSP", "", "")
     class SIMPLERSP(
+        val IMETHODRESPONSE: IMETHODRESPONSE
     )
+
     @Serializable
     @XmlSerialName("MULTIRSP", "", "")
     class MULTIRSP(
     )
+
     @Serializable
     @XmlSerialName("METHODCALL", "", "")
     class METHODCALL(
         val NAME: String,
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
 
-    )
+        )
+
     @Serializable
     @XmlSerialName("IMETHODCALL", "", "")
     class IMETHODCALL(
         val NAME: String,
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
     )
+
+    @Serializable
+    @XmlSerialName("IMETHODRESPONSE", "", "")
+    data class IMETHODRESPONSE(
+        val NAME: String,
+        val IRETURNVALUE: IRETURNVALUE,
+    )
+
+    @Serializable
+    @XmlSerialName("IRETURNVALUE", "", "")
+    data class IRETURNVALUE(
+        @XmlElement val VALUE: String,
+    )
+
     @Serializable
     @XmlSerialName("LOCALNAMESPACEPATH", "", "")
     class LOCALNAMESPACEPATH(
         val NAMESPACE: List<NAMESPACE> = listOf(),
-    )
+    ) {
+        constructor(vararg a: String) : this(a.toList().map { NAMESPACE(it) })
+    }
+
     @Serializable
     @XmlSerialName("NAMESPACE", "", "")
     class NAMESPACE(
@@ -88,23 +114,19 @@ class SLD_CIM {
     @Serializable
     @XmlSerialName("VALUE.NAMEDOBJECT", "", "")
     class _VALUE_NAMEDOBJECT(
-        val INSTANCENAME: _INSTANCENAME,
-        val INSTANCE: _INSTANCE
+        val INSTANCENAME: _INSTANCENAME, val INSTANCE: _INSTANCE
     )
 
     @Serializable
     @XmlSerialName("INSTANCENAME", "", "")
     class _INSTANCENAME(
-        val CLASSNAME: String,
-        val KEYBINDING: List<_KEYBINDING>
+        val CLASSNAME: String, val KEYBINDING: List<_KEYBINDING>
     )
 
     @Serializable
     @XmlSerialName("KEYBINDING", "", "")
     class _KEYBINDING(
-        val NAME: String,
-        @XmlElement(true)
-        val KEYVALUE: String
+        val NAME: String, @XmlElement(true) val KEYVALUE: String
     )
 
     @Serializable
@@ -119,30 +141,19 @@ class SLD_CIM {
     @Serializable
     @XmlSerialName("QUALIFIER", "", "")
     class _QUALIFIER(
-        val NAME: String,
-        val TYPE: String,
-        val TOSUBCLASS: Boolean?,
-        val TOINSTANCE: Boolean,
-        @XmlElement(true)
-        val VALUE: String
+        val NAME: String, val TYPE: String, val TOSUBCLASS: Boolean?, val TOINSTANCE: Boolean, @XmlElement(true) val VALUE: String
     )
 
     @Serializable
     @XmlSerialName("PROPERTY", "", "")
     class _PROPERTY(
-        val NAME: String,
-        val TYPE: String,
-        @XmlElement(true)
-        val VALUE: String?
+        val NAME: String, val TYPE: String, @XmlElement(true) val VALUE: String?
     )
 
     @Serializable
     @XmlSerialName("PROPERTY.ARRAY", "", "")
     class _PROPERTY_ARRAY(
-        val NAME: String,
-        val TYPE: String,
-        @XmlElement(true)
-        val VALUE: String?
+        val NAME: String, val TYPE: String, @XmlElement(true) val VALUE: String?
     )
 
     @Serializable
@@ -178,18 +189,16 @@ class SLD_CIM {
                     guid = guid.replace("-", "")
                     require(guid.length == 32)
                     return SAP_SoftwareComponent(
-                        ElementTypeID, Vendor, Name, Version, guid, Caption, Type,
-                        TechnologyType, PPMSNumber, Description, RuntimeType
+                        ElementTypeID, Vendor, Name, Version, guid, Caption, Type, TechnologyType, PPMSNumber, Description, RuntimeType
                     )
-                } else
-                    return null
+                } else return null
             }
         }
-
     }
 
-
     companion object {
+        //fun imethodcall(name: String, ) :
+
         fun decodeFromReader(xr: XmlReader): CIM {
             return XML.decodeFromReader(xr)
         }
