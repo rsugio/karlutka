@@ -36,8 +36,8 @@ class SLD_CIM {
     @Serializable
     @XmlSerialName("SIMPLEREQ", "", "")
     class SIMPLEREQ(
-        val METHODCALL: METHODCALL? = null,
         val IMETHODCALL: IMETHODCALL? = null,
+        val METHODCALL: METHODCALL? = null,     // не видел примеров использования
     )
 
     @Serializable
@@ -91,7 +91,8 @@ class SLD_CIM {
     @XmlSerialName("IRETURNVALUE", "", "")
     data class IRETURNVALUE(
         @XmlElement val VALUE: String?,
-        @XmlElement val CLASS: CLASS?
+        val CLASS: List<CLASS> = listOf(),
+        val VALUE_NAMEDINSTANCE: List<VALUE_NAMEDINSTANCE> = listOf()
     )
 
     @Serializable
@@ -180,8 +181,6 @@ class SLD_CIM {
     @Serializable
     @XmlSerialName("VALUE.ARRAY", "", "")
     class VALUE_ARRAY(
-        @XmlElement(true)
-        @XmlSerialName("VALUE", "", "")
         val VALUE: List<String> = listOf()
     )
 
@@ -190,9 +189,7 @@ class SLD_CIM {
     class CLASS(
         val NAME: String,
         val SUPERCLASS: String?,
-        @XmlSerialName("QUALIFIER", "", "")
         val QUALIFIER: List<QUALIFIER> = listOf(),
-        @XmlSerialName("METHOD", "", "")
         val METHOD: List<METHOD> = listOf()
     )
 
@@ -202,7 +199,6 @@ class SLD_CIM {
         val NAME: String,
         val TYPE: String,
         val PROPAGATED: Boolean,
-        //@XmlSerialName("QUALIFIER", "", "")
         val QUALIFIER: List<QUALIFIER> = listOf(),
         val PARAMETER: List<PARAMETER> = listOf(),
         val METHOD: List<METHOD> = listOf(),
@@ -214,19 +210,25 @@ class SLD_CIM {
     class PARAMETER(
         val NAME: String,
         val TYPE: String,
-        @XmlSerialName("QUALIFIER", "", "")
         val QUALIFIER: List<QUALIFIER> = listOf(),
     )
+
     @Serializable
     @XmlSerialName("PARAMETER.REFERENCE", "", "")
     class PARAMETER_REFERENCE(
         val NAME: String,
         val REFERENCECLASS: String,
-        @XmlSerialName("QUALIFIER", "", "")
         val QUALIFIER: List<QUALIFIER> = listOf(),
     )
 
-        @Serializable
+    @Serializable
+    @XmlSerialName("VALUE.NAMEDINSTANCE", "", "")
+    class VALUE_NAMEDINSTANCE(
+        val INSTANCENAME: INSTANCENAME,
+        val INSTANCE: INSTANCE,
+    )
+
+    @Serializable
     class SAP_SoftwareComponent(
         // Первичный ключ: ElementTypeID, Name, Vendor, Version
         val ElementTypeID: String,
