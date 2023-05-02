@@ -40,34 +40,33 @@ class KSLDTests {
             .POST(HttpRequest.BodyPublishers.ofString(cim.encodeToString()))
             .build()
         val response: HttpResponse<InputStream> = client.send(request, HttpResponse.BodyHandlers.ofInputStream())
-        val cimo: CIM?
-        if (response.statusCode() == 200) {
+        return if (response.statusCode() == 200) {
             val p = Paths.get("build/cim.xml")
             val os = p.outputStream()
             response.body().copyTo(os)
             os.close()
-            cimo = Cim.decodeFromReader(PlatformXmlReader(p.inputStream(), "UTF-8"))
+            Cim.decodeFromReader(PlatformXmlReader(p.inputStream(), "UTF-8"))
         } else {
             System.err.println(response)
             System.err.println(String(response.body().readAllBytes()))
-            cimo = null
+            null
         }
-        return cimo
     }
 
     @Test
     fun runtime() {
-        val a1 = op(SLD_CIM.SAPExt_GetObjectServer) //, "SAPExt_GetObjectServer")
-        val shortname = a1!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE  // короткое имя сервера в VALUE
-        println(shortname)
-        val a2 = op(SLD_CIM.GetClass_SAPXIDomain)
+        val a1 = op(SLD_CIM.SAPExt_GetObjectServer())
+        println(a1!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        val a2 = op(SLD_CIM.getClass("SAP_XIDomain"))
         println(a2!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val a3 = op(SLD_CIM.EnumerateInstances_SAPXIDomain)
+        val a3 = op(SLD_CIM.enumerateInstances("SAP_XIDomain", "Name", "Caption"))
         println(a3!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-//        val a4 = op(GetClass_CIM_ManagedElement)
+//        val a4 = op(SLD_CIM.getClass("CIM_ManagedElement"))
 //        println(a4!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-//        val a5 = op(EnumerateInstances_CIM_ManagedElement)        raises OOM
-//        println(a5!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        val r5 = SLD_CIM.associators("SAP_BCClient", "200.SystemName.DER.SystemNumber.0021175362.SystemHome.nl-s-derdb", "SAP_BusinessSystemViewedBCClient", "SAP_BusinessSystem")
+        println(r5.encodeToString())
+        val a5 = op(r5)
+        println(a5!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
     }
 
     @Test
@@ -76,12 +75,14 @@ class KSLDTests {
         //decodeFromStream(Paths.get("build/cim_big.xml").inputStream()) raises OOM
         Cim.decodeFromReader(x("/pi_SLD/cim01get.xml"))
         Cim.decodeFromReader(x("/pi_SLD/cim02get.xml"))
-        SLD_CIM.SAPExt_GetObjectServer.encodeToString()
         Cim.decodeFromReader(x("/pi_SLD/cim03getclass.xml"))
         Cim.decodeFromReader(x("/pi_SLD/cim04getclass.xml"))
         Cim.decodeFromReader(x("/pi_SLD/cim05enuminstances.xml"))
         Cim.decodeFromReader(x("/pi_SLD/cim06enuminstances.xml"))
         Cim.decodeFromReader(x("/pi_SLD/cim07getinstance.xml"))
         Cim.decodeFromReader(x("/pi_SLD/cim08getinstance.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim09associators.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim10associators.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim11error.xml"))
     }
 }

@@ -48,74 +48,68 @@ class SLD_CIM {
 
     companion object {
         fun messageid() = 12345677
-
         val sldactive = Cim.LOCALNAMESPACEPATH("sld", "active")
 
-        val SAPExt_GetObjectServer = Cim.CIM(
+        fun SAPExt_GetObjectServer() = Cim.CIM(
             Cim.MESSAGE(
-                messageid(),
-                Cim.SIMPLEREQ(Cim.IMETHODCALL("SAPExt_GetObjectServer", sldactive))
+                messageid(), Cim.SIMPLEREQ(Cim.IMETHODCALL("SAPExt_GetObjectServer", sldactive))
             )
         )
-        val GetClass_SAPXIDomain = Cim.CIM(
+
+        fun getClass(className: String) = Cim.CIM(
             Cim.MESSAGE(
-                messageid(),
-                Cim.SIMPLEREQ(
+                messageid(), Cim.SIMPLEREQ(
                     Cim.IMETHODCALL(
-                        "GetClass",
-                        sldactive,
-                        listOf(Cim.IPARAMVALUE("ClassName", null, Cim.JustName("SAP_XIDomain")))
+                        "GetClass", sldactive, listOf(Cim.IPARAMVALUE("ClassName", null, Cim.JustName(className)))
                     )
                 )
             )
         )
 
-        val GetClass_CIM_ManagedElement = Cim.CIM(
-            Cim.MESSAGE(
-                messageid(),
-                Cim.SIMPLEREQ(
-                    Cim.IMETHODCALL(
-                        "GetClass",
-                        sldactive,
-                        listOf(Cim.IPARAMVALUE("ClassName", null, Cim.JustName("CIM_ManagedElement")))
+        fun enumerateInstances(className: String, vararg properties: String): Cim.CIM {
+            return Cim.CIM(
+                Cim.MESSAGE(
+                    messageid(), Cim.SIMPLEREQ(
+                        Cim.IMETHODCALL(
+                            "EnumerateInstances", sldactive, listOf(
+                                Cim.IPARAMVALUE("ClassName", null, Cim.JustName(className)),
+                                Cim.IPARAMVALUE("LocalOnly", "false"),
+                                Cim.IPARAMVALUE("IncludeClassOrigin", "true"),
+                                Cim.IPARAMVALUE(
+                                    "PropertyList", null, null, null, Cim.VALUE_ARRAY(*properties)
+                                ),
+                            )
+                        )
                     )
                 )
             )
-        )
+        }
 
-        val EnumerateInstances_SAPXIDomain = Cim.CIM(
-            Cim.MESSAGE(
-                messageid(),
-                Cim.SIMPLEREQ(
-                    Cim.IMETHODCALL(
-                        "EnumerateInstances", sldactive,
-                        listOf(
-                            Cim.IPARAMVALUE("ClassName", null, Cim.JustName("SAP_XIDomain")),
-                            Cim.IPARAMVALUE("LocalOnly", "false"),
-                            Cim.IPARAMVALUE("IncludeClassOrigin", "true"),
-                            Cim.IPARAMVALUE(
-                                "PropertyList", null, null, null,
-                                Cim.VALUE_ARRAY("Name", "Caption")
+        fun associators(creationClass: String, name: String, assocClass: String, resultClass: String): Cim.CIM =
+            Cim.CIM(
+                Cim.MESSAGE(
+                    messageid(), Cim.SIMPLEREQ(
+                        Cim.IMETHODCALL(
+                            "Associators", sldactive,
+                            listOf(
+                                Cim.IPARAMVALUE(
+                                    "ObjectName",
+                                    null,
+                                    null,
+                                    Cim.INSTANCENAME(
+                                        creationClass,
+                                        listOf(Cim.KEYBINDING("CreationClassName", creationClass), Cim.KEYBINDING("Name", name))
+                                    )
+                                ),
+                                Cim.IPARAMVALUE("AssocClass", assocClass),
+                                Cim.IPARAMVALUE("ResultClass", resultClass),
+                                Cim.IPARAMVALUE("IncludeClassOrigin", "true")
                             ),
                         )
                     )
                 )
             )
 
-        )
-
-        val EnumerateInstances_CIM_ManagedElement = Cim.CIM(
-            Cim.MESSAGE(
-                messageid(),
-                Cim.SIMPLEREQ(
-                    Cim.IMETHODCALL(
-                        "EnumerateInstances",
-                        sldactive,
-                        listOf(Cim.IPARAMVALUE("ClassName", null, Cim.JustName("CIM_ManagedElement")))
-                    )
-                )
-            )
-        )
 
         fun decodeFromZip(zins: ZipInputStream, callback: (Cim.CIM) -> Unit) {
             // для стандартного экспорта из SAP SLD

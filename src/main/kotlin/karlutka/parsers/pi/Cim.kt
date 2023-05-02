@@ -87,7 +87,15 @@ class Cim {
     @XmlSerialName("IMETHODRESPONSE", "", "")
     data class IMETHODRESPONSE(
         val NAME: String,
-        val IRETURNVALUE: IRETURNVALUE,
+        val IRETURNVALUE: IRETURNVALUE?,
+        val ERROR: ERROR?
+    )
+
+    @Serializable
+    @XmlSerialName("ERROR", "", "")
+    class ERROR(
+        val CODE: String,
+        val DESCRIPTION: String
     )
 
     //    <!ELEMENT IRETURNVALUE (CLASSNAME* | INSTANCENAME* | VALUE* | VALUE.OBJECTWITHPATH* | VALUE.OBJECTWITHLOCALPATH* | VALUE.OBJECT* |
@@ -100,7 +108,7 @@ class Cim {
         val INSTANCENAME: List<INSTANCENAME> = listOf(),
         @XmlSerialName("VALUE", "", "")
         val VALUE: List<String> = listOf(),
-        //val VALUE_OBJECTWITHPATH: List<VALUE_OBJECTWITHPATH> = listOf(),
+        val VALUE_OBJECTWITHPATH: List<VALUE_OBJECTWITHPATH> = listOf(),
         //val VALUE_OBJECTWITHLOCALPATH: List<VALUE_OBJECTWITHLOCALPATH> = listOf(),
         //val VALUE_OBJECT: List<VALUE_OBJECT> = listOf(),
         //val OBJECTPATH: List<OBJECTPATH> = listOf(),
@@ -118,6 +126,13 @@ class Cim {
     ) {
         constructor(vararg a: String) : this(a.toList().map { JustName(it) })
     }
+
+    @Serializable
+    @XmlSerialName("VALUE.OBJECTWITHPATH", "", "")
+    class VALUE_OBJECTWITHPATH(
+        val INSTANCE: List<INSTANCE> = listOf(),
+        val INSTANCEPATH: List<INSTANCEPATH> = listOf()
+    )
 
     @Serializable
     @XmlSerialName("DECLARATION", "", "")
@@ -159,6 +174,18 @@ class Cim {
         val PROPERTY: List<PROPERTY>,
         val PROPERTY_ARRAY: List<PROPERTY_ARRAY>,
     )
+    @Serializable
+    @XmlSerialName("INSTANCEPATH", "", "")
+    class INSTANCEPATH(
+        val NAMESPACEPATH: NAMESPACEPATH,
+        val INSTANCENAME: INSTANCENAME
+    )
+    @Serializable
+    @XmlSerialName("NAMESPACEPATH", "", "")
+    class NAMESPACEPATH(
+        @XmlElement val HOST: String,
+        val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH
+    )
 
     @Serializable
     @XmlSerialName("QUALIFIER", "", "")
@@ -191,6 +218,7 @@ class Cim {
     class PROPERTY_ARRAY(
         val NAME: String,
         val TYPE: String,
+        val CLASSORIGIN: String?,
         val PROPAGATED: Boolean? = null,
         @XmlElement(true) val VALUE: String?,
         val VALUE_ARRAY: VALUE_ARRAY? = null,
