@@ -112,18 +112,24 @@ class Cim {
     @Serializable
     @XmlSerialName("IRETURNVALUE", "", "")
     data class IRETURNVALUE(
-        //val CLASSNAME:,
+        //val CLASSNAME:
         val INSTANCENAME: List<INSTANCENAME> = listOf(),
         @XmlSerialName("VALUE", "", "")
         val VALUE: List<String> = listOf(),
         val VALUE_OBJECTWITHPATH: List<VALUE_OBJECTWITHPATH> = listOf(),
         //val VALUE_OBJECTWITHLOCALPATH: List<VALUE_OBJECTWITHLOCALPATH> = listOf(),
         //val VALUE_OBJECT: List<VALUE_OBJECT> = listOf(),
-        //val OBJECTPATH: List<OBJECTPATH> = listOf(),
+        val OBJECTPATH: List<OBJECTPATH> = listOf(),
         val VALUE_NAMEDOBJECT: List<VALUE_NAMEDOBJECT> = listOf(),
         val CLASS: List<CLASS> = listOf(),
         val VALUE_NAMEDINSTANCE: List<VALUE_NAMEDINSTANCE> = listOf(),
-        val INSTANCE: List<INSTANCE> = listOf(),
+        val INSTANCE: List<INSTANCE> = listOf()
+    )
+
+    @Serializable
+    @XmlSerialName("OBJECTPATH", "", "")
+    class OBJECTPATH(
+        val INSTANCEPATH: INSTANCEPATH?
     )
 
     @Serializable
@@ -171,7 +177,14 @@ class Cim {
     @XmlSerialName("KEYBINDING", "", "")
     class KEYBINDING(
         val NAME: String,
-        @XmlElement(true) val KEYVALUE: String
+        @XmlElement(true) val KEYVALUE: String? = null,
+        val VALUE_REFERENCE: List<VALUE_REFERENCE> = listOf()
+    )
+
+    @Serializable
+    @XmlSerialName("VALUE.REFERENCE", "", "")
+    class VALUE_REFERENCE(
+        val INSTANCENAME: INSTANCENAME,
     )
 
     @Serializable

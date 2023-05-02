@@ -14,6 +14,7 @@ class SLD_CIM {
         SAP_XIRuntimeManagementServer,  //rwb
         SAP_BusinessSystem,
 
+        // не-иксайное
         SAP_J2EEEngineCluster           //SAP AS Java
     }
 
@@ -30,7 +31,6 @@ class SLD_CIM {
 
         //SAP_XIDomain -> SAP_XIRuntimeManagementServer
         SAP_XIContainedRuntimeManagementServer,
-
     }
 
     @Serializable
@@ -50,10 +50,10 @@ class SLD_CIM {
     ) {
         companion object {
             fun from(vno: Cim.VALUE_NAMEDOBJECT): SAP_SoftwareComponent? {
-                val ElementTypeID = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "ElementTypeID" }!!.KEYVALUE
-                val Vendor = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Vendor" }!!.KEYVALUE
-                val Name = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Name" }!!.KEYVALUE
-                val Version = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Version" }!!.KEYVALUE
+                val ElementTypeID = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "ElementTypeID" }!!.KEYVALUE!!
+                val Vendor = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Vendor" }!!.KEYVALUE!!
+                val Name = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Name" }!!.KEYVALUE!!
+                val Version = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Version" }!!.KEYVALUE!!
 
                 val PPMSNumber = vno.INSTANCE.PROPERTY.find { it.NAME == "PPMSNumber" }?.VALUE
                 val Caption = vno.INSTANCE.PROPERTY.find { it.NAME == "Caption" }!!.VALUE!!

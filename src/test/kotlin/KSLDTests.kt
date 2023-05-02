@@ -98,6 +98,8 @@ class KSLDTests {
             SLD_CIM.Classes.SAP_XIDomain,
             mapOf("CreationClassName" to SLD_CIM.Classes.SAP_XIDomain.toString(), "Name" to "1", "Caption" to "1")
         )
-        println(SLD_CIM.createInstance(i).encodeToString())
+        SLD_CIM.createInstance(i).encodeToString()
+        Cim.decodeFromReader(x("/pi_SLD/cim15referencenames.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim16referencenames.xml"))
     }
 }
