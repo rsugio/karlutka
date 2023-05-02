@@ -1,4 +1,6 @@
 import KT.Companion.x
+import karlutka.parsers.pi.Cim
+import karlutka.parsers.pi.Cim.*
 import karlutka.parsers.pi.SLD_CIM
 import nl.adaptivity.xmlutil.PlatformXmlReader
 import org.junit.jupiter.api.Test
@@ -10,6 +12,9 @@ import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import java.nio.file.Paths
 import java.time.Duration
+import kotlin.io.path.inputStream
+import kotlin.io.path.outputStream
+
 
 class KSLDTests {
     val po = KT.propAuth(Paths.get(".etc/po.properties"))
@@ -21,10 +26,10 @@ class KSLDTests {
         .build()
 
     fun op(
-        cim: SLD_CIM.CIM,
+        cim: CIM,
         cimoperation: String = "MethodCall",
         cimobject: String = "sld/active"
-    ): SLD_CIM.CIM? {
+    ): CIM? {
         val request: HttpRequest = HttpRequest.newBuilder()
             .uri(URI.create(po["sld"] as String))
             .header("cimprotocolversion", "1.0")
@@ -35,71 +40,48 @@ class KSLDTests {
             .POST(HttpRequest.BodyPublishers.ofString(cim.encodeToString()))
             .build()
         val response: HttpResponse<InputStream> = client.send(request, HttpResponse.BodyHandlers.ofInputStream())
-        val cim: SLD_CIM.CIM?
+        val cimo: CIM?
         if (response.statusCode() == 200) {
-            cim = SLD_CIM.decodeFromReader(PlatformXmlReader(response.body(), "UTF-8"))
+            val p = Paths.get("build/cim.xml")
+            val os = p.outputStream()
+            response.body().copyTo(os)
+            os.close()
+            cimo = Cim.decodeFromReader(PlatformXmlReader(p.inputStream(), "UTF-8"))
         } else {
             System.err.println(response)
-            //System.err.println(response.headers())
             System.err.println(String(response.body().readAllBytes()))
-            cim = null
+            cimo = null
         }
-        return cim
+        return cimo
     }
-
-    fun messageid() = 12345677
-
-    val sldactive = SLD_CIM.LOCALNAMESPACEPATH("sld", "active")
-    val SAPExt_GetObjectServer = SLD_CIM.CIM(
-        SLD_CIM.MESSAGE(
-            messageid(),
-            SLD_CIM.SIMPLEREQ(SLD_CIM.IMETHODCALL("SAPExt_GetObjectServer", sldactive))
-        )
-    )
-    val GetClass_SAPXIDomain = SLD_CIM.CIM(
-        SLD_CIM.MESSAGE(
-            messageid(),
-            SLD_CIM.SIMPLEREQ(SLD_CIM.IMETHODCALL("GetClass", sldactive, listOf(SLD_CIM.IPARAMVALUE("ClassName", null, SLD_CIM.JustName("SAP_XIDomain")))))
-        )
-    )
-
-    val GetClass_CIM_ManagedElement = SLD_CIM.CIM(
-        SLD_CIM.MESSAGE(
-            messageid(),
-            SLD_CIM.SIMPLEREQ(SLD_CIM.IMETHODCALL("GetClass", sldactive, listOf(SLD_CIM.IPARAMVALUE("ClassName", null, SLD_CIM.JustName("CIM_ManagedElement")))))
-        )
-    )
-
-    val EnumerateInstances_SAPXIDomain = SLD_CIM.CIM(
-        SLD_CIM.MESSAGE(
-            messageid(),
-            SLD_CIM.SIMPLEREQ(SLD_CIM.IMETHODCALL("EnumerateInstances", sldactive, listOf(SLD_CIM.IPARAMVALUE("ClassName", null, SLD_CIM.JustName("SAP_XIDomain")))))
-        )
-    )
 
     @Test
     fun runtime() {
-        val a1 = op(SAPExt_GetObjectServer) //, "SAPExt_GetObjectServer")
+        val a1 = op(SLD_CIM.SAPExt_GetObjectServer) //, "SAPExt_GetObjectServer")
         val shortname = a1!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE  // короткое имя сервера в VALUE
         println(shortname)
-        val a2 = op(GetClass_SAPXIDomain)
+        val a2 = op(SLD_CIM.GetClass_SAPXIDomain)
         println(a2!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val a3 = op(EnumerateInstances_SAPXIDomain)
+        val a3 = op(SLD_CIM.EnumerateInstances_SAPXIDomain)
         println(a3!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val a4 = op(GetClass_CIM_ManagedElement)
-        println(a4!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+//        val a4 = op(GetClass_CIM_ManagedElement)
+//        println(a4!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+//        val a5 = op(EnumerateInstances_CIM_ManagedElement)        raises OOM
+//        println(a5!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
     }
 
     @Test
     fun parserPrinter() {
-        SLD_CIM.decodeFromReader(x("/pi_SLD/cim01get.xml"))
-        SLD_CIM.decodeFromReader(x("/pi_SLD/cim02get.xml"))
-        SAPExt_GetObjectServer.encodeToString()
-        SLD_CIM.decodeFromReader(x("/pi_SLD/cim03getclass.xml"))
-        SLD_CIM.decodeFromReader(x("/pi_SLD/cim04getclass.xml"))
-        SLD_CIM.decodeFromReader(x("/pi_SLD/cim05enuminstances.xml"))
-        SLD_CIM.decodeFromReader(x("/pi_SLD/cim06enuminstances.xml"))
-        SLD_CIM.decodeFromReader(x("/pi_SLD/cim07getinstance.xml"))
-        SLD_CIM.decodeFromReader(x("/pi_SLD/cim08getinstance.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim.xml"))
+        //decodeFromStream(Paths.get("build/cim_big.xml").inputStream()) raises OOM
+        Cim.decodeFromReader(x("/pi_SLD/cim01get.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim02get.xml"))
+        SLD_CIM.SAPExt_GetObjectServer.encodeToString()
+        Cim.decodeFromReader(x("/pi_SLD/cim03getclass.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim04getclass.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim05enuminstances.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim06enuminstances.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim07getinstance.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim08getinstance.xml"))
     }
 }

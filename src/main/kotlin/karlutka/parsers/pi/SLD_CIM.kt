@@ -1,250 +1,11 @@
 package karlutka.parsers.pi
 
 import kotlinx.serialization.Serializable
-import nl.adaptivity.xmlutil.PlatformXmlReader
-import nl.adaptivity.xmlutil.XmlReader
-import nl.adaptivity.xmlutil.serialization.XML
-import nl.adaptivity.xmlutil.serialization.XmlElement
-import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import java.util.zip.ZipInputStream
 
-// очень простой набор для SLD, минималистичный
-// полное описание см DSP0201_2.4.0.pdf
+// прикладуха поверх CIM
 class SLD_CIM {
-    @Serializable
-    @XmlSerialName("CIM", "", "")
-    class CIM(
-        val MESSAGE: MESSAGE? = null,           // для обмена по HTTP
-        val DECLARATION: DECLARATION? = null,   // для файлов
-        val CIMVERSION: String = "2.3",
-        val DTDVERSION: String = "2.2",
-    ) {
-        fun encodeToString() = XML.encodeToString(this)
-    }
 
-    @Serializable
-    @XmlSerialName("MESSAGE", "", "")
-    class MESSAGE(
-        val ID: Int,
-        val SIMPLEREQ: SIMPLEREQ? = null,
-        val MULTIREQ: MULTIREQ? = null,
-        val SIMPLERSP: SIMPLERSP? = null,
-        val MULTIRSP: MULTIRSP? = null,
-        val PROTOCOLVERSION: String = "1.0",
-    )
-
-    @Serializable
-    @XmlSerialName("SIMPLEREQ", "", "")
-    class SIMPLEREQ(
-        val IMETHODCALL: IMETHODCALL? = null,
-        val METHODCALL: METHODCALL? = null,     // не видел примеров использования
-    )
-
-    @Serializable
-    @XmlSerialName("MULTIREQ", "", "")
-    class MULTIREQ(
-    )
-
-    @Serializable
-    @XmlSerialName("SIMPLERSP", "", "")
-    class SIMPLERSP(
-        val IMETHODRESPONSE: IMETHODRESPONSE
-    )
-
-    @Serializable
-    @XmlSerialName("MULTIRSP", "", "")
-    class MULTIRSP(
-    )
-
-    @Serializable
-    @XmlSerialName("METHODCALL", "", "")
-    class METHODCALL(
-        val NAME: String,
-        val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
-    )
-
-    @Serializable
-    @XmlSerialName("IMETHODCALL", "", "")
-    class IMETHODCALL(
-        val NAME: String,
-        val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
-        val IPARAMVALUE: List<IPARAMVALUE> = listOf()
-    )
-
-    @Serializable
-    @XmlSerialName("IPARAMVALUE", "", "")
-    class IPARAMVALUE(
-        val NAME: String,
-        @XmlElement
-        @XmlSerialName("VALUE", "", "")
-        val VALUE: String? = null,
-        @XmlSerialName("CLASSNAME", "", "")
-        val CLASSNAME: JustName? = null,
-        val INSTANCENAME: INSTANCENAME? = null,
-    )
-
-    @Serializable
-    @XmlSerialName("IMETHODRESPONSE", "", "")
-    data class IMETHODRESPONSE(
-        val NAME: String,
-        val IRETURNVALUE: IRETURNVALUE,
-    )
-
-    //    <!ELEMENT IRETURNVALUE (CLASSNAME* | INSTANCENAME* | VALUE* | VALUE.OBJECTWITHPATH* | VALUE.OBJECTWITHLOCALPATH* | VALUE.OBJECT* |
-    //    OBJECTPATH* | QUALIFIER.DECLARATION* | VALUE.ARRAY? | VALUE.REFERENCE? | CLASS* | INSTANCE* | INSTANCEPATH* | VALUE.NAMEDINSTANCE* |
-    //    VALUE.INSTANCEWITHPATH)>
-    @Serializable
-    @XmlSerialName("IRETURNVALUE", "", "")
-    data class IRETURNVALUE(
-        //val CLASSNAME:,
-        val INSTANCENAME: List<INSTANCENAME> = listOf(),
-        @XmlSerialName("VALUE", "", "")
-        val VALUE: List<String> = listOf(),
-        //val VALUE_OBJECTWITHPATH: List<VALUE_OBJECTWITHPATH> = listOf(),
-        //val VALUE_OBJECTWITHLOCALPATH: List<VALUE_OBJECTWITHLOCALPATH> = listOf(),
-        //val VALUE_OBJECT: List<VALUE_OBJECT> = listOf(),
-        //val OBJECTPATH: List<OBJECTPATH> = listOf(),
-        val VALUE_NAMEDOBJECT: List<VALUE_NAMEDOBJECT> = listOf(),
-        val CLASS: List<CLASS> = listOf(),
-        val VALUE_NAMEDINSTANCE: List<VALUE_NAMEDINSTANCE> = listOf(),
-        val INSTANCE: List<INSTANCE> = listOf()
-    )
-
-    @Serializable
-    @XmlSerialName("LOCALNAMESPACEPATH", "", "")
-    class LOCALNAMESPACEPATH(
-        @XmlSerialName("NAMESPACE", "", "")
-        val NAMESPACE: List<JustName> = listOf(),
-    ) {
-        constructor(vararg a: String) : this(a.toList().map { JustName(it) })
-    }
-
-    @Serializable
-    @XmlSerialName("DECLARATION", "", "")
-    class DECLARATION(
-        val DECLGROUP_WITHNAME: DECLGROUP_WITHNAME
-    )
-
-    @Serializable
-    @XmlSerialName("DECLGROUP.WITHNAME", "", "")
-    class DECLGROUP_WITHNAME(
-        val VALUE_NAMEDOBJECT: List<VALUE_NAMEDOBJECT>
-    )
-
-    @Serializable
-    @XmlSerialName("VALUE.NAMEDOBJECT", "", "")
-    class VALUE_NAMEDOBJECT(
-        val INSTANCENAME: INSTANCENAME, val INSTANCE: INSTANCE
-    )
-
-    @Serializable
-    @XmlSerialName("INSTANCENAME", "", "")
-    class INSTANCENAME(
-        val CLASSNAME: String,
-        val KEYBINDING: List<KEYBINDING> = listOf()
-    )
-
-    @Serializable
-    @XmlSerialName("KEYBINDING", "", "")
-    class KEYBINDING(
-        val NAME: String,
-        @XmlElement(true) val KEYVALUE: String
-    )
-
-    @Serializable
-    @XmlSerialName("INSTANCE", "", "")
-    class INSTANCE(
-        val CLASSNAME: String,
-        val QUALIFIER: List<QUALIFIER>,
-        val PROPERTY: List<PROPERTY>,
-        val PROPERTY_ARRAY: List<PROPERTY_ARRAY>,
-    )
-
-    @Serializable
-    @XmlSerialName("QUALIFIER", "", "")
-    class QUALIFIER(
-        val NAME: String,
-        val TYPE: String,
-        val TOSUBCLASS: Boolean?,
-        val TOINSTANCE: Boolean?,
-        val TRANSLATABLE: Boolean?,
-        val PROPAGATED: Boolean?,
-        val OVERRIDABLE: Boolean?,
-        @XmlElement(true)
-        val VALUE: String?,
-        val VALUE_ARRAY: VALUE_ARRAY?,
-    )
-
-    @Serializable
-    @XmlSerialName("PROPERTY", "", "")
-    class PROPERTY(
-        val NAME: String, val TYPE: String,
-        @XmlElement(true) val VALUE: String?
-    )
-
-    @Serializable
-    @XmlSerialName("PROPERTY.ARRAY", "", "")
-    class PROPERTY_ARRAY(
-        val NAME: String, val TYPE: String,
-        @XmlElement(true) val VALUE: String?
-    )
-
-    @Serializable
-    @XmlSerialName("VALUE.ARRAY", "", "")
-    class VALUE_ARRAY(
-        val VALUE: List<String> = listOf()
-    )
-
-    @Serializable
-    @XmlSerialName("CLASS", "", "")
-    class CLASS(
-        val NAME: String,
-        val SUPERCLASS: String?,
-        val QUALIFIER: List<QUALIFIER> = listOf(),
-        val METHOD: List<METHOD> = listOf()
-    )
-
-    @Serializable
-    @XmlSerialName("METHOD", "", "")
-    class METHOD(
-        val NAME: String,
-        val TYPE: String,
-        val PROPAGATED: Boolean,
-        val QUALIFIER: List<QUALIFIER> = listOf(),
-        val PARAMETER: List<PARAMETER> = listOf(),
-        val METHOD: List<METHOD> = listOf(),
-        val PARAMETER_REFERENCE: List<PARAMETER_REFERENCE> = listOf()
-    )
-
-    @Serializable
-    @XmlSerialName("PARAMETER", "", "")
-    class PARAMETER(
-        val NAME: String,
-        val TYPE: String,
-        val QUALIFIER: List<QUALIFIER> = listOf(),
-    )
-
-    @Serializable
-    @XmlSerialName("PARAMETER.REFERENCE", "", "")
-    class PARAMETER_REFERENCE(
-        val NAME: String,
-        val REFERENCECLASS: String,
-        val QUALIFIER: List<QUALIFIER> = listOf(),
-    )
-
-    @Serializable
-    @XmlSerialName("VALUE.NAMEDINSTANCE", "", "")
-    class VALUE_NAMEDINSTANCE(
-        val INSTANCENAME: INSTANCENAME,
-        val INSTANCE: INSTANCE,
-    )
-
-    @Serializable
-    class JustName(
-        val NAME: String
-    )
-
-    // ------------------------------------------------------------------ по хорошему, надо разделить SLD_CIM на CIM (см.выше) и SLD (ниже)
     @Serializable
     class SAP_SoftwareComponent(
         // Первичный ключ: ElementTypeID, Name, Vendor, Version
@@ -261,7 +22,7 @@ class SLD_CIM {
         val RuntimeType: String?
     ) {
         companion object {
-            fun from(vno: VALUE_NAMEDOBJECT): SAP_SoftwareComponent? {
+            fun from(vno: Cim.VALUE_NAMEDOBJECT): SAP_SoftwareComponent? {
                 val ElementTypeID = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "ElementTypeID" }!!.KEYVALUE
                 val Vendor = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Vendor" }!!.KEYVALUE
                 val Name = vno.INSTANCENAME.KEYBINDING.find { it.NAME == "Name" }!!.KEYVALUE
@@ -286,23 +47,88 @@ class SLD_CIM {
     }
 
     companion object {
-        //fun imethodcall(name: String, ) :
+        fun messageid() = 12345677
 
-        fun decodeFromReader(xr: XmlReader): CIM {
-            return XML.decodeFromReader(xr)
-        }
+        val sldactive = Cim.LOCALNAMESPACEPATH("sld", "active")
 
-        fun decodeFromZip(zins: ZipInputStream, callback: (CIM) -> Unit) {
+        val SAPExt_GetObjectServer = Cim.CIM(
+            Cim.MESSAGE(
+                messageid(),
+                Cim.SIMPLEREQ(Cim.IMETHODCALL("SAPExt_GetObjectServer", sldactive))
+            )
+        )
+        val GetClass_SAPXIDomain = Cim.CIM(
+            Cim.MESSAGE(
+                messageid(),
+                Cim.SIMPLEREQ(
+                    Cim.IMETHODCALL(
+                        "GetClass",
+                        sldactive,
+                        listOf(Cim.IPARAMVALUE("ClassName", null, Cim.JustName("SAP_XIDomain")))
+                    )
+                )
+            )
+        )
+
+        val GetClass_CIM_ManagedElement = Cim.CIM(
+            Cim.MESSAGE(
+                messageid(),
+                Cim.SIMPLEREQ(
+                    Cim.IMETHODCALL(
+                        "GetClass",
+                        sldactive,
+                        listOf(Cim.IPARAMVALUE("ClassName", null, Cim.JustName("CIM_ManagedElement")))
+                    )
+                )
+            )
+        )
+
+        val EnumerateInstances_SAPXIDomain = Cim.CIM(
+            Cim.MESSAGE(
+                messageid(),
+                Cim.SIMPLEREQ(
+                    Cim.IMETHODCALL(
+                        "EnumerateInstances", sldactive,
+                        listOf(
+                            Cim.IPARAMVALUE("ClassName", null, Cim.JustName("SAP_XIDomain")),
+                            Cim.IPARAMVALUE("LocalOnly", "false"),
+                            Cim.IPARAMVALUE("IncludeClassOrigin", "true"),
+                            Cim.IPARAMVALUE(
+                                "PropertyList", null, null, null,
+                                Cim.VALUE_ARRAY("Name", "Caption")
+                            ),
+                        )
+                    )
+                )
+            )
+
+        )
+
+        val EnumerateInstances_CIM_ManagedElement = Cim.CIM(
+            Cim.MESSAGE(
+                messageid(),
+                Cim.SIMPLEREQ(
+                    Cim.IMETHODCALL(
+                        "EnumerateInstances",
+                        sldactive,
+                        listOf(Cim.IPARAMVALUE("ClassName", null, Cim.JustName("CIM_ManagedElement")))
+                    )
+                )
+            )
+        )
+
+        fun decodeFromZip(zins: ZipInputStream, callback: (Cim.CIM) -> Unit) {
             // для стандартного экспорта из SAP SLD
             val gn = Regex("export[0-9]+.xml")
             var ze = zins.nextEntry
             while (ze != null) {
                 if (ze.name.matches(gn)) {
-                    val cim = decodeFromReader(PlatformXmlReader(zins, "UTF-8"))
+                    val cim = Cim.decodeFromStream(zins)
                     callback.invoke(cim)
                 }
                 ze = zins.nextEntry
             }
         }
+
     }
 }

@@ -1,12 +1,8 @@
 import KT.Companion.s
 import KT.Companion.x
 import karlutka.clients.ZtpDB
-import karlutka.parsers.pi.SLD_CIM
 import karlutka.models.MPI
-import karlutka.parsers.pi.FunctionLibrary
-import karlutka.parsers.pi.MappingTool
-import karlutka.parsers.pi.XiObj
-import karlutka.parsers.pi.XiTrafo
+import karlutka.parsers.pi.*
 import karlutka.server.DB
 import karlutka.server.Server
 import karlutka.util.*
@@ -100,7 +96,7 @@ class KXiObjTests {
 
     @Test
     fun sld() {
-        val z = SLD_CIM.decodeFromReader(x("/pi_SLD/export17.xml"))
+        val z = Cim.decodeFromReader(x("/pi_SLD/export17.xml"))
         val lst = z.DECLARATION!!.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT
             .filter { it.INSTANCE.CLASSNAME == "SAP_SoftwareComponent" }
             .map { it.INSTANCE }
@@ -135,5 +131,4 @@ class KXiObjTests {
         val q = p.resolveSibling("swcv.json")
         q.writeText(Json.encodeToString(lst))
     }
-
 }
