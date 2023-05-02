@@ -1,7 +1,8 @@
 import KT.Companion.x
 import karlutka.parsers.pi.Cim
-import karlutka.parsers.pi.Cim.*
+import karlutka.parsers.pi.Cim.CIM
 import karlutka.parsers.pi.SLD_CIM
+import karlutka.parsers.pi.SLD_CIM.Companion.instance
 import nl.adaptivity.xmlutil.PlatformXmlReader
 import org.junit.jupiter.api.Test
 import java.io.InputStream
@@ -57,16 +58,22 @@ class KSLDTests {
     fun runtime() {
         val a1 = op(SLD_CIM.SAPExt_GetObjectServer())
         println(a1!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val a2 = op(SLD_CIM.getClass("SAP_XIDomain"))
+        val a2 = op(SLD_CIM.getClass(SLD_CIM.Classes.SAP_XIDomain))
         println(a2!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val a3 = op(SLD_CIM.enumerateInstances("SAP_XIDomain", "Name", "Caption"))
+        val a3 = op(SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_XIDomain, "Name", "Caption"))
         println(a3!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 //        val a4 = op(SLD_CIM.getClass("CIM_ManagedElement"))
 //        println(a4!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val r5 = SLD_CIM.associators("SAP_BCClient", "200.SystemName.DER.SystemNumber.0021175362.SystemHome.nl-s-derdb", "SAP_BusinessSystemViewedBCClient", "SAP_BusinessSystem")
-        println(r5.encodeToString())
+        val r5 = SLD_CIM.associators(
+            "SAP_BCClient",
+            "200.SystemName.DER.SystemNumber.0021175362.SystemHome.nl-s-derdb",
+            "SAP_BusinessSystemViewedBCClient",
+            "SAP_BusinessSystem"
+        )
         val a5 = op(r5)
         println(a5!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+
+        //val a6 = op(SLD_CIM.getInstance())
     }
 
     @Test
@@ -84,5 +91,13 @@ class KSLDTests {
         Cim.decodeFromReader(x("/pi_SLD/cim09associators.xml"))
         Cim.decodeFromReader(x("/pi_SLD/cim10associators.xml"))
         Cim.decodeFromReader(x("/pi_SLD/cim11error.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim12createinstance.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim13createinstance.xml"))
+        Cim.decodeFromReader(x("/pi_SLD/cim14createinstance.xml"))
+        val i = instance(
+            SLD_CIM.Classes.SAP_XIDomain,
+            mapOf("CreationClassName" to SLD_CIM.Classes.SAP_XIDomain.toString(), "Name" to "1", "Caption" to "1")
+        )
+        println(SLD_CIM.createInstance(i).encodeToString())
     }
 }

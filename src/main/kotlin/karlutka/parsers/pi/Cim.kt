@@ -67,7 +67,14 @@ class Cim {
     class IMETHODCALL(
         val NAME: String,
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
+        val LOCALCLASSPATH: LOCALCLASSPATH? = null,
         val IPARAMVALUE: List<IPARAMVALUE> = listOf()
+    )
+
+    @Serializable
+    @XmlSerialName("LOCALCLASSPATH", "", "")
+    class LOCALCLASSPATH(
+        val CLASSNAME: String
     )
 
     @Serializable
@@ -81,6 +88,7 @@ class Cim {
         val CLASSNAME: JustName? = null,
         val INSTANCENAME: INSTANCENAME? = null,
         val VALUE_ARRAY: VALUE_ARRAY? = null,
+        val INSTANCE: INSTANCE? = null
     )
 
     @Serializable
@@ -170,9 +178,9 @@ class Cim {
     @XmlSerialName("INSTANCE", "", "")
     class INSTANCE(
         val CLASSNAME: String,
-        val QUALIFIER: List<QUALIFIER>,
-        val PROPERTY: List<PROPERTY>,
-        val PROPERTY_ARRAY: List<PROPERTY_ARRAY>,
+        val QUALIFIER: List<QUALIFIER> = listOf(),
+        val PROPERTY: List<PROPERTY> = listOf(),
+        val PROPERTY_ARRAY: List<PROPERTY_ARRAY> = listOf(),
     )
     @Serializable
     @XmlSerialName("INSTANCEPATH", "", "")

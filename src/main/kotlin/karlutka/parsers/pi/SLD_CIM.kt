@@ -5,6 +5,33 @@ import java.util.zip.ZipInputStream
 
 // прикладуха поверх CIM
 class SLD_CIM {
+    enum class Classes {
+        // классы сущностей
+        SAP_XIDomain, SAP_XIRemoteAdminService, SAP_XIAdapterFramework, SAP_HTTPServicePort, SAP_XIAdapterService,
+        SAP_XIIntegrationDirectory,
+        SAP_XIIntegrationRepository,
+        SAP_XIIntegrationServer,
+        SAP_XIRuntimeManagementServer,  //rwb
+        SAP_BusinessSystem,
+
+        SAP_J2EEEngineCluster           //SAP AS Java
+    }
+
+    // классы ассоциаций
+    enum class AClasses {
+        // (SAP_XIIntegrationRepository, SAP_XIRuntimeManagementServer, SAP_XIIntegrationServer, SAP_XIAdapterFramework) -> SAP_J2EEEngineCluster
+        SAP_XIViewedXISubSystem,
+
+        // SAP_XIRemoteAdminService -> SAP_HTTPServicePort
+        SAP_XIRemoteAdminServiceAccessByHTTP,
+
+        // SAP_BusinessSystem -> SAP_XIIntegrationServer
+        SAP_XIIntegrationServerLogicalIdentity,
+
+        //SAP_XIDomain -> SAP_XIRuntimeManagementServer
+        SAP_XIContainedRuntimeManagementServer,
+
+    }
 
     @Serializable
     class SAP_SoftwareComponent(
@@ -56,22 +83,25 @@ class SLD_CIM {
             )
         )
 
+        fun getClass(clazz: Classes) = getClass(clazz.toString())
         fun getClass(className: String) = Cim.CIM(
             Cim.MESSAGE(
                 messageid(), Cim.SIMPLEREQ(
                     Cim.IMETHODCALL(
-                        "GetClass", sldactive, listOf(Cim.IPARAMVALUE("ClassName", null, Cim.JustName(className)))
+                        "GetClass", sldactive, null, listOf(Cim.IPARAMVALUE("ClassName", null, Cim.JustName(className)))
                     )
                 )
             )
         )
+
+        fun enumerateInstances(clazz: Classes, vararg properties: String) = enumerateInstances(clazz.toString(), *properties)
 
         fun enumerateInstances(className: String, vararg properties: String): Cim.CIM {
             return Cim.CIM(
                 Cim.MESSAGE(
                     messageid(), Cim.SIMPLEREQ(
                         Cim.IMETHODCALL(
-                            "EnumerateInstances", sldactive, listOf(
+                            "EnumerateInstances", sldactive, null, listOf(
                                 Cim.IPARAMVALUE("ClassName", null, Cim.JustName(className)),
                                 Cim.IPARAMVALUE("LocalOnly", "false"),
                                 Cim.IPARAMVALUE("IncludeClassOrigin", "true"),
@@ -85,12 +115,15 @@ class SLD_CIM {
             )
         }
 
+        fun associators(creation: Classes, name: String, assoc: AClasses, result: Classes): Cim.CIM =
+            associators(creation.toString(), name, assoc.toString(), result.toString())
+
         fun associators(creationClass: String, name: String, assocClass: String, resultClass: String): Cim.CIM =
             Cim.CIM(
                 Cim.MESSAGE(
                     messageid(), Cim.SIMPLEREQ(
                         Cim.IMETHODCALL(
-                            "Associators", sldactive,
+                            "Associators", sldactive, null,
                             listOf(
                                 Cim.IPARAMVALUE(
                                     "ObjectName",
@@ -110,6 +143,17 @@ class SLD_CIM {
                 )
             )
 
+        fun instance(clazz: Classes, properties: Map<String, String>): Cim.INSTANCE {
+            return Cim.INSTANCE(clazz.toString(), listOf(), properties.map { Cim.PROPERTY(it.key, "string", null, null, it.value) })
+        }
+
+        fun createInstance(inst: Cim.INSTANCE) = Cim.CIM(
+            Cim.MESSAGE(
+                messageid(), Cim.SIMPLEREQ(
+                    Cim.IMETHODCALL("CreateInstance", sldactive, null, listOf(Cim.IPARAMVALUE("NewInstance", null, null, null, null, inst)))
+                )
+            )
+        )
 
         fun decodeFromZip(zins: ZipInputStream, callback: (Cim.CIM) -> Unit) {
             // для стандартного экспорта из SAP SLD
