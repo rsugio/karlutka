@@ -1,0 +1,73 @@
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+    <MESSAGE ID="471625917" PROTOCOLVERSION="1.0">
+        <SIMPLERSP>
+            <IMETHODRESPONSE NAME="Associators">
+                <IRETURNVALUE>
+                    <VALUE.OBJECTWITHPATH>
+                        <INSTANCEPATH>
+                            <NAMESPACEPATH>
+                                <HOST>aaa</HOST>
+                                <LOCALNAMESPACEPATH>
+                                    <NAMESPACE NAME="sld"/>
+                                    <NAMESPACE NAME="active"/>
+                                </LOCALNAMESPACEPATH>
+                            </NAMESPACEPATH>
+                            <INSTANCENAME CLASSNAME="SAP_BusinessSystem">
+                                <KEYBINDING NAME="CreationClassName">
+                                    <KEYVALUE>SAP_BusinessSystem</KEYVALUE>
+                                </KEYBINDING>
+                                <KEYBINDING NAME="Name">
+                                    <KEYVALUE>DER200</KEYVALUE>
+                                </KEYBINDING>
+                            </INSTANCENAME>
+                        </INSTANCEPATH>
+                        <INSTANCE CLASSNAME="SAP_BusinessSystem">
+                            <PROPERTY NAME="Status" TYPE="string" CLASSORIGIN="CIM_ManagedSystemElement"/>
+                            <PROPERTY NAME="Name" TYPE="string" CLASSORIGIN="CIM_ManagedSystemElement">
+                                <VALUE>DER200</VALUE>
+                            </PROPERTY>
+                            <PROPERTY NAME="NameFormat" TYPE="string" CLASSORIGIN="CIM_System">
+                                <VALUE>user-driven</VALUE>
+                            </PROPERTY>
+                            <PROPERTY.ARRAY NAME="Roles" TYPE="string" CLASSORIGIN="CIM_System">
+                                <VALUE.ARRAY>
+                                    <VALUE>Application System</VALUE>
+                                </VALUE.ARRAY>
+                            </PROPERTY.ARRAY>
+                            <PROPERTY NAME="BusinessSystemName" TYPE="string" CLASSORIGIN="SAP_LogicalBusinessSystem" PROPAGATED="true"/>
+                            <PROPERTY NAME="PrimaryOwnerContact" TYPE="string" CLASSORIGIN="CIM_System" PROPAGATED="true"/>
+                            <PROPERTY NAME="PrimaryOwnerName" TYPE="string" CLASSORIGIN="CIM_System" PROPAGATED="true"/>
+                            <PROPERTY NAME="EnabledState" TYPE="uint16" CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true"/>
+                            <PROPERTY NAME="Distribution" TYPE="uint16" CLASSORIGIN="CIM_ApplicationSystem" PROPAGATED="true"/>
+                            <PROPERTY NAME="StartupTime" TYPE="datetime" CLASSORIGIN="CIM_ApplicationSystem" PROPAGATED="true"/>
+                            <PROPERTY NAME="ServingStatus" TYPE="uint16" CLASSORIGIN="CIM_ApplicationSystem" PROPAGATED="true"/>
+                            <PROPERTY NAME="LastServingStatusUpdate" TYPE="datetime" CLASSORIGIN="CIM_ApplicationSystem" PROPAGATED="true"/>
+                            <PROPERTY NAME="CreationClassName" TYPE="string" CLASSORIGIN="CIM_System" PROPAGATED="true">
+                                <VALUE>SAP_BusinessSystem</VALUE>
+                            </PROPERTY>
+                            <PROPERTY.ARRAY NAME="OtherIdentifyingInfo" TYPE="string" CLASSORIGIN="CIM_System" PROPAGATED="true"/>
+                            <PROPERTY.ARRAY NAME="IdentifyingDescriptions" TYPE="string" CLASSORIGIN="CIM_System" PROPAGATED="true"/>
+                            <PROPERTY NAME="OtherEnabledState" TYPE="string" CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true"/>
+                            <PROPERTY NAME="RequestedState" TYPE="uint16" CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true">
+                                <VALUE>12</VALUE>
+                            </PROPERTY>
+                            <PROPERTY NAME="EnabledDefault" TYPE="uint16" CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true">
+                                <VALUE>2</VALUE>
+                            </PROPERTY>
+                            <PROPERTY NAME="TimeOfLastStateChange" TYPE="datetime" CLASSORIGIN="CIM_EnabledLogicalElement" PROPAGATED="true"/>
+                            <PROPERTY NAME="InstallDate" TYPE="datetime" CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true"/>
+                            <PROPERTY NAME="HealthState" TYPE="uint16" CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true"/>
+                            <PROPERTY.ARRAY NAME="OperationalStatus" TYPE="uint16" CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true"/>
+                            <PROPERTY.ARRAY NAME="StatusDescriptions" TYPE="string" CLASSORIGIN="CIM_ManagedSystemElement" PROPAGATED="true"/>
+                            <PROPERTY NAME="Caption" TYPE="string" CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true">
+                                <VALUE>DER200</VALUE>
+                            </PROPERTY>
+                            <PROPERTY NAME="Description" TYPE="string" CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true"/>
+                            <PROPERTY NAME="ElementName" TYPE="string" CLASSORIGIN="CIM_ManagedElement" PROPAGATED="true"/>
+                        </INSTANCE>
+                    </VALUE.OBJECTWITHPATH>
+                </IRETURNVALUE>
+            </IMETHODRESPONSE>
+        </SIMPLERSP>
+    </MESSAGE>
+</CIM>

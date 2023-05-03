@@ -60,46 +60,65 @@ class KSLDTests {
         println(a1!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         val a2 = op(SLD_CIM.getClass(SLD_CIM.Classes.SAP_XIDomain))
         println(a2!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val a3 = op(SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_XIDomain, "Name", "Caption"))
+        val a3 = op(SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_StandaloneDotNetSystem, "Name", "Caption"))
         println(a3!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 //        val a4 = op(SLD_CIM.getClass("CIM_ManagedElement"))
 //        println(a4!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val r5 = SLD_CIM.associators(
-            "SAP_BCClient",
-            "200.SystemName.DER.SystemNumber.0021175362.SystemHome.nl-s-derdb",
-            "SAP_BusinessSystemViewedBCClient",
-            "SAP_BusinessSystem"
-        )
-        val a5 = op(r5)
-        println(a5!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val a6 = op(SLD_CIM.referenceNames(SLD_CIM.Classes.SAP_XIDomain, "domain.01.ld-s-devpih"))
+//        val r5 = SLD_CIM.associators(
+//            "SAP_BCClient",
+//            "200.SystemName.DER.SystemNumber.0021175362.SystemHome.nl-s-derdb",
+//            "SAP_BusinessSystemViewedBCClient",
+//            "SAP_BusinessSystem"
+//        )
+//        val a5 = op(r5)
+//        println(a5!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        val instanceName = SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toInstanceName("2")
+        val a6 = op(SLD_CIM.referenceNames(instanceName))
         println(a6!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+
+        val i = instance(
+            SLD_CIM.Classes.SAP_StandaloneDotNetSystem,
+            mapOf("CreationClassName" to SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toString(), "Name" to "2", "Caption" to "2")
+        )
+        val a7 = op(SLD_CIM.createInstance(i))
+        println(a7!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+
+        val a8 = op(SLD_CIM.modifyInstance(instanceName, mapOf("Caption" to "22222")))
+        println(a8!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+//        val a9 = op(SLD_CIM.deleteInstance(SLD_CIM.Classes.SAP_StandaloneDotNetSystem, "2"))
+//        println(a9!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
     }
 
+    @Suppress("UNUSED_VALUE")
     @Test
     fun parserPrinter() {
-        Cim.decodeFromReader(x("/pi_SLD/cim.xml"))
+        var x: CIM = CIM()
+        x = Cim.decodeFromReader(x("/pi_SLD/cim.xml"))
         //decodeFromStream(Paths.get("build/cim_big.xml").inputStream()) raises OOM
-        Cim.decodeFromReader(x("/pi_SLD/cim01get.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim02get.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim03getclass.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim04getclass.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim05enuminstances.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim06enuminstances.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim07getinstance.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim08getinstance.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim09associators.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim10associators.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim11error.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim12createinstance.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim13createinstance.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim14createinstance.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim01get.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim02get.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim03getclass.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim04getclass.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim05enuminstances.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim06enuminstances.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim07getinstance.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim08getinstance.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim09associators.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim10associators.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim11error.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim12createinstance.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim13createinstance.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim14createinstance.xml"))
         val i = instance(
             SLD_CIM.Classes.SAP_XIDomain,
             mapOf("CreationClassName" to SLD_CIM.Classes.SAP_XIDomain.toString(), "Name" to "1", "Caption" to "1")
         )
-        SLD_CIM.createInstance(i).encodeToString()
-        Cim.decodeFromReader(x("/pi_SLD/cim15referencenames.xml"))
-        Cim.decodeFromReader(x("/pi_SLD/cim16referencenames.xml"))
+        x = SLD_CIM.createInstance(i)
+        x.encodeToString()
+        x = Cim.decodeFromReader(x("/pi_SLD/cim15referencenames.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim16referencenames.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim17modifyinstance.xml"))
+        x = SLD_CIM.modifyInstance(SLD_CIM.Classes.SAP_XIDomain.toInstanceName("1"), mapOf("Description" to "Azaza"))
+        x.encodeToString()
     }
 }

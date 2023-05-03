@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+    <MESSAGE ID="2015840494" PROTOCOLVERSION="1.0">
+        <SIMPLERSP>
+            <IMETHODRESPONSE NAME="CreateInstance">
+                <ERROR CODE="11" DESCRIPTION="Instance already exists: SAP_XIDomain.CreationClassName=&quot;SAP_XIDomain&quot;,Name=&quot;DUM.SystemNumber.0123456789.SystemHome.mydummyhost&quot;"/>
+            </IMETHODRESPONSE>
+        </SIMPLERSP>
+    </MESSAGE>
+</CIM>

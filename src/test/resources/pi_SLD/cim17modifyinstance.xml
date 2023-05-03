@@ -1,0 +1,40 @@
+<CIM CIMVERSION="2.0" DTDVERSION="2.0">
+    <MESSAGE ID="1101285199" PROTOCOLVERSION="1.0">
+        <SIMPLEREQ>
+            <IMETHODCALL NAME="ModifyInstance">
+                <LOCALNAMESPACEPATH>
+                    <NAMESPACE NAME="sld"/>
+                    <NAMESPACE NAME="active"/>
+                </LOCALNAMESPACEPATH>
+                <IPARAMVALUE NAME="ModifiedInstance">
+                    <VALUE.NAMEDINSTANCE>
+                        <INSTANCENAME CLASSNAME="sap_standalonedotnetsystem">
+                            <KEYBINDING NAME="creationclassname">
+                                <KEYVALUE>SAP_StandaloneDotNetSystem</KEYVALUE>
+                            </KEYBINDING>
+                            <KEYBINDING NAME="name">
+                                <KEYVALUE>1</KEYVALUE>
+                            </KEYBINDING>
+                        </INSTANCENAME>
+                        <INSTANCE CLASSNAME="SAP_StandaloneDotNetSystem">
+                            <PROPERTY NAME="CreationClassName" TYPE="string">
+                                <VALUE>SAP_StandaloneDotNetSystem</VALUE>
+                            </PROPERTY>
+                            <PROPERTY NAME="Description" TYPE="string">
+                                <VALUE></VALUE>
+                            </PROPERTY>
+                            <PROPERTY NAME="Name" TYPE="string">
+                                <VALUE>1</VALUE>
+                            </PROPERTY>
+                        </INSTANCE>
+                    </VALUE.NAMEDINSTANCE>
+                </IPARAMVALUE>
+                <IPARAMVALUE NAME="PropertyList">
+                    <VALUE.ARRAY>
+                        <VALUE>Description</VALUE>
+                    </VALUE.ARRAY>
+                </IPARAMVALUE>
+            </IMETHODCALL>
+        </SIMPLEREQ>
+    </MESSAGE>
+</CIM>

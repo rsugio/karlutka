@@ -1,0 +1,201 @@
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+    <MESSAGE ID="717882128" PROTOCOLVERSION="1.0">
+        <SIMPLERSP>
+            <IMETHODRESPONSE NAME="GetClass">
+                <IRETURNVALUE>
+                    <CLASS NAME="SAP_XIDomain" SUPERCLASS="SAP_LogicalApplicationSystem">
+                        <QUALIFIER NAME="DisplayName" TYPE="string" TRANSLATABLE="true">
+                            <VALUE>XI Domain</VALUE>
+                        </QUALIFIER>
+                        <QUALIFIER NAME="Description" TYPE="string" TRANSLATABLE="true">
+                            <VALUE>The XI domain bundles all systems building the exchange infrastructure to a single logical system, which is monitored as a whole. Exactly one integration server belongs to a XI domain.</VALUE>
+                        </QUALIFIER>
+                        <QUALIFIER NAME="SAP_SchemaSubset" TYPE="string" PROPAGATED="true">
+                            <VALUE>LD</VALUE>
+                        </QUALIFIER>
+                        <QUALIFIER NAME="Version" TYPE="string" TRANSLATABLE="true">
+                            <VALUE>1.6.3</VALUE>
+                        </QUALIFIER>
+                        <QUALIFIER NAME="UMLPackagePath" TYPE="string" PROPAGATED="true">
+                            <VALUE>CIM::Application::DeploymentModel</VALUE>
+                        </QUALIFIER>
+                        <METHOD NAME="StartApplication" TYPE="uint16" PROPAGATED="true">
+                            <QUALIFIER NAME="Description" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                <VALUE>StartApplication() starts an application system. The ApplicationSystem object must have been created prior to the invocation of this method. It is up to the implementation of the method to define which of the contained or dependent sub-elements are to be started and in which order their startup may occur. &#xA;Since a system startup can extend over long periods of time (several minutes is not unusual for complex distributed applications), the method can be implemented synchronously or asynchronously. In both cases EnabledState and RequestedState reflect the current state of the application and the desired state (Enabled) respectively. The exact nature of the errors during the startup cannot be determined in the asynchronous case. The method must return one of the following values: &#xA;Unspecified Error: If no return code can be identified &#xA;Completed with No Error: successful invocation &#xA;Start Already in Progress: application still being started &#xA;Failed:Indicates errors upon execution.</VALUE>
+                            </QUALIFIER>
+                            <QUALIFIER NAME="ValueMap" TYPE="string" PROPAGATED="true">
+                                <VALUE.ARRAY>
+                                    <VALUE>0</VALUE>
+                                    <VALUE>1</VALUE>
+                                    <VALUE>2</VALUE>
+                                    <VALUE>3</VALUE>
+                                    <VALUE>4..4096</VALUE>
+                                    <VALUE>4097..32767</VALUE>
+                                    <VALUE>32768..65535</VALUE>
+                                </VALUE.ARRAY>
+                            </QUALIFIER>
+                            <QUALIFIER NAME="Values" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                <VALUE.ARRAY>
+                                    <VALUE>Unspecified Error</VALUE>
+                                    <VALUE>Completed with No Error</VALUE>
+                                    <VALUE>Start Already in Progress</VALUE>
+                                    <VALUE>Failed</VALUE>
+                                    <VALUE>DMTF Reserved</VALUE>
+                                    <VALUE>Method Reserved</VALUE>
+                                    <VALUE>Vendor Specific</VALUE>
+                                </VALUE.ARRAY>
+                            </QUALIFIER>
+                            <QUALIFIER NAME="ModelCorrespondence" TYPE="string" PROPAGATED="true">
+                                <VALUE.ARRAY>
+                                    <VALUE>CIM_ApplicationSystem.EnabledState</VALUE>
+                                    <VALUE>CIM_ApplicationSystem.RequestedState</VALUE>
+                                </VALUE.ARRAY>
+                            </QUALIFIER>
+                        </METHOD>
+                        <METHOD NAME="StopApplication" TYPE="uint16" PROPAGATED="true">
+                            <QUALIFIER NAME="Description" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                <VALUE>StopApplication() allows for stopping/shutting down an application system. It is up to the implementation of the method to define which of the contained or dependent sub-elements are to be stopped and in which order their stop has to occur. &#xA;Since a system shutdown can last considerable time (several minutes is not necessarily unusual for complex distributed applications), the method can be implemented synchronously or asynchronously. In both cases EnabledState and RequestedState reflect the current state of the application and the desired state (Disabled) respectively. The exact nature of the errors during the stop cannot be determined in the asynchronous case. The method must return one of the following: &#xA;Unspecified Error: If no return code can be identified &#xA;Completed with No Error: successful invocation &#xA;Stop Already in Process: application is shutting down &#xA;Failed: Indicates errors upon execution.</VALUE>
+                            </QUALIFIER>
+                            <QUALIFIER NAME="ValueMap" TYPE="string" PROPAGATED="true">
+                                <VALUE.ARRAY>
+                                    <VALUE>0</VALUE>
+                                    <VALUE>1</VALUE>
+                                    <VALUE>2</VALUE>
+                                    <VALUE>3</VALUE>
+                                    <VALUE>4..4096</VALUE>
+                                    <VALUE>4097..32767</VALUE>
+                                    <VALUE>32768..65535</VALUE>
+                                </VALUE.ARRAY>
+                            </QUALIFIER>
+                            <QUALIFIER NAME="Values" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                <VALUE.ARRAY>
+                                    <VALUE>Unspecified Error</VALUE>
+                                    <VALUE>Completed with No Error</VALUE>
+                                    <VALUE>Stop Already in Process</VALUE>
+                                    <VALUE>Failed</VALUE>
+                                    <VALUE>DMTF Reserved</VALUE>
+                                    <VALUE>Method Reserved</VALUE>
+                                    <VALUE>Vendor Specific</VALUE>
+                                </VALUE.ARRAY>
+                            </QUALIFIER>
+                            <QUALIFIER NAME="ModelCorrespondence" TYPE="string" PROPAGATED="true">
+                                <VALUE.ARRAY>
+                                    <VALUE>CIM_ApplicationSystem.EnabledState</VALUE>
+                                    <VALUE>CIM_ApplicationSystem.RequestedState</VALUE>
+                                </VALUE.ARRAY>
+                            </QUALIFIER>
+                        </METHOD>
+                        <METHOD NAME="RequestStateChange" TYPE="uint32" PROPAGATED="true">
+                            <QUALIFIER NAME="Description" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                <VALUE>Requests that the state of the element be changed to the value specified in the RequestedState parameter. When the requested state change takes place, the EnabledState and RequestedState of the element will be the same. Invoking the RequestStateChange method multiple times could result in earlier requests being overwritten or lost. &#xA;A return code of 0 shall indicate the state change was successfully initiated. &#xA;A return code of 3 shall indicate that the state transition cannot complete within the interval specified by the TimeoutPeriod parameter. &#xA;A return code of 4096 (0x1000) shall indicate the state change was successfully initiated, a ConcreteJob has been created, and its reference returned in the output parameter Job. Any other return code indicates an error condition.</VALUE>
+                            </QUALIFIER>
+                            <QUALIFIER NAME="ValueMap" TYPE="string" PROPAGATED="true">
+                                <VALUE.ARRAY>
+                                    <VALUE>0</VALUE>
+                                    <VALUE>1</VALUE>
+                                    <VALUE>2</VALUE>
+                                    <VALUE>3</VALUE>
+                                    <VALUE>4</VALUE>
+                                    <VALUE>5</VALUE>
+                                    <VALUE>6</VALUE>
+                                    <VALUE>..</VALUE>
+                                    <VALUE>4096</VALUE>
+                                    <VALUE>4097</VALUE>
+                                    <VALUE>4098</VALUE>
+                                    <VALUE>4099</VALUE>
+                                    <VALUE>4100..32767</VALUE>
+                                    <VALUE>32768..65535</VALUE>
+                                </VALUE.ARRAY>
+                            </QUALIFIER>
+                            <QUALIFIER NAME="Values" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                <VALUE.ARRAY>
+                                    <VALUE>Completed with No Error</VALUE>
+                                    <VALUE>Not Supported</VALUE>
+                                    <VALUE>Unknown or Unspecified Error</VALUE>
+                                    <VALUE>Cannot complete within Timeout Period</VALUE>
+                                    <VALUE>Failed</VALUE>
+                                    <VALUE>Invalid Parameter</VALUE>
+                                    <VALUE>In Use</VALUE>
+                                    <VALUE>DMTF Reserved</VALUE>
+                                    <VALUE>Method Parameters Checked - Job Started</VALUE>
+                                    <VALUE>Invalid State Transition</VALUE>
+                                    <VALUE>Use of Timeout Parameter Not Supported</VALUE>
+                                    <VALUE>Busy</VALUE>
+                                    <VALUE>Method Reserved</VALUE>
+                                    <VALUE>Vendor Specific</VALUE>
+                                </VALUE.ARRAY>
+                            </QUALIFIER>
+                            <QUALIFIER NAME="ModelCorrespondence" TYPE="string" PROPAGATED="true">
+                                <VALUE.ARRAY>
+                                    <VALUE>CIM_EnabledLogicalElement.RequestedState</VALUE>
+                                </VALUE.ARRAY>
+                            </QUALIFIER>
+                            <PARAMETER NAME="RequestedState" TYPE="uint16">
+                                <QUALIFIER NAME="In" TYPE="boolean" OVERRIDABLE="false" PROPAGATED="true">
+                                    <VALUE>true</VALUE>
+                                </QUALIFIER>
+                                <QUALIFIER NAME="Description" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                    <VALUE>The state requested for the element. This information will be placed into the RequestedState property of the instance if the return code of the RequestStateChange method is 0 (&apos;Completed with No Error&apos;), or 4096 (0x1000) (&apos;Job Started&apos;). Refer to the description of the EnabledState and RequestedState properties for the detailed explanations of the RequestedState values.</VALUE>
+                                </QUALIFIER>
+                                <QUALIFIER NAME="ValueMap" TYPE="string" PROPAGATED="true">
+                                    <VALUE.ARRAY>
+                                        <VALUE>2</VALUE>
+                                        <VALUE>3</VALUE>
+                                        <VALUE>4</VALUE>
+                                        <VALUE>6</VALUE>
+                                        <VALUE>7</VALUE>
+                                        <VALUE>8</VALUE>
+                                        <VALUE>9</VALUE>
+                                        <VALUE>10</VALUE>
+                                        <VALUE>11</VALUE>
+                                        <VALUE>..</VALUE>
+                                        <VALUE>32768..65535</VALUE>
+                                    </VALUE.ARRAY>
+                                </QUALIFIER>
+                                <QUALIFIER NAME="Values" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                    <VALUE.ARRAY>
+                                        <VALUE>Enabled</VALUE>
+                                        <VALUE>Disabled</VALUE>
+                                        <VALUE>Shut Down</VALUE>
+                                        <VALUE>Offline</VALUE>
+                                        <VALUE>Test</VALUE>
+                                        <VALUE>Defer</VALUE>
+                                        <VALUE>Quiesce</VALUE>
+                                        <VALUE>Reboot</VALUE>
+                                        <VALUE>Reset</VALUE>
+                                        <VALUE>DMTF Reserved</VALUE>
+                                        <VALUE>Vendor Reserved</VALUE>
+                                    </VALUE.ARRAY>
+                                </QUALIFIER>
+                                <QUALIFIER NAME="ModelCorrespondence" TYPE="string" PROPAGATED="true">
+                                    <VALUE.ARRAY>
+                                        <VALUE>CIM_EnabledLogicalElement.RequestedState</VALUE>
+                                    </VALUE.ARRAY>
+                                </QUALIFIER>
+                            </PARAMETER>
+                            <PARAMETER NAME="TimeoutPeriod" TYPE="datetime">
+                                <QUALIFIER NAME="In" TYPE="boolean" OVERRIDABLE="false" PROPAGATED="true">
+                                    <VALUE>true</VALUE>
+                                </QUALIFIER>
+                                <QUALIFIER NAME="Description" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                    <VALUE>A timeout period that specifies the maximum amount of time that the client expects the transition to the new state to take. The interval format must be used to specify the TimeoutPeriod. A value of 0 or a null parameter indicates that the client has no time requirements for the transition. &#xA;If this property does not contain 0 or null and the implementation does not support this parameter, a return code of &apos;Use Of Timeout Parameter Not Supported&apos; shall be returned.</VALUE>
+                                </QUALIFIER>
+                            </PARAMETER>
+                            <PARAMETER.REFERENCE NAME="Job" REFERENCECLASS="CIM_ConcreteJob">
+                                <QUALIFIER NAME="In" TYPE="boolean" OVERRIDABLE="false" PROPAGATED="true">
+                                    <VALUE>false</VALUE>
+                                </QUALIFIER>
+                                <QUALIFIER NAME="Out" TYPE="boolean" OVERRIDABLE="false" PROPAGATED="true">
+                                    <VALUE>true</VALUE>
+                                </QUALIFIER>
+                                <QUALIFIER NAME="Description" TYPE="string" TRANSLATABLE="true" PROPAGATED="true">
+                                    <VALUE>May contain a reference to the ConcreteJob created to track the state transition initiated by the method invocation.</VALUE>
+                                </QUALIFIER>
+                            </PARAMETER.REFERENCE>
+                        </METHOD>
+                    </CLASS>
+                </IRETURNVALUE>
+            </IMETHODRESPONSE>
+        </SIMPLERSP>
+    </MESSAGE>
+</CIM>

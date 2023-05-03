@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+    <MESSAGE ID="717882128" PROTOCOLVERSION="1.0">
+        <SIMPLERSP>
+            <IMETHODRESPONSE NAME="EnumerateInstances">
+                <IRETURNVALUE>
+                    <VALUE.NAMEDINSTANCE>
+                        <INSTANCENAME CLASSNAME="SAP_XIDomain">
+                            <KEYBINDING NAME="CreationClassName">
+                                <KEYVALUE>SAP_XIDomain</KEYVALUE>
+                            </KEYBINDING>
+                            <KEYBINDING NAME="Name">
+                                <KEYVALUE>domain.01.aaa</KEYVALUE>
+                            </KEYBINDING>
+                        </INSTANCENAME>
+                        <INSTANCE CLASSNAME="SAP_XIDomain"/>
+                    </VALUE.NAMEDINSTANCE>
+                    <VALUE.NAMEDINSTANCE>
+                        <INSTANCENAME CLASSNAME="SAP_XIDomain">
+                            <KEYBINDING NAME="CreationClassName">
+                                <KEYVALUE>SAP_XIDomain</KEYVALUE>
+                            </KEYBINDING>
+                            <KEYBINDING NAME="Name">
+                                <KEYVALUE>domain.01.bbb</KEYVALUE>
+                            </KEYBINDING>
+                        </INSTANCENAME>
+                        <INSTANCE CLASSNAME="SAP_XIDomain"/>
+                    </VALUE.NAMEDINSTANCE>
+                    <VALUE.NAMEDINSTANCE>
+                        <INSTANCENAME CLASSNAME="SAP_XIDomain">
+                            <KEYBINDING NAME="CreationClassName">
+                                <KEYVALUE>SAP_XIDomain</KEYVALUE>
+                            </KEYBINDING>
+                            <KEYBINDING NAME="Name">
+                                <KEYVALUE>domain.01.ccc</KEYVALUE>
+                            </KEYBINDING>
+                        </INSTANCENAME>
+                        <INSTANCE CLASSNAME="SAP_XIDomain"/>
+                    </VALUE.NAMEDINSTANCE>
+                </IRETURNVALUE>
+            </IMETHODRESPONSE>
+        </SIMPLERSP>
+    </MESSAGE>
+</CIM>

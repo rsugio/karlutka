@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+    <MESSAGE ID="2015840494" PROTOCOLVERSION="1.0">
+        <SIMPLERSP>
+            <IMETHODRESPONSE NAME="CreateInstance">
+                <IRETURNVALUE>
+                    <INSTANCENAME CLASSNAME="SAP_XIDomain">
+                        <KEYBINDING NAME="CreationClassName">
+                            <KEYVALUE>SAP_XIDomain</KEYVALUE>
+                        </KEYBINDING>
+                        <KEYBINDING NAME="Name">
+                            <KEYVALUE>DUM.SystemNumber.0123456789.SystemHome.mydummyhost</KEYVALUE>
+                        </KEYBINDING>
+                    </INSTANCENAME>
+                </IRETURNVALUE>
+            </IMETHODRESPONSE>
+        </SIMPLERSP>
+    </MESSAGE>
+</CIM>

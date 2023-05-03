@@ -1,0 +1,37 @@
+<CIM CIMVERSION="2.0" DTDVERSION="2.0">
+	<MESSAGE ID="2015840494" PROTOCOLVERSION="1.0">
+		<SIMPLEREQ>
+			<IMETHODCALL NAME="CreateInstance">
+				<LOCALNAMESPACEPATH>
+					<NAMESPACE NAME="sld"/>
+					<NAMESPACE NAME="active"/>
+				</LOCALNAMESPACEPATH>
+				<IPARAMVALUE NAME="NewInstance">
+					<INSTANCE CLASSNAME="SAP_XIDomain">
+						<PROPERTY NAME="Caption" TYPE="string">
+							<VALUE>Dummy System for SLD API Test</VALUE>
+						</PROPERTY>
+						<PROPERTY NAME="CreationClassName" TYPE="string">
+							<VALUE>SAP_XIDomain</VALUE>
+						</PROPERTY>
+						<PROPERTY NAME="Name" TYPE="string">
+							<VALUE>DUM.SystemNumber.0123456789.SystemHome.mydummyhost</VALUE>
+						</PROPERTY>
+						<!--PROPERTY NAME="RoleInDevelopmentLandscape" TYPE="string">
+							<VALUE>DEV</VALUE>
+						</PROPERTY>
+						<PROPERTY NAME="SAPSystemName" TYPE="string">
+							<VALUE>DUM</VALUE>
+						</PROPERTY>
+						<PROPERTY NAME="SystemHome" TYPE="string">
+							<VALUE>mydummyhost</VALUE>
+						</PROPERTY>
+						<PROPERTY NAME="SystemNumber" TYPE="string">
+							<VALUE>0123456789</VALUE>
+						</PROPERTY-->
+					</INSTANCE>
+				</IPARAMVALUE>
+			</IMETHODCALL>
+		</SIMPLEREQ>
+	</MESSAGE>
+</CIM>

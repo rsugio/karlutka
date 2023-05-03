@@ -1,0 +1,15 @@
+<CIM CIMVERSION="2.0" DTDVERSION="2.0">
+    <MESSAGE ID="717882128" PROTOCOLVERSION="1.0">
+        <SIMPLEREQ>
+            <IMETHODCALL NAME="GetClass">
+                <LOCALNAMESPACEPATH>
+                    <NAMESPACE NAME="sld"/>
+                    <NAMESPACE NAME="active"/>
+                </LOCALNAMESPACEPATH>
+                <IPARAMVALUE NAME="ClassName">
+                    <CLASSNAME NAME="SAP_XIDomain"/>
+                </IPARAMVALUE>
+            </IMETHODCALL>
+        </SIMPLEREQ>
+    </MESSAGE>
+</CIM>
