@@ -1,6 +1,5 @@
 import KT.Companion.x
 import karlutka.parsers.pi.Cim
-import karlutka.parsers.pi.Cim.CIM
 import karlutka.parsers.pi.SLD_CIM
 import karlutka.parsers.pi.SLD_CIM.Companion.instance
 import nl.adaptivity.xmlutil.PlatformXmlReader
@@ -18,25 +17,21 @@ import kotlin.io.path.outputStream
 
 
 class KSLDTests {
-    val po = KT.propAuth(Paths.get(".etc/po.properties"))
-    val client: HttpClient = HttpClient.newBuilder()
+    private val po = KT.propAuth(Paths.get(".etc/po.properties"))
+    private val client: HttpClient = HttpClient.newBuilder()
         .version(HttpClient.Version.HTTP_1_1)
         .followRedirects(HttpClient.Redirect.NORMAL)
         .connectTimeout(Duration.ofSeconds(10))
         .authenticator(po["auth"] as Authenticator)
         .build()
 
-    fun op(
-        cim: CIM,
-        cimoperation: String = "MethodCall",
-        cimobject: String = "sld/active"
-    ): CIM? {
+    private fun op(cim: Cim.CIM): Cim.CIM? {
         val request: HttpRequest = HttpRequest.newBuilder()
             .uri(URI.create(po["sld"] as String))
             .header("cimprotocolversion", "1.0")
-            .header("cimoperation", cimoperation)
+            .header("cimoperation", "MethodCall")
             .header("cimmethod", cim.MESSAGE!!.SIMPLEREQ!!.IMETHODCALL!!.NAME)
-            .header("cimobject", cimobject)
+            .header("cimobject", "sld/active")      // в теории можно вытащить из параметра cim но оно пока не требуется
             .header("content-type", "application/xml; charset=utf-8")
             .POST(HttpRequest.BodyPublishers.ofString(cim.encodeToString()))
             .build()
@@ -55,13 +50,39 @@ class KSLDTests {
     }
 
     @Test
+    fun assoc() {
+        var x: Cim.CIM?
+        // Делаем отдельную систему
+        val system = SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toInstanceName("standalone1")
+        x = SLD_CIM.createInstance(system, mapOf("Caption" to "Caption Standalone1", "Description" to "Дескрипшон"))
+        x = op(x)
+        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        // Делаем кластер
+        val cluster = SLD_CIM.Classes.SAP_DotNetSystemCluster.toInstanceName("cluster1")
+        x = SLD_CIM.createInstance(cluster, mapOf("Caption" to "Caption Cluster1", "Description" to "Дескрипшон Кластера1"))
+        x = op(x)
+        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        // Делаем ассоциацию от системы к кластеру
+        //SLD_CIM.createInstance(x)
+        x = SLD_CIM.associatorNames(system)
+        //println(x.encodeToString())
+        x = op(x)
+        x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.OBJECTPATH.forEach {op->
+            println(op)
+        }
+        // SAP_DotNetSystemClusterDotNetSystem.GroupComponent=ref"SAP_DotNetSystemCluster.CreationClassName=\"SAP_DotNetSystemCluster\",Name=\"cluster1\"",PartComponent=ref"SAP_StandaloneDotNetSystem.CreationClassName=\"SAP_StandaloneDotNetSystem\",Name=\"standalone1\""
+
+    }
+
+    @Test
     fun runtime() {
-        val a1 = op(SLD_CIM.SAPExt_GetObjectServer())
-        println(a1!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val a2 = op(SLD_CIM.getClass(SLD_CIM.Classes.SAP_XIDomain))
-        println(a2!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-        val a3 = op(SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_StandaloneDotNetSystem, "Name", "Caption"))
-        println(a3!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        var x: Cim.CIM?
+        x = op(SLD_CIM.SAPExt_GetObjectServer())
+        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        x = op(SLD_CIM.getClass(SLD_CIM.Classes.SAP_XIDomain))
+        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        x = op(SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_StandaloneDotNetSystem, "Name", "Caption"))
+        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 //        val a4 = op(SLD_CIM.getClass("CIM_ManagedElement"))
 //        println(a4!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 //        val r5 = SLD_CIM.associators(
@@ -73,26 +94,27 @@ class KSLDTests {
 //        val a5 = op(r5)
 //        println(a5!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         val instanceName = SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toInstanceName("2")
-        val a6 = op(SLD_CIM.referenceNames(instanceName))
-        println(a6!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        x = op(SLD_CIM.referenceNames(instanceName))
+        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 
         val i = instance(
             SLD_CIM.Classes.SAP_StandaloneDotNetSystem,
             mapOf("CreationClassName" to SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toString(), "Name" to "2", "Caption" to "2")
         )
-        val a7 = op(SLD_CIM.createInstance(i))
-        println(a7!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        x = op(SLD_CIM.createInstance(i))
+        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 
-        val a8 = op(SLD_CIM.modifyInstance(instanceName, mapOf("Caption" to "22222")))
-        println(a8!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-//        val a9 = op(SLD_CIM.deleteInstance(SLD_CIM.Classes.SAP_StandaloneDotNetSystem, "2"))
-//        println(a9!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        x = op(SLD_CIM.modifyInstance(instanceName, mapOf("Caption" to "22222")))
+        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+
+        x = op(SLD_CIM.deleteInstance(instanceName))
+        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
     }
 
     @Suppress("UNUSED_VALUE")
     @Test
     fun parserPrinter() {
-        var x: CIM = CIM()
+        var x: Cim.CIM
         x = Cim.decodeFromReader(x("/pi_SLD/cim.xml"))
         //decodeFromStream(Paths.get("build/cim_big.xml").inputStream()) raises OOM
         x = Cim.decodeFromReader(x("/pi_SLD/cim01get.xml"))
@@ -120,5 +142,7 @@ class KSLDTests {
         x = Cim.decodeFromReader(x("/pi_SLD/cim17modifyinstance.xml"))
         x = SLD_CIM.modifyInstance(SLD_CIM.Classes.SAP_XIDomain.toInstanceName("1"), mapOf("Description" to "Azaza"))
         x.encodeToString()
+        x = Cim.decodeFromReader(x("/pi_SLD/cim18associatornames.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim19associatornames.xml"))
     }
 }

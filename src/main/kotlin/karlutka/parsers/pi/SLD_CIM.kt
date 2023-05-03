@@ -17,7 +17,8 @@ class SLD_CIM {
         // не-иксайное
         SAP_J2EEEngineCluster,           //SAP AS Java
 
-        SAP_StandaloneDotNetSystem;       // для тестов и отладки на котиках
+        SAP_StandaloneDotNetSystem,
+        SAP_DotNetSystemCluster;        // для тестов и отладки на котиках
 
         // Делает INSTANCENAME(CreationClassName, Name)
         fun toInstanceName(name: String): Cim.INSTANCENAME {
@@ -41,6 +42,8 @@ class SLD_CIM {
 
         //SAP_XIDomain -> SAP_XIRuntimeManagementServer
         SAP_XIContainedRuntimeManagementServer,
+
+        SAP_DotNetSystemClusterDotNetSystem
     }
 
     @Serializable
@@ -115,7 +118,8 @@ class SLD_CIM {
                                 Cim.iparamvalue("ClassName", Cim.CLASSNAME(className)),
                                 Cim.iparamvalue("LocalOnly", "false"),
                                 Cim.iparamvalue("IncludeClassOrigin", "true"),
-                                Cim.iparamvalue("PropertyList", Cim.VALUE_ARRAY(*properties)
+                                Cim.iparamvalue(
+                                    "PropertyList", Cim.VALUE_ARRAY(*properties)
                                 ),
                             )
                         )
@@ -156,15 +160,34 @@ class SLD_CIM {
             )
         )
 
+        fun createInstance(iname: Cim.INSTANCENAME, props: Map<String, String> = mapOf()): Cim.CIM {
+            val lst = mutableListOf<Cim.PROPERTY>()
+            lst.addAll(iname.KEYBINDING.map{Cim.PROPERTY(it.NAME, it.KEYVALUE!!)})
+            lst.addAll(props.map{Cim.PROPERTY(it.key, it.value)})
+
+            val instance = Cim.INSTANCE(iname.CLASSNAME, listOf(), lst)
+            return Cim.CIM(
+                Cim.MESSAGE(
+                    messageid(), Cim.SIMPLEREQ(
+                        Cim.IMETHODCALL("CreateInstance", sldactive, null, listOf(Cim.iparamvalue("NewInstance", instance)))
+                    )
+                )
+            )
+        }
+
         fun modifyInstance(instancename: Cim.INSTANCENAME, properties: Map<String, String>): Cim.CIM {
-            val props = properties.map {Cim.PROPERTY(it.key, it.value)}
+            val props = properties.map { Cim.PROPERTY(it.key, it.value) }
             val instance = Cim.INSTANCE(instancename.CLASSNAME, listOf(), props)
             val vni = Cim.VALUE_NAMEDINSTANCE(instancename, instance)
-            return Cim.CIM(Cim.MESSAGE(messageid(), Cim.SIMPLEREQ(
+            return Cim.CIM(
+                Cim.MESSAGE(
+                    messageid(), Cim.SIMPLEREQ(
                         Cim.IMETHODCALL(
                             "ModifyInstance", sldactive, null,
-                            listOf(Cim.iparamvalue("ModifiedInstance", vni),
-                                Cim.iparamvalue("PropertyList", Cim.VALUE_ARRAY(properties)))
+                            listOf(
+                                Cim.iparamvalue("ModifiedInstance", vni),
+                                Cim.iparamvalue("PropertyList", Cim.VALUE_ARRAY(properties))
+                            )
                         )
                     )
                 )
@@ -191,6 +214,28 @@ class SLD_CIM {
                     Cim.SIMPLEREQ(
                         Cim.IMETHODCALL(
                             "ReferenceNames", sldactive, null, listOf(
+                                Cim.iparamvalue("ObjectName", instancename)
+                            )
+                        )
+                    )
+                )
+            )
+        }
+
+        fun associatorNames(instancename: Cim.INSTANCENAME, assocClass: AClasses? = null, resultClass: Classes? = null): Cim.CIM {
+            val lst = mutableListOf(Cim.iparamvalue("ObjectName", instancename))
+            if (assocClass!=null) {
+                lst.add(Cim.iparamvalue("AssocClass", assocClass.toString()))
+            }
+            if (resultClass!=null) {
+                lst.add(Cim.iparamvalue("ResultClass", resultClass.toString()))
+            }
+
+            return Cim.CIM(
+                Cim.MESSAGE(
+                    messageid(),
+                    Cim.SIMPLEREQ(
+                        Cim.IMETHODCALL("AssociatorNames", sldactive, null, listOf(
                                 Cim.iparamvalue("ObjectName", instancename)
                             )
                         )
