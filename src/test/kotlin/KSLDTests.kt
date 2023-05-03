@@ -25,7 +25,7 @@ class KSLDTests {
         .authenticator(po["auth"] as Authenticator)
         .build()
 
-    private fun op(cim: Cim.CIM): Cim.CIM? {
+    private fun op(cim: Cim.CIM): Cim.CIM {
         val request: HttpRequest = HttpRequest.newBuilder()
             .uri(URI.create(po["sld"] as String))
             .header("cimprotocolversion", "1.0")
@@ -45,32 +45,47 @@ class KSLDTests {
         } else {
             System.err.println(response)
             System.err.println(String(response.body().readAllBytes()))
-            null
+            TODO()
         }
     }
 
     @Test
     fun assoc() {
         var x: Cim.CIM?
+        x = op(SLD_CIM.SAPExt_GetObjectServer())
+        val host = SLD_CIM.SAPExt_GetObjectServer_resp(x)
+        println("host = $host")
+        // хост + sld/active это обязательно для ассоциаций
+        val namespacepath = Cim.NAMESPACEPATH(host, SLD_CIM.sldactive)
+
         // Делаем отдельную систему
         val system = SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toInstanceName("standalone1")
         x = SLD_CIM.createInstance(system, mapOf("Caption" to "Caption Standalone1", "Description" to "Дескрипшон"))
         x = op(x)
-        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         // Делаем кластер
         val cluster = SLD_CIM.Classes.SAP_DotNetSystemCluster.toInstanceName("cluster1")
         x = SLD_CIM.createInstance(cluster, mapOf("Caption" to "Caption Cluster1", "Description" to "Дескрипшон Кластера1"))
         x = op(x)
-        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         // Делаем ассоциацию от системы к кластеру
         //SLD_CIM.createInstance(x)
-        x = SLD_CIM.associatorNames(system)
+        x = SLD_CIM.associatorNames(system, SLD_CIM.Classes.SAP_DotNetSystemClusterDotNetSystem)
         //println(x.encodeToString())
         x = op(x)
-        x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.OBJECTPATH.forEach {op->
-            println(op)
+        x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.OBJECTPATH.forEach {ox->
+            println(ox.INSTANCEPATH)
         }
+        x = SLD_CIM.enumerateInstances("SAP_DotNetSystemClusterDotNetSystem")
+        x = op(x)
         // SAP_DotNetSystemClusterDotNetSystem.GroupComponent=ref"SAP_DotNetSystemCluster.CreationClassName=\"SAP_DotNetSystemCluster\",Name=\"cluster1\"",PartComponent=ref"SAP_StandaloneDotNetSystem.CreationClassName=\"SAP_StandaloneDotNetSystem\",Name=\"standalone1\""
+        x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.VALUE_NAMEDINSTANCE.forEach {vni ->
+            println("${vni.INSTANCENAME.KEYBINDING}")
+        }
+
+        val f1 = Cim.createPropertyReference("GroupComponent", "SAP_DotNetSystemCluster", Cim.INSTANCEPATH(namespacepath, cluster) )
+        val t1 = Cim.createPropertyReference("PartComponent", "SAP_StandaloneDotNetSystem", Cim.INSTANCEPATH(namespacepath, system) )
+        val y = Cim.createAssociation(SLD_CIM.Classes.SAP_DotNetSystemClusterDotNetSystem.toString(), f1, t1)
 
     }
 
@@ -78,11 +93,11 @@ class KSLDTests {
     fun runtime() {
         var x: Cim.CIM?
         x = op(SLD_CIM.SAPExt_GetObjectServer())
-        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         x = op(SLD_CIM.getClass(SLD_CIM.Classes.SAP_XIDomain))
-        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         x = op(SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_StandaloneDotNetSystem, "Name", "Caption"))
-        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 //        val a4 = op(SLD_CIM.getClass("CIM_ManagedElement"))
 //        println(a4!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 //        val r5 = SLD_CIM.associators(
@@ -95,20 +110,20 @@ class KSLDTests {
 //        println(a5!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         val instanceName = SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toInstanceName("2")
         x = op(SLD_CIM.referenceNames(instanceName))
-        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 
         val i = instance(
             SLD_CIM.Classes.SAP_StandaloneDotNetSystem,
             mapOf("CreationClassName" to SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toString(), "Name" to "2", "Caption" to "2")
         )
         x = op(SLD_CIM.createInstance(i))
-        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 
         x = op(SLD_CIM.modifyInstance(instanceName, mapOf("Caption" to "22222")))
-        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 
         x = op(SLD_CIM.deleteInstance(instanceName))
-        println(x!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
     }
 
     @Suppress("UNUSED_VALUE")
@@ -116,7 +131,6 @@ class KSLDTests {
     fun parserPrinter() {
         var x: Cim.CIM
         x = Cim.decodeFromReader(x("/pi_SLD/cim.xml"))
-        //decodeFromStream(Paths.get("build/cim_big.xml").inputStream()) raises OOM
         x = Cim.decodeFromReader(x("/pi_SLD/cim01get.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim02get.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim03getclass.xml"))
@@ -144,5 +158,14 @@ class KSLDTests {
         x.encodeToString()
         x = Cim.decodeFromReader(x("/pi_SLD/cim18associatornames.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim19associatornames.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim20association.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim21association.xml"))
+    }
+
+    @Test
+    fun enum() {
+        require(Cim.ErrCodes.CIM_ERR_FAILED.ordinal == 1)
+        require(Cim.ErrCodes.CIM_ERR_ALREADY_EXISTS.ordinal == 11)
+        require(Cim.ErrCodes.CIM_ERR_SERVER_IS_SHUTTING_DOWN.ordinal == 28)
     }
 }

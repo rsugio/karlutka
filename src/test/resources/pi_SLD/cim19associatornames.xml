@@ -1,0 +1,29 @@
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+    <MESSAGE ID="471625917" PROTOCOLVERSION="1.0">
+        <SIMPLERSP>
+            <IMETHODRESPONSE NAME="AssociatorNames">
+                <IRETURNVALUE>
+                    <OBJECTPATH>
+                        <INSTANCEPATH>
+                            <NAMESPACEPATH>
+                                <HOST>aaaaa</HOST>
+                                <LOCALNAMESPACEPATH>
+                                    <NAMESPACE NAME="sld"/>
+                                    <NAMESPACE NAME="active"/>
+                                </LOCALNAMESPACEPATH>
+                            </NAMESPACEPATH>
+                            <INSTANCENAME CLASSNAME="SAP_DotNetSystemCluster">
+                                <KEYBINDING NAME="CreationClassName">
+                                    <KEYVALUE>SAP_DotNetSystemCluster</KEYVALUE>
+                                </KEYBINDING>
+                                <KEYBINDING NAME="Name">
+                                    <KEYVALUE>cluster1</KEYVALUE>
+                                </KEYBINDING>
+                            </INSTANCENAME>
+                        </INSTANCEPATH>
+                    </OBJECTPATH>
+                </IRETURNVALUE>
+            </IMETHODRESPONSE>
+        </SIMPLERSP>
+    </MESSAGE>
+</CIM>

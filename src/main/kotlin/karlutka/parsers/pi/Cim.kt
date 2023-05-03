@@ -20,6 +20,18 @@ class Cim {
         fun encodeToString() = XML.encodeToString(this)
     }
 
+    enum class ErrCodes {
+        CIM_OK, CIM_ERR_FAILED, CIM_ERR_ACCESS_DENIED, CIM_ERR_INVALID_NAMESPACE, CIM_ERR_INVALID_PARAMETER,
+        CIM_ERR_INVALID_CLASS, CIM_ERR_NOT_FOUND, CIM_ERR_NOT_SUPPORTED, CIM_ERR_CLASS_HAS_CHILDREN,
+        CIM_ERR_CLASS_HAS_INSTANCES, CIM_ERR_INVALID_SUPERCLASS, CIM_ERR_ALREADY_EXISTS,
+        CIM_ERR_NO_SUCH_PROPERTY, CIM_ERR_TYPE_MISMATCH, CIM_ERR_QUERY_LANGUAGE_NOT_SUPPORTED,
+        CIM_ERR_INVALID_QUERY, CIM_ERR_METHOD_NOT_AVAILABLE, CIM_ERR_METHOD_NOT_FOUND,
+        _CIM_UNUSED1, _CIM_UNUSED2,
+        CIM_ERR_NAMESPACE_NOT_EMPTY, CIM_ERR_INVALID_ENUMERATION_CONTEXT, CIM_ERR_INVALID_OPERATION_TIMEOUT,
+        CIM_ERR_PULL_HAS_BEEN_ABANDONED, CIM_ERR_PULL_CANNOT_BE_ABANDONED, CIM_ERR_FILTERED_ENUMERATION_NOT_SUPPORTED,
+        CIM_ERR_CONTINUATION_ON_ERROR_NOT_SUPPORTED, CIM_ERR_SERVER_LIMITS_EXCEEDED, CIM_ERR_SERVER_IS_SHUTTING_DOWN
+    }
+
     // ------------------------------------------------------------------ Declaration
     @Serializable
     @XmlSerialName("DECLARATION", "", "")
@@ -64,7 +76,7 @@ class Cim {
         val VALUE_NULL: List<VALUE_NULL> = listOf()
     ) {
         constructor(vararg s: String) : this(s.toList())
-        constructor(s: Map<String,Any>) : this(s.keys.toList())
+        constructor(s: Map<String, Any>) : this(s.keys.toList())
     }
 
     @Serializable
@@ -152,8 +164,7 @@ class Cim {
     @XmlSerialName("LOCALNAMESPACEPATH", "", "")
     class LOCALNAMESPACEPATH(
         val NAMESPACE: List<NAMESPACE> = listOf(),
-    )
-    {
+    ) {
         constructor(vararg a: String) : this(a.toList().map { NAMESPACE(it) })
     }
 
@@ -217,7 +228,7 @@ class Cim {
 
     @Serializable
     @XmlSerialName("KEYBINDING", "", "")
-    class KEYBINDING(
+    data class KEYBINDING(
         val NAME: String,
         @XmlElement(true) val KEYVALUE: String? = null,
         val VALUE_REFERENCE: List<VALUE_REFERENCE> = listOf()
@@ -306,7 +317,7 @@ class Cim {
         val CLASSORIGIN: String?,
         val PROPAGATED: Boolean?,
         val EmbeddedObject: String?, //enum instance, token
-        val QUALIFIER: List<QUALIFIER> ,   //0..unbounded
+        val QUALIFIER: List<QUALIFIER>,   //0..unbounded
         @XmlElement(true) val VALUE: String?,
     ) {
         constructor(name: String, value: String) : this(name, "string", null, null, null, listOf(), value)
@@ -329,7 +340,7 @@ class Cim {
     class PROPERTY_REFERENCE(
         val NAME: String,
         val REFERENCECLASS: String?,
-        val CLASSORIGIN: String?,
+        val CLASSORIGIN: String? = null,
         val PROPAGATED: Boolean? = null,
         val QUALIFIER: List<QUALIFIER> = listOf(),   //0..unbounded
         val VALUE_REFERENCE: VALUE_REFERENCE? = null,
@@ -566,6 +577,21 @@ class Cim {
                 TODO()
             }
             return x
+        }
+
+        fun createAssociation(clazz: String, propertyRefFrom: PROPERTY_REFERENCE, propertyRefTo: PROPERTY_REFERENCE): INSTANCE {
+            return INSTANCE(clazz, listOf(), listOf(), listOf(), listOf(propertyRefFrom, propertyRefTo))
+        }
+
+        // в основном для создания ассоциаций
+        fun createPropertyReference(name: String, referenceClass: String, instancepath: INSTANCEPATH): PROPERTY_REFERENCE {
+            val vr = VALUE_REFERENCE(null, null, null, instancepath)
+            return PROPERTY_REFERENCE(name, referenceClass, null, null, listOf(), vr)
+        }
+
+        fun createSimpleReq1param(id: Int, methodname: String, localnamespacepath: LOCALNAMESPACEPATH, iparamname: String, instance: INSTANCE): CIM {
+            val iparam = iparamvalue(iparamname, instance)
+            return CIM(MESSAGE(id, SIMPLEREQ(IMETHODCALL(methodname, localnamespacepath, null, listOf(iparam)))))
         }
 
         fun decodeFromReader(xr: XmlReader): CIM {

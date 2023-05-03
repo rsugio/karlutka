@@ -1,0 +1,36 @@
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+    <MESSAGE ID="2015840494" PROTOCOLVERSION="1.0">
+        <SIMPLERSP>
+            <IMETHODRESPONSE NAME="CreateInstance">
+                <IRETURNVALUE>
+                    <INSTANCENAME CLASSNAME="SAP_DotNetSystemClusterDotNetSystem">
+                        <KEYBINDING NAME="GroupComponent">
+                            <VALUE.REFERENCE>
+                                <INSTANCENAME CLASSNAME="SAP_DotNetSystemCluster">
+                                    <KEYBINDING NAME="CreationClassName">
+                                        <KEYVALUE>SAP_DotNetSystemCluster</KEYVALUE>
+                                    </KEYBINDING>
+                                    <KEYBINDING NAME="Name">
+                                        <KEYVALUE>cluster1</KEYVALUE>
+                                    </KEYBINDING>
+                                </INSTANCENAME>
+                            </VALUE.REFERENCE>
+                        </KEYBINDING>
+                        <KEYBINDING NAME="PartComponent">
+                            <VALUE.REFERENCE>
+                                <INSTANCENAME CLASSNAME="SAP_StandaloneDotNetSystem">
+                                    <KEYBINDING NAME="CreationClassName">
+                                        <KEYVALUE>SAP_StandaloneDotNetSystem</KEYVALUE>
+                                    </KEYBINDING>
+                                    <KEYBINDING NAME="Name">
+                                        <KEYVALUE>standalone1</KEYVALUE>
+                                    </KEYBINDING>
+                                </INSTANCENAME>
+                            </VALUE.REFERENCE>
+                        </KEYBINDING>
+                    </INSTANCENAME>
+                </IRETURNVALUE>
+            </IMETHODRESPONSE>
+        </SIMPLERSP>
+    </MESSAGE>
+</CIM>

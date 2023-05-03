@@ -1,0 +1,22 @@
+<CIM CIMVERSION="2.0" DTDVERSION="2.0">
+    <MESSAGE ID="471625917" PROTOCOLVERSION="1.0">
+        <SIMPLEREQ>
+            <IMETHODCALL NAME="AssociatorNames">
+                <LOCALNAMESPACEPATH>
+                    <NAMESPACE NAME="sld"/>
+                    <NAMESPACE NAME="active"/>
+                </LOCALNAMESPACEPATH>
+                <IPARAMVALUE NAME="ObjectName">
+                    <INSTANCENAME CLASSNAME="SAP_StandaloneDotNetSystem">
+                        <KEYBINDING NAME="CreationClassName">
+                            <KEYVALUE>SAP_StandaloneDotNetSystem</KEYVALUE>
+                        </KEYBINDING>
+                        <KEYBINDING NAME="Name">
+                            <KEYVALUE>standalone1</KEYVALUE>
+                        </KEYBINDING>
+                    </INSTANCENAME>
+                </IPARAMVALUE>
+            </IMETHODCALL>
+        </SIMPLEREQ>
+    </MESSAGE>
+</CIM>

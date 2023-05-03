@@ -14,23 +14,6 @@ class SLD_CIM {
         SAP_XIRuntimeManagementServer,  //rwb
         SAP_BusinessSystem,
 
-        // не-иксайное
-        SAP_J2EEEngineCluster,           //SAP AS Java
-
-        SAP_StandaloneDotNetSystem,
-        SAP_DotNetSystemCluster;        // для тестов и отладки на котиках
-
-        // Делает INSTANCENAME(CreationClassName, Name)
-        fun toInstanceName(name: String): Cim.INSTANCENAME {
-            return Cim.INSTANCENAME(
-                this.toString(),
-                listOf(Cim.KEYBINDING("CreationClassName", this.toString()), Cim.KEYBINDING("Name", name))
-            )
-        }
-    }
-
-    // классы ассоциаций
-    enum class AClasses {
         // (SAP_XIIntegrationRepository, SAP_XIRuntimeManagementServer, SAP_XIIntegrationServer, SAP_XIAdapterFramework) -> SAP_J2EEEngineCluster
         SAP_XIViewedXISubSystem,
 
@@ -43,7 +26,22 @@ class SLD_CIM {
         //SAP_XIDomain -> SAP_XIRuntimeManagementServer
         SAP_XIContainedRuntimeManagementServer,
 
+        // не-иксайное
+        SAP_J2EEEngineCluster,           //SAP AS Java
+
+        // для тестов и отладки на котиках
+        SAP_StandaloneDotNetSystem,
+        SAP_DotNetSystemCluster,
         SAP_DotNetSystemClusterDotNetSystem
+        ;
+
+        // Делает INSTANCENAME(CreationClassName, Name)
+        fun toInstanceName(name: String): Cim.INSTANCENAME {
+            return Cim.INSTANCENAME(
+                this.toString(),
+                listOf(Cim.KEYBINDING("CreationClassName", this.toString()), Cim.KEYBINDING("Name", name))
+            )
+        }
     }
 
     @Serializable
@@ -95,6 +93,7 @@ class SLD_CIM {
                 messageid(), Cim.SIMPLEREQ(Cim.IMETHODCALL("SAPExt_GetObjectServer", sldactive))
             )
         )
+        fun SAPExt_GetObjectServer_resp(x: Cim.CIM) = x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.VALUE[0]
 
         fun getClass(clazz: Classes) = getClass(clazz.toString())
         fun getClass(className: String) = Cim.CIM(
@@ -128,7 +127,7 @@ class SLD_CIM {
             )
         }
 
-        fun associators(creation: Classes, name: String, assoc: AClasses, result: Classes): Cim.CIM =
+        fun associators(creation: Classes, name: String, assoc: Classes, result: Classes): Cim.CIM =
             associators(creation.toInstanceName(name), assoc.toString(), result.toString())
 
         fun associators(instancename: Cim.INSTANCENAME, assocClass: String, resultClass: String): Cim.CIM =
@@ -222,7 +221,7 @@ class SLD_CIM {
             )
         }
 
-        fun associatorNames(instancename: Cim.INSTANCENAME, assocClass: AClasses? = null, resultClass: Classes? = null): Cim.CIM {
+        fun associatorNames(instancename: Cim.INSTANCENAME, assocClass: Classes? = null, resultClass: Classes? = null): Cim.CIM {
             val lst = mutableListOf(Cim.iparamvalue("ObjectName", instancename))
             if (assocClass!=null) {
                 lst.add(Cim.iparamvalue("AssocClass", assocClass.toString()))
@@ -243,7 +242,6 @@ class SLD_CIM {
                 )
             )
         }
-
 
         fun decodeFromZip(zins: ZipInputStream, callback: (Cim.CIM) -> Unit) {
             // для стандартного экспорта из SAP SLD
