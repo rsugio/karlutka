@@ -97,24 +97,24 @@ class KXiObjTests {
     @Test
     fun sld() {
         val z = Cim.decodeFromReader(x("/pi_SLD/export17.xml"))
-        val lst = z.DECLARATION!!.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT
-            .filter { it.INSTANCE.CLASSNAME == "SAP_SoftwareComponent" }
-            .map { it.INSTANCE }
-        lst.forEach { i ->
-            val vendor = i.PROPERTY.find { it.NAME == "Vendor" }?.VALUE
-            val version = i.PROPERTY.find { it.NAME == "Version" }?.VALUE
-            val name = i.PROPERTY.find { it.NAME == "Name" }?.VALUE
-            val PPMSNumber = i.PROPERTY.find { it.NAME == "PPMSNumber" }?.VALUE
-            val caption = i.PROPERTY.find { it.NAME == "Caption" }?.VALUE
-            val description = i.PROPERTY.find { it.NAME == "Description" }?.VALUE
-            val technologyType = i.PROPERTY.find { it.NAME == "TechnologyType" }?.VALUE
-            var guid = i.PROPERTY.find { it.NAME == "GUID" }?.VALUE
-            if (guid != null) {
-                guid = guid.replace("-", "")
-                require(guid.length == 32)
-                println("$guid $vendor  $technologyType     $version\t\t$caption|$name")
-            }
-        }
+//        val lst = z.DECLARATION!!.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT
+//            .filter { it.INSTANCE.CLASSNAME == "SAP_SoftwareComponent" }
+//            .map { it.INSTANCE }
+//        lst.forEach { i ->
+//            val vendor = i.PROPERTY.find { it.NAME == "Vendor" }?.VALUE
+//            val version = i.PROPERTY.find { it.NAME == "Version" }?.VALUE
+//            val name = i.PROPERTY.find { it.NAME == "Name" }?.VALUE
+//            val PPMSNumber = i.PROPERTY.find { it.NAME == "PPMSNumber" }?.VALUE
+//            val caption = i.PROPERTY.find { it.NAME == "Caption" }?.VALUE
+//            val description = i.PROPERTY.find { it.NAME == "Description" }?.VALUE
+//            val technologyType = i.PROPERTY.find { it.NAME == "TechnologyType" }?.VALUE
+//            var guid = i.PROPERTY.find { it.NAME == "GUID" }?.VALUE
+//            if (guid != null) {
+//                guid = guid.replace("-", "")
+//                require(guid.length == 32)
+//                println("$guid $vendor  $technologyType     $version\t\t$caption|$name")
+//            }
+//        }
     }
 
     @Test
@@ -123,10 +123,10 @@ class KXiObjTests {
         val zis = ZipInputStream(p.inputStream())
         val lst = mutableListOf<SLD_CIM.SAP_SoftwareComponent>()
         SLD_CIM.decodeFromZip(zis) { cim ->
-            cim.DECLARATION!!.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT.forEach{
-                val s = SLD_CIM.SAP_SoftwareComponent.from(it)
-                if (s!=null && s.Vendor=="sap.com") lst.add(s)
-            }
+//            cim.DECLARATION!!.DECLGROUP_WITHNAME.VALUE_NAMEDOBJECT.forEach{
+//                val s = SLD_CIM.SAP_SoftwareComponent.from(it)
+//                if (s!=null && s.Vendor=="sap.com") lst.add(s)
+//            }
         }
         val q = p.resolveSibling("swcv.json")
         q.writeText(Json.encodeToString(lst))

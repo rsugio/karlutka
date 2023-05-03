@@ -72,8 +72,8 @@ class KSLDTests {
         )
         val a5 = op(r5)
         println(a5!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-
-        //val a6 = op(SLD_CIM.getInstance())
+        val a6 = op(SLD_CIM.referenceNames(SLD_CIM.Classes.SAP_XIDomain, "domain.01.ld-s-devpih"))
+        println(a6!!.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
     }
 
     @Test

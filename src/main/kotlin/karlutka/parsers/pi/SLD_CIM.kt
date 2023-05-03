@@ -144,7 +144,7 @@ class SLD_CIM {
             )
 
         fun instance(clazz: Classes, properties: Map<String, String>): Cim.INSTANCE {
-            return Cim.INSTANCE(clazz.toString(), listOf(), properties.map { Cim.PROPERTY(it.key, "string", null, null, it.value) })
+            return Cim.INSTANCE(clazz.toString(), listOf(), properties.map { Cim.PROPERTY(it.key, "string", null, null, null, listOf(), it.value) })
         }
 
         fun createInstance(inst: Cim.INSTANCE) = Cim.CIM(
@@ -154,6 +154,25 @@ class SLD_CIM {
                 )
             )
         )
+
+        fun referenceNames(creationClass: Classes, name: String): Cim.CIM {
+            val i = Cim.INSTANCENAME(
+                creationClass.toString(),
+                listOf(Cim.KEYBINDING("CreationClassName", creationClass.toString()))
+            )
+            val m = Cim.MESSAGE(
+                messageid(),
+                Cim.SIMPLEREQ(
+                    Cim.IMETHODCALL(
+                        "ReferenceNames", sldactive, null, listOf(
+                            Cim.IPARAMVALUE("ObjectName", null, null, i)
+                        )
+                    )
+                )
+            )
+            return Cim.CIM(m)
+        }
+
 
         fun decodeFromZip(zins: ZipInputStream, callback: (Cim.CIM) -> Unit) {
             // для стандартного экспорта из SAP SLD

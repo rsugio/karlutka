@@ -2,8 +2,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.20"
-    kotlin("plugin.serialization") version "1.8.20"
+    kotlin("jvm") version "1.8.21"
+    kotlin("plugin.serialization") version "1.8.21"
     application
     java
     id("com.github.johnrengelman.shadow") version "7.0.0"
@@ -20,7 +20,7 @@ repositories {
 }
 val ktor_version = "2.3.0"
 val kotlinx_serialization_version = "1.5.0"
-val xmlutil_version = "0.85.0"
+val xmlutil_version = "0.86.0"
 val kaml_version = "0.53.0"
 val h2_version = "1.4.200"
 
