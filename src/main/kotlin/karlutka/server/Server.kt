@@ -180,24 +180,32 @@ object Server {
             get("/mdt/version.jsp") {
                 call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
             }
-            post("/run/value_mapping_cache/int") {
-                hmi(call)
+            post("/run/value_mapping_cache/{...}") {
+                val qr = call.request.queryString()
+                val etc = call.receiveText()
+                //val formParameters = call.receiveParameters()
+                println("\t(193)/CPACache/invalidate $qr got $etc")
+                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
             }
             post("/AdapterFramework/rwbAdapterAccess/int") {
                 hmi(call)
             }
-            post("/CPACache/invalidate") {
+            post("/CPACache/invalidate/{...}") {
                 // content-Type application/x-www-form-urlencoded
-                // body is consumer=af.tst.host&consumer_mode=AE
-                val formParameters = call.receiveParameters()
-                println("/CPACache/invalidate got $formParameters")
-                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
+                // body is consumer=af.sid.host&consumer_mode=AE
+                val qr = call.request.queryString()
+                val etc = call.receiveText()
+                //val formParameters = call.receiveParameters()
+                println("\t(193)/CPACache/invalidate $qr got $etc")
+                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
             }
         }
     }
 
     suspend fun hmi(call: ApplicationCall) {
         val s = call.receiveText()
+        val q = call.request.queryString()
+        println("${call.request.path()}?$q with plain text $s")
         val i = Hmi.parseInstance(s)
         val hr = i.toHmiRequest()
         println("${call.request.path()} with service=${hr.ServiceId} methodId=${hr.MethodId} methodInput=${hr.MethodInput}")
@@ -207,7 +215,7 @@ object Server {
             val hitlist = hr.MethodInput!!["hitlist"]!!
             val objid = hr.MethodInput["objid"]
             if (hitlist=="parties")
-                j = hr.toResponse("text/plain", "1\n78aedc7d79c439938511d517c6d9a2c1\tP_1C_METIZ\n")
+                j = hr.toResponse("text/plain", "1\n78aedc7d79c439938511d517c6d9a2c1\tP_PARTY\n")
             else if (hitlist=="party") {
                 j = hr.toResponse(
                     "text/xml",

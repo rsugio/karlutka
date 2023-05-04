@@ -143,11 +143,14 @@ class KHmiTests {
 
     @Test
     fun cpaCache() {
+        val i = Hmi.parseInstance(x("/pi_AE/rwb02select.xml"))
+
         val partyReq = Hmi.parseInstance(x("/pi_AE/hmi02cpaParty_req.xml")).toHmiRequest()
         val partyResp = partyReq.toResponse("text/plain", "")
         println(partyResp)
         partyResp.toInstance().write(System.out)
         println()
+
     }
 
 }

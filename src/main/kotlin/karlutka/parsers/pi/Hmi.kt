@@ -165,8 +165,9 @@ class Hmi {
 
     companion object {
         private fun instance(xr: XmlReader): Instance {
-            while (!xr.isStarted) xr.next()
-            require(xr.attributeCount == 1)
+            xr.skipPreamble()
+            val ac = xr.attributeCount
+            require(ac == 1)
             val a = xr.attributes[0]
             require(a.localName == "typeid")
             val lst = attributes(xr)
@@ -216,6 +217,6 @@ class Hmi {
             return instance(PlatformXmlReader(StringReader(s)))
         }
 
-        val hmserializer = SerializersModule { }
+        //val hmserializer = SerializersModule { }
     }
 }

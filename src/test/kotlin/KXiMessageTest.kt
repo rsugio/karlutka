@@ -49,13 +49,13 @@ class KXiMessageTest {
     fun dateTimeSentNow() = DateTimeFormatter.ISO_INSTANT.format(Instant.now().truncatedTo(ChronoUnit.MILLIS))
 
     fun writePayload(name: String, content: String) {
-        val payloads = Paths.get("build/payloads")
+        val payloads = Paths.get("tmp/payloads")
         if (!Files.isDirectory(payloads)) Files.createDirectories(payloads)
         payloads.resolve("$name.txt").writeText(content)
     }
 
     fun writePayload(name: String, xi: XiMessage) {
-        val payloads = Paths.get("build/payloads")
+        val payloads = Paths.get("tmp/payloads")
         if (!Files.isDirectory(payloads)) Files.createDirectories(payloads)
         val os = payloads.resolve("$name.txt").outputStream()
         os.write("Content-Type: ${xi.getContentType()}\n-----------------------------------\n".toByteArray())
@@ -71,7 +71,7 @@ class KXiMessageTest {
             .connectTimeout(Duration.ofSeconds(10))
             .authenticator(auth)
             .build()
-        val tmpin = Paths.get("build/xi_$s.mime.txt")
+        val tmpin = Paths.get("tmp/xi_$s.mime.txt")
         Files.deleteIfExists(tmpin)
         var tos = tmpin.outputStream()
         xin.writeTo(tos)
@@ -84,7 +84,7 @@ class KXiMessageTest {
         val response: HttpResponse<ByteArray> = client.send(request, BodyHandlers.ofByteArray())
         val rc = response.statusCode()
         val ct = response.headers().firstValue("conTent-typE")
-        val tmpout = Paths.get("build/xiAnswer_$rc.mime.txt")
+        val tmpout = Paths.get("tmp/xiAnswer_$rc.mime.txt")
         Files.deleteIfExists(tmpout)
         tos = tmpout.outputStream()
         tos.write(response.body())

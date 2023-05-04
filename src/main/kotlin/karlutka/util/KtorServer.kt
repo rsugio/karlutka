@@ -57,16 +57,19 @@ object KtorServer {
             }
             install(CallLogging) {
                 level = Level.INFO
-                filter { call -> call.request.path().startsWith("/") }
-                println("Call logging: 66")
+                filter { call ->
+//                    println("|log ${call.request.path()}")
+                    call.request.path().startsWith("/")
+                }
             }
 //            install(AutoHeadResponse)   //io.ktor:ktor-server-auto-head-response-jvm:$ktor_version
             install(StatusPages) {
                 status(HttpStatusCode.NotFound) { call, status ->
                     val method = call.request.httpMethod
-                    println("404: ${method.value} ${call.request.path()} ${call.request.queryString()} ${call.request.contentType()}")
                     if (method == HttpMethod.Post) {
-                        println(call.receiveText())
+                        println("404: ${method.value} ${call.request.path()} ${call.request.queryString()} ${call.request.contentType()} | ${call.receiveText()}")
+                    } else {
+                        println("404: ${method.value} ${call.request.path()} ${call.request.queryString()} ${call.request.contentType()}")
                     }
                     call.respondText(text = "404: Page Not Found", status = status)
                 }
