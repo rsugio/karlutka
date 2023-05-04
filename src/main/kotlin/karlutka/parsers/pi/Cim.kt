@@ -9,6 +9,18 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import java.io.InputStream
 
 class Cim {
+    enum class ErrCodes(val code: Int) {
+        CIM_ERR_FAILED(1), CIM_ERR_ACCESS_DENIED(2), CIM_ERR_INVALID_NAMESPACE(3), CIM_ERR_INVALID_PARAMETER(4),
+        CIM_ERR_INVALID_CLASS(5), CIM_ERR_NOT_FOUND(6), CIM_ERR_NOT_SUPPORTED(7), CIM_ERR_CLASS_HAS_CHILDREN(8),
+        CIM_ERR_CLASS_HAS_INSTANCES(9), CIM_ERR_INVALID_SUPERCLASS(10), CIM_ERR_ALREADY_EXISTS(11),
+        CIM_ERR_NO_SUCH_PROPERTY(12), CIM_ERR_TYPE_MISMATCH(13), CIM_ERR_QUERY_LANGUAGE_NOT_SUPPORTED(14),
+        CIM_ERR_INVALID_QUERY(15), CIM_ERR_METHOD_NOT_AVAILABLE(16), CIM_ERR_METHOD_NOT_FOUND(17),
+
+        CIM_ERR_NAMESPACE_NOT_EMPTY(20), CIM_ERR_INVALID_ENUMERATION_CONTEXT(21), CIM_ERR_INVALID_OPERATION_TIMEOUT(22),
+        CIM_ERR_PULL_HAS_BEEN_ABANDONED(23), CIM_ERR_PULL_CANNOT_BE_ABANDONED(24), CIM_ERR_FILTERED_ENUMERATION_NOT_SUPPORTED(25),
+        CIM_ERR_CONTINUATION_ON_ERROR_NOT_SUPPORTED(26), CIM_ERR_SERVER_LIMITS_EXCEEDED(27), CIM_ERR_SERVER_IS_SHUTTING_DOWN(28)
+    }
+
     @Serializable
     @XmlSerialName("CIM", "", "")
     class CIM(
@@ -18,18 +30,9 @@ class Cim {
         val DTDVERSION: String = "2.2",
     ) {
         fun encodeToString() = XML.encodeToString(this)
-    }
-
-    enum class ErrCodes {
-        CIM_OK, CIM_ERR_FAILED, CIM_ERR_ACCESS_DENIED, CIM_ERR_INVALID_NAMESPACE, CIM_ERR_INVALID_PARAMETER,
-        CIM_ERR_INVALID_CLASS, CIM_ERR_NOT_FOUND, CIM_ERR_NOT_SUPPORTED, CIM_ERR_CLASS_HAS_CHILDREN,
-        CIM_ERR_CLASS_HAS_INSTANCES, CIM_ERR_INVALID_SUPERCLASS, CIM_ERR_ALREADY_EXISTS,
-        CIM_ERR_NO_SUCH_PROPERTY, CIM_ERR_TYPE_MISMATCH, CIM_ERR_QUERY_LANGUAGE_NOT_SUPPORTED,
-        CIM_ERR_INVALID_QUERY, CIM_ERR_METHOD_NOT_AVAILABLE, CIM_ERR_METHOD_NOT_FOUND,
-        _CIM_UNUSED1, _CIM_UNUSED2,
-        CIM_ERR_NAMESPACE_NOT_EMPTY, CIM_ERR_INVALID_ENUMERATION_CONTEXT, CIM_ERR_INVALID_OPERATION_TIMEOUT,
-        CIM_ERR_PULL_HAS_BEEN_ABANDONED, CIM_ERR_PULL_CANNOT_BE_ABANDONED, CIM_ERR_FILTERED_ENUMERATION_NOT_SUPPORTED,
-        CIM_ERR_CONTINUATION_ON_ERROR_NOT_SUPPORTED, CIM_ERR_SERVER_LIMITS_EXCEEDED, CIM_ERR_SERVER_IS_SHUTTING_DOWN
+        fun getError(): ERROR? {
+            return MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.ERROR
+        }
     }
 
     // ------------------------------------------------------------------ Declaration
@@ -488,11 +491,17 @@ class Cim {
 
     @Serializable
     @XmlSerialName("ERROR", "", "")
-    data class ERROR(
-        val CODE: String,
+    class ERROR(
+        val CODE: Int,
         val DESCRIPTION: String? = null,
         val INSTANCE: List<INSTANCE> = listOf()
-    )
+    ) {
+        @kotlinx.serialization.Transient
+        val code: ErrCodes = ErrCodes.values().find { it.code == CODE }!!
+        override fun toString(): String {
+            return "$code: $DESCRIPTION"        //code уже содержит CIM_ERR так что этого достаточно
+        }
+    }
 
     class RETURNVALUE()
 
@@ -589,9 +598,18 @@ class Cim {
             return PROPERTY_REFERENCE(name, referenceClass, null, null, listOf(), vr)
         }
 
-        fun createSimpleReq1param(id: Int, methodname: String, localnamespacepath: LOCALNAMESPACEPATH, iparamname: String, instance: INSTANCE): CIM {
-            val iparam = iparamvalue(iparamname, instance)
+        fun createSimpleRequest(id: Int, methodname: String, localnamespacepath: LOCALNAMESPACEPATH, iparamname: String, value: Any): CIM {
+            val iparam = iparamvalue(iparamname, value)
             return CIM(MESSAGE(id, SIMPLEREQ(IMETHODCALL(methodname, localnamespacepath, null, listOf(iparam)))))
+        }
+
+        fun createSimpleRequest(id: Int, methodname: String, localnamespacepath: LOCALNAMESPACEPATH, params: Map<String, Any>): CIM {
+            val iparams = params.map { iparamvalue(it.key, it.value) }
+            return CIM(MESSAGE(id, SIMPLEREQ(IMETHODCALL(methodname, localnamespacepath, null, iparams))))
+        }
+
+        fun createInstance(clazz: String, properties: Map<String, String>): INSTANCE {
+            return INSTANCE(clazz, listOf(), properties.map { PROPERTY(it.key, "string", null, null, null, listOf(), it.value) })
         }
 
         fun decodeFromReader(xr: XmlReader): CIM {

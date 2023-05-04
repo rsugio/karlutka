@@ -41,7 +41,11 @@ class KSLDTests {
             val os = p.outputStream()
             response.body().copyTo(os)
             os.close()
-            Cim.decodeFromReader(PlatformXmlReader(p.inputStream(), "UTF-8"))
+            val resp = Cim.decodeFromReader(PlatformXmlReader(p.inputStream(), "UTF-8"))
+            if (resp.getError()!=null) {
+                System.err.println(resp.getError())
+            }
+            resp
         } else {
             System.err.println(response)
             System.err.println(String(response.body().readAllBytes()))
@@ -62,30 +66,31 @@ class KSLDTests {
         val system = SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toInstanceName("standalone1")
         x = SLD_CIM.createInstance(system, mapOf("Caption" to "Caption Standalone1", "Description" to "Дескрипшон"))
         x = op(x)
-        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        //println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         // Делаем кластер
         val cluster = SLD_CIM.Classes.SAP_DotNetSystemCluster.toInstanceName("cluster1")
         x = SLD_CIM.createInstance(cluster, mapOf("Caption" to "Caption Cluster1", "Description" to "Дескрипшон Кластера1"))
         x = op(x)
-        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+        //println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
         // Делаем ассоциацию от системы к кластеру
         //SLD_CIM.createInstance(x)
         x = SLD_CIM.associatorNames(system, SLD_CIM.Classes.SAP_DotNetSystemClusterDotNetSystem)
         //println(x.encodeToString())
         x = op(x)
         x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.OBJECTPATH.forEach {ox->
-            println(ox.INSTANCEPATH)
+            //println(ox.INSTANCEPATH)
         }
         x = SLD_CIM.enumerateInstances("SAP_DotNetSystemClusterDotNetSystem")
         x = op(x)
         // SAP_DotNetSystemClusterDotNetSystem.GroupComponent=ref"SAP_DotNetSystemCluster.CreationClassName=\"SAP_DotNetSystemCluster\",Name=\"cluster1\"",PartComponent=ref"SAP_StandaloneDotNetSystem.CreationClassName=\"SAP_StandaloneDotNetSystem\",Name=\"standalone1\""
         x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.VALUE_NAMEDINSTANCE.forEach {vni ->
-            println("${vni.INSTANCENAME.KEYBINDING}")
+            //println("${vni.INSTANCENAME.KEYBINDING}")
         }
 
         val f1 = Cim.createPropertyReference("GroupComponent", "SAP_DotNetSystemCluster", Cim.INSTANCEPATH(namespacepath, cluster) )
         val t1 = Cim.createPropertyReference("PartComponent", "SAP_StandaloneDotNetSystem", Cim.INSTANCEPATH(namespacepath, system) )
-        val y = Cim.createAssociation(SLD_CIM.Classes.SAP_DotNetSystemClusterDotNetSystem.toString(), f1, t1)
+        x = SLD_CIM.createInstance(Cim.createAssociation(SLD_CIM.Classes.SAP_DotNetSystemClusterDotNetSystem.toString(), f1, t1))
+        x = op(x)
 
     }
 

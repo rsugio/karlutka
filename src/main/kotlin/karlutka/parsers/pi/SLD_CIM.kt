@@ -93,63 +93,68 @@ class SLD_CIM {
                 messageid(), Cim.SIMPLEREQ(Cim.IMETHODCALL("SAPExt_GetObjectServer", sldactive))
             )
         )
+
         fun SAPExt_GetObjectServer_resp(x: Cim.CIM) = x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.VALUE[0]
 
         fun getClass(clazz: Classes) = getClass(clazz.toString())
-        fun getClass(className: String) = Cim.CIM(
-            Cim.MESSAGE(
-                messageid(), Cim.SIMPLEREQ(
-                    Cim.IMETHODCALL(
-                        "GetClass", sldactive, null, listOf(Cim.iparamvalue("ClassName", Cim.CLASSNAME(className)))
-                    )
-                )
-            )
-        )
+        fun getClass(className: String) = Cim.createSimpleRequest(messageid(), "GetClass", sldactive, "ClassName", Cim.CLASSNAME(className))
 
         fun enumerateInstances(clazz: Classes, vararg properties: String) = enumerateInstances(clazz.toString(), *properties)
 
         fun enumerateInstances(className: String, vararg properties: String): Cim.CIM {
-            return Cim.CIM(
-                Cim.MESSAGE(
-                    messageid(), Cim.SIMPLEREQ(
-                        Cim.IMETHODCALL(
-                            "EnumerateInstances", sldactive, null, listOf(
-                                Cim.iparamvalue("ClassName", Cim.CLASSNAME(className)),
-                                Cim.iparamvalue("LocalOnly", "false"),
-                                Cim.iparamvalue("IncludeClassOrigin", "true"),
-                                Cim.iparamvalue(
-                                    "PropertyList", Cim.VALUE_ARRAY(*properties)
-                                ),
-                            )
-                        )
-                    )
-                )
-            )
+            return Cim.createSimpleRequest(messageid(), "EnumerateInstances", sldactive, mapOf(
+                "ClassName" to Cim.CLASSNAME(className),
+                "LocalOnly" to "false",
+                "IncludeClassOrigin" to "true",
+                "PropertyList" to Cim.VALUE_ARRAY(*properties)
+            ))
+//            return Cim.CIM(
+//                Cim.MESSAGE(
+//                    messageid(), Cim.SIMPLEREQ(
+//                        Cim.IMETHODCALL(
+//                            "EnumerateInstances", sldactive, null, listOf(
+//                                Cim.iparamvalue("ClassName", Cim.CLASSNAME(className)),
+//                                Cim.iparamvalue("LocalOnly", "false"),
+//                                Cim.iparamvalue("IncludeClassOrigin", "true"),
+//                                Cim.iparamvalue(
+//                                    "PropertyList", Cim.VALUE_ARRAY(*properties)
+//                                ),
+//                            )
+//                        )
+//                    )
+//                )
+//            )
         }
 
         fun associators(creation: Classes, name: String, assoc: Classes, result: Classes): Cim.CIM =
             associators(creation.toInstanceName(name), assoc.toString(), result.toString())
 
-        fun associators(instancename: Cim.INSTANCENAME, assocClass: String, resultClass: String): Cim.CIM =
-            Cim.CIM(
-                Cim.MESSAGE(
-                    messageid(), Cim.SIMPLEREQ(
-                        Cim.IMETHODCALL(
-                            "Associators", sldactive, null,
-                            listOf(
-                                Cim.iparamvalue("ObjectName", instancename),
-                                Cim.IPARAMVALUE("AssocClass", assocClass),
-                                Cim.IPARAMVALUE("ResultClass", resultClass),
-                                Cim.IPARAMVALUE("IncludeClassOrigin", "true")
-                            ),
-                        )
-                    )
-                )
-            )
+        fun associators(instancename: Cim.INSTANCENAME, assocClass: String, resultClass: String): Cim.CIM {
+            return Cim.createSimpleRequest(messageid(), "Associators", sldactive, mapOf(
+                "ObjectName" to instancename,
+                "AssocClass" to assocClass,
+                "ResultClass" to resultClass,
+                "IncludeClassOrigin" to "true"
+            ))
 
-        fun instance(clazz: Classes, properties: Map<String, String>): Cim.INSTANCE {
-            return Cim.INSTANCE(clazz.toString(), listOf(), properties.map { Cim.PROPERTY(it.key, "string", null, null, null, listOf(), it.value) })
+//            Cim.CIM(
+//                Cim.MESSAGE(
+//                    messageid(), Cim.SIMPLEREQ(
+//                        Cim.IMETHODCALL(
+//                            "Associators", sldactive, null,
+//                            listOf(
+//                                Cim.iparamvalue("ObjectName", instancename),
+//                                Cim.IPARAMVALUE("AssocClass", assocClass),
+//                                Cim.IPARAMVALUE("ResultClass", resultClass),
+//                                Cim.IPARAMVALUE("IncludeClassOrigin", "true")
+//                            ),
+//                        )
+//                    )
+//                )
+//            )
         }
+
+        fun instance(clazz: Classes, properties: Map<String, String>) = Cim.createInstance(clazz.toString(), properties)
 
         fun createInstance(inst: Cim.INSTANCE) = Cim.CIM(
             Cim.MESSAGE(
@@ -161,8 +166,8 @@ class SLD_CIM {
 
         fun createInstance(iname: Cim.INSTANCENAME, props: Map<String, String> = mapOf()): Cim.CIM {
             val lst = mutableListOf<Cim.PROPERTY>()
-            lst.addAll(iname.KEYBINDING.map{Cim.PROPERTY(it.NAME, it.KEYVALUE!!)})
-            lst.addAll(props.map{Cim.PROPERTY(it.key, it.value)})
+            lst.addAll(iname.KEYBINDING.map { Cim.PROPERTY(it.NAME, it.KEYVALUE!!) })
+            lst.addAll(props.map { Cim.PROPERTY(it.key, it.value) })
 
             val instance = Cim.INSTANCE(iname.CLASSNAME, listOf(), lst)
             return Cim.CIM(
@@ -223,10 +228,10 @@ class SLD_CIM {
 
         fun associatorNames(instancename: Cim.INSTANCENAME, assocClass: Classes? = null, resultClass: Classes? = null): Cim.CIM {
             val lst = mutableListOf(Cim.iparamvalue("ObjectName", instancename))
-            if (assocClass!=null) {
+            if (assocClass != null) {
                 lst.add(Cim.iparamvalue("AssocClass", assocClass.toString()))
             }
-            if (resultClass!=null) {
+            if (resultClass != null) {
                 lst.add(Cim.iparamvalue("ResultClass", resultClass.toString()))
             }
 
@@ -234,7 +239,8 @@ class SLD_CIM {
                 Cim.MESSAGE(
                     messageid(),
                     Cim.SIMPLEREQ(
-                        Cim.IMETHODCALL("AssociatorNames", sldactive, null, listOf(
+                        Cim.IMETHODCALL(
+                            "AssociatorNames", sldactive, null, listOf(
                                 Cim.iparamvalue("ObjectName", instancename)
                             )
                         )
