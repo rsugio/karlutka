@@ -28,11 +28,11 @@ class KSLDTests {
     private fun op(cim: Cim.CIM): Cim.CIM {
         val request: HttpRequest = HttpRequest.newBuilder()
             .uri(URI.create(po["sld"] as String))
-            .header("cimprotocolversion", "1.0")
-            .header("cimoperation", "MethodCall")
-            .header("cimmethod", cim.MESSAGE!!.SIMPLEREQ!!.IMETHODCALL!!.NAME)
-            .header("cimobject", "sld/active")      // в теории можно вытащить из параметра cim но оно пока не требуется
-            .header("content-type", "application/xml; charset=utf-8")
+            .header("CIMProtocolVersion", cim.MESSAGE!!.PROTOCOLVERSION)        //1.0
+            .header("CIMOperation", "MethodCall")               // странно, почему-то передаём IMETHODCALL в содержимом а в заголовке надо так
+            .header("CIMMethod", cim.MESSAGE!!.SIMPLEREQ!!.IMETHODCALL!!.NAME)
+            .header("CIMObject", "sld/active")      // в теории можно вытащить из параметра cim но оно пока не требуется
+            .header("Content-Type", "application/xml; charset=utf-8")
             .POST(HttpRequest.BodyPublishers.ofString(cim.encodeToString()))
             .build()
         val response: HttpResponse<InputStream> = client.send(request, HttpResponse.BodyHandlers.ofInputStream())
@@ -89,8 +89,17 @@ class KSLDTests {
 
         val f1 = Cim.createPropertyReference("GroupComponent", "SAP_DotNetSystemCluster", Cim.INSTANCEPATH(namespacepath, cluster) )
         val t1 = Cim.createPropertyReference("PartComponent", "SAP_StandaloneDotNetSystem", Cim.INSTANCEPATH(namespacepath, system) )
-        x = SLD_CIM.createInstance(Cim.createAssociation(SLD_CIM.Classes.SAP_DotNetSystemClusterDotNetSystem.toString(), f1, t1))
+        val ca = Cim.createAssociation(SLD_CIM.Classes.SAP_DotNetSystemClusterDotNetSystem.toString(), f1, t1)
+        x = SLD_CIM.createInstance(ca)
+        //println(x.encodeToString())
         x = op(x)
+
+        // удаляем ассоциацию
+        x = SLD_CIM.deleteInstance(ca)
+        //x = op(x)
+        println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
+
+        // удаляем кластер и систему
 
     }
 
@@ -165,12 +174,6 @@ class KSLDTests {
         x = Cim.decodeFromReader(x("/pi_SLD/cim19associatornames.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim20association.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim21association.xml"))
-    }
-
-    @Test
-    fun enum() {
-        require(Cim.ErrCodes.CIM_ERR_FAILED.ordinal == 1)
-        require(Cim.ErrCodes.CIM_ERR_ALREADY_EXISTS.ordinal == 11)
-        require(Cim.ErrCodes.CIM_ERR_SERVER_IS_SHUTTING_DOWN.ordinal == 28)
+        x = Cim.decodeFromReader(x("/pi_SLD/cim22deleteassociation.xml"))
     }
 }

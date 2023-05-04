@@ -1,0 +1,58 @@
+<CIM CIMVERSION="2.0" DTDVERSION="2.0">
+	<MESSAGE ID="1526288277" PROTOCOLVERSION="1.0">
+		<SIMPLEREQ>
+			<IMETHODCALL NAME="DeleteInstance">
+				<LOCALNAMESPACEPATH>
+					<NAMESPACE NAME="sld"/>
+					<NAMESPACE NAME="active"/>
+				</LOCALNAMESPACEPATH>
+				<IPARAMVALUE NAME="InstanceName">
+					<INSTANCENAME CLASSNAME="sap_dotnetsystemclusterdotnetsystem">
+						<KEYBINDING NAME="groupcomponent">
+							<VALUE.REFERENCE>
+								<INSTANCEPATH>
+									<NAMESPACEPATH>
+										<HOST>aaa</HOST>
+										<LOCALNAMESPACEPATH>
+											<NAMESPACE NAME="sld"/>
+											<NAMESPACE NAME="active"/>
+										</LOCALNAMESPACEPATH>
+									</NAMESPACEPATH>
+									<INSTANCENAME CLASSNAME="sap_dotnetsystemcluster">
+										<KEYBINDING NAME="creationclassname">
+											<KEYVALUE>SAP_DotNetSystemCluster</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="name">
+											<KEYVALUE>cluster1</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</INSTANCEPATH>
+							</VALUE.REFERENCE>
+						</KEYBINDING>
+						<KEYBINDING NAME="partcomponent">
+							<VALUE.REFERENCE>
+								<INSTANCEPATH>
+									<NAMESPACEPATH>
+										<HOST>aaa</HOST>
+										<LOCALNAMESPACEPATH>
+											<NAMESPACE NAME="sld"/>
+											<NAMESPACE NAME="active"/>
+										</LOCALNAMESPACEPATH>
+									</NAMESPACEPATH>
+									<INSTANCENAME CLASSNAME="sap_standalonedotnetsystem">
+										<KEYBINDING NAME="creationclassname">
+											<KEYVALUE>SAP_StandaloneDotNetSystem</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="name">
+											<KEYVALUE>standalone1</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</INSTANCEPATH>
+							</VALUE.REFERENCE>
+						</KEYBINDING>
+					</INSTANCENAME>
+				</IPARAMVALUE>
+			</IMETHODCALL>
+		</SIMPLEREQ>
+	</MESSAGE>
+</CIM>

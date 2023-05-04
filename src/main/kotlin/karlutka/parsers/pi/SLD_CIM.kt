@@ -42,6 +42,7 @@ class SLD_CIM {
                 listOf(Cim.KEYBINDING("CreationClassName", this.toString()), Cim.KEYBINDING("Name", name))
             )
         }
+
     }
 
     @Serializable
@@ -198,6 +199,7 @@ class SLD_CIM {
             )
         }
 
+        // удаление обычного объекта
         fun deleteInstance(instancename: Cim.INSTANCENAME): Cim.CIM {
             return Cim.CIM(
                 Cim.MESSAGE(
@@ -210,6 +212,29 @@ class SLD_CIM {
                 )
             )
         }
+
+        //удаление ассоциации, но через InstanceName
+        fun deleteInstance(instance: Cim.INSTANCE): Cim.CIM {
+            val lst = instance.PROPERTY_REFERENCE
+            require(lst.size==2)
+            val kb0 = Cim.KEYBINDING(lst[0].NAME, null, listOf(lst[0].VALUE_REFERENCE!!))
+            val kb1 = Cim.KEYBINDING(lst[1].NAME, null, listOf(lst[1].VALUE_REFERENCE!!))
+
+            val instancename = Cim.INSTANCENAME(instance.CLASSNAME,
+                listOf(kb0, kb1)
+            )
+            return Cim.CIM(
+                Cim.MESSAGE(
+                    messageid(), Cim.SIMPLEREQ(
+                        Cim.IMETHODCALL(
+                            "DeleteInstance", sldactive, null,
+                            listOf((Cim.iparamvalue("InstanceName", instancename)))
+                        )
+                    )
+                )
+            )
+        }
+
 
         fun referenceNames(instancename: Cim.INSTANCENAME): Cim.CIM {
             return Cim.CIM(
