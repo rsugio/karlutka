@@ -2,6 +2,7 @@ import com.sap.conn.jco.JCo
 import karlutka.clients.*
 import karlutka.models.MTarget
 import karlutka.server.DB
+import karlutka.server.SPROXY
 import karlutka.server.Server
 import karlutka.util.*
 import java.nio.file.Path
@@ -44,10 +45,12 @@ fun main(args: Array<String>) {
     Server.kfpasswds = pw
     Server.pkfg = pkfg
     Server.ppw = ppw
-    //TODO - временно
+    //TODO - временно{
     val afprops = Properties()
     afprops.load(Paths.get(".etc/af.properties").inputStream())
     Server.afprops = afprops.toMap() as Map<String, String>
+    SPROXY.load(Paths.get("c:/data/tmp/ESR"))
+    //}
 
     KTempFile.tempFolder = Paths.get(kfg.tmpdir)
     KTempFile.start()

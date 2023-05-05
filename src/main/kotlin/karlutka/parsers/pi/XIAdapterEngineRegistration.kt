@@ -80,7 +80,7 @@ class XIAdapterEngineRegistration {
     }
 
     class GetApplicationDetailsFromSLD() {
-        fun answer(afname: String, hostname: String, cacherefresh: String): Scenario {
+        fun answer(sid: String, afname: String, hostname: String, cacherefresh: String): Scenario {
             val s = Scenario()
             val SLDData = Component("SLDData")
             SLDData.addProperties(
@@ -93,8 +93,8 @@ class XIAdapterEngineRegistration {
                     "AdapterFramework.HttpPort" to "80",
                     "AdapterFramework.TechnicalHost.HttpPort" to "80",
                     "AdapterFramework.IsCentral" to "false",
-                    "AdapterFramework.TechnicalHost.SystemName" to "TST",
-                    "AdapterFramework.SAPSystemName" to "TST",
+                    "AdapterFramework.TechnicalHost.SystemName" to sid,
+                    "AdapterFramework.SAPSystemName" to sid,
                     "AdapterFramework.ApplicationId" to "af",
                     "AdapterFramework.LogicalSystemName" to "af",
                     "AdapterFramework.TechnicalRoleId" to "J2EE_SERVER",

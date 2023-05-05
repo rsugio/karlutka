@@ -6,7 +6,9 @@ import kotlinx.serialization.Transient
 
 class MPI {
     enum class DIRECTION { INBOUND, OUTBOUND }
-    enum class ETypeID {AdapterMetaData,
+    enum class ETypeID {
+        workspace,
+        AdapterMetaData,
         ChannelTemplate,
         DOCU,
         FOLDER,
@@ -51,14 +53,19 @@ class MPI {
         BO_Query,           // встречалось пока только в ссылках
     }
 
+
+
+
+    // ----------------------------------------------------------------------------------------------------
+
     @Deprecated("рефактор")
     @Serializable
-    class State (
+    class State(
         val swcv: MutableList<Swcv>,
         val namespaces: MutableList<Namespace>,
         val objlist: MutableList<HmiType>,
         var dirConfiguration: HmUsages.DirConfiguration? = null
-        )
+    )
 
     @Deprecated("рефактор")
     @Serializable
@@ -72,13 +79,13 @@ class MPI {
         var folderref: String? = null,
         var modifyUser: String? = null,
         var modifyDate: String? = null,
-        val attrs: MutableMap<String,String> = mutableMapOf(),  // прикладные атрибуты
+        val attrs: MutableMap<String, String> = mutableMapOf(),  // прикладные атрибуты
         val swcv: Swcv? = null,                                 // ссылка валидна только для repository-типов
         @Transient var exist: Boolean = false                   //будет перечитываться при старте
     ) {
         override fun equals(other: Any?): Boolean {
             require(other is HmiType)
-            return typeId==other.typeId && oid == other.oid && elem==other.elem && vid == other.vid
+            return typeId == other.typeId && oid == other.oid && elem == other.elem && vid == other.vid
         }
 
         fun update(new: HmiType) {
@@ -111,7 +118,7 @@ class MPI {
         override fun equals(other: Any?): Boolean {
             requireNotNull(other)
             require(other is Swcv)
-            return guid==other.guid
+            return guid == other.guid
         }
     }
 
@@ -123,8 +130,9 @@ class MPI {
     ) {
         override fun equals(other: Any?): Boolean {
             require(other is Namespace)
-            return swcv==other.swcv && value==other.value
+            return swcv == other.swcv && value == other.value
         }
+
         override fun toString() = "Namespace($value,$description)"
     }
 
@@ -142,7 +150,7 @@ class MPI {
         override fun equals(x: Any?): Boolean {
             require(x is EsrObj)
             // нет swcvsp и num!
-            return x.typeID==typeID && x.oid==oid && x.swcvid==swcvid && x.key == key
+            return x.typeID == typeID && x.oid == oid && x.swcvid == swcvid && x.key == key
         }
 
         override fun toString(): String {

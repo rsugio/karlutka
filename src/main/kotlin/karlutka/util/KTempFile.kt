@@ -12,7 +12,7 @@ object KTempFile {
         if (Files.isDirectory(tempFolder)) {
             tempFolder.forEachDirectoryEntry {
                 if (Files.isDirectory(it)) {
-                    it.forEachDirectoryEntry { Files.delete(it) }
+//                    it.forEachDirectoryEntry { Files.delete(it) }
                 } else
                     Files.delete(it)
             }

@@ -16,7 +16,7 @@ import kotlin.io.path.inputStream
 import kotlin.io.path.outputStream
 import kotlin.io.path.writeText
 
-@Suppress("UNUSED_VALUE")
+@Suppress("UNUSED_VALUE", "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
 class KSLDTests {
     private val po = KT.propAuth(Paths.get(".etc/po.properties"))
     private val client: HttpClient = HttpClient.newBuilder()
@@ -154,10 +154,6 @@ class KSLDTests {
         x = op(asx("Antecedent", RTCname, "Dependent", portRTCname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath))
         //basic
         x = op(asx("Antecedent", afname, "Dependent", portbasicurlname, "SAP_XIAdapterHostedHTTPServicePort", namespacepath))
-
-
-
-
     }
     fun asx(prFrom: String, instFrom: Cim.INSTANCENAME, prTo: String, instTo: Cim.INSTANCENAME, assClass: String, namespacepath: Cim.NAMESPACEPATH): Cim.CIM {
         val f1 = Cim.createPropertyReference(prFrom, instFrom.CLASSNAME, Cim.INSTANCEPATH(namespacepath, instFrom) )

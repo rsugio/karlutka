@@ -14,7 +14,6 @@ import karlutka.server.Server
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
 import kotlinx.coroutines.*
-import kotlinx.serialization.decodeFromString
 import java.net.URL
 import java.net.URLEncoder
 import java.util.*
@@ -197,7 +196,7 @@ class PI(
     }
 
     suspend fun hmiGeneralQueryTask(
-        scope: CoroutineScope, qry: HmUsages.GeneralQueryRequest, uri: String = "/rep", remark: String = ""
+        scope: CoroutineScope, qry: SimpleQuery.QRequest, uri: String = "/rep", remark: String = ""
     ): Deferred<KtorClient.Task> {
         val serv = findHmiServiceMethod("query", "generic", uri)
         val req = HmUsages.HmiRequest(
@@ -539,18 +538,19 @@ class PI(
     )
 
     suspend fun hmiDirEverythingRequest(scope: CoroutineScope): List<Deferred<KtorClient.Task>> {
-        val qc = HmUsages.GeneralQueryRequest.QC('D', 'B', PCommon.ClCxt('L'))
-        val rez = mutableListOf<Deferred<KtorClient.Task>>()
-        dirTypes.forEach { (type, attrs) ->
-            val query = HmUsages.GeneralQueryRequest(
-                HmUsages.GeneralQueryRequest.Types.of(type),
-                qc,
-                HmUsages.GeneralQueryRequest.Condition(),
-                HmUsages.GeneralQueryRequest.Result(attrs.split(","))
-            )
-            rez.add(hmiGeneralQueryTask(scope, query, "/dir"))
-        }
-        return rez
+        TODO()
+//        val qc = SimpleQuery.QC('D', 'B', PCommon.ClCxt('L'))
+//        val rez = mutableListOf<Deferred<KtorClient.Task>>()
+//        dirTypes.forEach { (type, attrs) ->
+//            val query = SimpleQuery.QRequest(
+//                SimpleQuery.Types.of(type),
+//                qc,
+//                SimpleQuery.Condition(),
+//                SimpleQuery.Result(attrs.split(","))
+//            )
+//            rez.add(hmiGeneralQueryTask(scope, query, "/dir"))
+//        }
+//        return rez
     }
 
     suspend fun hmiResponseParse(tdl: List<Deferred<KtorClient.Task>>) {

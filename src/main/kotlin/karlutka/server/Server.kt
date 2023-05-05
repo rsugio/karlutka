@@ -7,12 +7,10 @@ import io.ktor.server.html.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.util.*
 import karlutka.clients.PI
 import karlutka.models.MTarget
-import karlutka.parsers.pi.Hmi
-import karlutka.parsers.pi.PerfMonitorServlet
-import karlutka.parsers.pi.XIAdapterEngineRegistration
-import karlutka.parsers.pi.XiMessage
+import karlutka.parsers.pi.*
 import karlutka.util.KTempFile
 import karlutka.util.KfPasswds
 import karlutka.util.Kfg
@@ -37,7 +35,7 @@ object Server {
     lateinit var kfpasswds: KfPasswds
     val targets = mutableMapOf<String, MTarget>()
     val UUIDgenerator = Generators.timeBasedGenerator()
-    lateinit var afprops: Map<String,String>
+    lateinit var afprops: Map<String, String>
 
     fun installRoutings(app: Application) {
         app.routing {
@@ -192,12 +190,27 @@ object Server {
             }
             post("/CPACache/invalidate/{...}") {
                 // content-Type application/x-www-form-urlencoded
-                // body is consumer=af.sid.host&consumer_mode=AE
+                // body is consumer=af.sid.host&consumer_mode=AE IR
                 val qr = call.request.queryString()
                 val etc = call.receiveText()
                 //val formParameters = call.receiveParameters()
                 println("\t(193)/CPACache/invalidate $qr got $etc")
                 call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
+            }
+            route("/rep") {
+                get {
+                    call.respondText(ContentType.Any, HttpStatusCode.OK) { "" } //для SM59
+                }
+                get("/applcomp/ext") {
+                    //service=APPLCOMP&method=release */*
+                    call.respondText(ContentType.Any, HttpStatusCode.OK) { "<release>7.0</release>" }
+                }
+                get("/query/ext") {
+                    //service=QUERY&method=GENERIC&body=QUERY_REQUEST_XML&release=7.0
+//                    println("209 /rep/query/ext ${call.request.queryString()}")
+                    val rt = SPROXY.handle(call.receiveText())
+                    call.respondText(ContentType.Text.Xml.withCharset(StandardCharsets.UTF_8), HttpStatusCode.OK) { rt }
+                }
             }
         }
     }
@@ -213,18 +226,31 @@ object Server {
         var j: Hmi.HmiResponse = hr.toResponse("text/plain", "")
         if (hr.ServiceId == "rwbAdapterAccess" && hr.MethodId == "select") {
             val hitlist = hr.MethodInput!!["hitlist"]!!
+            println("\n(217) histlist=$hitlist\n")
             val objid = hr.MethodInput["objid"]
-            if (hitlist=="parties")
-                j = hr.toResponse("text/plain", "1\n78aedc7d79c439938511d517c6d9a2c1\tP_PARTY\n")
-            else if (hitlist=="party") {
+            if (hitlist == "parties")
+                j = hr.toResponse("text/plain", "1\n50455e21531b36fa958fefae3be41689\tP_PARTY\n")
+            else if (hitlist == "party") {
+                val xml = """<cp:Party xmlns:cp="urn:sap-com:xi:xiParty">
+	<cp:PartyObjectId>50455e21531b36fa958fefae3be41689</cp:PartyObjectId>
+	<cp:PartyName>P_PARTY</cp:PartyName>
+	<cp:PartyIdentifier>
+		<cp:Identifier>P_PARTY</cp:Identifier>
+		<cp:Agency>http://sap.com/xi/XI</cp:Agency>
+		<cp:Schema>XIParty</cp:Schema>
+	</cp:PartyIdentifier>
+</cp:Party>"""
                 j = hr.toResponse(
                     "text/xml",
-                    "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGNwOlBhcnR5IHhtbG5zOmNwPSJ1cm46c2FwLWNvbTp4aTp4aVBhcnR5Ij48Y3A6UGFydHlPYmplY3RJZD43OGFlZGM3ZDc5YzQzOTkzODUxMWQ1MTdjNmQ5YTJjMTwvY3A6UGFydHlPYmplY3RJZD48Y3A6UGFydHlOYW1lPlBfMUNfTUVUSVo8L2NwOlBhcnR5TmFtZT48Y3A6UGFydHlJZGVudGlmaWVyPjxjcDpJZGVudGlmaWVyPlBfMUNfTUVUSVo8L2NwOklkZW50aWZpZXI+PGNwOkFnZW5jeT5odHRwOi8vc2FwLmNvbS94aS9YSTwvY3A6QWdlbmN5PjxjcDpTY2hlbWE+WElQYXJ0eTwvY3A6U2NoZW1hPjwvY3A6UGFydHlJZGVudGlmaWVyPjwvY3A6UGFydHk+"
+                    "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) " + xml.encodeBase64()
                 )
-            } else if (hitlist=="services"||hitlist=="channels" || hitlist=="admds") {
+            } else if (hitlist == "services" || hitlist == "channels" || hitlist == "admds") {
                 j = hr.toResponse("text/plain", "0")
-            } else if (hitlist=="cache")
-                j = hr.toResponse("text/xml", "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPENhY2hlU3RhdGU+PFN0YXRlPlM8L1N0YXRlPjxFcnJvciAvPjxDb25maXJtYXRpb25YTUwgLz48Q2FjaGVVcGRhdGVYTUwgLz48Q29uZmlybWF0aW9uWE1MSW5kaWNhdG9yPmZhbHNlPC9Db25maXJtYXRpb25YTUxJbmRpY2F0b3I+PENhY2hlVXBkYXRlWE1MSW5kaWNhdG9yPmZhbHNlPC9DYWNoZVVwZGF0ZVhNTEluZGljYXRvcj48VGltZXN0YW1wPjE2ODI2Njc4OTM5Njc8L1RpbWVzdGFtcD48YWU+dHJ1ZTwvYWU+PC9DYWNoZVN0YXRlPg==")
+            } else if (hitlist == "cache")
+                j = hr.toResponse(
+                    "text/xml",
+                    "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPENhY2hlU3RhdGU+PFN0YXRlPlM8L1N0YXRlPjxFcnJvciAvPjxDb25maXJtYXRpb25YTUwgLz48Q2FjaGVVcGRhdGVYTUwgLz48Q29uZmlybWF0aW9uWE1MSW5kaWNhdG9yPmZhbHNlPC9Db25maXJtYXRpb25YTUxJbmRpY2F0b3I+PENhY2hlVXBkYXRlWE1MSW5kaWNhdG9yPmZhbHNlPC9DYWNoZVVwZGF0ZVhNTEluZGljYXRvcj48VGltZXN0YW1wPjE2ODI2Njc4OTM5Njc8L1RpbWVzdGFtcD48YWU+dHJ1ZTwvYWU+PC9DYWNoZVN0YXRlPg=="
+                )
         } else if (hr.MethodId == "InvalidateCache")
             j = hr.toResponse("text/plain", "R\tU\t\t1682667894485")
         call.respondOutputStream(ContentType.Text.Xml, HttpStatusCode.OK) { j.toInstance().write(this) }
@@ -267,12 +293,12 @@ object Server {
             resp.component.add(XIAdapterEngineRegistration.featureCheck("CompAFJobsStatus", "1"))
         } else if (action == "getSettings") {
             c.compname = "Exchange Profile"
-            afprops.filter { it.key.startsWith("com.sap.aii") }.forEach{(k,v) ->
+            afprops.filter { it.key.startsWith("com.sap.aii") }.forEach { (k, v) ->
                 c.addProperty(k, v)
             }
-        } else if (action=="GetApplicationDetailsFromSLD") {
+        } else if (action == "GetApplicationDetailsFromSLD") {
             resp = XIAdapterEngineRegistration.GetApplicationDetailsFromSLD().answer(
-                afprops["afname"]!!, afprops["fqdn"]!!, afprops["CAECPAurl"]!!
+                afprops["afsid"]!!, afprops["afname"]!!, afprops["fqdn"]!!, afprops["CAECPAurl"]!!
             )
         } else if (action == "RegisterAppWithSLD") {
             resp = XIAdapterEngineRegistration.RegisterAppWithSLD().answer()
