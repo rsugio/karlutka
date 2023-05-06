@@ -10,7 +10,10 @@ import io.ktor.server.routing.*
 import io.ktor.util.*
 import karlutka.clients.PI
 import karlutka.models.MTarget
-import karlutka.parsers.pi.*
+import karlutka.parsers.pi.Hmi
+import karlutka.parsers.pi.PerfMonitorServlet
+import karlutka.parsers.pi.XIAdapterEngineRegistration
+import karlutka.parsers.pi.XiMessage
 import karlutka.util.KTempFile
 import karlutka.util.KfPasswds
 import karlutka.util.Kfg
@@ -160,16 +163,10 @@ object Server {
                     call.respondText(ContentType.Application.Xml, HttpStatusCode.NotAcceptable) { "Wrong Content-Type: $contentType" }
                 }
             }
-            post("/AdapterFramework/regtest") {
-                rtc(call)
-            }
             post("/rtc") {
                 rtc(call)
             }
             post("/run/rtc") {
-                rtc(call)
-            }
-            post("/AdapterFramework/rtc") {
                 rtc(call)
             }
             post("/rwb/regtest") {
@@ -184,6 +181,12 @@ object Server {
                 //val formParameters = call.receiveParameters()
                 println("\t(193)/CPACache/invalidate $qr got $etc")
                 call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
+            }
+            post("/AdapterFramework/regtest") {
+                rtc(call)
+            }
+            post("/AdapterFramework/rtc") {
+                rtc(call)
             }
             post("/AdapterFramework/rwbAdapterAccess/int") {
                 hmi(call)
@@ -208,8 +211,13 @@ object Server {
                 get("/query/ext") {
                     //service=QUERY&method=GENERIC&body=QUERY_REQUEST_XML&release=7.0
 //                    println("209 /rep/query/ext ${call.request.queryString()}")
-                    val rt = SPROXY.handle(call.receiveText())
+                    val rt = SPROXY.handle(call, call.receiveText())
                     call.respondText(ContentType.Text.Xml.withCharset(StandardCharsets.UTF_8), HttpStatusCode.OK) { rt }
+                }
+                get("/goa/ext/") {
+                    println("/rep/goa/ext/ query=${call.request.queryString()} body=${call.receiveText()}")
+                    val rt = SPROXY.navigation(call, call.receiveText())
+                    call.respondText(ContentType.Text.Any, HttpStatusCode.BadRequest) { rt }
                 }
             }
         }

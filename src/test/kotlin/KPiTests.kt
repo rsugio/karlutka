@@ -57,7 +57,7 @@ class KPiTests {
 </ns0:XiPatternMessage1>"""
 
             val om1 = HmUsages.TestExecutionRequest.create(
-                PCommon.VC("0050568f0aac1ed4a6e56926325e2eb3", 'S'),
+                PCommon.VC('S', "0050568f0aac1ed4a6e56926325e2eb3"),
                 "MAPPING",
                 "XiPatternInterface1ToInterface2",
                 "http://sap.com/xi/XI/System/Patterns",
@@ -67,13 +67,13 @@ class KPiTests {
             println(r1.outputXML)
 
             val om2 = HmUsages.TestExecutionRequest.create(
-                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'), "MAPPING", "OM_Ume", "http://test.com", "<a/>"
+                PCommon.VC('L', "9c1353476b6f11ebcedc000000417ca6"), "MAPPING", "OM_Ume", "http://test.com", "<a/>"
             )
             val r2 = pi.executeOMtest(om2)
             println(r2.outputXML)
 
             val mm1 = HmUsages.TestExecutionRequest.create(
-                PCommon.VC("9c1353476b6f11ebcedc000000417ca6", 'L'), "XI_TRAFO", "MM_Test", "http://test.com", "<a/>"
+                PCommon.VC('L', "9c1353476b6f11ebcedc000000417ca6"), "XI_TRAFO", "MM_Test", "http://test.com", "<a/>"
             )
             val rm1 = pi.executeMMtest(mm1)
             println(rm1.outputXML)

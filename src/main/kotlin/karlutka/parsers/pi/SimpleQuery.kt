@@ -22,8 +22,7 @@ class SimpleQuery {
     ) {
         val etypes = types.type.map { it.id }
         fun encodeToString() = XML.encodeToString(this)
-        fun hasWorkspace() = etypes.contains(MPI.ETypeID.workspace)
-
+        //fun contains(t: MPI.ETypeID) = etypes.contains(t)
     }
 
     @Serializable
@@ -107,7 +106,7 @@ class SimpleQuery {
                             // это namespdecl у которого нет RA_XILINK. Собираем суррогатную ссылку.
                             val swcguid = col.wkID!!.id
                             ref = HmUsages.Ref(
-                                PCommon.VC(null, '?'),
+                                PCommon.VC('?', null),
                                 PCommon.Key("namespdecl", swcguid),
                                 HmUsages.Ref.VSpec(4, swcguid, false)    //versionid := objectid := swcguid
                             )
@@ -155,6 +154,21 @@ class SimpleQuery {
         }
     }
 
+    data class RequestByNameNamespaceEQ(val entity: MPI.ETypeID, val name: String, val namespace: String, val attrib: List<String>) {
+        companion object {
+            fun fromRequest(qr: QRequest): RequestByNameNamespaceEQ? {
+                val e = qr.condition.complex?.elementary
+                val eqs = e?.filter { it.single.op == EOps.EQ }?.associate { Pair(it.single.key, it.single.value.simple.strg) } ?: mapOf()
+                val name = eqs["NAME"]
+                val namespace = eqs["NAMESPACE"]
+                if (qr.etypes.size == 1 && name != null && namespace != null)
+                    return RequestByNameNamespaceEQ(qr.etypes[0], name, namespace, qr.result.attrib)
+                else
+                    return null
+            }
+        }
+    }
+
     @Serializable
     @SerialName("types")
     class Types(
@@ -194,7 +208,6 @@ class SimpleQuery {
     )
 
     // ------------------------------------------------------------------------------------------
-
 
     @Serializable
     @XmlSerialName("condition", "", "")
@@ -319,9 +332,11 @@ class SimpleQuery {
         @XmlElement(true) val simple: Simple? = null,
         @XmlElement(true) val qref: Qref? = null,
         @XmlElement(true) val nsp: Nsp? = null,
-        @XmlElement(true) val array: QArray? = null
+        @XmlElement(true)
+        @XmlSerialName("array", "", "")
+        val array: List<QArray> = listOf()
     ) {
-        constructor(s: String) : this(null, Simple(s))
+        constructor(s: String?) : this(null, Simple(s))
         constructor(c: Char) : this(null, Simple(c.toString()))
 
         fun strvalue(): String? {
@@ -359,7 +374,10 @@ class SimpleQuery {
     @XmlSerialName("typeInfo", "", "")
     class TypeInfo(
         @XmlSerialName("type", "", "") val type: List<Type> = listOf(),
-    )
+    ) {
+        // Один тип и перечень ключа
+        constructor(e: MPI.ETypeID, vararg keys: String) : this(listOf(Type(e, keys.mapIndexed { ix, s -> KeyElem(s, ix) })))
+    }
 
     @Serializable
     @XmlSerialName("def", "", "")
@@ -385,6 +403,7 @@ class SimpleQuery {
         fun decodeFromReaderRequest(x: XmlReader): QRequest {
             return XML.Companion.decodeFromReader(x)
         }
+
         fun decodeFromStringRequest(s: String): QRequest {
             return XML.Companion.decodeFromString(s)
         }

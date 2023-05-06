@@ -3,7 +3,6 @@ import KT.Companion.x
 import karlutka.parsers.pi.Hmi
 import karlutka.parsers.pi.HmUsages
 import karlutka.parsers.pi.PCommon
-import karlutka.parsers.pi.SimpleQuery
 import org.apache.commons.io.output.NullOutputStream
 import kotlin.test.Test
 
@@ -103,7 +102,7 @@ class KHmiTests {
     @Test
     fun _read() {
         val ref = HmUsages.Ref(
-            PCommon.VC("3f38b2400b9e11ea9c32fae8ac130d0e", 'S', -1),
+            PCommon.VC('S', "3f38b2400b9e11ea9c32fae8ac130d0e", -1),
             PCommon.Key("namespdecl", null, listOf("3f38b2400b9e11ea9c32fae8ac130d0e"))
         )
         val type = HmUsages.Type(

@@ -8,6 +8,8 @@ class MPI {
     enum class DIRECTION { INBOUND, OUTBOUND }
     enum class ETypeID {
         workspace,
+        namespace,
+        namespdecl,
         AdapterMetaData,
         ChannelTemplate,
         DOCU,
@@ -44,7 +46,6 @@ class MPI {
         imsg,
         iseg,
         ityp,
-        namespdecl,
         process,            // не парсить
         processstep,        // не парсить
         rfc,

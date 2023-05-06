@@ -8,8 +8,8 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 class PCommon {
     @Serializable
     class VC(
-        val swcGuid: String? = null,    // нет для директори
-        val vcType: Char,           //S, L
+        val vcType: Char,    // нет для директори
+        val swcGuid: String? = null,           //S, L
         val sp: Int? = null,
         val caption: String? = null,
         @XmlElement(true)

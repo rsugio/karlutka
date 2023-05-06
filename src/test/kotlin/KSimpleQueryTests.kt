@@ -1,12 +1,13 @@
 import KT.Companion.s
 import KT.Companion.x
 import karlutka.parsers.pi.SimpleQuery
+import karlutka.parsers.pi.XiObj
 import karlutka.server.SPROXY
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import java.nio.file.Paths
 
-@Suppress("UNUSED_VALUE")
+//@Suppress("UNUSED_VALUE")
 class KSimpleQueryTests {
     companion object {
         @JvmStatic
@@ -22,19 +23,31 @@ class KSimpleQueryTests {
         val wksp = SPROXY.Workspace(a, a, a, a, a, a, 'A', a, a)
         val objects = SPROXY.Objects(wksp, mutableMapOf("ns00" to "ns00", "ns01" to "ns01"))
         objects.encodeToString()
-        SPROXY.decodeFromString(objects.encodeToString())
-        SPROXY.decodeFromString(s("/pi_ESR/objects.json"))
+        SPROXY.decodeObjectsFromString(objects.encodeToString())
+        SPROXY.decodeObjectsFromString(s("/pi_ESR/objects.json"))
     }
+
 
     @Test
     fun sproxy() {
         // последовательность вызовов, как она приходит из SPROXY
-        SimpleQuery.decodeFromReaderRequest(x("/pi_ESR/esr01request.xml"))
+        var s: String
+        s = SPROXY.handle(s("/pi_ESR/esr01request.xml"))
         SimpleQuery.decodeFromReaderResult(x("/pi_ESR/esr02result.xml"))
         SimpleQuery.decodeFromReaderRequest(x("/pi_ESR/esr03request.xml"))
         SimpleQuery.decodeFromReaderResult(x("/pi_ESR/esr04result.xml"))
         SimpleQuery.decodeFromReaderRequest(x("/pi_ESR/esr05ValueMappingReplicationOut.xml"))
         SimpleQuery.decodeFromReaderResult(x("/pi_ESR/esr06ValueMappingReplicationOut.xml"))
+        s = SPROXY.handle(s("/pi_ESR/esr05ValueMappingReplicationOut.xml"))
+        s = SPROXY.handle(s("/pi_ESR/esr07namespaces.xml"))
+        println(s)
+
+    }
+
+    @Test
+    fun xiObj() {
+        val x = XiObj.decodeFromXmlReader(x("/pi_ESR/ValueMappingReplicationOut.ifmmessif"))
+        println(x)
     }
 
 }
