@@ -1,6 +1,5 @@
 package karlutka.server
 
-import io.ktor.server.application.*
 import karlutka.models.MPI
 import karlutka.parsers.pi.HmUsages
 import karlutka.parsers.pi.PCommon
@@ -146,12 +145,15 @@ object SPROXY {
         }
     }
 
-    fun navigation(call: ApplicationCall, sreq: String): String {
+    fun navigation(sreq: String): String {
         val c = cnt++
         val pr = tracedir.resolve("${c}_navirequest.xml")
         pr.writeText(sreq)
+        val navigationRequestInput = SimpleQuery.decodeNavigationFromString(sreq)
 
-        //var rez = SimpleQuery.QResult(header, typei, matrix).encodeToString()
+        val header = SimpleQuery.HeaderInfo(5, "type", "existenceFlag")
+        val matrix = SimpleQuery.Matrix()
+        var rez = SimpleQuery.QResult(header, SimpleQuery.TypeInfo(), matrix).encodeToString()
         val res2 = """<queryResult>
     <headerInfo xmlns="">
         <rows count="5" />
@@ -169,7 +171,7 @@ object SPROXY {
             </c>
             <c>
                 <simple>
-                    <bool>false</bool>
+                    <bool>true</bool>
                 </simple>
             </c>
         </r>
@@ -179,7 +181,7 @@ object SPROXY {
             </c>
             <c>
                 <simple>
-                    <bool>false</bool>
+                    <bool>true</bool>
                 </simple>
             </c>
         </r>
@@ -189,7 +191,7 @@ object SPROXY {
             </c>
             <c>
                 <simple>
-                    <bool>false</bool>
+                    <bool>true</bool>
                 </simple>
             </c>
         </r>
@@ -199,7 +201,7 @@ object SPROXY {
             </c>
             <c>
                 <simple>
-                    <bool>false</bool>
+                    <bool>true</bool>
                 </simple>
             </c>
         </r>
@@ -218,11 +220,11 @@ object SPROXY {
         return res2
     }
 
-    fun handle(call: ApplicationCall, sreq: String): String {
+    fun handle(sreq: String): String {
         val c = cnt++
         val pr = tracedir.resolve("${c}_request.xml")
         pr.writeText(sreq)
-        val req = SimpleQuery.decodeFromStringRequest(sreq)
+        val req = SimpleQuery.decodeRequestFromString(sreq)
         var rez: String
         val cds = req.result.attrib.mapIndexed { i, s -> SimpleQuery.Def(s, i) }
 

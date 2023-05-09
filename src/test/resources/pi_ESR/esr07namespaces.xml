@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<generalQueryRequest>
+	<types>
+		<type id="namespace"/>
+	</types>
+	<qc qcType="S" delMode="N">
+		<clCxt consider="L"/>
+		<swcListDef def="G">
+			<swcInfoList>
+				<swc id="45d4a00000000000000000000000000e" underL="false"/>
+			</swcInfoList>
+		</swcListDef>
+	</qc>
+	<condition>
+		<elementary>
+			<single>
+				<key>QA_NSP_ADD_CLASSIC</key>
+				<val>
+					<simple>
+						<bool>false</bool>
+					</simple>
+				</val>
+				<op>EQ</op>
+			</single>
+		</elementary>
+	</condition>
+	<result>
+		<attrib>RA_NSP_STRING</attrib>
+	</result>
+</generalQueryRequest>

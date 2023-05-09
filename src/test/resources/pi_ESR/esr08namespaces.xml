@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<queryResult>
+	<headerInfo xmlns="">
+		<rows count="11"/>
+		<cols count="1"/>
+		<colDef>
+			<def type="RA_NSP_STRING" pos="0"/>
+		</colDef>
+	</headerInfo>
+	<typeInfo xmlns="">
+		<type id="namespace">
+			<keyElem name="name" pos="0"/>
+		</type>
+	</typeInfo>
+	<matrix xmlns="">
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/BASIS</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/BASIS/Global</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/BASIS/alerting</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/BASIS/alerting/api2</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/NWDemo</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/SEA/Basis/Global</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/SEA/MetaData</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/XI/Demo/Agency</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/XI/Demo/Airline</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/XI/System</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+		<r>
+			<c>
+				<nsp isUL="false">
+					<key typeID="namespace">
+						<elem>http://sap.com/xi/XI/System/Patterns</elem>
+					</key>
+					<ref>
+						<vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+							<clCxt consider="A"/>
+						</vc>
+						<key typeID="swc" oid="0050568f0aac1ed4a6e56926325e2eb3">
+							<elem/>
+							<elem/>
+							<elem/>
+							<elem/>
+						</key>
+					</ref>
+				</nsp>
+			</c>
+		</r>
+	</matrix>
+</queryResult>

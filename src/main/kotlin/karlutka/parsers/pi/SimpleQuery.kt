@@ -154,6 +154,45 @@ class SimpleQuery {
         }
     }
 
+    @Serializable
+    @SerialName("navigationRequestInput")
+    class NavigationRequestInput (
+        val navigationRequest: NavigationRequest,
+        val queryAttributes: QueryAttributes
+    )
+
+    @Serializable
+    @SerialName("navigationRequest")
+    class NavigationRequest(
+        @XmlElement val navigationCursor: NavigationCursor,
+        @XmlElement val existenceCheckOnly: Boolean
+    )
+
+    @Serializable
+    @SerialName("navigationCursor")
+    class NavigationCursor(
+        @XmlElement val wkID: WkID,
+        @XmlElement val type: Type,
+        @XmlElement val namespaces: Namespaces,
+        @XmlElement val types: Types,
+    )
+
+    @Serializable
+    @SerialName("namespaces")
+    class Namespaces(
+        @XmlElement val namespace: List<Namespace>
+    )
+
+    @Serializable
+    @SerialName("namespace")
+    class Namespace(
+        val name: String
+    )
+
+    @Serializable
+    @SerialName("queryAttributes")
+    class QueryAttributes(@XmlElement val attribute: List<String>)
+
     data class RequestByNameNamespaceEQ(val entity: MPI.ETypeID, val name: String, val namespace: String, val attrib: List<String>) {
         companion object {
             fun fromRequest(qr: QRequest): RequestByNameNamespaceEQ? {
@@ -299,6 +338,8 @@ class SimpleQuery {
         @XmlElement(true) val colDef: ColDef,
     ) {
         constructor(rows: Int, cols: Int, cd: ColDef) : this(Counted(rows), Counted(cols), cd)
+        constructor(rows: Int, vararg cols: String) : this(Counted(rows), Counted(cols.size), ColDef(cols.mapIndexed { ix, s -> Def(s, ix) }))
+        constructor(rows: Int, cols: List<String>) : this(Counted(rows), Counted(cols.size), ColDef(cols.mapIndexed { ix, s -> Def(s, ix) }))
     }
 
 
@@ -322,7 +363,7 @@ class SimpleQuery {
     @XmlSerialName("wkID", "", "")
     class WkID(
         val id: String,
-        val order: Int,
+        val order: Int?,    //в navigation нет
     )
 
     @Serializable
@@ -400,16 +441,23 @@ class SimpleQuery {
     // --------------------------------------------------------------------------------------------
     companion object {
         val conditionWS_TYPE_S = Condition(Complex(Single("WS_TYPE", Val(Simple("S")), EOps.EQ)))
-        fun decodeFromReaderRequest(x: XmlReader): QRequest {
+        fun decodeRequestFromReader(x: XmlReader): QRequest {
             return XML.Companion.decodeFromReader(x)
         }
 
-        fun decodeFromStringRequest(s: String): QRequest {
+        fun decodeRequestFromString(s: String): QRequest {
             return XML.Companion.decodeFromString(s)
         }
 
-        fun decodeFromReaderResult(x: XmlReader): QResult {
+        fun decodeResultFromReader(x: XmlReader): QResult {
             return XML.Companion.decodeFromReader(x)
+        }
+
+        fun decodeNavigationFromReader(x: XmlReader) : NavigationRequestInput {
+            return XML.Companion.decodeFromReader(x)
+        }
+        fun decodeNavigationFromString(s: String) : NavigationRequestInput {
+            return XML.Companion.decodeFromString(s)
         }
     }
 

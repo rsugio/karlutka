@@ -1,0 +1,15 @@
+<queryResult>
+	<headerInfo xmlns="">
+		<rows count="0"/>
+		<cols count="0"/>
+		<colDef>
+			<def type="RA_NSP_STRING" pos="0"/>
+		</colDef>
+	</headerInfo>
+	<typeInfo xmlns="">
+		<type id="namespace">
+			<keyElem name="name" pos="0"/>
+		</type>
+	</typeInfo>
+	<matrix xmlns=""/>
+</queryResult>

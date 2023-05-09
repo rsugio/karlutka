@@ -211,12 +211,13 @@ object Server {
                 get("/query/ext") {
                     //service=QUERY&method=GENERIC&body=QUERY_REQUEST_XML&release=7.0
 //                    println("209 /rep/query/ext ${call.request.queryString()}")
-                    val rt = SPROXY.handle(call, call.receiveText())
+                    val rt = SPROXY.handle(call.receiveText())
                     call.respondText(ContentType.Text.Xml.withCharset(StandardCharsets.UTF_8), HttpStatusCode.OK) { rt }
                 }
                 get("/goa/ext/") {
-                    println("/rep/goa/ext/ query=${call.request.queryString()} body=${call.receiveText()}")
-                    val rt = SPROXY.navigation(call, call.receiveText())
+                    val b = call.receiveText()
+                    println("/rep/goa/ext/ query=${call.request.queryString()} body=$b")
+                    val rt = SPROXY.navigation(b)
                     call.respondText(ContentType.Text.Any, HttpStatusCode.BadRequest) { rt }
                 }
             }

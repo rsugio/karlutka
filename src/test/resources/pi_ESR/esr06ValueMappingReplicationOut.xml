@@ -1,0 +1,242 @@
+<queryResult>
+    <headerInfo xmlns="">
+        <rows count="3" />
+        <cols count="10" />
+        <colDef>
+            <def type="RA_XILINK" pos="0" />
+            <def type="TEXT" pos="1" />
+            <def type="MODIFYUSER" pos="2" />
+            <def type="MODIFYDATE" pos="3" />
+            <def type="FOLDERREF" pos="4" />
+            <def type="CATEGORY" pos="5" />
+            <def type="IFPATTERN" pos="6" />
+            <def type="OBJECTSTATE" pos="7" />
+            <def type="RA_LINK_LIST_ROLE" pos="8" />
+            <def type="RA_LINK_LIST" pos="9" />
+        </colDef>
+    </headerInfo>
+    <typeInfo xmlns="">
+        <type id="ifmmessif">
+            <keyElem name="NAME" pos="0" />
+            <keyElem name="NAMESPACE" pos="1" />
+        </type>
+    </typeInfo>
+    <matrix xmlns="">
+        <r>
+            <c>
+                <qref isMod="false" isInUnderL="false">
+                    <ref>
+                        <vc vcType="S" swcGuid="1879eed07b4e11d987c6c81c0a114c15" sp="-1" caption="SAP BASIS 7.10">
+                            <clCxt consider="L" />
+                        </vc>
+                        <key typeID="ifmmessif" oid="f98bc091ff523864b27bdea7efa7bf70">
+                            <elem>ValueMappingReplicationOut</elem>
+                            <elem>http://sap.com/xi/XI/System</elem>
+                        </key>
+                        <vspec type="4" id="4b6c1ae1587a11d8c41f0002b3ca4e60" deleted="false" />
+                    </ref>
+                </qref>
+            </c>
+            <c>
+                <simple>
+                    <strg />
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg>sap</strg>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <date>2004-02-06T08:59:28</date>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <bin>00000000000000000000000000000000</bin>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg>O</strg>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg />
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg>N</strg>
+                </simple>
+            </c>
+            <c>
+                <array>
+                    <simple>
+                        <strg>_inner</strg>
+                    </simple>
+                </array>
+            </c>
+            <c>
+                <array>
+                    <ref>
+                        <vc vcType="S" swcGuid="1879eed07b4e11d987c6c81c0a114c15" sp="-1" caption="SAP BASIS 7.10">
+                            <clCxt consider="L" />
+                        </vc>
+                        <key typeID="ifmoper" oid="43d8d4391d803264a125499b34c015f2">
+                            <elem>ValueMappingReplicationOut</elem>
+                            <elem>http://sap.com/xi/XI/System</elem>
+                        </key>
+                    </ref>
+                </array>
+            </c>
+        </r>
+        <r>
+            <c>
+                <qref isMod="false" isInUnderL="false">
+                    <ref>
+                        <vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+                            <clCxt consider="L" />
+                        </vc>
+                        <key typeID="ifmmessif" oid="f98bc091ff523864b27bdea7efa7bf70">
+                            <elem>ValueMappingReplicationOut</elem>
+                            <elem>http://sap.com/xi/XI/System</elem>
+                        </key>
+                        <vspec type="4" id="4b6c1ae1587a11d8c41f0002b3ca4e60" deleted="false" />
+                    </ref>
+                </qref>
+            </c>
+            <c>
+                <simple>
+                    <strg />
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg>sap</strg>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <date>2004-02-06T09:59:28</date>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <bin>00000000000000000000000000000000</bin>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg>O</strg>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg />
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg>N</strg>
+                </simple>
+            </c>
+            <c>
+                <array>
+                    <simple>
+                        <strg>_inner</strg>
+                    </simple>
+                </array>
+            </c>
+            <c>
+                <array>
+                    <ref>
+                        <vc vcType="S" swcGuid="0050568f0aac1ed4a6e56926325e2eb3" sp="-1" caption="SAP BASIS 7.50">
+                            <clCxt consider="L" />
+                        </vc>
+                        <key typeID="ifmoper" oid="43d8d4391d803264a125499b34c015f2">
+                            <elem>ValueMappingReplicationOut</elem>
+                            <elem>http://sap.com/xi/XI/System</elem>
+                        </key>
+                    </ref>
+                </array>
+            </c>
+        </r>
+        <r>
+            <c>
+                <qref isMod="false" isInUnderL="false">
+                    <ref>
+                        <vc vcType="S" swcGuid="10748020234c11dd8439dff20a424100" sp="-1" caption="SAP BASIS 7.02">
+                            <clCxt consider="L" />
+                        </vc>
+                        <key typeID="ifmmessif" oid="f98bc091ff523864b27bdea7efa7bf70">
+                            <elem>ValueMappingReplicationOut</elem>
+                            <elem>http://sap.com/xi/XI/System</elem>
+                        </key>
+                        <vspec type="4" id="4b6c1ae1587a11d8c41f0002b3ca4e60" deleted="false" />
+                    </ref>
+                </qref>
+            </c>
+            <c>
+                <simple>
+                    <strg />
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg>sap</strg>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <date>2004-02-06T08:59:28</date>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <bin>00000000000000000000000000000000</bin>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg>O</strg>
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg />
+                </simple>
+            </c>
+            <c>
+                <simple>
+                    <strg>N</strg>
+                </simple>
+            </c>
+            <c>
+                <array>
+                    <simple>
+                        <strg>_inner</strg>
+                    </simple>
+                </array>
+            </c>
+            <c>
+                <array>
+                    <ref>
+                        <vc vcType="S" swcGuid="10748020234c11dd8439dff20a424100" sp="-1" caption="SAP BASIS 7.02">
+                            <clCxt consider="L" />
+                        </vc>
+                        <key typeID="ifmoper" oid="43d8d4391d803264a125499b34c015f2">
+                            <elem>ValueMappingReplicationOut</elem>
+                            <elem>http://sap.com/xi/XI/System</elem>
+                        </key>
+                    </ref>
+                </array>
+            </c>
+        </r>
+    </matrix>
+    <messages xmlns="">
+
+</messages>
+</queryResult>

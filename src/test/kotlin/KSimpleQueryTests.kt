@@ -25,6 +25,8 @@ class KSimpleQueryTests {
         objects.encodeToString()
         SPROXY.decodeObjectsFromString(objects.encodeToString())
         SPROXY.decodeObjectsFromString(s("/pi_ESR/objects.json"))
+        val n = SimpleQuery.decodeNavigationFromReader(x("/pi_ESR/navirequest01.xml"))
+        println(n)
     }
 
 
@@ -33,14 +35,15 @@ class KSimpleQueryTests {
         // последовательность вызовов, как она приходит из SPROXY
         var s: String
         s = SPROXY.handle(s("/pi_ESR/esr01request.xml"))
-        SimpleQuery.decodeFromReaderResult(x("/pi_ESR/esr02result.xml"))
-        SimpleQuery.decodeFromReaderRequest(x("/pi_ESR/esr03request.xml"))
-        SimpleQuery.decodeFromReaderResult(x("/pi_ESR/esr04result.xml"))
-        SimpleQuery.decodeFromReaderRequest(x("/pi_ESR/esr05ValueMappingReplicationOut.xml"))
-        SimpleQuery.decodeFromReaderResult(x("/pi_ESR/esr06ValueMappingReplicationOut.xml"))
+        SimpleQuery.decodeResultFromReader(x("/pi_ESR/esr02result.xml"))
+        SimpleQuery.decodeRequestFromReader(x("/pi_ESR/esr03request.xml"))
+        SimpleQuery.decodeResultFromReader(x("/pi_ESR/esr04result.xml"))
+        SimpleQuery.decodeRequestFromReader(x("/pi_ESR/esr05ValueMappingReplicationOut.xml"))
+        SimpleQuery.decodeResultFromReader(x("/pi_ESR/esr06ValueMappingReplicationOut.xml"))
         s = SPROXY.handle(s("/pi_ESR/esr05ValueMappingReplicationOut.xml"))
         s = SPROXY.handle(s("/pi_ESR/esr07namespaces.xml"))
-        println(s)
+        //println(s)
+        SPROXY.navigation(s("/pi_ESR/navirequest01.xml"))
 
     }
 

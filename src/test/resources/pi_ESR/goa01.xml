@@ -1,0 +1,27 @@
+<navigationRequestInput><!-- GET /rep/goa/ext/?query=service=goa&method=naviquery -->
+	<navigationRequest>
+		<navigationCursor>
+			<wkID id="45d4a00000000000000000000000000e"/>
+			<type id="namespace"/>
+			<namespaces>
+				<namespace name="urn:rsug-ru:samples"/>
+			</namespaces>
+			<types>
+				<type id="BO_Object"/>
+				<type id="BO_Enh"/>
+				<type id="ifmmessif"/>
+				<type id="ifmmessage"/>
+				<type id="ifmfaultm"/>
+				<type id="ifmtypedef"/>
+				<type id="ifmtypeenh"/>
+				<type id="agent"/>
+				<type id="FOLDER"/>
+			</types>
+		</navigationCursor>
+		<existenceCheckOnly>true</existenceCheckOnly>
+	</navigationRequest>
+	<queryAttributes>
+		<attribute>type</attribute>
+		<attribute>existenceFlag</attribute>
+	</queryAttributes>
+</navigationRequestInput>

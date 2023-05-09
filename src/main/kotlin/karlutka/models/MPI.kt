@@ -52,6 +52,9 @@ class MPI {
         swc,
         type,
         BO_Query,           // встречалось пока только в ссылках
+        BO_Object,          // navi
+        BO_Enh,             // navi
+        agent               // navi
     }
 
 
