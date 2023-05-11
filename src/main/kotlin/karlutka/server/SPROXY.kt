@@ -80,6 +80,42 @@ object SPROXY {
             return listOf()
         }
 
+        fun findObjects(nrq: SimpleQuery.NavigationRequestInput): SimpleQuery.QResult {
+            val askedEntity = nrq.navigationRequest.navigationCursor.type.id                // namespace, etc
+            val askedTypes = nrq.navigationRequest.navigationCursor.types.type              // много
+            val onNamespaces = nrq.navigationRequest.navigationCursor.namespaces.namespace  // вживую 1..1 но может быть 1..N
+
+            val relst = mutableListOf<SimpleQuery.R>()
+            onNamespaces.forEach { ns ->
+                val namespaceFolder = nsToPath[ns.name] //в этой папке ищем заданные объекты, по расширению
+                requireNotNull(namespaceFolder)
+                askedTypes.forEach { at ->
+                    val found = namespaceFolder.listDirectoryEntries("*.${at.id}")
+                    if (found.isNotEmpty()) {
+                        relst.add(
+                            SimpleQuery.R(
+                                listOf(
+                                    SimpleQuery.C(null, null, null, null, listOf(), at),
+                                    SimpleQuery.C(null, SimpleQuery.Simple(null, null, true))
+                                )
+                            )
+                        )
+                    }
+                }
+
+            }
+
+            val matrix = SimpleQuery.Matrix(relst)
+            val header = SimpleQuery.HeaderInfo(matrix.r.size, "type", "existenceFlag")
+            if (nrq.navigationRequest.existenceCheckOnly) {
+                // На входе перечень неймспейсов с обычно одним элементом и перечень типов
+                return SimpleQuery.QResult(header, SimpleQuery.TypeInfo(), matrix)
+            } else {
+                System.err.println("(160) navigation received request //TODO : ${nrq.navigationRequest}")
+                TODO()
+            }
+        }
+
         fun namespacesToR(): List<SimpleQuery.R> {
             val x = namespaces.values.map { name ->
                 val ref = workspace.toRef(null, false)
@@ -118,15 +154,15 @@ object SPROXY {
 
         fun toRef(x: XiObj?, withVersion: Boolean): HmUsages.Ref {
             val cl = PCommon.ClCxt('A')
-            val vspec: HmUsages.Ref.VSpec? = if (x!=null && withVersion)
+            val vspec: HmUsages.Ref.VSpec? = if (x != null && withVersion)
                 HmUsages.Ref.VSpec(4, x.idInfo.VID!!, false)
             else
                 null
-            val key = if (x!=null)
+            val key = if (x != null)
                 x.idInfo.key
             else {
                 // для 'namespace'
-                PCommon.Key("swc", RA_WORKSPACE_ID, listOf("","","",""))
+                PCommon.Key("swc", RA_WORKSPACE_ID, listOf("", "", "", ""))
             }
             return HmUsages.Ref(PCommon.VC(WS_TYPE, RA_WORKSPACE_ID, -1, CAPTION, cl), key, vspec)
         }
@@ -145,84 +181,25 @@ object SPROXY {
         }
     }
 
-    fun navigation(sreq: String): String {
+    fun navigation(method: String, sreq: String): String {
+        require(method in listOf("naviquery"))
         val c = cnt++
         val pr = tracedir.resolve("${c}_navirequest.xml")
+        val pt = tracedir.resolve("${c}_naviresponse.xml")
         pr.writeText(sreq)
-        val navigationRequestInput = SimpleQuery.decodeNavigationFromString(sreq)
-
-        val header = SimpleQuery.HeaderInfo(5, "type", "existenceFlag")
-        val matrix = SimpleQuery.Matrix()
-        var rez = SimpleQuery.QResult(header, SimpleQuery.TypeInfo(), matrix).encodeToString()
-        val res2 = """<queryResult>
-    <headerInfo xmlns="">
-        <rows count="5" />
-        <cols count="2" />
-        <colDef>
-            <def type="type" pos="0" />
-            <def type="existenceFlag" pos="1" />
-        </colDef>
-    </headerInfo>
-    <typeInfo xmlns="" />
-    <matrix xmlns="">
-        <r>
-            <c>
-                <type id="ifmtypedef" />
-            </c>
-            <c>
-                <simple>
-                    <bool>true</bool>
-                </simple>
-            </c>
-        </r>
-        <r>
-            <c>
-                <type id="ifmmessif" />
-            </c>
-            <c>
-                <simple>
-                    <bool>true</bool>
-                </simple>
-            </c>
-        </r>
-        <r>
-            <c>
-                <type id="ifmfaultm" />
-            </c>
-            <c>
-                <simple>
-                    <bool>true</bool>
-                </simple>
-            </c>
-        </r>
-        <r>
-            <c>
-                <type id="ifmmessage" />
-            </c>
-            <c>
-                <simple>
-                    <bool>true</bool>
-                </simple>
-            </c>
-        </r>
-        <r>
-            <c>
-                <type id="FOLDER" />
-            </c>
-            <c>
-                <simple>
-                    <bool>false</bool>
-                </simple>
-            </c>
-        </r>
-    </matrix>
-</queryResult>"""
-        return res2
+        println("navigation($method) $pr->$pt")
+        val nrq = SimpleQuery.decodeNavigationFromString(sreq)
+        val wkGUID = nrq.navigationRequest.navigationCursor.wkID.id
+        val sq = objectss.find { it.workspace.RA_WORKSPACE_ID == wkGUID }?.findObjects(nrq)
+        val rez = sq!!.encodeToString()
+        pt.writeText(rez)
+        return rez
     }
 
-    fun handle(sreq: String): String {
+    fun query(sreq: String): String {
         val c = cnt++
         val pr = tracedir.resolve("${c}_request.xml")
+        val pt = tracedir.resolve("${c}_response.xml")
         pr.writeText(sreq)
         val req = SimpleQuery.decodeRequestFromString(sreq)
         var rez: String
@@ -235,13 +212,16 @@ object SPROXY {
             val ks = listOf(SimpleQuery.KeyElem("WS_ID", 0), SimpleQuery.KeyElem("WS_ORDER", 1))
             val typei = SimpleQuery.TypeInfo(listOf(SimpleQuery.Type(MPI.ETypeID.workspace, ks)))
             if (req.condition == SimpleQuery.conditionWS_TYPE_S) {
-                val header = SimpleQuery.HeaderInfo(objectss.size, cds.size, SimpleQuery.ColDef(cds))
-                val matrix = SimpleQuery.Matrix(objectss.map { it.workspace.toR() })
+                val wksps = objectss.filter { it.workspace.WS_TYPE=='S' }
+                val header = SimpleQuery.HeaderInfo(wksps.size, cds.size, SimpleQuery.ColDef(cds))
+                val matrix = SimpleQuery.Matrix(wksps.map { it.workspace.toR() })
                 rez = SimpleQuery.QResult(header, typei, matrix).encodeToString()
             } else {
                 val name = req.condition.complex!!.getSingle("NAME").value.simple.strg
                 val version = req.condition.complex.getSingle("VERSION").value.simple.strg
-                val wksps = objectss.filter { it.workspace.NAME == name && it.workspace.VERSION == version }
+                val wstype = req.condition.complex.getSingle("WS_TYPE").value.simple.strg
+                val wksps =
+                    objectss.filter { it.workspace.NAME == name && it.workspace.VERSION == version && it.workspace.WS_TYPE.toString() == wstype }
 
                 val header = SimpleQuery.HeaderInfo(wksps.size, cds.size, SimpleQuery.ColDef(cds))
                 val matrix = SimpleQuery.Matrix(objectss.map { it.workspace.toR() })
@@ -277,7 +257,6 @@ object SPROXY {
             System.err.println("handler(UNIMPLEMENTED) $pr")
             TODO()
         }
-        val pt = tracedir.resolve("${c}_response.xml")
         pt.writeText(rez)
         return rez
     }

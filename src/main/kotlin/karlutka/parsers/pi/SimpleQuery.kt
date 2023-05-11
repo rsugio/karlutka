@@ -163,14 +163,14 @@ class SimpleQuery {
 
     @Serializable
     @SerialName("navigationRequest")
-    class NavigationRequest(
+    data class NavigationRequest(
         @XmlElement val navigationCursor: NavigationCursor,
         @XmlElement val existenceCheckOnly: Boolean
     )
 
     @Serializable
     @SerialName("navigationCursor")
-    class NavigationCursor(
+    data class NavigationCursor(
         @XmlElement val wkID: WkID,
         @XmlElement val type: Type,
         @XmlElement val namespaces: Namespaces,
@@ -375,7 +375,8 @@ class SimpleQuery {
         @XmlElement(true) val nsp: Nsp? = null,
         @XmlElement(true)
         @XmlSerialName("array", "", "")
-        val array: List<QArray> = listOf()
+        val array: List<QArray> = listOf(),
+        @XmlElement(true) val type: Type? = null,
     ) {
         constructor(s: String?) : this(null, Simple(s))
         constructor(c: Char) : this(null, Simple(c.toString()))

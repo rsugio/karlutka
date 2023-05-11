@@ -7,6 +7,7 @@ import io.ktor.server.html.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.util.*
 import io.ktor.util.*
 import karlutka.clients.PI
 import karlutka.models.MTarget
@@ -201,24 +202,52 @@ object Server {
                 call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
             }
             route("/rep") {
+
+            }
+            route("/rep2") {
                 get {
                     call.respondText(ContentType.Any, HttpStatusCode.OK) { "" } //для SM59
                 }
                 get("/applcomp/ext") {
-                    //service=APPLCOMP&method=release */*
-                    call.respondText(ContentType.Any, HttpStatusCode.OK) { "<release>7.0</release>" }
+                    //CL_HMI_CLIENT_FACTORY->CREATE_CLIENT
+                    // /rep/applcomp/ext?service=APPLCOMP&method=release
+                    // /rep/applcomp/ext?service=APPLCOMP&method=content_languages
+                    val method = call.request.queryParameters["method"]!!
+                    if (method=="release")
+                        call.respondText(ContentType.Any, HttpStatusCode.OK) { "<release>7.0</release>" }
+                    else
+                        TODO("/rep/applcomp/ext?method=$method")
                 }
                 get("/query/ext") {
-                    //service=QUERY&method=GENERIC&body=QUERY_REQUEST_XML&release=7.0
-//                    println("209 /rep/query/ext ${call.request.queryString()}")
-                    val rt = SPROXY.handle(call.receiveText())
+                    //CL_HMI_CLIENT_FACTORY->CREATE_CLIENT
+                    // /rep/query/ext?service=QUERY&method=GENERIC&body=QUERY_REQUEST_XML&release=7.0
+                    val p = call.request.queryParameters
+                    require(p.getOrFail("service")=="QUERY")
+                    require(p.getOrFail("method")=="GENERIC")
+                    require(p.getOrFail("body")=="QUERY_REQUEST_XML")
+                    val release = p.getOrFail("release")
+                    val rt = SPROXY.query(call.receiveText())
                     call.respondText(ContentType.Text.Xml.withCharset(StandardCharsets.UTF_8), HttpStatusCode.OK) { rt }
                 }
+                get("/read/ext/") {
+                    //CL_HMI_CLIENT_FACTORY->CREATE_CLIENT
+                    val p = call.request.queryParameters
+                    TODO("/rep/read/ext/ $p")
+                }
                 get("/goa/ext/") {
+                    //CL_HMI_CLIENT_FACTORY->CREATE_CLIENT
+                    // /rep/goa/ext/?service=goa&method=readobject
+                    // /rep/goa/ext/?service=goa&method=naviquery
+                    // /rep/goa/ext/?service=goa&method=readsingleobject
+                    val method = call.request.queryParameters["method"]!!
                     val b = call.receiveText()
-                    println("/rep/goa/ext/ query=${call.request.queryString()} body=$b")
-                    val rt = SPROXY.navigation(b)
+                    //println("/rep/goa/ext/ query=${call.request.queryString()}")
+                    val rt = SPROXY.navigation(method, b)
                     call.respondText(ContentType.Text.Any, HttpStatusCode.BadRequest) { rt }
+                }
+                get("/interfaceinfo/ext/") {
+                    // /rep/interfaceinfo/ext/?service=interfaceinfo&method=getMatchingSifs
+                    TODO("/rep/interfaceinfo/ext/ ${call.request.queryParameters}")
                 }
             }
         }
