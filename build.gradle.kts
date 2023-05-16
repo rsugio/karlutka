@@ -92,7 +92,7 @@ shadowJar.apply {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))       //8 is too low
+        languageVersion.set(JavaLanguageVersion.of("17"))
     }
 }
 

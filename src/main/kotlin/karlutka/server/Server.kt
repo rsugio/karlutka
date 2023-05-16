@@ -1,6 +1,7 @@
 package karlutka.server
 
 import com.fasterxml.uuid.Generators
+import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
@@ -15,14 +16,8 @@ import karlutka.parsers.pi.Hmi
 import karlutka.parsers.pi.PerfMonitorServlet
 import karlutka.parsers.pi.XIAdapterEngineRegistration
 import karlutka.parsers.pi.XiMessage
-import karlutka.util.KTempFile
-import karlutka.util.KfPasswds
-import karlutka.util.Kfg
-import karlutka.util.KtorClient
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.withContext
+import karlutka.util.*
+import kotlinx.coroutines.*
 import kotlinx.html.*
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
@@ -31,6 +26,7 @@ import java.time.Duration
 import java.time.Instant
 import kotlin.io.path.outputStream
 import kotlin.io.path.readBytes
+import kotlin.io.path.writeText
 
 object Server {
     lateinit var pkfg: Path
@@ -174,13 +170,14 @@ object Server {
                 rtc(call)
             }
             get("/mdt/version.jsp") {
+                println("/mdt/version.jsp")
                 call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
             }
             post("/run/value_mapping_cache/{...}") {
                 val qr = call.request.queryString()
                 val etc = call.receiveText()
                 //val formParameters = call.receiveParameters()
-                println("\t(193)/CPACache/invalidate $qr got $etc")
+                println("\t(183/run/value_mapping_cache/{...} $qr got $etc")
                 call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
             }
             post("/AdapterFramework/regtest") {
@@ -193,16 +190,14 @@ object Server {
                 hmi(call)
             }
             post("/CPACache/invalidate/{...}") {
-                // content-Type application/x-www-form-urlencoded
-                // body is consumer=af.sid.host&consumer_mode=AE IR
-                val qr = call.request.queryString()
-                val etc = call.receiveText()
-                //val formParameters = call.receiveParameters()
-                println("\t(193)/CPACache/invalidate $qr got $etc")
+                val query = call.request.queryParameters    //method=InvalidateCache или другой
+                val form = call.receiveParameters()   //[consumer=[af.fa0.fake0db], consumer_mode=[AE]]
+                cpacacheInvalidate(form.get("consumer")!!, form.get("consumer_mode")!!, query)
                 call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
             }
-            route("/rep") {
-
+            route("/rep/{TRATATA}") {
+                //TODO - file
+                //HttpClient.send (RealPO75 ESR)
             }
             route("/rep2") {
                 get {
@@ -213,7 +208,7 @@ object Server {
                     // /rep/applcomp/ext?service=APPLCOMP&method=release
                     // /rep/applcomp/ext?service=APPLCOMP&method=content_languages
                     val method = call.request.queryParameters["method"]!!
-                    if (method=="release")
+                    if (method == "release")
                         call.respondText(ContentType.Any, HttpStatusCode.OK) { "<release>7.0</release>" }
                     else
                         TODO("/rep/applcomp/ext?method=$method")
@@ -222,9 +217,9 @@ object Server {
                     //CL_HMI_CLIENT_FACTORY->CREATE_CLIENT
                     // /rep/query/ext?service=QUERY&method=GENERIC&body=QUERY_REQUEST_XML&release=7.0
                     val p = call.request.queryParameters
-                    require(p.getOrFail("service")=="QUERY")
-                    require(p.getOrFail("method")=="GENERIC")
-                    require(p.getOrFail("body")=="QUERY_REQUEST_XML")
+                    require(p.getOrFail("service") == "QUERY")
+                    require(p.getOrFail("method") == "GENERIC")
+                    require(p.getOrFail("body") == "QUERY_REQUEST_XML")
                     val release = p.getOrFail("release")
                     val rt = SPROXY.query(call.receiveText())
                     call.respondText(ContentType.Text.Xml.withCharset(StandardCharsets.UTF_8), HttpStatusCode.OK) { rt }
@@ -256,7 +251,7 @@ object Server {
     suspend fun hmi(call: ApplicationCall) {
         val s = call.receiveText()
         val q = call.request.queryString()
-        println("${call.request.path()}?$q with plain text $s")
+        println("(262) ${call.request.path()}?$q with plain text $s")
         val i = Hmi.parseInstance(s)
         val hr = i.toHmiRequest()
         println("${call.request.path()} with service=${hr.ServiceId} methodId=${hr.MethodId} methodInput=${hr.MethodInput}")
@@ -264,7 +259,7 @@ object Server {
         var j: Hmi.HmiResponse = hr.toResponse("text/plain", "")
         if (hr.ServiceId == "rwbAdapterAccess" && hr.MethodId == "select") {
             val hitlist = hr.MethodInput!!["hitlist"]!!
-            println("\n(217) histlist=$hitlist\n")
+            println("\n(270) histlist=$hitlist\n")
             val objid = hr.MethodInput["objid"]
             if (hitlist == "parties")
                 j = hr.toResponse("text/plain", "1\n50455e21531b36fa958fefae3be41689\tP_PARTY\n")
@@ -343,12 +338,25 @@ object Server {
         } else {
             TODO()
         }
-
         call.respondText(
             ContentType.Text.Xml,
             HttpStatusCode.OK
         ) { resp.encodeToString() }
+    }
 
+    suspend fun cpacacheInvalidate(consumer: String, mode: String, queryParams: Parameters) {
+        println("(348)/CPACache/invalidate")
+        // queryParams == method=InvalidateCache или другой...
+        require(mode in listOf("AE", "IR"))
+        if (mode=="AE") {
+            val parent = targets["DPH"] as PI
+            val resp1 = parent.dirHmiCacheRefreshService("C", consumer)    //changed objects
+            KTempFile.getCPAUpdatePath("C").writeText(resp1.bodyAsText())
+            val resp2 = parent.dirHmiCacheRefreshService("D", consumer)    //changed objects
+            KTempFile.getCPAUpdatePath("D").writeText(resp2.bodyAsText())
+        }
+        System.err.println("cpacacheInvalidate with mode: $mode, queryParams: $queryParams")
+        TODO()
     }
 
     suspend fun index(call: ApplicationCall) {

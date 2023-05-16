@@ -11,7 +11,7 @@ import java.time.Duration
 import java.util.*
 import kotlin.io.path.inputStream
 
-fun main(args: Array<String>) {
+suspend fun main(args: Array<String>) {
     val pid = ProcessHandle.current().pid()
     println("[ru-hello]Привет (∀x∈X)P(x), pid=$pid")
 
@@ -49,7 +49,7 @@ fun main(args: Array<String>) {
     val afprops = Properties()
     afprops.load(Paths.get(".etc/af.properties").inputStream())
     Server.afprops = afprops.toMap() as Map<String, String>
-    SPROXY.load(Paths.get("c:/data/tmp/ESR"))
+    SPROXY.load(Paths.get("c:/data/SPROXY"))
     //}
 
     KTempFile.tempFolder = Paths.get(kfg.tmpdir)
@@ -61,31 +61,39 @@ fun main(args: Array<String>) {
         Duration.ofMillis(Server.kfg.httpClientConnectionTimeoutMillis)
     )
 
-    //DB.init(kfg.h2connection)
-
-    if (kfg.influxdb != null) {
+    DB.init(kfg.h2connection)
+    if (kfg.influxdb != null && false) {
         val info = KInflux.init(kfg.influxdb, pw.securityMaterials)
         println("Influx по ${kfg.influxdb.host} подключен: $info")
-    } else {
-        System.err.println("Influx не указан")
     }
 
-    println("Проверка телеметрии:")
+    println("Загружаем соединения")
     Server.kfg.targets.forEach { konf ->
         konf.loadAuths(Server.kfpasswds.securityMaterials)
         val target: MTarget
+        var pingAuth = false
         when (konf) {
             is KfTarget.ABAP   -> target = AbapJCo(konf)
-            is KfTarget.PIAF   -> target = PI(konf)
+            is KfTarget.PIAF   -> {
+                val pi = PI(konf)
+                if (konf.checkAuthResource.isNotEmpty()) {
+                    pi.checkAuth(konf.checkAuthResource)
+                    pingAuth = true
+                }
+                target = pi
+            }
             is KfTarget.BTPNEO -> target = BTPNEO(konf)
             is KfTarget.BTPCF  -> target = BTPCF(konf)
             is KfTarget.CPINEO -> target = CPINEO(konf)
         }
         Server.targets[target.getSid()] = target
-        println("\tзагружен ${konf.sid}(${konf.getKind()})")
+        if (pingAuth)
+            println("\tзагружен ${konf.sid}(${konf.getKind()}), с проверкой доступа")
+        else
+            println("\tзагружен ${konf.sid}(${konf.getKind()}), без проверки доступа")
     }
 
-    println("Протяжка продувка на ${kfg.httpServerListenAddress}:${kfg.httpServerListenPort}")
+    println("Протяжка продувка .. Ktor-server готовится к запуску на ${kfg.httpServerListenAddress}:${kfg.httpServerListenPort}")
     KtorServer.server.start(wait = false)
     println("ПОЕХАЛИ!")
     KtorServer.server.start(wait = true)

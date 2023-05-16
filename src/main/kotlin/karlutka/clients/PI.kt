@@ -13,7 +13,10 @@ import karlutka.server.DB
 import karlutka.server.Server
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 import java.net.URL
 import java.net.URLEncoder
 import java.util.*
@@ -31,7 +34,8 @@ class PI(
 
     // список адаптер фреймворков, вида af.sid.host-db
     val afs = mutableListOf<String>()
-//    var state = MPI.State(mutableListOf(), mutableListOf(), mutableListOf())
+
+    //    var state = MPI.State(mutableListOf(), mutableListOf(), mutableListOf())
     val contextuser = "_"                   // пользователь, использующийся в контекстных запросах
 
     init {
@@ -41,13 +45,12 @@ class PI(
             konfig.url, Server.kfg.httpClientRetryOnServerErrors, LogLevel.valueOf(Server.kfg.httpClientLogLevel)
         )
         KtorClient.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
-        fromnum = DB.getPiClientNumber(konfig.sid) {num->
+        fromnum = DB.getPiClientNumber(konfig.sid) { num ->
             // сюда на добавление нового пиая
         }
     }
 
-    suspend fun perfServletListOfComponents(scope: CoroutineScope) =
-        scope.async { KtorClient.taskGet(client, PerfMonitorServlet.uriPerfServlet) }
+    suspend fun perfServletListOfComponents(scope: CoroutineScope) = scope.async { KtorClient.taskGet(client, PerfMonitorServlet.uriPerfServlet) }
 
     suspend fun perfServletListOfComponents(td: Deferred<KtorClient.Task>): List<String> {
         val t = td.await()
@@ -109,13 +112,12 @@ class PI(
     /**
      * Пока смотрим, чтобы ответ был предсказуемым
      */
-    suspend fun checkAuth(resource: String, expected: String) {
+    suspend fun checkAuth(resource: String, expected: String? = null) {
         val resp = client.get(resource)
-        require(resp.status.isSuccess())
+        require(resp.status.isSuccess()) { "Cannot login to ${httpHostPort} path=${resource}: response code ${resp.status}" }
         val resptext = resp.bodyAsText()
-        require(!resptext.contains("logon_ui_resources"),
-            { "PASSWORD incorrect - '${resptext.substring(0, minOf(300, resptext.length))}'" })
-        require(resptext.contains(expected), { resptext })
+        require(!resptext.contains("logon_ui_resources")) { "Cannot login to ${httpHostPort} path=${resource}: PASSWORD incorrect. '$resptext'" }
+        if (expected != null) require(resptext.contains(expected), { resptext })
     }
 
 //    suspend fun amm(filter: AdapterMessageMonitoringVi.AdapterFilter?) {
@@ -138,6 +140,15 @@ class PI(
         throw Exception("HMI POST - ошибка после 10 повторов")
     }
 
+    suspend fun dirHmiCacheRefreshService(mode: String, consumer: String): HttpResponse {
+        // /dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=C&consumer=af.fa0.fake0db
+        val iv = KtorClient.taskGet(client, "/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=$mode&consumer=$consumer")
+        iv.execute()
+        require(iv.resp.contentType()!!.match("text/xml"))
+        val ok = iv.resp.status.isSuccess()
+        return iv.resp
+    }
+
     @Deprecated("подумать об удалении")
     fun hmiServices(sxml: String) {
 //        hmiServices = Hm.hmserializer.decodeFromString<Hm.HmiServices>(sxml).list
@@ -154,9 +165,7 @@ class PI(
     }
 
     private fun findHmiServiceMethod(service: String, method: String, uri: String = "/rep"): HmUsages.HmiService {
-        val s = hmiServices
-            .filter { it.serviceid == service && it.methodid == method && it.url.startsWith(uri) }
-            .sortedBy { it.release }
+        val s = hmiServices.filter { it.serviceid == service && it.methodid == method && it.url.startsWith(uri) }.sortedBy { it.release }
         require(s.isNotEmpty())
         return s.last()
     }
@@ -577,9 +586,7 @@ class PI(
         // Чтение КК
         // serviceId=hmi_channel_xml, method=read_channel_xml, /dir/hmi_channel_xml/int?container=any
         val cc1 = mapOf<String, String>(
-            "readAllData" to "true",
-            "com.sap.xpi.features.channel.ref.cleanup" to "true",
-            "id" to "/BS_ENERGO_D/CC_SOAPSender_Async"
+            "readAllData" to "true", "com.sap.xpi.features.channel.ref.cleanup" to "true", "id" to "/BS_ENERGO_D/CC_SOAPSender_Async"
         )
 
         val rep = HmUsages.HmiRequest(

@@ -77,6 +77,9 @@ object KtorServer {
                     val st = cause.stackTrace.joinToString("\n\t")
                     val s = "ОШИБКА ОБРАБОТКИ ЗАПРОСА ${call.request.httpMethod.value} ${call.request.uri}\n" +
                             "$cause\n\n$st"
+                    System.err.println("${call.request.httpMethod.value} ${call.request.uri}\n$cause\n" +
+                            "\n" +
+                            "$st")
                     call.respondText(s, ContentType.Text.Plain, HttpStatusCode.InternalServerError)
                 }
             }

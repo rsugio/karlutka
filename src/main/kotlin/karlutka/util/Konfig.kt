@@ -47,6 +47,7 @@ sealed class KfTarget {
         override val text: String? = null,
         val url: String,
         val auth: String = "",
+        val checkAuthResource: String = ""
     ) : KfTarget() {
         @Transient
         var basic: KfAuth.Basic? = null //TODO подумать про аутентификацию формой /logon_ui_resources/

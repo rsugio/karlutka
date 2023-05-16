@@ -26,10 +26,18 @@ object KTempFile {
     fun getTempFileXiObj() = Files.createTempFile(tempFolder, "xiobj_", ".xml")
     fun getTempFileTpt() = Files.createTempFile(tempFolder, "tpt_", ".bin")
     fun getTempFileZip() = Files.createTempFile(tempFolder, "zip_", ".zip")
+
+    var cpa = 10000
+    fun getCPAUpdatePath(suffix: String): Path {
+        val p = tempFolder.resolve("CPACache")
+        if (!Files.isDirectory(p)) Files.createDirectory(p)
+        return p.resolve("${cpa++}_$suffix.xml")
+    }
+
     fun getTempFileXI(qos: String, queue: String? = null, messageId: String): Path {
         val xif = tempFolder.resolve("XI")
         if (!Files.isDirectory(xif)) Files.createDirectory(xif)
-        if (queue==null)
+        if (queue == null)
             return xif.resolve("${qos}_$messageId.mime")
         else
             return xif.resolve("${qos}_${queue}_$messageId.mime")
