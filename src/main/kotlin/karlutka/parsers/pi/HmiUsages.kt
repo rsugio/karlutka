@@ -1,27 +1,19 @@
 package karlutka.parsers.pi
 
-import karlutka.util.KtorClient
+import karlutka.util.KtorClient         //TODO убрать нафиг
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import nl.adaptivity.xmlutil.XmlReader
+import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
 
-class HmUsages {
-
-    class ApplCompLevel(
-        val Release: String = "7.0", val SupportPackage: String = "*"
-    ) {
-//        fun attr(n: String = "ClientLevel") =  instance(
-//            n, "com.sap.aii.util.applcomp.ApplCompLevel", HmString(Release).attr("Release"), HmString(SupportPackage).attr("SupportPackage")
-//        )
-
-    }
-
+class HmiUsages {
     @Serializable
     @XmlSerialName("Services", "", "")
-    // Читается по /rep/getregisteredhmimethods/int?container=any
+    // Читается по /rep/getregisteredhmimethods/int?container=any, для /dir надо искать или составлять вручную
     class HmiServices(val list: List<HmiService> = listOf())
 
     @Serializable
@@ -37,6 +29,14 @@ class HmUsages {
         var url: String = ""
         fun applCompLevel(): ApplCompLevel = ApplCompLevel(release, SP)
 //        fun url() = "/rep/$serviceid/int?container=any"
+    }
+
+    class ApplCompLevel(
+        val Release: String = "7.0", val SupportPackage: String = "*",
+    ) {
+//        fun attr(n: String = "ClientLevel") = Hmi.Instance(
+//            n, "com.sap.aii.util.applcomp.ApplCompLevel", HmString(Release).attr("Release"), HmString(SupportPackage).attr("SupportPackage")
+//        )
     }
 
     class HmiMethodInput(val input: Map<String, String?>) {
@@ -135,7 +135,7 @@ class HmUsages {
         val ServerLogicalSystemName: String? = null,
         val ServerApplicationId: String? = null,
         val HmiSpecVersion: String = "1.0",
-        val ControlFlag: Int = 0
+        val ControlFlag: Int = 0,
     ) {
         fun instance(): Hmi.Instance? {
             return null
@@ -158,7 +158,7 @@ class HmUsages {
 //            return Instance("com.sap.aii.util.hmi.core.msg.HmiRequest", a)
         }
 
-        fun encodeToString():String = TODO() //Hm.hmserializer.encodeToString(this.instance())
+        fun encodeToString(): String = TODO() //Hm.hmserializer.encodeToString(this.instance())
     }
 
     class HmiResponse(
@@ -168,7 +168,7 @@ class HmUsages {
         val MethodFault: HmiMethodFault? = null,
         val CoreException: HmiCoreException? = null,
         val ControlFlag: Int = 0,
-        val HmiSpecVersion: String? = null
+        val HmiSpecVersion: String? = null,
     ) {
         fun toQueryResult(task: KtorClient.Task): SimpleQuery.Result {
             TODO()
@@ -202,7 +202,6 @@ class HmUsages {
             }
         }
     }
-
 
 
     // Прикладные сервисы поверх HMI
@@ -281,7 +280,7 @@ class HmUsages {
             @XmlValue(true) val value: String = "",
         )
 
-        fun encodeToString():String = TODO() // Hm.hmserializer.encodeToString(this)
+        fun encodeToString(): String = TODO() // Hm.hmserializer.encodeToString(this)
 
         companion object {
             fun decodeFromString(sxml: String): TestExecutionRequest {
@@ -291,7 +290,7 @@ class HmUsages {
 
             fun create(
                 swcv: PCommon.VC, typeId: String = "MAPPING", //для ММ - XI_TRAFO
-                name: String, namespace: String, testXml: String
+                name: String, namespace: String, testXml: String,
             ): TestExecutionRequest {
                 val params = listOf(
                     Property("TimeSent", ""),
@@ -359,7 +358,7 @@ class HmUsages {
     @Serializable
     @XmlSerialName("message", "", "")
     class TestMessage(
-        val level: String? = "INFO", @Serializable @XmlValue(true) val text2: String? = null
+        val level: String? = "INFO", @Serializable @XmlValue(true) val text2: String? = null,
     )
 
     @Serializable
@@ -416,7 +415,7 @@ class HmUsages {
         @Serializable
         @XmlSerialName("FEATURE", "", "")
         class Feature(
-            @Serializable val FEATUREID: String
+            @Serializable val FEATUREID: String,
         )
 
         @Serializable
@@ -428,7 +427,7 @@ class HmUsages {
         @Serializable
         @XmlSerialName("Role", "", "")
         class Role(
-            @Serializable val RoleID: String
+            @Serializable val RoleID: String,
         )
 
         @Serializable
@@ -462,7 +461,7 @@ class HmUsages {
         )
 
         companion object {
-            fun decodeFromString(sxml: String):DirConfiguration = TODO() //Hm.hmserializer.decodeFromString<DirConfiguration>(sxml)
+            fun decodeFromString(sxml: String): DirConfiguration = TODO() //Hm.hmserializer.decodeFromString<DirConfiguration>(sxml)
 //            fun decodeFromXmlReader(xmlReader: XmlReader) = hmserializer.decodeFromReader<DirConfiguration>(xmlReader)
         }
     }
@@ -472,7 +471,7 @@ class HmUsages {
     class ReadListRequest(
         @XmlElement(true) val type: Type,
     ) {
-        fun encodeToString():String = TODO() // Hm.hmserializer.encodeToString(this)
+        fun encodeToString(): String = TODO() // Hm.hmserializer.encodeToString(this)
     }
 
     @Serializable
@@ -498,4 +497,7 @@ class HmUsages {
 // XI_TRAFO:
 // MAPPING:
 
+    companion object {
+        fun decodeHmiServicesFromReader(r: XmlReader) = XML.Companion.decodeFromReader<HmiServices>(r)
+    }
 }

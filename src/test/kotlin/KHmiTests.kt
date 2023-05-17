@@ -1,7 +1,7 @@
 import KT.Companion.s
 import KT.Companion.x
 import karlutka.parsers.pi.Hmi
-import karlutka.parsers.pi.HmUsages
+import karlutka.parsers.pi.HmiUsages
 import karlutka.parsers.pi.PCommon
 import org.apache.commons.io.output.NullOutputStream
 import kotlin.test.Test
@@ -9,29 +9,29 @@ import kotlin.test.Test
 //TODO переписать эти тесты
 class KHmiTests {
     @Test
-    fun rawhmi() {
-//        val services = Hm.hmserializer.decodeFromString<HmUsages.HmiServices>(s("/pi_HMI/rep_registered.xml")).list
-//        require(services.size > 10)
+    fun parsehmi() {
+        val services = HmiUsages.decodeHmiServicesFromReader(x("/pi_HMI/rep_registered.xml")).list
+        require(services.size > 30)
+
+        var instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/response.xml"))
+        var resp = Hmi.HmiResponse(instance)
+        require(resp.MethodOutputContentType == "text/xml")
+        require(resp.MethodOutputReturn!!.startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"))
+        require(resp.methodOutputTypeId=="com.sap.aii.utilxi.hmi.api.HmiMethodOutput")
+
+        instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/exception.xml"))
+        resp = Hmi.HmiResponse(instance)
+        requireNotNull(resp.CoreException)
+        instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/exception2.xml"))
+        resp = Hmi.HmiResponse(instance)
+        requireNotNull(resp.CoreException)
         /*
-                val inp = HmiMethodInput("ключ", "значение")
-                println(inp)
-                val req = HmiRequest(
-                    "clientId", "requestId", ApplCompLevel(),
-                    HmiMethodInput(mapOf("user_alias" to "aasasa", "body" to null, "VC" to "SWCV")),
-                    "methodId",
-                    "serviceId",
-                    "user"
-                )
-                req.instance()
-                //encodeToString()
 
-                val instResp = Hm.parseInstance(s("/pi_HMI/01resp.xml"))
-                val resp = HmiResponse.from(instResp)
-                require(resp.MethodOutput!!.ContentType == "text/xml")
 
-                val exc = HmiResponse.from(Hm.parseInstance(s("/pi_HMI/exception.xml")))
+
+                val exc = HmiResponse.from(Hm.parseInstance(s("/pi_HMI/.xml")))
                 require(exc.CoreException!!.LocalizedMessage.startsWith("Internal error: Method generic"))
-                Hm.parseResponse(s("/pi_HMI/02exception.xml"))
+                Hm.parseResponse(s("/pi_HMI/exception2.xml"))
 
                 val many = Hm.parseInstance(s("/pi_HMI/03many.xml"))
                 require(many.attribute.isNotEmpty())
@@ -84,35 +84,35 @@ class KHmiTests {
 
     @Test
     fun omtest() {
-        HmUsages.TestExecutionRequest.decodeFromString(s("/pi_HMI/unescaped/testExecutionRequest.xml"))
-        val r3 = HmUsages.TestExecutionResponse.decodeFromString(s("/pi_HMI/omtest_response3.xml"))
+        HmiUsages.TestExecutionRequest.decodeFromString(s("/pi_HMI/unescaped/testExecutionRequest.xml"))
+        val r3 = HmiUsages.TestExecutionResponse.decodeFromString(s("/pi_HMI/omtest_response3.xml"))
         r3.messages!!.message
-        val r4 = HmUsages.TestExecutionResponse.decodeFromString(s("/pi_HMI/omtest_response4.xml"))
+        val r4 = HmiUsages.TestExecutionResponse.decodeFromString(s("/pi_HMI/omtest_response4.xml"))
         r4.exception!!.message.contentString.trim()
     }
 
     @Test
     fun _dirConfiguration() {
-        val conf = HmUsages.DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration.xml"))
+        val conf = HmiUsages.DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration.xml"))
         require(conf.FEATURES.FEATURE.size == 30)
-        val conf2 = HmUsages.DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration2.xml"))
+        val conf2 = HmiUsages.DirConfiguration.decodeFromString(s("/pi_HMI/dir_configuration2.xml"))
         require(conf2.FEATURES.FEATURE.size == 30)
     }
 
     @Test
     fun _read() {
-        val ref = HmUsages.Ref(
+        val ref = HmiUsages.Ref(
             PCommon.VC('S', "3f38b2400b9e11ea9c32fae8ac130d0e", -1),
             PCommon.Key("namespdecl", null, listOf("3f38b2400b9e11ea9c32fae8ac130d0e"))
         )
-        val type = HmUsages.Type(
+        val type = HmiUsages.Type(
             "namespdecl", ref,
             ADD_IFR_PROPERTIES = true,
             STOP_ON_FIRST_ERROR = false,
             RELEASE = "7.0",
             DOCU_LANG = "EN"
         )
-        val list = HmUsages.ReadListRequest(type)
+        val list = HmiUsages.ReadListRequest(type)
         require(list.type.ADD_IFR_PROPERTIES)
         //println(list.encodeToString())
     }
@@ -121,21 +121,21 @@ class KHmiTests {
     fun v2ParseNPrint() {
         var i: Hmi.Instance
         var r: Hmi.HmiRequest
-        i = Hmi.parseInstance(x("/pi_HMI/01req.xml"))
+        i = Hmi.decodeInstanceFromReader(x("/pi_HMI/01req.xml"))
         require(i.attributes.size==14)
         i.write(NullOutputStream.NULL_OUTPUT_STREAM)
         r = i.toHmiRequest()
         require(r.MethodInput!!.size==1)
 
-        i = Hmi.parseInstance(x("/pi_HMI/hmi01req.xml"))
+        i = Hmi.decodeInstanceFromReader(x("/pi_HMI/hmi01req.xml"))
         require(i.attributes.size==2)
         i.write(NullOutputStream.NULL_OUTPUT_STREAM)
 
-        i = Hmi.parseInstance(x("/pi_HMI/03many.xml"))
+        i = Hmi.decodeInstanceFromReader(x("/pi_HMI/03many.xml"))
         require(i.attributes[0].value.size==5)
         i.write(NullOutputStream.NULL_OUTPUT_STREAM)
 
-        i = Hmi.parseInstance(x("/pi_HMI/04many.xml"))
+        i = Hmi.decodeInstanceFromReader(x("/pi_HMI/04many.xml"))
         require(i.attributes.size>10)
         i.write(NullOutputStream.NULL_OUTPUT_STREAM)
         r = i.toHmiRequest()
@@ -144,10 +144,10 @@ class KHmiTests {
 
     @Test
     fun cpaCache() {
-        val i = Hmi.parseInstance(x("/pi_AE/rwb02select.xml"))
+        val i = Hmi.decodeInstanceFromReader(x("/pi_AE/rwb02select.xml"))
 
-        val partyReq = Hmi.parseInstance(x("/pi_AE/hmi02cpaParty_req.xml")).toHmiRequest()
-        val partyResp = partyReq.toResponse("text/plain", "")
+        val partyReq = Hmi.decodeInstanceFromReader(x("/pi_AE/hmi02cpaParty_req.xml")).toHmiRequest()
+        val partyResp = partyReq.copyToResponse("text/plain", "")
         println(partyResp)
         partyResp.toInstance().write(System.out)
         println()
