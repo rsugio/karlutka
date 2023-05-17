@@ -98,13 +98,13 @@ class Hmi {
         }
     }
 
-    class HmiRequest(
+    data class HmiRequest(
         val typeid: String,
         val ClientId: String,
         val RequestId: String,
         val ClientLevel: HmiUsages.ApplCompLevel,
         val methodInputTypeId: String?,
-        val MethodInput: Map<String, String?>?,
+        val MethodInput: Map<String, String?>?,     // что если не все параметры строковые?
         val MethodId: String,
         val ServiceId: String,
         val ClientUser: String? = null,
@@ -116,6 +116,31 @@ class Hmi {
         val HmiSpecVersion: String = "1.0",
         val ControlFlag: String = "0",
     ) {
+        constructor(inst: Instance) : this(
+            inst.typeid,
+            inst.attributes.find { it.name == "ClientId" }!!.value[0].text!!,
+            inst.attributes.find { it.name == "RequestId" }!!.value[0].text!!,
+            HmiUsages.ApplCompLevel(inst.attributes.find { it.name == "ClientLevel" }!!.value[0].instance!!),
+            inst.attributes.find { it.name == "MethodInput" }!!.value[0].instance!!.typeid,
+            // единственный случай что нашёл это Parameters = inst.attributes.find { it.name == "MethodInput" }!!.value[0].instance?.attributes?.get(0)?
+            inst.attributes.find { it.name == "MethodInput" }!!.value[0].instance?.attributes?.get(0)?.value?.associate { v ->
+                Pair(
+                    v.instance?.attributes?.find { it.name == "Key" }?.value?.get(0)?.text!!,
+                    v.instance.attributes.find { it.name == "Value" }?.value?.get(0)?.text!!
+                )
+            } ?: mapOf(),
+            inst.attributes.find { it.name == "MethodId" }!!.value[0].text!!,
+            inst.attributes.find { it.name == "ServiceId" }!!.value[0].text!!,
+            inst.attributes.find { it.name == "ClientUser" }?.value?.get(0)?.text,
+            inst.attributes.find { it.name == "ClientPassword" }?.value?.get(0)?.text,
+            inst.attributes.find { it.name == "ClientLanguage" }?.value?.get(0)?.text ?: "EN",
+            inst.attributes.find { it.name == "RequiresSession" }?.value?.get(0)?.text?.toBooleanStrict() ?: false,
+            inst.attributes.find { it.name == "ServerLogicalSystemName" }?.value?.get(0)?.text,
+            inst.attributes.find { it.name == "ServerApplicationId" }?.value?.get(0)?.text,
+            inst.attributes.find { it.name == "HmiSpecVersion" }?.value?.get(0)?.text ?: "1.0",
+            inst.attributes.find { it.name == "ControlFlag" }?.value?.get(0)?.text ?: "0",
+        )
+
         fun copyToResponse(contentType: String, Return: String): HmiResponse {
             return HmiResponse(
                 typeid.replace("HmiRequest", "HmiResponse"),
@@ -130,7 +155,7 @@ class Hmi {
         }
     }
 
-    class HmiResponse(
+    data class HmiResponse(
         val typeid: String,
         val ClientId: String,
         val RequestId: String,

@@ -25,18 +25,22 @@ class KHmiTests {
         instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/exception2.xml"))
         resp = Hmi.HmiResponse(instance)
         requireNotNull(resp.CoreException)
+
+        instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/request.xml"))   //1 параметр
+        var req = Hmi.HmiRequest(instance)
+        require(req.MethodInput==mapOf("user_alias" to "aasasa"))
+        instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/request4.xml"))
+        req = Hmi.HmiRequest(instance)
+        require(req.MethodInput==mapOf("release" to "7.0", "body" to "", "VC" to "SWC", "SP" to "-1", "UC" to "true"))
+
+
         /*
 
-
-
-                val exc = HmiResponse.from(Hm.parseInstance(s("/pi_HMI/.xml")))
-                require(exc.CoreException!!.LocalizedMessage.startsWith("Internal error: Method generic"))
-                Hm.parseResponse(s("/pi_HMI/exception2.xml"))
 
                 val many = Hm.parseInstance(s("/pi_HMI/03many.xml"))
                 require(many.attribute.isNotEmpty())
 
-                val many4 = Hm.parseInstance(s("/pi_HMI/04many.xml"))
+                val many4 = Hm.parseInstance(s("/pi_HMI/request4.xml"))
                 require(many4.attribute.isNotEmpty())
 
                 val mm1 = Hm.parseResponse(s("/pi_HMI/mmtest_response1.xml"))
@@ -121,7 +125,7 @@ class KHmiTests {
     fun v2ParseNPrint() {
         var i: Hmi.Instance
         var r: Hmi.HmiRequest
-        i = Hmi.decodeInstanceFromReader(x("/pi_HMI/01req.xml"))
+        i = Hmi.decodeInstanceFromReader(x("/pi_HMI/request.xml"))
         require(i.attributes.size==14)
         i.write(NullOutputStream.NULL_OUTPUT_STREAM)
         r = i.toHmiRequest()
@@ -135,7 +139,7 @@ class KHmiTests {
         require(i.attributes[0].value.size==5)
         i.write(NullOutputStream.NULL_OUTPUT_STREAM)
 
-        i = Hmi.decodeInstanceFromReader(x("/pi_HMI/04many.xml"))
+        i = Hmi.decodeInstanceFromReader(x("/pi_HMI/request4.xml"))
         require(i.attributes.size>10)
         i.write(NullOutputStream.NULL_OUTPUT_STREAM)
         r = i.toHmiRequest()

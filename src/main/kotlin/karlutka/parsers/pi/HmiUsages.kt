@@ -34,6 +34,10 @@ class HmiUsages {
     class ApplCompLevel(
         val Release: String = "7.0", val SupportPackage: String = "*",
     ) {
+        constructor(inst: Hmi.Instance) : this(
+            inst.attributes.find { it.name == "Release" }?.value?.get(0)?.text ?: "7.0",
+            inst.attributes.find { it.name == "SupportPackage" }?.value?.get(0)?.text ?: "0",
+        )
 //        fun attr(n: String = "ClientLevel") = Hmi.Instance(
 //            n, "com.sap.aii.util.applcomp.ApplCompLevel", HmString(Release).attr("Release"), HmString(SupportPackage).attr("SupportPackage")
 //        )
