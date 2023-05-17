@@ -1,6 +1,6 @@
 package karlutka.models
 
-import karlutka.parsers.pi.HmUsages
+import karlutka.parsers.pi.HmiUsages
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
@@ -54,7 +54,13 @@ class MPI {
         BO_Query,           // встречалось пока только в ссылках
         BO_Object,          // navi
         BO_Enh,             // navi
-        agent               // navi
+        agent,               // navi
+
+        // Directory
+        Party,
+        Channel,
+        AllInOne,
+        DirectoryView
     }
 
 
@@ -68,7 +74,7 @@ class MPI {
         val swcv: MutableList<Swcv>,
         val namespaces: MutableList<Namespace>,
         val objlist: MutableList<HmiType>,
-        var dirConfiguration: HmUsages.DirConfiguration? = null
+        var dirConfiguration: HmiUsages.DirConfiguration? = null
     )
 
     @Deprecated("рефактор")

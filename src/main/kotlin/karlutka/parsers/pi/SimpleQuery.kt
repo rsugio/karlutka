@@ -94,7 +94,7 @@ class SimpleQuery {
             val rez = mutableListOf<MPI.HmiType>()
             val posTypeMapping = headerInfo.colDef.def.associate { Pair(it.pos, it.type) }
             matrix.r.forEach { row ->
-                lateinit var ref: HmUsages.Ref
+                lateinit var ref: HmiUsages.Ref
                 val att1 = mutableMapOf<String, String>()
                 val att2 = mutableMapOf<String, String>()
                 row.c.forEachIndexed { cx, col ->
@@ -105,10 +105,10 @@ class SimpleQuery {
                         "RA_WORKSPACE_ID" -> {
                             // это namespdecl у которого нет RA_XILINK. Собираем суррогатную ссылку.
                             val swcguid = col.wkID!!.id
-                            ref = HmUsages.Ref(
+                            ref = HmiUsages.Ref(
                                 PCommon.VC('?', null),
                                 PCommon.Key("namespdecl", swcguid),
-                                HmUsages.Ref.VSpec(4, swcguid, false)    //versionid := objectid := swcguid
+                                HmiUsages.Ref.VSpec(4, swcguid, false)    //versionid := objectid := swcguid
                             )
                         }
 
@@ -348,7 +348,7 @@ class SimpleQuery {
     class Qref(
         @Serializable val isMod: Boolean,
         @Serializable val isInUnderL: Boolean,
-        @XmlElement(true) val ref: HmUsages.Ref,
+        @XmlElement(true) val ref: HmiUsages.Ref,
     )
 
     @Serializable
@@ -356,7 +356,7 @@ class SimpleQuery {
     class Nsp(
         val isUL: Boolean,
         @XmlElement(true) @XmlSerialName("key", "", "") val key: PCommon.Key,
-        @XmlElement(true) @XmlSerialName("ref", "", "") val ref: HmUsages.Ref,
+        @XmlElement(true) @XmlSerialName("ref", "", "") val ref: HmiUsages.Ref,
     )
 
     @Serializable
@@ -397,7 +397,7 @@ class SimpleQuery {
     @XmlSerialName("array", "", "")
     class QArray(
         @XmlElement(true) val simple: Simple? = null,
-        @XmlElement(true) val ref: HmUsages.Ref? = null,
+        @XmlElement(true) val ref: HmiUsages.Ref? = null,
     )
 
     @Serializable

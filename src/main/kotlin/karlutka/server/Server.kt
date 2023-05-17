@@ -252,17 +252,17 @@ object Server {
         val s = call.receiveText()
         val q = call.request.queryString()
         println("(262) ${call.request.path()}?$q with plain text $s")
-        val i = Hmi.parseInstance(s)
+        val i = Hmi.decodeInstanceFromString(s)
         val hr = i.toHmiRequest()
         println("${call.request.path()} with service=${hr.ServiceId} methodId=${hr.MethodId} methodInput=${hr.MethodInput}")
 
-        var j: Hmi.HmiResponse = hr.toResponse("text/plain", "")
+        var j: Hmi.HmiResponse = hr.copyToResponse("text/plain", "")
         if (hr.ServiceId == "rwbAdapterAccess" && hr.MethodId == "select") {
             val hitlist = hr.MethodInput!!["hitlist"]!!
             println("\n(270) histlist=$hitlist\n")
             val objid = hr.MethodInput["objid"]
             if (hitlist == "parties")
-                j = hr.toResponse("text/plain", "1\n50455e21531b36fa958fefae3be41689\tP_PARTY\n")
+                j = hr.copyToResponse("text/plain", "1\n50455e21531b36fa958fefae3be41689\tP_PARTY\n")
             else if (hitlist == "party") {
                 val xml = """<cp:Party xmlns:cp="urn:sap-com:xi:xiParty">
 	<cp:PartyObjectId>50455e21531b36fa958fefae3be41689</cp:PartyObjectId>
@@ -273,20 +273,20 @@ object Server {
 		<cp:Schema>XIParty</cp:Schema>
 	</cp:PartyIdentifier>
 </cp:Party>"""
-                j = hr.toResponse(
+                j = hr.copyToResponse(
                     "text/xml",
                     "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) " + xml.encodeBase64()
                 )
             } else if (hitlist == "services" || hitlist == "channels" || hitlist == "admds") {
-                j = hr.toResponse("text/plain", "0")
+                j = hr.copyToResponse("text/plain", "0")
             } else if (hitlist == "cache")
-                j = hr.toResponse(
+                j = hr.copyToResponse(
                     "text/xml",
                     "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPENhY2hlU3RhdGU+PFN0YXRlPlM8L1N0YXRlPjxFcnJvciAvPjxDb25maXJtYXRpb25YTUwgLz48Q2FjaGVVcGRhdGVYTUwgLz48Q29uZmlybWF0aW9uWE1MSW5kaWNhdG9yPmZhbHNlPC9Db25maXJtYXRpb25YTUxJbmRpY2F0b3I+PENhY2hlVXBkYXRlWE1MSW5kaWNhdG9yPmZhbHNlPC9DYWNoZVVwZGF0ZVhNTEluZGljYXRvcj48VGltZXN0YW1wPjE2ODI2Njc4OTM5Njc8L1RpbWVzdGFtcD48YWU+dHJ1ZTwvYWU+PC9DYWNoZVN0YXRlPg=="
                 )
         } else if (hr.MethodId == "InvalidateCache")
-            j = hr.toResponse("text/plain", "R\tU\t\t1682667894485")
-        call.respondOutputStream(ContentType.Text.Xml, HttpStatusCode.OK) { j.toInstance().write(this) }
+            j = hr.copyToResponse("text/plain", "R\tU\t\t1682667894485")
+        call.respondOutputStream(ContentType.Text.Xml, HttpStatusCode.OK) { j.toInstance().encodeToStream(this) }
     }
 
     suspend fun rtc(call: ApplicationCall) {

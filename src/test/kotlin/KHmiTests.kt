@@ -11,8 +11,10 @@ import kotlin.test.Test
 class KHmiTests {
     @Test
     fun parsehmi() {
-        val services = HmiUsages.decodeHmiServicesFromReader(x("/pi_HMI/rep_registered.xml")).list
-        require(services.size == 170)
+        var services = HmiUsages.decodeHmiServicesFromReader(x("/pi_HMI/rep_registered.xml"))
+        require(services.list.size == 170)
+        services = HmiUsages.decodeHmiServicesFromResponse(Hmi.HmiResponse(Hmi.decodeInstanceFromReader(x("/pi_HMI/rep_registered2.xml"))))
+        require(services.list.size == 170)
         require(HmiUsages.decodeHmiServicesFromReader(x("/pi_HMI/rep_supportedmethods.xml")).list.size==160)
 
         var instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/response.xml"))

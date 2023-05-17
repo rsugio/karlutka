@@ -1,7 +1,7 @@
 package karlutka.server
 
 import karlutka.models.MPI
-import karlutka.parsers.pi.HmUsages
+import karlutka.parsers.pi.HmiUsages
 import karlutka.parsers.pi.PCommon
 import karlutka.parsers.pi.SimpleQuery
 import karlutka.parsers.pi.XiObj
@@ -152,10 +152,10 @@ object SPROXY {
             )
         )
 
-        fun toRef(x: XiObj?, withVersion: Boolean): HmUsages.Ref {
+        fun toRef(x: XiObj?, withVersion: Boolean): HmiUsages.Ref {
             val cl = PCommon.ClCxt('A')
-            val vspec: HmUsages.Ref.VSpec? = if (x != null && withVersion)
-                HmUsages.Ref.VSpec(4, x.idInfo.VID!!, false)
+            val vspec: HmiUsages.Ref.VSpec? = if (x != null && withVersion)
+                HmiUsages.Ref.VSpec(4, x.idInfo.VID!!, false)
             else
                 null
             val key = if (x != null)
@@ -164,7 +164,7 @@ object SPROXY {
                 // для 'namespace'
                 PCommon.Key("swc", RA_WORKSPACE_ID, listOf("", "", "", ""))
             }
-            return HmUsages.Ref(PCommon.VC(WS_TYPE, RA_WORKSPACE_ID, -1, CAPTION, cl), key, vspec)
+            return HmiUsages.Ref(PCommon.VC(WS_TYPE, RA_WORKSPACE_ID, -1, CAPTION, cl), key, vspec)
         }
     }
 

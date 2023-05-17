@@ -15,7 +15,8 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.*
 import io.ktor.utils.io.*
 import io.ktor.utils.io.core.*
-import karlutka.parsers.pi.HmUsages
+import karlutka.parsers.pi.Hmi
+import karlutka.parsers.pi.HmiUsages
 import karlutka.serialization.KSoap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -115,12 +116,21 @@ object KtorClient {
             close()
             return s
         }
+        fun isXml(): Boolean {
+            val ct = resp.contentType()!!
+            return ct.match("*/xml")
+        }
 
         fun bodyAsXmlReader(): XmlReader {
-            requireNotNull(resp)
-            requireNotNull(os)
-            // В паре с bodyAsXmlReader() надо вызывать close()
             return PlatformXmlReader(path.reader(resp.charset() ?: Charsets.UTF_8))
+        }
+
+//        fun bodyAsHmiInstance(): Hmi.Instance {
+//            return Hmi.decodeInstanceFromReader(PlatformXmlReader(path.reader(resp.charset() ?: Charsets.UTF_8)))
+//        }
+
+        fun bodyAsHmiResponse(): Hmi.HmiResponse {
+            return Hmi.HmiResponse(Hmi.decodeInstanceFromReader(bodyAsXmlReader()))
         }
 
         fun close() {
@@ -188,7 +198,11 @@ object KtorClient {
         return taskPost(client, soap.uri, soap.composeSOAP(), mapOf("content-type" to "text/xml"))
     }
 
-    suspend fun taskPost(client: HttpClient, uri: String, req: HmUsages.HmiRequest): Task {
+    @Deprecated("old HMI")
+    suspend fun taskPost(client: HttpClient, uri: String, req: HmiUsages.HmiRequest): Task {
         return taskPost(client, uri, req.encodeToString(), mapOf("content-type" to "text/xml"))
+    }
+    suspend fun taskPost(client: HttpClient, uri: String, req: Hmi.HmiRequest): Task {
+        return taskPost(client, uri, req.toInstance().encodeToString(), mapOf("content-type" to "text/xml"))
     }
 }

@@ -1,5 +1,5 @@
 import karlutka.clients.PI
-import karlutka.parsers.pi.HmUsages
+import karlutka.parsers.pi.HmiUsages
 import karlutka.parsers.pi.PCommon
 import karlutka.server.DB
 import karlutka.server.Server
@@ -23,15 +23,28 @@ class KPiTests {
 
         DB.init(Server.kfg.h2connection)
 
-        target = Server.kfg.targets.find { it.sid == "DPI" }!! as KfTarget.PIAF
+        target = Server.kfg.targets.find { it.sid == "DPH" }!! as KfTarget.PIAF
         target.loadAuths(Server.kfpasswds.securityMaterials)
         pi = PI(target)
         runBlocking {
             withContext(Dispatchers.Default) {
                 println(pi.pingNoAuth())
                 pi.checkAuth("/rwb", "Runtime Workbench")
-                pi.hmiGetRegistered(this)
+                val services = pi.hmiGetRegistered(this)
+                require(services.size > 100)
             }
+        }
+    }
+
+    @Test
+    fun nop() {
+    }
+
+    @Test
+    fun cpa() {
+        runBlocking {
+            pi.dirHmiCacheRefreshService("C", "af.fa0.fake0db")
+            pi.dirHmiCacheRefreshService("D", "af.fa0.fake0db")
         }
     }
 
@@ -56,7 +69,7 @@ class KPiTests {
 <Person><Id>Русскiй языкъ прекрасенъ</Id><LastName/><FirstName/><TelephoneNumber/><CountryCode/></Person>
 </ns0:XiPatternMessage1>"""
 
-            val om1 = HmUsages.TestExecutionRequest.create(
+            val om1 = HmiUsages.TestExecutionRequest.create(
                 PCommon.VC('S', "0050568f0aac1ed4a6e56926325e2eb3"),
                 "MAPPING",
                 "XiPatternInterface1ToInterface2",
@@ -66,13 +79,13 @@ class KPiTests {
             val r1 = pi.executeOMtest(om1)
             println(r1.outputXML)
 
-            val om2 = HmUsages.TestExecutionRequest.create(
+            val om2 = HmiUsages.TestExecutionRequest.create(
                 PCommon.VC('L', "9c1353476b6f11ebcedc000000417ca6"), "MAPPING", "OM_Ume", "http://test.com", "<a/>"
             )
             val r2 = pi.executeOMtest(om2)
             println(r2.outputXML)
 
-            val mm1 = HmUsages.TestExecutionRequest.create(
+            val mm1 = HmiUsages.TestExecutionRequest.create(
                 PCommon.VC('L', "9c1353476b6f11ebcedc000000417ca6"), "XI_TRAFO", "MM_Test", "http://test.com", "<a/>"
             )
             val rm1 = pi.executeMMtest(mm1)
@@ -130,8 +143,5 @@ class KPiTests {
         }
     }
 
-    @Test
-    fun nop() {
 
-    }
 }

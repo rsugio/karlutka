@@ -3,6 +3,7 @@ package karlutka.parsers.pi
 import karlutka.util.KtorClient         //TODO убрать нафиг
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
 import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
@@ -14,7 +15,11 @@ class HmiUsages {
     @Serializable
     @XmlSerialName("Services", "", "")
     // Читается по /rep/getregisteredhmimethods/int?container=any, для /dir надо искать или составлять вручную
-    class HmiServices(val list: List<HmiService> = listOf())
+    class HmiServices(
+        val list: List<HmiService> = listOf()
+    ) {
+        constructor(r: Hmi.HmiResponse): this(XML.decodeFromString<HmiServices>(r.MethodOutputReturn!!).list)
+    }
 
     @Serializable
     @XmlSerialName("service", "", "")
@@ -34,10 +39,12 @@ class HmiUsages {
     class ApplCompLevel(
         val Release: String = "7.0", val SupportPackage: String = "*",
     ) {
+        constructor(s: HmiService) : this(s.release, s.SP)
         constructor(inst: Hmi.Instance) : this(
             inst.attributes.find { it.name == "Release" }?.value?.get(0)?.text ?: "7.0",
             inst.attributes.find { it.name == "SupportPackage" }?.value?.get(0)?.text ?: "0",
         )
+
         fun toInstance(): Hmi.Instance {
             return Hmi.Instance(
                 Hmi.typeIdAiiApplCompLevel,
@@ -506,5 +513,6 @@ class HmiUsages {
 
     companion object {
         fun decodeHmiServicesFromReader(r: XmlReader) = XML.Companion.decodeFromReader<HmiServices>(r)
+        fun decodeHmiServicesFromResponse(r: Hmi.HmiResponse) = XML.Companion.decodeFromString<HmiServices>(r.MethodOutputReturn!!)
     }
 }

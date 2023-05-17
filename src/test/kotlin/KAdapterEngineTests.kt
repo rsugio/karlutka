@@ -1,5 +1,7 @@
 import KT.Companion.s
+import KT.Companion.x
 import karlutka.parsers.pi.XIAdapterEngineRegistration
+import karlutka.parsers.pi.XICache
 import kotlin.test.Test
 
 class KAdapterEngineTests {
@@ -13,8 +15,16 @@ class KAdapterEngineTests {
     }
 
     @Test
-    fun compose() {
+    fun cpa() {
+        XICache.decodeFromReader(x("/pi_AE/cpa02.xml"))
+        XICache.decodeFromReader(x("/pi_AE/cpa03.xml"))
+        XICache.decodeFromReader(x("/pi_AE/cpa04.xml"))
+        XICache.decodeFromReader(x("/pi_AE/cpa05.xml"))
+        //XICache.decodeFromReader(x("/pi_AE/ExportedCacheUpdate.xml"))
+    }
 
+    @Test
+    fun compose() {
         //XIAdapterEngineRegistration.Scenario()
     }
 }
