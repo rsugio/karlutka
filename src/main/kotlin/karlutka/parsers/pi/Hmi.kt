@@ -1,8 +1,7 @@
 package karlutka.parsers.pi
 
 import nl.adaptivity.xmlutil.*
-import java.io.OutputStream
-import java.io.StringReader
+import java.io.*
 
 /**
  * Базовый класс работы с HMI. Помимо Instance, Attribute и Value здесь лишь запрос и ответ. Можно добавить фолт.
@@ -15,17 +14,30 @@ class Hmi {
         val typeid: String,
         val attributes: List<Attribute> = listOf(),
     ) {
-        fun write(xw: XmlWriter) {
+        fun encodeToWriter(xw: XmlWriter) {
             xw.startTag(null, "instance", null)
             xw.attribute(null, "typeid", null, typeid)
             attributes.forEach { it.write(xw) }
             xw.endTag(null, "instance", null)
         }
 
-        fun write(os: OutputStream) {
-            val xw = PlatformXmlWriter(os, "UTF-8", false, XmlDeclMode.None)
-            write(xw)
+        fun encodeToStream(os: OutputStream, declMode: XmlDeclMode = XmlDeclMode.None) {
+            val xw = PlatformXmlWriter(os, "UTF-8", false, declMode)
+            encodeToWriter(xw)
             xw.endDocument()
+        }
+
+        fun encodeToWriter(ow: Writer, declMode: XmlDeclMode = XmlDeclMode.None) {
+            val xw = PlatformXmlWriter(ow, false, declMode)
+            encodeToWriter(xw)
+            xw.endDocument()
+        }
+
+        fun encodeToString(declMode: XmlDeclMode = XmlDeclMode.None) : String {
+            val sw = StringWriter()
+            encodeToWriter(sw, declMode)
+            sw.close()
+            return sw.toString()
         }
 
         fun toHmiRequest(): HmiRequest {
@@ -90,7 +102,7 @@ class Hmi {
             xw.attribute(null, "index", null, index.toString())
             xw.attribute(null, "isnull", null, isnull.toString())
             if (instance != null) {
-                instance.write(xw)
+                instance.encodeToWriter(xw)
             } else if (text != null) {
                 xw.text(text)
             }
@@ -98,8 +110,8 @@ class Hmi {
         }
     }
 
-    data class HmiRequest(
-        val typeid: String,
+    class HmiRequest(
+        val typeid: String = typeIdAiiHmiRequest,
         val ClientId: String,
         val RequestId: String,
         val ClientLevel: HmiUsages.ApplCompLevel,
@@ -140,6 +152,33 @@ class Hmi {
             inst.attributes.find { it.name == "HmiSpecVersion" }?.value?.get(0)?.text ?: "1.0",
             inst.attributes.find { it.name == "ControlFlag" }?.value?.get(0)?.text ?: "0",
         )
+
+        fun toInstance(): Instance {
+            val lst = mutableListOf<Attribute>()
+            lst.add(Attribute("ClientId", ClientId))
+            lst.add(Attribute("ClientLanguage", ClientLanguage))
+            lst.add(Attribute("ClientLevel", ClientLevel.toInstance()))
+            lst.add(Attribute("ClientPassword", ClientPassword))
+            lst.add(Attribute("ClientUser", ClientUser))
+            lst.add(Attribute("ControlFlag", ControlFlag))
+            lst.add(Attribute("HmiSpecVersion", HmiSpecVersion))
+            lst.add(Attribute("MethodId", MethodId))
+            if (MethodInput != null) {
+                val lz = MethodInput.map {
+                    Instance(typeIdEntryStringString, listOf(Attribute("Key", it.key), Attribute("Value", it.value)))
+                }.mapIndexed { ix, inst -> Value(ix, false, inst) }.toMutableList()
+                val inst = Instance(typeIdAiiHmiInput, listOf(Attribute(false, null, "Parameters", lz)))
+                lst.add(Attribute("MethodInput", inst))
+            } else {
+                lst.add(Attribute("MethodInput", Value(0, true)))
+            }
+            lst.add(Attribute("RequestId", RequestId))
+            lst.add(Attribute("RequiresSession", RequiresSession.toString()))
+            lst.add(Attribute("ServerApplicationId", ServerApplicationId))          //возможно только для ESR
+            lst.add(Attribute("ServerLogicalSystemName", ServerLogicalSystemName))  //возможно только для ESR
+            lst.add(Attribute("ServiceId", ServiceId))
+            return Instance(typeid, lst)
+        }
 
         fun copyToResponse(contentType: String, Return: String): HmiResponse {
             return HmiResponse(
@@ -212,6 +251,11 @@ class Hmi {
     }
 
     companion object {
+        const val typeIdAiiHmiRequest = "com.sap.aii.util.hmi.core.msg.HmiRequest"
+        const val typeIdAiiHmiInput = "com.sap.aii.util.hmi.api.HmiMethodInput"
+        const val typeIdAiiApplCompLevel = "com.sap.aii.util.applcomp.ApplCompLevel"
+        const val typeIdEntryStringString = "com.sap.aii.util.hmi.core.gdi2.EntryStringString"
+
         fun decodeInstanceFromReader(xr: XmlReader): Instance {
             xr.skipPreamble()
             val ac = xr.attributeCount
@@ -224,9 +268,9 @@ class Hmi {
 
         private fun decodeAttributes(xr: XmlReader): List<Attribute> {
             val lst = mutableListOf<Attribute>()
-            var li: Instance? = null        // latest instance
-            var la: Attribute? = null       // latest attribute
-            var lv: Value? = null           // latest value
+            var li: Instance? = null            // latest instance
+            var la: Attribute? = null           // latest attribute
+            var lv: Value? = null               // latest value
             val lt = mutableListOf<String>()
 
             while (xr.hasNext()) {

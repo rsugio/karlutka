@@ -4,6 +4,7 @@ import karlutka.parsers.pi.Hmi
 import karlutka.parsers.pi.HmiUsages
 import karlutka.parsers.pi.PCommon
 import org.apache.commons.io.output.NullOutputStream
+import java.io.StringWriter
 import kotlin.test.Test
 
 //TODO переписать эти тесты
@@ -11,13 +12,17 @@ class KHmiTests {
     @Test
     fun parsehmi() {
         val services = HmiUsages.decodeHmiServicesFromReader(x("/pi_HMI/rep_registered.xml")).list
-        require(services.size > 30)
+        require(services.size == 170)
+        require(HmiUsages.decodeHmiServicesFromReader(x("/pi_HMI/rep_supportedmethods.xml")).list.size==160)
 
         var instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/response.xml"))
         var resp = Hmi.HmiResponse(instance)
+        val sw = StringWriter()
+        instance.encodeToWriter(sw)
+        sw.close()
         require(resp.MethodOutputContentType == "text/xml")
         require(resp.MethodOutputReturn!!.startsWith("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"))
-        require(resp.methodOutputTypeId=="com.sap.aii.utilxi.hmi.api.HmiMethodOutput")
+        require(resp.methodOutputTypeId == "com.sap.aii.utilxi.hmi.api.HmiMethodOutput")
 
         instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/exception.xml"))
         resp = Hmi.HmiResponse(instance)
@@ -28,37 +33,48 @@ class KHmiTests {
 
         instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/request.xml"))   //1 параметр
         var req = Hmi.HmiRequest(instance)
-        require(req.MethodInput==mapOf("user_alias" to "aasasa"))
+        require(req.MethodInput == mapOf("user_alias" to "aasasa"))
         instance = Hmi.decodeInstanceFromReader(x("/pi_HMI/request4.xml"))
         req = Hmi.HmiRequest(instance)
-        require(req.MethodInput==mapOf("release" to "7.0", "body" to "", "VC" to "SWC", "SP" to "-1", "UC" to "true"))
+        require(req.MethodInput == mapOf("release" to "7.0", "body" to "", "VC" to "SWC", "SP" to "-1", "UC" to "true"))
 
+        req = Hmi.HmiRequest(Hmi.decodeInstanceFromReader(x("/pi_HMI/mmtest_request1.xml")))
+        require(req.MethodInput!!.isNotEmpty() && req.methodInputTypeId!=null)
+        resp = Hmi.HmiResponse(Hmi.decodeInstanceFromReader(x("/pi_HMI/mmtest_response1.xml")))
+        require(resp.MethodOutputReturn!!.isNotBlank())
+
+        req = Hmi.HmiRequest(Hmi.decodeInstanceFromReader(x("/pi_HMI/omtest_request2.xml")))
+        require(req.MethodInput!!.isNotEmpty() && req.methodInputTypeId!=null)
+        resp = Hmi.HmiResponse(Hmi.decodeInstanceFromReader(x("/pi_HMI/omtest_response2.xml")))
+        require(resp.MethodOutputReturn!!.isNotBlank())
 
         /*
+        val om2 = Hm.parseResponse(s("/pi_HMI/omtest_response2.xml"))
+        require(om2.MethodOutput!!.Return.length > 100)
 
+        val x1 = Hm.parseResponse(s("/pi_HMI/rep_gqresp_text.xml"))
+        require(x1.MethodOutput!!.Return.length > 100)
 
-                val many = Hm.parseInstance(s("/pi_HMI/03many.xml"))
-                require(many.attribute.isNotEmpty())
+        val x2 = Hm.parseResponse(s("/pi_HMI/rep_gqresp_wksp.xml"))
+        require(x2.MethodOutput!!.Return.length > 10000)                //длинный ответ
 
-                val many4 = Hm.parseInstance(s("/pi_HMI/request4.xml"))
-                require(many4.attribute.isNotEmpty())
-
-                val mm1 = Hm.parseResponse(s("/pi_HMI/mmtest_response1.xml"))
-                require(mm1.MethodOutput!!.Return.length > 10000) //длинный ответ
-
-                val om2 = Hm.parseResponse(s("/pi_HMI/omtest_response2.xml"))
-                require(om2.MethodOutput!!.Return.length > 100)
-
-                val x1 = Hm.parseResponse(s("/pi_HMI/rep_gqresp_text.xml"))
-                require(x1.MethodOutput!!.Return.length > 100)
-
-                val x2 = Hm.parseResponse(s("/pi_HMI/rep_gqresp_wksp.xml"))
-                require(x2.MethodOutput!!.Return.length > 10000)                //длинный ответ
-
-                val x3 = Hm.parseResponse(s("/pi_HMI/rep_query_1.xml"))
-                require(x3.MethodOutput!!.Return.length > 10000)
-
+        val x3 = Hm.parseResponse(s("/pi_HMI/rep_query_1.xml"))
+        require(x3.MethodOutput!!.Return.length > 10000)
          */
+    }
+
+    @Test
+    fun compose() {
+        val r0 = Hmi.HmiRequest(Hmi.typeIdAiiHmiRequest,
+            "1",
+            "2",
+            HmiUsages.ApplCompLevel("*", "*"),
+            Hmi.typeIdAiiHmiInput,
+            mapOf("release" to "7.5", "body" to ""),
+            "DEFAULT",
+            "getregisteredhmimethods"
+        )
+        r0.toInstance().encodeToString()
     }
 
     @Test
@@ -126,24 +142,24 @@ class KHmiTests {
         var i: Hmi.Instance
         var r: Hmi.HmiRequest
         i = Hmi.decodeInstanceFromReader(x("/pi_HMI/request.xml"))
-        require(i.attributes.size==14)
-        i.write(NullOutputStream.NULL_OUTPUT_STREAM)
+        require(i.attributes.size == 14)
+        i.encodeToStream(NullOutputStream.NULL_OUTPUT_STREAM)
         r = i.toHmiRequest()
-        require(r.MethodInput!!.size==1)
+        require(r.MethodInput!!.size == 1)
 
         i = Hmi.decodeInstanceFromReader(x("/pi_HMI/hmi01req.xml"))
-        require(i.attributes.size==2)
-        i.write(NullOutputStream.NULL_OUTPUT_STREAM)
+        require(i.attributes.size == 2)
+        i.encodeToStream(NullOutputStream.NULL_OUTPUT_STREAM)
 
         i = Hmi.decodeInstanceFromReader(x("/pi_HMI/03many.xml"))
-        require(i.attributes[0].value.size==5)
-        i.write(NullOutputStream.NULL_OUTPUT_STREAM)
+        require(i.attributes[0].value.size == 5)
+        i.encodeToStream(NullOutputStream.NULL_OUTPUT_STREAM)
 
         i = Hmi.decodeInstanceFromReader(x("/pi_HMI/request4.xml"))
-        require(i.attributes.size>10)
-        i.write(NullOutputStream.NULL_OUTPUT_STREAM)
+        require(i.attributes.size > 10)
+        i.encodeToStream(NullOutputStream.NULL_OUTPUT_STREAM)
         r = i.toHmiRequest()
-        require(r.MethodInput!!.size==5)
+        require(r.MethodInput!!.size == 5)
     }
 
     @Test
@@ -153,7 +169,7 @@ class KHmiTests {
         val partyReq = Hmi.decodeInstanceFromReader(x("/pi_AE/hmi02cpaParty_req.xml")).toHmiRequest()
         val partyResp = partyReq.copyToResponse("text/plain", "")
         println(partyResp)
-        partyResp.toInstance().write(System.out)
+        partyResp.toInstance().encodeToStream(System.out)
         println()
 
     }

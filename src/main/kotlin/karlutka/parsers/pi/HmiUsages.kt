@@ -38,9 +38,12 @@ class HmiUsages {
             inst.attributes.find { it.name == "Release" }?.value?.get(0)?.text ?: "7.0",
             inst.attributes.find { it.name == "SupportPackage" }?.value?.get(0)?.text ?: "0",
         )
-//        fun attr(n: String = "ClientLevel") = Hmi.Instance(
-//            n, "com.sap.aii.util.applcomp.ApplCompLevel", HmString(Release).attr("Release"), HmString(SupportPackage).attr("SupportPackage")
-//        )
+        fun toInstance(): Hmi.Instance {
+            return Hmi.Instance(
+                Hmi.typeIdAiiApplCompLevel,
+                listOf(Hmi.Attribute("Release", Release), Hmi.Attribute("SupportPackage", SupportPackage))
+            )
+        }
     }
 
     class HmiMethodInput(val input: Map<String, String?>) {
