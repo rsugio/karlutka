@@ -4,9 +4,11 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dsl.xml.io.CamelXmlRoutesBuilderLoader;
 import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.main.Main;
 import org.apache.camel.model.RoutesDefinition;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.spi.RoutesBuilderLoader;
+import org.apache.camel.support.ResourceHelper;
 import org.apache.camel.support.ResourceSupport;
 import org.junit.jupiter.api.Test;
 
@@ -34,6 +36,7 @@ public class JCamelTest {
     void camel1() throws Exception {
         CamelContext context = new DefaultCamelContext();
         context.addRoutes(new R1());
+
         ProducerTemplate template = context.createProducerTemplate();
         Instant s = Instant.now();
         System.out.println("Started");
@@ -45,15 +48,39 @@ public class JCamelTest {
     }
     @Test
     void camel2() throws Exception {
-        String r2 = "<route>" +
-                "<from uri=\"file:/camel/src\"/>" +
-                "<to uri=\"file:/camel/Прочее\"/>" +
-                "</route>";
-        CamelContext context = new DefaultCamelContext();
-        InputStream is = getClass().getResourceAsStream("/camel/barRoute.xml");
-        assert(is!=null);
-        XmlRoutesBuilderLoader l = new XmlRoutesBuilderLoader();
-        //l.loadRoutesBuilder(getClass().getResource("/camel/barRoute.xml"));
+        String content = "<routes>\n" +
+                "<route>\n" +
+                "    <from uri=\"timer:xml?period=1s\"/>\n" +
+                "    <log message=\"------- Я тут -------\"/>\n" +
+                "</route>\n" +
+                "</routes>";
+        String content2 = "<routes>\n" +
+                "<route>\n" +
+                "    <from uri=\"timer:xml2?period=2s\"/>\n" +
+                "    <log message=\"------- Я там -------\"/>\n" +
+                "</route>\n" +
+                "</routes>";
 
+        CamelContext context = new DefaultCamelContext();
+        Resource resource = ResourceHelper.fromString("in-memory.xml", content);
+        RouteBuilder builder = (RouteBuilder) new XmlRoutesBuilderLoader().loadRoutesBuilder(resource);
+        context.addRoutes(builder);
+        builder.configure();
+        Resource resource2 = ResourceHelper.fromString("in-memory2.xml", content2);
+        RouteBuilder builder2 = (RouteBuilder) new XmlRoutesBuilderLoader().loadRoutesBuilder(resource2);
+        context.addRoutes(builder2);
+        builder2.configure();
+
+        context.start();
+        Thread.sleep(10000L);
+        context.stop();
     }
+
+    @Test
+    void camel3() throws Exception {
+        Main main = new Main();
+        main.configure().withRoutesReloadPattern("*.xml");
+        main.run();
+    }
+
 }

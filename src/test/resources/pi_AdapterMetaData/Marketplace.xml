@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterTypeMetaData version="30">
+  <GuiHandlerClassName />
+  <Type>Marketplace</Type>
+
+  <GuiLabels guid="43d67e90b04a11daaae7ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.TITLE">
+    <Label language="EN">Marketplace Adapter</Label>
+    <Label language="DE">Marketplace-Adapter</Label>
+  </GuiLabels>
+  
+  <Inbound>
+	  <TransportProtocol>
+		<Version>1.1</Version>
+		<Name>HTTP</Name>
+		<GuiLabels guid="43d67e91b04a11daaf60ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.TRANS_PROT_HTTP">
+		  <Label language="EN">HTTP</Label>
+		  <Label language="DE">HTTP</Label>
+		</GuiLabels>
+		<ValidMessageProtocols>
+			<ProtocolIdentifier>
+				<Name>MML</Name>
+				<Version />
+		        </ProtocolIdentifier>
+      		</ValidMessageProtocols>
+
+		<ChannelAttributes>
+		</ChannelAttributes>
+
+		<SecurityAttributes>
+		</SecurityAttributes>
+	  </TransportProtocol>
+
+	  <TransportProtocol>
+		<Version>1.1</Version>
+		<Name>HTTPS</Name>
+		<GuiLabels guid="43d67e92b04a11da8923ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.TRANS_PROT_HTTPS">
+		  <Label language="EN">HTTPS</Label>
+		  <Label language="DE">HTTPS</Label>
+		</GuiLabels>
+		<ValidMessageProtocols>
+			<ProtocolIdentifier>
+				<Name>MML</Name>
+				<Version />
+		        </ProtocolIdentifier>
+      		</ValidMessageProtocols>
+
+		<ChannelAttributes>
+		</ChannelAttributes>
+
+		<SecurityAttributes>
+		</SecurityAttributes>
+	  </TransportProtocol>
+
+	  <TransportProtocol>
+		<Version>3.5</Version>
+		<Name>SonicMQ</Name>
+		<GuiLabels guid="43d67e93b04a11daa313ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.TRANS_PROT_SONIC">
+		  <Label language="EN">JMS Sonic MQ 3.5</Label>
+		  <Label language="DE">JMS Sonic MQ 3.5</Label>
+		</GuiLabels>
+		<ValidMessageProtocols>
+			<ProtocolIdentifier>
+				<Name>MML</Name>
+				<Version />
+		        </ProtocolIdentifier>
+      		</ValidMessageProtocols>
+
+		<ChannelAttributes>
+			
+		</ChannelAttributes>
+
+		<SecurityAttributes>
+		</SecurityAttributes>
+	  </TransportProtocol>
+
+	  <MessageProtocol>
+		<Version />
+		<Name>MML</Name>
+		<GuiLabels guid="43d67e94b04a11daa290ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.MSG_PROT_MML">
+		  <Label language="EN">MML</Label>
+		  <Label language="DE">MML</Label>
+		</GuiLabels>
+
+		<ChannelAttributes>
+		</ChannelAttributes>
+
+		<SecurityAttributes>
+		</SecurityAttributes>
+
+		<ModuleProcessorAttributes>
+		  <ModuleSequence>
+		    <ModuleSequenceItem>
+		      <Name>MarketPlaceAdapterBeanModule</Name>
+		      <Type>local</Type>
+		      <Key>MarketplaceAdapterKey</Key>
+		    </ModuleSequenceItem>
+		  </ModuleSequence>
+
+		  <ModuleConfig>
+		    <ModuleConfigItem>
+		      <Key>MarketplaceAdapterKey</Key>
+		      <Name>Timeout</Name>
+		      <Value>300000</Value>
+		    </ModuleConfigItem>
+		  </ModuleConfig>
+		</ModuleProcessorAttributes>
+
+	  </MessageProtocol>
+
+	  <GlobalChannelAttributes>
+		<AttributeReference>
+		  <ReferenceName>PersistDuration</ReferenceName>
+		</AttributeReference>
+		<AttributeReference>
+		  <ReferenceName>NumberRetries</ReferenceName>
+		</AttributeReference>
+		<AttributeReference>
+		  <ReferenceName>RetryInterval</ReferenceName>
+		</AttributeReference>
+	  </GlobalChannelAttributes>
+  </Inbound>
+
+
+  <Outbound>
+	  <TransportProtocol>
+		<Version>1.1</Version>
+		<Name>HTTP</Name>
+		<GuiLabels guid="43d67e95b04a11daa7c9ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.TRANS_PROT_HTTP">
+		  <Label language="EN">HTTP</Label>
+		  <Label language="DE">HTTP</Label>
+		</GuiLabels>
+		<ValidMessageProtocols>
+			<ProtocolIdentifier>
+				<Name>MML</Name>
+				<Version />
+		        </ProtocolIdentifier>
+      		</ValidMessageProtocols>
+
+		<ChannelAttributes>
+		  <AttributeReference>
+			<ReferenceName>URL</ReferenceName>
+		  </AttributeReference>
+		</ChannelAttributes>
+
+		<SecurityAttributes>
+		  <AttributeReference>
+			<ReferenceName>LogonUser</ReferenceName>
+		  </AttributeReference>
+		  <AttributeReference>
+			<ReferenceName>LogonPassword</ReferenceName>
+		  </AttributeReference>
+		</SecurityAttributes>
+	  </TransportProtocol>
+
+	  <TransportProtocol>
+		<Version>1.1</Version>
+		<Name>HTTPS</Name>
+		<GuiLabels guid="43d67e96b04a11da8226ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.TRANS_PROT_HTTPS">
+		  <Label language="EN">HTTPS</Label>
+		  <Label language="DE">HTTPS</Label>
+		</GuiLabels>
+		<ValidMessageProtocols>
+			<ProtocolIdentifier>
+				<Name>MML</Name>
+				<Version />
+		        </ProtocolIdentifier>
+      		</ValidMessageProtocols>
+
+		<ChannelAttributes>
+		  <AttributeReference>
+			<ReferenceName>URL</ReferenceName>
+		  </AttributeReference>
+		</ChannelAttributes>
+
+		<SecurityAttributes>
+		  <AttributeReference>
+			<ReferenceName>AuthenticationModeHTTPS</ReferenceName>
+		  </AttributeReference>
+		  <AttributeReference>
+			<ReferenceName>CertificateAlias</ReferenceName>
+			  <EditCondition>
+				<AttributeName>AuthenticationModeHTTPS</AttributeName>
+				<AttributeValue>certificate</AttributeValue>
+			  </EditCondition>
+		  </AttributeReference>
+		  <AttributeReference>
+			<ReferenceName>KeystoreView</ReferenceName>
+			  <EditCondition>
+				<AttributeName>AuthenticationModeHTTPS</AttributeName>
+				<AttributeValue>certificate</AttributeValue>
+			  </EditCondition>
+		  </AttributeReference>
+		  <AttributeReference>
+			<ReferenceName>LogonUser</ReferenceName>
+			  <EditCondition>
+				<AttributeName>AuthenticationModeHTTPS</AttributeName>
+				<AttributeValue>user_pass</AttributeValue>
+			  </EditCondition>
+		  </AttributeReference>
+		  <AttributeReference>
+			<ReferenceName>LogonPassword</ReferenceName>
+			  <EditCondition>
+				<AttributeName>AuthenticationModeHTTPS</AttributeName>
+				<AttributeValue>user_pass</AttributeValue>
+			  </EditCondition>
+		  </AttributeReference>
+		</SecurityAttributes>
+	  </TransportProtocol>
+
+	  <TransportProtocol>
+		<Version>3.5</Version>
+		<Name>SonicMQ</Name>
+		<GuiLabels guid="43d67e97b04a11da8d49ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.TRANS_PROT_SONIC">
+		  <Label language="EN">JMS Sonic MQ 3.5</Label>
+		  <Label language="DE">JMS Sonic MQ 3.5</Label>
+		</GuiLabels>
+		<ValidMessageProtocols>
+			<ProtocolIdentifier>
+				<Name>MML</Name>
+				<Version />
+		        </ProtocolIdentifier>
+      		</ValidMessageProtocols>
+
+		<ChannelAttributes>
+		  <AttributeReference>
+			<ReferenceName>JMSOutboundQueue</ReferenceName>
+		  </AttributeReference>
+		</ChannelAttributes>
+
+		<SecurityAttributes>
+		</SecurityAttributes>
+	  </TransportProtocol>
+
+	  <MessageProtocol>
+		<Version />
+		<Name>MML</Name>
+		<GuiLabels guid="43d67e98b04a11dabd99ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.MSG_PROT_MML">
+		  <Label language="EN">MML</Label>
+		  <Label language="DE">MML</Label>
+		</GuiLabels>
+
+		<ChannelAttributes>
+		</ChannelAttributes>
+
+		<SecurityAttributes>
+		</SecurityAttributes>
+
+		<ModuleProcessorAttributes>
+		  <ModuleSequence>
+		    <ModuleSequenceItem>
+		      <Name>MarketPlaceAdapterBeanModule</Name>
+		      <Type>local</Type>
+		      <Key>MarketplaceAdapterKey</Key>
+		    </ModuleSequenceItem>
+		  </ModuleSequence>
+
+		  <ModuleConfig>
+		    <ModuleConfigItem>
+		      <Key>MarketplaceAdapterKey</Key>
+		      <Name>Timeout</Name>
+		      <Value>300000</Value>
+		    </ModuleConfigItem>
+		  </ModuleConfig>
+		</ModuleProcessorAttributes>
+
+	  </MessageProtocol>
+
+	  <GlobalChannelAttributes>
+		<AttributeReference>
+		  <ReferenceName>PersistDuration</ReferenceName>
+		</AttributeReference>
+		<AttributeReference>
+		  <ReferenceName>NumberRetries</ReferenceName>
+		</AttributeReference>
+		<AttributeReference>
+		  <ReferenceName>RetryInterval</ReferenceName>
+		</AttributeReference>
+	  </GlobalChannelAttributes>
+  </Outbound>
+
+
+  <Attribute>
+    <Name>JMSInboundQueue</Name>
+    <Usage>required</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <GuiLabels guid="43d8c880b04a11da9feece230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_JMS_INQUEUE">
+      <Label language="EN">JMS Inbound Queue</Label>
+      <Label language="DE">JMS Eingangs-Queue</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>JMSOutboundQueue</Name>
+    <Usage>required</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <GuiLabels guid="43d8c881b04a11da853ace230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_JMS_OUTQUEUE">
+      <Label language="EN">JMS Outbound Queue</Label>
+      <Label language="DE">JMS Ausgangs-Queue</Label>
+    </GuiLabels>
+  </Attribute>
+  
+  <Attribute>
+    <Name>AuthenticationModeHTTPS</Name>
+    <Usage>required</Usage>
+    <Default>user_pass</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <FixedValue>
+      <value>user_pass</value>
+      <GuiLabels guid="43d8c882b04a11da8c60ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_USERPASS">
+        <Label language="EN">User Name/Password</Label>
+        <Label language="DE">Benutzername/Kennwort</Label>
+      </GuiLabels>
+    </FixedValue>
+    <FixedValue>
+      <value>certificate</value>
+      <GuiLabels guid="43d8c883b04a11da80abce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_CERTLOGON">
+        <Label language="EN">Certificate Logon</Label>
+        <Label language="DE">Zertifikatsanmeldung</Label>
+      </GuiLabels>
+    </FixedValue>
+    <GuiLabels guid="43d8c884b04a11dac23dce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_AUTHMODE">
+      <Label language="EN">Authentication Mode</Label>
+      <Label language="DE">Authentifizierungsart</Label>
+    </GuiLabels>
+  </Attribute>
+
+  
+
+  <Attribute>
+    <Name>CertificateAlias</Name>
+    <Usage>required</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <HelpServiceName>SecStoreHelpServiceKeyAlias</HelpServiceName>
+    <GuiLabels guid="43d8c885b04a11dac207ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_KEYSTORE_ENTRY">
+      <Label language="EN">Keystore Entry</Label>
+      <Label language="DE">Schlüsselspeichereintrag</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>KeystoreView</Name>
+    <Usage>required</Usage>
+    <Default>DEFAULT</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <HelpServiceName>SecStoreHelpServiceKeyView</HelpServiceName>
+    <GuiLabels guid="43d8c886b04a11dab697ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_KEYSTORE_VIEW">
+      <Label language="EN">Keystore View</Label>
+      <Label language="DE">Schlüsselspeicher</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>PersistDuration</Name>
+    <Usage>optional</Usage>
+    <Default>86400000</Default> 
+    <DataType>xsd:timePeriod</DataType>
+    <Length>0</Length>
+    <GuiLabels guid="43d8c887b04a11da8e68ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_PERSIST_DURATION">
+      <Label language="EN">Persist Duration</Label>
+      <Label language="DE">Aufbewahrungszeit</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>NumberRetries</Name>
+    <Usage>optional</Usage>
+    <Default>3</Default>
+    <DataType>xsd:integer</DataType>
+    <Length>0</Length>
+    <GuiLabels guid="43d8c888b04a11dacbbace230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_NUM_RETRIES">
+      <Label language="EN">Number of Retries</Label>
+      <Label language="DE">Anzahl Wiederholungen</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>RetryInterval</Name>
+    <Usage>optional</Usage>
+    <Default>300000</Default> 
+    <DataType>xsd:timePeriod</DataType>
+    <Length>0</Length>
+    <GuiLabels guid="43d8c889b04a11dab0ebce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_RETRY_INTERVAL">
+      <Label language="EN">Retry Interval</Label>
+      <Label language="DE">Wiederholungsintervall</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>Timeout</Name>
+    <Usage>optional</Usage>
+    <Default>300000</Default> 
+    <DataType>xsd:timePeriod</DataType>
+    <Length>0</Length>
+    <GuiLabels guid="43d8c88ab04a11dacc43ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_TIMEOUT">
+      <Label language="EN">Timeout</Label>
+      <Label language="DE">Timeout</Label>
+    </GuiLabels>
+  </Attribute>
+
+
+  <Attribute>
+    <Name>URL</Name>
+    <Usage>required</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <PasswordReference>LogonPassword</PasswordReference>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <GuiLabels guid="43d8c88bb04a11dac847ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_URL">
+      <Label language="EN">URL</Label>
+      <Label language="DE">URL</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>LogonUser</Name>
+    <Usage>required</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <GuiLabels guid="43d8c88cb04a11da969cce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_USERNAME">
+      <Label language="EN">User Name</Label>
+      <Label language="DE">Benutzername</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute isPassword="true">
+    <Name>LogonPassword</Name>
+    <Usage>required</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <GuiLabels guid="43d8c88db04a11da965bce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_MarketplaceAdapterMetadata.ATTR_PASSWORD">
+      <Label language="EN">Password</Label>
+      <Label language="DE">Kennwort</Label>
+    </GuiLabels>
+  </Attribute>
+
+</AdapterTypeMetaData>

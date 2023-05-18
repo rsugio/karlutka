@@ -174,10 +174,19 @@ object Server {
                 call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
             }
             post("/run/value_mapping_cache/{...}") {
-                val qr = call.request.queryString()
-                val etc = call.receiveText()
-                //val formParameters = call.receiveParameters()
-                println("\t(183/run/value_mapping_cache/{...} $qr got $etc")
+                //http://aaaa:80/run/value_mapping_cache/ext?method=invalidateCache&mode=Invalidate&consumer=af.fa0.fake0db&consumer_mode=IR
+                val query = call.request.queryParameters
+                val form = call.receiveParameters()
+                println("\t(180/run/value_mapping_cache/{...} $query got $form")
+                //val modeMethod = form.get("mode")
+                cpacacheInvalidate(form.get("consumer")!!, form.get("consumer_mode")!!, query)
+                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
+            }
+            post("/CPACache/invalidate/{...}") {
+                val query = call.request.queryParameters    //method=InvalidateCache или другой
+                val form = call.receiveParameters()   //[consumer=[af.fa0.fake0db], consumer_mode=[AE]]
+                println("(188)/CPACache/invalidate/{...} query=$query form=$form")
+                cpacacheInvalidate(form.get("consumer")!!, form.get("consumer_mode")!!, query)
                 call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
             }
             post("/AdapterFramework/regtest") {
@@ -189,12 +198,7 @@ object Server {
             post("/AdapterFramework/rwbAdapterAccess/int") {
                 hmi(call)
             }
-            post("/CPACache/invalidate/{...}") {
-                val query = call.request.queryParameters    //method=InvalidateCache или другой
-                val form = call.receiveParameters()   //[consumer=[af.fa0.fake0db], consumer_mode=[AE]]
-                cpacacheInvalidate(form.get("consumer")!!, form.get("consumer_mode")!!, query)
-                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
-            }
+
             route("/rep/{TRATATA}") {
                 //TODO - file
                 //HttpClient.send (RealPO75 ESR)
@@ -345,18 +349,17 @@ object Server {
     }
 
     suspend fun cpacacheInvalidate(consumer: String, mode: String, queryParams: Parameters) {
-        println("(348)/CPACache/invalidate")
         // queryParams == method=InvalidateCache или другой...
         require(mode in listOf("AE", "IR"))
+        val parent = targets["DPH"] as PI
         if (mode=="AE") {
-            val parent = targets["DPH"] as PI
             val resp1 = parent.dirHmiCacheRefreshService("C", consumer)    //changed objects
-            KTempFile.getCPAUpdatePath("C").writeText(resp1.bodyAsText())
             val resp2 = parent.dirHmiCacheRefreshService("D", consumer)    //changed objects
-            KTempFile.getCPAUpdatePath("D").writeText(resp2.bodyAsText())
-        }
-        System.err.println("cpacacheInvalidate with mode: $mode, queryParams: $queryParams")
-        TODO()
+        } else if (mode=="IR") {
+//            val resp1 = parent.dirHmiCacheRefreshService("C", consumer)    //changed objects
+//            val resp2 = parent.dirHmiCacheRefreshService("D", consumer)    //changed objects
+        } else
+            TODO()
     }
 
     suspend fun index(call: ApplicationCall) {

@@ -1,0 +1,2970 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AdapterTypeMetaData version="72">
+   <GuiHandlerClassName/>
+   <Inbound>
+      <TransportProtocol>
+         <Name>HTTP</Name>
+         <Version>1.1</Version>
+         <GuiLabels guid="c886e9c0e7a311d8904ac0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.TRNS_PROT_HTTP_11">
+            <Label language="EN">HTTP 1.1</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>POST</Name>
+               <Version>1.1</Version>
+            </ProtocolIdentifier>
+            <ProtocolIdentifier>
+               <Name>GET</Name>
+               <Version>1.1</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes>
+			</ChannelAttributes>
+      </TransportProtocol>
+      <MessageProtocol>
+         <Name>POST</Name>
+         <Version>1.1</Version>
+         <GuiLabels guid="97531682e7a311d8c10ec0c60a126354">
+            <Label language="EN">POST</Label>
+         </GuiLabels>
+         <ChannelAttributes>
+            <Tab id="tabGeneral">
+               <AttributeGroup>
+                  <Name>requestDetails</Name>
+                  <GuiLabels guid="1554c5f0463111da970bcd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_REQUEST_DETAILS">
+                     <Label language="EN">Request Details</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableFormSource</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mainPayloadFormFieldName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableFormSource</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>enableMultipartSource</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>isKeepAsAttachments</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableMultipartSource</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="tabAdvanced">
+               <AttributeGroup>
+                  <Name>dynamicConfiguration</Name>
+                  <GuiLabels guid="1554c5f0463111da970bcd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_DYNCONFIG">
+                     <Label language="EN">Adapter-Specific Message Properties</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableDynConfig</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>headerFieldSelection</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>urlParamSelection</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>headerFieldSelectionResp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>adapterStatusGroup</Name>
+                  <GuiLabels guid="308f5af4d2d948a0b3ff30938b8481d6" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_ADAPTER_STATUS">
+                     <Label language="EN">Adapter Status</Label>
+                  </GuiLabels>
+                 <AttributeReference>
+                  <ReferenceName>HttpAdapterStatus</ReferenceName>
+               </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>additionalParametersGroup</Name>
+                  <GuiLabels guid="ed57c5a4f02012d8add7eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_ADD_PARAM">
+                     <Label language="EN">Additional Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableAdditionalParameters</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>additionalParametersTable</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableAdditionalParameters</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <MessageProtocol>
+         <Name>GET</Name>
+         <Version>1.1</Version>
+         <GuiLabels guid="97531682e7a311d8c10ec0c60a126359">
+            <Label language="EN">GET</Label>
+         </GuiLabels>
+         <ChannelAttributes>
+            <Tab id="tabGeneral">
+               <AttributeGroup>
+                  <Name>requestDetails</Name>
+                  <GuiLabels guid="1554c5f0463111da970bcd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_REQUEST_DETAILS">
+                     <Label language="EN">Request Details</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>mainPayloadFormFieldName</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="tabAdvanced">
+               <AttributeGroup>
+                  <Name>dynamicConfiguration</Name>
+                  <GuiLabels guid="1554c5f0463111da970bcd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_DYNCONFIG">
+                     <Label language="EN">Adapter-Specific Message Properties</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableDynConfig</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>headerFieldSelection</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>urlParamSelection</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>headerFieldSelectionResp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>adapterStatusGroup</Name>
+                  <GuiLabels guid="ff5e9bd5cd254d9089c5a3a1a8146e7b" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_ADAPTER_STATUS">
+                     <Label language="EN">Adapter Status</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                  <ReferenceName>HttpAdapterStatus</ReferenceName>
+               </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>additionalParametersGroup</Name>
+                  <GuiLabels guid="ed57c5a4f02012d8add7eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_ADD_PARAM">
+                     <Label language="EN">Additional Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableAdditionalParameters</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>additionalParametersTable</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableAdditionalParameters</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+   </Inbound>
+   <Outbound>
+      <TransportProtocol>
+         <Name>HTTP</Name>
+         <Version>1.1</Version>
+         <GuiLabels guid="97531680e7a311d880c9c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.TRNS_PROT_HTTP_11">
+            <Label language="EN">HTTP 1.1</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>POST</Name>
+               <Version>1.1</Version>
+            </ProtocolIdentifier>
+            <ProtocolIdentifier>
+               <Name>GET</Name>
+               <Version>1.1</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes>
+      </ChannelAttributes>
+         <SecurityAttributes>
+      </SecurityAttributes>
+      </TransportProtocol>
+      <MessageProtocol>
+         <Name>POST</Name>
+         <Version>1.1</Version>
+         <GuiLabels guid="97531682e7a311d8c10ec0c60a126354">
+            <Label language="EN">POST</Label>
+         </GuiLabels>
+         <ChannelAttributes>
+            <Tab id="tabGeneral">
+               <AttributeGroup>
+                  <Name>DestinationDetails</Name>
+                  <GuiLabels guid="98f55d80e57e11ddba2f0800200c9a66" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_DEST_DETAILS">
+                     <Label language="EN">Destination Details</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>addressingMode</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>host</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>port</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>path</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>authenticationSettings</Name>
+                  <GuiLabels guid="97531681e7a311d8997bc0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_AUTH_SETT">
+                     <Label language="EN">Security and Authentication</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableSSL</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>enableClientCertificate</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableSSL</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>keystoreView</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableSSL</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>enableClientCertificate</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>keystoreViewEntry</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableSSL</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>enableClientCertificate</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>authenticationMode</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>logonUser</ReferenceName>
+                     <AndCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>authenticationMode</AttributeName>
+                              <AttributeValue>basicSAP</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>authenticationMode</AttributeName>
+                              <AttributeValue>basicNonSAP</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                        <EditCondition>
+                           <AttributeName>addressingMode</AttributeName>
+                           <AttributeValue>url</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>logonPassword</ReferenceName>
+                     <AndCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>authenticationMode</AttributeName>
+                              <AttributeValue>basicSAP</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>authenticationMode</AttributeName>
+                              <AttributeValue>basicNonSAP</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                        <EditCondition>
+                           <AttributeName>addressingMode</AttributeName>
+                           <AttributeValue>url</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>logonLanguage</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>authenticationMode</AttributeName>
+                           <AttributeValue>basicSAP</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>addressingMode</AttributeName>
+                           <AttributeValue>url</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>logonClient</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>authenticationMode</AttributeName>
+                           <AttributeValue>basicSAP</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>addressingMode</AttributeName>
+                           <AttributeValue>url</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>ProxyGroup</Name>
+                  <GuiLabels guid="97531681e7a311d8997bc0c60a126357" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_PROXY">
+                     <Label language="EN">Proxy</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableProxy</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>proxyHost</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>enableProxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>proxyPort</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>enableProxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>proxyUser</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>enableProxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>proxyPassword</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>enableProxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <!-- TODO: supported later
+					&lt;AttributeReference&gt;
+						&lt;ReferenceName&gt;httpDestination&lt;/ReferenceName&gt;
+						&lt;EditCondition&gt;
+							&lt;AttributeName&gt;addressingMode&lt;/AttributeName&gt;
+							&lt;AttributeValue&gt;destination&lt;/AttributeValue&gt;
+						&lt;/EditCondition&gt;
+					&lt;/AttributeReference&gt;
+					-->
+               <AttributeGroup>
+                  <Name>requestDetails</Name>
+                  <GuiLabels guid="1554c5f0463111da970bcd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_REQUEST_DETAILS">
+                     <Label language="EN">Request Details</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableFormSource</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mainPayloadFormFieldName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableFormSource</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>enableMultipartSource</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>isKeepAsAttachments</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableMultipartSource</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <!-- Not needed as Http Destination already supports it
+                        &lt;AttributeReference&gt;
+							&lt;ReferenceName&gt;maskSpecialCharacters&lt;/ReferenceName&gt;
+						&lt;/AttributeReference&gt;
+                        -->
+                  <AttributeReference>
+                     <ReferenceName>enableContentDetails</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>characterEncoding</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableContentDetails</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>contentType</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableContentDetails</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="tabAdvanced">
+               <AttributeGroup>
+                  <Name>headerFields</Name>
+                  <GuiLabels guid="97558780e7a311d88d46c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_STATIC_HDR_FIELDS">
+                     <Label language="EN">Header fields</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>httpHeader</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>attributesToQuery</Name>
+                  <GuiLabels guid="97558781e7a311d8941fc0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_QUERY_PARAMETERS">
+                     <Label language="EN">Query Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>senderPartyToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>senderServiceToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>receiverInterfaceToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>messageGuidToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>qosToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>queueIdToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>enableAdditionalQueryParameters</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>staticAdditionalQueryParameterTable</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableAdditionalQueryParameters</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>dynamicConfiguration</Name>
+                  <GuiLabels guid="1554c5f0463111da970bcd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_DYNCONFIG">
+                     <Label language="EN">Adapter-Specific Message Properties</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableDynConfig</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>headerFieldSelection</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>urlParamSelection</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>headerFieldSelectionResp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>adapterStatusGroup</Name>
+                  <GuiLabels guid="263e09b675724265ad6f97b14804e807" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_ADAPTER_STATUS">
+                     <Label language="EN">Adapter Status</Label>
+                  </GuiLabels>
+                 <AttributeReference>
+                  <ReferenceName>HttpAdapterStatus</ReferenceName>
+               </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>additionalParametersGroup</Name>
+                  <GuiLabels guid="ed57c5a4f02012d8add7eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_ADD_PARAM">
+                     <Label language="EN">Additional Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableAdditionalParameters</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>additionalParametersTable</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableAdditionalParameters</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>sap.com/com.sap.aii.adapter.http/HttpAdapterBean</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <MessageProtocol>
+         <Name>GET</Name>
+         <Version>1.1</Version>
+         <GuiLabels guid="97531682e7a311d8c10ec0c60a126354">
+            <Label language="EN">GET</Label>
+         </GuiLabels>
+         <ChannelAttributes>
+            <Tab id="tabGeneral">
+               <AttributeGroup>
+                  <Name>DestinationDetails</Name>
+                  <GuiLabels guid="98f55d80e57e11ddba2f0800200c9a66" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_DEST_DETAILS">
+                     <Label language="EN">Destination Details</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>addressingMode</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>host</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>port</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>path</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>authenticationSettings</Name>
+                  <GuiLabels guid="97531681e7a311d8997bc0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_AUTH_SETT">
+                     <Label language="EN">Security and Authentication</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableSSL</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>enableClientCertificate</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableSSL</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>keystoreView</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableSSL</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>enableClientCertificate</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>keystoreViewEntry</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableSSL</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>enableClientCertificate</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>authenticationMode</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>logonUser</ReferenceName>
+                     <AndCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>authenticationMode</AttributeName>
+                              <AttributeValue>basicSAP</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>authenticationMode</AttributeName>
+                              <AttributeValue>basicNonSAP</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                        <EditCondition>
+                           <AttributeName>addressingMode</AttributeName>
+                           <AttributeValue>url</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>logonPassword</ReferenceName>
+                     <AndCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>authenticationMode</AttributeName>
+                              <AttributeValue>basicSAP</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>authenticationMode</AttributeName>
+                              <AttributeValue>basicNonSAP</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                        <EditCondition>
+                           <AttributeName>addressingMode</AttributeName>
+                           <AttributeValue>url</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>logonLanguage</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>authenticationMode</AttributeName>
+                           <AttributeValue>basicSAP</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>addressingMode</AttributeName>
+                           <AttributeValue>url</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>logonClient</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>authenticationMode</AttributeName>
+                           <AttributeValue>basicSAP</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>addressingMode</AttributeName>
+                           <AttributeValue>url</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>ProxyGroup</Name>
+                  <GuiLabels guid="97531681e7a311d8997bc0c60a126357" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_PROXY">
+                     <Label language="EN">Proxy</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableProxy</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>proxyHost</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>enableProxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>proxyPort</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>enableProxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>proxyUser</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>enableProxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>proxyPassword</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>addressingMode</AttributeName>
+                        <AttributeValue>url</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>enableProxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <!-- TODO: supported later
+					&lt;AttributeReference&gt;
+						&lt;ReferenceName&gt;httpDestination&lt;/ReferenceName&gt;
+						&lt;EditCondition&gt;
+							&lt;AttributeName&gt;addressingMode&lt;/AttributeName&gt;
+							&lt;AttributeValue&gt;destination&lt;/AttributeValue&gt;
+						&lt;/EditCondition&gt;
+					&lt;/AttributeReference&gt;
+					-->
+               <AttributeGroup>
+                  <Name>requestDetails</Name>
+                  <GuiLabels guid="1554c5f0463111da970bcd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_REQUEST_DETAILS">
+                     <Label language="EN">Request Details</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>mainPayloadFormFieldName</ReferenceName>
+                  </AttributeReference>
+                  <!-- Not needed as Http Destination already supports it
+                        &lt;AttributeReference&gt;
+							&lt;ReferenceName&gt;maskSpecialCharacters&lt;/ReferenceName&gt;
+						&lt;/AttributeReference&gt;
+                        -->
+               </AttributeGroup>
+            </Tab>
+            <Tab id="tabAdvanced">
+               <AttributeGroup>
+                  <Name>headerFields</Name>
+                  <GuiLabels guid="97558780e7a311d88d46c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_STATIC_HDR_FIELDS">
+                     <Label language="EN">Header fields</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>httpHeader</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>attributesToQuery</Name>
+                  <GuiLabels guid="97558781e7a311d8941fc0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_QUERY_PARAMETERS">
+                     <Label language="EN">Query Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>senderPartyToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>senderServiceToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>receiverInterfaceToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>messageGuidToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>qosToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>queueIdToQuery</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>enableAdditionalQueryParameters</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>staticAdditionalQueryParameterTable</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableAdditionalQueryParameters</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>dynamicConfiguration</Name>
+                  <GuiLabels guid="1554c5f0463111da970bcd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_DYNCONFIG">
+                     <Label language="EN">Adapter-Specific Message Properties</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableDynConfig</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>headerFieldSelection</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthHeaderField</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>urlParamSelection</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthURLParam</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>urlParamSelection</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>headerFieldSelectionResp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfig</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>firstHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>secondHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>thirdHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fourthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>fifthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sixthHeaderFieldResp</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfig</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>headerFieldSelectionResp</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>adapterStatusGroup</Name>
+                  <GuiLabels guid="8daeaf751c6446caa16bd048d7a95a67" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_ADAPTER_STATUS">
+                     <Label language="EN">Adapter Status</Label>
+                  </GuiLabels>
+                 <AttributeReference>
+                  <ReferenceName>HttpAdapterStatus</ReferenceName>
+               </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>additionalParametersGroup</Name>
+                  <GuiLabels guid="ed57c5a4f02012d8add7eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_GRP_ADD_PARAM">
+                     <Label language="EN">Additional Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableAdditionalParameters</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>additionalParametersTable</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableAdditionalParameters</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>sap.com/com.sap.aii.adapter.http/HttpAdapterBean</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <GlobalChannelAttributes/>
+   </Outbound>
+   <TabDefinition id="tabGeneral">
+      <GuiLabels resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.TAB_GENERAL">
+         <Label language="EN">General</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="tabAdvanced">
+      <GuiLabels resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.TAB_ADVANCED">
+         <Label language="EN">Advanced</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <Attribute>
+      <Name>enableFormSource</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="156567d7463111da86b2cd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ENABLE_FORM_CONFIGURATION">
+         <Label language="EN">Set Form</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mainPayloadFormFieldName</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="97558786e7a311d88d02c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_MAIN_PAYLOAD_FIELD">
+         <Label language="EN">Main Payload Parameter Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableMultipartSource</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="156567d7463111da86b2cd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ENABLE_MULTIPART_CONFIGURATION">
+         <Label language="EN">Set Multipart</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>isKeepAsAttachments</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="156567d7463111da86b2cd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_IS_KEEP_ATTACHMENTS">
+         <Label language="EN">Keep Attachments</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>addressingMode</Name>
+      <Usage>required</Usage>
+      <Default>url</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>url</value>
+         <GuiLabels guid="97558783e7a311d88343c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ADDR_MODE_URL">
+            <Label language="EN">URL address</Label>
+         </GuiLabels>
+      </FixedValue>
+      <!-- TODO: supported later.
+                          &lt;FixedValue&gt;
+                             &lt;value&gt;destination&lt;/value&gt;
+                             &lt;GuiLabels guid=&quot;97558784e7a311d885aec0c60a126354&quot; resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_HTTPAdapterMetadata.ATTR_ADDR_MODE_DEST&quot;&gt;
+                                &lt;Label language=&quot;EN&quot;&gt;HTTP destination&lt;/Label&gt;
+                             &lt;/GuiLabels&gt;
+                          &lt;/FixedValue&gt;
+                          -->
+      <GuiLabels guid="97558785e7a311d8c78ec0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ADDR_MODE">
+         <Label language="EN">Addressing mode</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>host</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <PasswordReference>logonPassword</PasswordReference>
+      <PasswordReference>proxyPassword</PasswordReference>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="97558786e7a311d88d02c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_HOST">
+         <Label language="EN">Target Host</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>port</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <PasswordReference>logonPassword</PasswordReference>
+      <PasswordReference>proxyPassword</PasswordReference>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="9757f880e7a311d89dd3c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_PORT">
+         <Label language="EN">Target Port</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>path</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <PasswordReference>logonPassword</PasswordReference>
+      <PasswordReference>proxyPassword</PasswordReference>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="9757f881e7a311d8a6b8c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_PATH">
+         <Label language="EN">Path</Label>
+      </GuiLabels>
+   </Attribute>
+   <!-- TODO: will be supported later.
+             &lt;Attribute&gt;
+                &lt;Name&gt;httpDestination&lt;/Name&gt;
+                &lt;Usage&gt;required&lt;/Usage&gt;
+                &lt;Default /&gt;
+                &lt;DataType&gt;xsd:string&lt;/DataType&gt;
+                &lt;Length&gt;32&lt;/Length&gt;
+                &lt;Flag&gt;nonTransportable&lt;/Flag&gt;
+                &lt;GuiLabels guid=&quot;9757f882e7a311d8c31ac0c60a126354&quot; resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_HTTPAdapterMetadata.ATTR_HTTP_DEST&quot;&gt;
+                   &lt;Label language=&quot;EN&quot;&gt;HTTP destination&lt;/Label&gt;
+                &lt;/GuiLabels&gt;
+             &lt;/Attribute&gt;
+             -->
+   <Attribute>
+      <Name>authenticationMode</Name>
+      <Usage>required</Usage>
+      <Default>anonymous</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>basicSAP</value>
+         <GuiLabels guid="9757f883e7a311d8a9b8c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_AUTH_MODE_BAS_SAP">
+            <Label language="EN">Use logon data for SAP system</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>basicNonSAP</value>
+         <GuiLabels guid="9757f884e7a311d8aeacc0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_AUTH_MODE_BAS_NON_SAP">
+            <Label language="EN">Use logon data for non-SAP system</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>anonymous</value>
+         <GuiLabels guid="9757f885e7a311d8c14ac0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_AUTH_MODE_ANON">
+            <Label language="EN">Anonymous logon</Label>
+         </GuiLabels>
+      </FixedValue>
+      <GuiLabels guid="9757f886e7a311d89b1bc0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_AUTH_MODE">
+         <Label language="EN">User Authentication</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>proxyHost</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="9757f887e7a311d88ee3c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_PRX_HOST">
+         <Label language="EN">HTTP Proxy Host</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>proxyPort</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="9757f888e7a311d8a2e7c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_PRX_PORT">
+         <Label language="EN">HTTP Proxy Port</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableProxy</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="db53d610e54d11ddad8b0800200c9a66" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ENABLE_PROXY">
+         <Label language="EN">Use Proxy</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>proxyUser</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="975a427de7a311d8be67c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_LOGON_USER">
+         <Label language="EN">User Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>proxyPassword</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="975a427ee7a311d8acd8c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_LOGON_PWD">
+         <Label language="EN">User Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>contentType</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="975a4270e7a311d8b729c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_CONT_TYPE">
+         <Label language="EN">Content Type</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>headerTableName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="975a4271e7a311d8cfa5c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_HDR_TAB_NAME">
+         <Label language="EN">Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>headerTableValue</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="975a4272e7a311d88ce0c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_HDR_TAB_VAL">
+         <Label language="EN">Value</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableContentDetails</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="db53d610e54d11ddad8b0800200c8a66" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ENABLE_CONTENT_DETAILS">
+         <Label language="EN">Specify Content Details</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>characterEncoding</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="975a4273e7a311d8acb5c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_XML_ENC">
+         <Label language="EN">Character Encoding</Label>
+      </GuiLabels>
+   </Attribute>
+   <!--
+  &lt;Attribute&gt;
+    &lt;Name&gt;maskSpecialCharacters&lt;/Name&gt;
+    &lt;Usage&gt;required&lt;/Usage&gt;
+    &lt;Default&gt;0&lt;/Default&gt;
+    &lt;DataType&gt;xsd:boolean&lt;/DataType&gt;
+    &lt;Length&gt;1&lt;/Length&gt;
+    &lt;GuiLabels guid=&quot;975a4274e7a311d8cbe7c0c60a126354&quot;
+    resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_MASK_SPEC_CHARS&quot;&gt;
+      &lt;Label language=&quot;EN&quot;&gt;Mask Special Characters (URL Escaping)&lt;/Label&gt;
+    &lt;/GuiLabels&gt;
+  &lt;/Attribute&gt;
+  -->
+   <Attribute>
+      <Name>prolog</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="975a4275e7a311d89873c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_PROLOG">
+         <Label language="EN">Prolog</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>epilog</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="975a4276e7a311d8a736c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_HTTPAdapterMetadata.ATTR_EPILOG">
+         <Label language="EN">Epilog</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>senderPartyToQuery</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>1</Length>
+      <GuiLabels guid="975a4277e7a311d89a82c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_SND_PT_TO_QUERY">
+         <Label language="EN">Sender Party</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>senderServiceToQuery</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>1</Length>
+      <GuiLabels guid="975a4278e7a311d8bd8ac0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_SND_SRV_TO_QUERY">
+         <Label language="EN">Sender Service</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receiverInterfaceToQuery</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>1</Length>
+      <GuiLabels guid="975a4279e7a311d880afc0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_REC_IF_TO_QUERY">
+         <Label language="EN">Receiver Interface</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>messageGuidToQuery</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>1</Length>
+      <GuiLabels guid="975a427ae7a311d8ca61c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_MSG_GUID_TO_QUERY">
+         <Label language="EN">Message ID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>qosToQuery</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>1</Length>
+      <GuiLabels guid="975a427be7a311d892efc0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_QOS_TO_QUERY">
+         <Label language="EN">Quality Of Service</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>queueIdToQuery</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>1</Length>
+      <GuiLabels guid="975a427ce7a311d8c46fc0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_QUEUE_ID_TO_QUERY">
+         <Label language="EN">Queue ID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>logonUser</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="975a427de7a311d8be67c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_LOGON_USER">
+         <Label language="EN">User Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>logonPassword</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="975a427ee7a311d8acd8c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_LOGON_PWD">
+         <Label language="EN">User Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>logonLanguage</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="975a427fe7a311d8b5f1c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_LOGON_LANG">
+         <Label language="EN">Logon language</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>logonClient</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="975a4280e7a311d88734c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_LOGON_CLNT">
+         <Label language="EN">Logon Client</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableAdditionalQueryParameters</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="db53d610e54d11ddad8b0800200c9a66" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ENABLE_ADDN_QUERY_PARAMS">
+         <Label language="EN">Additional Query Parameters</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>staticAdditionalQueryParameterTable</Name>
+      <Usage>optional</Usage>
+      <GuiLabels guid="CC5C140CE7A411DDA480D3DC55D89593" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_STATIC_QUERY_PARAMS">
+         <Label language="EN">Static Query Parameters</Label>
+      </GuiLabels>
+      <AttributeReference>
+         <ReferenceName>queryParamName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>queryParamValue</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>queryParamName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="975a4271e7a311d8cfa5c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_QUERY_PARAM_NAME">
+         <Label language="EN">Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>queryParamValue</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="975a4271e7a311d8cfa5c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_QUERY_PARAM_VALUE">
+         <Label language="EN">Value</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>httpHeader</Name>
+      <Usage>optional</Usage>
+      <AttributeReference>
+         <ReferenceName>headerTableName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>headerTableValue</ReferenceName>
+      </AttributeReference>
+      <GuiLabels guid="975a4281e7a311d88f35c0c60a126354" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_TAB_HTTP_HDR">
+         <Label language="EN">HTTP Header</Label>
+      </GuiLabels>
+   </AttributeTable>
+   <Attribute>
+      <Name>headerFieldSelection</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="ab55ac80578011dac7d5e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_HEADER_FIELD_SEL">
+         <Label language="EN">HTTP Header Fields</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>headerFieldSelectionResp</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="faef7f10810911dbbae9f5780a12cb37" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_HEADER_FIELD_SEL_RES">
+         <Label language="EN">HTTP Header Fields (Synchronous Response)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>firstHeaderField</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab55ac81578011dacf7ce4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIRST_HEADER_FIELD">
+         <Label language="EN">Field 1 (HeaderFieldOne)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>secondHeaderField</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573320578011daad8ee4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SECOND_HEADER_FIELD">
+         <Label language="EN">Field 2 (HeaderFieldTwo)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>thirdHeaderField</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573321578011dab1d0e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_THIRD_HEADER_FIELD">
+         <Label language="EN">Field 3 (HeaderFieldThree)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>fourthHeaderField</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573322578011dab836e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FOURTH_HEADER_FIELD">
+         <Label language="EN">Field 4 (HeaderFieldFour)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>fifthHeaderField</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573323578011da9d49e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIFTH_HEADER_FIELD">
+         <Label language="EN">Field 5 (HeaderFieldFive)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sixthHeaderField</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573324578011dacf0de4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SIXTH_HEADER_FIELD">
+         <Label language="EN">Field 6 (HeaderFieldSix)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>urlParamSelection</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="ab573325578011dab7e5e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_URL_PARAM_SEL">
+         <Label language="EN">URL Parameters</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>firstURLParam</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573326578011da8ae3e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIRST_URL_PARAM">
+         <Label language="EN">Parameter 1 (URLParamOne)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>secondURLParam</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573327578011dab9b9e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SECOND_URL_PARAM">
+         <Label language="EN">Parameter 2 (URLParamTwo)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>thirdURLParam</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573328578011daa82ce4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_THIRD_URL_PARAM">
+         <Label language="EN">Parameter 3 (URLParamThree)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>fourthURLParam</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573329578011dac2efe4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FOURTH_URL_PARAM">
+         <Label language="EN">Parameter 4 (URLParamFour)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>fifthURLParam</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab57332a578011daaf6de4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIFTH_URL_PARAM">
+         <Label language="EN">Parameter 5 (URLParamFive)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sixthURLParam</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab57332b578011da8f78e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SIXTH_URL_PARAM">
+         <Label language="EN">Parameter 6 (URLParamSix)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>headerFieldSelectionRcvr</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="ab55ac80578011dac7d5e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_HEADER_FIELD_SEL">
+         <Label language="EN">HTTP Header Fields</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>urlParamSelectionRcvr</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="ab573325578011dab7e5e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_URL_PARAM_SEL">
+         <Label language="EN">URL Parameters</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>copyURL</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>1</Length>
+      <GuiLabels guid="ab57332d578011dab029e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_COPY_URL">
+         <Label language="EN">URL</Label>
+      </GuiLabels>
+   </Attribute>
+   <!-- TODO: will be supported later.
+             &lt;Attribute&gt;
+                &lt;Name&gt;copyHTTPDest&lt;/Name&gt;
+                &lt;Usage&gt;optional&lt;/Usage&gt;
+                &lt;Default&gt;0&lt;/Default&gt;
+                &lt;DataType&gt;xsd:boolean&lt;/DataType&gt;
+                &lt;Length&gt;1&lt;/Length&gt;
+                &lt;GuiLabels guid=&quot;9757f882e7a311d8c31ac0c60a126354&quot; resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_HTTPAdapterMetadata.ATTR_HTTP_DEST&quot;&gt;
+                   &lt;Label language=&quot;EN&quot;&gt;HTTP destination&lt;/Label&gt;
+                &lt;/GuiLabels&gt;
+             &lt;/Attribute&gt;
+             -->
+   <Attribute>
+      <Name>firstHeaderFieldResp</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab55ac81578011dacf7ce4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIRST_HEADER_FIELD">
+         <Label language="EN">Field 1 (HeaderFieldOne)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>secondHeaderFieldResp</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573320578011daad8ee4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SECOND_HEADER_FIELD">
+         <Label language="EN">Field 2 (HeaderFieldTwo)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>thirdHeaderFieldResp</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573321578011dab1d0e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_THIRD_HEADER_FIELD">
+         <Label language="EN">Field 3 (HeaderFieldThree)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>fourthHeaderFieldResp</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573322578011dab836e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FOURTH_HEADER_FIELD">
+         <Label language="EN">Field 4 (HeaderFieldFour)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>fifthHeaderFieldResp</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573323578011da9d49e4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIFTH_HEADER_FIELD">
+         <Label language="EN">Field 5 (HeaderFieldFive)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sixthHeaderFieldResp</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ab573324578011dacf0de4420a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SIXTH_HEADER_FIELD">
+         <Label language="EN">Field 6 (HeaderFieldSix)</Label>
+      </GuiLabels>
+   </Attribute>
+   <!-- not necessary, IMHO
+  &lt;Attribute&gt;
+    &lt;Name&gt;firstURLParamRcvr&lt;/Name&gt;
+    &lt;Usage&gt;optional&lt;/Usage&gt;
+    &lt;Default /&gt;
+    &lt;DataType&gt;xsd:string&lt;/DataType&gt;
+    &lt;Length&gt;0&lt;/Length&gt;
+    &lt;GuiLabels guid=&quot;ab573326578011da8ae3e4420a12638a&quot;
+    resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIRST_URL_PARAM&quot;&gt;
+
+      &lt;Label language=&quot;EN&quot;&gt;Parameter 1&lt;/Label&gt;
+    &lt;/GuiLabels&gt;
+  &lt;/Attribute&gt;
+  &lt;Attribute&gt;
+    &lt;Name&gt;secondURLParamRcvr&lt;/Name&gt;
+    &lt;Usage&gt;optional&lt;/Usage&gt;
+    &lt;Default /&gt;
+    &lt;DataType&gt;xsd:string&lt;/DataType&gt;
+    &lt;Length&gt;0&lt;/Length&gt;
+    &lt;GuiLabels guid=&quot;ab573327578011dab9b9e4420a12638a&quot;
+    resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SECOND_URL_PARAM&quot;&gt;
+
+      &lt;Label language=&quot;EN&quot;&gt;Parameter 2&lt;/Label&gt;
+    &lt;/GuiLabels&gt;
+  &lt;/Attribute&gt;
+  &lt;Attribute&gt;
+    &lt;Name&gt;thirdURLParamRcvr&lt;/Name&gt;
+    &lt;Usage&gt;optional&lt;/Usage&gt;
+    &lt;Default /&gt;
+    &lt;DataType&gt;xsd:string&lt;/DataType&gt;
+    &lt;Length&gt;0&lt;/Length&gt;
+    &lt;GuiLabels guid=&quot;ab573328578011daa82ce4420a12638a&quot;
+    resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_THIRD_URL_PARAM&quot;&gt;
+
+      &lt;Label language=&quot;EN&quot;&gt;Parameter 3&lt;/Label&gt;
+    &lt;/GuiLabels&gt;
+  &lt;/Attribute&gt;
+  &lt;Attribute&gt;
+    &lt;Name&gt;fourthURLParamRcvr&lt;/Name&gt;
+    &lt;Usage&gt;optional&lt;/Usage&gt;
+    &lt;Default /&gt;
+    &lt;DataType&gt;xsd:string&lt;/DataType&gt;
+    &lt;Length&gt;0&lt;/Length&gt;
+    &lt;GuiLabels guid=&quot;ab573329578011dac2efe4420a12638a&quot;
+    resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FOURTH_URL_PARAM&quot;&gt;
+
+      &lt;Label language=&quot;EN&quot;&gt;Parameter 4&lt;/Label&gt;
+    &lt;/GuiLabels&gt;
+  &lt;/Attribute&gt;
+  &lt;Attribute&gt;
+    &lt;Name&gt;fifthURLParamRcvr&lt;/Name&gt;
+    &lt;Usage&gt;optional&lt;/Usage&gt;
+    &lt;Default /&gt;
+    &lt;DataType&gt;xsd:string&lt;/DataType&gt;
+    &lt;Length&gt;0&lt;/Length&gt;
+    &lt;GuiLabels guid=&quot;ab57332a578011daaf6de4420a12638a&quot;
+    resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIFTH_URL_PARAM&quot;&gt;
+
+      &lt;Label language=&quot;EN&quot;&gt;Parameter 5&lt;/Label&gt;
+    &lt;/GuiLabels&gt;
+  &lt;/Attribute&gt;
+  &lt;Attribute&gt;
+    &lt;Name&gt;sixthURLParamRcvr&lt;/Name&gt;
+    &lt;Usage&gt;optional&lt;/Usage&gt;
+    &lt;Default /&gt;
+    &lt;DataType&gt;xsd:string&lt;/DataType&gt;
+    &lt;Length&gt;0&lt;/Length&gt;
+    &lt;GuiLabels guid=&quot;ab57332b578011da8f78e4420a12638a&quot;
+    resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SIXTH_URL_PARAM&quot;&gt;
+
+      &lt;Label language=&quot;EN&quot;&gt;Parameter 6&lt;/Label&gt;
+    &lt;/GuiLabels&gt;
+  &lt;/Attribute&gt;
+  -->
+   <Attribute>
+      <Name>enableDynConfig</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="156567d7463111da86b2cd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCONFIG_SET_PROPERTIES">
+         <Label language="EN">Set Adapter-Specific Message Properties</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableDynConfigReceiver</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="156567d8463111da80ddcd020a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCONFIG_USE_PROPERTIES">
+         <Label language="EN">Use Adapter-Specific Message Properties</Label>
+      </GuiLabels>
+   </Attribute>
+   <!-- TODO: will be supported later
+  &lt;Attribute&gt;
+    &lt;Name&gt;dynConfigFailOnMissingProperties&lt;/Name&gt;
+    &lt;Usage&gt;optional&lt;/Usage&gt;
+    &lt;Default&gt;1&lt;/Default&gt;
+    &lt;DataType&gt;xsd:boolean&lt;/DataType&gt;
+    &lt;GuiLabels guid=&quot;156567d9463111daa509cd020a126056&quot;
+    resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.AT_DYNCONFIG_FAIL_MISSING_PROPS&quot;&gt;
+      &lt;Label language=&quot;EN&quot;&gt;Fail On Missing Adapter-Specific Message Properties&lt;/Label&gt;
+    &lt;/GuiLabels&gt;
+  &lt;/Attribute&gt;
+  -->
+   <DynamicAttributes>
+      <AttributeReference>
+         <ReferenceName>HeaderFieldOne</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>HeaderFieldTwo</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>HeaderFieldThree</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>HeaderFieldFour</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>HeaderFieldFive</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>HeaderFieldSix</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>URLParamOne</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>URLParamTwo</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>URLParamThree</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>URLParamFour</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>URLParamFive</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>URLParamSix</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>TargetURL</ReferenceName>
+      </AttributeReference>
+      <!-- TODO: will be supported later.
+                          &lt;AttributeReference&gt;
+                             &lt;ReferenceName&gt;HTTPDest&lt;/ReferenceName&gt;
+                          &lt;/AttributeReference&gt;
+                          -->
+   </DynamicAttributes>
+   <Attribute>
+      <Name>HeaderFieldOne</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a205cfc11da9cc3f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIRST_HEADER_FIELD">
+         <Label language="EN">Field 1 (HeaderFieldOne)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>HeaderFieldTwo</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a215cfc11daa881f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SECOND_HEADER_FIELD">
+         <Label language="EN">Field 2 (HeaderFieldTwo)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>HeaderFieldThree</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a225cfc11dab8b4f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_THIRD_HEADER_FIELD">
+         <Label language="EN">Field 3 (HeaderFieldThree)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>HeaderFieldFour</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a235cfc11dab621f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FOURTH_HEADER_FIELD">
+         <Label language="EN">Field 4 (HeaderFieldFour)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>HeaderFieldFive</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a245cfc11dacad6f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIFTH_HEADER_FIELD">
+         <Label language="EN">Field 5 (HeaderFieldFive)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>HeaderFieldSix</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a255cfc11dab607f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SIXTH_HEADER_FIELD">
+         <Label language="EN">Field 6 (HeaderFieldSix)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>URLParamOne</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a265cfc11dab61df1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIRST_URL_PARAM">
+         <Label language="EN">Parameter 1 (URLParamOne)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>URLParamTwo</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a275cfc11da93f6f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SECOND_URL_PARAM">
+         <Label language="EN">Parameter 2 (URLParamTwo)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>URLParamThree</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a285cfc11dab9d0f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_THIRD_URL_PARAM">
+         <Label language="EN">Parameter 3 (URLParamThree)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>URLParamFour</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a295cfc11da853ef1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FOURTH_URL_PARAM">
+         <Label language="EN">Parameter 4 (URLParamFour)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>URLParamFive</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a2a5cfc11da9874f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_FIFTH_URL_PARAM">
+         <Label language="EN">Parameter 5 (URLParamFive)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>URLParamSix</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a2b5cfc11daacdaf1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_SIXTH_URL_PARAM">
+         <Label language="EN">Parameter 6 (URLParamSix)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>TargetURL</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="72a01a2c5cfc11dac596f1430a12638a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_DYNCFG_COPY_URL">
+         <Label language="EN">URL</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableSSL</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="156567d7463111da86b2cd020a126156" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ENABLE_SSL">
+         <Label language="EN">Use SSL</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableClientCertificate</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="156567d7463111db86b2cd020a126156" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ENABLE_CLIENT_CERT">
+         <Label language="EN">Specify Client Certificate</Label>
+      </GuiLabels>
+   </Attribute>
+   <!-- &lt;Attribute&gt;
+    &lt;Name&gt;keystoreView&lt;/Name&gt;
+    &lt;Usage&gt;required&lt;/Usage&gt;
+    &lt;DataType&gt;xsd:string&lt;/DataType&gt;
+    &lt;Length&gt;0&lt;/Length&gt;
+    &lt;GuiLabels guid=&quot;9757f881e7a311d8a6b8d0c60a126354&quot; resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_KEYSTORE_VIEW&quot;&gt;
+      &lt;Label language=&quot;EN&quot;&gt;Keystore View&lt;/Label&gt;
+    &lt;/GuiLabels&gt;
+  &lt;/Attribute&gt;
+-->
+   <Attribute>
+      <Name>keystoreView</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels guid="28894bf2201911dc9d64000d606e71ad" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_KEYSTORE_VIEW">
+         <Label language="EN">Keystore View</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>keystoreViewEntry</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceKeyAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels guid="29894bf2201911dc9d64000d606e71ad" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_KEYSTORE_VIEW_ENTRY">
+         <Label language="EN">Keystore Entry</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>HttpAdapterStatus</Name>
+      <Usage>required</Usage>
+      <Default>active</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="99c1dbb583ab4b6a80e8d545e0f4ec11" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_HTTP_ADAPTER_STATUS">
+         <Label language="EN">Status</Label>
+         <Label language="DE">Status</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>active</value>
+         <GuiLabels guid="bdc148bf39c24d8889aaa9d6f44ec244" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_HTTP_ADAPTER_ACTIVE">
+            <Label language="EN">Active</Label>
+            <Label language="DE">Aktiv</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>inactive</value>
+         <GuiLabels guid="c878e2e88a0a408290c9112f3f28c674" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_HTTP_ADAPTER_INACTIVE">
+            <Label language="EN">Inactive</Label>
+            <Label language="DE">Inaktiv</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>enableAdditionalParameters</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="fc613b90f02011d88eeceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ENABLE_ADDN_PARAMS">
+         <Label language="EN">Set Additional Parameters</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>additionalParametersTable</Name>
+      <Usage>optional</Usage>
+      <GuiLabels guid="dc613b92f02011d893bbeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATT_TAB_ADDN_PARAMS">
+         <Label language="EN">Additional Parameters</Label>
+      </GuiLabels>
+      <AttributeReference>
+         <ReferenceName>additionalParameterName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>additionalParameterValue</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>additionalParameterName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc613b93f02211d8acb3eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ADDN_PARAM_NAME">
+         <Label language="EN">Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>additionalParameterValue</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="ec613b93f02211d8acb3eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_HTTP_AdapterMetadata.ATTR_ADDN_PARAM_VALUE">
+         <Label language="EN">Value</Label>
+      </GuiLabels>
+   </Attribute>
+   <!-- TODO: will be supported later
+             &lt;Attribute&gt;
+                &lt;Name&gt;HTTPDest&lt;/Name&gt;
+                &lt;DataType&gt;xsd:string&lt;/DataType&gt;
+                &lt;GuiLabels guid=&quot;9757f882e7a311d8c31ac0c60a126354&quot; resourceId=&quot;com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_HTTPAdapterMetadata.ATTR_HTTP_DEST&quot;&gt;
+                   &lt;Label language=&quot;EN&quot;&gt;HTTP destination&lt;/Label&gt;
+                &lt;/GuiLabels&gt;
+             &lt;/Attribute&gt;
+             -->
+</AdapterTypeMetaData>

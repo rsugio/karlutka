@@ -65,9 +65,10 @@ dependencies {
     implementation("org.apache.camel:camel-core:$camel_version")
     //implementation("org.apache.camel:camel-http:$camel_version")
     implementation("org.apache.camel:camel-base:$camel_version")
+    implementation("org.apache.camel:camel-main:$camel_version")
     implementation("org.apache.camel:camel-componentdsl:$camel_version")
     implementation("org.apache.camel:camel-xml-io-dsl:$camel_version")
-
+    //compileOnly("org.apache.camel:spi-annotations:$camel_version")
 }
 
 

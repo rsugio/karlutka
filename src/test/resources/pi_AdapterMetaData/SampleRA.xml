@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="71">
+
+  <!-- ********************************************************************** -->
+  <!-- G E N E R A L   S E C T I O N                                          -->
+  <!-- ********************************************************************** -->
+
+  <GuiHandlerClassName />
+
+  <!-- Adapter type definition -->
+  <Type>Sample</Type>
+  <GuiLabels>
+    <Label language="EN">JCA Sample Adapter</Label>
+  </GuiLabels>
+
+  <!-- Adapter Specific Message Attributes Attribute Declaration (used e.g. in XI Routing) -->
+  <DynamicAttributes>
+    <AttributeReference>
+      <ReferenceName>JCAChannelID</ReferenceName>
+    </AttributeReference>
+  </DynamicAttributes>
+
+  <!-- ********************************************************************** -->
+  <!-- R E C E I V E R  C H A N N E L   S E C T I O N                         -->
+  <!-- ********************************************************************** -->
+
+  <Outbound>
+
+    <!-- Transport protocol settings -->
+
+    <TransportProtocol>
+      <Name>File</Name>
+      <!-- Note: If you increase the version number below then transport protocol data of
+           older channels cannot read anymore. I.e. You have to provide the old and new
+           version to be compatible- -->
+      <Version>7.1.0</Version>
+      <GuiLabels>
+        <Label language="EN">File System</Label>
+      </GuiLabels>
+      <ValidMessageProtocols>
+        <ProtocolIdentifier>
+          <Name>JCA10</Name>
+          <Version>7.1.0</Version>
+        </ProtocolIdentifier>
+      </ValidMessageProtocols>
+
+      <ChannelAttributes>
+        <AttributeGroup>
+          <Name>outboundParameters</Name>
+          <GuiLabels>
+            <Label language="EN">File System Access Parameters</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>fileOutDir</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>fileOutPrefix</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>fileMode</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>faultInterface</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>faultInterfaceNamespace</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>raiseError</ReferenceName>
+          </AttributeReference>
+        </AttributeGroup>
+
+        <AttributeGroup>
+          <Name>sampleParameters</Name>
+          <GuiLabels>
+            <Label language="EN">Sample Channel Parameters (not used, just for demo)</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>sampleString</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>samplePassword</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleBoolean</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleLong</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleInteger</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleTable</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleBinary</ReferenceName>
+          </AttributeReference>
+        </AttributeGroup>
+      </ChannelAttributes>
+
+      <SecurityAttributes>
+        <AttributeGroup>
+          <Name>KeystoreAccess</Name>
+          <GuiLabels>
+            <Label language="EN">Select Certificates from Keystore</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>secViewPrivateKey</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>secAliasPrivateKey</ReferenceName>
+          </AttributeReference>
+        </AttributeGroup>
+      </SecurityAttributes>
+    </TransportProtocol>
+
+    <!-- Message protocol settings -->
+
+    <MessageProtocol>
+      <Name>JCA10</Name>
+      <Version>7.1.0</Version>
+      <GuiLabels>
+        <Label language="EN">JCA 1.0</Label>
+      </GuiLabels>
+      <SecurityAttributes>
+        <AttributeGroup>
+          <Name>sampleParameters</Name>
+          <GuiLabels>
+            <Label language="EN">Sample Security (Agreement) Parameters (not used, just for demo)</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>sampleString</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>samplePassword</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleBoolean</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleLong</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleInteger</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleTable</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleBinary</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleViewPublicKey</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleAliasPublicKey</ReferenceName>
+          </AttributeReference>
+        </AttributeGroup>
+      </SecurityAttributes>
+
+      <ModuleProcessorAttributes>
+        <ModuleSequence>
+          <ModuleSequenceItem>
+            <Name>localejbs/ModuleProcessorExitBean</Name>
+            <Type>local</Type>
+            <Key>exit</Key>
+          </ModuleSequenceItem>
+        </ModuleSequence>
+        <ModuleConfig>
+          <ModuleConfigItem>
+            <Key>exit</Key>
+            <Name>JNDIName</Name>
+            <Value>deployedAdapters/com.sap.aii.adapter.sample.ra/shareable/com.sap.aii.adapter.sample.ra</Value>
+          </ModuleConfigItem>
+          <ModuleConfigItem>
+            <Key>exit</Key>
+            <Name>userName</Name>
+            <Value>Administrator</Value>
+          </ModuleConfigItem>
+          <ModuleConfigItem>
+            <Key>exit</Key>
+            <Name>pwd</Name>
+            <Value>sapsap</Value>
+          </ModuleConfigItem>
+        </ModuleConfig>
+      </ModuleProcessorAttributes>
+    </MessageProtocol>
+
+    <!-- Global settings -->
+
+    <GlobalChannelAttributes>
+
+      <!-- Channel activation via XI directory -->
+
+      <AttributeGroup>
+        <Name>Status</Name>
+        <GuiLabels>
+          <Label language="EN">Adapter Status</Label>
+        </GuiLabels>
+        <AttributeReference>
+          <ReferenceName>adapterStatus</ReferenceName>
+        </AttributeReference>
+      </AttributeGroup>
+
+      <!-- Adapter Specific Message Attributes -->
+
+      <AttributeGroup>
+        <Name>dynamicConfiguration</Name>
+        <GuiLabels>
+          <Label language="EN">Adapter-Specific Message Properties</Label>
+        </GuiLabels>
+        <AttributeReference>
+          <ReferenceName>enableDynConfigReceiver</ReferenceName>
+        </AttributeReference>
+        <AttributeReference>
+          <ReferenceName>dynConfigFailOnMissingProperties</ReferenceName>
+          <EditCondition>
+            <AttributeName>enableDynConfigReceiver</AttributeName>
+            <AttributeValue>1</AttributeValue>
+          </EditCondition>
+        </AttributeReference>
+        <!-- Adapter Specific Message Attributes Headers -->
+        <AttributeReference>
+          <ReferenceName>dynConfigJCAChannelID</ReferenceName>
+          <EditCondition>
+            <AttributeName>enableDynConfigReceiver</AttributeName>
+            <AttributeValue>1</AttributeValue>
+          </EditCondition>
+        </AttributeReference>
+      </AttributeGroup>
+
+    </GlobalChannelAttributes>
+  </Outbound>
+
+  <!-- ********************************************************************** -->
+  <!-- S E N D E R  C H A N N E L   S E C T I O N                             -->
+  <!-- ********************************************************************** -->
+
+  <Inbound>
+ 
+    <!-- Transport protocol settings -->
+
+   <TransportProtocol>
+      <Name>File</Name>
+      <Version>7.1.0</Version>
+      <GuiLabels>
+        <Label language="EN">File System</Label>
+      </GuiLabels>
+      <ValidMessageProtocols>
+        <ProtocolIdentifier>
+          <Name>JCA10</Name>
+          <Version>7.1.0</Version>
+        </ProtocolIdentifier>
+      </ValidMessageProtocols>
+      <ChannelAttributes>
+        <AttributeGroup>
+          <Name>inboundParameters</Name>
+          <GuiLabels>
+            <Label language="EN">File System Access</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>fileInDir</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>fileInName</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>channelAddressMode</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>processMode</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>qos</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>raiseError</ReferenceName>
+          </AttributeReference>
+        </AttributeGroup>
+
+	<!-- Attention: In SP16 the fileProcessParameters group was moved from GlobalChannelAttributes
+             to here to clarify that those parameters belong to the transport protocol.
+             BUT: The filePollInterval and filePollIntervalMsec values of channels that
+             have been created with SP15 or before are lost! I.e. this change is incompatible!
+             Please do not similar incompatible changes if you have released your adapter previously. -->
+
+        <AttributeGroup>
+          <Name>fileProcessParameters</Name>
+          <GuiLabels>
+            <Label language="EN">File Processing</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>filePollInterval</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>filePollIntervalMsecs</ReferenceName>
+          </AttributeReference>
+        </AttributeGroup>
+
+        <AttributeGroup>
+          <Name>sampleParameters</Name>
+          <GuiLabels>
+            <Label language="EN">Sample Channel Parameters (not used, just for demo)</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>sampleString</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>samplePassword</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleBoolean</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleLong</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleInteger</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleTable</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleBinary</ReferenceName>
+          </AttributeReference>
+        </AttributeGroup>
+      </ChannelAttributes>
+      <SecurityAttributes />
+    </TransportProtocol>
+
+    <!-- Message protocol settings -->
+
+    <MessageProtocol>
+      <Name>JCA10</Name>
+      <Version>7.1.0</Version>
+      <GuiLabels>
+        <Label language="EN">JCA 1.0</Label>
+      </GuiLabels>
+      <SecurityAttributes>
+        <AttributeGroup>
+          <Name>sampleParameters</Name>
+          <GuiLabels>
+            <Label language="EN">Sample Security (Agreement) Parameters (not used, just for demo)</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>sampleString</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>samplePassword</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleBoolean</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleLong</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleInteger</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleTable</ReferenceName>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>sampleBinary</ReferenceName>
+          </AttributeReference>
+        </AttributeGroup>
+      </SecurityAttributes>
+      <ModuleProcessorAttributes>
+        <ModuleSequence>
+          <ModuleSequenceItem>
+            <Name>localejbs/CallSapAdapter</Name>
+            <Type>local</Type>
+            <Key>exit</Key>
+          </ModuleSequenceItem>
+        </ModuleSequence>
+      </ModuleProcessorAttributes>
+    </MessageProtocol>
+
+    <!-- Global settings -->
+
+    <GlobalChannelAttributes>
+      <AttributeGroup>
+        <Name>status</Name>
+        <GuiLabels>
+          <Label language="EN">Adapter Status</Label>
+        </GuiLabels>
+        <AttributeReference>
+          <ReferenceName>adapterStatus</ReferenceName>
+        </AttributeReference>
+      </AttributeGroup>
+
+      <!-- Adapter Specific Message Attributes -->
+
+      <AttributeGroup>
+        <Name>dynamicConfiguration</Name>
+        <GuiLabels>
+          <Label language="EN">Adapter-Specific Message Properties</Label>
+        </GuiLabels>
+        <AttributeReference>
+          <ReferenceName>enableDynConfigSender</ReferenceName>
+        </AttributeReference>
+        <AttributeReference>
+          <ReferenceName>dynConfigJCAChannelID</ReferenceName>
+          <EditCondition>
+            <AttributeName>enableDynConfigSender</AttributeName>
+            <AttributeValue>1</AttributeValue>
+          </EditCondition>
+        </AttributeReference>
+      </AttributeGroup>
+    </GlobalChannelAttributes>
+  </Inbound>
+
+  <!-- ********************************************************************** -->
+  <!-- A T T R I B U T E S     S E C T I O N                                  -->
+  <!-- ********************************************************************** -->
+
+  <!-- Used attributes to configure a JCA channel -->
+
+  <Attribute>
+    <Name>adapterStatus</Name>
+    <Usage>optional</Usage>
+    <Default>active</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+        <Label language="EN"></Label>
+    </GuiLabels>
+    <FixedValue>
+      <value>active</value>
+      <GuiLabels>
+        <Label language="EN">Active</Label>
+      </GuiLabels>
+    </FixedValue>
+    <FixedValue>
+      <value>inactive</value>
+      <GuiLabels>
+        <Label language="EN">Inactive</Label>
+      </GuiLabels>
+    </FixedValue>
+  </Attribute>
+
+  <Attribute>
+    <Name>fileInDir</Name>
+    <Flag>nonTransportable</Flag>
+    <Usage>required</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Source Directory</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>fileInName</Name>
+    <Usage>required</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">File name</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>filePollInterval</Name>
+    <Usage>required</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">poll interval (secs)</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>filePollIntervalMsecs</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">poll interval (msecs)</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>processMode</Name>
+    <Usage>optional</Usage>
+    <Default>test</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">File process mode</Label>
+    </GuiLabels>
+    <FixedValue>
+      <value>test</value>
+      <GuiLabels>
+        <Label language="EN">No File change, no duplicate check</Label>
+      </GuiLabels>
+    </FixedValue>
+    <FixedValue>
+      <value>rename</value>
+      <GuiLabels>
+        <Label language="EN">Rename file, duplicate check</Label>
+      </GuiLabels>
+    </FixedValue>
+  </Attribute>
+
+  <Attribute>
+    <Name>fileMode</Name>
+    <Usage>optional</Usage>
+    <Default>new</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">File process mode</Label>
+    </GuiLabels>
+    <FixedValue>
+      <value>new</value>
+      <GuiLabels>
+        <Label language="EN">Create a new file for each message</Label>
+      </GuiLabels>
+    </FixedValue>
+    <FixedValue>
+      <value>replace</value>
+      <GuiLabels>
+        <Label language="EN">Use one file only, replace content with last message</Label>
+      </GuiLabels>
+    </FixedValue>
+  </Attribute>
+
+  <Attribute>
+    <Name>qos</Name>
+    <Usage>required</Usage>
+    <Default>EO</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Message Quality of Service</Label>
+    </GuiLabels>
+    <FixedValue>
+      <value>EO</value>
+      <GuiLabels>
+        <Label language="EN">Exactly Once</Label>
+      </GuiLabels>
+    </FixedValue>
+    <FixedValue>
+      <value>EOIO</value>
+      <GuiLabels>
+        <Label language="EN">Exactly Once In Order</Label>
+      </GuiLabels>
+    </FixedValue>
+    <FixedValue>
+      <value>BE</value>
+      <GuiLabels>
+        <Label language="EN">Best Effort</Label>
+      </GuiLabels>
+    </FixedValue>
+  </Attribute>
+
+  <Attribute>
+    <Name>raiseError</Name>
+    <Usage>optional</Usage>
+    <Default>none</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Raise error condition (demo)</Label>
+    </GuiLabels>
+    <FixedValue>
+      <value>none</value>
+      <GuiLabels>
+        <Label language="EN">Raise no error</Label>
+      </GuiLabels>
+    </FixedValue>
+    <FixedValue>
+      <value>rollback</value>
+      <GuiLabels>
+        <Label language="EN">Raise rollback during message processing</Label>
+      </GuiLabels>
+    </FixedValue>
+  </Attribute>
+
+  <Attribute>
+    <Name>fileOutDir</Name>
+    <Flag>nonTransportable</Flag>
+    <Usage>required</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Destination Directory</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>fileOutPrefix</Name>
+    <Usage>required</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">File Name</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>channelAddressMode</Name>
+    <Usage>optional</Usage>
+    <Default>CPA</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Address mode</Label>
+    </GuiLabels>
+    <FixedValue>
+      <value>CPA</value>
+      <GuiLabels>
+        <Label language="EN">CPA: Read address information from XI agreement (A2A)</Label>
+      </GuiLabels>
+    </FixedValue>
+    <FixedValue>
+      <value>MSG</value>
+      <GuiLabels>
+        <Label language="EN">MSG: Read address information from message (B2B)</Label>
+      </GuiLabels>
+    </FixedValue>
+  </Attribute>
+
+  <Attribute>
+    <Name>faultInterface</Name>
+    <Usage>optional</Usage>
+    <Default>XIAFJCASampleFault</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Fault interface for sync (BE) application errors</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>faultInterfaceNamespace</Name>
+    <Usage>optional</Usage>
+    <Default>http://sap.com/xi/XI/sample/JCA</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Fault interface namespace</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>secViewPrivateKey</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <HelpService>
+      <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+      <HelpServiceQueryAttributes>
+        <HelpServiceQueryAttribute>
+          <Name>Key</Name>
+          <Value>Private</Value>
+        </HelpServiceQueryAttribute>
+        <HelpServiceQueryAttribute>
+          <Name>KeyAlgorithm</Name>
+          <Value>RSA</Value>
+        </HelpServiceQueryAttribute>
+        <HelpServiceQueryAttribute>
+          <Name>X509Extension</Name>
+          <Value>SubjectKeyIdentifier</Value>
+        </HelpServiceQueryAttribute>
+      </HelpServiceQueryAttributes>
+    </HelpService>
+    <GuiLabels>
+      <Label language="EN">View to private Keys</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>secAliasPrivateKey</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <HelpService>
+      <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+      <HelpServiceQueryAttributes>
+        <HelpServiceQueryAttribute>
+          <Name>Key</Name>
+          <Value>Private</Value>
+        </HelpServiceQueryAttribute>
+        <HelpServiceQueryAttribute>
+          <Name>KeyAlgorithm</Name>
+          <Value>RSA</Value>
+        </HelpServiceQueryAttribute>
+        <HelpServiceQueryAttribute>
+          <Name>X509Extension</Name>
+          <Value>SubjectKeyIdentifier</Value>
+        </HelpServiceQueryAttribute>
+      </HelpServiceQueryAttributes>
+    </HelpService>
+    <GuiLabels>
+      <Label language="EN">Alias of private Key</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <!-- Unused attributes just for demo AMD attribute capabilities -->
+
+  <AttributeTable>
+    <Name>sampleTable</Name>
+    <Usage>optional</Usage>
+    <AttributeReference>
+      <ReferenceName>sampleKey</ReferenceName>
+    </AttributeReference>
+    <AttributeReference>
+      <ReferenceName>sampleValue</ReferenceName>
+    </AttributeReference>
+    <GuiLabels>
+      <Label language="EN">Sample only (not used): table</Label>
+    </GuiLabels>
+  </AttributeTable>
+
+  <Attribute>
+    <Name>sampleKey</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Sample key</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>sampleValue</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Sample value</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>sampleString</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Default>This sample value has no function.</Default>
+    <GuiLabels>
+      <Label language="EN">Sample only (not used): String value</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute isPassword="true">
+    <Name>samplePassword</Name>
+    <Flag>nonTransportable</Flag>
+    <Usage>optional</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <GuiLabels>
+      <Label language="EN">Sample only (not used): password value</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>sampleBoolean</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:boolean</DataType>
+    <Default>1</Default>
+    <GuiLabels>
+      <Label language="EN">Sample only (not used): boolean value</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>sampleInteger</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:integer</DataType>
+    <Default>-1</Default>
+    <GuiLabels>
+      <Label language="EN">Sample only (not used): integer value</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>sampleLong</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:long</DataType>
+    <Default>1000</Default>
+    <GuiLabels>
+      <Label language="EN">Sample only (not used): long value</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>sampleBinary</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:binary</DataType>
+    <Default>656667</Default>
+    <GuiLabels>
+      <Label language="EN">Sample only (not used): binary value</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>sampleViewPublicKey</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <HelpService>
+      <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+      <HelpServiceQueryAttributes>
+        <HelpServiceQueryAttribute>
+          <Name>Key</Name>
+          <Value>Public</Value>
+        </HelpServiceQueryAttribute>
+        <HelpServiceQueryAttribute>
+          <Name>KeyAlgorithm</Name>
+          <Value>RSA</Value>
+        </HelpServiceQueryAttribute>
+        <HelpServiceQueryAttribute>
+          <Name>X509Extension</Name>
+          <Value>SubjectKeyIdentifier</Value>
+        </HelpServiceQueryAttribute>
+      </HelpServiceQueryAttributes>
+    </HelpService>
+    <GuiLabels>
+      <Label language="EN">Sample to access public keys</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>sampleAliasPublicKey</Name>
+    <Usage>optional</Usage>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <HelpService>
+      <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+      <HelpServiceQueryAttributes>
+        <HelpServiceQueryAttribute>
+          <Name>Key</Name>
+          <Value>Public</Value>
+        </HelpServiceQueryAttribute>
+        <HelpServiceQueryAttribute>
+          <Name>KeyAlgorithm</Name>
+          <Value>RSA</Value>
+        </HelpServiceQueryAttribute>
+        <HelpServiceQueryAttribute>
+          <Name>X509Extension</Name>
+          <Value>SubjectKeyIdentifier</Value>
+        </HelpServiceQueryAttribute>
+      </HelpServiceQueryAttributes>
+    </HelpService>
+
+    <GuiLabels>
+      <Label language="EN">Sample to access public keys</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <!-- Adapter Specific Message Attributes: Global Controls -->
+
+  <Attribute>
+    <Name>enableDynConfigSender</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:boolean</DataType>
+    <GuiLabels>
+      <Label language="EN">Set Adapter-Specific Message Properties</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>enableDynConfigReceiver</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:boolean</DataType>
+    <GuiLabels>
+      <Label language="EN">Use Adapter-Specific Message Properties</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>dynConfigFailOnMissingProperties</Name>
+    <Usage>optional</Usage>
+    <Default>1</Default>
+    <DataType>xsd:boolean</DataType>
+    <GuiLabels>
+      <Label language="EN">Fail On Missing Adapter-Specific Message Properties</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <!-- Adapter Specific Message Attributes: Switch on/off -->
+
+  <Attribute>
+    <Name>dynConfigJCAChannelID</Name>
+    <Usage>optional</Usage>
+    <Default>0</Default>
+    <DataType>xsd:boolean</DataType>
+    <GuiLabels>
+      <Label language="EN">XI Channel ID</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>JCAChannelID</Name>
+    <DataType>xsd:string</DataType>
+    <GuiLabels>
+      <Label language="EN">JCA Channel ID</Label>
+    </GuiLabels>
+  </Attribute>
+
+</AdapterTypeMetaData>

@@ -1,0 +1,1984 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="30">
+    <GuiHandlerClassName/>
+    <Type>CIDX</Type>
+    <GuiLabels guid="74d38660aae211d8afe3f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_ADAPTER">
+        <Label language="EN">CIDX</Label>
+        <Label language="DE">CIDX</Label>
+    </GuiLabels>
+    <Inbound>
+        <Tab id="source">
+            <TransportProtocol>
+                <Version>1.1</Version>
+                <Name>HTTP</Name>
+                <GuiLabels guid="74d38661aae211d8bd68f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.TRNS_PROT_HTTP_11">
+                    <Label language="EN">HTTP 1.1</Label>
+                    <Label language="DE">HTTP 1.1</Label>
+                </GuiLabels>
+                <ValidMessageProtocols>
+                    <ProtocolIdentifier>
+                        <Name>RNIF</Name>
+                        <Version>1.1</Version>
+                    </ProtocolIdentifier>
+                </ValidMessageProtocols>
+                <ChannelAttributes>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_TRNS_SETT</Name>
+                        <GuiLabels guid="74d38662aae211d8cedef3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_TRNS_SETT">
+                            <Label language="EN">Transport Parameters</Label>
+                            <Label language="DE">Transportparameter</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>httpDestination</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>PersistDuration</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </ChannelAttributes>
+                <SecurityAttributes>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_AUTH_SETT</Name>
+                        <GuiLabels guid="74d38663aae211d8b215f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_AUTH_SETT">
+                            <Label language="EN">Authentication</Label>
+                            <Label language="DE">Authentifizierung</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>isClientAuthenticationRequired</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>logonUser</ReferenceName>
+                            <AndCondition>
+                                <EditCondition>
+                                    <AttributeName>isClientAuthenticationRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>logonPassword</ReferenceName>
+                            <AndCondition>
+                                <EditCondition>
+                                    <AttributeName>isClientAuthenticationRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </SecurityAttributes>
+            </TransportProtocol>
+            <TransportProtocol>
+                <Version>2.0</Version>
+                <Name>HTTPS</Name>
+                <GuiLabels guid="74d5d050aae211d893aef3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.TRNS_PROT_HTTPS_20">
+                    <Label language="EN">HTTPS</Label>
+                    <Label language="DE">HTTPS</Label>
+                </GuiLabels>
+                <ValidMessageProtocols>
+                    <ProtocolIdentifier>
+                        <Name>RNIF</Name>
+                        <Version>1.1</Version>
+                    </ProtocolIdentifier>
+                </ValidMessageProtocols>
+                <ChannelAttributes>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_TRNS_SETT</Name>
+                        <GuiLabels guid="74d5d051aae211d8bb4bf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_TRNS_SETT">
+                            <Label language="EN">Transport Parameters</Label>
+                            <Label language="DE">Transportparameter</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>httpDestination</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>PersistDuration</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </ChannelAttributes>
+                <SecurityAttributes>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_AUTH_SETT</Name>
+                        <GuiLabels guid="74d5d052aae211d89100f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_AUTH_SETT">
+                            <Label language="EN">Authentication</Label>
+                            <Label language="DE">Authentifizierung</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>AuthenticationModeHTTPS</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>SSLKeystoreView</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>AuthenticationModeHTTPS</AttributeName>
+                                        <AttributeValue>certificate</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>SSLCertificateAlias</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>AuthenticationModeHTTPS</AttributeName>
+                                        <AttributeValue>certificate</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>logonUser</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>AuthenticationModeHTTPS</AttributeName>
+                                        <AttributeValue>user_pass</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>logonPassword</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>AuthenticationModeHTTPS</AttributeName>
+                                        <AttributeValue>user_pass</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </SecurityAttributes>
+            </TransportProtocol>
+        </Tab>
+        <MessageProtocol>
+            <Version>1.1</Version>
+            <Name>RNIF</Name>
+            <GuiLabels guid="74d84150aae211d8b6e7f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.MSG_PROT_RNIF_11">
+                <Label language="EN">RNIF 1.1</Label>
+                <Label language="DE">RNIF 1.1</Label>
+            </GuiLabels>
+            <ChannelAttributes>
+                <Tab id="source">
+                    <AttributeGroup>
+                        <Name>SecurityLevel</Name>
+                        <!-- <Name>ATTR_GRP_SECLEVEL_HTTP</Name> -->
+                        <GuiLabels guid="4309be101bc911db9a2edf040a11744f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_SECLEVEL_HTTP">
+                            <Label language="EN">Inbound Security Checks</Label>
+                            <Label language="DE">Sicherheitsprufungen am Eingang</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>securityLevelHTTP</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </Tab>
+                <Tab id="advanced">
+                    <AttributeGroup>
+                        <Name>dynamicConfiguration</Name>
+                        <!-- <Name>ATG_DYNCONFIG</Name> -->
+                        <GuiLabels guid="0d96b350737c11daab25c6250a15cad1" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_GeneralAdapterMetadata.ATG_DYNCONFIG">
+                            <Label language="EN">Adapter-Specific Message Properties</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>enableDynConfig</ReferenceName>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>dynConfigPipInstanceId</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>enableDynConfig</AttributeName>
+                                <AttributeValue>1</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>dynConfigMessageId</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>enableDynConfig</AttributeName>
+                                <AttributeValue>1</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>dynConfigDocumentId</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>enableDynConfig</AttributeName>
+                                <AttributeValue>1</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>dynConfigDocDateTime</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>enableDynConfig</AttributeName>
+                                <AttributeValue>1</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </Tab>
+                <Tab id="process">
+                    <AttributeReference>
+                        <ReferenceName>BT-Pattern</ReferenceName>
+                    </AttributeReference>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_MSG_PROT_DETAILS</Name>
+                        <GuiLabels guid="74dab250aae211d8af51f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_MSG_PROT_DETAILS">
+                            <Label language="EN">Message Protocol Specific Information</Label>
+                            <Label language="DE">Message Protocol Specific Information</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>GlobalProcessCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>My_GlobalBusinessServiceCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>PARTNER_GlobalBusinessServiceCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>GlobalSupplyChainCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </Tab>
+            </ChannelAttributes>
+            <SecurityAttributes>
+                <AttributeReference>
+                    <ReferenceName>trust_model</ReferenceName>
+                    <AndCondition>
+                        <OrCondition>
+                            <EditCondition>
+                                <AttributeName>isSignatureRequired</AttributeName>
+                                <AttributeValue>1</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                <AttributeValue>1</AttributeValue>
+                            </EditCondition>
+                        </OrCondition>
+                        <OrCondition>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </OrCondition>
+                    </AndCondition>
+                </AttributeReference>
+                <AttributeGroup>
+                    <Name>ATTR_GRP_CUR_SIGN_CERT</Name>
+                    <GuiLabels guid="74dab251aae211d8a054f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_CUR_SIGN_CERT">
+                        <Label language="EN">Current Certificate for Signing</Label>
+                        <Label language="DE">Eigenes Zertifikat zum Signieren</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>applyDigestAlgorithm</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>applySignatureKeyStore</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>applySignatureAlias</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                </AttributeGroup>
+                <AttributeGroup>
+                    <Name>ATTR_GRP_PART_SIGN_CERT</Name>
+                    <GuiLabels guid="74dcfc40aae211d8cefaf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_PART_SIGN_CERT">
+                        <Label language="EN">Partner Certificate for Signing</Label>
+                        <Label language="DE">Partner Zertifikat zum Signieren</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureKeyStore</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Direct</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureKeyAlias</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Direct</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureIssuerDN</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Hierarchical</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureSubjectDN</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Hierarchical</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureCAKeyStore</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Hierarchical</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                </AttributeGroup>
+            </SecurityAttributes>
+            <ModuleProcessorAttributes>
+                <ModuleSequence>
+                    <ModuleSequenceItem>
+                        <Name>CIDXModuleListener</Name>
+                        <Type>local</Type>
+                        <Key>CIDX</Key>
+                    </ModuleSequenceItem>
+                </ModuleSequence>
+            </ModuleProcessorAttributes>
+        </MessageProtocol>
+        <GlobalChannelAttributes>
+            <Tab id="process">
+                <AttributeGroup>
+                    <Name>ATTR_GRP_TX_STD_DETAILS</Name>
+                    <GuiLabels guid="74df6d40aae211d88283f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_TX_STD_DETAILS">
+                        <Label language="EN">chemXML Transaction Information</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>GlobalProcessIndicatorCode</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>standardVersion</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>GlobalBusinessActionCode</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>My_GlobalPartnerRoleClassificationCode</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>PARTNER_GlobalPartnerRoleClassificationCode</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                </AttributeGroup>
+                <AttributeGroup>
+                    <Name>ATTR_GRP_MSG_EXG_CTRLS</Name>
+                    <GuiLabels guid="74e1de40aae211d8b1d3f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_MSG_EXG_CTRLS">
+                        <Label language="EN">Message Exchange Controls</Label>
+                        <Label language="DE">Einstellungen zur Message-Verarbeitung</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>ActionRetryCount</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>ackPolicy</ReferenceName>
+                    </AttributeReference>
+                </AttributeGroup>
+                <AttributeGroup>
+                    <Name>ATTR_GRP_SECY_POLICY</Name>
+                    <GuiLabels guid="74e1de41aae211d8948df3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_SECY_POLICY">
+                        <Label language="EN">Security Policy</Label>
+                        <Label language="DE">Security-Richtlinie</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>isSignatureRequired</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>isSignatureRequiredForSignal</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>isNonRepudiationRequired</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                </AttributeGroup>
+            </Tab>
+        </GlobalChannelAttributes>
+    </Inbound>
+    <Outbound>
+        <Tab id="target">
+            <TransportProtocol>
+                <Version>1.1</Version>
+                <Name>HTTP</Name>
+                <GuiLabels guid="74e42830aae211d89600f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.TRNS_PROT_HTTP_11">
+                    <Label language="EN">HTTP 1.1</Label>
+                    <Label language="DE">HTTP 1.1</Label>
+                </GuiLabels>
+                <ValidMessageProtocols>
+                    <ProtocolIdentifier>
+                        <Name>RNIF</Name>
+                        <Version>1.1</Version>
+                    </ProtocolIdentifier>
+                </ValidMessageProtocols>
+                <ChannelAttributes>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_TRNS_SETT</Name>
+                        <GuiLabels guid="74e42831aae211d8ac1ef3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_TRNS_SETT">
+                            <Label language="EN">Transport Parameters</Label>
+                            <Label language="DE">Transportparameter</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>httpDestination</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>PersistDuration</ReferenceName>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </ChannelAttributes>
+                <SecurityAttributes>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_AUTH_SETT</Name>
+                        <GuiLabels guid="74e42832aae211d8b6b1f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_AUTH_SETT">
+                            <Label language="EN">Authentication</Label>
+                            <Label language="DE">Authentifizierung</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>isClientAuthenticationRequired</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>logonUser</ReferenceName>
+                            <AndCondition>
+                                <EditCondition>
+                                    <AttributeName>isClientAuthenticationRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>logonPassword</ReferenceName>
+                            <AndCondition>
+                                <EditCondition>
+                                    <AttributeName>isClientAuthenticationRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </SecurityAttributes>
+            </TransportProtocol>
+            <TransportProtocol>
+                <Version>2.0</Version>
+                <Name>HTTPS</Name>
+                <GuiLabels guid="74e69930aae211d8b4c6f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.TRNS_PROT_HTTPS_20">
+                    <Label language="EN">HTTPS</Label>
+                    <Label language="DE">HTTPS</Label>
+                </GuiLabels>
+                <ValidMessageProtocols>
+                    <ProtocolIdentifier>
+                        <Name>RNIF</Name>
+                        <Version>1.1</Version>
+                    </ProtocolIdentifier>
+                </ValidMessageProtocols>
+                <ChannelAttributes>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_TRNS_SETT</Name>
+                        <GuiLabels guid="74e69931aae211d8a98ef3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_TRNS_SETT">
+                            <Label language="EN">Transport Parameters</Label>
+                            <Label language="DE">Transportparameter</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>httpDestination</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>PersistDuration</ReferenceName>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </ChannelAttributes>
+                <SecurityAttributes>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_AUTH_SETT</Name>
+                        <GuiLabels guid="74e69932aae211d88d25f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_AUTH_SETT">
+                            <Label language="EN">Authentication</Label>
+                            <Label language="DE">Authentifizierung</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>AuthenticationModeHTTPS</ReferenceName>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>SSLKeystoreView</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>AuthenticationModeHTTPS</AttributeName>
+                                        <AttributeValue>certificate</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>SSLCertificateAlias</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>AuthenticationModeHTTPS</AttributeName>
+                                        <AttributeValue>certificate</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>logonUser</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>AuthenticationModeHTTPS</AttributeName>
+                                        <AttributeValue>user_pass</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>logonPassword</ReferenceName>
+                            <AndCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>AuthenticationModeHTTPS</AttributeName>
+                                        <AttributeValue>user_pass</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                                <OrCondition>
+                                    <EditCondition>
+                                        <AttributeName>BT-Pattern</AttributeName>
+                                        <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                    </EditCondition>
+                                </OrCondition>
+                            </AndCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </SecurityAttributes>
+            </TransportProtocol>
+        </Tab>
+        <MessageProtocol>
+            <Version>1.1</Version>
+            <Name>RNIF</Name>
+            <GuiLabels guid="74e8e320aae211d88148f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.MSG_PROT_RNIF_11">
+                <Label language="EN">RNIF 1.1</Label>
+                <Label language="DE">RNIF 1.1</Label>
+            </GuiLabels>
+            <ChannelAttributes>
+                <Tab id="process">
+                    <AttributeReference>
+                        <ReferenceName>BT-Pattern</ReferenceName>
+                    </AttributeReference>
+                    <AttributeGroup>
+                        <Name>ATTR_GRP_MSG_PROT_DETAILS</Name>
+                        <GuiLabels guid="74e8e321aae211d8c172f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_MSG_PROT_DETAILS">
+                            <Label language="EN">Message Protocol Specific Information</Label>
+                            <Label language="DE">Message Protocol Specific Information</Label>
+                        </GuiLabels>
+                        <AttributeReference>
+                            <ReferenceName>GlobalProcessCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>GlobalTransactionCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>ActionVersionIdentifier</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>My_GlobalBusinessServiceCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>PARTNER_GlobalBusinessServiceCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>My_GlobalPartnerClassificationCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                        <AttributeReference>
+                            <ReferenceName>PARTNER_GlobalPartnerClassificationCode</ReferenceName>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </AttributeReference>
+                    </AttributeGroup>
+                </Tab>
+            </ChannelAttributes>
+            <SecurityAttributes>
+                <AttributeReference>
+                    <ReferenceName>trust_model</ReferenceName>
+                    <AndCondition>
+                        <OrCondition>
+                            <EditCondition>
+                                <AttributeName>isSignatureRequired</AttributeName>
+                                <AttributeValue>1</AttributeValue>
+                            </EditCondition>
+                            <EditCondition>
+                                <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                <AttributeValue>1</AttributeValue>
+                            </EditCondition>
+                        </OrCondition>
+                        <OrCondition>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </OrCondition>
+                    </AndCondition>
+                </AttributeReference>
+                <AttributeGroup>
+                    <Name>ATTR_GRP_CUR_SIGN_CERT</Name>
+                    <GuiLabels guid="74e8e322aae211d8b96ef3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_CUR_SIGN_CERT">
+                        <Label language="EN">Current Certificate for Signing</Label>
+                        <Label language="DE">Eigenes Zertifikat zum Signieren</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>applyDigestAlgorithm</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>applySignatureKeyStore</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>applySignatureAlias</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequired</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                </AttributeGroup>
+                <AttributeGroup>
+                    <Name>ATTR_GRP_PART_SIGN_CERT</Name>
+                    <GuiLabels guid="74eb5420aae211d8b1d3f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_PART_SIGN_CERT">
+                        <Label language="EN">Partner Certificate for Signing</Label>
+                        <Label language="DE">Partner Zertifikat zum Signieren</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureKeyStore</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Direct</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureKeyAlias</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Direct</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureIssuerDN</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Hierarchical</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureSubjectDN</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Hierarchical</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>verifySignatureCAKeyStore</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>isSignatureRequiredForSignal</AttributeName>
+                                    <AttributeValue>1</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>trust_model</AttributeName>
+                                    <AttributeValue>Hierarchical</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                </AttributeGroup>
+            </SecurityAttributes>
+            <ModuleProcessorAttributes>
+                <ModuleSequence>
+                    <ModuleSequenceItem>
+                        <Name>CIDXModuleListener</Name>
+                        <Type>local</Type>
+                        <Key>CIDX</Key>
+                    </ModuleSequenceItem>
+                </ModuleSequence>
+            </ModuleProcessorAttributes>
+        </MessageProtocol>
+        <GlobalChannelAttributes>
+            <Tab id="process">
+                <AttributeGroup>
+                    <Name>ATTR_GRP_TX_STD_DETAILS</Name>
+                    <GuiLabels guid="74edc520aae211d8cb26f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_TX_STD_DETAILS">
+                        <Label language="EN">chemXML Transaction Information</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>GlobalProcessIndicatorCode</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>standardVersion</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>GlobalBusinessActionCode</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>My_GlobalPartnerRoleClassificationCode</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>PARTNER_GlobalPartnerRoleClassificationCode</ReferenceName>
+                        <EditCondition>
+                            <AttributeName>BT-Pattern</AttributeName>
+                            <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                        </EditCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>specification</ReferenceName>
+                    </AttributeReference>
+                </AttributeGroup>
+                <AttributeGroup>
+                    <Name>ATTR_GRP_MSG_EXG_CTRLS</Name>
+                    <GuiLabels guid="74edc521aae211d89a18f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_MSG_EXG_CTRLS">
+                        <Label language="EN">Message Exchange Controls</Label>
+                        <Label language="DE">Einstellungen zur Message-Verarbeitung</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>ActionRetryCount</ReferenceName>
+                        <OrCondition>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </OrCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>timeToAcknowledgeReceipt</ReferenceName>
+                        <OrCondition>
+                            <EditCondition>
+                                <AttributeName>BT-Pattern</AttributeName>
+                                <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                            </EditCondition>
+                        </OrCondition>
+                    </AttributeReference>
+                </AttributeGroup>
+                <AttributeGroup>
+                    <Name>ATTR_GRP_SECY_POLICY</Name>
+                    <GuiLabels guid="74edc522aae211d89166f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_GRP_SECY_POLICY">
+                        <Label language="EN">Security Policy</Label>
+                        <Label language="DE">Security-Richtlinie</Label>
+                    </GuiLabels>
+                    <AttributeReference>
+                        <ReferenceName>isSignatureRequired</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>isSignatureRequiredForSignal</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                    <AttributeReference>
+                        <ReferenceName>isNonRepudiationRequired</ReferenceName>
+                        <AndCondition>
+                            <OrCondition>
+                                <EditCondition>
+                                    <AttributeName>BT-Pattern</AttributeName>
+                                    <AttributeValue>Initiating_SingleAction_Async</AttributeValue>
+                                </EditCondition>
+                            </OrCondition>
+                        </AndCondition>
+                    </AttributeReference>
+                </AttributeGroup>
+            </Tab>
+        </GlobalChannelAttributes>
+    </Outbound>
+    <Attribute>
+        <Name>standardVersion</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74edc523aae211d8984ef3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_PROCESS_STD_VERSION">
+            <Label language="EN">Version</Label>
+            <Label language="DE">Version</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>BT-Pattern</Name>
+        <Usage>optional</Usage>
+        <Default>Initiating_SingleAction_Async</Default>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <FixedValue>
+            <value>Initiating_SingleAction_Async</value>
+            <GuiLabels guid="74edc524aae211d8bfd5f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_PTRN_1ACTION_REQ">
+                <Label language="EN">Single-Action Asynchronous Request</Label>
+                <Label language="DE">Asynchrone Anforderung mit einer Aktion</Label>
+            </GuiLabels>
+        </FixedValue>
+        <GuiLabels guid="74edc525aae211d8a4ddf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_PTRN_CONFIG_TYPE">
+            <Label language="EN">Configuration Type</Label>
+            <Label language="DE">Art der Konfiguration</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>specification</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74edc526aae211d8a5ecf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_DOC_SCHEMA_SPEC">
+            <Label language="EN">Document Schema Specification</Label>
+            <Label language="DE">Dokumentschema-Spezifikation</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>ActionVersionIdentifier</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74edc527aae211d8a469f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_MSG_VER">
+            <Label language="EN">Message Version</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>GlobalProcessIndicatorCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f00f10aae211d888a8f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_PROCESS_IND_CODE">
+            <Label language="EN">Code</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>GlobalProcessCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f00f11aae211d8ad62f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_BIS_PROCESS_NAME">
+            <Label language="EN">Process Name</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>GlobalTransactionCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f28010aae211d8b1cbf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_BIS_TX_NAME">
+            <Label language="EN">Transaction Name</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>GlobalBusinessActionCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f28011aae211d88842f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_REQ_MSG">
+            <Label language="EN">Requesting Message</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>My_GlobalPartnerRoleClassificationCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f28012aae211d8cec4f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_CUR_ROLE">
+            <Label language="EN">Current Role</Label>
+            <Label language="DE">Eigene Rolle</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>PARTNER_GlobalPartnerRoleClassificationCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f28013aae211d8c8abf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_PART_ROLE">
+            <Label language="EN">Partner Role</Label>
+            <Label language="DE">Partnerrolle</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>My_GlobalBusinessServiceCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f28014aae211d8aca6f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_CUR_BIS_SERV_CODE">
+            <Label language="EN">Current Business Service Code</Label>
+            <Label language="DE">Eigener Business-Service-Code</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>PARTNER_GlobalBusinessServiceCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f28015aae211d8b662f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_PART_BIS_SERV_CODE">
+            <Label language="EN">Partner Business Service Code</Label>
+            <Label language="DE">Partner-Business-Service-Code</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>My_GlobalPartnerClassificationCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f28016aae211d8937bf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_CUR_CLASS_CODE">
+            <Label language="EN">Current Classification Code</Label>
+            <Label language="DE">Eigener Classification-Code</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>PARTNER_GlobalPartnerClassificationCode</Name>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f28017aae211d8a0d9f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_PART_CLASS_CODE">
+            <Label language="EN">Partner Classification Code</Label>
+            <Label language="DE">Partner-Classification-Code</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>GlobalSupplyChainCode</Name>
+        <Usage>required</Usage>
+        <Default>Chemical</Default>
+        <DataType>xsd:string</DataType>
+        <GuiLabels guid="74f28018aae211d88aaef3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_SPLYCHAIN_CODE">
+            <Label language="EN">Supply Chain Code</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>timeToAcknowledgeReceipt</Name>
+        <Usage>required</Usage>
+        <Default>7200000</Default>
+        <DataType>xsd:timePeriod</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f28019aae211d8a75ff3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_TIME_TO_ACK_RCPT">
+            <Label language="EN">Time to Acknowledge Receipt</Label>
+            <Label language="DE">Frist fur Empfangsbestatigung</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>isNonRepudiationRequired</Name>
+        <Usage>optional</Usage>
+        <Default>1</Default>
+        <DataType>xsd:boolean</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f2801aaae211d8a7b8f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_NREP">
+            <Label language="EN">Non-Repudiation</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>isClientAuthenticationRequired</Name>
+        <Usage>optional</Usage>
+        <Default>1</Default>
+        <DataType>xsd:boolean</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f2801baae211d88fdef3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_CLIENT_AUTH_REQ">
+            <Label language="EN">Client Authentication Required</Label>
+            <Label language="DE">Erfordert Client-Authentifizierung</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>ActionRetryCount</Name>
+        <Usage>required</Usage>
+        <Default>3</Default>
+        <DataType>xsd:integer</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f4f110aae211d8c44af3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_RETRY_COUNT">
+            <Label language="EN">Number of Retries</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>PersistDuration</Name>
+        <Usage>optional</Usage>
+        <Default>2592000000</Default>
+        <DataType>xsd:timePeriod</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f4f111aae211d8bed3f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_PERSIST_TIME">
+            <Label language="EN">Persist Duration</Label>
+            <Label language="DE">Aufbewahrungszeit</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>httpDestination</Name>
+        <Flag>nonTransportable</Flag>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+		<PasswordReference>logonPassword</PasswordReference>
+        <GuiLabels guid="74f4f112aae211d8c68bf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_URL_ADDRESS">
+            <Label language="EN">URL</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>logonUser</Name>
+        <Flag>nonTransportable</Flag>
+        <Usage>required</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f4f113aae211d88489f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_LOGON_USER">
+            <Label language="EN">User Name</Label>
+            <Label language="DE">Benutzername</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute isPassword="true">
+        <Name>logonPassword</Name>
+        <Flag>nonTransportable</Flag>
+        <Usage>optional</Usage>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="74f4f114aae211d8b893f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_LOGON_PWD">
+            <Label language="EN">Password</Label>
+            <Label language="DE">Kennwort</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>trust_model</Name>
+        <Usage>optional</Usage>
+        <Default>Direct</Default>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <FixedValue>
+            <value>Direct</value>
+            <GuiLabels guid="74f4f115aae211d88352f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_TRUST_DIRECT">
+                <Label language="EN">Direct</Label>
+                <Label language="DE">Direkt</Label>
+            </GuiLabels>
+        </FixedValue>
+        <FixedValue>
+            <value>Hierarchical</value>
+            <GuiLabels guid="74f4f116aae211d893d7f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_TRUST_HIERARCHY">
+                <Label language="EN">Hierarchical</Label>
+                <Label language="DE">Hierarchisch</Label>
+            </GuiLabels>
+        </FixedValue>
+        <GuiLabels guid="74f4f117aae211d8a6edf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_TRUST_MODEL">
+            <Label language="EN">Trust Model</Label>
+            <Label language="DE">Trust-Modell</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>applyDigestAlgorithm</Name>
+        <Usage>optional</Usage>
+        <Default>SHA</Default>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <FixedValue>
+            <value>SHA</value>
+            <GuiLabels guid="74f4f118aae211d8995df3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_DIGEST_ALG_SHA1">
+                <Label language="EN">SHA-1</Label>
+            </GuiLabels>
+        </FixedValue>
+        <FixedValue>
+            <value>MD5</value>
+            <GuiLabels guid="74994690af9d11db9024da980a15ca37" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_DIGEST_ALG_MD5">
+                <Label language="EN">MD5</Label>
+            </GuiLabels>
+        </FixedValue>
+        <GuiLabels guid="74f4f119aae211d890faf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_DIGEST_ALG">
+            <Label language="EN">Algorithm</Label>
+            <Label language="DE">Algorithmus</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>applySignatureKeyStore</Name>
+        <Usage>required</Usage>
+        <Flag>nonTransportable</Flag>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>230</Length>
+        <HelpService>
+            <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+            <HelpServiceQueryAttributes>
+                <HelpServiceQueryAttribute>
+                    <Name>Key</Name>
+                    <Value>Private</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>KeyAlgorithm</Name>
+                    <Value>RSA</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>X509Extension</Name>
+                    <Value>SubjectKeyIdentifier</Value>
+                </HelpServiceQueryAttribute>
+            </HelpServiceQueryAttributes>
+        </HelpService>
+        <GuiLabels guid="74f4f11aaae211d88c98f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_APPLY_SIG_STORE">
+            <Label language="EN">Keystore View</Label>
+            <Label language="DE">Schlusselspeicher</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>applySignatureAlias</Name>
+        <Usage>required</Usage>
+        <Flag>nonTransportable</Flag>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>256</Length>
+        <HelpService>
+            <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+            <HelpServiceQueryAttributes>
+                <HelpServiceQueryAttribute>
+                    <Name>Key</Name>
+                    <Value>Private</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>KeyAlgorithm</Name>
+                    <Value>RSA</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>X509Extension</Name>
+                    <Value>SubjectKeyIdentifier</Value>
+                </HelpServiceQueryAttribute>
+            </HelpServiceQueryAttributes>
+        </HelpService>
+        <GuiLabels guid="74f4f11baae211d8c0acf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_APPLY_SIG_ALIAS">
+            <Label language="EN">Keystore Entry</Label>
+            <Label language="DE">Schlusselspeichereintrag</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>verifySignatureCAKeyStore</Name>
+        <Usage>required</Usage>
+        <Flag>nonTransportable</Flag>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>230</Length>
+        <HelpService>
+            <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+            <HelpServiceQueryAttributes>
+                <HelpServiceQueryAttribute>
+                    <Name>Key</Name>
+                    <Value>Public</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>KeyAlgorithm</Name>
+                    <Value>RSA</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>X509Extension</Name>
+                    <Value>SubjectKeyIdentifier</Value>
+                </HelpServiceQueryAttribute>
+            </HelpServiceQueryAttributes>
+        </HelpService>
+        <GuiLabels guid="74f4f11caae211d8cd21f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_VERI_SIG_CA_STORE">
+            <Label language="EN">Certification Authority Keystore View</Label>
+            <Label language="DE">Schlusselspeicher fur Certification Authority</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>verifySignatureKeyStore</Name>
+        <Usage>required</Usage>
+        <Flag>nonTransportable</Flag>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>230</Length>
+        <HelpService>
+            <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+            <HelpServiceQueryAttributes>
+                <HelpServiceQueryAttribute>
+                    <Name>Key</Name>
+                    <Value>Public</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>KeyAlgorithm</Name>
+                    <Value>RSA</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>X509Extension</Name>
+                    <Value>SubjectKeyIdentifier</Value>
+                </HelpServiceQueryAttribute>
+            </HelpServiceQueryAttributes>
+        </HelpService>
+        <GuiLabels guid="74f4f11daae211d88c98f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_VERI_SIG_STORE">
+            <Label language="EN">Keystore View</Label>
+            <Label language="DE">Schlusselspeicher</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>verifySignatureKeyAlias</Name>
+        <Usage>required</Usage>
+        <Flag>nonTransportable</Flag>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>256</Length>
+        <HelpService>
+            <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+            <HelpServiceQueryAttributes>
+                <HelpServiceQueryAttribute>
+                    <Name>Key</Name>
+                    <Value>Public</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>KeyAlgorithm</Name>
+                    <Value>RSA</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>X509Extension</Name>
+                    <Value>SubjectKeyIdentifier</Value>
+                </HelpServiceQueryAttribute>
+            </HelpServiceQueryAttributes>
+        </HelpService>
+        <GuiLabels guid="74f4f11eaae211d89185f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_VERI_SIG_ALIAS">
+            <Label language="EN">Keystore Entry</Label>
+            <Label language="DE">Schlusselspeichereintrag</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>verifySignatureIssuerDN</Name>
+        <Usage>required</Usage>
+        <Flag>nonTransportable</Flag>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <HelpService>
+            <HelpServiceName>SecStoreHelpServiceIssuerDN</HelpServiceName>
+            <HelpServiceQueryAttributes>
+                <HelpServiceQueryAttribute>
+                    <Name>Key</Name>
+                    <Value>Public</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>KeyAlgorithm</Name>
+                    <Value>RSA</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>X509Extension</Name>
+                    <Value>SubjectKeyIdentifier</Value>
+                </HelpServiceQueryAttribute>
+            </HelpServiceQueryAttributes>
+        </HelpService>
+        <GuiLabels guid="74f4f11faae211d884c5f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_VERI_SIG_ISSUER">
+            <Label language="EN">Issuer</Label>
+            <Label language="DE">Aussteller</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>verifySignatureSubjectDN</Name>
+        <Usage>required</Usage>
+        <Flag>nonTransportable</Flag>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <HelpService>
+            <HelpServiceName>SecStoreHelpServiceSubjectDN</HelpServiceName>
+            <HelpServiceQueryAttributes>
+                <HelpServiceQueryAttribute>
+                    <Name>Key</Name>
+                    <Value>Public</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>KeyAlgorithm</Name>
+                    <Value>RSA</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>X509Extension</Name>
+                    <Value>SubjectKeyIdentifier</Value>
+                </HelpServiceQueryAttribute>
+            </HelpServiceQueryAttributes>
+        </HelpService>
+        <GuiLabels guid="74f4f120aae211d8c29ef3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_VERI_SIG_SUBJECT">
+            <Label language="EN">Subject</Label>
+            <Label language="DE">Inhaber</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>isSignatureRequired</Name>
+        <Usage>optional</Usage>
+        <Default>1</Default>
+        <DataType>xsd:boolean</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="e7431f1008cb11da836acc6b0a11744f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_IS_SIG_REQD_ACTION">
+            <Label language="EN">Sign Action Message</Label>
+            <Label language="DE">Aktion Message signieren</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>isSignatureRequiredForSignal</Name>
+        <Usage>optional</Usage>
+        <Default>1</Default>
+        <DataType>xsd:boolean</DataType>
+        <Length>0</Length>
+        <GuiLabels guid="e7431f1108cb11daa9d0cc6b0a11744f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_IS_SIG_REQD_SIGNAL">
+            <Label language="EN">Sign Signal Message</Label>
+            <Label language="DE">Signal Message signieren</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>ackPolicy</Name>
+        <Usage>optional</Usage>
+        <Default>weak</Default>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <FixedValue>
+            <value>strong</value>
+            <GuiLabels guid="74f73b01aae211d8cde4f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_ACK_POLICY_STRNG">
+                <Label language="EN">Strong</Label>
+                <Label language="DE">Strikt</Label>
+            </GuiLabels>
+        </FixedValue>
+        <FixedValue>
+            <value>weak</value>
+            <GuiLabels guid="74f73b02aae211d8a30cf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_ACK_POLICY_WEAK">
+                <Label language="EN">Weak</Label>
+                <Label language="DE">Schwach</Label>
+            </GuiLabels>
+        </FixedValue>
+        <GuiLabels guid="74f73b03aae211d8a0e0f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_ACK_POLICY">
+            <Label language="EN">Receipt Acknowledgement</Label>
+            <Label language="DE">Empfangsbestatigung</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>AuthenticationModeHTTPS</Name>
+        <Usage>optional</Usage>
+        <Default>user_pass</Default>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <FixedValue>
+            <value>user_pass</value>
+            <GuiLabels guid="74f73b04aae211d88ae6f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_AUTH_MODE_USR_PWD">
+                <Label language="EN">User Name/Password</Label>
+                <Label language="DE">Benutzername/Kennwort</Label>
+            </GuiLabels>
+        </FixedValue>
+        <FixedValue>
+            <value>certificate</value>
+            <GuiLabels guid="74f73b05aae211d89205f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_AUTH_MODE_CERT">
+                <Label language="EN">Certificate Logon</Label>
+                <Label language="DE">Zertifikatsanmeldung</Label>
+            </GuiLabels>
+        </FixedValue>
+        <GuiLabels guid="74f73b06aae211d8c264f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_AUTH_MODE_HTTPS">
+            <Label language="EN">Authentication Mode</Label>
+            <Label language="DE">Authentifizierungsart</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>SSLCertificateAlias</Name>
+        <Usage>required</Usage>
+        <Flag>nonTransportable</Flag>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>256</Length>
+        <HelpService>
+            <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+            <HelpServiceQueryAttributes>
+                <HelpServiceQueryAttribute>
+                    <Name>Key</Name>
+                    <Value>Private</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>KeyAlgorithm</Name>
+                    <Value>RSA</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>X509Extension</Name>
+                    <Value>SubjectKeyIdentifier</Value>
+                </HelpServiceQueryAttribute>
+            </HelpServiceQueryAttributes>
+        </HelpService>
+        <GuiLabels guid="74f73b07aae211d8a642f3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_AUTH_SSL_ALIAS">
+            <Label language="EN">Keystore Entry</Label>
+            <Label language="DE">Schlusselspeichereintrag</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>SSLKeystoreView</Name>
+        <Usage>required</Usage>
+        <Flag>nonTransportable</Flag>
+        <Default/>
+        <DataType>xsd:string</DataType>
+        <Length>230</Length>
+        <HelpService>
+            <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+            <HelpServiceQueryAttributes>
+                <HelpServiceQueryAttribute>
+                    <Name>Key</Name>
+                    <Value>Private</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>KeyAlgorithm</Name>
+                    <Value>RSA</Value>
+                </HelpServiceQueryAttribute>
+                <HelpServiceQueryAttribute>
+                    <Name>X509Extension</Name>
+                    <Value>SubjectKeyIdentifier</Value>
+                </HelpServiceQueryAttribute>
+            </HelpServiceQueryAttributes>
+        </HelpService>
+        <GuiLabels guid="74f73b08aae211d88d2bf3a40a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_AUTH_SSL_STORE">
+            <Label language="EN">Keystore View</Label>
+            <Label language="DE">Schlusselspeicher</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>enableDynConfig</Name>
+        <Usage>optional</Usage>
+        <Default/>
+        <DataType>xsd:boolean</DataType>
+        <GuiLabels guid="38b28c907c5911da8284e5680a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_DYN_CNFG">
+            <Label language="EN">Set Adapter-Specific Message Properties</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>dynConfigPipInstanceId</Name>
+        <Usage>optional</Usage>
+        <Default/>
+        <DataType>xsd:boolean</DataType>
+        <GuiLabels guid="38b28c917c5911dacc85e5680a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_DYN_CNFG_PIPID">
+            <Label language="EN">Process Instance Identifier</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>dynConfigDocumentId</Name>
+        <Usage>optional</Usage>
+        <Default/>
+        <DataType>xsd:boolean</DataType>
+        <GuiLabels guid="38b28c927c5911dab6a4e5680a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_DYN_CNFG_DOCID">
+            <Label language="EN">Document Identifier</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>dynConfigDocDateTime</Name>
+        <Usage>optional</Usage>
+        <Default/>
+        <DataType>xsd:boolean</DataType>
+        <GuiLabels guid="38b28c937c5911daae5fe5680a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_DYN_CNFG_DOCDATE">
+            <Label language="EN">Document Date Timestamp</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>dynConfigMessageId</Name>
+        <Usage>optional</Usage>
+        <Default/>
+        <DataType>xsd:boolean</DataType>
+        <GuiLabels guid="38b28c947c5911da94ede5680a1174b2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_DYN_CNFG_MSGID">
+            <Label language="EN">Message Identifier</Label>
+        </GuiLabels>
+    </Attribute>
+    <Attribute>
+        <Name>securityLevelHTTP</Name>
+        <Usage>required</Usage>
+        <Default>HTTPplain</Default>
+        <DataType>xsd:string</DataType>
+        <Length>0</Length>
+        <FixedValue>
+            <value>HTTPplain</value>
+            <GuiLabels guid="431f1ad01bc911dbb46edf040a11744f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_SECLEVEL_HTTP">
+                <Label language="EN">HTTP</Label>
+                <Label language="DE">HTTP</Label>
+            </GuiLabels>
+        </FixedValue>
+        <FixedValue>
+            <value>HTTPSwithoutClientAuth</value>
+            <GuiLabels guid="431f1ad11bc911db861ddf040a11744f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_SECLEVEL_HTTPS_SRV">
+                <Label language="EN">HTTPS without client authentication</Label>
+                <Label language="DE">HTTPS ohne Client-Authentisierung</Label>
+            </GuiLabels>
+        </FixedValue>
+        <FixedValue>
+            <value>HTTPSwithClientAuth</value>
+            <GuiLabels guid="431f1ad21bc911db886bdf040a11744f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_SECLEVEL_HTTPS_CLT">
+                <Label language="EN">HTTPS with client authentication</Label>
+                <Label language="DE">HTTPS mit Client-Authentisierung</Label>
+            </GuiLabels>
+        </FixedValue>
+        <GuiLabels guid="431f1ad31bc911db8b79df040a11744f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.ATTR_SECLEVEL">
+            <Label language="EN">HTTP security level</Label>
+            <Label language="DE">HTTP Security-Level</Label>
+        </GuiLabels>
+    </Attribute>
+    <TabDefinition id="process">
+        <GuiLabels guid="e237f612a40d11dbb140dcd70a15ca62" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.TAB_PROCESS">
+            <Label language="EN">Process Specification</Label>
+            <Label language="DE">Verarbeitung</Label>
+        </GuiLabels>
+    </TabDefinition>
+    <TabDefinition id="source">
+        <GuiLabels guid="e237f610a40d11dba806dcd70a15ca62" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.TAB_SOURCE">
+            <Label language="EN">Source</Label>
+            <Label language="DE">Quelle</Label>
+        </GuiLabels>
+    </TabDefinition>
+    <TabDefinition id="target">
+        <GuiLabels guid="e237f611a40d11dba6c6dcd70a15ca62" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.TAB_TARGET">
+            <Label language="EN">Target</Label>
+            <Label language="DE">Ziel</Label>
+        </GuiLabels>
+    </TabDefinition>
+    <TabDefinition id="advanced">
+        <GuiLabels guid="e237f613a40d11db9243dcd70a15ca62" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_CIDXAdapterMetadata.TAB_ADVANCED">
+            <Label language="EN">Advanced</Label>
+            <Label language="DE">Erweitert</Label>
+        </GuiLabels>
+    </TabDefinition>
+</AdapterTypeMetaData>

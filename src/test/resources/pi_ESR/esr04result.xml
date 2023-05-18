@@ -1,1 +1,115 @@
-<queryResult><headerInfo xmlns=""><rows count="2"/><cols count="9"/><colDef><def type="RA_WORKSPACE_ID" pos="0"/><def type="WS_NAME" pos="1"/><def type="VENDOR" pos="2"/><def type="NAME" pos="3"/><def type="VERSION" pos="4"/><def type="CAPTION" pos="5"/><def type="WS_TYPE" pos="6"/><def type="ORIGINAL_LANGUAGE" pos="7"/><def type="DEPWS_ID" pos="8"/></colDef></headerInfo><typeInfo xmlns=""><type id="workspace"><keyElem name="WS_ID" pos="0"/><keyElem name="WS_ORDER" pos="1"/></type></typeInfo><matrix xmlns=""><r><c><wkID id="45d4a640dc3d11e886a1e492ac130d0e" order="-1"/></c><c><simple><strg>SC_A_ERP_ACTIVE, 1.0 of nlmk.com</strg></simple></c><c><simple><strg>nlmk.com</strg></simple></c><c><simple><strg>SC_A_ERP_ACTIVE</strg></simple></c><c><simple><strg>1.0</strg></simple></c><c><simple><strg>SC_A_ERP_ACTIVE, 1.0 of nlmk.com</strg></simple></c><c><simple><strg>S</strg></simple></c><c><simple><strg>EN</strg></simple></c><c><simple><bin>103c4060dc3d11e88a22e492ac130d0e</bin></simple></c></r><r><c><wkID id="33305a33f80411e1bbd4efd50a4290b1" order="-1"/></c><c><simple><strg>SFIHCM02 600</strg></simple></c><c><simple><strg>sap.com</strg></simple></c><c><simple><strg>SFIHCM02</strg></simple></c><c><simple><strg>600</strg></simple></c><c><simple><strg>SFIHCM02 600</strg></simple></c><c><simple><strg>S</strg></simple></c><c><simple><strg>EN</strg></simple></c><c><simple><bin>0166657678e411e1c35ccf350a4290b1</bin></simple></c></r></matrix></queryResult>
+<queryResult>
+	<headerInfo xmlns="">
+		<rows count="2"/>
+		<cols count="9"/>
+		<colDef>
+			<def type="RA_WORKSPACE_ID" pos="0"/>
+			<def type="WS_NAME" pos="1"/>
+			<def type="VENDOR" pos="2"/>
+			<def type="NAME" pos="3"/>
+			<def type="VERSION" pos="4"/>
+			<def type="CAPTION" pos="5"/>
+			<def type="WS_TYPE" pos="6"/>
+			<def type="ORIGINAL_LANGUAGE" pos="7"/>
+			<def type="DEPWS_ID" pos="8"/>
+		</colDef>
+	</headerInfo>
+	<typeInfo xmlns="">
+		<type id="workspace">
+			<keyElem name="WS_ID" pos="0"/>
+			<keyElem name="WS_ORDER" pos="1"/>
+		</type>
+	</typeInfo>
+	<matrix xmlns="">
+		<r>
+			<c>
+				<wkID id="45d4a640dc3d11e886a1e492ac130d0e" order="-1"/>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_ERP_ACTIVE, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_ERP_ACTIVE</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>1.0</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SC_A_ERP_ACTIVE, 1.0 of vendor.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>S</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>EN</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bin>103c4060dc3d11e88a22e492ac130d0e</bin>
+				</simple>
+			</c>
+		</r>
+		<r>
+			<c>
+				<wkID id="33305a33f80411e1bbd4efd50a4290b1" order="-1"/>
+			</c>
+			<c>
+				<simple>
+					<strg>SFIHCM02 600</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>sap.com</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SFIHCM02</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>600</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>SFIHCM02 600</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>S</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<strg>EN</strg>
+				</simple>
+			</c>
+			<c>
+				<simple>
+					<bin>0166657678e411e1c35ccf350a4290b1</bin>
+				</simple>
+			</c>
+		</r>
+	</matrix>
+</queryResult>

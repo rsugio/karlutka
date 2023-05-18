@@ -1,0 +1,1633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterTypeMetaData version="712">
+   <GuiHandlerClassName/>
+   <Type>IDOC</Type>
+   <GuiLabels guid="777487c07b6211dda45f001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.TYPE_NAME">
+      <Label language="EN">IDOC Adapter for Adapter Engine</Label>
+      <Label language="DE">IDOC Adapter for Adapter Engine</Label>
+   </GuiLabels>
+   <Inbound>
+      <TransportProtocol>
+         <Name>tRFC</Name>
+         <Version/>
+         <GuiLabels guid="7776d1b07b6211ddbfb3001a4b5051a5" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.TRNS_TRFC">
+            <Label language="EN">tRFC</Label>
+            <Label language="DE">tRFC</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>IDOCXML</Name>
+               <Version>712</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes>
+            <Tab id="RFCParameters">
+               <AttributeGroup>
+                  <Name>RFCParameters</Name>
+                  <GuiLabels guid="7776d1b17b6211ddb678001a4b5051a6" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_RFC_PARAMS">
+                     <Label language="EN">RFC Parameters</Label>
+                     <Label language="DE">RFC Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>RFCServerParam</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>RFCServerParameters</Name>
+                  <GuiLabels guid="09ce20c07b6511ddcd1d001a4b5051a7" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_RFC_SERVER_PARAMS">
+                     <Label language="EN">RFC Server Parameters</Label>
+                     <Label language="DE">RFC Server Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>InAckDestination</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>Default</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ProgramID</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SAPClient</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>UserName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>Password</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SNCMode</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SNCPartner</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>RFCServerParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>SNCMode</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>QualityOfProtect</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>RFCServerParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>SNCMode</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SNCName</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>RFCServerParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>SNCMode</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SNCPath</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>RFCServerParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>SNCMode</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>Language</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ServerName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>PortNumber</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ResourceAdapterName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCServerParam</AttributeName>
+                        <AttributeValue>fromNWA</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>OptionalConnFactoryName</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>RFCServerParam</AttributeName>
+                           <AttributeValue>fromNWA</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>SysAckErrorRequestedParam</AttributeName>
+                              <AttributeValue>1</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>AppAckOkRequestedParam</AttributeName>
+                              <AttributeValue>1</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>SysAckOkRequestedParam</AttributeName>
+                              <AttributeValue>1</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>AppAckErrorRequestedParam</AttributeName>
+                              <AttributeValue>1</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>InboundMessageSettings</Name>
+                  <GuiLabels guid="9d905f507c0811ddb89daa1cc4bd3c33" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_INBD_MESG_SET">
+                     <Label language="EN">Inbound Message Settings</Label>
+                     <Label language="DE">Inbound Message Settings</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>MultipleIdocsInIdocXML</ReferenceName>
+                  </AttributeReference>
+				  <AttributeReference>
+                     <ReferenceName>NumberOfIdocsInIdocXML</ReferenceName>
+					  <EditCondition>
+                        <AttributeName>MultipleIdocsInIdocXML</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>EOIO</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>QUEUE_NAME</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>EOIO</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="AckParameters">
+               <AttributeGroup>
+                  <Name>AckParameters</Name>
+                  <GuiLabels guid="79cbb0307bf511ddb32e001cc4bd3cd1" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_ACK_PARAMS">
+                     <Label language="EN">Acknowledgement Parameters</Label>
+                     <Label language="DE">Acknowledgement Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>SysAckOkRequestedParam</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SysAckErrorRequestedParam</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>AppAckOkRequestedParam</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>AppAckErrorRequestedParam</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ALEAUDRequestedParam</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="advanced">
+               <AttributeGroup>
+                  <Name>IDocStatus</Name>
+                  <GuiLabels guid="3fe602c779f346f9b310535889cd43e2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_IDOC_STATUS">
+                     <Label language="EN">Adapter Status</Label>
+                     <Label language="DE">Adapter Status</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>IDocAdapterStatus</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+      </TransportProtocol>
+      <MessageProtocol>
+         <Name>IDOCXML</Name>
+         <Version>712</Version>
+         <GuiLabels guid="7776d1b27b6211dd87b4001a4b5051a2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.MSG_PROTOCOL">
+            <Label language="EN">Idoc XML</Label>
+            <Label language="DE">Idoc XML</Label>
+         </GuiLabels>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <GlobalChannelAttributes/>
+      <GlobalSecurityAttributes/>
+   </Inbound>
+   <Outbound>
+      <TransportProtocol>
+         <Name>tRFC</Name>
+         <Version/>
+         <GuiLabels guid="98d7dd207c0411dd98fc001cc4bd3cd2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.TRNS_TRFC">
+            <Label language="EN">tRFC</Label>
+            <Label language="DE">tRFC</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>IDOCXML</Name>
+               <Version>712</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes>
+            <Tab id="RFCParameters">
+               <AttributeGroup>
+                  <Name>RFCParameters</Name>
+                  <GuiLabels guid="7776d1b17b6212ddb678001a4b5051a9" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_RFC_PARAMS">
+                     <Label language="EN">RFC Parameters</Label>
+                     <Label language="DE">RFC Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>RFCClientParam</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>RFCClientParameters</Name>
+                  <GuiLabels guid="9d905f507c0811ddb89d001cc4bd3cda" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_RFC_CLNT_PARAMS">
+                     <Label language="EN">RFC Client Parameters</Label>
+                     <Label language="DE">RFC Client Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>OutDestination</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>Default</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SAPClient</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>UserName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>Password</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SNCMode</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SNCPartner</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>RFCClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>SNCMode</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>QualityOfProtect</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>RFCClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>SNCMode</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SNCName</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>RFCClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>SNCMode</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SNCPath</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>RFCClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>SNCMode</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>Language</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ServerName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>PortNumber</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ConnFactoryName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>fromNWA</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>OptionalResourceAdapterName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>fromNWA</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>OptionalProgramID</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>RFCClientParam</AttributeName>
+                        <AttributeValue>manual</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>CommonRFCClientParameters</Name>
+                  <GuiLabels guid="9d905f507c0811ddb89d001cc4bd3c33" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_COM_RFC_CLNT_PARAMS">
+                     <Label language="EN">Release and Version Info</Label>
+                     <Label language="DE">Release and Version Info</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>InterfaceVersion</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>SAPRelease</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>Packaging</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>PackSize</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>Packaging</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>PackTimeout</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>Packaging</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>PackMemory</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>Packaging</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>QueuedProcessing</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>InterfaceVersion</AttributeName>
+                        <AttributeValue>Interface Version 4.0 or above</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="optional">
+               <AttributeGroup>
+                  <Name>OptionalParameters</Name>
+                  <GuiLabels guid="79cbb0307bfc11ddb32e001cc4bd3c12" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_OPTNL_PARAMS">
+                     <Label language="EN">Optional Metadata Parameters</Label>
+                     <Label language="DE">Optional Metadata Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>MetadataRequired</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>MetadataClientParam</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>MetadataRequired</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>MetadataClientParameters</Name>
+                  <GuiLabels guid="9d915f507c0811ddb89d001cc4bd3c56" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_CLNT_PARAMS">
+                     <Label language="EN">Metadata Client Parameters</Label>
+                     <Label language="DE">Metadata Client Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>MetaDestination</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataRequired</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataClientParam</AttributeName>
+                           <AttributeValue>Default</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>MetadataSAPClient</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataRequired</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>MetadataUserName</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataRequired</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>MetadataPassword</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataRequired</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>MetadataLanguage</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataRequired</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>MetadataServerName</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataRequired</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>MetadataPortNumber</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataRequired</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataClientParam</AttributeName>
+                           <AttributeValue>manual</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>MetadataClientParameters2</Name>
+                  <GuiLabels guid="9d945f507c0811ddb89d001cc4bd3c67" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_CLNT_PARAMS">
+                     <Label language="EN">Metadata Client Parameters</Label>
+                     <Label language="DE">Metadata Client Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>MetadataConnFactoryName</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataRequired</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>MetadataClientParam</AttributeName>
+                           <AttributeValue>fromNWA</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="advanced">
+               <AttributeGroup>
+                  <Name>IDocStatus</Name>
+                  <GuiLabels guid="fa89840faa094d81982bec01e6deba37" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_IDOC_STATUS">
+                     <Label language="EN">Adapter Status</Label>
+                     <Label language="DE">Adapter Status</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>IDocAdapterStatus</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>IDOCControlRecordApplication</Name>
+                  <GuiLabels guid="bbb5f0107c0011ddbdc6001cc4bd3c32" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_ADV_OPTIONS">
+                     <Label language="EN">Advance Options</Label>
+                     <Label language="DE">Advance Options</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>ControlRecordInIDocXml</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ApplyCntlRecFromPayload</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ApplySenderFromPayload</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ApplyReceiverFromPayload</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>addTable</Name>
+                  <GuiLabels guid="fc57c5a4f02011d8add7eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_CONTROL_HEADERS">
+                     <Label language="EN">IDoc Control Headers</Label>
+                     <Label language="DE">IDoc Control Headers</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>idoc.overridecontrolheaders</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>idoc.controlHeadersTable</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>idoc.overridecontrolheaders</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>additionalTable</Name>
+                  <GuiLabels guid="fc57c5a4f02011d8add7eaf70a126328" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_ADDITIONAL_PARAMETERS">
+                     <Label language="EN">Additional Parameters</Label>
+                     <Label language="DE">Additional Parameters</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>idoc.additionalParamEnabled</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>idoc.additionalParamTable</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>idoc.additionalParamEnabled</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+      </TransportProtocol>
+      <MessageProtocol>
+         <Name>IDOCXML</Name>
+         <Version>712</Version>
+         <GuiLabels guid="7776d1b27b6211dd87b4001a4b505125" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.MSG_PROTOCOL">
+            <Label language="EN">Idoc XML</Label>
+            <Label language="DE">Idoc XML</Label>
+         </GuiLabels>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>IDocOutboundModuleBean</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <GlobalChannelAttributes/>
+      <GlobalSecurityAttributes/>
+   </Outbound>
+   <Attribute>
+      <Name>RFCServerParam</Name>
+      <Usage>required</Usage>
+      <Default>Default</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="7776d1b37b6211dd871d001a4b505153" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_RFC_SERVER_PARAMS">
+         <Label language="EN">RFC Server Parameters</Label>
+         <Label language="DE">RFC Server Parameters</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>Default</value>
+         <GuiLabels guid="7776d1b47b6211dd46be001a4b5051a1" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SERVER_DEFAULT">
+            <Label language="EN">Default (Recommended)</Label>
+            <Label language="DE">Default (Recommended)</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>manual</value>
+         <GuiLabels guid="7776d1b47b6211ddc6be001a4b5051a1" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SERVER_MAN">
+            <Label language="EN">Manual</Label>
+            <Label language="DE">Manual</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>fromNWA</value>
+         <GuiLabels guid="7776d1b57b6211dda260001a4b5051ab" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SERVER_FROM_NWA">
+            <Label language="EN">From NWA</Label>
+            <Label language="DE">From NWA</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>RFCClientParam</Name>
+      <Usage>required</Usage>
+      <Default>Default</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="98d7dd217c0411dd8d7b001cc4bd3cd8" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_RFC_CLNT_PARAMS">
+         <Label language="EN">RFC Client Parameters</Label>
+         <Label language="DE">RFC Client Parameters</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>Default</value>
+         <GuiLabels guid="98d7dd227c0411dd9c24091cc4bd3c39" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_CLNT_DEFAULT">
+            <Label language="EN">Default (Recommended)</Label>
+            <Label language="DE">Default (Recommended)</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>manual</value>
+         <GuiLabels guid="98d7dd227c0411dd9c24001cc4bd3c39" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_CLNT_MAN">
+            <Label language="EN">Manual</Label>
+            <Label language="DE">Manual</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>fromNWA</value>
+         <GuiLabels guid="98d7dd237c0411dda935001cc4bd3c87" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_CLNT_FROM_NWA">
+            <Label language="EN">From NWA</Label>
+            <Label language="DE">From NWA</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>MetadataClientParam</Name>
+      <Usage>required</Usage>
+      <Default>Default</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="98d7dd217c0411dd8d7b001cc4bd3c22" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_CLNT_PARAMS">
+         <Label language="EN">Metadata Client Parameters</Label>
+         <Label language="DE">Metadata Client Parameters</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>Default</value>
+         <GuiLabels guid="98d7dd227c0411dd9c24001c34bd3c77" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_CLNT_DEFAULT">
+            <Label language="EN">Default (Recommended)</Label>
+            <Label language="DE">Default (Recommended)</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>manual</value>
+         <GuiLabels guid="98d7dd227c0411dd9c24001cc4bd3c77" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_CLNT_MAN">
+            <Label language="EN">Manual</Label>
+            <Label language="DE">Manual</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>fromNWA</value>
+         <GuiLabels guid="98d7dd237c0411dda935001cc4bd3c99" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_CLNT_FROM_NWA">
+            <Label language="EN">From NWA</Label>
+            <Label language="DE">From NWA</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>SysAckOkRequestedParam</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="98d7dd217c1411dd8d7b001cc4bd3c91" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SYSACK_OK_REQ">
+         <Label language="EN">System Ack Ok Requested</Label>
+         <Label language="DE">System Ack Ok Requested</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>SysAckErrorRequestedParam</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="98d7dd217c2411dd8d7b001cc4bd3c00" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SYSACK_ERR_REQ">
+         <Label language="EN">System Ack Error Requested</Label>
+         <Label language="DE">System Ack Error Requested</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AppAckOkRequestedParam</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="98d7dd217c3411dd8d7b001cc4bd3c93" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_APPACK_OK_REQ">
+         <Label language="EN">Application Ack Ok Requested</Label>
+         <Label language="DE">Application Ack Ok Requested</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AppAckErrorRequestedParam</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="98d7dd217c4411dd8d7b001cc4bd3c37" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_APPACK_ERR_REQ">
+         <Label language="EN">Application Ack Error Requested</Label>
+         <Label language="DE">Application Ack Error Requested</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ALEAUDRequestedParam</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="78d7dd217c5411dd8d7b001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_ALEAUD_SPCL_HANDL">
+         <Label language="EN">ALEAUD Special Handling Needed</Label>
+         <Label language="DE">ALEAUD Special Handling Needed</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>MultipleIdocsInIdocXML</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e01aa57b5611ddbb85001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_MULTPL_IDOC">
+         <Label language="EN">Multiple IDocs in single XI Message (or IDOCXML)</Label>
+         <Label language="DE">Multiple IDocs in single XI Message (or IDOCXML))</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>NumberOfIdocsInIdocXML</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <Length>5</Length>
+      <GuiLabels guid="cf5455116b924e0eab362795597f3571" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_MULTPL_IDOC_NO">
+         <Label language="EN">Number of IDocs in Single XI Message</Label>
+         <Label language="DE">Number of IDocs in Single XI Message</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>EOIO</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e01aa57b5611ddbb85001cc4bd3cd6" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_EOIO">
+         <Label language="EN">EOIO enabled</Label>
+         <Label language="DE">EOIO enabled</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>QUEUE_NAME</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e01aa57b5611ddbb85001cc4bd3c91" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_QUEUE_NAME">
+         <Label language="EN">Queue Name</Label>
+         <Label language="DE">Queue Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>QueuedProcessing</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="7b5226bac41d4ab2993e2d3cfd0e2ef1" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_QUEUE_PROCESSING">
+         <Label language="EN">Queue Processing</Label>
+         <Label language="DE">Queue Processing</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AckRequestedParam</Name>
+      <Usage>required</Usage>
+      <Default>manual</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="98d7dd217c4411dd8d7b001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_ACK_REQ_PARAMS">
+         <Label language="EN">Ack Requested Parameters</Label>
+         <Label language="DE">Ack Requested Parameters</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>manual</value>
+         <GuiLabels guid="98d7dd22776411dd9c24001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_ACK_REQ_MAN">
+            <Label language="EN">Manual</Label>
+            <Label language="DE">Manual</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>fromNWA</value>
+         <GuiLabels guid="98d7dd237c0411dda935001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_ACK_REQ_FROM_NWA">
+            <Label language="EN">From NWA</Label>
+            <Label language="DE">From NWA</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>ProgramID</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>32</Length>
+      <GuiLabels guid="061462317b671100a9ad001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_PROGRAMID">
+         <Label language="EN">Program ID</Label>
+         <Label language="DE">Program ID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>OptionalProgramID</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>32</Length>
+      <GuiLabels guid="061462317b671100a9ad001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_OPTNL_PROGRAMID">
+         <Label language="EN">Program ID (ALEAUD)</Label>
+         <Label language="DE">Program ID (ALEAUD) </Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>SAPClient</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <Length>3</Length>
+      <GuiLabels guid="32883a24824146078d4b0ca47dad2e0a" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SAP_CLNT">
+         <Label language="EN">SAP Client</Label>
+         <Label language="DE">SAP Client</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>UserName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>32</Length>
+      <GuiLabels guid="8334430f67e64c8d9d30261dea811262" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_USER_NAME">
+         <Label language="EN">User Name</Label>
+         <Label language="DE">User Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>Password</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="a7c411b03ff04ff0ac134da16499b765" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_PWD">
+         <Label language="EN">Password</Label>
+         <Label language="DE">Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>Language</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>2</Length>
+      <GuiLabels guid="0dc7f17ad541403ab1e41d4aa5b3fe66" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_LANG">
+         <Label language="EN">Language</Label>
+         <Label language="DE">Language</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ServerName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="3b054d966e324afeabdf223d0ed1c9cf" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SERVR_NAME">
+         <Label language="EN">Server Name</Label>
+         <Label language="DE">Server Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>PortNumber</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <Length>2</Length>
+      <GuiLabels guid="525fa67577c94fc48f4c91520d934a44" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_PORT_NUM">
+         <Label language="EN">System Number</Label>
+         <Label language="DE">System Number</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>MetadataRequired</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e010057bfe11ddbb85001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_REQD">
+         <Label language="EN">External Metadata Required</Label>
+         <Label language="DE">External Metadata Required</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>MetadataSAPClient</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <Length>3</Length>
+      <GuiLabels guid="81ec500b832740308363dc7c321069e6" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_SAP_CLNT">
+         <Label language="EN">Metadata SAP Client</Label>
+         <Label language="DE">Metadata SAP Client</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>MetadataUserName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="d6c258111aa941ff98bed271067d6dfa" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_USR_NAME">
+         <Label language="EN">Metadata User Name</Label>
+         <Label language="DE">Metadata User Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>MetadataPassword</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="41914b83e6e047febee128776ca07023" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_PWD">
+         <Label language="EN">Metadata Password</Label>
+         <Label language="DE">Metadata Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>MetadataLanguage</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>2</Length>
+      <GuiLabels guid="9ee9fab43efd4bb1939f81be5a997a0e" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_LANG">
+         <Label language="EN">Metadata Language</Label>
+         <Label language="DE">Metadata Language</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>MetadataServerName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c75dbcfdbb694185a5a428a9106be5d1" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_SERVR">
+         <Label language="EN">Metadata Server Name</Label>
+         <Label language="DE">Metadata Server Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>MetadataPortNumber</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <Length>2</Length>
+      <GuiLabels guid="a8932fd0fce2435aa73426a38eecaae0" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_PORT_NUM">
+         <Label language="EN">Metadata System Number</Label>
+         <Label language="DE">Metadata System Number</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ResourceAdapterName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="5e4311607b6811ddb4ea001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_RES_ADPTR_NAME">
+         <Label language="EN">Resource Adapter Name</Label>
+         <Label language="DE">Resource Adapter Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>OptionalResourceAdapterName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="5e4311622b6811ddb4ea001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_OPTNL_RES_ADPTR_NAME">
+         <Label language="EN">Resource Adapter Name (ALEAUD)</Label>
+         <Label language="DE">Resource Adapter Name (ALEAUD)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>SAPRelease</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>5</Length>
+      <GuiLabels guid="5e433b627b6811dd82b2001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_INTF_VER">
+         <Label language="EN">Interface Version</Label>
+         <Label language="DE">Interface Version</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>InAckDestination</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="5e4311687b6811ddb4ea001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_IN_ACK_DEST">
+         <Label language="EN">Ack Destination</Label>
+         <Label language="DE">Ack Destination</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>OutDestination</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="5e4311667b6811ddb4ea001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_OUT_DEST">
+         <Label language="EN">Destination</Label>
+         <Label language="DE">Destination</Label>
+      </GuiLabels>
+      <Flag>nonTransportable</Flag>
+   </Attribute>
+   <Attribute>
+      <Name>MetaDestination</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length/>
+      <GuiLabels guid="5e4311637b6811ddb4ea001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_META_DEST">
+         <Label language="EN">Metadata Destination</Label>
+         <Label language="DE">Metadata Destination</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>InterfaceVersion</Name>
+      <Usage>required</Usage>
+      <Default>Interface Version 4.0 or above</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="5e433b627b6811dd82b2991a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_INTF_VER">
+         <Label language="EN">Interface Version</Label>
+         <Label language="DE">Interface Version</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>Interface Version 4.0 or above</value>
+         <GuiLabels guid="5e433b639b6811dd82b2001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_INTF_VER_ABV">
+            <Label language="EN">Interface Version 4.0 or above</Label>
+            <Label language="DE">Interface Version 4.0 or above</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>Interface Version below 4.0</value>
+         <GuiLabels guid="5e433b627b6811dd82b2001a4b5341a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_INTF_VER_BLW">
+            <Label language="EN">Interface Version below 4.0</Label>
+            <Label language="DE">Interface Version below 4.0</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>ControlRecordInIDocXml</Name>
+      <Usage>required</Usage>
+      <Default>Not Mandatory</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="5f463g627b6811dd82b2001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_CNTRL_REC">
+         <Label language="EN">Control Record in IDoc XML</Label>
+         <Label language="DE">Control Record in IDoc XML</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>Mandatory (Recommended)</value>
+         <GuiLabels guid="5e433b627b5511dd82b2001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_CNTRLREC_AVL">
+            <Label language="EN">Mandatory (Recommended)</Label>
+            <Label language="DE">Mandatory (Recommended)</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>Not Mandatory</value>
+         <GuiLabels guid="5e433b627b6811jj82b2001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_CNTRLREC_UNAVL">
+            <Label language="EN">Not Mandatory</Label>
+            <Label language="DE">Not Mandatory</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>SAPRelease</Name>
+      <Usage>required</Usage>
+      <Default>730</Default>
+      <DataType>xsd:string</DataType>
+      <Length>5</Length>
+      <GuiLabels guid="5e433163716811ddacad001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SAP_REL">
+         <Label language="EN">SAP Release</Label>
+         <Label language="DE">SAP Release</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>MetadataConnFactoryName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e010007afe11ddawwe001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_METADATA_CONN_FACT_NAME">
+         <Label language="EN">Metadata Connection Factory Name (use configurations from NWA)</Label>
+         <Label language="DE">Metadata Connection Factory Name (use configurations from NWA)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>VerifySender</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e010017bde11dd83ca001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_VER_SENDR">
+         <Label language="EN">Verify Sender (IDOC _DC)</Label>
+         <Label language="DE">Verify Sender (IDOC _DC)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AckRequested</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e010057b5611ddbb85001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_ACK_REQSTD">
+         <Label language="EN">Acknowledgements requested (ALEAUD)</Label>
+         <Label language="DE">Acknowledgements requested (ALEAUD)</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>CTLRecordTable</Name>
+      <Usage>optional</Usage>
+      <AttributeReference>
+         <ReferenceName>HeaderTableField</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>HeaderTableValue</ReferenceName>
+      </AttributeReference>
+      <GuiLabels guid="a53ad250330111dd81b2001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_IDOC_CONT_REC">
+         <Label language="EN">IDOC Control Records</Label>
+         <Label language="DE">IDOC Control Records</Label>
+      </GuiLabels>
+   </AttributeTable>
+   <Attribute>
+      <Name>HeaderTableField</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="a53ad2522c0111ddb5bf001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_FIELD">
+         <Label language="EN">Field</Label>
+         <Label language="DE">Field</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>HeaderTableValue</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="a53ad2527c0111ddad4f001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_EXPCTD_VAL">
+         <Label language="EN">Expected Value</Label>
+         <Label language="DE">Expected Value</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ConnFactoryName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="266ceed07c0e11dd9548001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_CONN_FACT_NAME">
+         <Label language="EN">Connection Factory Name(reuse NWA configuration)</Label>
+         <Label language="DE">Connection Factory Name(reuse NWA configuration)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>OptionalConnFactoryName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="266ceed07c0e11dd9228001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_ACK_CONN_FACT_NAME">
+         <Label language="EN">Ack Connection Factory Name(reuse NWA configuration)</Label>
+         <Label language="DE">Ack Connection Factory Name(reuse NWA configuration)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ApplyCntlRecFromPayload</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e0100544fe11ddbb85001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_APPL_CONT_FROM_PAYLD">
+         <Label language="EN">Apply Control Records from Payload</Label>
+         <Label language="DE">Apply Control Records from Payload</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ApplySenderFromPayload</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e01005eefe11ddbb85001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_APPL_SENDR_FROM_PAYLD">
+         <Label language="EN">Apply Sender from Payload</Label>
+         <Label language="DE">Apply Sender from Payload</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ApplyReceiverFromPayload</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e010057b1111ddbb85001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_APPL_RECVR_FROM_PAYLD">
+         <Label language="EN">Apply Receiver from Payload</Label>
+         <Label language="DE">Apply Receiver from Payload</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>SNCMode</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e010257b1111ddbb85001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_MODE">
+         <Label language="EN">SNC Mode</Label>
+         <Label language="DE">SNC Mode</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>SNCPartner</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="266ceed0773e11dd9228001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_PARTNER">
+         <Label language="EN">SNC Partner Name</Label>
+         <Label language="DE">SNC Partner Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>QualityOfProtect</Name>
+      <Usage>required</Usage>
+      <Default>8</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="5e433b627b6811dd82b2441a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_LEVEL">
+         <Label language="EN">Quality Of Protection</Label>
+         <Label language="DE">Quality Of Protection</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>9</value>
+         <GuiLabels guid="5e433b639b6811dd82b2001aaa5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_LEVEL9">
+            <Label language="EN">Level9 - Maximum</Label>
+            <Label language="DE">Level9 - Maximum</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>8</value>
+         <GuiLabels guid="5e433b639b6811dd82b22234b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_LEVEL8">
+            <Label language="EN">Level8 - Default</Label>
+            <Label language="DE">Level8 - Default</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>8</value>
+         <GuiLabels guid="5e433b639b6811dd37b2001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_LEVEL3">
+            <Label language="EN">Level3 - Privacy</Label>
+            <Label language="DE">Level3 - Privacy</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>2</value>
+         <GuiLabels guid="5e433b639b6811dd71b2001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_LEVEL2">
+            <Label language="EN">Level2 - Integrity</Label>
+            <Label language="DE">Level2 - Integrity</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>1</value>
+         <GuiLabels guid="5e433b639b6811d132b2001a4b5051a4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_LEVEL1">
+            <Label language="EN">Level1 - Open</Label>
+            <Label language="DE">Level1 - Open</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>SNCName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="266ceed07c0e11dd9228001cc4ab3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_NAME">
+         <Label language="EN">SNC Name</Label>
+         <Label language="DE">SNC Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>SNCPath</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="266ceed07c0e11dd9228001cc99d3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_SNC_PATH">
+         <Label language="EN">Path to SNC Library</Label>
+         <Label language="DE">Path to SNC Library</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>Packaging</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="06e010257b1111ddbb85001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.PACKAGING">
+         <Label language="EN">Packaging Required</Label>
+         <Label language="DE">Packaging Required</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>PackSize</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>5</Length>
+      <GuiLabels guid="266ceed0773e11dd9228001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.PACKAGING_SIZE">
+         <Label language="EN">Package Size</Label>
+         <Label language="DE">Package Size</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>PackTimeout</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>10</Length>
+      <GuiLabels guid="499a0fcf07ed44368dbd30bc8e9697f1" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.PACKAGING_TIMEOUT">
+         <Label language="EN">Package Wait Time (milliseconds)</Label>
+         <Label language="DE">Package Wait Time (milliseconds)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>PackMemory</Name>
+      <Usage>optional</Usage>
+     <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>10</Length>
+      <GuiLabels guid="cf7dd98023b44cc28ee4795e079bea0f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.PACKAGING_MEMORY">
+         <Label language="EN">Package Memory (bytes)</Label>
+         <Label language="DE">Package Memory (bytes)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>IDocAdapterStatus</Name>
+      <Usage>required</Usage>
+      <Default>active</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fabe5707b56849cb8059fe542decd958" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_IDOC_ADAPTER_STATUS">
+         <Label language="EN">Status</Label>
+         <Label language="DE">Status</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>active</value>
+         <GuiLabels guid="c6b2b30862e4415e87ecbb55238361ad" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_IDOC_ADAPTER_ACTIVE">
+            <Label language="EN">Active</Label>
+            <Label language="DE">Aktiv</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>inactive</value>
+         <GuiLabels guid="a6b3bd778d3e4ced8b7375a9e453c7f2" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATG_IDOC_ADAPTER_INACTIVE">
+            <Label language="EN">Inactive</Label>
+            <Label language="DE">Inaktiv</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>idoc.overridecontrolheaders</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="f1613b90f02011d88eeceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.AT_IDOC_OVERRIDE_CONTROL_HEADERS">
+         <Label language="EN"> Override IDoc Control Headers</Label>
+         <Label language="DE"> Override IDoc Control Headers</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>idoc.controlHeadersTable</Name>
+      <Usage>optional</Usage>
+      <GuiLabels guid="fc613b22f02011d893bbeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.ATT_IDOC_CONTROL_HEADERS_TABLE">
+         <Label language="EN">IDoc Control Headers</Label>
+         <Label language="DE">IDoc Control Headers</Label>
+      </GuiLabels>
+      <AttributeReference>
+         <ReferenceName>idoc.controlHeaderName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>idoc.controlHeaderValue</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>idoc.controlHeaderName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc613b93f08011d8acb3eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.AT_HEADER">
+         <Label language="EN">Header</Label>
+         <Label language="DE">Header</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>idoc.controlHeaderValue</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc613b94f02011d899630af70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.AT_HEADER_VALUE">
+         <Label language="EN">Value</Label>
+         <Label language="DE">Wert</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>idoc.additionalParamEnabled</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="f1613b90f02011d88eeceaf70a126319" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.AT_IDOC_ADDITIONAL_PARAMETERS">
+         <Label language="EN">Set Additional Parameters</Label>
+         <Label language="DE">Set Additional Parameters</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>idoc.additionalParamTable</Name>
+      <Usage>optional</Usage>
+      <GuiLabels guid="fc613b22f02011d893bbeaf70a126129" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.AT_IDOC_ADDITIONAL_PARAMETERS_TABLE">
+         <Label language="EN">Additional Parameters Table</Label>
+         <Label language="DE">Additional Parameters Table</Label>
+      </GuiLabels>
+      <AttributeReference>
+         <ReferenceName>idoc.additionalParamName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>idoc.additionalParamValue</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>idoc.additionalParamName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc613b93f08011d8acb3eaf70a126119" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.AT_PARAMETER">
+         <Label language="EN">Header</Label>
+         <Label language="DE">Header</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>idoc.additionalParamValue</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc613b94f02011d899630af70a126229" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.AT_PARAMETER_VALUE">
+         <Label language="EN">Value</Label>
+         <Label language="DE">Wert</Label>
+      </GuiLabels>
+   </Attribute>
+   <TabDefinition id="RFCParameters">
+      <GuiLabels guid="5025b4507c02eeddc1d7001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.TBD_RFC_PARAMS">
+         <Label language="EN">RFC Parameters</Label>
+         <Label language="DE">RFC Parameters</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="optional">
+      <GuiLabels guid="cfe1b7e07c05ffddc41b001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.TBD_OPTNL_PARAMS">
+         <Label language="EN">Optional Parameters</Label>
+         <Label language="DE">Optional Parameters</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="AckParameters">
+      <GuiLabels guid="5025b4517c0212ddcc2d001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.TBD_ACK_SET">
+         <Label language="EN">Ack Settings</Label>
+         <Label language="DE">Ack Settings</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="advanced">
+      <GuiLabels guid="5025b4517c0121ddcc2d001cc4bd3cde" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_AAE_IDocAdapterMetadata.TBD_ADV">
+         <Label language="EN">Advanced</Label>
+         <Label language="DE">Advanced</Label>
+      </GuiLabels>
+   </TabDefinition>
+</AdapterTypeMetaData>

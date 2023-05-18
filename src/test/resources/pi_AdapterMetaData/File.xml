@@ -1,0 +1,3578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="30">
+   <GuiHandlerClassName/>
+   <Type>File</Type>
+   <GuiLabels guid="fc4e28b0f02011d8ba16eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TYPE_NAME">
+      <Label language="EN">File/FTP Adapter</Label>
+      <Label language="DE">File/FTP-Adapter</Label>
+   </GuiLabels>
+   <Outbound>
+      <TransportProtocol>
+         <Name>File</Name>
+         <Version/>
+         <GuiLabels guid="fc4e28b1f02011d88b62eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TRNS_FILE">
+            <Label language="EN">File System (NFS)</Label>
+            <Label language="DE">File System (NFS)</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>File</Name>
+               <Version>3.0.0527</Version>
+            </ProtocolIdentifier>
+            <ProtocolIdentifier>
+               <Name>FileCSV</Name>
+               <Version>3.0.0527</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes>
+            <Tab id="target">
+               <AttributeGroup>
+                  <Name>file.system</Name>
+                  <GuiLabels guid="fc5554a1f02011d8a846eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_SYST">
+                     <Label language="EN">File Access Parameters</Label>
+                     <Label language="DE">Datei-Zugriffsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.targetDir</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>createTargetDirectory</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.targetFileName</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="process">
+               <AttributeGroup>
+                  <Name>file.processParams</Name>
+                  <GuiLabels guid="fc57c5a2f02011d8b224eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_FILEPROC">
+                     <Label language="EN">Processing Parameters</Label>
+                     <Label language="DE">Verarbeitungsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.writeMode</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.overwrite</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.writeMode</AttributeName>
+                        <AttributeValue>create</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.writeDirectly</ReferenceName>
+                     <NotCondition>
+                        <EditCondition>
+                           <AttributeName>file.writeMode</AttributeName>
+                           <AttributeValue>append</AttributeValue>
+                        </EditCondition>
+                     </NotCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>tempFileNameScheme</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>file.writeDirectly</AttributeName>
+                           <AttributeValue>NO</AttributeValue>
+                        </EditCondition>
+                        <NotCondition>
+                           <EditCondition>
+                              <AttributeName>file.writeMode</AttributeName>
+                              <AttributeValue>append</AttributeValue>
+                           </EditCondition>
+                        </NotCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>emptyMessageHandling</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>maximumConcurrency</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.type</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.encoding</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.type</AttributeName>
+                        <AttributeValue>txt</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>file.nameFormatDescription</Name>
+                  <GuiLabels guid="fc5099b3f02011d8bf47eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_NAMEDESC">
+                     <Label language="EN">Counter Definition</Label>
+                     <Label language="DE">Z�hlerdefinition</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.counterSeparator</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.writeMode</AttributeName>
+                        <AttributeValue>addCounter</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.counterFormat</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.writeMode</AttributeName>
+                        <AttributeValue>addCounter</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.counterStep</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.writeMode</AttributeName>
+                        <AttributeValue>addCounter</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.counterMode</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.writeMode</AttributeName>
+                        <AttributeValue>addCounter</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>file.osCommand.before</Name>
+                  <GuiLabels guid="3b709ea012b111dc88fb000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_PREPROCESS_OSCOMMAND">
+                     <Label language="EN">Run Operating System Command Before Message Processing</Label>
+                     <Label language="DE">Betriebssystembefehl vor Nachrichtenverarbeitung ausf�hren</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.execute</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.executeTimeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.executeTerminateAfterTimeout</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>file.osCommand.after</Name>
+                  <GuiLabels guid="3b709ea112b111dc8695000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_OSCOMMAND">
+                     <Label language="EN">Run Operating System Command After Message Processing</Label>
+                     <Label language="DE">Betriebssystembefehl nach Nachrichtenverarbeitung ausf�hren</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.execute</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.executeTimeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.executeTerminateAfterTimeout</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="advanced">
+               <AttributeGroup>
+                  <Name>file.varSubstitutionGroup</Name>
+                  <GuiLabels guid="3b709ea212b111dcacf7000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_VARSUBST">
+                     <Label language="EN">Variable Substitution (Target Directory/File Name Scheme)</Label>
+                     <Label language="DE">Variablenersetzung (Zielverzeichnis/Dateinamenschema)/</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.varSubstitution</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.varSubstitutionParams</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.varSubstitution</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.varSubstitutionDisableSecurity</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.varSubstitution</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>dynamicConfiguration</Name>
+                  <GuiLabels guid="3b709ea312b111dcc943000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_GeneralAdapterMetadata.ATG_DYNCONFIG">
+                     <Label language="EN">Adapter-Specific Message Properties</Label>
+                     <Label language="DE">Adapterspezifische Nachrichtenattribute</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableDynConfigReceiver</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFailOnMissingProperties</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigReceiver</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigReceiver</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigDirectory</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigReceiver</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileType</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigReceiver</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileEncoding</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>dynConfigFileType</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfigReceiver</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigTargetTempFileName</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfigReceiver</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>file.writeDirectly</AttributeName>
+                           <AttributeValue>NO</AttributeValue>
+                        </EditCondition>
+                        <NotCondition>
+                           <EditCondition>
+                              <AttributeName>file.writeMode</AttributeName>
+                              <AttributeValue>append</AttributeValue>
+                           </EditCondition>
+                        </NotCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+      </TransportProtocol>
+      <TransportProtocol>
+         <Name>FTP</Name>
+         <Version/>
+         <GuiLabels guid="fc4e28b2f02011d8b033eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TRNS_FTP">
+            <Label language="EN">File Transfer Protocol (FTP)</Label>
+            <Label language="DE">File Transfer Protocol (FTP)</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>File</Name>
+               <Version>3.0.0527</Version>
+            </ProtocolIdentifier>
+            <ProtocolIdentifier>
+               <Name>FileCSV</Name>
+               <Version>3.0.0527</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes>
+            <Tab id="target">
+               <AttributeGroup>
+                  <Name>file.system</Name>
+                  <GuiLabels guid="fc5554a1f02011d8a846eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_SYST">
+                     <Label language="EN">File Access Parameters</Label>
+                     <Label language="DE">Datei-Zugriffsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>ftp.targetDir</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>createTargetDirectory</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.targetFileName</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>ftp.connection</Name>
+                  <GuiLabels guid="fc4e28b3f02011d88952eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_FTPCONN">
+                     <Label language="EN">FTP Connection Parameters</Label>
+                     <Label language="DE">FTP-Verbindungsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>ftp.host</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.port</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.dataConnectionMode</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.timeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.useftpproxy</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.security</AttributeName>
+                        <AttributeValue>none</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.ftpproxyhostname</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>none</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.useftpproxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.ftpproxyport</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>none</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.useftpproxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.ftpproxytype</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>none</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.useftpproxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.customftpproxytype</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>none</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.useftpproxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.ftpproxytype</AttributeName>
+                           <AttributeValue>custom_type</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security.commandorder</ReferenceName>
+                     <AndCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control_data</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security.useClientCert</ReferenceName>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>ftps_control</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>ftps_control_data</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security.keyStore</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security.useClientCert</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control_data</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security.clientCertificate</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security.useClientCert</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control_data</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.anonymous</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.user</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.anonymous</AttributeName>
+                        <AttributeValue>0</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.password</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.anonymous</AttributeName>
+                        <AttributeValue>0</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.connection</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.transferMode</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="process">
+               <AttributeGroup>
+                  <Name>file.processParams</Name>
+                  <GuiLabels guid="fc57c5a2f02011d8b224eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_FILEPROC">
+                     <Label language="EN">Processing Parameters</Label>
+                     <Label language="DE">Verarbeitungsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>ftp.writeMode</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.overwrite</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.writeMode</AttributeName>
+                           <AttributeValue>create</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.putSafe</AttributeName>
+                           <AttributeValue>YES</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.putSafe</ReferenceName>
+                     <NotCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.writeMode</AttributeName>
+                           <AttributeValue>append</AttributeValue>
+                        </EditCondition>
+                     </NotCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>tempFileNameScheme</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.putSafe</AttributeName>
+                           <AttributeValue>YES</AttributeValue>
+                        </EditCondition>
+                        <NotCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.writeMode</AttributeName>
+                              <AttributeValue>append</AttributeValue>
+                           </EditCondition>
+                        </NotCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>emptyMessageHandling</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>maximumConcurrency</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.type</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.encoding</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.type</AttributeName>
+                        <AttributeValue>txt</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>file.osCommand.before</Name>
+                  <GuiLabels guid="3b730fa012b111dcb12b000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_PREPROCESS_OSCOMMAND">
+                     <Label language="EN">Run Operating System Command Before Message Processing</Label>
+                     <Label language="DE">Betriebssystembefehl vor Nachrichtenverarbeitung ausf�hren</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.execute</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.executeTimeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.executeTerminateAfterTimeout</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>file.osCommand.after</Name>
+                  <GuiLabels guid="3b730fa112b111dc8ae1000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_OSCOMMAND">
+                     <Label language="EN">Run Operating System Command After Message Processing</Label>
+                     <Label language="DE">Betriebssystembefehl nach Nachrichtenverarbeitung ausf�hren</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.execute</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.executeTimeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.executeTerminateAfterTimeout</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="advanced">
+               <AttributeGroup>
+                  <Name>file.varSubstitutionGroup</Name>
+                  <GuiLabels guid="3b75599012b111dc8528000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_VARSUBST">
+                     <Label language="EN">Variable Substitution (Target Directory/File Name Scheme)</Label>
+                     <Label language="DE">Variablenersetzung (Zielverzeichnis/Dateinamenschema)/</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.varSubstitution</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.varSubstitutionParams</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.varSubstitution</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.varSubstitutionDisableSecurity</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.varSubstitution</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>dynamicConfiguration</Name>
+                  <GuiLabels guid="3b75599112b111dcb26d000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_GeneralAdapterMetadata.ATG_DYNCONFIG">
+                     <Label language="EN">Adapter-Specific Message Properties</Label>
+                     <Label language="DE">Adapterspezifische Nachrichtenattribute</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableDynConfigReceiver</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFailOnMissingProperties</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigReceiver</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigReceiver</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigDirectory</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigReceiver</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileType</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigReceiver</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileEncoding</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>dynConfigFileType</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfigReceiver</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigTargetTempFileName</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfigReceiver</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.putSafe</AttributeName>
+                           <AttributeValue>YES</AttributeValue>
+                        </EditCondition>
+                        <NotCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.writeMode</AttributeName>
+                              <AttributeValue>append</AttributeValue>
+                           </EditCondition>
+                        </NotCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+      </TransportProtocol>
+      <MessageProtocol>
+         <Name>File</Name>
+         <Version>3.0.0527</Version>
+         <GuiLabels guid="fc5099b0f02011d8c681eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.MSG_FILE">
+            <Label language="EN">File</Label>
+            <Label language="DE">File</Label>
+         </GuiLabels>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <MessageProtocol>
+         <Name>FileCSV</Name>
+         <Version>3.0.0527</Version>
+         <GuiLabels guid="fc5099b1f02011d885bceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.MSG_CSV">
+            <Label language="EN">File Content Conversion</Label>
+            <Label language="DE">File Content Conversion</Label>
+         </GuiLabels>
+         <ChannelAttributes>
+            <Tab id="fcc">
+               <AttributeGroup>
+                  <Name>file.convParams</Name>
+                  <GuiLabels guid="fc5099b2f02011d88ba8eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_CONV">
+                     <Label language="EN">Content Conversion Parameters</Label>
+                     <Label language="DE">Parameter zur Inhaltskonvertierung</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.recordsetStructure</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.conversionParameters</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <GlobalChannelAttributes>
+         <Tab id="advanced">
+            <AttributeGroup>
+               <Name>file.status</Name>
+               <GuiLabels guid="fc5099b4f02011d8940aeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_STAT">
+                  <Label language="EN">Adapter Status</Label>
+                  <Label language="DE">Adapterstatus</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>file.adapterStatus</ReferenceName>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeReference>
+               <ReferenceName>file.advanced</ReferenceName>
+            </AttributeReference>
+            <AttributeGroup>
+               <Name>addTable</Name>
+               <GuiLabels guid="fc5099b5f02011d889c8eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_ADDPAR">
+                  <Label language="EN">Additional Parameters</Label>
+                  <Label language="DE">Zus�tzliche Parameter</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>file.addParameterParams</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>file.advanced</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+            </AttributeGroup>
+         </Tab>
+      </GlobalChannelAttributes>
+      <GlobalSecurityAttributes/>
+   </Outbound>
+   <Inbound>
+      <TransportProtocol>
+         <Name>File</Name>
+         <Version/>
+         <GuiLabels guid="fc5554a0f02011d8c3f8eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TRNS_FILE">
+            <Label language="EN">File System (NFS)</Label>
+            <Label language="DE">File System (NFS)</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>File</Name>
+               <Version>3.0.0527</Version>
+            </ProtocolIdentifier>
+            <ProtocolIdentifier>
+               <Name>FileCSV</Name>
+               <Version>3.0.0527</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes>
+            <Tab id="source">
+               <AttributeGroup>
+                  <Name>file.system</Name>
+                  <GuiLabels guid="fc5554a1f02011d8a846eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_SYST">
+                     <Label language="EN">File Access Parameters</Label>
+                     <Label language="DE">Datei-Zugriffsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.sourceDir</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.sourceFileName</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>advancedSourceFileSelection</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>exclusionMask</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>advancedSourceFileSelection</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>advancedFileSources</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>advancedSourceFileSelection</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.additionalPayloads</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.addPayloadNames</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.additionalPayloads</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.addPayloadParams</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.additionalPayloads</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="process">
+               <AttributeGroup>
+                  <Name>file.processParams</Name>
+                  <GuiLabels guid="fc57c5a2f02011d8b224eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_FILEPROC">
+                     <Label language="EN">Processing Parameters</Label>
+                     <Label language="DE">Verarbeitungsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.qualityOfService</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.queueName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.qualityOfService</AttributeName>
+                        <AttributeValue>EOIO</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.pollInterval</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.pollIntervalMsecs</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.retryInterval</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.processingMode</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.archiveWithTimestamp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.processingMode</AttributeName>
+                        <AttributeValue>archive</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.archiveDir</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.processingMode</AttributeName>
+                        <AttributeValue>archive</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>emptyFileHandling</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>useErrorArchiveDir</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>errorArchiveDir</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>useErrorArchiveDir</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>errorArchiveWithTimestamp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>useErrorArchiveDir</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.processingLocked</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.processingMode</AttributeName>
+                        <AttributeValue>archive</AttributeValue>
+                        <AttributeValue>delete</AttributeValue>
+                        <AttributeValue>test</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.processingOrder</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.type</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.encoding</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.type</AttributeName>
+                        <AttributeValue>txt</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>file.osCommand.before</Name>
+                  <GuiLabels guid="3b77ca9012b111dcbc83000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_PREPROCESS_OSCOMMAND">
+                     <Label language="EN">Run Operating System Command Before Message Processing</Label>
+                     <Label language="DE">Betriebssystembefehl vor Nachrichtenverarbeitung ausf�hren</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.execute</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.executeTimeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.executeTerminateAfterTimeout</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>file.osCommand.after</Name>
+                  <GuiLabels guid="3b77ca9112b111dcac14000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_OSCOMMAND">
+                     <Label language="EN">Run Operating System Command After Message Processing</Label>
+                     <Label language="DE">Betriebssystembefehl nach Nachrichtenverarbeitung ausf�hren</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.execute</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.executeTimeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.executeTerminateAfterTimeout</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>DuplicateHandling</Name>
+                  <GuiLabels guid="3b7a4b3112a123dc834d000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATTR_GRP_DUPLICATE_HANDLING">
+                     <Label language="EN">Duplicate Handling</Label>
+                     <Label language="DE">Duplicate Handling</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.EnableDuplicateHandling</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.DuplicateMsgThreshold</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.EnableDuplicateHandling</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.DisableChannelOnDuplicate</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.EnableDuplicateHandling</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="advanced">
+               <AttributeGroup>
+                  <Name>dynamicConfiguration</Name>
+                  <GuiLabels guid="3b77ca9212b111dca4cc000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_GeneralAdapterMetadata.ATG_DYNCONFIG">
+                     <Label language="EN">Adapter-Specific Message Properties</Label>
+                     <Label language="DE">Adapterspezifische Nachrichtenattribute</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableDynConfigSender</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigDirectory</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileType</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileEncoding</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfigSender</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>dynConfigFileType</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>file.type</AttributeName>
+                           <AttributeValue>txt</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigSourceFileSize</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigSourceFileTimestamp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+      </TransportProtocol>
+      <TransportProtocol>
+         <Name>FTP</Name>
+         <Version/>
+         <GuiLabels guid="fc5554a2f02011d8b85feaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TRNS_FTP">
+            <Label language="EN">File Transfer Protocol (FTP)</Label>
+            <Label language="DE">File Transfer Protocol (FTP)</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>File</Name>
+               <Version>3.0.0527</Version>
+            </ProtocolIdentifier>
+            <ProtocolIdentifier>
+               <Name>FileCSV</Name>
+               <Version>3.0.0527</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes>
+            <Tab id="source">
+               <AttributeGroup>
+                  <Name>file.system</Name>
+                  <GuiLabels guid="fc5554a1f02011d8a846eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_SYST">
+                     <Label language="EN">File Access Parameters</Label>
+                     <Label language="DE">Datei-Zugriffsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>ftp.sourceDir</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.sourceFileName</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>advancedSourceFileSelection</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>exclusionMask</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>advancedSourceFileSelection</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>advancedFileSources</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>advancedSourceFileSelection</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>ftp.connection</Name>
+                  <GuiLabels guid="fc5554a3f02011d8bcdaeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_FTPCONN">
+                     <Label language="EN">FTP Connection Parameters</Label>
+                     <Label language="DE">FTP-Verbindungsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>ftp.host</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.port</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.dataConnectionMode</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.timeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.useftpproxy</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.security</AttributeName>
+                        <AttributeValue>none</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.ftpproxyhostname</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>none</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.useftpproxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.ftpproxyport</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>none</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.useftpproxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.ftpproxytype</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>none</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.useftpproxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.customftpproxytype</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>none</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.useftpproxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.ftpproxytype</AttributeName>
+                           <AttributeValue>custom_type</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security.commandorder</ReferenceName>
+                     <AndCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control_data</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security.useClientCert</ReferenceName>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>ftps_control</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security</AttributeName>
+                           <AttributeValue>ftps_control_data</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security.keyStore</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security.useClientCert</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control_data</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.security.clientCertificate</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>ftp.security.useClientCert</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>ftp.security</AttributeName>
+                              <AttributeValue>ftps_control_data</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.anonymous</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.user</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.anonymous</AttributeName>
+                        <AttributeValue>0</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.password</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.anonymous</AttributeName>
+                        <AttributeValue>0</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.connection</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.transferMode</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="process">
+               <AttributeGroup>
+                  <Name>file.processParams</Name>
+                  <GuiLabels guid="fc57c5a2f02011d8b224eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_FILEPROC">
+                     <Label language="EN">Processing Parameters</Label>
+                     <Label language="DE">Verarbeitungsparameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.qualityOfService</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.queueName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.qualityOfService</AttributeName>
+                        <AttributeValue>EOIO</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.pollInterval</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.pollIntervalMsecs</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.retryInterval</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.processingMode</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.archiveWithTimestamp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.processingMode</AttributeName>
+                        <AttributeValue>archive</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.archiveDir</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.processingMode</AttributeName>
+                        <AttributeValue>archive</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.archiveOnFtpServer</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.processingMode</AttributeName>
+                        <AttributeValue>archive</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>emptyFileHandling</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>useErrorArchiveDir</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>errorArchiveDir</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>useErrorArchiveDir</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>errorArchiveWithTimestamp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>useErrorArchiveDir</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.type</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.encoding</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>file.type</AttributeName>
+                        <AttributeValue>txt</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>file.osCommand.before</Name>
+                  <GuiLabels guid="3b7a3b9012b111dc8c0c000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_PREPROCESS_OSCOMMAND">
+                     <Label language="EN">Run Operating System Command Before Message Processing</Label>
+                     <Label language="DE">Betriebssystembefehl vor Nachrichtenverarbeitung ausf�hren</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.execute</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.executeTimeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.preprocess.executeTerminateAfterTimeout</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>file.osCommand.after</Name>
+                  <GuiLabels guid="3b7a3b9112b111dc834d000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_OSCOMMAND">
+                     <Label language="EN">Run Operating System Command After Message Processing</Label>
+                     <Label language="DE">Betriebssystembefehl nach Nachrichtenverarbeitung ausf�hren</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>file.execute</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.executeTimeout</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.executeTerminateAfterTimeout</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>DuplicateHandling</Name>
+                  <GuiLabels guid="3b7a4b9112a123dc834d000f246a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATTR_GRP_DUPLICATE_HANDLING">
+                     <Label language="EN">Duplicate Handling</Label>
+                     <Label language="DE">Duplicate Handling</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>ftp.EnableDuplicateHandling</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.DuplicateMsgThreshold</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.EnableDuplicateHandling</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>ftp.DisableChannelOnDuplicate</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>ftp.EnableDuplicateHandling</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="advanced">
+               <AttributeGroup>
+                  <Name>dynamicConfiguration</Name>
+                  <GuiLabels guid="3b7a3b9212b111dc938b000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_GeneralAdapterMetadata.ATG_DYNCONFIG">
+                     <Label language="EN">Adapter-Specific Message Properties</Label>
+                     <Label language="DE">Adapterspezifische Nachrichtenattribute</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>enableDynConfigSender</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileName</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigDirectory</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileType</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigFileEncoding</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>dynConfigFileType</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>enableDynConfigSender</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>file.type</AttributeName>
+                           <AttributeValue>txt</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigSourceFileSize</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigSourceFileTimestamp</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>dynConfigSourceFTPHost</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>enableDynConfigSender</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+      </TransportProtocol>
+      <MessageProtocol>
+         <Name>File</Name>
+         <Version>3.0.0527</Version>
+         <GuiLabels guid="fc5554a4f02011d8a830eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.MSG_FILE">
+            <Label language="EN">File</Label>
+            <Label language="DE">File</Label>
+         </GuiLabels>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <MessageProtocol>
+         <Name>FileCSV</Name>
+         <Version>3.0.0527</Version>
+         <GuiLabels guid="fc57c5a0f02011d8972ceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.MSG_CSV">
+            <Label language="EN">File Content Conversion</Label>
+            <Label language="DE">File Content Conversion</Label>
+         </GuiLabels>
+         <ChannelAttributes>
+            <Tab id="fcc">
+               <AttributeGroup>
+                  <Name>file.convParams</Name>
+                  <GuiLabels guid="fc57c5a1f02011d8c040eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_CONV">
+                     <Label language="EN">Content Conversion Parameters</Label>
+                     <Label language="DE">Parameter zur Inhaltskonvertierung</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>xml.documentName</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>xml.documentNamespace</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>xml.documentSkipFirstRows</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>xml.recordsetName</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>xml.recordsetNamespace</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>xml.recordsetStructure</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>xml.recordsetStructureOrder</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>xml.recordsetsPerMessage</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>xml.keyfieldName</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>xml.keyfieldType</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>file.conversionParameters</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>0</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <GlobalChannelAttributes>
+         <Tab id="advanced">
+            <AttributeGroup>
+               <Name>file.status</Name>
+               <GuiLabels guid="fc57c5a3f02011d8b21ceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_STAT">
+                  <Label language="EN">Adapter Status</Label>
+                  <Label language="DE">Adapterstatus</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>file.adapterStatus</ReferenceName>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeReference>
+               <ReferenceName>file.advanced</ReferenceName>
+            </AttributeReference>
+            <AttributeGroup>
+               <Name>chunkMode</Name>
+               <GuiLabels guid="3c4e28b2f02011d8b033eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_CHUNKMODE">
+                  <Label language="EN">Chunk Mode for Binary File-to-file Transfer (For EOIO mode only)</Label>
+                  <Label language="DE">St�ckweise �bertragung Datei-zu-Datei (Nur in EOIO Modus)</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>enableChunkMode</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>file.advanced</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>file.qualityOfService</AttributeName>
+                        <AttributeValue>EOIO</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>chunkSize</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>file.advanced</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>enableChunkMode</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>file.qualityOfService</AttributeName>
+                        <AttributeValue>EOIO</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeGroup>
+               <Name>addTable</Name>
+               <GuiLabels guid="fc57c5a4f02011d8add7eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATG_ADDPAR">
+                  <Label language="EN">Additional Parameters</Label>
+                  <Label language="DE">Zus�tzliche Parameter</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>file.checkFileModification</ReferenceName>
+                  <AndCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>xml.recordsetsPerMessage</AttributeName>
+                           <AttributeValue/>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>xml.recordsetsPerMessage</AttributeName>
+                           <AttributeValue>*</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                     <EditCondition>
+                        <AttributeName>file.advanced</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>maxFileSize</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>file.advanced</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>file.addParameterParams</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>file.advanced</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+            </AttributeGroup>
+         </Tab>
+      </GlobalChannelAttributes>
+      <GlobalSecurityAttributes/>
+   </Inbound>
+   <Attribute>
+      <Name>file.adapterStatus</Name>
+      <Usage>optional</Usage>
+      <Default>active</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc57c5a5f02011d89f22eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_STATE">
+         <Label language="EN">Status</Label>
+         <Label language="DE">Status</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>active</value>
+         <GuiLabels guid="fc57c5a6f02011d8ac0feaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_ACTIVE">
+            <Label language="EN">Active</Label>
+            <Label language="DE">Aktiv</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>inactive</value>
+         <GuiLabels guid="fc5a0f90f02011d8a71beaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_INACTIVE">
+            <Label language="EN">Inactive</Label>
+            <Label language="DE">Inaktiv</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>file.sourceDir</Name>
+      <Usage>required</Usage>
+      <Default>/</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5a0f91f02011d8c4a9eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SRCDIR">
+         <Label language="EN">Source Directory</Label>
+         <Label language="DE">Quellverzeichnis</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xml.documentName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f92f02011d88623eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DOCNAME">
+         <Label language="EN">Document Name</Label>
+         <Label language="DE">Dokumentname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xml.documentNamespace</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f93f02011d8c664eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DOCNS">
+         <Label language="EN">Document Namespace</Label>
+         <Label language="DE">Dokumentnamensraum</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xml.documentSkipFirstRows</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f94f02011d89cbfeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DOCSKIPROWS">
+         <Label language="EN">Document Offset</Label>
+         <Label language="DE">Dokument Offset</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xml.recordsetName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f95f02011d88663eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_RSNAME">
+         <Label language="EN">Recordset Name</Label>
+         <Label language="DE">Recordset-Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xml.recordsetNamespace</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f96f02011d8a3c8eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_RSNS">
+         <Label language="EN">Recordset Namespace</Label>
+         <Label language="DE">Recordset-Namensraum</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xml.recordsetStructure</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f97f02011d89cc1eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_RSSTRUCT">
+         <Label language="EN">Recordset Structure</Label>
+         <Label language="DE">Recordset-Struktur </Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xml.recordsetStructureOrder</Name>
+      <Usage>required</Usage>
+      <Default>asc</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="79d7d4601c4111d9854bdc5c0a126362" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_RSSTRUCTORDER">
+         <Label language="EN">Recordset Sequence</Label>
+         <Label language="DE">Recordset Reihenfolge</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>var</value>
+         <GuiLabels guid="79d7d4611c4111d9c87adc5c0a126362" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_VAR">
+            <Label language="EN">Variable</Label>
+            <Label language="DE">Variabel</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>asc</value>
+         <GuiLabels guid="79d7d4621c4111d9aff7dc5c0a126362" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_ASC">
+            <Label language="EN">Ascending</Label>
+            <Label language="DE">Aufsteigend</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>xml.recordsetsPerMessage</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f98f02011d89d8beaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_RSPMESS">
+         <Label language="EN">Recordsets per Message</Label>
+         <Label language="DE">Recordsets pro Message</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xml.keyfieldName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f99f02011d8baa9eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_KEY">
+         <Label language="EN">Key Field Name</Label>
+         <Label language="DE">Schl�sselfeldname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xml.keyfieldType</Name>
+      <Usage>optional</Usage>
+      <Default>StrS</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f9af02011d8c66eeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_KEYTYPE">
+         <Label language="EN">Key Field Type</Label>
+         <Label language="DE">Schl�sselfeldtyp</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>StrS</value>
+         <GuiLabels guid="fc5a0f9bf02011d88f11eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_STRS">
+            <Label language="EN">String (Case-Sensitive)</Label>
+            <Label language="DE">String (case-sensitive)</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>StrI</value>
+         <GuiLabels guid="fc5a0f9cf02011d8afd6eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_STRI">
+            <Label language="EN">String (Case-Insensitive)</Label>
+            <Label language="DE">String (case-insensitive)</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>Integer</value>
+         <GuiLabels guid="fc5a0f9df02011d8847deaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_INT">
+            <Label language="EN">Integer</Label>
+            <Label language="DE">Integer</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>Float</value>
+         <GuiLabels guid="fc5a0f9ef02011d8ae23eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_FLOAT">
+            <Label language="EN">Float</Label>
+            <Label language="DE">Float</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>file.recordsetStructure</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f9ff02011d8c013eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_RSSTRUCT">
+         <Label language="EN">Recordset Structure</Label>
+         <Label language="DE">Recordset-Struktur</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>file.conversionParameters</Name>
+      <Usage>optional</Usage>
+      <GuiLabels guid="fc5a0fa0f02011d8a1deeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATT_RSDESC">
+         <Label language="EN">Recordsets Description</Label>
+         <Label language="DE">Recordsets-Beschreibung</Label>
+      </GuiLabels>
+      <AttributeReference>
+         <ReferenceName>file.addConvParamName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>file.addConvParamValue</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>file.addConvParamName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0fa1f02011d8bf69eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADDPARNAME">
+         <Label language="EN">Name</Label>
+         <Label language="DE">Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.addConvParamValue</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0fa2f02011d8bd97eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADDPARVAL">
+         <Label language="EN">Value</Label>
+         <Label language="DE">Wert</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.sourceFileName</Name>
+      <Usage>required</Usage>
+      <Default>xi_input.dat</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5a0fa3f02011d8bb6deaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SRCFILENAME">
+         <Label language="EN">File Name</Label>
+         <Label language="DE">Dateiname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.type</Name>
+      <Usage>required</Usage>
+      <Default>bin</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0fa4f02011d88383eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SRCFILETYPE">
+         <Label language="EN">File Type</Label>
+         <Label language="DE">Dateityp</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>bin</value>
+         <GuiLabels guid="fc5a0fa5f02011d8b6adeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_BIN">
+            <Label language="EN">Binary</Label>
+            <Label language="DE">bin�r</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>txt</value>
+         <GuiLabels guid="fc5a0fa6f02011d8b609eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_TXT">
+            <Label language="EN">Text</Label>
+            <Label language="DE">Text</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>file.encoding</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0fa7f02011d8c8b5eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FILENC">
+         <Label language="EN">File Encoding</Label>
+         <Label language="DE">Datei-Codierung</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.additionalPayloads</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="fc5a0fa8f02011d8cb40eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADDFILES">
+         <Label language="EN">Additional File(s)</Label>
+         <Label language="DE">Zus�tzliche Datei(en)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.addPayloadNames</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c8090f02011d888f8eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADDFILELIST">
+         <Label language="EN">File List</Label>
+         <Label language="DE">Dateiliste</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>file.addPayloadParams</Name>
+      <Usage>optional</Usage>
+      <Label language="EN">.</Label>
+      <AttributeReference>
+         <ReferenceName>file.addPayloadParamName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>file.addPayloadParamValue</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>file.addPayloadParamName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c8091f02011d8be80eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADDFILENAMES">
+         <Label language="EN">Name</Label>
+         <Label language="DE">Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.addPayloadParamValue</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c8092f02011d88b59eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADDFILEVALUE">
+         <Label language="EN">Value</Label>
+         <Label language="DE">Wert</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.execute</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c8093f02011d8818feaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_OPCMD">
+         <Label language="EN">Command Line</Label>
+         <Label language="DE">Kommandozeile</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.executeTimeout</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <Length>6</Length>
+      <DataType>xsd:integer</DataType>
+      <GuiLabels guid="3b7ef68012b111dcb554000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_OPCMDTIMEOUT">
+         <Label language="EN">Timeout (secs)</Label>
+         <Label language="DE">Timeout (Sek.)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.executeTerminateAfterTimeout</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="3b7ef68112b111dc8fb9000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_OPCMDTERMINATE">
+         <Label language="EN">Terminate Program After Timeout</Label>
+         <Label language="DE">Programm nach nach Timeout abbrechen</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.DuplicateMsgThreshold</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0e71f02014d8c4a9eaf70a121329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATTR_DUPLICATE_THRESH">
+         <Label language="EN">Duplicate Message Alert Threshold</Label>
+         <Label language="DE">Duplicate Message Alert Threshold</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.DisableChannelOnDuplicate</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f61e02014d8c4b9eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATTR_DUPLICATE_DISABLE">
+         <Label language="EN">Disable channel if threshold exceeds</Label>
+         <Label language="DE">Disable channel if threshold exceeds</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.DuplicateMsgThreshold</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0e71f02014z8c4a9eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATTR_DUPLICATE_THRESH">
+         <Label language="EN">Duplicate Message Alert Threshold</Label>
+         <Label language="DE">Duplicate Message Alert Threshold</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.DisableChannelOnDuplicate</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f61e02014d8c4a9eaf00a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATTR_DUPLICATE_DISABLE">
+         <Label language="EN">Disable Channel On Duplicate</Label>
+         <Label language="DE">Deaktivieren Channel auf Duplizieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.EnableDuplicateHandling</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f61e02014d8c4b45af70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATTR_ENABLE_DUPLICATE_HANDLING">
+         <Label language="EN">Enable Duplicate Handling</Label>
+         <Label language="DE">Aktivieren Duplicate Handling</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.EnableDuplicateHandling</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5a0f61e02014d111b45af70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATTR_ENABLE_DUPLICATE_HANDLING">
+         <Label language="EN">Enable Duplicate Handling</Label>
+         <Label language="DE">Aktivieren Duplicate Handling</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.preprocess.execute</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c8093f02011d8818feaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_OPCMD">
+         <Label language="EN">Command Line</Label>
+         <Label language="DE">Kommandozeile</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.preprocess.executeTimeout</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <Length>6</Length>
+      <DataType>xsd:integer</DataType>
+      <GuiLabels guid="3b7ef68212b111dcc753000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_OPCMDTIMEOUT">
+         <Label language="EN">Timeout (secs)</Label>
+         <Label language="DE">Timeout (Sek.)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.preprocess.executeTerminateAfterTimeout</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="3b7ef68312b111dc8ca8000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_OPCMDTERMINATE">
+         <Label language="EN">Terminate Program After Timeout</Label>
+         <Label language="DE">Programm nach nach Timeout abbrechen</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.qualityOfService</Name>
+      <Usage>required</Usage>
+      <Default>EO</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c8094f02011d88b15eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_QOS">
+         <Label language="EN">Quality of Service</Label>
+         <Label language="DE">Quality-of-Service</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>BE</value>
+         <GuiLabels guid="fc5c8095f02011d8855ceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_BE">
+            <Label language="EN">Best Effort</Label>
+            <Label language="DE">Best Effort</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>EO</value>
+         <GuiLabels guid="fc5c8096f02011d8cc53eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_EO">
+            <Label language="EN">Exactly Once</Label>
+            <Label language="DE">Exactly Once</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>EOIO</value>
+         <GuiLabels guid="fc5c8097f02011d89557eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_EOIO">
+            <Label language="EN">Exactly Once in Order</Label>
+            <Label language="DE">Exactly Once In Order</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>file.queueName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>16</Length>
+      <GuiLabels guid="fc5c8098f02011d8c3cfeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_QNAME">
+         <Label language="EN">Queue Name</Label>
+         <Label language="DE">Queue-Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.pollInterval</Name>
+      <Usage>required</Usage>
+      <Default>60</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>10</Length>
+      <GuiLabels guid="fc5c8099f02011d8c9f8eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_POLLSEC">
+         <Label language="EN">Poll Interval (secs)</Label>
+         <Label language="DE">Poll-Intervall (Sek.)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.pollIntervalMsecs</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <Length>10</Length>
+      <GuiLabels guid="fc5c809af02011d8ab6ceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_POLLMSEC">
+         <Label language="EN">Poll Interval (msecs)</Label>
+         <Label language="DE">Poll-Intervall (mSek.)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.retryInterval</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <Length>10</Length>
+      <GuiLabels guid="fc5c809bf02011d8a7a8eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_RETRYSEC">
+         <Label language="EN">Retry Interval (secs)</Label>
+         <Label language="DE">Wiederholungsintervall (Sek.)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.processingMode</Name>
+      <Usage>required</Usage>
+      <Default>test</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c809cf02011d8a548eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_PROCMODE">
+         <Label language="EN">Processing Mode</Label>
+         <Label language="DE">Verarbeitungsmodus</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>archive</value>
+         <GuiLabels guid="fc5c809df02011d89a30eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_ARCHIVE">
+            <Label language="EN">Archive</Label>
+            <Label language="DE">Archivieren</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>readonly</value>
+         <GuiLabels guid="fc5c809ef02011d8bd5deaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_RO">
+            <Label language="EN">Set to Read-Only</Label>
+            <Label language="DE">Auf schreibgesch�tzt setzen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>delete</value>
+         <GuiLabels guid="fc5c809ff02011d8c222eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_DEL">
+            <Label language="EN">Delete</Label>
+            <Label language="DE">L�schen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>test</value>
+         <GuiLabels guid="fc5c80a0f02011d8a31eeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_TEST">
+            <Label language="EN">Test</Label>
+            <Label language="DE">Testen</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.processingMode</Name>
+      <Usage>required</Usage>
+      <Default>test</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c809cf02011d8a548eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_PROCMODE">
+         <Label language="EN">Processing Mode</Label>
+         <Label language="DE">Verarbeitungsmodus</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>archive</value>
+         <GuiLabels guid="fc5c809df02011d89a30eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_ARCHIVE">
+            <Label language="EN">Archive</Label>
+            <Label language="DE">Archivieren</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>delete</value>
+         <GuiLabels guid="fc5c809ff02011d8c222eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_DEL">
+            <Label language="EN">Delete</Label>
+            <Label language="DE">L�schen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>test</value>
+         <GuiLabels guid="fc5c80a0f02011d8a31eeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_TEST">
+            <Label language="EN">Test</Label>
+            <Label language="DE">Testen</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.archiveOnFtpServer</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fd000780fb2c11d88ce0d3030a126336" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ARCONFTP">
+         <Label language="EN">Archive files on ftp server</Label>
+         <Label language="DE">Dateien auf ftp Server archivieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.archiveWithTimestamp</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c80a1f02011d8c5e7eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADDTIME">
+         <Label language="EN">Add Time Stamp</Label>
+         <Label language="DE">Zeitstempel hinzuf�gen</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.archiveDir</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5c80a2f02011d8bd64eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ARCHDIR">
+         <Label language="EN">Archive Directory</Label>
+         <Label language="DE">Archivverzeichnis</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.processingLocked</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5c80a3f02011d8bed6eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_LOCKED">
+         <Label language="EN">Process Read-Only Files</Label>
+         <Label language="DE">Schreibgesch�tzte Dateien verarbeiten</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.processingOrder</Name>
+      <Usage>optional</Usage>
+      <Default>byName</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5eca80f02011d8ad44eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SEQ">
+         <Label language="EN">Processing Sequence</Label>
+         <Label language="DE">Verarbeitungsreihenfolge</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>byName</value>
+         <GuiLabels guid="fc5eca81f02011d8a913eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_BYNAME">
+            <Label language="EN">By Name</Label>
+            <Label language="DE">nach Name</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>byDate</value>
+         <GuiLabels guid="fc5eca82f02011d8ca16eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_BYDATE">
+            <Label language="EN">By Date</Label>
+            <Label language="DE">nach Datum</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>file.targetDir</Name>
+      <Usage>required</Usage>
+      <Default>/</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5eca83f02011d8b19ceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_TARGETDIR">
+         <Label language="EN">Target Directory</Label>
+         <Label language="DE">Zielverzeichnis</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.host</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <PasswordReference>ftp.password</PasswordReference>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5eca84f02011d8c392eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTPHOST">
+         <Label language="EN">Server</Label>
+         <Label language="DE">Server</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.port</Name>
+      <Usage>required</Usage>
+      <Default>21</Default>
+      <DataType>xsd:string</DataType>
+      <PasswordReference>ftp.password</PasswordReference>
+      <Length>6</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5eca85f02011d8ac30eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTPPORT">
+         <Label language="EN">Port</Label>
+         <Label language="DE">Port</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.connection</Name>
+      <Usage>required</Usage>
+      <Default>permanently</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>permanently</value>
+         <GuiLabels guid="fc5eca86f02011d8bf29eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_FTPPERM">
+            <Label language="EN">Permanently</Label>
+            <Label language="DE">Permanent</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>perFileTransfer</value>
+         <GuiLabels guid="fc5eca87f02011d8a11deaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_FTPPERFILE">
+            <Label language="EN">Per File Transfer</Label>
+            <Label language="DE">Pro Dateitransfer</Label>
+         </GuiLabels>
+      </FixedValue>
+      <GuiLabels guid="fc5eca88f02011d88c27eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTPCONNMODE">
+         <Label language="EN">Connect Mode</Label>
+         <Label language="DE">Verbindungsmodus</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.transferMode</Name>
+      <Usage>required</Usage>
+      <Default>bin</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>bin</value>
+         <GuiLabels guid="fc5eca89f02011d8bf3beaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_BIN">
+            <Label language="EN">Binary</Label>
+            <Label language="DE">bin�r</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>txt</value>
+         <GuiLabels guid="fc5eca8af02011d8a941eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_TXT">
+            <Label language="EN">Text</Label>
+            <Label language="DE">Text</Label>
+         </GuiLabels>
+      </FixedValue>
+      <GuiLabels guid="fc5eca8bf02011d8b539eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_TRANSFER">
+         <Label language="EN">Transfer Mode</Label>
+         <Label language="DE">�bertragungsmodus</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.targetDir</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5eca83f02011d8b19ceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_TARGETDIR">
+         <Label language="EN">Target Directory</Label>
+         <Label language="DE">Zielverzeichnis</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.sourceDir</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5a0f91f02011d8c4a9eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SRCDIR">
+         <Label language="EN">Source Directory</Label>
+         <Label language="DE">Quellverzeichnis</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.anonymous</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:boolean</DataType>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5eca8ef02011d88f52eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTPANONYM">
+         <Label language="EN">Anonymous Login</Label>
+         <Label language="DE">Anonyme Anmeldung</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.user</Name>
+      <Usage>optional</Usage>
+      <Default>anonymous</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5eca8ff02011d8a32deaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTPUSER">
+         <Label language="EN">User Name</Label>
+         <Label language="DE">Benutzername</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>ftp.password</Name>
+      <Usage>optional</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc5eca90f02011d89af5eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTPWD">
+         <Label language="EN">Password</Label>
+         <Label language="DE">Kennwort</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.targetFileName</Name>
+      <Usage>required</Usage>
+      <Default>xi_output.dat</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc5eca91f02011d8b32beaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_TARGETFILENAME">
+         <Label language="EN">File Name Scheme</Label>
+         <Label language="DE">Dateinamenschema</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.putSafe</Name>
+      <Usage>optional</Usage>
+      <Default>YES</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>YES</value>
+         <GuiLabels guid="fc5eca92f02011d8ba97eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_TEMPFILE">
+            <Label language="EN">Via Temporary File</Label>
+            <Label language="DE">�ber Tempor�r-Datei</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>NO</value>
+         <GuiLabels guid="fc5eca93f02011d88d1eeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_DIRECT">
+            <Label language="EN">Directly</Label>
+            <Label language="DE">Direkt</Label>
+         </GuiLabels>
+      </FixedValue>
+      <GuiLabels guid="fc5eca94f02011d89507eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTPPUT">
+         <Label language="EN">put file</Label>
+         <Label language="DE">�bertragung </Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.writeMode</Name>
+      <Usage>required</Usage>
+      <Default>addTimeStamp</Default>
+      <GuiLabels guid="fc613b80f02011d894c0eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_WRTMODE">
+         <Label language="EN">File Construction Mode</Label>
+         <Label language="DE">Dateierzeugungsmodus</Label>
+      </GuiLabels>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>create</value>
+         <GuiLabels guid="fc613b81f02011d8cd02eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_CREATE">
+            <Label language="EN">Create</Label>
+            <Label language="DE">Erstellen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>append</value>
+         <GuiLabels guid="fc613b82f02011d8cf31eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_APD">
+            <Label language="EN">Append</Label>
+            <Label language="DE">Hinzuf�gen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>addTimeStamp</value>
+         <GuiLabels guid="fc613b83f02011d8975aeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_ADDTS">
+            <Label language="EN">Add Time Stamp</Label>
+            <Label language="DE">Zeitstempel hinzuf�gen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>addMessageId</value>
+         <GuiLabels guid="fc613b84f02011d8be6ceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_ADDMS">
+            <Label language="EN">Add Message ID</Label>
+            <Label language="DE">Message-ID hinzuf�gen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>addCounter</value>
+         <GuiLabels guid="fc613b85f02011d88da8eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_ADDCNT">
+            <Label language="EN">Add Counter</Label>
+            <Label language="DE">Z�hler hinzuf�gen</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.writeMode</Name>
+      <Usage>required</Usage>
+      <Default>addTimeStamp</Default>
+      <GuiLabels guid="fc613b80f02011d894c0eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_WRTMODE">
+         <Label language="EN">File Construction Mode</Label>
+         <Label language="DE">Dateierzeugungsmodus</Label>
+      </GuiLabels>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>create</value>
+         <GuiLabels guid="fc613b81f02011d8cd02eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_CREATE">
+            <Label language="EN">Create</Label>
+            <Label language="DE">Erstellen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>append</value>
+         <GuiLabels guid="fc613b82f02011d8cf31eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_APD">
+            <Label language="EN">Append</Label>
+            <Label language="DE">Hinzuf�gen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>addTimeStamp</value>
+         <GuiLabels guid="fc613b83f02011d8975aeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_ADDTS">
+            <Label language="EN">Add Time Stamp</Label>
+            <Label language="DE">Zeitstempel hinzuf�gen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>addMessageId</value>
+         <GuiLabels guid="fc613b84f02011d8be6ceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_ADDMS">
+            <Label language="EN">Add Message ID</Label>
+            <Label language="DE">Message-ID hinzuf�gen</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>file.overwrite</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="fc613b86f02011d8af14eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_OWRT">
+         <Label language="EN">Overwrite Existing File</Label>
+         <Label language="DE">Bestehende Datei �berschreiben</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.overwrite</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="fc613b86f02011d8af14eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_OWRT">
+         <Label language="EN">Overwrite Existing File</Label>
+         <Label language="DE">Bestehende Datei �berschreiben</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.counterSeparator</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc613b87f02011d8c1a1eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_PREFIX">
+         <Label language="EN">Prefix</Label>
+         <Label language="DE">Pr�fix</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.counterFormat</Name>
+      <Usage>optional</Usage>
+      <Default>00000</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc613b88f02011d8a586eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FORMAT">
+         <Label language="EN">Format</Label>
+         <Label language="DE">Format</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.counterStep</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc613b89f02011d89421eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_STEP">
+         <Label language="EN">Step</Label>
+         <Label language="DE">Schrittweite</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.counterMode</Name>
+      <Usage>optional</Usage>
+      <Default>immediately</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="fc613b8af02011d8ab65eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_CNTMODE">
+         <Label language="EN">Mode</Label>
+         <Label language="DE">Modus</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>afterFirst</value>
+         <GuiLabels guid="fc613b8bf02011d8cdc0eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_AFRST">
+            <Label language="EN">After First File</Label>
+            <Label language="DE">Nach der ersten Datei</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>immediately</value>
+         <GuiLabels guid="fc613b8cf02011d8bda6eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_IMMDT">
+            <Label language="EN">Immediately</Label>
+            <Label language="DE">Sofort</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>file.type</Name>
+      <Usage>required</Usage>
+      <Default>bin</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc613b8df02011d89dc6eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FILETYPE">
+         <Label language="EN">File Type</Label>
+         <Label language="DE">Dateityp</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>bin</value>
+         <GuiLabels guid="fc613b8ef02011d8c6e4eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_BIN">
+            <Label language="EN">Binary</Label>
+            <Label language="DE">Bin�r</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>txt</value>
+         <GuiLabels guid="fc613b8ff02011d899f7eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_TXT">
+            <Label language="EN">Text</Label>
+            <Label language="DE">Text</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>file.advanced</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="fc613b90f02011d88eeceaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADVDMODE">
+         <Label language="EN">Advanced Mode</Label>
+         <Label language="DE">Erweiterter Modus</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.checkFileModification</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc613b91f02011d8aff8eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_CHECKMOD">
+         <Label language="EN">Msecs to Wait Before Modification Check</Label>
+         <Label language="DE">Wartezeit (mSek.) vor �nderungspr�fung</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>file.addParameterParams</Name>
+      <Usage>optional</Usage>
+      <GuiLabels guid="fc613b92f02011d893bbeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATT_ADDPAR">
+         <Label language="EN">Additional Parameters</Label>
+         <Label language="DE">Zus�tzliche Parameter</Label>
+      </GuiLabels>
+      <AttributeReference>
+         <ReferenceName>file.addParameterParamName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>file.addParameterParamValue</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>file.addParameterParamName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc613b93f02011d8acb3eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADDPARNAME">
+         <Label language="EN">Name</Label>
+         <Label language="DE">Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.addParameterParamValue</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="fc613b94f02011d89963eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADDPARVAL">
+         <Label language="EN">Value</Label>
+         <Label language="DE">Wert</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.varSubstitution</Name>
+      <Usage>optional</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels guid="3b86227012b111dcce4c000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_VARSUBST_ENABLE">
+         <Label language="EN">Enable</Label>
+         <Label language="DE">Aktivieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>file.varSubstitutionParams</Name>
+      <Usage>optional</Usage>
+      <GuiLabels guid="3b86227112b111dca2d3000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATT_VARSUBST_PARAMS">
+         <Label language="EN">Variable Substitution</Label>
+         <Label language="DE">Variablenersetzung</Label>
+      </GuiLabels>
+      <AttributeReference>
+         <ReferenceName>file.varSubstitutionParamName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>file.varSubstitutionParamValue</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>file.varSubstitutionParamName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="3b86227212b111dc9b37000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_VARSUBST_PARAM_NAME">
+         <Label language="EN">Variable Name</Label>
+         <Label language="DE">Variablenname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.varSubstitutionParamValue</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="3b86227312b111dc930c000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_VARSUBST_PARAM_VALUE">
+         <Label language="EN">Reference</Label>
+         <Label language="DE">Referenz</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.varSubstitutionDisableSecurity</Name>
+      <Usage>optional</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels guid="3b86227412b111dcb6e3000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_VARSUBST_DISABLE_SECURITY">
+         <Label language="EN">Disable Security Checks</Label>
+         <Label language="DE">Sicherheitspr�fung deaktivieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.security</Name>
+      <Usage>required</Usage>
+      <Default>none</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>none</value>
+         <GuiLabels guid="3b86227512b111dcb9a7000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_SECURITY_NONE">
+            <Label language="EN">None</Label>
+            <Label language="DE">keine</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ftps_control</value>
+         <GuiLabels guid="3b86227612b111dc8372000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_SECURITY_FTPS_CONTROL">
+            <Label language="EN">FTPS (FTP over SSL/TLS) for Control Connection</Label>
+            <Label language="DE">FTPS (FTP �ber SSL/TLS) f�r Kontrollverbindung</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ftps_control_data</value>
+         <GuiLabels guid="3b86227712b111dc83e4000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_SECURITY_FTPS_CONTROL_DATA">
+            <Label language="EN">FTPS (FTP over SSL/TLS) for Control and Data Connection</Label>
+            <Label language="DE">FTPS (FTP �ber SSL/TLS) f�r Kontroll- und Datenverbindung</Label>
+         </GuiLabels>
+      </FixedValue>
+      <GuiLabels guid="3b86227812b111dcb5b8000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SECURITY">
+         <Label language="EN">Connection Security</Label>
+         <Label language="DE">Sicherheit</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.useftpproxy</Name>
+      <Usage>optional</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels guid="22ec0a0bd7be49878dd6536d367ec23f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_USE_FTP_PROXY">
+         <Label language="EN">Use FTP Proxy</Label>
+         <Label language="DE">Verwenden Sie FTP-Proxy</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.ftpproxyhostname</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="72c02c962d594ae092f05bd2fa0180c4" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTP_PROXY_HOST">
+         <Label language="EN">FTP Proxy Host Name</Label>
+         <Label language="DE">FTP Proxy Host Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.ftpproxyport</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>6</Length>
+      <GuiLabels guid="91886a8caec943f1b71119adabe9718f" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTP_PROXY_PORT">
+         <Label language="EN">FTP Proxy Port</Label>
+         <Label language="DE">FTP Proxy Port</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.ftpproxytype</Name>
+      <Usage>required</Usage>
+      <Default>user_at_host</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>user_at_host</value>
+         <GuiLabels guid="722cbe9d827f44c79308b43dc2122fa5" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_USER_AT_HOST">
+            <Label language="EN">USER@HOST</Label>
+            <Label language="DE">USER@HOST</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>user_at_host_colon_port</value>
+         <GuiLabels guid="64b5683fea3f42a88d16b4a131df4f7b" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_USER_AT_HOST_COLON_PORT">
+            <Label language="EN">USER@HOST:PORT</Label>
+            <Label language="DE">USER@HOST:PORT</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>custom_type</value>
+         <GuiLabels guid="491b1a5538dc4124b9530a37535e9b12" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_CUSTOM_TYPE">
+            <Label language="EN">Other</Label>
+            <Label language="DE">Other</Label>
+         </GuiLabels>
+      </FixedValue>
+      <GuiLabels guid="8743f6d1ca414a68abad5d3d4cd29496" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTP_PROXY_TYPE">
+         <Label language="EN">FTP Proxy Type</Label>
+         <Label language="DE">FTP Proxy Typ</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.customftpproxytype</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="88133042bd5a-c99b11352bf450c77a7" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_CUSTOM_FTP_PROXY_TYPE">
+         <Label language="EN">Please Specify Other FTP Proxy</Label>
+         <Label language="DE">Please Specify Other FTP Proxy</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.security.commandorder</Name>
+      <Usage>optional</Usage>
+      <Default>124</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>124</value>
+         <GuiLabels guid="3b86227912b111dc9be1000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_SECURITY_CMDORDER_1">
+            <Label language="EN">AUTH TLS, USER, PASS, PBSZ, PROT</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>109</value>
+         <GuiLabels guid="3b86227a12b111dcbbe7000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_SECURITY_CMDORDER_2">
+            <Label language="EN">AUTH TLS, USER, PBSZ, PROT, PASS</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>76</value>
+         <GuiLabels guid="3b86227b12b111dcbd1b000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_SECURITY_CMDORDER_3">
+            <Label language="EN">AUTH TLS, PBSZ, PROT, USER, PASS</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>333</value>
+         <GuiLabels guid="3b86227c12b111dca894000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_SECURITY_CMDORDER_4">
+            <Label language="EN">USER, AUTH TLS, PBSZ, PROT, PASS</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>348</value>
+         <GuiLabels guid="3b86227d12b111dca9f7000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_SECURITY_CMDORDER_5">
+            <Label language="EN">USER, AUTH TLS, PASS, PBSZ, PROT</Label>
+         </GuiLabels>
+      </FixedValue>
+      <GuiLabels guid="3b86227e12b111dc9e41000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SECURITY_CMDORDER">
+         <Label language="EN">Command Order</Label>
+         <Label language="DE">Befehlsreihenfolge</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.security.useClientCert</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b86227f12b111dc804b000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SECURITY_USECLIENTCERT">
+         <Label language="EN">Use X.509 Certificate for Client Authentication</Label>
+         <Label language="DE">X.509-Zertifikat zur Client-Authentifikation verwenden</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.security.keyStore</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceKeyView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels guid="3b86228012b111dca674000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SECURITY_KEYSTORE">
+         <Label language="EN">Key Store</Label>
+         <Label language="DE">Schl�sselspeicher</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.security.clientCertificate</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceKeyAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels guid="3b86228112b111dc8e6c000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_SECURITY_CERT">
+         <Label language="EN">X.509 Certificate and Private Key</Label>
+         <Label language="DE">X.509-Zertifikat und privater Schl�ssel</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.timeout</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <Length>6</Length>
+      <DataType>xsd:integer</DataType>
+      <GuiLabels guid="3b86228212b111dc9f0b000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTPTIMEOUT">
+         <Label language="EN">Timeout (secs)</Label>
+         <Label language="DE">Timeout (Sek.)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>ftp.dataConnectionMode</Name>
+      <Usage>optional</Usage>
+      <Default>passive</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>passive</value>
+         <GuiLabels guid="3b86228312b111dccb6b000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_FTP_DATACONN_PASSIVE">
+            <Label language="EN">Passive</Label>
+            <Label language="DE">Passiv</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>active</value>
+         <GuiLabels guid="3b86228412b111dc843b000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_FTP_DATACONN_ACTIVE">
+            <Label language="EN">Active</Label>
+            <Label language="DE">Aktiv</Label>
+         </GuiLabels>
+      </FixedValue>
+      <GuiLabels guid="3b86228512b111dca85c000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_FTP_DATACONNMODE">
+         <Label language="EN">Data Connection</Label>
+         <Label language="DE">Datenverbindung</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>advancedSourceFileSelection</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b86228612b111dccee1000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADVANCEDSOURCESELECTION">
+         <Label language="EN">Advanced Source File Selection</Label>
+         <Label language="DE">Erweiterte Auswahl der Quelldateien</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>exclusionMask</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="3b86228712b111dcb2db000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADVANCEDSOURCEEXCLUSIONMASK">
+         <Label language="EN">Exclusion Mask</Label>
+         <Label language="DE">Ausschlussmaske</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>advancedFileSources</Name>
+      <Usage>required</Usage>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="3b86228812b111dc8c56000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.ATT_ADVANCEDSOURCEFILES">
+         <Label language="EN">Source Files and Directories</Label>
+         <Label language="DE">Quelldateien und -verzeichnisse</Label>
+      </GuiLabels>
+      <AttributeReference>
+         <ReferenceName>advancedSourceDir</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>advancedSourceFileMask</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>advancedSourceExclusionMask</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>advancedSourceDir</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="3b886c6012b111dc9266000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADVANCEDSOURCEDIR">
+         <Label language="EN">Directory</Label>
+         <Label language="DE">Verzeichnis</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>advancedSourceFileMask</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="3b886c6112b111dc949d000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADVANCEDSOURCEFILE">
+         <Label language="EN">File Name Mask</Label>
+         <Label language="DE">Dateinamensmaske</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>advancedSourceExclusionMask</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="3b886c6212b111dca644000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ADVANCEDSOURCEEXCLUSIONMASK">
+         <Label language="EN">Exclusion Mask</Label>
+         <Label language="DE">Ausschlussmaske</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>tempFileNameScheme</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="3b886c6312b111dc9c38000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_TEMPFILENAMESCHEME">
+         <Label language="EN">Temporary File Name Scheme</Label>
+         <Label language="DE">Namensschema der Tempor�rdatei</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>file.writeDirectly</Name>
+      <Usage>optional</Usage>
+      <Default>YES</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <FixedValue>
+         <value>NO</value>
+         <GuiLabels guid="fc5eca92f02011d8ba97eaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_TEMPFILE">
+            <Label language="EN">Via Temporary File</Label>
+            <Label language="DE">�ber Tempor�rdatei</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>YES</value>
+         <GuiLabels guid="fc5eca93f02011d88d1eeaf70a126329" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_DIRECT">
+            <Label language="EN">Directly</Label>
+            <Label language="DE">Direkt</Label>
+         </GuiLabels>
+      </FixedValue>
+      <GuiLabels guid="3b886c6412b111dc960a000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_WRITEMODE">
+         <Label language="EN">Write Mode</Label>
+         <Label language="DE">Schreibmodus</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>useErrorArchiveDir</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c6512b111dc805d000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_USEERRORARCHIVEDIR">
+         <Label language="EN">Archive Faulty Source Files</Label>
+         <Label language="DE">Fehlerhafte Quelldateien archivieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>errorArchiveDir</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels guid="3b886c6612b111dc9c22000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ERRORARCHIVEDIR">
+         <Label language="EN">Error Archive Directory</Label>
+         <Label language="DE">Verzeichnis zur Fehlerarchivierung</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>errorArchiveWithTimestamp</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c6712b111dc8a1f000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ERRORARCHIVETIMESTAMP">
+         <Label language="EN">Add Timestamp</Label>
+         <Label language="DE">Zeitstempel hinzuf�gen</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>emptyFileHandling</Name>
+      <Usage>optional</Usage>
+      <Default>confirm</Default>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c6812b111dc805c000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_EMPTY_FILE_HANDLING">
+         <Label language="EN">Empty File Handling</Label>
+         <Label language="DE">Behandlung leerer Dateien</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>confirm</value>
+         <GuiLabels guid="3b886c6912b111dca10f000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_EFH_CONFIRM">
+            <Label language="EN">Do Not Create Message</Label>
+            <Label language="DE">Keine Message erstellen</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>process</value>
+         <GuiLabels guid="3b886c6a12b111dcc323000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_EFH_PROCESS">
+            <Label language="EN">Process Empty Files</Label>
+            <Label language="DE">Leere Dateien verarbeiten</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>skip</value>
+         <GuiLabels guid="3b886c6b12b111dc8da2000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_EFH_SKIP">
+            <Label language="EN">Skip Empty Files</Label>
+            <Label language="DE">Leere Dateien �berspringen</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>emptyMessageHandling</Name>
+      <Usage>optional</Usage>
+      <Default>process</Default>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c6c12b111dcb05e000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_EMPTY_MSG_HANDLING">
+         <Label language="EN">Empty Message Handling</Label>
+         <Label language="DE">Behandlung leerer Messages</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>process</value>
+         <GuiLabels guid="3b886c6d12b111dc9c32000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_EMH_PROCESS">
+            <Label language="EN">Write Empty File</Label>
+            <Label language="DE">Leere Datei schreiben</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ignore</value>
+         <GuiLabels guid="3b886c6e12b111dc8ab5000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.VAL_EMH_IGNORE">
+            <Label language="EN">Ignore</Label>
+            <Label language="DE">Ignorieren</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>maximumConcurrency</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:integer</DataType>
+      <GuiLabels guid="3b886c6f12b111dcb09e000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_MAX_CONCURRENCY">
+         <Label language="EN">Maximum Concurrency</Label>
+         <Label language="DE">Maximale Nebenl�ufigkeit</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>maxFileSize</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <GuiLabels guid="3b886c7012b111dc8629000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_MAX_FILE_SIZE">
+         <Label language="EN">Maximum File Size (Bytes)</Label>
+         <Label language="DE">Maximale Dateigr��e (Byte)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableDynConfigSender</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7112b111dc80ca000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_GeneralAdapterMetadata.AT_DYNCONFIG_SET_PROPERTIES">
+         <Label language="EN">Set Adapter-Specific Message Properties</Label>
+         <Label language="DE">Adapterspezifische Nachrichtenattribute erstellen</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableDynConfigReceiver</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7212b111dca9cc000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_GeneralAdapterMetadata.AT_DYNCONFIG_USE_PROPERTIES">
+         <Label language="EN">Use Adapter-Specific Message Properties</Label>
+         <Label language="DE">Adapterspezifische Nachrichtenattribute verarbeiten</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynConfigFailOnMissingProperties</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7312b111dcac0d000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_GeneralAdapterMetadata.AT_DYNCONFIG_FAIL_MISSING_PROPS">
+         <Label language="EN">Fail On Missing Adapter-Specific Message Properties</Label>
+         <Label language="DE">Fehlende Nachrichtenattribute als Fehler behandeln</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynConfigFileName</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7412b111dc8d1d000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_FILENAME">
+         <Label language="EN">File Name</Label>
+         <Label language="DE">Dateiname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynConfigDirectory</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7512b111dc8a28000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_DIRECTORY">
+         <Label language="EN">Directory</Label>
+         <Label language="DE">Verzeichnis</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynConfigFileType</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7612b111dcc253000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_FILETYPE">
+         <Label language="EN">File Type</Label>
+         <Label language="DE">Dateityp</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynConfigFileEncoding</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7712b111dc8b6f000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_FILEENCODING">
+         <Label language="EN">File Encoding</Label>
+         <Label language="DE">Zeichensatz</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynConfigSourceFileSize</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7812b111dca19c000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_SOURCEFILESIZE">
+         <Label language="EN">Source File Size</Label>
+         <Label language="DE">Gr��e der Quelldatei</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynConfigSourceFileTimestamp</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7912b111dcadcd000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_SOURCEFILETIMESTAMP">
+         <Label language="EN">Source File Timestamp</Label>
+         <Label language="DE">�nderungszeitpunkt der Quelldatei</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynConfigSourceFTPHost</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7a12b111dca952000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_SOURCEFTPHOST">
+         <Label language="EN">Source FTP Host</Label>
+         <Label language="DE">FTP-Quellsystem</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynConfigTargetTempFileName</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels guid="3b886c7b12b111dcac2e000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_TEMPFILENAMESCHEME">
+         <Label language="EN">Temporary Target File Name Scheme</Label>
+         <Label language="DE">Namensschema der tempor�ren Zieldatei</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>createTargetDirectory</Name>
+      <Usage>optional</Usage>
+      <Default>1</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="3b886c7c12b111dc87fd000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_CREATETARGETDIR">
+         <Label language="EN">Create Target Directory</Label>
+         <Label language="DE">Zielverzeichnis erstellen</Label>
+      </GuiLabels>
+   </Attribute>
+   <DynamicAttributes>
+      <AttributeReference>
+         <ReferenceName>FileName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>Directory</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>FileType</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>FileEncoding</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>SourceFileSize</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>SourceFileTimestamp</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>SourceFTPHost</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>TargetTempFileName</ReferenceName>
+      </AttributeReference>
+   </DynamicAttributes>
+   <Attribute>
+      <Name>FileName</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c7d12b111dca2a0000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_FILENAME">
+         <Label language="EN">File Name</Label>
+         <Label language="DE">Dateiname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>Directory</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c7e12b111dccf01000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_DIRECTORY">
+         <Label language="EN">Directory</Label>
+         <Label language="DE">Verzeichnis</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>FileType</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c7f12b111dca183000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_FILETYPE">
+         <Label language="EN">File Type</Label>
+         <Label language="DE">Dateityp</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>FileEncoding</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c8012b111dcc104000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_FILEENCODING">
+         <Label language="EN">File Encoding</Label>
+         <Label language="DE">Zeichensatz</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>SourceFileSize</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c8112b111dcb9bb000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_SOURCEFILESIZE">
+         <Label language="EN">Source File Size</Label>
+         <Label language="DE">Gr��e der Quelldatei</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>SourceFileTimestamp</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c8212b111dc97de000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_SOURCEFILETIMESTAMP">
+         <Label language="EN">Source File Timestamp</Label>
+         <Label language="DE">�nderungszeitpunkt der Quelldatei</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>SourceFTPHost</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c8312b111dcb7d6000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_SOURCEFTPHOST">
+         <Label language="EN">Source FTP Host</Label>
+         <Label language="DE">FTP-Quellsystem</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>TargetTempFileName</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels guid="3b886c8412b111dccb4b000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_DYNHEADER_TEMPFILENAMESCHEME">
+         <Label language="EN">Temporary Target File Name Scheme</Label>
+         <Label language="DE">Namensschema der tempor�ren Zieldatei</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enableChunkMode</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="3b886c8c12b111dc87fd000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_ENABLECHUNKMODE">
+         <Label language="EN">Use Chunk Mode</Label>
+         <Label language="DE">Dateizerlegung</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>chunkSize</Name>
+      <Usage>optional</Usage>
+      <Default>10</Default>
+      <DataType>xsd:string</DataType>
+      <Length>5</Length>
+      <GuiLabels guid="3b886c8c12b111dc87ed000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.AT_CHUNKSIZEE">
+         <Label language="EN">Maximum Size [MB]</Label>
+         <Label language="DE">Maximale Gr��e [MB]</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>1</value>
+         <GuiLabels>
+            <Label language="EN">1</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>2</value>
+         <GuiLabels>
+            <Label language="EN">2</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>5</value>
+         <GuiLabels>
+            <Label language="EN">5</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>10</value>
+         <GuiLabels>
+            <Label language="EN">10</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>20</value>
+         <GuiLabels>
+            <Label language="EN">20</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>50</value>
+         <GuiLabels>
+            <Label language="EN">50</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <TabDefinition id="source">
+      <GuiLabels guid="3b886c8512b111dcac34000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TAB_SOURCE">
+         <Label language="EN">Source</Label>
+         <Label language="DE">Quelle</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="target">
+      <GuiLabels guid="3b8add6012b111dcc1a6000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TAB_TARGET">
+         <Label language="EN">Target</Label>
+         <Label language="DE">Ziel</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="process">
+      <GuiLabels guid="3b8add6112b111dcceb7000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TAB_PROCESS">
+         <Label language="EN">Processing</Label>
+         <Label language="DE">Verarbeitung</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="fcc">
+      <GuiLabels guid="3b8add6212b111dc89ac000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TAB_FCC">
+         <Label language="EN">Content Conversion</Label>
+         <Label language="DE">Content Conversion</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="advanced">
+      <GuiLabels guid="3b8add6312b111dc8a65000f206a1795" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_FileAdapterMetadata.TAB_ADVANCED">
+         <Label language="EN">Advanced</Label>
+         <Label language="DE">Erweitert</Label>
+      </GuiLabels>
+   </TabDefinition>
+</AdapterTypeMetaData>

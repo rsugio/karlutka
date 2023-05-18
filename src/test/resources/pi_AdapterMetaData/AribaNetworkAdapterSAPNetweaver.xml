@@ -1,0 +1,1917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterTypeMetaData version="30">
+   <GuiHandlerClassName/>
+   <Type>AribaSap</Type>
+   <GuiLabels guid="bfe21380afc711dd83b2f5960a0a3e4f">
+      <Label language="EN">Ariba SAP XI Adapter</Label>
+   </GuiLabels>
+   <Outbound>
+      <TransportProtocol>
+         <Name>HTTPS</Name>
+         <Version>1.0</Version>
+         <GuiLabels guid="bfe21381afc711dd9592f5960a0a3e4f">
+            <Label language="EN">HTTPS</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>JCA10</Name>
+               <Version>1.0</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes/>
+         <SecurityAttributes/>
+      </TransportProtocol>
+      <MessageProtocol>
+         <Name>JCA10</Name>
+         <Version>1.0</Version>
+         <GuiLabels guid="bfe21382afc711dd9865f5960a0a3e4f">
+            <Label language="EN">JCA 1.0</Label>
+         </GuiLabels>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>localejbs/ModuleProcessorExitBean</Name>
+                  <Type>local</Type>
+                  <Key>exit</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+            <ModuleConfig>
+               <ModuleConfigItem>
+                  <Key>exit</Key>
+                  <Name>JNDIName</Name>
+                  <Value>deployedAdapters/AribaNetworkAdapterSAPNetweaver/shareable/AribaNetworkAdapterSAPNetweaver</Value>
+               </ModuleConfigItem>
+            </ModuleConfig>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <GlobalChannelAttributes>
+         <AttributeGroup>
+            <Name>backendSystem</Name>
+            <GuiLabels guid="bfe21383afc711ddb965f5960a0a3f4f">
+               <Label language="EN">Backend System Type</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>backendSystemType</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>outboundRequest</Name>
+            <GuiLabels guid="bfe21383afc711ddb965f5960a0a3e4f">
+               <Label language="EN">Outbound Request Type</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>outboundRequestTypeForBuyer</ReferenceName>
+               <EditCondition>
+                  <AttributeName>backendSystemType</AttributeName>
+                  <AttributeValue>buyer</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>outboundRequestTypeForSupplier</ReferenceName>
+               <EditCondition>
+                  <AttributeName>backendSystemType</AttributeName>
+                  <AttributeValue>supplier</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>copyRequest</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>DeploymentMode</Name>
+            <GuiLabels guid="bfe21384afc711dd8fb4f5960a0a3e4f">
+               <Label language="EN">Deployment Mode</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>deploymentMode</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>SelfTest</Name>
+            <GuiLabels guid="bfe22384afc711dd8fb4f5960a0a3e4f">
+               <Label language="EN">Self Test</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>selfTestDownloadLocation</ReferenceName>
+               <EditCondition>
+                  <AttributeName>deploymentMode</AttributeName>
+                  <AttributeValue>selfTest</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>CredentialInformation</Name>
+            <GuiLabels guid="bfe48486afc711ddc7aef5960a0a4e4f">
+               <Label language="EN">Credential Information</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>credentialDomain</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>credential</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>toEqualsFromCredential</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>SecurityConfig</Name>
+            <GuiLabels guid="bfe21385afc711ddb6aff5960a0a3e4f">
+               <Label language="EN">Authentication</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>trustStoreView</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>credentialMode</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>sharedSecret</ReferenceName>
+               <EditCondition>
+                  <AttributeName>credentialMode</AttributeName>
+                  <AttributeValue>0</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>keyStoreView</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>credentialMode</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>port</ReferenceName>
+               <EditCondition>
+                  <AttributeName>credentialMode</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>AribaSNInfo</Name>
+            <GuiLabels guid="bfe21386afc711dd95ccf5960a0a3e4f">
+               <Label language="EN">cXML Configuration</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>endpoint</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>anID</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>userAgent</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>xmlLang</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>profileURL</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>getProfileInterval</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>documentExpiryPeriod</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>cXMLVersion</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>dtd</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>timeout</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>useXMLValidation</ReferenceName>
+               <EditCondition>
+                  <AttributeName>isSAPAddOnSuite</AttributeName>
+                  <AttributeValue>0</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>catalogConfigDir</ReferenceName>
+               <EditCondition>
+                  <AttributeName>useXMLValidation</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>isSAPAddOnSuite</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>proxyServerInfo</Name>
+            <GuiLabels guid="bfe21387afc711ddaafaf5960a0a3e4f">
+               <Label language="EN">Proxy Server Configuration</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>proxyServerUsed</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerHost</ReferenceName>
+               <EditCondition>
+                  <AttributeName>proxyServerUsed</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerPort</ReferenceName>
+               <EditCondition>
+                  <AttributeName>proxyServerUsed</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerAuthenticationMethod</ReferenceName>
+               <EditCondition>
+                  <AttributeName>proxyServerUsed</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerUser</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerUsed</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerAuthenticationMethod</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                     <AttributeValue>2</AttributeValue>
+                     <AttributeValue>3</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerPassword</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerUsed</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerAuthenticationMethod</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                     <AttributeValue>2</AttributeValue>
+                     <AttributeValue>3</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerDomain</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerUsed</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerAuthenticationMethod</AttributeName>
+                     <AttributeValue>3</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>emailInfo</Name>
+            <GuiLabels guid="bfe48480afc711dda568f5960a0a3e4f">
+               <Label language="EN">Email Notifications</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>emailActive</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>smtpServerHost</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailAddress</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailReceiver</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailccReceiver</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailSenderName</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailAuthentication</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailUser</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>emailActive</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>emailAuthentication</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailPassword</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>emailActive</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>emailAuthentication</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>Status</Name>
+            <GuiLabels guid="bfe48482afc711dd9997f5960a0a3e4f">
+               <Label language="EN">Adapter Status</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>adapterStatus</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>AttachmentInfo</Name>
+            <GuiLabels guid="c6ca45f04c6f11dfb717002170b2d2fb">
+               <Label language="EN">Attachment Configuration</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>byPassProxyServerDomains</ReferenceName>
+               <EditCondition>
+                  <AttributeName>isSAPAddOnSuite</AttributeName>
+                  <AttributeValue>0</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>attachmentAuthenticationActive</ReferenceName>
+               <EditCondition>
+                  <AttributeName>isSAPAddOnSuite</AttributeName>
+                  <AttributeValue>0</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>attachmentURLUserID</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>isSAPAddOnSuite</AttributeName>
+                     <AttributeValue>0</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>attachmentAuthenticationActive</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>attachmentURLPassword</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>isSAPAddOnSuite</AttributeName>
+                     <AttributeValue>0</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>attachmentAuthenticationActive</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+         </AttributeGroup>
+      </GlobalChannelAttributes>
+      <GlobalSecurityAttributes/>
+   </Outbound>
+   <Inbound>
+      <TransportProtocol>
+         <Name>HTTPS</Name>
+         <Version>1.0</Version>
+         <GuiLabels guid="bfe48483afc711ddc3a6f5960a0a3e4f">
+            <Label language="EN">HTTPS</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>JCA10</Name>
+               <Version>1.0</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes/>
+         <SecurityAttributes/>
+      </TransportProtocol>
+      <MessageProtocol>
+         <Name>JCA10</Name>
+         <Version>1.0</Version>
+         <GuiLabels guid="bfe48484afc711ddbd9bf5960a0a3e4f">
+            <Label language="EN">JCA 1.0</Label>
+         </GuiLabels>
+         <SecurityAttributes/>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>localejbs/CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>exit</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <GlobalChannelAttributes>
+         <AttributeGroup>
+            <Name>backendSystem</Name>
+            <GuiLabels guid="bfe21383afc711ddb965f5960a0a3f5f">
+               <Label language="EN">Backend System Type</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>backendSystemType</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>InboundRequest</Name>
+            <GuiLabels guid="bfe48485afc711dda40bf5960a0a3e4f">
+               <Label language="EN">Inbound Request Type</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>inboundRequestTypeForBuyer</ReferenceName>
+               <EditCondition>
+                  <AttributeName>backendSystemType</AttributeName>
+                  <AttributeValue>buyer</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>inboundRequestTypeForSupplier</ReferenceName>
+               <EditCondition>
+                  <AttributeName>backendSystemType</AttributeName>
+                  <AttributeValue>supplier</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>DeploymentMode</Name>
+            <GuiLabels guid="bfe48486afc711ddc7aef5960a0a3e4f">
+               <Label language="EN">Deployment Mode</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>deploymentMode</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>CredentialInformation</Name>
+            <GuiLabels guid="bfe48486afc711ddc7aef5960a0a4e4f">
+               <Label language="EN">Credential Information</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>credentialDomain</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>credential</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>SecurityConfig</Name>
+            <GuiLabels guid="bfe21385afc711ddb6aff5960a0a3e4f">
+               <Label language="EN">Authentication</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>trustStoreView</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>credentialMode</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>sharedSecret</ReferenceName>
+               <EditCondition>
+                  <AttributeName>credentialMode</AttributeName>
+                  <AttributeValue>0</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>keyStoreView</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>credentialMode</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>port</ReferenceName>
+               <EditCondition>
+                  <AttributeName>credentialMode</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>AribaSNInfo</Name>
+            <GuiLabels guid="bfe48488afc711ddaa2df5960a0a3e4f">
+               <Label language="EN">cXML Configuration</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>endpoint</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>anID</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>userAgent</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>xmlLang</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>profileURL</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>getProfileInterval</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>getPendingInterval</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>maxDocumentsinGetPending</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>systemID</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>documentExpiryPeriod</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>cXMLVersion</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>timeout</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>statusUpdateRequestRetryCount</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>statusUpdateRequestRetryInterval</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>useXMLValidation</ReferenceName>
+               <EditCondition>
+                  <AttributeName>isSAPAddOnSuite</AttributeName>
+                  <AttributeValue>0</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>catalogConfigDir</ReferenceName>
+               <EditCondition>
+                  <AttributeName>useXMLValidation</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>isSAPAddOnSuite</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>proxyServerInfo</Name>
+            <GuiLabels guid="bfe48489afc711dd937af5960a0a3e4f">
+               <Label language="EN">Proxy Server Configuration</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>proxyServerUsed</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerHost</ReferenceName>
+               <EditCondition>
+                  <AttributeName>proxyServerUsed</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerPort</ReferenceName>
+               <EditCondition>
+                  <AttributeName>proxyServerUsed</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerAuthenticationMethod</ReferenceName>
+               <EditCondition>
+                  <AttributeName>proxyServerUsed</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerUser</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerUsed</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerAuthenticationMethod</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                     <AttributeValue>2</AttributeValue>
+                     <AttributeValue>3</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerPassword</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerUsed</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerAuthenticationMethod</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                     <AttributeValue>2</AttributeValue>
+                     <AttributeValue>3</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>proxyServerDomain</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerUsed</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>proxyServerAuthenticationMethod</AttributeName>
+                     <AttributeValue>3</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>emailInfo</Name>
+            <GuiLabels guid="bfe4848aafc711dda29bf5960a0a3e4f">
+               <Label language="EN">Email Notifications</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>emailActive</ReferenceName>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>smtpServerHost</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailAddress</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailReceiver</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailccReceiver</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailSenderName</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailAuthentication</ReferenceName>
+               <EditCondition>
+                  <AttributeName>emailActive</AttributeName>
+                  <AttributeValue>1</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailUser</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>emailActive</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>emailAuthentication</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>emailPassword</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>emailActive</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>emailAuthentication</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>Status</Name>
+            <GuiLabels guid="bfe4848cafc711dd92fff5960a0a3e4f">
+               <Label language="EN">Adapter Status</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>adapterStatus</ReferenceName>
+            </AttributeReference>
+         </AttributeGroup>
+         <AttributeGroup>
+            <Name>AttachmentInfo</Name>
+            <GuiLabels guid="c6ccb6f04c6f11dfbcc0002170b2d2fb">
+               <Label language="EN">Attachment Configuration</Label>
+            </GuiLabels>
+            <AttributeReference>
+               <ReferenceName>storecXMLDocument</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>isSAPAddOnSuite</AttributeName>
+                     <AttributeValue>0</AttributeValue>
+                  </EditCondition>
+                  <OrCondition>
+                     <EditCondition>
+                        <AttributeName>attachmentProcessingMode</AttributeName>
+                        <AttributeValue>useFileSystem</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>attachmentProcessingMode</AttributeName>
+                        <AttributeValue>useSharedFileSystem</AttributeValue>
+                     </EditCondition>
+                  </OrCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>attachmentProcessingMode</ReferenceName>
+               <EditCondition>
+                  <AttributeName>isSAPAddOnSuite</AttributeName>
+                  <AttributeValue>0</AttributeValue>
+               </EditCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>attachmentDownloadLocation</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>isSAPAddOnSuite</AttributeName>
+                     <AttributeValue>0</AttributeValue>
+                  </EditCondition>
+                  <OrCondition>
+                     <EditCondition>
+                        <AttributeName>attachmentProcessingMode</AttributeName>
+                        <AttributeValue>useFileSystem</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>attachmentProcessingMode</AttributeName>
+                        <AttributeValue>useSharedFileSystem</AttributeValue>
+                     </EditCondition>
+                  </OrCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>sharedLocationMachineName</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>isSAPAddOnSuite</AttributeName>
+                     <AttributeValue>0</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>attachmentProcessingMode</AttributeName>
+                     <AttributeValue>useSharedFileSystem</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>sharedLocationUser</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>isSAPAddOnSuite</AttributeName>
+                     <AttributeValue>0</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>attachmentProcessingMode</AttributeName>
+                     <AttributeValue>useSharedFileSystem</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+            <AttributeReference>
+               <ReferenceName>sharedLocationPassword</ReferenceName>
+               <AndCondition>
+                  <EditCondition>
+                     <AttributeName>isSAPAddOnSuite</AttributeName>
+                     <AttributeValue>0</AttributeValue>
+                  </EditCondition>
+                  <EditCondition>
+                     <AttributeName>attachmentProcessingMode</AttributeName>
+                     <AttributeValue>useSharedFileSystem</AttributeValue>
+                  </EditCondition>
+               </AndCondition>
+            </AttributeReference>
+         </AttributeGroup>
+      </GlobalChannelAttributes>
+      <GlobalSecurityAttributes/>
+   </Inbound>
+   <Attribute>
+      <Name>deploymentMode</Name>
+      <Usage>required</Usage>
+      <Default>test</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe4848dafc711ddc808f5960a0a3e4f">
+         <Label language="EN">Mode</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>test</value>
+         <GuiLabels guid="bfe4848eafc711ddcb14f5960a0a3e4f">
+            <Label language="EN">Test</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>production</value>
+         <GuiLabels guid="bfe4848fafc711ddbab9f5960a0a3e4f">
+            <Label language="EN">Production</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>selfTest</value>
+         <GuiLabels guid="bfe4848asdeafc711ddcb14f5960a0a3e4f">
+            <Label language="EN">SelfTest</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>credentialMode</Name>
+      <Usage>required</Usage>
+      <Default>1</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe48490afc711ddb7cdf5960a0a3e4f">
+         <Label language="EN">Credential Mode</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>0</value>
+         <GuiLabels guid="bfe48491afc711ddc0bbf5960a0a3e4f">
+            <Label language="EN">Shared secret</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>1</value>
+         <GuiLabels guid="bfe48492afc711ddcd39f5960a0a3e4f">
+            <Label language="EN">Client certificate</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>credentialDomain</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe48493afc711ddc328f5960a0a3e4f">
+         <Label language="EN">Credential Domain</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>0</value>
+         <GuiLabels guid="bfe48494afc711ddbd68f5960a0a3e4f">
+            <Label language="EN">Network Id</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>1</value>
+         <GuiLabels guid="bfe48495afc711dd8a5af5960a0a3e4f">
+            <Label language="EN">Network User Id</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>2</value>
+         <GuiLabels guid="bfe48496afc711ddbd6ef5960a0a3e4f">
+            <Label language="EN">DUNS</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>credential</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe48497afc711ddba53f5960a0a3e4f">
+         <Label language="EN">Credential</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>trustStoreView</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe48497afc711ddba53f5960a0a4e4f">
+         <Label language="EN">Trust Store View</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>storePass</Name>
+      <Usage>required</Usage>
+      <Default>storePass</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe48499afc711ddadb0f5960a0a3e4f">
+         <Label language="EN">Store Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>sharedSecret</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe4849aafc711ddafe8f5960a0a3e4f">
+         <Label language="EN">Shared Secret Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>keyPass</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe4849bafc711dd9faef5960a0a3e4f">
+         <Label language="EN">Key Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>port</Name>
+      <Usage>required</Usage>
+      <Default>443</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe4849cafc711ddacb7f5960a0a3e4f">
+         <Label language="EN">Port</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>anID</Name>
+      <Usage>required</Usage>
+      <Default>AN01000000001</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe4849dafc711dd8256f5960a0a3e4f">
+         <Label language="EN">AN ID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>userAgent</Name>
+      <Usage>required</Usage>
+      <Default>Ariba SN</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe4849eafc711ddac97f5960a0a3e4f">
+         <Label language="EN">User Agent</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>xmlLang</Name>
+      <Usage>required</Usage>
+      <Default>en-US</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe4849fafc711ddc89af5960a0a3e4f">
+         <Label language="EN">Language</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>en-US</value>
+         <GuiLabels guid="bfe484a0afc711dd9686f5960a0a3e4f">
+            <Label language="EN">en-US</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>profileURL</Name>
+      <Usage>required</Usage>
+      <Default>https://certservice.ariba.com/service/transaction/cxml.asp</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a1afc711dd9222f5960a0a3e4f">
+         <Label language="EN">GetProfile URL</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>getProfileInterval</Name>
+      <Usage>required</Usage>
+      <Default>60</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a2afc711ddb3bcf5960a0a3e4f">
+         <Label language="EN">GetProfile Interval (Minutes)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>getPendingInterval</Name>
+      <Usage>required</Usage>
+      <Default>15</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a3afc711ddb7caf5960a0a3e4f">
+         <Label language="EN">GetPending Interval (Minutes)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>maxDocumentsinGetPending</Name>
+      <Usage>required</Usage>
+      <Default>2</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a4afc711dd8137f5960a0a3e4f">
+         <Label language="EN">Max Documents in GetPending</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>cXMLVersion</Name>
+      <Usage>required</Usage>
+      <Default>1.2.030</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a5afc711ddc609f5960a0a3e4f">
+         <Label language="EN">cXML Version</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dtd</Name>
+      <Usage>required</Usage>
+      <Default>cXML.dtd</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a5afca11ddc609f5960a0a3e4f">
+         <Label language="EN">DTD</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>cXML.dtd</value>
+         <GuiLabels guid="bfe484a6afc711dda184f5960a0a3e4f">
+            <Label language="EN">cXML.dtd</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>PaymentRemittance.dtd</value>
+         <GuiLabels guid="bfe484a7afc711dd8de3f5960a0a3e4f">
+            <Label language="EN">PaymentRemittance.dtd</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>Fulfill.dtd</value>
+         <GuiLabels guid="bfe484a8afc711dd84c1f5960a0a3e4f">
+            <Label language="EN">Fulfill.dtd</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>Quote.dtd</value>
+         <GuiLabels guid="bfe484a9afc711ddc1a5f5960a0a3e4f">
+            <Label language="EN">Quote.dtd</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>InvoiceDetail.dtd</value>
+         <GuiLabels guid="bfe484aaafc711ddc1a5f5960a0a3e4f">
+            <Label language="EN">InvoiceDetail.dtd</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>Contract.dtd</value>
+         <GuiLabels guid="bfe484aaafc711ddc1a5f5860a0a3e4f">
+            <Label language="EN">Contract.dtd</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>useXMLValidation</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a6afc711dd8460f5960a0a3e4f">
+         <Label language="EN">Use XML Validation</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>catalogConfigDir</Name>
+      <Usage>required</Usage>
+      <Default>D:/AribaDataDir/etc/catalog</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a7afc711dda989f5960a0a3e4f">
+         <Label language="EN">Catalog Configuration Directory</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>isSAPAddOnSuite</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a6afc911dd8460f5960a0a3e4f">
+         <Label language="EN">Use SAP Add on Suite</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>proxyServerUsed</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a8afc711ddcc6df5960a0a3e4f">
+         <Label language="EN">Use Proxy Server</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>proxyServerHost</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484a9afc711dd9298f5960a0a3e4f">
+         <Label language="EN">Proxy Server Host</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>proxyServerPort</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484aaafc711dd8319f5960a0a3e4f">
+         <Label language="EN">Proxy Server Port</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>proxyServerAuthenticationMethod</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484abafc711ddb618f5960a0a3e4f">
+         <Label language="EN">Proxy Authentication Method</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>0</value>
+         <GuiLabels guid="bfe484acafc711dda184f5960a0a3e4f">
+            <Label language="EN">Disabled</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>1</value>
+         <GuiLabels guid="bfe484adafc711dd8de3f5960a0a3e4f">
+            <Label language="EN">Basic</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>2</value>
+         <GuiLabels guid="bfe484aeafc711dd84c1f5960a0a3e4f">
+            <Label language="EN">Digest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>3</value>
+         <GuiLabels guid="bfe484afafc711ddc1a5f5960a0a3e4f">
+            <Label language="EN">NTLM</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>proxyServerUser</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b0afc711ddc700f5960a0a3e4f">
+         <Label language="EN">Username</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>proxyServerPassword</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b1afc711ddcb8ef5960a0a3e4f">
+         <Label language="EN">Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>proxyServerDomain</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b2afc711dd91c2f5960a0a3e4f">
+         <Label language="EN">Domain</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>emailActive</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b3afc711dda04ef5960a0a3e4f">
+         <Label language="EN">Use Email Notifications</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>smtpServerHost</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b4afc711ddcfeaf5960a0a3e4f">
+         <Label language="EN">SMTP Server Host</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>emailAddress</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b5afc711dd8680f5960a0a3e4f">
+         <Label language="EN">Sender Address</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>emailReceiver</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b6afc711dd9d89f5960a0a3e4f">
+         <Label language="EN">Recipient Address</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>emailccReceiver</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b7afc711dda95ff5960a0a3e4f">
+         <Label language="EN">CC Address</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>emailSenderName</Name>
+      <Usage>required</Usage>
+      <Default>AribaSN Adapter Admin</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b8afc711ddb5ecf5960a0a3e4f">
+         <Label language="EN">Sender Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>emailAuthentication</Name>
+      <Usage>required</Usage>
+      <Default>1</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484b9afc711dd9944f5960a0a3e4f">
+         <Label language="EN">Email Authentication</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>emailUser</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484baafc711dd8de4f5960a0a3e4f">
+         <Label language="EN">User</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>emailPassword</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484bbafc711dd9d55f5960a0a3e4f">
+         <Label language="EN">Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>useAlternativeKeyStore</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484bcafc711dda743f5960a0a3e4f">
+         <Label language="EN">Use Alternative KeyStore</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>trustKeyStore</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484bdafc711dd9224f5960a0a3e4f">
+         <Label language="EN">Trust KeyStore Location</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>trustStorePass</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484beafc711ddc78cf5960a0a3e4f">
+         <Label language="EN">Trust KeyStore Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>adapterStatus</Name>
+      <Usage>optional</Usage>
+      <Default>active</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484bfafc711dd9efff5960a0a3e4f">
+         <Label language="EN">Status</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>active</value>
+         <GuiLabels guid="bfe484c0afc711dd9200f5960a0a3e4f">
+            <Label language="EN">Active</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>inactive</value>
+         <GuiLabels guid="bfe484c1afc711dd8b57f5960a0a3e4f">
+            <Label language="EN">Inactive</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>backendSystemType</Name>
+      <Usage>required</Usage>
+      <Default>Buyer</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484bfafc711dd9efff5960a0a3ef6f">
+         <Label language="EN">System Type</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>buyer</value>
+         <GuiLabels guid="bfe484c0afc711dd9200f5960a0a3f7f">
+            <Label language="EN">Buyer</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>supplier</value>
+         <GuiLabels guid="bfe484c1afc711dd8b57f5960a0a3f8f">
+            <Label language="EN">Supplier</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>outboundRequestTypeForBuyer</Name>
+      <Usage>required</Usage>
+      <Default>OrderRequest:OrderRequest</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484c2afc711dda782f5960a0a3e4f">
+         <Label language="EN">Outbound Request Type</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>OrderRequest:OrderRequest</value>
+         <GuiLabels guid="bfe484c3afc711ddca23f5960a0a3e4f">
+            <Label language="EN">OrderRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ShipNoticeRequest:ShipNoticeRequest</value>
+         <GuiLabels guid="bfe484c3afc711ddca45f5960a0a3e4f">
+            <Label language="EN">ShipNoticeRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ProductActivityMessage:ProductActivityMessage</value>
+         <GuiLabels guid="bfe484c3afc711abca67f5960a0a3e4f">
+            <Label language="EN">ProductActivityMessage</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ChangeOrderRequest:OrderRequest</value>
+         <GuiLabels guid="bfe484c4afc711ddbfc2f5960a0a3e4f">
+            <Label language="EN">ChangeOrderRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ScheduleAgreementReleaseRequest:OrderRequest</value>
+         <GuiLabels guid="bfe484c6afc711ddbfc2f5960a0a3e4f">
+            <Label language="EN">ScheduleAgreementReleaseRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>OrderStatusRequest:OrderStatusRequest</value>
+         <GuiLabels guid="bfe484c601afc711ddbfc2f5960a0a3e4f">
+            <Label language="EN">OrderStatusRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>InvoiceUpdateRequest:StatusUpdateRequest</value>
+         <GuiLabels guid="bfe484c5afc711ddb707f5960a0a3e4f">
+            <Label language="EN">InvoiceUpdateRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>StatusUpdateRequest:StatusUpdateRequest</value>
+         <GuiLabels guid="afe484c5afc711ddb707f5960a0a3e4f">
+            <Label language="EN">StatusUpdateRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>EntrySheetUpdateRequest:StatusUpdateRequest</value>
+         <GuiLabels guid="bfe484c5afc711dbb707f5960a0a3e4f">
+            <Label language="EN">EntrySheetUpdateRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>InvoiceCopyRequest:CopyRequest</value>
+         <GuiLabels guid="bfe484c6afc711dd967bf5960a0a3e4f">
+            <Label language="EN">InvoiceCopyRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>PaymentRequest:PaymentProposalRequest</value>
+         <GuiLabels guid="bfe484c7afc711ddc7acf5960a0a3e4f">
+            <Label language="EN">PaymentRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>PaymentRemittanceRequest:PaymentRemittanceRequest</value>
+         <GuiLabels guid="bfe484c8afc711ddafaef5960a0a3e4f">
+            <Label language="EN">PaymentRemittanceRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ReceiptRequest:ReceiptRequest</value>
+         <GuiLabels guid="bfe6f580afc711dd8646f5960a0a3e4f">
+            <Label language="EN">ReceiptRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>PaymentRemittanceStatusUpdateRequest:PaymentRemittanceStatusUpdateRequest</value>
+         <GuiLabels guid="bfe484c3afc711ddca23f5960a0a3e8f">
+            <Label language="EN">PaymentRemittanceStatusUpdateRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>PurchaseRequisitionRequest:PurchaseRequisitionRequest</value>
+         <GuiLabels guid="bfe484c3afc711ddca23f5960a0a3e6f">
+            <Label language="EN">PurchaseRequisitionRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>QuoteRequest:QuoteRequest</value>
+         <GuiLabels guid="bfe6f580afc711dd8646f5950a0a3e4f">
+            <Label language="EN">QuoteRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>CatalogUploadRequest:CatalogUploadRequest</value>
+         <GuiLabels guid="bfe6f580afc711dd8656f5950a0a3e4f">
+            <Label language="EN">CatalogUploadRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ContractStatusUpdateRequest:ContractStatusUpdateRequest</value>
+         <GuiLabels guid="bfe6f580afc711dd8656f5950b0a3e4f">
+            <Label language="EN">ContractStatusUpdateRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>PaymentBatchRequest:PaymentBatchRequest</value>
+         <GuiLabels guid="bfe6f580afc711dd8656f5950c0a3e4f">
+            <Label language="EN">PaymentBatchRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>QualityNotificationRequest:QualityNotificationRequest</value>
+         <GuiLabels guid="bfe87623afc711ddca23f5960a0a3e4f">
+            <Label language="EN">QualityNotificationRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ServiceEntryRequest:ServiceEntryRequest</value>
+         <GuiLabels guid="bfe88624afc711ddca23f5960a0a3e4f">
+            <Label language="EN">ServiceEntryRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>outboundRequestTypeForSupplier</Name>
+      <Usage>required</Usage>
+      <Default>ConfirmationRequest:ConfirmationRequest</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe484c2afc711dda782f5960a0a3f9f">
+         <Label language="EN">Outbound Request Type</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>ConfirmationRequest:ConfirmationRequest</value>
+         <GuiLabels guid="bfe6f582afc711ddcd2ef5960a0a3faf">
+            <Label language="EN">ConfirmationRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>InvoiceDetailRequest:InvoiceDetailRequest</value>
+         <GuiLabels guid="bfe6f583afc711dd8725f5960a0a3fbf">
+            <Label language="EN">InvoiceDetailRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ShipmentNoticeRequest:ShipNoticeRequest</value>
+         <GuiLabels guid="bfe6f584afc711ddc7b9f5960a0a3fcf">
+            <Label language="EN">ShipmentNoticeRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ProductReplenishmentMessage:ProductReplenishmentMessage</value>
+         <GuiLabels guid="bfe484c3afc711ddca45f5960a0a3a8e">
+            <Label language="EN">ProductReplenishmentMessage</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>CatalogUploadRequest:CatalogUploadRequest</value>
+         <GuiLabels guid="bfe6f580afc711dd8656f5950a0a3e4f">
+            <Label language="EN">CatalogUploadRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>inboundRequestTypeForSupplier</Name>
+      <Usage>required</Usage>
+      <Default>OrderRequest:OrderRequest</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe6f581afc711ddccf9f5960a0a3fdf">
+         <Label language="EN">Inbound Request Type</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>OrderRequest:OrderRequest</value>
+         <GuiLabels guid="bfe484c3afc711ddca23f5960a0a3fef">
+            <Label language="EN">OrderRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ChangeOrderRequest:OrderRequest</value>
+         <GuiLabels guid="bfe484c4afc711ddbfc2f5960a0a3fff">
+            <Label language="EN">ChangeOrderRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>PaymentRemittanceRequest:PaymentRemittanceRequest</value>
+         <GuiLabels guid="bfe484c4afc711ddbfc2f5960a0a4fff">
+            <Label language="EN">PaymentRemittanceRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>inboundRequestTypeForBuyer</Name>
+      <Usage>required</Usage>
+      <Default>ConfirmationRequest:ConfirmationRequest</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="bfe6f581afc711ddccf9f5960a0a3e4f">
+         <Label language="EN">Inbound Request Type</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>ConfirmationRequest:ConfirmationRequest</value>
+         <GuiLabels guid="bfe6f582afc711ddcd2ef5960a0a3e4f">
+            <Label language="EN">ConfirmationRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>InvoiceDetailRequest:InvoiceDetailRequest</value>
+         <GuiLabels guid="bfe6f583afc711dd8725f5960a0a3e4f">
+            <Label language="EN">InvoiceDetailRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ComponentConsumptionRequest:ComponentConsumptionRequest</value>
+         <GuiLabels guid="bfe6f583afc711dd8725f6560a0a3e4f">
+            <Label language="EN">ComponentConsumptionRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ReceiptRequest:ReceiptRequest</value>
+         <GuiLabels guid="bfe6f583afc711dd8725f7560a0a3e4f">
+            <Label language="EN">ReceiptRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ShipmentNoticeRequest:ShipNoticeRequest</value>
+         <GuiLabels guid="bfe6f584afc711ddc7b9f5960a0a3e4f">
+            <Label language="EN">ShipmentNoticeRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ProductReplenishmentMessage:ProductReplenishmentMessage</value>
+         <GuiLabels guid="bfe484c3afc711ddca45f5960a0a3a8f">
+            <Label language="EN">ProductReplenishmentMessage</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>PayMeNowRequest:CopyRequest.PaymentProposalRequest</value>
+         <GuiLabels guid="bfe6f585afc711ddc59af5960a0a3g8f">
+            <Label language="EN">PayMeNowRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>PaymentRemittanceRequest:CopyRequest.PaymentRemittanceRequest</value>
+         <GuiLabels guid="bfe6f586afc711dd97a0f5960a0a3e4f">
+            <Label language="EN">PaymentRemittanceRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ServiceEntryRequest:ServiceEntryRequest</value>
+         <GuiLabels guid="bfe5f583afc711dd8725f5960a0a3e4f">
+            <Label language="EN">ServiceEntryRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>QuoteMessage:QuoteMessage</value>
+         <GuiLabels guid="bfe5f583bfc711dd8725f5960a0a3e4f">
+            <Label language="EN">QuoteMessage</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>ContractRequest:ContractRequest</value>
+         <GuiLabels guid="bfe5f583bfc711dd8725f5960a0a3f4f">
+            <Label language="EN">ContractRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>QualityNotificationRequest:QualityNotificationRequest</value>
+         <GuiLabels guid="bfe87684afc711ddca23f5960a0a3e4f">
+            <Label language="EN">QualityNotificationRequest</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>statusUpdateRequestRetryCount</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e04c6f11dfa225002170b2d2fb">
+         <Label language="EN">Status Update Request Retry Count</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>statusUpdateRequestRetryInterval</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e14c6f11dfc981002170b2d2fb">
+         <Label language="EN">Status Update Request Retry Interval (Seconds)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>timeout</Name>
+      <Usage>optional</Usage>
+      <Default>5</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e174c6f11df8d93002170b2d2fb">
+         <Label language="EN">Timeout to connect to Ariba Network (Minutes)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>attachmentAuthenticationActive</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e24c6f11df9cd5002170b2d2fb">
+         <Label language="EN">Active Attachment Authentication</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>attachmentURLUserID</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e34c6f11dfcd09002170b2d2fb">
+         <Label language="EN">Attachment URL UserId</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>attachmentURLPassword</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e44c6f11df846d002170b2d2fb">
+         <Label language="EN">Attachment URL Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>attachmentDownloadLocation</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e54c6f11df8d93002170b2d2fb">
+         <Label language="EN">Attachment Download Location</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>endpoint</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e64c6f11df8d93002170b2d2fb">
+         <Label language="EN">End Point ID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>keyStoreView</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e84c6f11df8d93002170b2d2fb">
+         <Label language="EN">KeyStore View</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>byPassProxyServerDomains</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e94c6f11df8d93002170b2d2fb">
+         <Label language="EN">Bypass Proxy Server For Domains</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>storecXMLDocument</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e97c6f11df8d93002170b2d2fb">
+         <Label language="EN">Store cXML Document</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>attachmentProcessingMode</Name>
+      <Usage>optional</Usage>
+      <Default>useFileSystem</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e134c6f11df8d93002170b2d2fb">
+         <Label language="EN">Attachment Processing Mode</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>useFileSystem</value>
+         <GuiLabels guid="c6cf00e144c6f11df8d93002170b2d2fb">
+            <Label language="EN">Use Local File System</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>useSharedFileSystem</value>
+         <GuiLabels guid="c6cf00e154c6f11df8d93002170b2d2fb">
+            <Label language="EN">Use Shared File System</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>embeddedIncXML</value>
+         <GuiLabels guid="c6cf00e164c6f11df8d93002170b2d2fb">
+            <Label language="EN">Embedded In cXML</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>processInMapping</value>
+         <GuiLabels guid="c6cf00e264c6f11df8d93002170b2d2fb">
+            <Label language="EN">Send Attachments To Mapping</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>sharedLocationMachineName</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e184c6f11df8d93002170b2d2fb">
+         <Label language="EN">Shared System Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sharedLocationUser</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e186c6f11df8d93002170b2d2fb">
+         <Label language="EN">Shared System User ID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>sharedLocationPassword</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e204c6f11df8d93002170b2d2fb">
+         <Label language="EN">Shared System Password</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>documentExpiryPeriod</Name>
+      <Usage>required</Usage>
+      <Default>24</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e200c6f11df8d93002170b2d2fb">
+         <Label language="EN">Expiration Time For The Document (Hours)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>systemID</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e202c6f11df8d93002170b2d2fb">
+         <Label language="EN">System ID for GetPending</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>selfTestDownloadLocation</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="c6cf00e206c6f11df8d93002170b2d2fb">
+         <Label language="EN">Self Test Download Location</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>copyRequest</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="Adapter00001">
+         <Label language="EN">Is CopyRequest</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>toEqualsFromCredential</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels guid="Adapter00002">
+         <Label language="EN">To Credentials Same as From Credentials</Label>
+      </GuiLabels>
+   </Attribute>
+</AdapterTypeMetaData>

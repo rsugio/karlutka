@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="30">
+
+  <GuiHandlerClassName />
+
+  <Type>BC</Type>
+
+  <GuiLabels guid="a7ca9170b04a11da8f2cce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.TYPE">
+    <Label language="EN">SAP Business Connector</Label>
+    <Label language="DE">SAP Business Connector</Label>
+  </GuiLabels>
+
+  <Inbound>
+    <TransportProtocol>
+      <Version>1.1</Version>
+      <Name>HTTP</Name>
+      <GuiLabels guid="a7ca9171b04a11dacb81ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.TRNS_HTTP">
+        <Label language="EN">HTTP</Label>
+        <Label language="DE">HTTP</Label>
+      </GuiLabels>
+      <ChannelAttributes />
+      <SecurityAttributes />
+      <ValidMessageProtocols>
+         <ProtocolIdentifier>
+            <Name>RFC-XML</Name>
+            <Version />
+         </ProtocolIdentifier>
+         <ProtocolIdentifier>
+            <Name>IDOC-XML</Name>
+            <Version />
+         </ProtocolIdentifier>
+
+      </ValidMessageProtocols>
+    </TransportProtocol>
+    
+    <MessageProtocol>
+      <Version />
+      <Name>RFC-XML</Name>
+      <GuiLabels guid="a7ca9172b04a11da8a56ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.MSG_XRFC">
+        <Label language="EN">RFC-XML with Envelope</Label>
+        <Label language="DE">RFC-XML mit Umschlag</Label>
+      </GuiLabels>
+      <ChannelAttributes>
+
+      </ChannelAttributes>
+      <SecurityAttributes>
+        <AttributeGroup>
+          <Name>verifySignaturePartnerCertificate</Name>
+          <GuiLabels guid="a7ca9173b04a11dac709ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_GRP_PCS">
+            <Label language="EN">Partner certificate for signing</Label>
+            <Label language="DE">Partnerzertifikat zum Signieren</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>verifySignatureIssuerDN</ReferenceName>
+            <EditCondition>
+              <AttributeName>isMessageSecurity</AttributeName>
+              <AttributeValue>1</AttributeValue>
+            </EditCondition>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>verifySignatureSubjectDN</ReferenceName>
+            <EditCondition>
+              <AttributeName>isMessageSecurity</AttributeName>
+              <AttributeValue>1</AttributeValue>
+            </EditCondition>
+          </AttributeReference>
+        </AttributeGroup>
+        <AttributeGroup>
+          <Name>verifySignature</Name>
+          <GuiLabels guid="a7ca9174b04a11da9318ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_GRP_CA">
+            <Label language="EN">Certification Authority</Label>
+            <Label language="DE">Certification Authority</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>verifySignatureKeyStore</ReferenceName>
+            <EditCondition>
+              <AttributeName>isMessageSecurity</AttributeName>
+              <AttributeValue>1</AttributeValue>
+            </EditCondition>
+          </AttributeReference>
+        </AttributeGroup>
+      </SecurityAttributes>
+      <ModuleProcessorAttributes>
+         <ModuleSequence>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleSenderBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+         </ModuleSequence>
+      </ModuleProcessorAttributes>
+    </MessageProtocol>
+    
+    <MessageProtocol>
+      <Version />
+      <Name>IDOC-XML</Name>
+      <GuiLabels guid="a7ca9175b04a11dab4c5ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.MSG_XIDOC">
+        <Label language="EN">IDoc-XML</Label>
+        <Label language="DE">IDoc-XML</Label>
+      </GuiLabels>
+      <ChannelAttributes>
+      </ChannelAttributes>
+      <SecurityAttributes>
+      </SecurityAttributes>
+      <ModuleProcessorAttributes>
+         <ModuleSequence>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleSenderBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+         </ModuleSequence>
+      </ModuleProcessorAttributes>
+    </MessageProtocol>
+
+    <MessageProtocol>
+      <Version />
+      <Name>PLAIN</Name>
+      <GuiLabels guid="a7ca9176b04a11da8105ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.MSG_PLAIN">
+        <Label language="EN">Plain-XML</Label>
+        <Label language="DE">Plain-XML</Label>
+      </GuiLabels>
+      <ChannelAttributes>
+      </ChannelAttributes>
+      <SecurityAttributes>
+      </SecurityAttributes>
+      <ModuleProcessorAttributes>
+         <ModuleSequence>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleSenderBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+         </ModuleSequence>
+      </ModuleProcessorAttributes>
+    </MessageProtocol>
+
+    <GlobalChannelAttributes>
+      <AttributeReference>
+        <ReferenceName>PersistDuration</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+        <ReferenceName>NumberRetries</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+        <ReferenceName>RetryInterval</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+        <ReferenceName>Timeout</ReferenceName>
+      </AttributeReference>
+    </GlobalChannelAttributes>
+  </Inbound>
+
+  <Outbound>
+    <TransportProtocol>
+      <Version>1.1</Version>
+      <Name>HTTP</Name>
+      <GuiLabels guid="a7ca9177b04a11daa4acce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.TRNS_HTTP">
+        <Label language="EN">HTTP</Label>
+        <Label language="DE">HTTP</Label>
+      </GuiLabels>
+      <ValidMessageProtocols>
+         <ProtocolIdentifier>
+            <Name>RFC-XML</Name>
+            <Version />
+         </ProtocolIdentifier>
+         <ProtocolIdentifier>
+            <Name>IDOC-XML</Name>
+            <Version />
+         </ProtocolIdentifier>
+
+      </ValidMessageProtocols>
+      <ChannelAttributes>
+        <AttributeReference>
+          <ReferenceName>URL</ReferenceName>
+        </AttributeReference>
+      </ChannelAttributes>
+      <SecurityAttributes>
+        <AttributeReference>
+          <ReferenceName>LogonUser</ReferenceName>
+        </AttributeReference>
+        <AttributeReference>
+          <ReferenceName>LogonPassword</ReferenceName>
+        </AttributeReference>
+      </SecurityAttributes>
+    </TransportProtocol>
+    
+    <TransportProtocol>
+      <Version>1.1</Version>
+      <Name>HTTPS</Name>
+      <GuiLabels guid="a7ca9178b04a11da83a1ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.TRNS_HTTPS">
+        <Label language="EN">HTTPS</Label>
+        <Label language="DE">HTTPS</Label>
+      </GuiLabels>
+      <ValidMessageProtocols>
+         <ProtocolIdentifier>
+            <Name>RFC-XML</Name>
+            <Version />
+         </ProtocolIdentifier>
+         <ProtocolIdentifier>
+            <Name>IDOC-XML</Name>
+            <Version />
+         </ProtocolIdentifier>
+
+      </ValidMessageProtocols>
+      <ChannelAttributes>
+        <AttributeReference>
+          <ReferenceName>URL</ReferenceName>
+        </AttributeReference>
+      </ChannelAttributes>
+      <SecurityAttributes>
+        <AttributeReference>
+          <ReferenceName>AuthenticationMode</ReferenceName>
+        </AttributeReference>
+        <AttributeReference>
+          <ReferenceName>CertificateAlias</ReferenceName>
+          <EditCondition>
+            <AttributeName>AuthenticationMode</AttributeName>
+            <AttributeValue>certificate</AttributeValue>
+          </EditCondition>
+        </AttributeReference>
+        <AttributeReference>
+          <ReferenceName>KeystoreView</ReferenceName>
+          <EditCondition>
+            <AttributeName>AuthenticationMode</AttributeName>
+            <AttributeValue>certificate</AttributeValue>
+          </EditCondition>
+        </AttributeReference>
+        <AttributeReference>
+          <ReferenceName>LogonUser</ReferenceName>
+          <EditCondition>
+            <AttributeName>AuthenticationMode</AttributeName>
+            <AttributeValue>user_pass</AttributeValue>
+          </EditCondition>
+        </AttributeReference>
+        <AttributeReference>
+          <ReferenceName>LogonPassword</ReferenceName>
+          <EditCondition>
+            <AttributeName>AuthenticationMode</AttributeName>
+            <AttributeValue>user_pass</AttributeValue>
+          </EditCondition>
+        </AttributeReference>
+      </SecurityAttributes>
+    </TransportProtocol>
+    
+    <MessageProtocol>
+      <Version />
+      <Name>RFC-XML</Name>
+      <GuiLabels guid="a7ca9179b04a11daa8c1ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.MSG_XRFC">
+        <Label language="EN">RFC-XML with Envelope</Label>
+        <Label language="DE">RFC-XML mit Umschlag</Label>
+      </GuiLabels>
+      <ChannelAttributes>
+
+      </ChannelAttributes>
+        <SecurityAttributes>
+        <AttributeGroup>
+          <Name>applySignature</Name>
+          <GuiLabels guid="a7ca917ab04a11da9e47ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_GRP_CS">
+            <Label language="EN">Certificate for signing</Label>
+            <Label language="DE">Zertifikat zum Signieren</Label>
+          </GuiLabels>
+          <AttributeReference>
+            <ReferenceName>applySignatureKeyStore</ReferenceName>
+            <EditCondition>
+              <AttributeName>isMessageSecurity</AttributeName>
+              <AttributeValue>1</AttributeValue>
+            </EditCondition>
+          </AttributeReference>
+          <AttributeReference>
+            <ReferenceName>applySignatureAlias</ReferenceName>
+          <EditCondition>
+              <AttributeName>isMessageSecurity</AttributeName>
+              <AttributeValue>1</AttributeValue>
+            </EditCondition>
+          </AttributeReference>
+        </AttributeGroup>
+      </SecurityAttributes>
+      <ModuleProcessorAttributes>
+         <ModuleSequence>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleSenderBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+         </ModuleSequence>
+      </ModuleProcessorAttributes>
+    </MessageProtocol>
+
+    <MessageProtocol>
+      <Version />
+      <Name>IDOC-XML</Name>
+      <GuiLabels guid="a7ccdb60b04a11da88acce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.MSG_XIDOC">
+        <Label language="EN">IDoc-XML</Label>
+        <Label language="DE">IDoc-XML</Label>
+      </GuiLabels>
+      <ChannelAttributes>
+      </ChannelAttributes>
+      <SecurityAttributes>
+      </SecurityAttributes>
+      <ModuleProcessorAttributes>
+         <ModuleSequence>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleSenderBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+         </ModuleSequence>
+      </ModuleProcessorAttributes>
+    </MessageProtocol>
+
+    <MessageProtocol>
+      <Version />
+      <Name>PLAIN</Name>
+      <GuiLabels guid="a7ccdb61b04a11da84bece230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.MSG_PLAIN">
+        <Label language="EN">Plain-XML</Label>
+        <Label language="DE">Plain-XML</Label>
+      </GuiLabels>
+      <ChannelAttributes>
+      </ChannelAttributes>
+      <SecurityAttributes>
+      </SecurityAttributes>
+      <ModuleProcessorAttributes>
+         <ModuleSequence>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleSenderBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+           <ModuleSequenceItem>
+             <Name>BcAdapterModuleConverterBean</Name>
+             <Type>local</Type>
+             <Key>0</Key>
+           </ModuleSequenceItem>
+         </ModuleSequence>
+      </ModuleProcessorAttributes>
+    </MessageProtocol>
+
+    <GlobalChannelAttributes>
+      <AttributeReference>
+        <ReferenceName>PersistDuration</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+        <ReferenceName>NumberRetries</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+        <ReferenceName>RetryInterval</ReferenceName>
+      </AttributeReference>
+    </GlobalChannelAttributes>
+  </Outbound>
+
+  <Attribute>
+    <Name>AuthenticationMode</Name>
+    <Usage>required</Usage>
+    <Default>user_pass</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>          
+    <FixedValue>
+      <value>user_pass</value>
+      <GuiLabels guid="a7ccdb62b04a11dab417ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_AUTH_USER">
+        <Label language="EN">User Name/Password</Label>
+        <Label language="DE">Benutzername/Kennwort</Label>
+      </GuiLabels>
+    </FixedValue>
+    <FixedValue>
+      <value>certificate</value>
+      <GuiLabels guid="a7ccdb63b04a11da8502ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_AUTH_CERT">
+        <Label language="EN">Certificate Logon</Label>
+        <Label language="DE">Zertifikatsanmeldung</Label>
+      </GuiLabels>
+    </FixedValue>
+    <GuiLabels guid="a7ccdb64b04a11da8445ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_AUTH_MODE">
+      <Label language="EN">Authentication Mode</Label>
+      <Label language="DE">Authentifizierungsart</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>CertificateAlias</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>  
+    <HelpServiceName>SecStoreHelpServiceKeyAlias</HelpServiceName>
+    <GuiLabels guid="a7ccdb65b04a11da8722ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_CERT_ALIAS">
+      <Label language="EN">Keystore Entry</Label>
+      <Label language="DE">Schlüsselspeichereintrag</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>KeystoreView</Name>
+    <Usage>optional</Usage>
+    <Default>DEFAULT</Default>
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <HelpServiceName>SecStoreHelpServiceKeyView</HelpServiceName>
+    <GuiLabels guid="a7ccdb66b04a11daae30ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_KEYSTORE_VIEW">
+      <Label language="EN">Keystore View</Label>
+      <Label language="DE">Schlüsselspeicher</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>PersistDuration</Name>
+    <Usage>optional</Usage>
+    <Default>2592000000</Default> 
+    <DataType>xsd:timePeriod</DataType>
+    <Length>0</Length>
+    <GuiLabels guid="a7ccdb67b04a11da9651ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_PERSIST_DURATION">
+      <Label language="EN">Persist Duration</Label>
+      <Label language="DE">Aufbewahrungszeit</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>NumberRetries</Name>
+    <Usage>optional</Usage>
+    <Default>3</Default>
+    <DataType>xsd:integer</DataType>
+    <Length>0</Length>
+    <GuiLabels guid="a7ccdb68b04a11daaf8fce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_NUM_RETRY">
+      <Label language="EN">Number of Retries</Label>
+      <Label language="DE">Anzahl Wiederholungen</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>RetryInterval</Name>
+    <Usage>optional</Usage>
+    <Default>300000</Default> 
+    <DataType>xsd:timePeriod</DataType>
+    <Length>0</Length>
+    <GuiLabels guid="a7ccdb69b04a11daa744ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_RETRY_INTERVAL">
+      <Label language="EN">Retry Interval</Label>
+      <Label language="DE">Wiederholungsintervall</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>Timeout</Name>
+    <Usage>optional</Usage>
+    <Default>300000</Default> 
+    <DataType>xsd:timePeriod</DataType>
+    <Length>0</Length>
+    <GuiLabels guid="a7ccdb6ab04a11dac086ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_TIMEOUT">
+      <Label language="EN">Timeout</Label>
+      <Label language="DE">Timeout</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>URL</Name>
+    <Usage>required</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <PasswordReference>LogonPassword</PasswordReference>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>    
+    <GuiLabels guid="a7ccdb6bb04a11da8198ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_URL">
+      <Label language="EN">URL</Label>
+      <Label language="DE">URL</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>LogonUser</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>    
+    <GuiLabels guid="a7ccdb6cb04a11daac2cce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_USER">
+      <Label language="EN">User Name</Label>
+      <Label language="DE">Benutzername</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute isPassword="true">
+    <Name>LogonPassword</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>    
+    <GuiLabels guid="a7ccdb6db04a11daa7e3ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_PASSWD">
+      <Label language="EN">Password</Label>
+      <Label language="DE">Kennwort</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>isMessageSecurity</Name>
+    <Usage>required</Usage>
+    <Default>0</Default>
+    <DataType>xsd:boolean</DataType>
+    <Length>1</Length>
+    <GuiLabels guid="a7ccdb6eb04a11da857ece230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_MSG_SECURITY">
+      <Label language="EN">Message security</Label>
+      <Label language="DE">Message Security</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>applySignatureKeyStore</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>230</Length>
+    <Flag>nonTransportable</Flag>
+    <HelpServiceName>SecStoreHelpServiceKeyView</HelpServiceName>
+    <GuiLabels guid="a7ccdb6fb04a11daca42ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_APPLY_KEYSTORE_VIEW">
+      <Label language="EN">Keystore View</Label>
+      <Label language="DE">Schlüsselspeicher</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>applySignatureAlias</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>256</Length>
+    <Flag>nonTransportable</Flag>
+    <HelpServiceName>SecStoreHelpServiceKeyAlias</HelpServiceName>
+    <GuiLabels guid="a7ccdb70b04a11dac72bce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_APPLY_ALIAS">
+      <Label language="EN">Keystore Entry</Label>
+      <Label language="DE">Schlüsselspeichereintrag</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>verifySignatureKeyStore</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>230</Length>
+    <Flag>nonTransportable</Flag>
+    <HelpServiceName>SecStoreHelpServicePubView</HelpServiceName>
+    <GuiLabels guid="a7ccdb71b04a11da87b5ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_VERIFY_KEYSTORE">
+      <Label language="EN">Keystore View</Label>
+      <Label language="DE">Schlüsselspeicher</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>verifySignatureIssuerDN</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <HelpServiceName>SecStoreHelpServicePubIssuerDN</HelpServiceName>
+    <GuiLabels guid="a7ccdb72b04a11dab024ce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_ISSUER">
+      <Label language="EN">Issuer</Label>
+      <Label language="DE">Aussteller</Label>
+    </GuiLabels>
+  </Attribute>
+
+  <Attribute>
+    <Name>verifySignatureSubjectDN</Name>
+    <Usage>optional</Usage>
+    <Default />
+    <DataType>xsd:string</DataType>
+    <Length>0</Length>
+    <Flag>nonTransportable</Flag>
+    <HelpServiceName>SecStoreHelpServicePubSubjectDN</HelpServiceName>
+    <GuiLabels guid="a7ccdb73b04a11da8c0dce230a126056" resourceId="com.sap.aii.ib.bom.cpa.generic.adaptermetadata.rb_BCAdapterMetadata.ATTR_SUBJECT">
+      <Label language="EN">Subject</Label>
+      <Label language="DE">Inhaber</Label>
+    </GuiLabels>
+  </Attribute>
+
+</AdapterTypeMetaData>

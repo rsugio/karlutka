@@ -322,7 +322,6 @@ The valid CIM status code values are defined in DSP0200.</xs:documentation>
         <xs:restriction base="xs:string">
             <xs:minLength value="25"/>
             <xs:maxLength value="25"/>
-            <!-- TODO: Add validation pattern -->
         </xs:restriction>
     </xs:simpleType>
     <!-- Section: Entity Descriptions. -->

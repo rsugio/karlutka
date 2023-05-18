@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!-- Reverse engineering for Karlutka 2023-05-18 -->
+	<xs:element name="AdapterTypeMetaData">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="1" type="xs:string" name="GuiHandlerClassName"/>
+				<xs:sequence minOccurs="0">
+					<xs:element ref="Type"/>
+					<xs:element ref="GuiLabels"/>
+				</xs:sequence>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="Attribute"/>
+					<xs:element ref="AttributeTable"/>
+					<xs:element ref="DynamicAttributes"/>
+					<xs:element ref="Inbound"/>
+					<xs:element ref="Outbound"/>
+					<xs:element ref="TabDefinition"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="version" use="required" type="xs:decimal"/>
+			<xs:attribute name="senderAgreementUnique" use="optional" type="xs:boolean"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Attribute">
+		<xs:complexType>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="Flag"/>
+				<xs:element ref="GuiLabels"/>
+				<xs:element ref="HelpServiceName"/>
+				<xs:element ref="Name"/>
+				<xs:element ref="Usage"/>
+				<xs:element ref="DataType"/>
+				<xs:element ref="Default"/>
+				<xs:element ref="FixedValue"/>
+				<xs:element ref="HelpService"/>
+				<xs:element ref="Length"/>
+				<xs:element ref="PasswordReference"/>
+			</xs:choice>
+			<xs:attribute name="isPassword" type="xs:boolean"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DataType" type="xs:anyURI"/>
+	<xs:element name="Default" type="xs:string"/>
+	<xs:element name="FixedValue">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="value"/>
+				<xs:element ref="GuiLabels"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="value" type="xs:anyURI"/>
+	<xs:element name="HelpService">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="HelpServiceName"/>
+				<xs:element minOccurs="0" ref="HelpServiceQueryAttributes"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HelpServiceQueryAttributes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="HelpServiceQueryAttribute"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="HelpServiceQueryAttribute">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Name"/>
+				<xs:element ref="Value"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Length" type="xs:string"/>
+	<xs:element name="PasswordReference" type="xs:string"/>
+	<xs:element name="AttributeTable">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Name"/>
+				<xs:element ref="Usage"/>
+				<xs:choice minOccurs="0">
+					<xs:element ref="Flag"/>
+					<xs:element ref="Label"/>
+				</xs:choice>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="AttributeReference"/>
+					<xs:element ref="GuiLabels"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DynamicAttributes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="AttributeReference"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Inbound">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="Tab"/>
+				<xs:choice minOccurs="1" maxOccurs="unbounded">
+					<xs:element ref="GlobalChannelAttributes"/>
+					<xs:element ref="GlobalSecurityAttributes"/>
+					<xs:element ref="MessageProtocol"/>
+					<xs:element ref="TransportProtocol"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Outbound">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="Tab"/>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="GlobalChannelAttributes"/>
+					<xs:element ref="GlobalSecurityAttributes"/>
+					<xs:element ref="MessageProtocol"/>
+					<xs:element ref="TransportProtocol"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="TabDefinition">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="GuiLabels"/>
+			</xs:sequence>
+			<xs:attribute name="id" use="required" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Type" type="xs:NCName"/>
+	<xs:element name="GuiLabels">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="Label"/>
+			</xs:sequence>
+			<xs:attribute name="guid" type="xs:NMTOKEN"/>
+			<xs:attribute name="resourceId"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Tab">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="TransportProtocol"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="AttributeGroup"/>
+					<xs:element ref="AttributeReference"/>
+				</xs:choice>
+			</xs:choice>
+			<xs:attribute name="id" use="required" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="MessageProtocol">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="Name"/>
+					<xs:element ref="Version"/>
+				</xs:choice>
+				<xs:element ref="GuiLabels"/>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="ChannelAttributes"/>
+					<xs:element ref="SecurityAttributes"/>
+					<xs:element ref="ModuleProcessorAttributes"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModuleProcessorAttributes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ModuleSequence"/>
+				<xs:element minOccurs="0" ref="ModuleConfig"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModuleSequence">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="ModuleSequenceItem"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModuleSequenceItem">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Name"/>
+				<xs:element ref="Type"/>
+				<xs:element ref="Key"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModuleConfig">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="ModuleConfigItem"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModuleConfigItem">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Key"/>
+				<xs:element ref="Name"/>
+				<xs:element ref="Value"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GlobalChannelAttributes">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="AttributeReference"/>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Tab"/>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="AttributeGroup"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GlobalSecurityAttributes">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="TransportProtocol">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="Name"/>
+					<xs:element ref="Version"/>
+				</xs:choice>
+				<xs:element ref="GuiLabels"/>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="ChannelAttributes"/>
+					<xs:element ref="SecurityAttributes"/>
+					<xs:element ref="ValidMessageProtocols"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ValidMessageProtocols">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" ref="ProtocolIdentifier"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ProtocolIdentifier">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Name"/>
+				<xs:element ref="Version"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AttributeReference">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ReferenceName"/>
+				<xs:choice>
+					<xs:element ref="AndCondition"/>
+					<xs:element ref="NotCondition"/>
+					<xs:element ref="OrCondition"/>
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="EditCondition"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ReferenceName">
+		<xs:complexType mixed="true">
+			<xs:attribute name="namespace" use="optional" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Name">
+		<xs:complexType mixed="true">
+			<xs:attribute name="namespace" use="optional" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Flag" type="xs:string"/>
+	<xs:element name="Usage" type="xs:string"/>
+	<xs:element name="HelpServiceName" type="xs:NCName"/>
+	<xs:element name="Value" type="xs:string"/>
+	<xs:element name="Label">
+		<xs:complexType mixed="true">
+			<xs:attribute name="language" use="required" type="xs:NCName"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AttributeGroup">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="Name"/>
+				<xs:element ref="GuiLabels"/>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="AttributeReference"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Version" type="xs:string"/>
+	<xs:element name="SecurityAttributes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="AttributeReference"/>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="AttributeGroup"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Key" type="xs:NMTOKEN"/>
+	<xs:element name="ChannelAttributes">
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="AttributeReference"/>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="AttributeGroup"/>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Tab"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OrCondition">
+		<xs:complexType>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="AndCondition"/>
+				<xs:element ref="EditCondition"/>
+			</xs:choice>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AndCondition">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" ref="AndCondition"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="EditCondition"/>
+					<xs:element ref="NotCondition"/>
+					<xs:element ref="OrCondition"/>
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="NotCondition">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="EditCondition"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="EditCondition">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AttributeName"/>
+				<xs:element maxOccurs="unbounded" ref="AttributeValue"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AttributeName" type="xs:NCName"/>
+	<xs:element name="AttributeValue" type="xs:string"/>
+</xs:schema>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="80">
+	<GuiHandlerClassName/>
+	<Inbound>
+		<TransportProtocol>
+			<Name>STP</Name>
+			<Version>1.0</Version>
+			<GuiLabels>
+				<Label language="EN">Sender Transport Protocol STP 1.0</Label>
+			</GuiLabels>
+			<ChannelAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="Attribute namespace (is optional)">Technical name of Channel Attribute for STP 1.0</ReferenceName>
+				</AttributeReference>
+			</ChannelAttributes>
+			<SecurityAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="Attribute namespace (is optional)">Technical name of Security Attribute for STP 1.0</ReferenceName>
+				</AttributeReference>
+			</SecurityAttributes>
+			<ValidMessageProtocols>
+				<ProtocolIdentifier>
+					<Name>SMP</Name>
+					<Version>2.0</Version>
+				</ProtocolIdentifier>
+			</ValidMessageProtocols>
+		</TransportProtocol>
+		<MessageProtocol>
+			<Name>SMP</Name>
+			<Version>2.0</Version>
+			<GuiLabels>
+				<Label language="EN">Sender Message Protocol SMP 2.0</Label>
+			</GuiLabels>
+			<ChannelAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="Attribute namespace (is optional)">Technical name of Channel Attribute for SMP 2.0</ReferenceName>
+				</AttributeReference>
+			</ChannelAttributes>
+			<SecurityAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="Attribute namespace (is optional)">Technical name of Security Attribute for SMP 2.0</ReferenceName>
+				</AttributeReference>
+			</SecurityAttributes>
+		</MessageProtocol>
+		<GlobalChannelAttributes>
+			<AttributeReference>
+				<ReferenceName namespace="Attribute namespace (is optional)">Technical name of a protocol independent Sender Channel Attribute</ReferenceName>
+			</AttributeReference>
+		</GlobalChannelAttributes>
+	</Inbound>
+	<Outbound>
+		<TransportProtocol>
+			<Name>RTP</Name>
+			<Version>3.0</Version>
+			<GuiLabels>
+				<Label language="EN">Receiver Transport Protocol RTP 3.0</Label>
+			</GuiLabels>
+			<ChannelAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="Attribute namespace (is optional)">Technical name of Channel Attribute for RTP 3.0</ReferenceName>
+				</AttributeReference>
+			</ChannelAttributes>
+			<SecurityAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="Attribute namespace (is optional)">Technical name of Security Attribute for RTP 3.0</ReferenceName>
+				</AttributeReference>
+			</SecurityAttributes>
+			<ValidMessageProtocols>
+				<ProtocolIdentifier>
+					<Name>RMP</Name>
+					<Version>4.0</Version>
+				</ProtocolIdentifier>
+			</ValidMessageProtocols>
+		</TransportProtocol>
+		<MessageProtocol>
+			<Name>RMP</Name>
+			<Version>4.0</Version>
+			<GuiLabels>
+				<Label language="EN">Receiver Message Protocol RMP 4.0</Label>
+			</GuiLabels>
+			<ChannelAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="Attribute namespace (is optional)">Technical name of Channel Attribute for RMP 4.0</ReferenceName>
+				</AttributeReference>
+			</ChannelAttributes>
+			<SecurityAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="Attribute namespace (is optional)">Technical name of Security Attribute for RMP 4.0</ReferenceName>
+				</AttributeReference>
+			</SecurityAttributes>
+		</MessageProtocol>
+		<GlobalChannelAttributes>
+			<AttributeReference>
+				<ReferenceName namespace="Attribute namespace (is optional)">Technical name of a protocol independent Receiver Channel Attribute</ReferenceName>
+			</AttributeReference>
+		</GlobalChannelAttributes>
+	</Outbound>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of Channel Attribute for STP 1.0</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Channel Attribute for STP 1.0</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of Security Attribute for STP 1.0</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Security Attribute for STP 1.0</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of Channel Attribute for SMP 2.0</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Channel Attribute for SMP 2.0</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of Security Attribute for SMP 2.0</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Security Attribute for SMP 2.0</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of a protocol independent Sender Channel Attribute</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Protocol independent Sender Channel Attribute</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of Channel Attribute for RTP 3.0</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Channel Attribute for RTP 3.0</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of Security Attribute for RTP 3.0</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Security Attribute for RTP 3.0</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of Channel Attribute for RMP 4.0</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Channel Attribute for RMP 4.0</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of Security Attribute for RMP 4.0</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Security Attribute for RMP 4.0</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="Attribute namespace (is optional)">Technical name of a protocol independent Receiver Channel Attribute</Name>
+		<Usage />
+		<DataType />
+		<Length />
+		<GuiLabels>
+			<Label language="EN">Protocol independent Receiver Channel Attribute</Label>
+		</GuiLabels>
+	</Attribute>
+</AdapterTypeMetaData>

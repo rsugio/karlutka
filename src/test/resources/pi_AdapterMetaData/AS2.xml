@@ -1,0 +1,3321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="30">
+   <!--
+		**********************************************************************
+	-->
+   <!--
+		G E N E R A L S E C T I O N
+	-->
+   <!--
+		**********************************************************************
+	-->
+   <GuiHandlerClassName/>
+   <!-- Adapter type definition -->
+   <Type>AS2</Type>
+   <GuiLabels>
+      <Label language="EN">AS2 Adapter</Label>
+      <Label language="DE">AS2 Adapter</Label>
+   </GuiLabels>
+   <!--
+		**********************************************************************
+	-->
+   <!--
+		S E N D E R C H A N N E L S E C T I O N
+	-->
+   <!--
+		**********************************************************************
+	-->
+   <Inbound>
+      <!-- Transport protocol settings -->
+      <TransportProtocol>
+         <Name>HTTP</Name>
+         <!--
+				Note: If you increase the version number below then transport
+				protocol data of older channels cannot read anymore. I.e. You have
+				to provide the old and new version to be compatible-
+			-->
+         <Version>1.1</Version>
+         <GuiLabels>
+            <Label language="DE">Hypertext Transfer Protocol</Label>
+            <Label language="EN">Hypertext Transfer Protocol</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>AS2</Name>
+               <Version>1.1</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes/>
+      </TransportProtocol>
+      <TransportProtocol>
+         <Name>AS2MDN</Name>
+         <!--
+				Note: If you increase the version number below then transport
+				protocol data of older channels cannot read anymore. I.e. You have
+				to provide the old and new version to be compatible-
+			-->
+         <Version>1.1</Version>
+         <GuiLabels>
+            <Label language="DE">AS2 MDN</Label>
+            <Label language="EN">AS2 MDN</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>AS2</Name>
+               <Version>ACK</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes/>
+      </TransportProtocol>
+      <!-- Message protocol settings -->
+      <MessageProtocol>
+         <Name>AS2</Name>
+         <Version>1.1</Version>
+         <GuiLabels>
+            <Label language="EN">AS2</Label>
+            <Label language="DE">AS2</Label>
+         </GuiLabels>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>localejbs/CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>entry</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+         <ChannelAttributes>
+            <Tab id="general">
+               <!-- &lt;AttributeGroup&gt;
+                  &lt;Name&gt;tpm&lt;/Name&gt;
+                  &lt;GuiLabels&gt;
+                     &lt;Label language=&quot;EN&quot;&gt;Trading Partner Management (TPM) Configuration&lt;/Label&gt;
+                     &lt;Label language=&quot;DE&quot;&gt;Trading Partner Management (TPM) Configuration&lt;/Label&gt;
+                  &lt;/GuiLabels&gt;
+                  &lt;AttributeReference&gt;
+                     &lt;ReferenceName&gt;tpm.enable&lt;/ReferenceName&gt;
+                  &lt;/AttributeReference&gt;
+                  &lt;AttributeReference&gt;
+                     &lt;ReferenceName&gt;tpm.tpID&lt;/ReferenceName&gt;
+                     &lt;EditCondition&gt;
+                        &lt;AttributeName&gt;tpm.enable&lt;/AttributeName&gt;
+                        &lt;AttributeValue&gt;1&lt;/AttributeValue&gt;
+                     &lt;/EditCondition&gt;
+                  &lt;/AttributeReference&gt;
+               &lt;/AttributeGroup&gt;
+ -->
+               <AttributeGroup>
+                  <Name>server</Name>
+                  <GuiLabels>
+                     <Label language="EN">Server</Label>
+                     <Label language="DE">Server</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>sender.serverPath</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>message</Name>
+                  <GuiLabels>
+                     <Label language="EN">Message</Label>
+                     <Label language="DE">Nachricht</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>sender.messageId.left</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.messageId.right</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.fromName</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.toName</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.subject</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.filenamePolicy</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>charset</Name>
+                  <GuiLabels>
+                     <Label language="EN">Charset</Label>
+                     <Label language="DE">Zeichensatz</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>sender.convertCharset</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.convertCharset.original</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.convertCharset</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.convertCharset.target</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.convertCharset</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>ambivalentSenders</Name>
+                  <GuiLabels>
+                     <Label language="EN">Ambilvalent configuration</Label>
+                     <Label language="DE">Ambivalente Konfiguration</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>sender.ambivalentError</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="security">
+               <AttributeGroup>
+                  <Name>signature</Name>
+                  <GuiLabels>
+                     <Label language="EN">Signature</Label>
+                     <Label language="DE">Signatur</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>sender.sign.checkSignature</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.sign.secSenderCertificateView</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.sign.checkSignature</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.sign.secSenderCertificate</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.sign.checkSignature</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>encryption</Name>
+                  <GuiLabels>
+                     <Label language="EN">Decryption</Label>
+                     <Label language="DE">Entschlüsselung</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>sender.encryption.decrypt</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.encryption.secKeyView</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.encryption.decrypt</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sender.encryption.secKey</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.encryption.decrypt</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="mdn">
+               <AttributeGroup>
+                  <Name>MDN Signing</Name>
+                  <GuiLabels>
+                     <Label language="EN">Signature</Label>
+                     <Label language="DE">Signatur</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>sender.mdn.sign</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sign.secSenderCertificateView</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.mdn.sign</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sign.secSenderCertificate</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.mdn.sign</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sign.secSenderKeyView</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.mdn.sign</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>sign.secSenderKey</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.mdn.sign</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>Async MDN</Name>
+                  <GuiLabels>
+                     <Label language="EN">Asynchronous Message Disposition Notification</Label>
+                     <Label language="DE">Asynchron Message Disposition Notification</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>mdn.asyncSendOptions</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.overrideURL</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.newAsyncURL</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>mdn.async.overrideURL</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.recipient.httpBasicAuthentication</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.recipient.httpBasicAuthentication.user</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>mdn.async.recipient.httpBasicAuthentication</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.recipient.httpBasicAuthentication.password</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>mdn.async.recipient.httpBasicAuthentication</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.client.auth</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.client.auth.keystore</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>mdn.client.auth</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+               	  </AttributeReference>
+               	  <AttributeReference>
+                     <ReferenceName>mdn.client.auth.alias</ReferenceName>
+                     <EditCondition>
+                     	<AttributeName>mdn.client.auth</AttributeName>
+                     	<AttributeValue>1</AttributeValue>
+                     </EditCondition>
+               	  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.recipient.proxy</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.recipient.proxy.host</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>mdn.async.recipient.proxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.recipient.proxy.port</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>mdn.async.recipient.proxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.recipient.proxy.auth</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>mdn.async.recipient.proxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.recipient.proxy.auth.user</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.async.recipient.proxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.async.recipient.proxy.auth</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.async.recipient.proxy.auth.password</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.async.recipient.proxy</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.async.recipient.proxy.auth</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="general">
+               <AttributeGroup>
+                  <Name>duplicateHandling</Name>
+                  <GuiLabels>
+                     <Label language="EN">Duplicate Handling</Label>
+                     <Label language="DE">Duplicate Handling</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>duplicateCheck.enable</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>duplicateCheck.threshold</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>duplicateCheck.enable</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>duplicateCheck.disableChannel</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>duplicateCheck.enable</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>duplicateCheck.timeValue</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>duplicateCheck.enable</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>duplicateCheck.timeUnit</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>duplicateCheck.enable</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>duplicateFileNameCheck.enable</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>duplicateFileNameCheck.timeValue</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>duplicateFileNameCheck.enable</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>duplicateFileNameCheck.mdnType</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>duplicateFileNameCheck.enable</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>config</Name>
+                  <GuiLabels>
+                     <Label language="EN">Message configuration</Label>
+                     <Label language="DE">Nachrichtenkonfiguration</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>dynamic.setParams</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>deliverySemantics</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>eoio.sequenceId</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>deliverySemantics</AttributeName>
+                           <AttributeValue>eoio</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeGroup>
+                  <Name>Archive</Name>
+                  <GuiLabels>
+                     <Label language="EN">Archiving</Label>
+                     <Label language="DE">Archivierung</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive.path</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>msg.archive</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive.incoming.wired</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive.incoming.wired.path</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>msg.archive.incoming.wired</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive.encoded</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.convertCharset</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive.encoded.path</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>msg.archive.encoded</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>sender.convertCharset</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive.decrypted</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>sender.encryption.decrypt</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive.decrypted.path</ReferenceName>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>msg.archive.decrypted</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>sender.encryption.decrypt</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </AndCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive.onerror</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>msg.archive.onerror.path</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>msg.archive.onerror</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.archive.positive</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.archive.positive.path</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>mdn.archive.positive</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.archive.negative</ReferenceName>
+                  </AttributeReference>
+                  <AttributeReference>
+                     <ReferenceName>mdn.archive.negative.path</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>mdn.archive.negative</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+            <Tab id="advanced">
+               <!-- Channel activation via XI directory -->
+               <AttributeGroup>
+                  <Name>Status</Name>
+                  <GuiLabels>
+                     <Label language="EN">Channel Status</Label>
+                     <Label language="DE">Channel Status</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>adapterStatus</ReferenceName>
+                  </AttributeReference>
+               </AttributeGroup>
+               <AttributeReference>
+                  <ReferenceName>as2.advanced</ReferenceName>
+               </AttributeReference>
+               <AttributeGroup>
+                  <Name>addTable</Name>
+                  <GuiLabels>
+                     <Label language="EN">Additional Parameters</Label>
+                     <Label language="DE">Zusätzliche Parameter</Label>
+                  </GuiLabels>
+                  <AttributeReference>
+                     <ReferenceName>as2.addParameterParams</ReferenceName>
+                     <EditCondition>
+                        <AttributeName>as2.advanced</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AttributeReference>
+               </AttributeGroup>
+            </Tab>
+         </ChannelAttributes>
+      </MessageProtocol>
+      <MessageProtocol>
+         <Name>AS2</Name>
+         <Version>ACK</Version>
+         <GuiLabels>
+            <Label language="EN">AS2 MDN XML</Label>
+            <Label language="DE">AS2 MDN XML</Label>
+         </GuiLabels>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>localejbs/CallSapAdapter</Name>
+                  <Type>local</Type>
+                  <Key>entry</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+         </ModuleProcessorAttributes>
+         <ChannelAttributes>
+            <AttributeGroup>
+               <Name>Status</Name>
+               <GuiLabels>
+                  <Label language="EN">Channel Status</Label>
+                  <Label language="DE">Channel Status</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>adapterStatus</ReferenceName>
+               </AttributeReference>
+            </AttributeGroup>
+         </ChannelAttributes>
+      </MessageProtocol>
+   </Inbound>
+   <!--
+		**********************************************************************
+	-->
+   <!--
+		R E C E I V E R C H A N N E L S E C T I O N
+	-->
+   <!--
+		**********************************************************************
+	-->
+   <Outbound>
+      <!-- Transport protocol settings -->
+      <TransportProtocol>
+         <Name>HTTP</Name>
+         <Version>1.1</Version>
+         <GuiLabels>
+            <Label language="EN">Hypertext Transfer Protocol</Label>
+            <Label language="DE">Hypertext Transfer Protocol</Label>
+         </GuiLabels>
+         <ValidMessageProtocols>
+            <ProtocolIdentifier>
+               <Name>AS2</Name>
+               <Version>1.1</Version>
+            </ProtocolIdentifier>
+         </ValidMessageProtocols>
+         <ChannelAttributes>
+            <AttributeGroup>
+               <Name>inboundParameters</Name>
+               <GuiLabels>
+                  <Label language="EN">HTTP Peer Configuration</Label>
+                  <Label language="DE">HTTP Konfiguration Gegenstelle</Label>
+               </GuiLabels>
+            </AttributeGroup>
+         </ChannelAttributes>
+      </TransportProtocol>
+      <!-- Message protocol settings -->
+      <MessageProtocol>
+         <Name>AS2</Name>
+         <Version>1.1</Version>
+         <GuiLabels>
+            <Label language="EN">AS2</Label>
+            <Label language="DE">AS2</Label>
+         </GuiLabels>
+         <ModuleProcessorAttributes>
+            <ModuleSequence>
+               <ModuleSequenceItem>
+                  <Name>localejbs/ModuleProcessorExitBean</Name>
+                  <Type>local</Type>
+                  <Key>exit</Key>
+               </ModuleSequenceItem>
+            </ModuleSequence>
+            <ModuleConfig>
+               <ModuleConfigItem>
+                  <Key>exit</Key>
+                  <Name>JNDIName</Name>
+                  <Value>deployedAdapters/com.sap.aii.adapter.as2.ra/shareable/com.sap.aii.adapter.as2.ra</Value>
+               </ModuleConfigItem>
+            </ModuleConfig>
+         </ModuleProcessorAttributes>
+      </MessageProtocol>
+      <!-- Global settings -->
+      <GlobalChannelAttributes>
+         <Tab id="general">
+            <!-- &lt;AttributeGroup&gt;
+               &lt;Name&gt;tpm&lt;/Name&gt;
+               &lt;GuiLabels&gt;
+                  &lt;Label language=&quot;EN&quot;&gt;Trading Partner Management (TPM) Configuration&lt;/Label&gt;
+                  &lt;Label language=&quot;DE&quot;&gt;Trading Partner Management (TPM) Configuration&lt;/Label&gt;
+               &lt;/GuiLabels&gt;
+               &lt;AttributeReference&gt;
+                  &lt;ReferenceName&gt;tpm.enable&lt;/ReferenceName&gt;
+               &lt;/AttributeReference&gt;
+               &lt;AttributeReference&gt;
+                  &lt;ReferenceName&gt;tpm.tpID&lt;/ReferenceName&gt;
+                  -
+                  &lt;EditCondition&gt;
+                     &lt;AttributeName&gt;tpm.enable&lt;/AttributeName&gt;
+                     &lt;AttributeValue&gt;1&lt;/AttributeValue&gt;
+                  &lt;/EditCondition&gt;
+               &lt;/AttributeReference&gt;
+            &lt;/AttributeGroup&gt;
+ -->
+            <AttributeGroup>
+               <Name>receipient</Name>
+               <GuiLabels>
+                  <Label language="EN">Receipient</Label>
+                  <Label language="DE">Empfänger</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>receipient.url</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.httpBasicAuthentication</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.httpBasicAuthentication.user</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>receipient.httpBasicAuthentication</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.httpBasicAuthentication.password</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>receipient.httpBasicAuthentication</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>client.auth</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>client.auth.keystore</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>client.auth</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>client.auth.alias</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>client.auth</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.proxy</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.proxy.host</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>receipient.proxy</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.proxy.port</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>receipient.proxy</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.proxy.auth</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>receipient.proxy</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.proxy.auth.user</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>receipient.proxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>receipient.proxy.auth</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.proxy.auth.password</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>receipient.proxy</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>receipient.proxy.auth</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeGroup>
+               <Name>message</Name>
+               <GuiLabels>
+                  <Label language="EN">Message</Label>
+                  <Label language="DE">Nachricht</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>fileName</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.messageId.left</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.messageId.right</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>receipient.messageId.compatible</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>recipient.fromName</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>recipient.toName</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>recipient.fromEmail</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>recipient.subject</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>recipient.contentType</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>enable.attachments</ReferenceName>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeGroup>
+               <Name>charset</Name>
+               <GuiLabels>
+                  <Label language="EN">Charset</Label>
+                  <Label language="DE">Zeichensatz</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>recipient.convertCharset</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>recipient.convertCharset.original</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>recipient.convertCharset</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>recipient.convertCharset.target</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>recipient.convertCharset</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+            </AttributeGroup>
+         </Tab>
+         <Tab id="security">
+            <AttributeGroup>
+               <Name>compression</Name>
+               <GuiLabels>
+                  <Label language="EN">Compression</Label>
+                  <Label language="DE">Kompression</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>compression.compressMessage</ReferenceName>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeGroup>
+               <Name>signature</Name>
+               <GuiLabels>
+                  <Label language="EN">Signature</Label>
+                  <Label language="DE">Signatur</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>sign.signMessage</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>signing.message.algorithms</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>sign.signMessage</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>sign.secSenderCertificateView</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>sign.signMessage</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>sign.secSenderCertificate</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>sign.signMessage</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>sign.secSenderKeyView</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>sign.signMessage</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>sign.secSenderKey</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>sign.signMessage</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeGroup>
+               <Name>encryption</Name>
+               <GuiLabels>
+                  <Label language="EN">Encryption</Label>
+                  <Label language="DE">Verschlüsselung</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>encryption.encryptMessage</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>encryption.algorithm</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>encryption.encryptMessage</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>encryption.keyLength</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>encryption.encryptMessage</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>encryption.algorithm</AttributeName>
+                           <AttributeValue>rc2_CBC</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>encryption.algorithm</AttributeName>
+                           <AttributeValue>rc4</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>encryption.algorithm</AttributeName>
+                           <AttributeValue>rc5_CBC</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>encryption.secReceipientCertificateView</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>encryption.encryptMessage</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>encryption.secReceipientCertificate</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>encryption.encryptMessage</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+            </AttributeGroup>
+         </Tab>
+         <Tab id="mdn">
+            <AttributeGroup>
+               <Name>mdn</Name>
+               <GuiLabels>
+                  <Label language="EN">MDN</Label>
+                  <Label language="DE">MDN</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>mdn.request</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>asynchronousMDNUrl</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>mdn.request</AttributeName>
+                     <AttributeValue>async</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.hash</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.sign</AttributeName>
+                        <AttributeValue>0</AttributeValue>
+                     </EditCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.hash.check</ReferenceName>
+                  <AndCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.hash</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.sign</AttributeName>
+                           <AttributeValue>1</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.sign</ReferenceName>
+                  <OrCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.request</AttributeName>
+                        <AttributeValue>async</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.request</AttributeName>
+                        <AttributeValue>sync</AttributeValue>
+                     </EditCondition>
+                  </OrCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>signing.mdn.algorithms</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>mdn.sign</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.checkSignature</ReferenceName>
+                  <AndCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.sign</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.sign.secSignerCertificateView</ReferenceName>
+                  <AndCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.sign</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.checkSignature</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.sign.secSignerCertificate</ReferenceName>
+                  <AndCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.sign</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.checkSignature</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.newMessage.options</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>mdn.request</AttributeName>
+                     <AttributeValue>async</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.newMessage.options.sync</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>mdn.request</AttributeName>
+                     <AttributeValue>sync</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeGroup>
+               <Name>newMessage</Name>
+               <GuiLabels>
+                  <Label language="EN">Referenced MDN Channel</Label>
+                  <Label language="DE">Referenced MDN Channel</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>mdn.newMessage.senderChannel</ReferenceName>
+                  <OrCondition>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options</AttributeName>
+                              <AttributeValue>onAllMDNs</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options</AttributeName>
+                              <AttributeValue>onErrorMDNs</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options.sync</AttributeName>
+                              <AttributeValue>onAllMDNs</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options.sync</AttributeName>
+                              <AttributeValue>onErrorMDNs</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </OrCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.newMessage.senderParty</ReferenceName>
+                  <OrCondition>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options</AttributeName>
+                              <AttributeValue>onAllMDNs</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options</AttributeName>
+                              <AttributeValue>onErrorMDNs</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options.sync</AttributeName>
+                              <AttributeValue>onAllMDNs</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options.sync</AttributeName>
+                              <AttributeValue>onErrorMDNs</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </OrCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.newMessage.senderComponent</ReferenceName>
+                  <OrCondition>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options</AttributeName>
+                              <AttributeValue>onAllMDNs</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options</AttributeName>
+                              <AttributeValue>onErrorMDNs</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                     <AndCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                        <OrCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options.sync</AttributeName>
+                              <AttributeValue>onAllMDNs</AttributeValue>
+                           </EditCondition>
+                           <EditCondition>
+                              <AttributeName>mdn.newMessage.options.sync</AttributeName>
+                              <AttributeValue>onErrorMDNs</AttributeValue>
+                           </EditCondition>
+                        </OrCondition>
+                     </AndCondition>
+                  </OrCondition>
+               </AttributeReference>
+            </AttributeGroup>
+         </Tab>
+         <Tab id="general">
+            <AttributeGroup>
+               <Name>dynconfig</Name>
+               <GuiLabels>
+                  <Label language="EN">Dynamic configuration</Label>
+                  <Label language="DE">Dynamische Konfiguration</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>dynamic.evaluateParams</ReferenceName>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeGroup>
+               <Name>Archive</Name>
+               <GuiLabels>
+                  <Label language="EN">Archiving</Label>
+                  <Label language="DE">Archivierung</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>msg.archive</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>msg.archive.path</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>msg.archive</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>msg.archive.incoming</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>msg.archive.incoming.path</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>msg.archive.incoming</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>msg.archive.encoded</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>recipient.convertCharset</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>msg.archive.encoded.path</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>msg.archive.encoded</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>recipient.convertCharset</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>msg.archive.outgoing.wired</ReferenceName>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>msg.archive.outgoing.wired.path</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>msg.archive.outgoing.wired</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.archive.positive</ReferenceName>
+                  <OrCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.request</AttributeName>
+                        <AttributeValue>async</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.request</AttributeName>
+                        <AttributeValue>sync</AttributeValue>
+                     </EditCondition>
+                  </OrCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.archive.positive.path</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.archive.positive</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                  </AndCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.archive.negative</ReferenceName>
+                  <OrCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.request</AttributeName>
+                        <AttributeValue>async</AttributeValue>
+                     </EditCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.request</AttributeName>
+                        <AttributeValue>sync</AttributeValue>
+                     </EditCondition>
+                  </OrCondition>
+               </AttributeReference>
+               <AttributeReference>
+                  <ReferenceName>mdn.archive.negative.path</ReferenceName>
+                  <AndCondition>
+                     <EditCondition>
+                        <AttributeName>mdn.archive.negative</AttributeName>
+                        <AttributeValue>1</AttributeValue>
+                     </EditCondition>
+                     <OrCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>async</AttributeValue>
+                        </EditCondition>
+                        <EditCondition>
+                           <AttributeName>mdn.request</AttributeName>
+                           <AttributeValue>sync</AttributeValue>
+                        </EditCondition>
+                     </OrCondition>
+                  </AndCondition>
+               </AttributeReference>
+            </AttributeGroup>
+         </Tab>
+         <Tab id="advanced">
+            <!-- Channel activation via XI directory -->
+            <AttributeGroup>
+               <Name>Status</Name>
+               <GuiLabels>
+                  <Label language="EN">Channel Status</Label>
+                  <Label language="DE">Channel Status</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>adapterStatus</ReferenceName>
+               </AttributeReference>
+            </AttributeGroup>
+            <AttributeReference>
+               <ReferenceName>as2.advanced</ReferenceName>
+            </AttributeReference>
+            <AttributeGroup>
+               <Name>addTable</Name>
+               <GuiLabels>
+                  <Label language="EN">Additional Parameters</Label>
+                  <Label language="DE">Zusätzliche Parameter</Label>
+               </GuiLabels>
+               <AttributeReference>
+                  <ReferenceName>as2.addParameterParams</ReferenceName>
+                  <EditCondition>
+                     <AttributeName>as2.advanced</AttributeName>
+                     <AttributeValue>1</AttributeValue>
+                  </EditCondition>
+               </AttributeReference>
+            </AttributeGroup>
+         </Tab>
+         <!-- Adapter Specific Message Attributes -->
+      </GlobalChannelAttributes>
+   </Outbound>
+   <!--
+		**********************************************************************
+	-->
+   <!--
+		A T T R I B U T E S S E C T I O N
+	-->
+   <!--
+		**********************************************************************
+	-->
+   <!-- Used attributes to configure a JCA channel -->
+   <Attribute>
+      <Name>adapterStatus</Name>
+      <Usage>optional</Usage>
+      <Default>active</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Channel Status</Label>
+         <Label language="DE">Channel Status</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>active</value>
+         <GuiLabels>
+            <Label language="EN">Active</Label>
+            <Label language="DE">Aktiv</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>inactive</value>
+         <GuiLabels>
+            <Label language="EN">Inactive</Label>
+            <Label language="DE">Inaktiv</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.url</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Default>http://</Default>
+      <GuiLabels>
+         <Label language="EN">Receipient URL</Label>
+         <Label language="DE">Empfänger URL</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.httpBasicAuthentication</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Basic HTTP Authentication</Label>
+         <Label language="DE">Basic HTTP Authentication</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.httpBasicAuthentication.user</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default/>
+      <GuiLabels>
+         <Label language="EN">Username</Label>
+         <Label language="DE">Benutzername</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>receipient.httpBasicAuthentication.password</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default/>
+      <GuiLabels>
+         <Label language="EN">Password</Label>
+         <Label language="DE">Passwort</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.proxy</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Proxyserver</Label>
+         <Label language="DE">Proxyserver</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.proxy.host</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels>
+         <Label language="EN">Host</Label>
+         <Label language="DE">Host</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.proxy.port</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:integer</DataType>
+      <Length>5</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>3128</Default>
+      <GuiLabels>
+         <Label language="EN">Port</Label>
+         <Label language="DE">Port</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.proxy.auth</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Basic Proxy Authentication</Label>
+         <Label language="DE">Basic Proxy Authentication</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.proxy.auth.user</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels>
+         <Label language="EN">Username</Label>
+         <Label language="DE">Benutzername</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>receipient.proxy.auth.password</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels>
+         <Label language="EN">Password</Label>
+         <Label language="DE">Passwort</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>fileName</Name>
+      <Usage>optional</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels>
+         <Label language="EN">Filename</Label>
+         <Label language="DE">Dateiname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.messageId.left</Name>
+      <Usage>optional</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>499</Length>
+      <GuiLabels>
+         <Label language="EN">MessageID left</Label>
+         <Label language="DE">Linke MessageID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.messageId.right</Name>
+      <Usage>optional</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>499</Length>
+      <GuiLabels>
+         <Label language="EN">MessageID right</Label>
+         <Label language="DE">Rechte MessageID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>receipient.messageId.compatible</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Use compatible MessageId (shorter)</Label>
+         <Label language="DE">Kompatible (kurze) MessageID verwenden</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.serverPath</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Default>.*</Default>
+      <GuiLabels>
+         <Label language="EN">Expected URL-Path</Label>
+         <Label language="DE">Erwarteter URL-Pfad</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.messageId.left</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>499</Length>
+      <Default>.*</Default>
+      <GuiLabels>
+         <Label language="EN">Expected MessageID left</Label>
+         <Label language="DE">Erwartete linke MessageID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.messageId.right</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>499</Length>
+      <Default>.*</Default>
+      <GuiLabels>
+         <Label language="EN">Expected MessageID right</Label>
+         <Label language="DE">Erwartete rechte MessageID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.fromName</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>128</Length>
+      <Default>.*</Default>
+      <GuiLabels>
+         <Label language="EN">Expected sender&apos;s AS2Name</Label>
+         <Label language="DE">Erwarteter AS2-Name der Gegenstelle</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.toName</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>128</Length>
+      <Default>.*</Default>
+      <GuiLabels>
+         <Label language="EN">Expected own AS2Name</Label>
+         <Label language="DE">Erwarteter eigener AS2Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.subject</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Default>.*</Default>
+      <GuiLabels>
+         <Label language="EN">Expected subject</Label>
+         <Label language="DE">Erwarteter Betreff</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>recipient.fromName</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>128</Length>
+      <GuiLabels>
+         <Label language="EN">Own AS2Name</Label>
+         <Label language="DE">Eigener AS2Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>recipient.toName</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>128</Length>
+      <GuiLabels>
+         <Label language="EN">Receipient&apos;s AS2Name</Label>
+         <Label language="DE">AS2Name der Gegenstelle</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>recipient.fromEmail</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Own email-address</Label>
+         <Label language="DE">Eigene E-Mail-Adresse</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>recipient.subject</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Message subject</Label>
+         <Label language="DE">Betreff der Nachricht</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>recipient.contentType</Name>
+      <Usage>required</Usage>
+      <Default>application/edi-x12</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Content-Type</Label>
+         <Label language="DE">Content-Type</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.request</Name>
+      <Usage>required</Usage>
+      <Default>sync</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">MessageDeliveryNotification</Label>
+         <Label language="DE">Zustellungsbenachrichtigung</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>none</value>
+         <GuiLabels>
+            <Label language="EN">None</Label>
+            <Label language="DE">Keine</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sync</value>
+         <GuiLabels>
+            <Label language="EN">Synchronous</Label>
+            <Label language="DE">Synchron</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>async</value>
+         <GuiLabels>
+            <Label language="EN">Asynchronous</Label>
+            <Label language="DE">Asynchron</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.newMessage.options</Name>
+      <Usage>required</Usage>
+      <Default>none</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Create New XI Message for received MDN</Label>
+         <Label language="DE">Neues XI Bericht für empfangene MDN</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>none</value>
+         <GuiLabels>
+            <Label language="EN">None</Label>
+            <Label language="DE">Keine</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>onAllMDNs</value>
+         <GuiLabels>
+            <Label language="EN">Both Positive and Negative MDN</Label>
+            <Label language="DE">Positive und Negative MDN</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>onErrorMDNs</value>
+         <GuiLabels>
+            <Label language="EN">Negative MDN Only</Label>
+            <Label language="DE">Nur Negative MDN</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.newMessage.options.sync</Name>
+      <Usage>required</Usage>
+      <Default>none</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Create New XI Message for received MDN</Label>
+         <Label language="DE">Neues XI Bericht fÃ¼r empfangene MDN</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>none</value>
+         <GuiLabels>
+            <Label language="EN">None</Label>
+            <Label language="DE">Keine</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>onAllMDNs</value>
+         <GuiLabels>
+            <Label language="EN">Both Positive and Negative MDN</Label>
+            <Label language="DE">Positive und Negative MDN</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>onErrorMDNs</value>
+         <GuiLabels>
+            <Label language="EN">Negative MDN Only</Label>
+            <Label language="DE">Nur Negative MDN</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.newMessage.senderChannel</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">Communication Channel</Label>
+         <Label language="DE">Communication Channel</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.newMessage.senderParty</Name>
+      <Usage>optional</Usage>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">Party</Label>
+         <Label language="DE">Party</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.newMessage.senderComponent</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">Communication Component</Label>
+         <Label language="DE">Communication Component</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.incoming</Name>
+      <GuiLabels>
+         <Label language="EN">Incoming Payload to channel</Label>
+      </GuiLabels>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.incoming.path</Name>
+      <Usage>required</Usage>
+      <Default>D:/wArchive/%TIME_%SEQNUM.%TYPE</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive name</Label>
+         <Label language="DE">Archivname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.incoming.wired</Name>
+      <GuiLabels>
+         <Label language="EN">Incoming Wired Message</Label>
+      </GuiLabels>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.incoming.wired.path</Name>
+      <Usage>required</Usage>
+      <Default>D:/wArchive/%TIME_%SEQNUM.%TYPE</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive name</Label>
+         <Label language="DE">Archivname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.encoded</Name>
+      <GuiLabels>
+         <Label language="EN">Payload after Charset conversion</Label>
+      </GuiLabels>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.encoded.path</Name>
+      <Usage>required</Usage>
+      <Default>D:/wArchive/%TIME_%SEQNUM.%TYPE</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive name</Label>
+         <Label language="DE">Archivname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.outgoing.wired</Name>
+      <GuiLabels>
+         <Label language="EN">Outgoing Wired Message</Label>
+      </GuiLabels>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.outgoing.wired.path</Name>
+      <Usage>required</Usage>
+      <Default>D:/wArchive/%TIME_%SEQNUM.%TYPE</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive name</Label>
+         <Label language="DE">Archivname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.decrypted</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Payload after Decryption</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.decrypted.path</Name>
+      <Usage>required</Usage>
+      <Default>D:/dArchive/%TIME_%SEQNUM.%TYPE</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive name</Label>
+         <Label language="DE">Archivname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.archive.positive</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive Positive MDN</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.archive.positive.path</Name>
+      <Usage>required</Usage>
+      <Default>D:/pArchive/%TIME_%SEQNUM.%TYPE</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive name</Label>
+         <Label language="DE">Archivname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.archive.negative</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive Negative MDN</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.archive.negative.path</Name>
+      <Usage>required</Usage>
+      <Default>D:/nArchive/%TIME_%SEQNUM.%TYPE</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive name</Label>
+         <Label language="DE">Archivname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.onerror</Name>
+      <GuiLabels>
+         <Label language="EN">Archive Error Messages</Label>
+      </GuiLabels>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.onerror.path</Name>
+      <Usage>required</Usage>
+      <Default>D:/wArchive/%TIME_%SEQNUM.%TYPE</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive name</Label>
+         <Label language="DE">Archivname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.hash</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels>
+         <Label language="EN">Request Message Integrity Check (MIC)</Label>
+         <Label language="DE">Message Integrity Check (MIC) anfordern</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.sign</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels>
+         <Label language="EN">Request signing</Label>
+         <Label language="DE">Signatur anfordern</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>asynchronousMDNUrl</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Default>http://server:port/AS2/mdn</Default>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">MDN target-URL</Label>
+         <Label language="DE">MDN Ziel-URL</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.hash.check</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels>
+         <Label language="EN">Verify MIC</Label>
+         <Label language="DE">MIC verifizieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.checkSignature</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels>
+         <Label language="EN">Verify signature</Label>
+         <Label language="DE">Signatur verifizieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.sign.secSignerCertificateView</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>DEFAULT</Default>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Public</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">View to signer&apos;s public key certificate</Label>
+         <Label language="DE">Schlüsselspeicher mit Public-Key-Zertifikat der Gegenstelle</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.sign.secSignerCertificate</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Public</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Alias of signer&apos;s public key certificate</Label>
+         <Label language="DE">Alias des Public-Key-Zertifikates der Gegenstelle</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.asyncSendOptions</Name>
+      <Usage>optional</Usage>
+      <Default>immediate</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Send Options</Label>
+         <Label language="DE">Sendeoptionen</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>immediate</value>
+         <GuiLabels>
+            <Label language="EN">Immediate</Label>
+            <Label language="DE">Unmittelbar</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>onAppAck</value>
+         <GuiLabels>
+            <Label language="EN">On Application Acknowledgement</Label>
+            <Label language="DE">Auf Application Acknowledgement</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.async.recipient.httpBasicAuthentication</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Basic HTTP Authentication</Label>
+         <Label language="DE">Basic HTTP Authentication</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.async.recipient.httpBasicAuthentication.user</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default/>
+      <GuiLabels>
+         <Label language="EN">Username</Label>
+         <Label language="DE">Benutzername</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>mdn.async.recipient.httpBasicAuthentication.password</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default/>
+      <GuiLabels>
+         <Label language="EN">Password</Label>
+         <Label language="DE">Passwort</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.async.recipient.proxy</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Proxyserver</Label>
+         <Label language="DE">Proxyserver</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.async.recipient.proxy.host</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels>
+         <Label language="EN">Host</Label>
+         <Label language="DE">Host</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.async.recipient.proxy.port</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:integer</DataType>
+      <Length>5</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>3128</Default>
+      <GuiLabels>
+         <Label language="EN">Port</Label>
+         <Label language="DE">Port</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.async.recipient.proxy.auth</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Basic Proxy Authentication</Label>
+         <Label language="DE">Basic Proxy Authentication</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.async.recipient.proxy.auth.user</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels>
+         <Label language="EN">Username</Label>
+         <Label language="DE">Benutzername</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute isPassword="true">
+      <Name>mdn.async.recipient.proxy.auth.password</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels>
+         <Label language="EN">Password</Label>
+         <Label language="DE">Passwort</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.async.overrideURL</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Override URL for MDN</Label>
+         <Label language="DE">URL für MDN überschreiben</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.async.newAsyncURL</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <GuiLabels>
+         <Label language="EN">Async MDN URL</Label>
+         <Label language="DE">Async MDN URL</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>compression.compressMessage</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Compress message</Label>
+         <Label language="DE">Nachricht komprimieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sign.signMessage</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Sign message</Label>
+         <Label language="DE">Nachricht signieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <!-- KEYSTORE -->
+   <Attribute>
+      <Name>sign.secSenderCertificateView</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>DEFAULT</Default>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Public</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">View to own public key certificate</Label>
+         <Label language="DE">Schlüsselspeicher mit eigenem	Public-Key-Zertifikat</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sign.secSenderCertificate</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Public</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Alias of own public key certificate</Label>
+         <Label language="DE">Alias des eigenen Public-Key-Zertifikates</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sign.secSenderKeyView</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>DEFAULT</Default>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+            <HelpServiceQueryAttribute>
+               <Name>KeyAlgorithm</Name>
+               <Value>RSA</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">View to own private key</Label>
+         <Label language="DE">Schlüsselspeicher mit eigenem Private Key</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sign.secSenderKey</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+            <HelpServiceQueryAttribute>
+               <Name>KeyAlgorithm</Name>
+               <Value>RSA</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Alias of own private key</Label>
+         <Label language="DE">Alias des eigenen Private Key</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>encryption.secReceipientCertificateView</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>DEFAULT</Default>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Public</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">View to receipients&apos;s public key certificate</Label>
+         <Label language="DE">Schlüsselspeicher mit Public-Key-Zertifikat der Gegenstelle</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>encryption.secReceipientCertificate</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Public</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Alias of recipient&apos;s certificate</Label>
+         <Label language="DE">Alias des Public-Key-Zertifikates der Gegenstelle</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>client.auth.keystore</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>DEFAULT</Default>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Keystore View</Label>
+         <Label language="DE">Schl?sselspeicher</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>client.auth.alias</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Keystore Entry</Label>
+         <Label language="DE">Schl?sselspeichereintrag</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>client.auth</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Configure Client Certificate Authentication</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.client.auth.keystore</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>DEFAULT</Default>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Keystore View</Label>
+         <Label language="DE">Schl?sselspeicher</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.client.auth.alias</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Keystore Entry</Label>
+         <Label language="DE">Schl?sselspeichereintrag</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>mdn.client.auth</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Configure Client Certificate Authentication</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>encryption.encryptMessage</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Encrypt message</Label>
+         <Label language="DE">Nachricht verschlüsseln</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>encryption.algorithm</Name>
+      <Usage>required</Usage>
+      <Default>aes128_CBC</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Algorithm</Label>
+         <Label language="DE">Algorithmus</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>aes128_CBC</value>
+         <GuiLabels>
+            <Label language="EN">AES 128</Label>
+            <Label language="DE">AES 128</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>aes192_CBC</value>
+         <GuiLabels>
+            <Label language="EN">AES 192</Label>
+            <Label language="DE">AES 192</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>aes256_CBC</value>
+         <GuiLabels>
+            <Label language="EN">AES 256</Label>
+            <Label language="DE">AES 256</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>des_EDE3_CBC</value>
+         <GuiLabels>
+            <Label language="EN">3DES</Label>
+            <Label language="DE">3DES</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>rc2_CBC</value>
+         <GuiLabels>
+            <Label language="EN">RC2</Label>
+            <Label language="DE">RC2</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>encryption.keyLength</Name>
+      <Usage>required</Usage>
+      <Default>128</Default>
+      <DataType>xsd:integer</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Key length</Label>
+         <Label language="DE">Schlüssellänge</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.sign.checkSignature</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Verify Signature</Label>
+         <Label language="DE">Signatur überprüfen</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.sign.secSenderCertificateView</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>DEFAULT</Default>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Public</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">View to senders&apos;s public key certificate</Label>
+         <Label language="DE">Schlüsselspeicher mit Public-Key-Zertifikat der Gegenstelle</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.sign.secSenderCertificate</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Public</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Alias of sender&apos;s public key certificate</Label>
+         <Label language="DE">Alias des Public-Key-Zertifikates der Gegenstelle</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.encryption.decrypt</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Decrypt</Label>
+         <Label language="DE">Entschlüsseln</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.encryption.secKeyView</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <Default>DEFAULT</Default>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceView</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">View to own private key</Label>
+         <Label language="DE">Schlüsselspeicher mit eigenem Private Key</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.encryption.secKey</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Flag>nonTransportable</Flag>
+      <HelpService>
+         <HelpServiceName>SecStoreHelpServiceAlias</HelpServiceName>
+         <HelpServiceQueryAttributes>
+            <HelpServiceQueryAttribute>
+               <Name>Key</Name>
+               <Value>Private</Value>
+            </HelpServiceQueryAttribute>
+         </HelpServiceQueryAttributes>
+      </HelpService>
+      <GuiLabels>
+         <Label language="EN">Alias of own private key</Label>
+         <Label language="DE">Alias des eigenen Private Key</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.mdn.sign</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Sign MDN</Label>
+         <Label language="DE">MDN signieren</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive</Name>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive Messages and MDN</Label>
+         <Label language="DE">Nachrichten archivieren und MDN</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>msg.archive.path</Name>
+      <Usage>required</Usage>
+      <Default>D:/aArchive/%TIME_%SEQNUM.%TYPE</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Archive name</Label>
+         <Label language="DE">Archivname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.convertCharset</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>1</Default>
+      <GuiLabels>
+         <Label language="EN">Charset conversion</Label>
+         <Label language="DE">Zeichensatzkonvertierung</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.convertCharset.original</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Default>utf8</Default>
+      <Length>32</Length>
+      <GuiLabels>
+         <Label language="EN">Source encoding</Label>
+         <Label language="DE">Quellkodierung</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>utf8</value>
+         <GuiLabels>
+            <Label language="EN">UTF-8</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>iso885915</value>
+         <GuiLabels>
+            <Label language="EN">ISO-8859-15</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>sender.convertCharset.target</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Default>iso885915</Default>
+      <Length>32</Length>
+      <GuiLabels>
+         <Label language="EN">Destination encoding</Label>
+         <Label language="DE">Zielkodierung</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>utf8</value>
+         <GuiLabels>
+            <Label language="EN">UTF-8</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>iso885915</value>
+         <GuiLabels>
+            <Label language="EN">ISO-8859-15</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>sender.ambivalentError</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>1</Default>
+      <Length/>
+      <GuiLabels>
+         <Label language="EN">Alert on messages in channels with ambivalent configuration</Label>
+         <Label language="DE">Bei Nachrichen an ambivalente Kanäle benachrichtigen</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>recipient.convertCharset</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>1</Default>
+      <GuiLabels>
+         <Label language="EN">Charset conversion</Label>
+         <Label language="DE">Zeichensatzkonvertierung</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>recipient.convertCharset.original</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Default>utf8</Default>
+      <Length>32</Length>
+      <GuiLabels>
+         <Label language="EN">Source encoding</Label>
+         <Label language="DE">Quellkodierung</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>utf8</value>
+         <GuiLabels>
+            <Label language="EN">UTF-8</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>iso885915</value>
+         <GuiLabels>
+            <Label language="EN">ISO-8859-15</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>recipient.convertCharset.target</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:string</DataType>
+      <Default>iso885915</Default>
+      <Length>32</Length>
+      <GuiLabels>
+         <Label language="EN">Destination encoding</Label>
+         <Label language="DE">Zielkodierung</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>utf8</value>
+         <GuiLabels>
+            <Label language="EN">UTF-8</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>iso885915</value>
+         <GuiLabels>
+            <Label language="EN">ISO-8859-15</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <!-- Tabs -->
+   <TabDefinition id="general">
+      <GuiLabels>
+         <Label language="EN">General</Label>
+         <Label language="DE">Allgmein</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="security">
+      <GuiLabels>
+         <Label language="EN">Signature and encryption</Label>
+         <Label language="DE">Signatur und Verschlüsselung</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="mdn">
+      <GuiLabels>
+         <Label language="EN">MDN</Label>
+         <Label language="DE">MDN</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <TabDefinition id="advanced">
+      <GuiLabels>
+         <Label language="EN">Advanced</Label>
+         <Label language="DE">Erweitert</Label>
+      </GuiLabels>
+   </TabDefinition>
+   <Attribute>
+      <Name>dynamic.setParams</Name>
+      <DataType>xsd:boolean</DataType>
+      <Default>1</Default>
+      <GuiLabels>
+         <Label language="EN">Set dynamic parameters</Label>
+         <Label language="DE">Dynamische parameter setzen</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>dynamic.evaluateParams</Name>
+      <DataType>xsd:boolean</DataType>
+      <Default>1</Default>
+      <GuiLabels>
+         <Label language="EN">Respect parameters</Label>
+         <Label language="DE">Parameter auswerten</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>duplicateCheck.enable</Name>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Enable Duplicate Message Handling</Label>
+         <Label language="DE">Aktivieren Duplicate Message Handling</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>sender.filenamePolicy</Name>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Send Negative MDN if FileName is not present</Label>
+         <Label language="DE">Senden Negative MDN wenn FileName nicht vorhanden</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>duplicateFileNameCheck.enable</Name>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Enable Duplicate FileName Handling</Label>
+         <Label language="DE">Aktivieren Duplicate FileName Handling</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>duplicateCheck.threshold</Name>
+      <DataType>xsd:integer</DataType>
+      <Usage>required</Usage>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Duplicate Message Threshold</Label>
+         <Label language="DE">Duplicate Message Threshold</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>duplicateCheck.disableChannel</Name>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Disable channel if threshold exceeded</Label>
+         <Label language="DE">Disable channel if threshold exceeded</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>duplicateCheck.timeValue</Name>
+      <DataType>xsd:integer</DataType>
+      <Default>1</Default>
+      <GuiLabels>
+         <Label language="EN">Time Period for Duplicate Check</Label>
+         <Label language="DE">Zeitraum der Duplikatspruefung</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>duplicateCheck.timeUnit</Name>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Default>day</Default>
+      <GuiLabels>
+         <Label language="EN">Time Period for Duplicate Check (Unit)</Label>
+         <Label language="DE">Zeitraum der Duplikatspruefung (Unit)</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>hour</value>
+         <GuiLabels>
+            <Label language="EN">Hour</Label>
+            <Label language="DE">Hour</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>day</value>
+         <GuiLabels>
+            <Label language="EN">Day</Label>
+            <Label language="DE">Day</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>duplicateFileNameCheck.timeValue</Name>
+      <DataType>xsd:integer</DataType>
+      <Default>1440</Default>
+      <GuiLabels>
+         <Label language="EN">Time Period for Duplicate Filename Check (minutes)</Label>
+         <Label language="DE">Zeitraum der Duplikatspruefung Dateiname (minutes)</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>duplicateFileNameCheck.mdnType</Name>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <Default>warning</Default>
+      <GuiLabels>
+         <Label language="EN">Type of MDN for Duplicate Filename</Label>
+         <Label language="DE">Type of MDN for Duplicate Filename</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>warning</value>
+         <GuiLabels>
+            <Label language="EN">Send Warning MDN</Label>
+            <Label language="DE">Send Warning MDN</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>error</value>
+         <GuiLabels>
+            <Label language="EN">Send Error MDN</Label>
+            <Label language="DE">Send Error MDN</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <!-- delivery semantics -->
+   <Attribute>
+      <Name>deliverySemantics</Name>
+      <Usage>required</Usage>
+      <Default>eo</Default>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">Quality of service</Label>
+         <Label language="DE">Quality of service</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>eo</value>
+         <GuiLabels>
+            <Label language="EN">Exactly once (asynchronous)</Label>
+            <Label language="DE">Exactly once (asynchron)</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>eoio</value>
+         <GuiLabels>
+            <Label language="EN">Exactly once in order (asynchronous)</Label>
+            <Label language="DE">Exactly once in order (asynchron)</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>be</value>
+         <GuiLabels>
+            <Label language="EN">Best effort (synchronous)</Label>
+            <Label language="DE">Best effort (synchron)</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>eoio.sequenceId</Name>
+      <DataType>xsd:string</DataType>
+      <Default/>
+      <GuiLabels>
+         <Label language="EN">Queue Name</Label>
+         <Label language="DE">Queue Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2URL</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">HTTP URL</Label>
+         <Label language="DE">HTTP URL</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2Subject</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">Subject</Label>
+         <Label language="DE">Betreff</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2From</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">From</Label>
+         <Label language="DE">Absender</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2To</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">To</Label>
+         <Label language="DE">Empfänger</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2FromEmail</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">From email-address</Label>
+         <Label language="DE">Emailadresse des Absenders</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2MessageId</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">MessageID</Label>
+         <Label language="DE">MessageID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2MessageIdLeft</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">Left part of MessageID</Label>
+         <Label language="DE">Linker Teil der MessageID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2MessageIdRight</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">Right part of MessageID</Label>
+         <Label language="DE">Rechter Teil der MessageID</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2ContentType</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">Contenttype</Label>
+         <Label language="DE">Contenttype</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>AS2Filename</Name>
+      <DataType>xsd:string</DataType>
+      <GuiLabels>
+         <Label language="EN">Filename</Label>
+         <Label language="DE">Dateiname</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>enable.attachments</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels>
+         <Label language="EN">Enable AS2 Attachments</Label>
+         <Label language="DE">Aktivieren AS2 Attachments</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>signing.message.algorithms</Name>
+      <Usage>required</Usage>
+      <Default>sha1</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Algorithm</Label>
+         <Label language="DE">Algorithmus</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>sha1</value>
+         <GuiLabels>
+            <Label language="EN">SHA 1</Label>
+            <Label language="DE">SHA 1</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sha224</value>
+         <GuiLabels>
+            <Label language="EN">SHA 224</Label>
+            <Label language="DE">SHA 224</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sha256</value>
+         <GuiLabels>
+            <Label language="EN">SHA 256</Label>
+            <Label language="DE">SHA 256</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sha384</value>
+         <GuiLabels>
+            <Label language="EN">SHA 384</Label>
+            <Label language="DE">SHA 384</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sha512</value>
+         <GuiLabels>
+            <Label language="EN">SHA 512</Label>
+            <Label language="DE">SHA 512</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>signing.mdn.algorithms</Name>
+      <Usage>required</Usage>
+      <Default>default</Default>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Algorithm</Label>
+         <Label language="DE">Algorithmus</Label>
+      </GuiLabels>
+      <FixedValue>
+         <value>default</value>
+         <GuiLabels>
+            <Label language="EN">Default</Label>
+            <Label language="DE">Default</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sha1</value>
+         <GuiLabels>
+            <Label language="EN">SHA 1</Label>
+            <Label language="DE">SHA 1</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sha224</value>
+         <GuiLabels>
+            <Label language="EN">SHA 224</Label>
+            <Label language="DE">SHA 224</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sha256</value>
+         <GuiLabels>
+            <Label language="EN">SHA 256</Label>
+            <Label language="DE">SHA 256</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sha384</value>
+         <GuiLabels>
+            <Label language="EN">SHA 384</Label>
+            <Label language="DE">SHA 384</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>sha512</value>
+         <GuiLabels>
+            <Label language="EN">SHA 512</Label>
+            <Label language="DE">SHA 512</Label>
+         </GuiLabels>
+      </FixedValue>
+      <FixedValue>
+         <value>msgAlgo</value>
+         <GuiLabels>
+            <Label language="EN">Same as Signed Message</Label>
+            <Label language="DE">Gleich wie signierten Nachricht</Label>
+         </GuiLabels>
+      </FixedValue>
+   </Attribute>
+   <Attribute>
+      <Name>as2.advanced</Name>
+      <Usage>optional</Usage>
+      <Default>0</Default>
+      <DataType>xsd:boolean</DataType>
+      <GuiLabels>
+         <Label language="EN">Advanced Mode</Label>
+         <Label language="DE">Erweiterter Modus</Label>
+      </GuiLabels>
+   </Attribute>
+   <AttributeTable>
+      <Name>as2.addParameterParams</Name>
+      <Usage>optional</Usage>
+      <GuiLabels>
+         <Label language="EN">Additional Parameters</Label>
+         <Label language="DE">Zusätzliche Parameter</Label>
+      </GuiLabels>
+      <AttributeReference>
+         <ReferenceName>as2.addParameterParamName</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>as2.addParameterParamValue</ReferenceName>
+      </AttributeReference>
+   </AttributeTable>
+   <Attribute>
+      <Name>as2.addParameterParamName</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Name</Label>
+         <Label language="DE">Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>as2.addParameterParamValue</Name>
+      <Usage>optional</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Value</Label>
+         <Label language="DE">Wert</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>tpm.tpID</Name>
+      <Usage>required</Usage>
+      <Default/>
+      <DataType>xsd:string</DataType>
+      <Length>0</Length>
+      <GuiLabels>
+         <Label language="EN">Technical Profile Name</Label>
+         <Label language="DE">Technische Profil Name</Label>
+      </GuiLabels>
+   </Attribute>
+   <Attribute>
+      <Name>tpm.enable</Name>
+      <Usage>required</Usage>
+      <DataType>xsd:boolean</DataType>
+      <Default>0</Default>
+      <GuiLabels>
+         <Label language="EN">Enable TPM</Label>
+         <Label language="DE">Aktivieren TPM</Label>
+      </GuiLabels>
+   </Attribute>
+   <!--
+		Adapter Specific Message Attributes Attribute Declaration (used e.g.
+		in XI Routing)
+	-->
+   <DynamicAttributes>
+      <AttributeReference>
+         <ReferenceName>AS2URL</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>AS2Subject</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>AS2From</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>AS2To</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>AS2FromEmail</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>AS2MessageId</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>AS2MessageIdLeft</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>AS2MessageIdRight</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>AS2ContentType</ReferenceName>
+      </AttributeReference>
+      <AttributeReference>
+         <ReferenceName>AS2Filename</ReferenceName>
+      </AttributeReference>
+   </DynamicAttributes>
+</AdapterTypeMetaData>
