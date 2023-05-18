@@ -23,6 +23,7 @@ val kotlinx_serialization_version = "1.5.0"
 val xmlutil_version = "0.86.0"
 val kaml_version = "0.53.0"
 val h2_version = "1.4.200"
+val camel_version = "4.0.0-M3"
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
@@ -61,9 +62,12 @@ dependencies {
 
     testImplementation(kotlin("test"))
     testImplementation("commons-io:commons-io:2.11.0")    //BOMInputStream
-    testImplementation("org.apache.camel:camel-core:4.0.0-M2")
-    //testImplementation("org.apache.camel:camel-http:4.0.0-M2")
-    //testImplementation("org.apache.camel:camel-base:4.0.0-M2")
+    implementation("org.apache.camel:camel-core:$camel_version")
+    //implementation("org.apache.camel:camel-http:$camel_version")
+    implementation("org.apache.camel:camel-base:$camel_version")
+    implementation("org.apache.camel:camel-componentdsl:$camel_version")
+    implementation("org.apache.camel:camel-xml-io-dsl:$camel_version")
+
 }
 
 
