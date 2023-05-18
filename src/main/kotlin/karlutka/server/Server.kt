@@ -1,7 +1,6 @@
 package karlutka.server
 
 import com.fasterxml.uuid.Generators
-import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
@@ -16,9 +15,19 @@ import karlutka.parsers.pi.Hmi
 import karlutka.parsers.pi.PerfMonitorServlet
 import karlutka.parsers.pi.XIAdapterEngineRegistration
 import karlutka.parsers.pi.XiMessage
-import karlutka.util.*
-import kotlinx.coroutines.*
+import karlutka.util.KTempFile
+import karlutka.util.KfPasswds
+import karlutka.util.Kfg
+import karlutka.util.KtorClient
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.withContext
 import kotlinx.html.*
+import org.apache.camel.builder.RouteBuilder
+import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader
+import org.apache.camel.impl.DefaultCamelContext
+import org.apache.camel.support.ResourceHelper
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -26,7 +35,6 @@ import java.time.Duration
 import java.time.Instant
 import kotlin.io.path.outputStream
 import kotlin.io.path.readBytes
-import kotlin.io.path.writeText
 
 object Server {
     lateinit var pkfg: Path
@@ -36,6 +44,45 @@ object Server {
     val targets = mutableMapOf<String, MTarget>()
     val UUIDgenerator = Generators.timeBasedGenerator()
     lateinit var afprops: Map<String, String>
+    val camelContext = DefaultCamelContext(true)
+
+    init {
+        val route0 = """<routes><route id="0#грабитьКорованы">
+    <from uri="timer:initial?period=10s"/>
+    <log message="------- Я тут -------"/></route></routes>"""
+        addRoute(route0)
+        addRoute(route0)
+        addRoute(route0)
+    }
+
+    fun addRoute(xmlDsl: String) {
+        val resource = ResourceHelper.fromString("memory.xml", xmlDsl)
+        val builder = XmlRoutesBuilderLoader().loadRoutesBuilder(resource) as RouteBuilder
+        camelContext.addRoutes(builder)
+        builder.configure()
+        camelContext.start()
+    }
+
+    suspend fun getCamel(call: ApplicationCall) {
+        call.respondHtml {
+            head {
+                title("Camel тык-пык")
+                link(rel = "stylesheet", href = "/styles.css", type = "text/css")
+                link(rel = "shortcut icon", href = "/favicon.ico")
+            }
+            body {
+                h1 { +"Твой друг кэмелятина" }
+                ul {
+                    camelContext.routes.forEach { r ->
+                        li {
+                            b { +r.id }
+                            +" ${r.toString()}"
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     fun installRoutings(app: Application) {
         app.routing {
@@ -249,6 +296,9 @@ object Server {
                     TODO("/rep/interfaceinfo/ext/ ${call.request.queryParameters}")
                 }
             }
+            get("/camel") {
+                getCamel(call)
+            }
         }
     }
 
@@ -352,10 +402,12 @@ object Server {
         // queryParams == method=InvalidateCache или другой...
         require(mode in listOf("AE", "IR"))
         val parent = targets["DPH"] as PI
-        if (mode=="AE") {
+        if (mode == "AE") {
             val resp1 = parent.dirHmiCacheRefreshService("C", consumer)    //changed objects
+            // Если пришла икоха с каналом
+
             val resp2 = parent.dirHmiCacheRefreshService("D", consumer)    //changed objects
-        } else if (mode=="IR") {
+        } else if (mode == "IR") {
 //            val resp1 = parent.dirHmiCacheRefreshService("C", consumer)    //changed objects
 //            val resp2 = parent.dirHmiCacheRefreshService("D", consumer)    //changed objects
         } else
@@ -378,10 +430,10 @@ object Server {
                 ul {
 
                     li {
-                        a("/metrics") { +"/metrics" }
-                        +" метрики для прометея"
+                        a("/camel") { +"/camel" }
+                        +" что творится в кэмеле"
                     }
-                    li { a("/ping") { +"пинговалка" } }
+                    //li { a("/ping") { +"пинговалка" } }
                     li {
                         a("/PIAF/performance") { +"перформанс" }
                         +" PIAF /mdt/performancedataqueryservlet"

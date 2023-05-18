@@ -1,0 +1,22 @@
+<CacheRefresh>
+	<DELETED_OBJECTS>
+		<SAPXI_OBJECT_KEY>
+			<OBJECT_ID>50455e21531b36fa958fefae3be41689</OBJECT_ID>
+			<OBJECT_TYPE>Party</OBJECT_TYPE>
+		</SAPXI_OBJECT_KEY>
+	</DELETED_OBJECTS>
+	<cp:Party xmlns:cp="urn:sap-com:xi:xiParty">
+		<cp:PartyName>P_PARTY</cp:PartyName>
+		<cp:PartyObjectId>50455e21531b36fa958fefae3be41689</cp:PartyObjectId>
+		<cp:PartyIdentifier>
+			<cp:Agency>http://sap.com/xi/XI</cp:Agency>
+			<cp:Schema>XIParty</cp:Schema>
+			<cp:Identifier>P_PARTY</cp:Identifier>
+		</cp:PartyIdentifier>
+		<cp:PartyIdentifier>
+			<cp:Agency>ba</cp:Agency>
+			<cp:Schema>abb</cp:Schema>
+			<cp:Identifier>a</cp:Identifier>
+		</cp:PartyIdentifier>
+	</cp:Party>
+</CacheRefresh>

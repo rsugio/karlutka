@@ -1,0 +1,82 @@
+﻿
+http://vendor:50000/CPACache/monitor.jsp
+http://vendor:50000/CPACache/history.jsp
+http://vendor:50000/CPACache/invalidate
+http://vendor:50000/CPACache/testconfigupload.jsp
+
+
+<CacheRefreshError>
+<EngineType>AE</EngineType>
+<EngineName>af.dph.vendordb</EngineName>
+<RefreshMode>C</RefreshMode>
+<GlobalError>
+<Message> CPA Cache not updated with directory data. </Message>
+<Trace> com.sap.aii.af.service.cpa.impl.exception.CPADirectoryCacheException: Could not open Directory URL (http://vendor:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=C&consumer=af.dph.vendordb). Reason: com.sap.aii.af.service.cpa.impl.exception.CPADirectoryCacheException: HTTP 503: Service Unavailable at com.sap.aii.af.service.cpa.impl.cache.directory.DirectoryAccess.getDataFromDirectory(DirectoryAccess.java:325) at com.sap.aii.af.service.cpa.impl.cache.directory.DirectoryAccess.getDeltaCacheUpdateXML(DirectoryAccess.java:475) at com.sap.aii.af.service.cpa.impl.cache.CacheManager.performCacheUpdate(CacheManager.java:504) at com.sap.aii.af.service.cpa.impl.cache.CacheManager$CacheUpdateRunnable.run(CacheManager.java:312) at com.sap.engine.core.thread.impl3.ActionObject.run(ActionObject.java:37) at java.security.AccessController.doPrivileged(Native Method) at com.sap.engine.core.thread.impl3.SingleThread.execute(SingleThread.java:185) at com.sap.engine.core.thread.impl3.SingleThread.run(SingleThread.java:302) Caused by: com.sap.aii.af.service.cpa.impl.exception.CPADirectoryCacheException: HTTP 503: Service Unavailable at com.sap.aii.af.service.cpa.impl.cache.directory.DirectoryAccess.getDataFromDirectory(DirectoryAccess.java:316) ... 7 more </Trace>
+</GlobalError>
+<GlobalError>
+<Message> Confirmation handling failed. </Message>
+<Trace> com.sap.aii.af.service.cpa.impl.exception.CPADirectoryCacheException: Could not send confirmation. Reason: com.sap.aii.af.service.cpa.impl.exception.CPADirectoryCacheException: Could not access Confirmation URL. Reason: HTTP 503: Service Unavailable at com.sap.aii.af.service.cpa.impl.cache.directory.DirectoryAccess.invokeConfirmationURL(DirectoryAccess.java:379) at com.sap.aii.af.service.cpa.impl.cache.directory.DirectoryAccess.invokeConfirmationURL(DirectoryAccess.java:497) at com.sap.aii.af.service.cpa.impl.cache.CacheManager.performCacheUpdate(CacheManager.java:595) at com.sap.aii.af.service.cpa.impl.cache.CacheManager$CacheUpdateRunnable.run(CacheManager.java:312) at com.sap.engine.core.thread.impl3.ActionObject.run(ActionObject.java:37) at java.security.AccessController.doPrivileged(Native Method) at com.sap.engine.core.thread.impl3.SingleThread.execute(SingleThread.java:185) at com.sap.engine.core.thread.impl3.SingleThread.run(SingleThread.java:302) Caused by: com.sap.aii.af.service.cpa.impl.exception.CPADirectoryCacheException: Could not access Confirmation URL. Reason: HTTP 503: Service Unavailable at com.sap.aii.af.service.cpa.impl.cache.directory.DirectoryAccess.invokeConfirmationURL(DirectoryAccess.java:372) ... 7 more </Trace>
+</GlobalError>
+</CacheRefreshError>
+
+
+
+com.sap.aii.af.service.cpa.test.TestAccess#removeTestConfiguration
+<CacheRefresh><DELETED_OBJECTS>
+"<SAPXI_OBJECT_KEY><OBJECT_TYPE>" + objType + "</OBJECT_TYPE><OBJECT_ID>" + errorXML + "</OBJECT_ID></SAPXI_OBJECT_KEY>"
+</DELETED_OBJECTS></CacheRefresh>
+
+
+
+
+http://vendor:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=F&consumer=af.dph.vendordb
+
+
+cacheType = DIRECTORY
+directoryURL = http://localhost:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=<Mode>&consumer=DefaultConsumer
+
+com.sap.aii.af.service.cpa.impl.cache.directory.DirectoryDataParseErrorInfo#renderToXML
+
+http://vendor:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=D&consumer=af.dph.vendordb
+http://vendor:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=D&consumer=af.fa0.vendordb
+<CacheRefresh/>
+
+http://vendor:50000/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=D&consumer=af.fa0.vendordb
+<CacheRefresh/>
+
+
+<CacheRefresh><DELETED_OBJECTS>
+"<SAPXI_OBJECT_KEY><OBJECT_TYPE>" + objType + "</OBJECT_TYPE><OBJECT_ID>" + errorXML + "</OBJECT_ID></SAPXI_OBJECT_KEY>"
+</DELETED_OBJECTS></CacheRefresh>
+
+
+Таблицы БД:
+
+xi_af_cache_updt
+xi_af_cpa_history	history.jsp
+xi_af_cpa_sync_nod	?
+xi_dircacheerrors	ошибки обновления кэша. Consumer - хост, Consumer_mode = (AE|IR)
+xi_dircacheevent	события обновления кэша через changelists 
+xi_dircacheobj	объекты обновления кэша, есть Consumer и Consumer_mode
+
+поле consumer в смысле AE есть в:
+XI_DIRCACHEERRORS
+XI_DIRCACHEOBJ
+XI_RUNCACHESTATE
+
+select * from SAPSR3DB.XI_DIRCACHEOBJ where consumer like 'af.%'
+
+/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=C&consumer=af.fa0.fake0db
+
+
+Статусы обновления кэша такие:
+U
+P
+E
+S
+W
+
+
+Error mode = at com.sap.aii.ibdir.server.abapcache.CacheRefreshRequest.processHTTPRequest(CacheRefreshRequest.java:368) at
+
+SAPMM-4994

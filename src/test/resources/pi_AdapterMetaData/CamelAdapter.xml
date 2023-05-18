@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="80" senderAgreementUnique="true">
+	<GuiHandlerClassName/>
+	<Inbound>
+		<TransportProtocol>
+			<Name>file</Name>
+			<Version>4.0.0-M3</Version>
+			<GuiLabels>
+				<Label language="EN">from("file:/folder")</Label>
+			</GuiLabels>
+			<ChannelAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="general">Connection</ReferenceName>
+				</AttributeReference>
+			</ChannelAttributes>
+			
+			<ValidMessageProtocols>
+				<ProtocolIdentifier>
+					<Name>Binary</Name>
+					<Version>1.0</Version>
+				</ProtocolIdentifier>
+			</ValidMessageProtocols>
+		</TransportProtocol>
+		
+		<TransportProtocol>
+			<Name>http</Name>
+			<Version>4.0.0-M3</Version>
+			<GuiLabels>
+				<Label language="EN">from("http:/endpoint")</Label>
+			</GuiLabels>
+			<ChannelAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="general">Connection</ReferenceName>
+				</AttributeReference>
+			</ChannelAttributes>
+			<ValidMessageProtocols>
+				<ProtocolIdentifier>
+					<Name>Binary</Name>
+					<Version>1.0</Version>
+				</ProtocolIdentifier>
+			</ValidMessageProtocols>
+		</TransportProtocol>
+		<MessageProtocol>
+			<Name>Binary</Name>
+			<Version>1.0</Version>
+			<GuiLabels>
+				<Label language="EN">Binary</Label>
+			</GuiLabels>
+			<ChannelAttributes/>
+			<SecurityAttributes/>
+		</MessageProtocol>
+		<GlobalChannelAttributes>
+			<AttributeReference>
+				<ReferenceName namespace="general">routeId</ReferenceName>
+			</AttributeReference>
+			<!--AttributeReference>
+				<ReferenceName namespace="general">autoStartup</ReferenceName>
+			</AttributeReference-->
+			<AttributeReference>
+				<ReferenceName namespace="general">log</ReferenceName>
+			</AttributeReference>
+		</GlobalChannelAttributes>
+	</Inbound>
+	<Outbound>
+		<TransportProtocol>
+			<Name>file</Name>
+			<Version>4.0.0-M3</Version>
+			<GuiLabels>
+				<Label language="EN">to("file:/folder")</Label>
+			</GuiLabels>
+			<ChannelAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="general">Connection</ReferenceName>
+				</AttributeReference>
+			</ChannelAttributes>
+			<SecurityAttributes/>
+			<ValidMessageProtocols>
+				<ProtocolIdentifier>
+					<Name>Binary</Name>
+					<Version>1.0</Version>
+				</ProtocolIdentifier>
+			</ValidMessageProtocols>
+		</TransportProtocol>
+		<MessageProtocol>
+			<Name>Binary</Name>
+			<Version>1.0</Version>
+			<GuiLabels>
+				<Label language="EN">Binary</Label>
+			</GuiLabels>
+			<ChannelAttributes/>
+			<SecurityAttributes/>
+		</MessageProtocol>
+		<GlobalChannelAttributes/>
+	</Outbound>
+	<Attribute>
+		<Name namespace="general">Connection</Name>
+		<Usage>required</Usage>
+		<DataType>xsd:string</DataType>
+		<Length>192</Length>
+		<GuiLabels>
+			<Label language="EN">Connection</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="general">routeId</Name>
+		<Usage>optional</Usage>
+		<DataType>xsd:string</DataType>
+		<Length>30</Length>
+		<GuiLabels>
+			<Label language="EN">routeId</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="general">log</Name>
+		<Usage>optional</Usage>
+		<DataType>xsd:string</DataType>
+		<Length>255</Length>
+		<GuiLabels>
+			<Label language="EN">log message</Label>
+		</GuiLabels>
+	</Attribute>
+</AdapterTypeMetaData>

@@ -1,18 +1,12 @@
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.dsl.xml.io.CamelXmlRoutesBuilderLoader;
 import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.main.Main;
-import org.apache.camel.model.RoutesDefinition;
 import org.apache.camel.spi.Resource;
-import org.apache.camel.spi.RoutesBuilderLoader;
 import org.apache.camel.support.ResourceHelper;
-import org.apache.camel.support.ResourceSupport;
 import org.junit.jupiter.api.Test;
 
-import java.io.InputStream;
 import java.time.Instant;
 
 public class JCamelTest {
@@ -75,12 +69,4 @@ public class JCamelTest {
         Thread.sleep(10000L);
         context.stop();
     }
-
-    @Test
-    void camel3() throws Exception {
-        Main main = new Main();
-        main.configure().withRoutesReloadPattern("*.xml");
-        main.run();
-    }
-
 }

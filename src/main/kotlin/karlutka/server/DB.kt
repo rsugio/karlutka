@@ -41,12 +41,12 @@ object DB {
         inslink = conn.prepareStatement("insert into PUBLIC.ESRVLINK(vernum,role,kpos,objnum) values(?1,?2,?3,?4)")
         println("H2 соединён на $url")
 
-        readSwcvList()
-        println("прочитаны SWCV")
-        val usedSw = readEsrObjList()
-        println("прочитаны ESROBJ")
+        //readSwcvList()
+//        println("прочитаны SWCV")
+//        val usedSw = readEsrObjList()
+//        println("прочитаны ESROBJ")
         // чтобы в памяти не держать бессмысленные ссылки, удаляем ненужные SWCV но сохраняем
-        swcv.removeIf { !usedSw.contains(it.guid) }
+//        swcv.removeIf { !usedSw.contains(it.guid) }
     }
 
     fun close() {

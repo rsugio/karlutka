@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CacheRefresh>
+	<DELETED_OBJECTS>
+		<SAPXI_OBJECT_KEY>
+			<OBJECT_ID>b82d4c10ca13351c9f6eda52999900b6</OBJECT_ID>
+			<OBJECT_TYPE>Channel</OBJECT_TYPE>
+		</SAPXI_OBJECT_KEY>
+		<SAPXI_OBJECT_KEY>
+			<OBJECT_ID>e555b0436c03370cbb33dee30c1185b6</OBJECT_ID>
+			<OBJECT_TYPE>AllInOne</OBJECT_TYPE>
+		</SAPXI_OBJECT_KEY>
+	</DELETED_OBJECTS>
+	<cp:Channel xmlns:cp="urn:sap-com:xi:xiChannel">
+		<cp:PartyName/>
+		<cp:ServiceName>BC_TEST1</cp:ServiceName>
+		<cp:ChannelName>fake</cp:ChannelName>
+		<cp:ChannelObjectId>b82d4c10ca13351c9f6eda52999900b6</cp:ChannelObjectId>
+		<cp:AdapterName>File</cp:AdapterName>
+		<cp:AdapterNamespace>http://sap.com/xi/XI/System</cp:AdapterNamespace>
+		<cp:AdapterSWCV>0050568f0aac1ed4a6e56926325e2eb3</cp:AdapterSWCV>
+		<cp:EngineType>AE</cp:EngineType>
+		<cp:EngineName>af.fa0.fake0db</cp:EngineName>
+		<cp:ChannelDirection>I</cp:ChannelDirection>
+		<cp:MessageProtocol>File</cp:MessageProtocol>
+		<cp:MessageProtocolVersion>3.0.0527</cp:MessageProtocolVersion>
+		<cp:TransportProtocol>File</cp:TransportProtocol>
+		<cp:TransportProtocolVersion/>
+		<cp:FromPartyAgency>016</cp:FromPartyAgency>
+		<cp:FromPartySchema>DUNS</cp:FromPartySchema>
+		<cp:ToPartyAgency>166</cp:ToPartyAgency>
+		<cp:ToPartySchema>SCAC</cp:ToPartySchema>
+		<cp:ChannelAttributes>
+			<AdapterTypeData>
+				<Attribute xmlns="">
+					<Name>advancedFileSources</Name>
+					<Namespace/>
+					<Value isTable="true"/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>advancedSourceFileSelection</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>chunkSize</Name>
+					<Namespace/>
+					<Value>10</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>dynConfigDirectory</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>dynConfigFileEncoding</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>dynConfigFileName</Name>
+					<Namespace/>
+					<Value>1</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>dynConfigFileType</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>dynConfigSourceFileSize</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>dynConfigSourceFileTimestamp</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>emptyFileHandling</Name>
+					<Namespace/>
+					<Value>confirm</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>enableChunkMode</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>enableDynConfigSender</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>errorArchiveDir</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>errorArchiveWithTimestamp</Name>
+					<Namespace/>
+					<Value>1</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>exclusionMask</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.DisableChannelOnDuplicate</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.DuplicateMsgThreshold</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.EnableDuplicateHandling</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.adapterStatus</Name>
+					<Namespace/>
+					<Value>active</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.addParameterParams</Name>
+					<Namespace/>
+					<Value isTable="true"/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.addPayloadNames</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.addPayloadParams</Name>
+					<Namespace/>
+					<Value isTable="true"/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.additionalPayloads</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.advanced</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.archiveDir</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.archiveWithTimestamp</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.checkFileModification</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.encoding</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.execute</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.executeTerminateAfterTimeout</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.executeTimeout</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.pollInterval</Name>
+					<Namespace/>
+					<Value>60</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.pollIntervalMsecs</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.preprocess.execute</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.preprocess.executeTerminateAfterTimeout</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.preprocess.executeTimeout</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.processingLocked</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.processingMode</Name>
+					<Namespace/>
+					<Value>test</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.processingOrder</Name>
+					<Namespace/>
+					<Value>byName</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.qualityOfService</Name>
+					<Namespace/>
+					<Value>EO</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.queueName</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.retryInterval</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.sourceDir</Name>
+					<Namespace/>
+					<Value>/</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.sourceFileName</Name>
+					<Namespace/>
+					<Value>xi_input.dat</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>file.type</Name>
+					<Namespace/>
+					<Value>bin</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>maxFileSize</Name>
+					<Namespace/>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>useErrorArchiveDir</Name>
+					<Namespace/>
+					<Value>0</Value>
+				</Attribute>
+			</AdapterTypeData>
+		</cp:ChannelAttributes>
+		<cp:PipelineAttributes>
+			<cp:PipelineData>
+				<cp:PipelineConfig>
+					<cp:Position>0</cp:Position>
+					<cp:ModuleName>CallSapAdapter</cp:ModuleName>
+					<cp:ModuleType>L</cp:ModuleType>
+					<cp:ModuleNs>руссяз</cp:ModuleNs>
+				</cp:PipelineConfig>
+			</cp:PipelineData>
+			<cp:ModuleData>
+				<cp:ModuleConfig>
+					<cp:ModuleNs>руссяз</cp:ModuleNs>
+					<cp:ParamName>руссяз2</cp:ParamName>
+					<cp:ParamValue>руссяз3</cp:ParamValue>
+				</cp:ModuleConfig>
+			</cp:ModuleData>
+		</cp:PipelineAttributes>
+	</cp:Channel>
+	<AllInOne version="150">
+		<FromPartyName/>
+		<FromServiceName>BC_TEST1</FromServiceName>
+		<ToPartyName/>
+		<ToServiceName/>
+		<FromInterfaceName>dummy_interface</FromInterfaceName>
+		<FromInterfaceNamespace>urn:dummy-namespace</FromInterfaceNamespace>
+		<AllInOneObjectId>e555b0436c03370cbb33dee30c1185b6</AllInOneObjectId>
+		<ParentURI>dir://ICO/e555b0436c03370cbb33dee30c1185b6</ParentURI>
+		<SenderConnectivity>
+			<ChannelObjectId>b82d4c10ca13351c9f6eda52999900b6</ChannelObjectId>
+			<AdapterName>File</AdapterName>
+			<AdapterNamespace>http://sap.com/xi/XI/System</AdapterNamespace>
+			<AdapterSWCV>0050568f0aac1ed4a6e56926325e2eb3</AdapterSWCV>
+			<EngineName>af.fa0.fake0db</EngineName>
+			<EngineType>AE</EngineType>
+			<InterfaceVersion/>
+			<ValidationMode>0</ValidationMode>
+			<VirusScanMode>0</VirusScanMode>
+			<AllInOneAttributes>
+				<AdapterTypeData>
+					<Attribute xmlns="">
+						<Name>sap.xi.gen.if.is_async</Name>
+						<Namespace/>
+						<Value>0</Value>
+					</Attribute>
+				</AdapterTypeData>
+			</AllInOneAttributes>
+		</SenderConnectivity>
+		<NamespaceMapping>
+			<p1:NSM xmlns:p1="http://sap.com/xi/ib/prefix">
+				<definition prefix="s2" uri="urn:s2"/>
+				<definition prefix="s1" uri="urn:s1"/>
+			</p1:NSM>
+		</NamespaceMapping>
+		<NoReceiverBehaviour>
+			<IfNoReceiverFound>0</IfNoReceiverFound>
+		</NoReceiverBehaviour>
+		<ReceiverConfigurations>
+			<ReceiverConfiguration>
+				<ReceiverId>a8d4b89ef4cb11edc649000000417ca6</ReceiverId>
+				<Receiver>
+					<PartyExtractor>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>a8d2a8eff4cb11eda88b000000417ca6</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE/>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</PartyExtractor>
+					<PartyAgencyExtractor>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>a8d2a8f1f4cb11eda92d000000417ca6</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>http://sap.com/xi/XI</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</PartyAgencyExtractor>
+					<PartySchemaExtractor>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>a8d2a8f2f4cb11edc29d000000417ca6</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>XIParty</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</PartySchemaExtractor>
+					<ServiceExtractor>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>a8d2a8f0f4cb11ed9816000000417ca6</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>BC_TEST1</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</ServiceExtractor>
+				</Receiver>
+				<InterfaceDeterminations>
+					<InterfaceDetermination>
+						<FromOperation/>
+						<FromXmlRoot/>
+						<FromXmlRootNamespace/>
+						<InterfaceConditionId/>
+						<Interfaces>
+							<Interface>
+								<InterfaceName>dummy_interface</InterfaceName>
+								<InterfaceNamespace>urn:dummy-namespace</InterfaceNamespace>
+								<ReceiverConnectivityId>2950f0b4e53a5e4d02878c3580dae902</ReceiverConnectivityId>
+								<SequenceNumber>0</SequenceNumber>
+							</Interface>
+						</Interfaces>
+						<IntfMappingName/>
+						<IntfMappingNamespace/>
+						<IntfMappingObjectId/>
+						<IntfMappingSwcvId/>
+						<MappingRequired>0</MappingRequired>
+					</InterfaceDetermination>
+				</InterfaceDeterminations>
+			</ReceiverConfiguration>
+		</ReceiverConfigurations>
+		<ReceiverAssignmentList mode="standard">
+			<ReceiverAssignment>
+				<ReceiverConditionId>4b8bbd2bf4c311eda68c005056b4c5ba</ReceiverConditionId>
+				<ReceiverIds>
+					<ReceiverId>a8d4b89ef4cb11edc649000000417ca6</ReceiverId>
+				</ReceiverIds>
+			</ReceiverAssignment>
+		</ReceiverAssignmentList>
+		<ReceiverConnectivityList>
+			<ReceiverConnectivity>
+				<FromPartyName/>
+				<FromServiceName>BC_TEST1</FromServiceName>
+				<ToPartyName/>
+				<ToServiceName>BC_TEST1</ToServiceName>
+				<ToInterfaceName>dummy_interface</ToInterfaceName>
+				<ToInterfaceNamespace>urn:dummy-namespace</ToInterfaceNamespace>
+				<InterfaceVersion/>
+				<ReceiverConnectivityId>2950f0b4e53a5e4d02878c3580dae902</ReceiverConnectivityId>
+				<ChannelObjectId>9f54154d9f0539a091339f1d203ce556</ChannelObjectId>
+				<AdapterName>REST</AdapterName>
+				<AdapterNamespace>http://sap.com/xi/XI/System</AdapterNamespace>
+				<AdapterSWCV>0050568f0aac1ed4a6e56926325e2eb3</AdapterSWCV>
+				<EngineName>af.fa0.fake0db</EngineName>
+				<EngineType>AE</EngineType>
+				<ValidationMode>0</ValidationMode>
+				<VirusScanMode>0</VirusScanMode>
+				<AllInOneAttributes>
+					<AdapterTypeData>
+						<Attribute xmlns="">
+							<Name>propagatePrincipal</Name>
+							<Namespace/>
+							<Value>0</Value>
+						</Attribute>
+						<Attribute xmlns="">
+							<Name>sap.xi.gen.if.is_async</Name>
+							<Namespace/>
+							<Value>0</Value>
+						</Attribute>
+					</AdapterTypeData>
+				</AllInOneAttributes>
+			</ReceiverConnectivity>
+		</ReceiverConnectivityList>
+		<Conditions>
+			<RDS_CONDSHORT>
+				<CONDITIONID>4b8bbd2bf4c311eda68c005056b4c5ba</CONDITIONID>
+				<CONDLINE>
+					<COMPGROUP>1</COMPGROUP>
+					<COUNTER>1</COUNTER>
+					<COMPOP>EQ</COMPOP>
+					<LEXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>60169ce8f4c311eda570005056b4c5ba</EXTRACTORID>
+							<TYPE>XP</TYPE>
+							<VALUE>/s1:a/s2:b</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE>X</MULTLINE>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</LEXTRACTOR>
+					<REXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>6215eaf7f4c311ed91ee005056b4c5ba</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>c</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</REXTRACTOR>
+				</CONDLINE>
+			</RDS_CONDSHORT>
+		</Conditions>
+		<ScenarioConfiguration>
+			<Parameters/>
+		</ScenarioConfiguration>
+	</AllInOne>
+</CacheRefresh>
