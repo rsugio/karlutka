@@ -20,7 +20,16 @@ class KAdapterEngineTests {
         XICache.decodeFromReader(x("/pi_AE/cpa03.xml"))
         XICache.decodeFromReader(x("/pi_AE/cpa04.xml"))
         XICache.decodeFromReader(x("/pi_AE/cpa05.xml"))
+        XICache.decodeFromReader(x("/pi_AE/cpa06.xml"))
         //XICache.decodeFromReader(x("/pi_AE/ExportedCacheUpdate.xml"))
+    }
+
+    @Test
+    fun route() {
+        val cpa = XICache.decodeFromReader(x("/pi_AE/cpa06.xml"))
+        cpa.AllInOne.filter{it.SenderConnectivity.AdapterName=="CamelAdapter"}.forEach {ico ->
+            println(ico)
+        }
     }
 
     @Test

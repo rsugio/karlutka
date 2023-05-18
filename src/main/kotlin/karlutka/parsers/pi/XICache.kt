@@ -123,7 +123,7 @@ class XICache {
 
     @Serializable
     @SerialName("AllInOne")
-    class AllInOne(
+    data class AllInOne(
         val version: String,
         @XmlElement val FromPartyName: String,
         @XmlElement val FromServiceName: String,
@@ -180,12 +180,46 @@ class XICache {
     @Serializable
     @SerialName("NoReceiverBehaviour")
     class NoReceiverBehaviour(
-        @XmlElement val IfNoReceiverFound: String
+        @XmlElement val IfNoReceiverFound: String,
     )
 
     @Serializable
     @SerialName("ReceiverConfigurations")
-    class ReceiverConfigurations()
+    class ReceiverConfigurations(
+        @SerialName("ReceiverConfiguration")
+        val ReceiverConfiguration: List<ReceiverConfiguration>,
+    )
+
+    @Serializable
+    class ReceiverConfiguration(
+        @XmlElement val ReceiverId: String,
+        @XmlElement val Receiver: Receiver,
+    )
+
+    @Serializable
+    @SerialName("Receiver")
+    class Receiver(
+        @XmlElement @SerialName("PartyExtractor") val PartyExtractor: AbstractExtractor,
+        @XmlElement @SerialName("PartyAgencyExtractor") val PartyAgencyExtractor: AbstractExtractor,
+        @XmlElement @SerialName("PartySchemaExtractor") val PartySchemaExtractor: AbstractExtractor,
+        @XmlElement @SerialName("ServiceExtractor") val ServiceExtractor: AbstractExtractor,
+    )
+
+    @Serializable
+    class AbstractExtractor(
+        @XmlElement val TRD_EXTRACTOR: TRD_EXTRACTOR,
+    )
+    @Serializable
+    @SerialName("TRD_EXTRACTOR")
+    class TRD_EXTRACTOR(
+        @XmlElement val EXTRACTORID: String,
+        @XmlElement val TYPE: String,
+        @XmlElement val VALUE: String,
+        @XmlElement val DATATYPE: String,
+        @XmlElement val MULTLINE: String,
+        @XmlElement val COBJNS: String,
+        @XmlElement val COBJNAME: String,
+    )
 
     @Serializable
     @SerialName("ReceiverAssignmentList")
