@@ -1,8 +1,10 @@
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
+import org.apache.camel.Route;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.support.ResourceHelper;
 import org.junit.jupiter.api.Test;
@@ -68,5 +70,31 @@ public class JCamelTest {
         context.start();
         Thread.sleep(10000L);
         context.stop();
+    }
+
+    @Test
+    void camel4() throws Exception {
+        String xmlDsl = "<routes>" +
+                "<route id=\"0#грабитьКорованы\"><from uri=\"timer:thief?period=1s\"/><log message=\"------- Граблю -------\"/></route>" +
+                "<route id=\"1#охранятьКорованы\"><from uri=\"timer:guard?period=845ms\"/><log message=\"------- Охраняю -------\"/></route>" +
+                "</routes>";
+        CamelContext camelContext = new DefaultCamelContext(true);
+        Resource resource = ResourceHelper.fromString("memory.xml", xmlDsl);
+        RouteBuilder builder = (RouteBuilder)(new XmlRoutesBuilderLoader().loadRoutesBuilder(resource));
+        camelContext.addRoutes(builder);
+        builder.configure();
+        camelContext.start();
+        System.out.println(camelContext.getRoutes());
+        for (Route r: camelContext.getRoutes()) {
+            System.out.println(r.getId());
+            System.out.println(r.getDescription());
+            System.out.println(r.getRoute());
+            RouteDefinition rd = builder.getRouteCollection().getRoutes().get(0);
+            System.out.println(r.toString());
+            System.out.println(rd.toString());
+
+        }
+//        Thread.sleep(3000L);
+        camelContext.stop();
     }
 }

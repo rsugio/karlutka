@@ -103,12 +103,15 @@
 	</Attribute>
 	<Attribute>
 		<Name namespace="general">routeId</Name>
-		<Usage>optional</Usage>
+		<Usage>required</Usage>
 		<DataType>xsd:string</DataType>
 		<Length>30</Length>
 		<GuiLabels>
 			<Label language="EN">routeId</Label>
 		</GuiLabels>
+		<HelpService>
+			<HelpServiceName>A</HelpServiceName>
+		</HelpService>
 	</Attribute>
 	<Attribute>
 		<Name namespace="general">log</Name>

@@ -45,17 +45,17 @@ object Server {
     val UUIDgenerator = Generators.timeBasedGenerator()
     lateinit var afprops: Map<String, String>
     val camelContext = DefaultCamelContext(true)
+    val routeSources = mutableMapOf<String,String>()
 
     init {
-        val route0 = """<routes><route id="0#грабитьКорованы">
-    <from uri="timer:initial?period=10s"/>
-    <log message="------- Я тут -------"/></route></routes>"""
-        addRoute(route0)
-        addRoute(route0)
-        addRoute(route0)
+        addRoute("0#грабитьКорованы", """<route id="0#грабитьКорованы">
+    <from uri="timer:thief?period=10s"/>
+    <log message="------- Граблю корованы -------"/>
+</route>""")
     }
 
-    fun addRoute(xmlDsl: String) {
+    fun addRoute(id: String, xmlDsl: String) {
+        routeSources[id] = xmlDsl
         val resource = ResourceHelper.fromString("memory.xml", xmlDsl)
         val builder = XmlRoutesBuilderLoader().loadRoutesBuilder(resource) as RouteBuilder
         camelContext.addRoutes(builder)
@@ -77,6 +77,9 @@ object Server {
                         li {
                             b { +r.id }
                             +" ${r.toString()}"
+                            pre {
+                                +routeSources[r.id]!!
+                            }
                         }
                     }
                 }
