@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="80" senderAgreementUnique="true">
+<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="80" senderAgreementUnique="true">
 	<GuiHandlerClassName/>
 	<Inbound>
 		<TransportProtocol>
-			<Name>file</Name>
+			<Name>timer</Name>
 			<Version>4.0.0-M3</Version>
 			<GuiLabels>
-				<Label language="EN">from("file:/folder")</Label>
+				<Label language="EN">from("timer:name[?options]")</Label>
 			</GuiLabels>
-			<ChannelAttributes>
-				<AttributeReference>
-					<ReferenceName namespace="general">Connection</ReferenceName>
-				</AttributeReference>
-			</ChannelAttributes>
-			
+			<ChannelAttributes/>
 			<ValidMessageProtocols>
 				<ProtocolIdentifier>
 					<Name>Binary</Name>
@@ -21,18 +17,112 @@
 				</ProtocolIdentifier>
 			</ValidMessageProtocols>
 		</TransportProtocol>
-		
+
 		<TransportProtocol>
-			<Name>http</Name>
+			<Name>file</Name>
 			<Version>4.0.0-M3</Version>
 			<GuiLabels>
-				<Label language="EN">from("http:/endpoint")</Label>
+				<Label language="EN">from("file:directoryName[?options]")</Label>
 			</GuiLabels>
-			<ChannelAttributes>
+			<ChannelAttributes/>
+			<ValidMessageProtocols>
+				<ProtocolIdentifier>
+					<Name>Binary</Name>
+					<Version>1.0</Version>
+				</ProtocolIdentifier>
+			</ValidMessageProtocols>
+		</TransportProtocol>
+
+		<TransportProtocol>
+			<Name>direct</Name>
+			<Version>4.0.0-M3</Version>
+			<GuiLabels>
+				<Label language="EN">from("direct:someName[?options]")</Label>
+			</GuiLabels>
+			<ChannelAttributes/>
+			<ValidMessageProtocols>
+				<ProtocolIdentifier>
+					<Name>Binary</Name>
+					<Version>1.0</Version>
+				</ProtocolIdentifier>
+			</ValidMessageProtocols>
+		</TransportProtocol>
+		<MessageProtocol>
+			<Name>Binary</Name>
+			<Version>1.0</Version>
+			<GuiLabels>
+				<Label language="EN">Binary</Label>
+			</GuiLabels>
+			<ChannelAttributes/>
+			<SecurityAttributes/>
+		</MessageProtocol>
+
+		<GlobalChannelAttributes>
+			<AttributeGroup>
+				<Name>camel</Name>
+				<GuiLabels>
+					<Label language="EN">Camel from</Label>
+				</GuiLabels>
 				<AttributeReference>
-					<ReferenceName namespace="general">Connection</ReferenceName>
+					<ReferenceName namespace="camel">connection</ReferenceName>
 				</AttributeReference>
-			</ChannelAttributes>
+				<AttributeReference>
+					<ReferenceName namespace="camel">connection2</ReferenceName>
+				</AttributeReference>
+				<AttributeReference>
+					<ReferenceName namespace="camel">routeId</ReferenceName>
+				</AttributeReference>
+			</AttributeGroup>
+			<AttributeGroup>
+				<Name>camelprocessor</Name>
+				<GuiLabels>
+					<Label language="EN">Processor</Label>
+				</GuiLabels>
+				<AttributeReference>
+					<ReferenceName namespace="camel">processor</ReferenceName>
+				</AttributeReference>
+				<AttributeReference>
+					<ReferenceName namespace="camel">processor2</ReferenceName>
+				</AttributeReference>
+			</AttributeGroup>
+
+			<AttributeGroup>
+				<Name>information</Name>
+				<GuiLabels>
+					<Label language="EN">Information</Label>
+				</GuiLabels>
+				<AttributeReference>
+					<ReferenceName namespace="general">cmdbUrl</ReferenceName>
+				</AttributeReference>
+				<AttributeReference>
+					<ReferenceName namespace="general">docuUrl</ReferenceName>
+				</AttributeReference>
+			</AttributeGroup>
+		</GlobalChannelAttributes>
+	</Inbound>
+	<Outbound>
+		<TransportProtocol>
+			<Name>file</Name>
+			<Version>4.0.0-M3</Version>
+			<GuiLabels>
+				<Label language="EN">to("file:directoryName[?options]")</Label>
+			</GuiLabels>
+			<ChannelAttributes/>
+			<SecurityAttributes/>
+			<ValidMessageProtocols>
+				<ProtocolIdentifier>
+					<Name>Binary</Name>
+					<Version>1.0</Version>
+				</ProtocolIdentifier>
+			</ValidMessageProtocols>
+		</TransportProtocol>
+		<TransportProtocol>
+			<Name>direct</Name>
+			<Version>4.0.0-M3</Version>
+			<GuiLabels>
+				<Label language="EN">to("direct:someName[?options]")</Label>
+			</GuiLabels>
+			<ChannelAttributes/>
 			<ValidMessageProtocols>
 				<ProtocolIdentifier>
 					<Name>Binary</Name>
@@ -50,76 +140,110 @@
 			<SecurityAttributes/>
 		</MessageProtocol>
 		<GlobalChannelAttributes>
-			<AttributeReference>
-				<ReferenceName namespace="general">routeId</ReferenceName>
-			</AttributeReference>
-			<!--AttributeReference>
-				<ReferenceName namespace="general">autoStartup</ReferenceName>
-			</AttributeReference-->
-			<AttributeReference>
-				<ReferenceName namespace="general">log</ReferenceName>
-			</AttributeReference>
-		</GlobalChannelAttributes>
-	</Inbound>
-	<Outbound>
-		<TransportProtocol>
-			<Name>file</Name>
-			<Version>4.0.0-M3</Version>
-			<GuiLabels>
-				<Label language="EN">to("file:/folder")</Label>
-			</GuiLabels>
-			<ChannelAttributes>
+			<AttributeGroup>
+				<Name>camelprocessor</Name>
+				<GuiLabels>
+					<Label language="EN">Processor</Label>
+				</GuiLabels>
 				<AttributeReference>
-					<ReferenceName namespace="general">Connection</ReferenceName>
+					<ReferenceName namespace="camel">processor</ReferenceName>
 				</AttributeReference>
-			</ChannelAttributes>
-			<SecurityAttributes/>
-			<ValidMessageProtocols>
-				<ProtocolIdentifier>
-					<Name>Binary</Name>
-					<Version>1.0</Version>
-				</ProtocolIdentifier>
-			</ValidMessageProtocols>
-		</TransportProtocol>
-		<MessageProtocol>
-			<Name>Binary</Name>
-			<Version>1.0</Version>
-			<GuiLabels>
-				<Label language="EN">Binary</Label>
-			</GuiLabels>
-			<ChannelAttributes/>
-			<SecurityAttributes/>
-		</MessageProtocol>
-		<GlobalChannelAttributes/>
+				<AttributeReference>
+					<ReferenceName namespace="camel">processor2</ReferenceName>
+				</AttributeReference>
+			</AttributeGroup>
+			<AttributeGroup>
+				<Name>camel</Name>
+				<GuiLabels>
+					<Label language="EN">Camel</Label>
+				</GuiLabels>
+				<AttributeReference>
+					<ReferenceName namespace="camel">connection</ReferenceName>
+				</AttributeReference>
+				<AttributeReference>
+					<ReferenceName namespace="camel">connection2</ReferenceName>
+				</AttributeReference>
+			</AttributeGroup>
+			<AttributeGroup>
+				<Name>information</Name>
+				<GuiLabels>
+					<Label language="EN">Information</Label>
+				</GuiLabels>
+				<AttributeReference>
+					<ReferenceName namespace="general">cmdbUrl</ReferenceName>
+				</AttributeReference>
+				<AttributeReference>
+					<ReferenceName namespace="general">docuUrl</ReferenceName>
+				</AttributeReference>
+			</AttributeGroup>
+		</GlobalChannelAttributes>
 	</Outbound>
+	<!-- Camel -->
 	<Attribute>
-		<Name namespace="general">Connection</Name>
+		<Name namespace="camel">connection</Name>
 		<Usage>required</Usage>
 		<DataType>xsd:string</DataType>
-		<Length>192</Length>
+		<Length>132</Length>
 		<GuiLabels>
 			<Label language="EN">Connection</Label>
 		</GuiLabels>
 	</Attribute>
 	<Attribute>
-		<Name namespace="general">routeId</Name>
+		<Name namespace="camel">connection2</Name>
+		<Usage>optional</Usage>
+		<DataType>xsd:string</DataType>
+		<Length>132</Length>
+		<GuiLabels>
+			<Label language="EN">Connection2</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="camel">routeId</Name>
 		<Usage>required</Usage>
 		<DataType>xsd:string</DataType>
 		<Length>30</Length>
 		<GuiLabels>
-			<Label language="EN">routeId</Label>
+			<Label language="EN">RouteId</Label>
 		</GuiLabels>
-		<HelpService>
-			<HelpServiceName>A</HelpServiceName>
-		</HelpService>
 	</Attribute>
 	<Attribute>
-		<Name namespace="general">log</Name>
+		<Name namespace="camel">processor</Name>
 		<Usage>optional</Usage>
 		<DataType>xsd:string</DataType>
 		<Length>255</Length>
 		<GuiLabels>
-			<Label language="EN">log message</Label>
+			<Label language="EN">Processor</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="camel">processor2</Name>
+		<Usage>optional</Usage>
+		<DataType>xsd:string</DataType>
+		<Length>255</Length>
+		<GuiLabels>
+			<Label language="EN">Processor2</Label>
+		</GuiLabels>
+	</Attribute>
+
+	<!-- Documentation -->
+	<Attribute>
+		<Name namespace="general">cmdbUrl</Name>
+		<Usage>optional</Usage>
+		<DataType>xsd:string</DataType>
+		<Length>128</Length>
+		<Default>http://cmdb/catalog-is/CF-######</Default>
+		<GuiLabels>
+			<Label language="EN">CMDB url</Label>
+		</GuiLabels>
+	</Attribute>
+	<Attribute>
+		<Name namespace="general">docuUrl</Name>
+		<Usage>optional</Usage>
+		<DataType>xsd:string</DataType>
+		<Length>128</Length>
+		<Default>https://confluence/pages/viewpage.action?pageId=#######</Default>
+		<GuiLabels>
+			<Label language="EN">Documentation url</Label>
 		</GuiLabels>
 	</Attribute>
 </AdapterTypeMetaData>

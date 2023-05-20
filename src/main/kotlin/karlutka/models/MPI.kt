@@ -54,11 +54,12 @@ class MPI {
         BO_Query,           // встречалось пока только в ссылках
         BO_Object,          // navi
         BO_Enh,             // navi
-        agent,               // navi
+        agent,              // navi
 
         // Directory
         Party,
         Channel,
+        Service,
         AllInOne,
         DirectoryView
     }

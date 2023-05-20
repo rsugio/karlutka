@@ -19,4 +19,35 @@
 			<cp:Identifier>a</cp:Identifier>
 		</cp:PartyIdentifier>
 	</cp:Party>
+	<cp:Party xmlns:cp="urn:sap-com:xi:xiParty">
+		<cp:PartyObjectId>78aedc7d79c439938511d517c6d9a2c1</cp:PartyObjectId>
+		<cp:PartyName>P_1C_METIZ</cp:PartyName>
+		<cp:PartyIdentifier>
+			<cp:PartyIdentifierObjectId>9a040c84d7c7244e87ea6431e90b6d8f</cp:PartyIdentifierObjectId>
+			<cp:Agency>http://sap.com/xi/XI</cp:Agency>
+			<cp:Schema>XIParty</cp:Schema>
+			<cp:Identifier>P_1C_METIZ</cp:Identifier>
+		</cp:PartyIdentifier>
+	</cp:Party>
+	<cp:Service xmlns:cp="urn:sap-com:xi:xiService">
+		<cp:ServiceObjectId>e27e1200351532939bccce9bb6da2e50</cp:ServiceObjectId>
+		<cp:PartyName>P_BELGIUM</cp:PartyName>
+		<cp:ServiceName>BS_NEXTCLOUD_D</cp:ServiceName>
+		<cp:ServiceType>BS</cp:ServiceType>
+		<cp:IsThirdParty>true</cp:IsThirdParty>
+		<cp:isNWBPMProcess>false</cp:isNWBPMProcess>
+		<cp:ServiceIdentifier>
+			<cp:ServiceIdentifierObjectId>e3ac2f352ff4651908b068b6b2fdd1d6</cp:ServiceIdentifierObjectId>
+			<cp:Schema>LogicalSystem</cp:Schema>
+			<cp:Identifier/>
+		</cp:ServiceIdentifier>
+	</cp:Service>
+	<cp:Service xmlns:cp="urn:sap-com:xi:xiService">
+		<cp:ServiceObjectId>ac410abf83a93ac088f41df2c9fe0616</cp:ServiceObjectId>
+		<cp:PartyName/>
+		<cp:ServiceName>BC_CommerceConsumerCPI</cp:ServiceName>
+		<cp:ServiceType>SR</cp:ServiceType>
+		<cp:IsThirdParty>true</cp:IsThirdParty>
+		<cp:isNWBPMProcess>false</cp:isNWBPMProcess>
+	</cp:Service>
 </CacheRefresh>

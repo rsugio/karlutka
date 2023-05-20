@@ -24,17 +24,16 @@ class KAdapterEngineTests {
         XICache.decodeFromReader(x("/pi_AE/cpa04.xml"))
         XICache.decodeFromReader(x("/pi_AE/cpa05.xml"))
         XICache.decodeFromReader(x("/pi_AE/cpa06.xml"))
+        XICache.decodeFromReader(x("/pi_AE/ExportedCacheUpdate0.xml"))
         //XICache.decodeFromReader(x("/pi_AE/ExportedCacheUpdate.xml"))
     }
 
     @Test
-    fun route() {
+    fun parseIco() {
         val cpa = XICache.decodeFromReader(x("/pi_AE/cpa06.xml"))
-        val r = MCamelDSL.Route("1", MCamelDSL.From("timer:thief?period=10s"))
-        r.add(MCamelDSL.Log("------- Граблю корованы -------"))
-
-        cpa.AllInOne.filter{it.SenderConnectivity.AdapterName=="CamelAdapter"}.forEach {ico ->
-
+        cpa.AllInOne.filter{it.SenderConnectivity.AdapterName!="1CamelAdapter"}.forEach {ico ->
+            val parsed = ico.toParsed()
+            println(parsed)
         }
     }
 

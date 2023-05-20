@@ -1,22 +1,28 @@
 package karlutka.parsers.pi
 
 import karlutka.models.MPI
+import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import nl.adaptivity.xmlutil.util.CompactFragment
 
 class XICache {
     @Serializable
     @XmlSerialName("CacheRefresh", "", "")
     class CacheRefresh(
         val DELETED_OBJECTS: DELETED_OBJECTS? = null,
-        val Party: List<Party>,
+        val Party: List<Party>,                             // может быть, не читать
         val Channel: List<Channel>,
         val AllInOne: List<AllInOne>,
-        val ServiceInterface: List<ServiceInterface>,
-        val MPP_MAP: List<MPP_MAP>
+        val ServiceInterface: List<ServiceInterface>,       // может быть, не читать
+        val MPP_MAP: List<MPP_MAP>,
+        @XmlSerialName("AdapterMetaData", "urn:sap-com:xi:xiAdapterMetaData", "cp")
+        val AdapterMetaData: List<@Contextual CompactFragment>,
+        @XmlSerialName("Service", "urn:sap-com:xi:xiService", "cp")
+        val Service: List<@Contextual CompactFragment>,
     )
 
     @Serializable
@@ -29,7 +35,7 @@ class XICache {
     @XmlSerialName("SAPXI_OBJECT_KEY", "", "")
     class SAPXI_OBJECT_KEY(
         @XmlElement val OBJECT_ID: String,
-        @XmlElement @XmlSerialName("OBJECT_TYPE") val OBJECT_TYPE: MPI.ETypeID,    //TODO переделать на Enum
+        @XmlElement @XmlSerialName("OBJECT_TYPE") val OBJECT_TYPE: MPI.ETypeID,
         @XmlElement val SP_NUMBER: Int?,        // только на репозитории
         @XmlElement val VERSION_ID: String?,     // только на репозитории
     )
@@ -45,6 +51,7 @@ class XICache {
     @Serializable
     @XmlSerialName("PartyIdentifier", "urn:sap-com:xi:xiParty", "cp")
     class PartyIdentifier(
+        @XmlElement val PartyIdentifierObjectId: String?,
         @XmlElement val Agency: String,
         @XmlElement val Schema: String,
         @XmlElement val Identifier: String,
@@ -111,6 +118,7 @@ class XICache {
     @Serializable
     @XmlSerialName("PipelineConfig", "urn:sap-com:xi:xiChannel", "cp")
     class PipelineConfig(
+        @XmlElement val PipelineConfigObjectId: String?,    //guid
         @XmlElement val Position: Int,
         @XmlElement val ModuleName: String,
         @XmlElement val ModuleType: Char,
@@ -130,6 +138,30 @@ class XICache {
         @XmlElement val ParamName: String,
         @XmlElement val ParamValue: String,
     )
+
+    data class AllInOneParsed(
+        val fromParty: String,
+        val fromService: String,
+        val toParty: String,
+        val toService: String,
+        val fromIface: String,
+        val fromIfacens: String,
+        val namespaceMapping: Map<String, String> = mapOf(),
+        val ifNoReceiverFound: Int = 0,
+        val defaultReceiver: Receiver? = null,
+    ) {
+        data class Receiver(
+            val id: String,
+            val party: String,
+            val service: String,
+        )
+
+        data class Channel(
+            val id: String,
+            val receiver: Receiver,
+        )
+
+    }
 
     @Serializable
     @XmlSerialName("AllInOne", "", "")
@@ -151,7 +183,32 @@ class XICache {
         @XmlElement val ReceiverConnectivityList: ReceiverConnectivityList,
         @XmlElement val Conditions: Conditions,
         @XmlElement val ScenarioConfiguration: ScenarioConfiguration,
-    )
+    ) {
+        fun toParsed(): AllInOneParsed {
+            val receivers = ReceiverConfigurations.ReceiverConfiguration.map {
+                AllInOneParsed.Receiver(
+                    it.ReceiverId,
+                    it.Receiver.PartyExtractor.TRD_EXTRACTOR.VALUE,
+                    it.Receiver.ServiceExtractor.TRD_EXTRACTOR.VALUE
+                )
+            }
+            val channels = ReceiverConnectivityList.ReceiverConnectivity.map { c ->
+                AllInOneParsed.Channel(
+                    c.ChannelObjectId,
+                    receivers.find { r -> r.party == c.ToPartyName && r.service == c.ToServiceName }!!
+                )
+            }.distinctBy { it.id }
+            println(receivers)
+            println(channels)
+            val parsed = AllInOneParsed(FromPartyName, FromServiceName, ToPartyName, ToServiceName,
+                FromInterfaceName, FromInterfaceNamespace,
+                NamespaceMapping.NSM.definition.associate { Pair(it.prefix, it.uri) },
+                NoReceiverBehaviour.IfNoReceiverFound,
+                receivers.find { it.id == NoReceiverBehaviour.DefaultReceiverId }
+            )
+            return parsed
+        }
+    }
 
     @Serializable
     @XmlSerialName("SenderConnectivity", "", "")
