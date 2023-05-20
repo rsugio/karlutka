@@ -3,8 +3,6 @@ import KT.Companion.x
 import karlutka.models.MCamelDSL
 import karlutka.parsers.pi.XIAdapterEngineRegistration
 import karlutka.parsers.pi.XICache
-import nl.adaptivity.xmlutil.PlatformXmlWriter
-import javax.xml.stream.XMLStreamWriter
 import kotlin.test.Test
 
 class KAdapterEngineTests {
@@ -18,19 +16,31 @@ class KAdapterEngineTests {
     }
 
     @Test
+    fun value() {
+
+    }
+
+    @Test
     fun cpa() {
-        XICache.decodeFromReader(x("/pi_AE/cpa02.xml"))
-        XICache.decodeFromReader(x("/pi_AE/cpa03.xml"))
-        XICache.decodeFromReader(x("/pi_AE/cpa04.xml"))
-        XICache.decodeFromReader(x("/pi_AE/cpa05.xml"))
-        XICache.decodeFromReader(x("/pi_AE/cpa06.xml"))
-        XICache.decodeFromReader(x("/pi_AE/ExportedCacheUpdate0.xml"))
-        //XICache.decodeFromReader(x("/pi_AE/ExportedCacheUpdate.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/ExportedCacheUpdate_ICoTmp.xml"))
+//        XICache.decodeChannelAttributesFromReader(x("/pi_AE/cpattr.xml"))
+//        XICache.decodeChannelFromReader(x("/pi_AE/channel.xml"))            // для отладки
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/cpa01.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/cpa02.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/cpa03.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/cpa04.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/cpa05.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/cpa06.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/cpa07.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/ExportedCacheUpdate_AMD.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/ExportedCacheUpdate_ICo.xml"))
+        XICache.decodeCacheRefreshFromString(s("/pi_AE/ExportedCacheUpdate_Channel.xml"))
+        //XICache.decodeCacheRefreshFromString(s("/pi_AE/ExportedCacheUpdate_Channels.xml"))
     }
 
     @Test
     fun parseIco() {
-        val cpa = XICache.decodeFromReader(x("/pi_AE/cpa06.xml"))
+        val cpa = XICache.decodeCacheRefreshFromString(s("/pi_AE/cpa06.xml"))
         cpa.AllInOne.filter{it.SenderConnectivity.AdapterName!="1CamelAdapter"}.forEach {ico ->
             val parsed = ico.toParsed()
             println(parsed)

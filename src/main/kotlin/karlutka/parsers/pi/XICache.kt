@@ -3,13 +3,18 @@ package karlutka.parsers.pi
 import karlutka.models.MPI
 import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
+import nl.adaptivity.xmlutil.ExperimentalXmlUtilApi
 import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
 
 class XICache {
+    enum class EOp { EQ, NE, CP, EX }
+
     @Serializable
     @XmlSerialName("CacheRefresh", "", "")
     class CacheRefresh(
@@ -19,10 +24,9 @@ class XICache {
         val AllInOne: List<AllInOne>,
         val ServiceInterface: List<ServiceInterface>,       // может быть, не читать
         val MPP_MAP: List<MPP_MAP>,
-        @XmlSerialName("AdapterMetaData", "urn:sap-com:xi:xiAdapterMetaData", "cp")
-        val AdapterMetaData: List<@Contextual CompactFragment>,
-        @XmlSerialName("Service", "urn:sap-com:xi:xiService", "cp")
-        val Service: List<@Contextual CompactFragment>,
+        @XmlSerialName("AdapterMetaData", "", "") val AdapterMetaData: List<@Contextual CompactFragment>,
+        @XmlSerialName("Service", "", "") val Service: List<@Contextual CompactFragment>,
+        @XmlSerialName("SXI_CONT", "", "") val SXI_CONT: @Contextual CompactFragment? = null,  // контейнер параметров, не нужен
     )
 
     @Serializable
@@ -41,7 +45,7 @@ class XICache {
     )
 
     @Serializable
-    @XmlSerialName("Party", "urn:sap-com:xi:xiParty", "cp")
+    @XmlSerialName("Party", "", "") //"""urn:sap-com:xi:xiParty", "cp")
     class Party(
         @XmlElement val PartyName: String,
         @XmlElement val PartyObjectId: String,
@@ -49,7 +53,7 @@ class XICache {
     )
 
     @Serializable
-    @XmlSerialName("PartyIdentifier", "urn:sap-com:xi:xiParty", "cp")
+    @XmlSerialName("PartyIdentifier", "", "") // "urn:sap-com:xi:xiParty", "cp")
     class PartyIdentifier(
         @XmlElement val PartyIdentifierObjectId: String?,
         @XmlElement val Agency: String,
@@ -58,7 +62,7 @@ class XICache {
     )
 
     @Serializable
-    @XmlSerialName("Channel", "urn:sap-com:xi:xiChannel", "cp")
+    @XmlSerialName("Channel", "", "") // "urn:sap-com:xi:xiChannel", "cp")
     class Channel(
         @XmlElement val PartyName: String,
         @XmlElement val ServiceName: String,
@@ -83,7 +87,7 @@ class XICache {
     )
 
     @Serializable
-    @XmlSerialName("ChannelAttributes", "urn:sap-com:xi:xiChannel", "cp")
+    @XmlSerialName("ChannelAttributes", "", "")// "urn:sap-com:xi:xiChannel", "cp")
     class ChannelAttributes(
         @XmlElement val AdapterTypeData: AdapterTypeData,
     )
@@ -99,24 +103,33 @@ class XICache {
     class Attribute(
         @XmlElement val Name: String,
         @XmlElement val Namespace: String,
-        @XmlElement val Value: String,
+        @XmlElement val Value: Value,
     )
 
     @Serializable
-    @XmlSerialName("PipelineAttributes", "urn:sap-com:xi:xiChannel", "cp")
+    @XmlSerialName("Value", "", "")
+    class Value(
+        @XmlElement(false) val isTable: Boolean?,
+        @XmlElement(false) val isPassword: Boolean?,
+        @XmlElement(false) val encryption: String?,
+        @XmlValue(true) val text: String?,
+    )
+
+    @Serializable
+    @XmlSerialName("PipelineAttributes", "", "") // "urn:sap-com:xi:xiChannel", "cp")
     class PipelineAttributes(
         @XmlElement val PipelineData: PipelineData?,
         @XmlElement val ModuleData: ModuleData?,
     )
 
     @Serializable
-    @XmlSerialName("PipelineData", "urn:sap-com:xi:xiChannel", "cp")
+    @XmlSerialName("PipelineData", "", "") // "urn:sap-com:xi:xiChannel", "cp")
     class PipelineData(
         @XmlElement val PipelineConfig: List<PipelineConfig>,
     )
 
     @Serializable
-    @XmlSerialName("PipelineConfig", "urn:sap-com:xi:xiChannel", "cp")
+    @XmlSerialName("PipelineConfig", "", "") // "urn:sap-com:xi:xiChannel", "cp")
     class PipelineConfig(
         @XmlElement val PipelineConfigObjectId: String?,    //guid
         @XmlElement val Position: Int,
@@ -126,13 +139,13 @@ class XICache {
     )
 
     @Serializable
-    @XmlSerialName("ModuleData", "urn:sap-com:xi:xiChannel", "cp")
+    @XmlSerialName("ModuleData", "", "") // "urn:sap-com:xi:xiChannel", "cp")
     class ModuleData(
         val ModuleConfig: List<ModuleConfig>,
     )
 
     @Serializable
-    @XmlSerialName("ModuleConfig", "urn:sap-com:xi:xiChannel", "cp")
+    @XmlSerialName("ModuleConfig", "", "") // "urn:sap-com:xi:xiChannel", "cp")
     class ModuleConfig(
         @XmlElement val ModuleNs: String,
         @XmlElement val ParamName: String,
@@ -161,12 +174,39 @@ class XICache {
             val receiver: Receiver,
         )
 
+        interface LogicalNode {
+            fun evaluate(): Boolean
+        }
+
+        class OrNode(val left: LogicalNode, val right: LogicalNode) : LogicalNode {
+            override fun evaluate(): Boolean = left.evaluate() || right.evaluate()
+        }
+
+        class AndNode(val left: LogicalNode, val right: LogicalNode) : LogicalNode {
+            override fun evaluate(): Boolean = left.evaluate() && right.evaluate()
+        }
+
+        class ValueNode(val value: Boolean) : LogicalNode {
+            override fun evaluate(): Boolean = value
+        }
+
+        data class Condition(
+            val id: String,
+            val groups: List<Any> = listOf(),
+        )
+
+        data class Extractor(
+            val xpath: String? = null,
+            val co: String? = null,
+            val op: EOp,
+
+            )
     }
 
     @Serializable
     @XmlSerialName("AllInOne", "", "")
     class AllInOne(
-        val version: String,
+        val version: String?,   // нет в полной
         @XmlElement val FromPartyName: String,
         @XmlElement val FromServiceName: String,
         @XmlElement val ToPartyName: String,
@@ -174,38 +214,49 @@ class XICache {
         @XmlElement val FromInterfaceName: String,
         @XmlElement val FromInterfaceNamespace: String,
         @XmlElement val AllInOneObjectId: String,
-        @XmlElement val ParentURI: String,
+        @XmlElement val ParentURI: String?,             // нет в полной
         @XmlElement val SenderConnectivity: SenderConnectivity,
-        @XmlElement val NamespaceMapping: NamespaceMapping,
-        @XmlElement val NoReceiverBehaviour: NoReceiverBehaviour,
+        @XmlElement val NamespaceMapping: NamespaceMapping?,        // нет в полной
+        @XmlElement val NoReceiverBehaviour: NoReceiverBehaviour?,   // нет в полной
         @XmlElement val ReceiverConfigurations: ReceiverConfigurations,
-        @XmlElement val ReceiverAssignmentList: ReceiverAssignmentList,
+        @XmlElement val ReceiverAssignmentList: ReceiverAssignmentList?,    // нет в полной
         @XmlElement val ReceiverConnectivityList: ReceiverConnectivityList,
-        @XmlElement val Conditions: Conditions,
-        @XmlElement val ScenarioConfiguration: ScenarioConfiguration,
+        @XmlElement val Conditions: Conditions?,    // нет в полной
+        @XmlElement val ScenarioConfiguration: ScenarioConfiguration?,      // нет в полной
     ) {
         fun toParsed(): AllInOneParsed {
+            require(Conditions != null && NamespaceMapping != null && NoReceiverBehaviour != null)
             val receivers = ReceiverConfigurations.ReceiverConfiguration.map {
                 AllInOneParsed.Receiver(
-                    it.ReceiverId,
-                    it.Receiver.PartyExtractor.TRD_EXTRACTOR.VALUE,
-                    it.Receiver.ServiceExtractor.TRD_EXTRACTOR.VALUE
+                    it.ReceiverId!!,    //TODO - для полного кэша есть пустые
+                    it.Receiver.PartyExtractor.TRD_EXTRACTOR.VALUE, it.Receiver.ServiceExtractor.TRD_EXTRACTOR.VALUE
                 )
             }
             val channels = ReceiverConnectivityList.ReceiverConnectivity.map { c ->
                 AllInOneParsed.Channel(
                     c.ChannelObjectId,
-                    receivers.find { r -> r.party == c.ToPartyName && r.service == c.ToServiceName }!!
+                    receivers.find { r -> r.party == c.ToPartyName && r.service == c.ToServiceName }!!,
                 )
-            }.distinctBy { it.id }
+            }.distinctBy { it.id }  //Если один канал несколько раз
+            val conditions = Conditions.RDS_CONDSHORT.map { rds ->
+                AllInOneParsed.Condition(
+                    rds.CONDITIONID,
+
+                    )
+            }
+            assert(conditions.distinct().size == conditions.size)
             println(receivers)
             println(channels)
-            val parsed = AllInOneParsed(FromPartyName, FromServiceName, ToPartyName, ToServiceName,
-                FromInterfaceName, FromInterfaceNamespace,
+            println(conditions)
+            val parsed = AllInOneParsed(FromPartyName,
+                FromServiceName,
+                ToPartyName,
+                ToServiceName,
+                FromInterfaceName,
+                FromInterfaceNamespace,
                 NamespaceMapping.NSM.definition.associate { Pair(it.prefix, it.uri) },
                 NoReceiverBehaviour.IfNoReceiverFound,
-                receivers.find { it.id == NoReceiverBehaviour.DefaultReceiverId }
-            )
+                receivers.find { it.id == NoReceiverBehaviour.DefaultReceiverId })
             return parsed
         }
     }
@@ -223,6 +274,40 @@ class XICache {
         @XmlElement val ValidationMode: Int,
         @XmlElement val VirusScanMode: Int,
         @XmlElement val AllInOneAttributes: AllInOneAttributes,
+//        @XmlElement val HeaderMapping: HeaderMapping?,
+        @XmlElement val Users: Users?,
+    )
+
+    @Serializable
+    @XmlSerialName("Users", "", "")
+    class Users(
+        @XmlElement val Name: List<String>,
+    )
+
+    @Serializable
+    @XmlSerialName("HeaderMapping", "", "")
+    class HeaderMapping(
+        @XmlElement val FieldMapping: FieldMapping,
+    )
+
+    @Serializable
+    @XmlSerialName("FieldMapping", "", "")
+    class FieldMapping(
+        @XmlElement val Field: List<Field>,
+    )
+
+    @Serializable
+    @XmlSerialName("Field", "", "")
+    class Field(
+        @XmlElement val Name: String,
+        @XmlElement val Extractor: Extractor,
+    )
+
+    @Serializable
+    @XmlSerialName("Extractor", "", "")
+    class Extractor(
+        @XmlElement val ExtractorId: String,
+        @XmlElement @XmlSerialName("ExtractorData", "", "") val ExtractorData: AbstractExtractor,
     )
 
     @Serializable
@@ -261,13 +346,13 @@ class XICache {
     @Serializable
     @XmlSerialName("ReceiverConfigurations", "", "")
     class ReceiverConfigurations(
-        @XmlSerialName("ReceiverConfiguration", "", "")
-        val ReceiverConfiguration: List<ReceiverConfiguration>,
+        @XmlSerialName("ReceiverConfiguration", "", "") val ReceiverConfiguration: List<ReceiverConfiguration>,
     )
 
     @Serializable
     class ReceiverConfiguration(
-        @XmlElement val ReceiverId: String,
+        @XmlElement val ReceiverId: String?,
+        @XmlElement val ReceiverConfigurationObjectId: String?,                 //полный кэш
         @XmlElement val Receiver: Receiver,
         @XmlElement val InterfaceDeterminations: InterfaceDeterminations,
     )
@@ -275,6 +360,7 @@ class XICache {
     @Serializable
     @XmlSerialName("Receiver", "", "")
     class Receiver(
+        @XmlElement @XmlSerialName("ReceiverConditionId", "", "") val ReceiverConditionId: String?, //<empty> для полного кэша, игнорим
         @XmlElement @XmlSerialName("PartyExtractor", "", "") val PartyExtractor: AbstractExtractor,
         @XmlElement @XmlSerialName("PartyAgencyExtractor", "", "") val PartyAgencyExtractor: AbstractExtractor,
         @XmlElement @XmlSerialName("PartySchemaExtractor", "", "") val PartySchemaExtractor: AbstractExtractor,
@@ -293,7 +379,8 @@ class XICache {
         @XmlElement val TYPE: String,
         @XmlElement val VALUE: String,
         @XmlElement val DATATYPE: String,
-        @XmlElement val MULTLINE: String,
+        @XmlElement val MULTILINE: String?,     //у сапа опечатка в выгрузках
+        @XmlElement val MULTLINE: String?,
         @XmlElement val COBJNS: String,
         @XmlElement val COBJNAME: String,
     )
@@ -310,12 +397,37 @@ class XICache {
         @XmlElement val FromXmlRoot: String,
         @XmlElement val FromXmlRootNamespace: String,
         @XmlElement val InterfaceConditionId: String,
-        @XmlElement val Interfaces: Interfaces,
+        @XmlElement val Interfaces: Interfaces?,                //нет в полном
         @XmlElement val IntfMappingName: String,
         @XmlElement val IntfMappingNamespace: String,
         @XmlElement val IntfMappingObjectId: String,
         @XmlElement val IntfMappingSwcvId: String,
         @XmlElement val MappingRequired: Int,
+        @XmlElement val InterfaceDeterminationObjectId: String?,    //в полном кэше
+        @XmlElement val ReceiverConnectivityId: String?,    //в полном кэше
+        @XmlElement val InterfaceName: String?,    //в полном кэше
+        @XmlElement val InterfaceNamespace: String?,    //в полном кэше
+        @XmlElement val SequenceNumber: Int?,    //в полном кэше
+        @XmlElement @XmlSerialName("properties", "", "") val properties: IDProperties?,
+    )
+
+    @Serializable
+    class IDProperties(
+        @XmlElement val property: List<IDProperty>,
+    )
+
+    @Serializable
+    @XmlSerialName("property", "", "")
+    class IDProperty(
+        val id: Int,
+        val guid: String,
+        val name: String,
+        val counter: Int,
+        val type: String,   //xsd:string
+        val valueType: String,
+        val direction: String,
+        val parentguid: String,
+        @XmlValue val value: String,
     )
 
     @Serializable
@@ -378,12 +490,19 @@ class XICache {
         @XmlElement val ValidationMode: Int,
         @XmlElement val VirusScanMode: Int,
         @XmlElement val AllInOneAttributes: AllInOneAttributes,
+        @XmlElement val HeaderMapping: HeaderMappingExt?,
+    )
+
+    @Serializable
+    @XmlSerialName("HeaderMapping", "", "")
+    class HeaderMappingExt(
+        @XmlElement val HeaderMapping: HeaderMapping,
     )
 
     @Serializable
     @XmlSerialName("Conditions", "", "")
     class Conditions(
-        val RDS_CONDSHORT: RDS_CONDSHORT?,
+        val RDS_CONDSHORT: List<RDS_CONDSHORT>,
     )
 
     @Serializable
@@ -397,7 +516,7 @@ class XICache {
     class CONDLINE(
         @XmlElement val COMPGROUP: Int,
         @XmlElement val COUNTER: Int,
-        @XmlElement val COMPOP: String,
+        @XmlElement @XmlSerialName("COMPOP", "", "") val COMPOP: EOp,
         @XmlElement @XmlSerialName("LEXTRACTOR", "", "") val LEXTRACTOR: AbstractExtractor,
         @XmlElement @XmlSerialName("REXTRACTOR", "", "") val REXTRACTOR: AbstractExtractor,
     )
@@ -405,7 +524,20 @@ class XICache {
     @Serializable
     @XmlSerialName("ScenarioConfiguration", "", "")
     class ScenarioConfiguration(
-        @XmlElement val Parameters: String,
+        @XmlElement val Parameters: Parameters,
+    )
+
+    @Serializable
+    @XmlSerialName("Parameters", "", "")
+    class Parameters(
+        @XmlElement val parameter: List<Parameter>,
+    )
+
+    @Serializable
+    @XmlSerialName("Parameter", "", "")
+    class Parameter(
+        @XmlElement val Name: String,   //stage.conf or logger.conf
+        @XmlElement val Value: String,  //BI=3,VI=3,MS=3,AM=1,VO=1  or  BI=3,MS=7,AM=15
     )
 
     @Serializable
@@ -450,12 +582,30 @@ class XICache {
     )
 
     companion object {
-//        private val xml = XML {
-//            defaultPolicy {
-//                //ignoreUnknownChildren()
-//            }
-//        }
+        @OptIn(ExperimentalXmlUtilApi::class)
+        private val parser = XML {
+            defaultPolicy {
+//                pedantic = false
+                autoPolymorphic = false
+//                unknownChildHandler = UnknownChildHandler { xr, kind, descriptor, name, candidates ->
+//                    println(name!!.localPart)
+//                    emptyList()
+//                }
+            }
+        }
 
-        fun decodeFromReader(xr: XmlReader) = XML.decodeFromReader<CacheRefresh>(xr)
+
+        fun decodeCacheRefreshFromString(s: String): CacheRefresh {
+            val regex1 = Regex("xmlns:cp=\"urn:sap-com:xi:.+\"")
+            val regex2 = Regex("<cp:")
+            val regex3 = Regex("</cp:")
+            val s2 = s.replace(regex1, "").replace(regex2, "<").replace(regex3, "</")
+            return parser.decodeFromString<CacheRefresh>(s2)
+        }
+
+        //fun decodeCacheRefreshFromReader(xr: XmlReader) = parser.decodeFromReader<CacheRefresh>(xr)
+        fun decodeChannelAttributesFromReader(xr: XmlReader) = parser.decodeFromReader<ChannelAttributes>(xr)
+        fun decodeChannelFromReader(xr: XmlReader) = parser.decodeFromReader<Channel>(xr)
+
     }
 }
