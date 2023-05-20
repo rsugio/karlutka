@@ -1,0 +1,16 @@
+<scenario>
+	<scenname/>
+	<scenversion/>
+	<sceninst/>
+	<component>
+		<compname>ActivityLogEntry</compname>
+		<property>
+			<propname>Message</propname>
+			<propvalue>Registration of Adapter Framework with SLD was successful</propvalue>
+		</property>
+		<property>
+			<propname>Type</propname>
+			<propvalue>INFO</propvalue>
+		</property>
+	</component>
+</scenario>

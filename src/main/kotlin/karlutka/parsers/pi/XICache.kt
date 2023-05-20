@@ -2,9 +2,13 @@ package karlutka.parsers.pi
 
 import karlutka.models.MPI
 import kotlinx.serialization.Contextual
+import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.modules.SerializersModule
 import nl.adaptivity.xmlutil.ExperimentalXmlUtilApi
+import nl.adaptivity.xmlutil.XmlDelegatingReader
 import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
@@ -112,8 +116,34 @@ class XICache {
         @XmlElement(false) val isTable: Boolean?,
         @XmlElement(false) val isPassword: Boolean?,
         @XmlElement(false) val encryption: String?,
-        @XmlValue(true) val text: String?,
+        @XmlValue val data: List<@Polymorphic Any?>,
+    ) {
+        fun getValue() {
+
+        }
+        companion object {
+            fun module(): SerializersModule {
+                return SerializersModule {
+                    polymorphic(Any::class, String::class, String.serializer())
+                    polymorphic(Any::class, Row::class, Row.serializer())
+                }
+            }
+        }
+    }
+
+    @Serializable
+    @XmlSerialName("Row", "", "")
+    class Row(
+        @XmlElement val field: List<RowField>
     )
+
+    @Serializable
+    @XmlSerialName("Field", "", "")
+    class RowField(
+        @XmlElement val Fieldname: String,
+        @XmlElement val Fieldvalue: String
+    )
+
 
     @Serializable
     @XmlSerialName("PipelineAttributes", "", "") // "urn:sap-com:xi:xiChannel", "cp")
@@ -147,6 +177,7 @@ class XICache {
     @Serializable
     @XmlSerialName("ModuleConfig", "", "") // "urn:sap-com:xi:xiChannel", "cp")
     class ModuleConfig(
+        @XmlElement val ModuleConfigObjectId: String?,
         @XmlElement val ModuleNs: String,
         @XmlElement val ParamName: String,
         @XmlElement val ParamValue: String,
@@ -323,7 +354,7 @@ class XICache {
     )
 
     @Serializable
-    @XmlSerialName("NSM", "http://sap.com/xi/ib/prefix", "nsm")
+    @XmlSerialName("NSM", "", "") //"""http://sap.com/xi/ib/prefix", "nsm")
     class NSM(
         @XmlElement @XmlSerialName("definition", "", "") val definition: List<Definition>,
     )
@@ -583,10 +614,10 @@ class XICache {
 
     companion object {
         @OptIn(ExperimentalXmlUtilApi::class)
-        private val parser = XML {
+        private val parser = XML(Value.module()) {
             defaultPolicy {
 //                pedantic = false
-                autoPolymorphic = false
+                autoPolymorphic = true
 //                unknownChildHandler = UnknownChildHandler { xr, kind, descriptor, name, candidates ->
 //                    println(name!!.localPart)
 //                    emptyList()
@@ -596,6 +627,7 @@ class XICache {
 
 
         fun decodeCacheRefreshFromString(s: String): CacheRefresh {
+            TODO()
             val regex1 = Regex("xmlns:cp=\"urn:sap-com:xi:.+\"")
             val regex2 = Regex("<cp:")
             val regex3 = Regex("</cp:")
@@ -603,7 +635,11 @@ class XICache {
             return parser.decodeFromString<CacheRefresh>(s2)
         }
 
-        //fun decodeCacheRefreshFromReader(xr: XmlReader) = parser.decodeFromReader<CacheRefresh>(xr)
+        private class NamespaceNormalizingReader(reader: XmlReader) : XmlDelegatingReader(reader) {
+            override val namespaceURI: String
+                get() = ""
+        }
+        fun decodeCacheRefreshFromReader(xr: XmlReader) = parser.decodeFromReader<CacheRefresh>(NamespaceNormalizingReader(xr))
         fun decodeChannelAttributesFromReader(xr: XmlReader) = parser.decodeFromReader<ChannelAttributes>(xr)
         fun decodeChannelFromReader(xr: XmlReader) = parser.decodeFromReader<Channel>(xr)
 

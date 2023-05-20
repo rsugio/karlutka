@@ -1,18 +1,21 @@
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
+import karlutka.parsers.pi.XICache
+import kotlinx.serialization.*
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import nl.adaptivity.xmlutil.XmlDeclMode
+import nl.adaptivity.xmlutil.XmlDelegatingReader
+import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
+import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
+import nl.adaptivity.xmlutil.serialization.XmlValue
 import java.util.*
 import kotlin.test.Test
 
@@ -49,7 +52,7 @@ object ColorAsStringSerializer : KSerializer<A> {
 
 @Serializable
 open class VC(
-    val swcGuid: String = "vc"
+    val swcGuid: String = "vc",
 )
 
 @Serializable
@@ -92,5 +95,47 @@ class KBukvar {
             println(UUID.randomUUID()!!)
         }
     }
+
+    // ----------------------------------------------------------------------------------------------------------------------
+    enum class AddresStatus { VALID, INVALID, TEMPORARY }
+
+    @Serializable
+    @XmlSerialName("address")
+    data class Address(
+        val houseNumber: String,
+        val street: String,
+        val city: String,
+        @XmlElement(false) val status: AddresStatus = AddresStatus.VALID,
+    )
+
+    @Serializable
+    data class MixedValueContainer(@XmlValue val data: List<@Polymorphic Any>) {
+        companion object {
+            fun module(): SerializersModule {
+                return SerializersModule {
+                    polymorphic(Any::class, String::class, String.serializer())
+                    polymorphic(Any::class, Address::class, Address.serializer())
+                }
+            }
+        }
+    }
+
+    val expectedXML = "<MixedValueContainer>foo<address " +
+            "houseNumber=\"10\" street=\"Downing Street\" city=\"London\" status=\"VALID\"/>bar</MixedValueContainer>"
+
+    @Test
+    fun mixed2() {
+        val p = XML(XICache.Value.module()) {
+            autoPolymorphic = true
+        }
+        val s = p.decodeFromString<MixedValueContainer>(expectedXML)
+        println(s)
+    }
+
+    class NamespaceNormalizingReader(reader: XmlReader) : XmlDelegatingReader(reader) {
+        override val namespaceURI: String
+            get() = ""
+    }
+
 
 }

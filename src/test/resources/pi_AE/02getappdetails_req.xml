@@ -1,0 +1,17 @@
+<scenario>
+	<scenname/>
+	<scenversion/>
+	<sceninst/>
+	<component>
+		<compname>RegistrationTest</compname>
+		<compversion>1.0</compversion>
+		<property>
+			<propname>action</propname>
+			<propvalue>GetApplicationDetailsFromSLD</propvalue>
+		</property>
+		<property>
+			<propname>language</propname>
+			<propvalue>en</propvalue>
+		</property>
+	</component>
+</scenario>
