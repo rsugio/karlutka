@@ -107,7 +107,18 @@ class XICache {
         @XmlElement val Name: String,
         @XmlElement val Namespace: String,
         @XmlElement val Value: Value,
-    )
+    ) {
+        fun valueAsString(): String {
+            require(Value.isTable == null || Value.isTable == false)
+            require(Value.isPassword == null || Value.isPassword == false)
+            if (Value.data.isEmpty())
+                return ""
+            else if (Value.data.size == 1)
+                return Value.data[0].toString()
+            else
+                throw NotImplementedError()
+        }
+    }
 
     @Serializable
     @XmlSerialName("Value", "", "")
@@ -196,7 +207,8 @@ class XICache {
         val receivers: List<Receiver>,
         val condgroups: List<ConditionGroup>,
         val channelsR: List<ChannelR>,
-        val senderAttr: List<Attribute>
+        val senderCC: String,
+        val senderAttr: List<Attribute>,
     ) {
         data class Receiver(
             val id: String,
@@ -207,7 +219,7 @@ class XICache {
         data class ChannelR(
             val id: String,
             val receiver: Receiver,
-            val attrs: List<Attribute>
+            val attrs: List<Attribute>,
         )
 
         data class ConditionGroup(
@@ -224,19 +236,18 @@ class XICache {
         data class CondLine(
             val counter: Int,
             val xpath: String?,
-            val co: String?,        //context object
+            val cobj: String?,        //context object name, потребует своего xpath и отдельного чтения из ESR
+            val cons: String?,        //context object namespace
             val op: EOp,
             val right: String,
         ) {
             constructor(c: CONDLINE) : this(
                 c.COUNTER,
                 if (c.LEXTRACTOR.TRD_EXTRACTOR.TYPE == "XP") c.LEXTRACTOR.TRD_EXTRACTOR.VALUE else null,
-                if (c.LEXTRACTOR.TRD_EXTRACTOR.TYPE == "CT")
-                    "{${c.LEXTRACTOR.TRD_EXTRACTOR.COBJNS}}${c.LEXTRACTOR.TRD_EXTRACTOR.COBJNAME}"
-                else
-                    null,
+                c.LEXTRACTOR.TRD_EXTRACTOR.COBJNAME,
+                c.LEXTRACTOR.TRD_EXTRACTOR.COBJNS,
                 c.COMPOP,
-                c.REXTRACTOR.TRD_EXTRACTOR.VALUE
+                c.REXTRACTOR.TRD_EXTRACTOR.VALUE //> и < экранируются сами
             )
         }
     }
@@ -277,7 +288,7 @@ class XICache {
                 AllInOneParsed.ChannelR(
                     c.ChannelObjectId,
                     receivers.find { r -> r.party == c.ToPartyName && r.service == c.ToServiceName }!!,
-                    cr.Channel.find{it.ChannelObjectId==c.ChannelObjectId}?.ChannelAttributes?.AdapterTypeData?.Attribute ?: listOf()
+                    cr.Channel.find { it.ChannelObjectId == c.ChannelObjectId }?.ChannelAttributes?.AdapterTypeData?.Attribute ?: listOf()
                 )
             }.distinctBy { it.id }  //Если один канал несколько раз
             val conditions = Conditions.RDS_CONDSHORT.map { rds ->
@@ -293,12 +304,7 @@ class XICache {
                 )
             }
             assert(conditions.distinct().size == conditions.size)
-            val senderAttr = cr.Channel.find { it.ChannelObjectId==SenderConnectivity.ChannelObjectId}!!.ChannelAttributes.AdapterTypeData.Attribute
-//            println(receivers)
-//            println()
-//            channels.forEach { println(it) }
-//            println()
-//            conditions.forEach { println(it) }
+            val sender = cr.Channel.find { it.ChannelObjectId == SenderConnectivity.ChannelObjectId }!!
 
             val parsed = AllInOneParsed(
                 FromPartyName,
@@ -313,7 +319,8 @@ class XICache {
                 receivers,
                 conditions,
                 channels,
-                senderAttr
+                sender.ChannelName,
+                sender.ChannelAttributes.AdapterTypeData.Attribute
             )
             return parsed
         }

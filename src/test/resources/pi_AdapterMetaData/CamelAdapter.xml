@@ -4,51 +4,22 @@
 	<GuiHandlerClassName/>
 	<Inbound>
 		<TransportProtocol>
-			<Name>timer</Name>
+			<Name>transport</Name>
 			<Version>4.0.0-M3</Version>
 			<GuiLabels>
-				<Label language="EN">from("timer:name[?options]")</Label>
+				<Label language="EN">from("protocol:xyz[?options]")</Label>
 			</GuiLabels>
 			<ChannelAttributes/>
 			<ValidMessageProtocols>
 				<ProtocolIdentifier>
-					<Name>Binary</Name>
+					<Name>binary</Name>
 					<Version>1.0</Version>
 				</ProtocolIdentifier>
 			</ValidMessageProtocols>
 		</TransportProtocol>
 
-		<TransportProtocol>
-			<Name>file</Name>
-			<Version>4.0.0-M3</Version>
-			<GuiLabels>
-				<Label language="EN">from("file:directoryName[?options]")</Label>
-			</GuiLabels>
-			<ChannelAttributes/>
-			<ValidMessageProtocols>
-				<ProtocolIdentifier>
-					<Name>Binary</Name>
-					<Version>1.0</Version>
-				</ProtocolIdentifier>
-			</ValidMessageProtocols>
-		</TransportProtocol>
-
-		<TransportProtocol>
-			<Name>direct</Name>
-			<Version>4.0.0-M3</Version>
-			<GuiLabels>
-				<Label language="EN">from("direct:someName[?options]")</Label>
-			</GuiLabels>
-			<ChannelAttributes/>
-			<ValidMessageProtocols>
-				<ProtocolIdentifier>
-					<Name>Binary</Name>
-					<Version>1.0</Version>
-				</ProtocolIdentifier>
-			</ValidMessageProtocols>
-		</TransportProtocol>
 		<MessageProtocol>
-			<Name>Binary</Name>
+			<Name>binary</Name>
 			<Version>1.0</Version>
 			<GuiLabels>
 				<Label language="EN">Binary</Label>
@@ -72,11 +43,14 @@
 				<AttributeReference>
 					<ReferenceName namespace="camel">routeId</ReferenceName>
 				</AttributeReference>
+				<AttributeReference>
+					<ReferenceName namespace="camel">exchangePattern</ReferenceName>
+				</AttributeReference>
 			</AttributeGroup>
 			<AttributeGroup>
 				<Name>camelprocessor</Name>
 				<GuiLabels>
-					<Label language="EN">Processor</Label>
+					<Label language="EN">Post-processors</Label>
 				</GuiLabels>
 				<AttributeReference>
 					<ReferenceName namespace="camel">processor</ReferenceName>
@@ -102,36 +76,22 @@
 	</Inbound>
 	<Outbound>
 		<TransportProtocol>
-			<Name>file</Name>
+			<Name>transport</Name>
 			<Version>4.0.0-M3</Version>
 			<GuiLabels>
-				<Label language="EN">to("file:directoryName[?options]")</Label>
+				<Label language="EN">to("protocol:xyzName[?options]")</Label>
 			</GuiLabels>
 			<ChannelAttributes/>
 			<SecurityAttributes/>
 			<ValidMessageProtocols>
 				<ProtocolIdentifier>
-					<Name>Binary</Name>
-					<Version>1.0</Version>
-				</ProtocolIdentifier>
-			</ValidMessageProtocols>
-		</TransportProtocol>
-		<TransportProtocol>
-			<Name>direct</Name>
-			<Version>4.0.0-M3</Version>
-			<GuiLabels>
-				<Label language="EN">to("direct:someName[?options]")</Label>
-			</GuiLabels>
-			<ChannelAttributes/>
-			<ValidMessageProtocols>
-				<ProtocolIdentifier>
-					<Name>Binary</Name>
+					<Name>binary</Name>
 					<Version>1.0</Version>
 				</ProtocolIdentifier>
 			</ValidMessageProtocols>
 		</TransportProtocol>
 		<MessageProtocol>
-			<Name>Binary</Name>
+			<Name>binary</Name>
 			<Version>1.0</Version>
 			<GuiLabels>
 				<Label language="EN">Binary</Label>
@@ -143,7 +103,7 @@
 			<AttributeGroup>
 				<Name>camelprocessor</Name>
 				<GuiLabels>
-					<Label language="EN">Processor</Label>
+					<Label language="EN">Pre-processors</Label>
 				</GuiLabels>
 				<AttributeReference>
 					<ReferenceName namespace="camel">processor</ReferenceName>
@@ -207,6 +167,33 @@
 		</GuiLabels>
 	</Attribute>
 	<Attribute>
+		<Name namespace="camel">exchangePattern</Name>
+		<Usage>optional</Usage>
+		<DataType>xsd:string</DataType>
+		<Length>20</Length>
+		<GuiLabels>
+			<Label language="EN">ExchangePattern</Label>
+		</GuiLabels>
+		<FixedValue>
+			<value></value>
+			<GuiLabels>
+				<Label language="EN"></Label>
+			</GuiLabels>
+		</FixedValue>
+		<FixedValue>
+			<value>InOnly</value>
+			<GuiLabels>
+				<Label language="EN">InOnly</Label>
+			</GuiLabels>
+		</FixedValue>
+		<FixedValue>
+			<value>InOut</value>
+			<GuiLabels>
+				<Label language="EN">InOut</Label>
+			</GuiLabels>
+		</FixedValue>
+	</Attribute>
+	<Attribute>
 		<Name namespace="camel">processor</Name>
 		<Usage>optional</Usage>
 		<DataType>xsd:string</DataType>
@@ -224,6 +211,7 @@
 			<Label language="EN">Processor2</Label>
 		</GuiLabels>
 	</Attribute>
+	<!-- TODO additional namespace mapping table on Consumer. Подумать. -->
 
 	<!-- Documentation -->
 	<Attribute>

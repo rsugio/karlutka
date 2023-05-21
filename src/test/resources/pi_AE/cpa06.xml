@@ -2,16 +2,16 @@
 <CacheRefresh>
 	<DELETED_OBJECTS>
 		<SAPXI_OBJECT_KEY>
-			<OBJECT_ID>9f54154d9f0539a091339f1d203ce556</OBJECT_ID>
+			<OBJECT_ID>ad2125142a373f20b6a78fd93cc948bd</OBJECT_ID>
 			<OBJECT_TYPE>Channel</OBJECT_TYPE>
 		</SAPXI_OBJECT_KEY>
 		<SAPXI_OBJECT_KEY>
-			<OBJECT_ID>e964dcee782b3b35ab8f1867f8ebf76c</OBJECT_ID>
-			<OBJECT_TYPE>Channel</OBJECT_TYPE>
+			<OBJECT_ID>b3f63c2ddb603ff68b9e9c8605799c41</OBJECT_ID>
+			<OBJECT_TYPE>Service</OBJECT_TYPE>
 		</SAPXI_OBJECT_KEY>
 		<SAPXI_OBJECT_KEY>
-			<OBJECT_ID>b82d4c10ca13351c9f6eda52999900b6</OBJECT_ID>
-			<OBJECT_TYPE>Channel</OBJECT_TYPE>
+			<OBJECT_ID>4e6f2c971f24e466ed4c9381f85e7f8e</OBJECT_ID>
+			<OBJECT_TYPE>AdapterMetaData</OBJECT_TYPE>
 		</SAPXI_OBJECT_KEY>
 		<SAPXI_OBJECT_KEY>
 			<OBJECT_ID>e555b0436c03370cbb33dee30c1185b6</OBJECT_ID>
@@ -21,137 +21,283 @@
 			<OBJECT_ID>54c42ea4b7fa30df9936d41a24b6c8eb</OBJECT_ID>
 			<OBJECT_TYPE>Channel</OBJECT_TYPE>
 		</SAPXI_OBJECT_KEY>
+		<SAPXI_OBJECT_KEY>
+			<OBJECT_ID>114200ab9f20325abc502281f0f0ba57</OBJECT_ID>
+			<OBJECT_TYPE>Service</OBJECT_TYPE>
+		</SAPXI_OBJECT_KEY>
+		<SAPXI_OBJECT_KEY>
+			<OBJECT_ID>8ac2d8a156453c05bef317865de7e0d2</OBJECT_ID>
+			<OBJECT_TYPE>Channel</OBJECT_TYPE>
+		</SAPXI_OBJECT_KEY>
+		<SAPXI_OBJECT_KEY>
+			<OBJECT_ID>ee25326f7c283eabab1dbd9a8cd95c88</OBJECT_ID>
+			<OBJECT_TYPE>Service</OBJECT_TYPE>
+		</SAPXI_OBJECT_KEY>
+		<SAPXI_OBJECT_KEY>
+			<OBJECT_ID>d6d4199bb6ab3db581466a8ef6d5ff62</OBJECT_ID>
+			<OBJECT_TYPE>Channel</OBJECT_TYPE>
+		</SAPXI_OBJECT_KEY>
+		<SAPXI_OBJECT_KEY>
+			<OBJECT_ID>249602eea8183371bacf684294384d9a</OBJECT_ID>
+			<OBJECT_TYPE>AllInOne</OBJECT_TYPE>
+		</SAPXI_OBJECT_KEY>
+		<SAPXI_OBJECT_KEY>
+			<OBJECT_ID>e719f09b369a36c6a05b3dda3bafd930</OBJECT_ID>
+			<OBJECT_TYPE>Channel</OBJECT_TYPE>
+		</SAPXI_OBJECT_KEY>
 	</DELETED_OBJECTS>
-	<cp:Channel xmlns:cp="urn:sap-com:xi:xiChannel">
-		<cp:PartyName/>
-		<cp:ServiceName>BC_TEST5</cp:ServiceName>
-		<cp:ChannelName>rcv5</cp:ChannelName>
-		<cp:ChannelObjectId>54c42ea4b7fa30df9936d41a24b6c8eb</cp:ChannelObjectId>
+	<cp:AdapterMetaData xmlns:cp="urn:sap-com:xi:xiAdapterMetaData">
+		<cp:AdapterMetaDataObjectId>4e6f2c971f24e466ed4c9381f85e7f8e</cp:AdapterMetaDataObjectId>
 		<cp:AdapterName>CamelAdapter</cp:AdapterName>
 		<cp:AdapterNamespace>urn:rsug-ru:adapters</cp:AdapterNamespace>
 		<cp:AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</cp:AdapterSWCV>
-		<cp:EngineType>AE</cp:EngineType>
-		<cp:EngineName>af.fa0.fake0db</cp:EngineName>
-		<cp:ChannelDirection>O</cp:ChannelDirection>
-		<cp:MessageProtocol>Binary</cp:MessageProtocol>
-		<cp:MessageProtocolVersion>1.0</cp:MessageProtocolVersion>
-		<cp:TransportProtocol>file</cp:TransportProtocol>
-		<cp:TransportProtocolVersion>4.0.0-M3</cp:TransportProtocolVersion>
-		<cp:FromPartyAgency/>
-		<cp:FromPartySchema/>
-		<cp:ToPartyAgency/>
-		<cp:ToPartySchema/>
-		<cp:ChannelAttributes>
-			<AdapterTypeData>
-				<Attribute xmlns="">
-					<Name>cmdbUrl</Name>
-					<Namespace>general</Namespace>
-					<Value>http://cmdb/catalog-is/CF-######</Value>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>connection</Name>
-					<Namespace>camel</Namespace>
-					<Value>file:/camel</Value>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>connection2</Name>
-					<Namespace>camel</Namespace>
-					<Value/>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>docuUrl</Name>
-					<Namespace>general</Namespace>
-					<Value>https://confluence/pages/viewpage.action?pageId=#######</Value>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>processor</Name>
-					<Namespace>camel</Namespace>
-					<Value/>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>processor2</Name>
-					<Namespace>camel</Namespace>
-					<Value/>
-				</Attribute>
-			</AdapterTypeData>
-		</cp:ChannelAttributes>
-		<cp:PipelineAttributes>
-			<cp:PipelineData/>
-			<cp:ModuleData/>
-		</cp:PipelineAttributes>
-	</cp:Channel>
-	<cp:Channel xmlns:cp="urn:sap-com:xi:xiChannel">
-		<cp:PartyName/>
-		<cp:ServiceName>BC_TEST2</cp:ServiceName>
-		<cp:ChannelName>file2</cp:ChannelName>
-		<cp:ChannelObjectId>e964dcee782b3b35ab8f1867f8ebf76c</cp:ChannelObjectId>
-		<cp:AdapterName>CamelAdapter</cp:AdapterName>
-		<cp:AdapterNamespace>urn:rsug-ru:adapters</cp:AdapterNamespace>
-		<cp:AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</cp:AdapterSWCV>
-		<cp:EngineType>AE</cp:EngineType>
-		<cp:EngineName>af.fa0.fake0db</cp:EngineName>
-		<cp:ChannelDirection>O</cp:ChannelDirection>
-		<cp:MessageProtocol>Binary</cp:MessageProtocol>
-		<cp:MessageProtocolVersion>1.0</cp:MessageProtocolVersion>
-		<cp:TransportProtocol>file</cp:TransportProtocol>
-		<cp:TransportProtocolVersion>4.0.0-M3</cp:TransportProtocolVersion>
-		<cp:FromPartyAgency/>
-		<cp:FromPartySchema/>
-		<cp:ToPartyAgency/>
-		<cp:ToPartySchema/>
-		<cp:ChannelAttributes>
-			<AdapterTypeData>
-				<Attribute xmlns="">
-					<Name>cmdbUrl</Name>
-					<Namespace>general</Namespace>
-					<Value>http://cmdb/catalog-is/CF-######</Value>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>connection</Name>
-					<Namespace>camel</Namespace>
-					<Value>file:/camel</Value>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>connection2</Name>
-					<Namespace>camel</Namespace>
-					<Value/>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>docuUrl</Name>
-					<Namespace>general</Namespace>
-					<Value>https://confluence/pages/viewpage.action?pageId=#######</Value>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>processor</Name>
-					<Namespace>camel</Namespace>
-					<Value/>
-				</Attribute>
-				<Attribute xmlns="">
-					<Name>processor2</Name>
-					<Namespace>camel</Namespace>
-					<Value/>
-				</Attribute>
-			</AdapterTypeData>
-		</cp:ChannelAttributes>
-		<cp:PipelineAttributes>
-			<cp:PipelineData/>
-			<cp:ModuleData/>
-		</cp:PipelineAttributes>
-	</cp:Channel>
+		<cp:SWCVElementTypeId>0</cp:SWCVElementTypeId>
+		<cp:SWCVName>ZFAE</cp:SWCVName>
+		<cp:SWCVVendor>rsug.ru</cp:SWCVVendor>
+		<cp:SWCVVersion>1.0</cp:SWCVVersion>
+		<AdapterTypeMetaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="AdapterMetadata.xsd" version="80" senderAgreementUnique="true">
+			<GuiHandlerClassName/>
+			<Inbound>
+				<TransportProtocol>
+					<Name>transport</Name>
+					<Version>4.0.0-M3</Version>
+					<GuiLabels>
+						<Label language="EN">from(&quot;protocol:xyz[?options]&quot;)</Label>
+					</GuiLabels>
+					<ChannelAttributes/>
+					<ValidMessageProtocols>
+						<ProtocolIdentifier>
+							<Name>binary</Name>
+							<Version>1.0</Version>
+						</ProtocolIdentifier>
+					</ValidMessageProtocols>
+				</TransportProtocol>
+				<MessageProtocol>
+					<Name>binary</Name>
+					<Version>1.0</Version>
+					<GuiLabels>
+						<Label language="EN">Binary</Label>
+					</GuiLabels>
+					<ChannelAttributes/>
+					<SecurityAttributes/>
+				</MessageProtocol>
+				<GlobalChannelAttributes>
+					<AttributeGroup>
+						<Name>camel</Name>
+						<GuiLabels>
+							<Label language="EN">Camel from</Label>
+						</GuiLabels>
+						<AttributeReference>
+							<ReferenceName namespace="camel">connection</ReferenceName>
+						</AttributeReference>
+						<AttributeReference>
+							<ReferenceName namespace="camel">connection2</ReferenceName>
+						</AttributeReference>
+						<AttributeReference>
+							<ReferenceName namespace="camel">routeId</ReferenceName>
+						</AttributeReference>
+						<AttributeReference>
+							<ReferenceName namespace="camel">exchangePattern</ReferenceName>
+						</AttributeReference>
+					</AttributeGroup>
+					<AttributeGroup>
+						<Name>camelprocessor</Name>
+						<GuiLabels>
+							<Label language="EN">Post-processors</Label>
+						</GuiLabels>
+						<AttributeReference>
+							<ReferenceName namespace="camel">processor</ReferenceName>
+						</AttributeReference>
+						<AttributeReference>
+							<ReferenceName namespace="camel">processor2</ReferenceName>
+						</AttributeReference>
+					</AttributeGroup>
+					<AttributeGroup>
+						<Name>information</Name>
+						<GuiLabels>
+							<Label language="EN">Information</Label>
+						</GuiLabels>
+						<AttributeReference>
+							<ReferenceName namespace="general">cmdbUrl</ReferenceName>
+						</AttributeReference>
+						<AttributeReference>
+							<ReferenceName namespace="general">docuUrl</ReferenceName>
+						</AttributeReference>
+					</AttributeGroup>
+				</GlobalChannelAttributes>
+			</Inbound>
+			<Outbound>
+				<TransportProtocol>
+					<Name>transport</Name>
+					<Version>4.0.0-M3</Version>
+					<GuiLabels>
+						<Label language="EN">to(&quot;protocol:xyzName[?options]&quot;)</Label>
+					</GuiLabels>
+					<ChannelAttributes/>
+					<SecurityAttributes/>
+					<ValidMessageProtocols>
+						<ProtocolIdentifier>
+							<Name>binary</Name>
+							<Version>1.0</Version>
+						</ProtocolIdentifier>
+					</ValidMessageProtocols>
+				</TransportProtocol>
+				<MessageProtocol>
+					<Name>binary</Name>
+					<Version>1.0</Version>
+					<GuiLabels>
+						<Label language="EN">Binary</Label>
+					</GuiLabels>
+					<ChannelAttributes/>
+					<SecurityAttributes/>
+				</MessageProtocol>
+				<GlobalChannelAttributes>
+					<AttributeGroup>
+						<Name>camelprocessor</Name>
+						<GuiLabels>
+							<Label language="EN">Pre-processors</Label>
+						</GuiLabels>
+						<AttributeReference>
+							<ReferenceName namespace="camel">processor</ReferenceName>
+						</AttributeReference>
+						<AttributeReference>
+							<ReferenceName namespace="camel">processor2</ReferenceName>
+						</AttributeReference>
+					</AttributeGroup>
+					<AttributeGroup>
+						<Name>camel</Name>
+						<GuiLabels>
+							<Label language="EN">Camel</Label>
+						</GuiLabels>
+						<AttributeReference>
+							<ReferenceName namespace="camel">connection</ReferenceName>
+						</AttributeReference>
+						<AttributeReference>
+							<ReferenceName namespace="camel">connection2</ReferenceName>
+						</AttributeReference>
+					</AttributeGroup>
+					<AttributeGroup>
+						<Name>information</Name>
+						<GuiLabels>
+							<Label language="EN">Information</Label>
+						</GuiLabels>
+						<AttributeReference>
+							<ReferenceName namespace="general">cmdbUrl</ReferenceName>
+						</AttributeReference>
+						<AttributeReference>
+							<ReferenceName namespace="general">docuUrl</ReferenceName>
+						</AttributeReference>
+					</AttributeGroup>
+				</GlobalChannelAttributes>
+			</Outbound>
+			<Attribute>
+				<Name namespace="camel">connection</Name>
+				<Usage>required</Usage>
+				<DataType>xsd:string</DataType>
+				<Length>132</Length>
+				<GuiLabels>
+					<Label language="EN">Connection</Label>
+				</GuiLabels>
+			</Attribute>
+			<Attribute>
+				<Name namespace="camel">connection2</Name>
+				<Usage>optional</Usage>
+				<DataType>xsd:string</DataType>
+				<Length>132</Length>
+				<GuiLabels>
+					<Label language="EN">Connection2</Label>
+				</GuiLabels>
+			</Attribute>
+			<Attribute>
+				<Name namespace="camel">routeId</Name>
+				<Usage>required</Usage>
+				<DataType>xsd:string</DataType>
+				<Length>30</Length>
+				<GuiLabels>
+					<Label language="EN">RouteId</Label>
+				</GuiLabels>
+			</Attribute>
+			<Attribute>
+				<Name namespace="camel">exchangePattern</Name>
+				<Usage>optional</Usage>
+				<DataType>xsd:string</DataType>
+				<Length>20</Length>
+				<GuiLabels>
+					<Label language="EN">ExchangePattern</Label>
+				</GuiLabels>
+				<FixedValue>
+					<value/>
+					<GuiLabels>
+						<Label language="EN"/>
+					</GuiLabels>
+				</FixedValue>
+				<FixedValue>
+					<value>InOnly</value>
+					<GuiLabels>
+						<Label language="EN">InOnly</Label>
+					</GuiLabels>
+				</FixedValue>
+				<FixedValue>
+					<value>InOut</value>
+					<GuiLabels>
+						<Label language="EN">InOut</Label>
+					</GuiLabels>
+				</FixedValue>
+			</Attribute>
+			<Attribute>
+				<Name namespace="camel">processor</Name>
+				<Usage>optional</Usage>
+				<DataType>xsd:string</DataType>
+				<Length>255</Length>
+				<GuiLabels>
+					<Label language="EN">Processor</Label>
+				</GuiLabels>
+			</Attribute>
+			<Attribute>
+				<Name namespace="camel">processor2</Name>
+				<Usage>optional</Usage>
+				<DataType>xsd:string</DataType>
+				<Length>255</Length>
+				<GuiLabels>
+					<Label language="EN">Processor2</Label>
+				</GuiLabels>
+			</Attribute>
+			<Attribute>
+				<Name namespace="general">cmdbUrl</Name>
+				<Usage>optional</Usage>
+				<DataType>xsd:string</DataType>
+				<Length>128</Length>
+				<Default>http://cmdb/catalog-is/CF-######</Default>
+				<GuiLabels>
+					<Label language="EN">CMDB url</Label>
+				</GuiLabels>
+			</Attribute>
+			<Attribute>
+				<Name namespace="general">docuUrl</Name>
+				<Usage>optional</Usage>
+				<DataType>xsd:string</DataType>
+				<Length>128</Length>
+				<Default>https://confluence/pages/viewpage.action?pageId=#######</Default>
+				<GuiLabels>
+					<Label language="EN">Documentation url</Label>
+				</GuiLabels>
+			</Attribute>
+		</AdapterTypeMetaData>
+	</cp:AdapterMetaData>
 	<cp:Channel xmlns:cp="urn:sap-com:xi:xiChannel">
 		<cp:PartyName/>
 		<cp:ServiceName>BC_TEST1</cp:ServiceName>
-		<cp:ChannelName>fake</cp:ChannelName>
-		<cp:ChannelObjectId>b82d4c10ca13351c9f6eda52999900b6</cp:ChannelObjectId>
+		<cp:ChannelName>test1sender</cp:ChannelName>
+		<cp:ChannelObjectId>ad2125142a373f20b6a78fd93cc948bd</cp:ChannelObjectId>
 		<cp:AdapterName>CamelAdapter</cp:AdapterName>
 		<cp:AdapterNamespace>urn:rsug-ru:adapters</cp:AdapterNamespace>
 		<cp:AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</cp:AdapterSWCV>
 		<cp:EngineType>AE</cp:EngineType>
 		<cp:EngineName>af.fa0.fake0db</cp:EngineName>
 		<cp:ChannelDirection>I</cp:ChannelDirection>
-		<cp:MessageProtocol>Binary</cp:MessageProtocol>
+		<cp:MessageProtocol>binary</cp:MessageProtocol>
 		<cp:MessageProtocolVersion>1.0</cp:MessageProtocolVersion>
-		<cp:TransportProtocol>timer</cp:TransportProtocol>
+		<cp:TransportProtocol>transport</cp:TransportProtocol>
 		<cp:TransportProtocolVersion>4.0.0-M3</cp:TransportProtocolVersion>
 		<cp:FromPartyAgency>016</cp:FromPartyAgency>
 		<cp:FromPartySchema>DUNS</cp:FromPartySchema>
@@ -167,7 +313,7 @@
 				<Attribute xmlns="">
 					<Name>connection</Name>
 					<Namespace>camel</Namespace>
-					<Value>timer:tick?period=1s</Value>
+					<Value>file:/camel?delete=false&amp;recursive=false&amp;exchangePattern=InOnly</Value>
 				</Attribute>
 				<Attribute xmlns="">
 					<Name>connection2</Name>
@@ -180,19 +326,82 @@
 					<Value>http://confluence/тратата</Value>
 				</Attribute>
 				<Attribute xmlns="">
+					<Name>exchangePattern</Name>
+					<Namespace>camel</Namespace>
+					<Value>InOnly</Value>
+				</Attribute>
+				<Attribute xmlns="">
 					<Name>processor</Name>
 					<Namespace>camel</Namespace>
-					<Value>&lt;setBody&gt;&lt;simple&gt;Ну что, получил?!&lt;/simple&gt;&lt;/setBody&gt;</Value>
+					<Value/>
 				</Attribute>
 				<Attribute xmlns="">
 					<Name>processor2</Name>
 					<Namespace>camel</Namespace>
-					<Value>&lt;log message=&quot;&quot;/&gt;</Value>
+					<Value>&lt;log message=&quot;test1sender отработал&quot;/&gt;</Value>
 				</Attribute>
 				<Attribute xmlns="">
 					<Name>routeId</Name>
 					<Namespace>camel</Namespace>
-					<Value>1</Value>
+					<Value>test1sender</Value>
+				</Attribute>
+			</AdapterTypeData>
+		</cp:ChannelAttributes>
+		<cp:PipelineAttributes>
+			<cp:PipelineData/>
+			<cp:ModuleData/>
+		</cp:PipelineAttributes>
+	</cp:Channel>
+	<cp:Channel xmlns:cp="urn:sap-com:xi:xiChannel">
+		<cp:PartyName/>
+		<cp:ServiceName>BC_TEST5</cp:ServiceName>
+		<cp:ChannelName>rcv5</cp:ChannelName>
+		<cp:ChannelObjectId>54c42ea4b7fa30df9936d41a24b6c8eb</cp:ChannelObjectId>
+		<cp:AdapterName>CamelAdapter</cp:AdapterName>
+		<cp:AdapterNamespace>urn:rsug-ru:adapters</cp:AdapterNamespace>
+		<cp:AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</cp:AdapterSWCV>
+		<cp:EngineType>AE</cp:EngineType>
+		<cp:EngineName>af.fa0.fake0db</cp:EngineName>
+		<cp:ChannelDirection>O</cp:ChannelDirection>
+		<cp:MessageProtocol>binary</cp:MessageProtocol>
+		<cp:MessageProtocolVersion>1.0</cp:MessageProtocolVersion>
+		<cp:TransportProtocol>transport</cp:TransportProtocol>
+		<cp:TransportProtocolVersion>4.0.0-M3</cp:TransportProtocolVersion>
+		<cp:FromPartyAgency/>
+		<cp:FromPartySchema/>
+		<cp:ToPartyAgency/>
+		<cp:ToPartySchema/>
+		<cp:ChannelAttributes>
+			<AdapterTypeData>
+				<Attribute xmlns="">
+					<Name>cmdbUrl</Name>
+					<Namespace>general</Namespace>
+					<Value>http://cmdb/catalog-is/CF-######</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>connection</Name>
+					<Namespace>camel</Namespace>
+					<Value>file:/camel</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>connection2</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>docuUrl</Name>
+					<Namespace>general</Namespace>
+					<Value>https://confluence/pages/viewpage.action?pageId=#######</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>processor</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>processor2</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
 				</Attribute>
 			</AdapterTypeData>
 		</cp:ChannelAttributes>
@@ -204,17 +413,17 @@
 	<cp:Channel xmlns:cp="urn:sap-com:xi:xiChannel">
 		<cp:PartyName/>
 		<cp:ServiceName>BC_TEST1</cp:ServiceName>
-		<cp:ChannelName>test2</cp:ChannelName>
-		<cp:ChannelObjectId>9f54154d9f0539a091339f1d203ce556</cp:ChannelObjectId>
+		<cp:ChannelName>test1receiver</cp:ChannelName>
+		<cp:ChannelObjectId>e719f09b369a36c6a05b3dda3bafd930</cp:ChannelObjectId>
 		<cp:AdapterName>CamelAdapter</cp:AdapterName>
 		<cp:AdapterNamespace>urn:rsug-ru:adapters</cp:AdapterNamespace>
 		<cp:AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</cp:AdapterSWCV>
 		<cp:EngineType>AE</cp:EngineType>
 		<cp:EngineName>af.fa0.fake0db</cp:EngineName>
 		<cp:ChannelDirection>O</cp:ChannelDirection>
-		<cp:MessageProtocol>Binary</cp:MessageProtocol>
+		<cp:MessageProtocol>binary</cp:MessageProtocol>
 		<cp:MessageProtocolVersion>1.0</cp:MessageProtocolVersion>
-		<cp:TransportProtocol>file</cp:TransportProtocol>
+		<cp:TransportProtocol>transport</cp:TransportProtocol>
 		<cp:TransportProtocolVersion>4.0.0-M3</cp:TransportProtocolVersion>
 		<cp:FromPartyAgency/>
 		<cp:FromPartySchema/>
@@ -259,6 +468,132 @@
 			<cp:ModuleData/>
 		</cp:PipelineAttributes>
 	</cp:Channel>
+	<cp:Channel xmlns:cp="urn:sap-com:xi:xiChannel">
+		<cp:PartyName/>
+		<cp:ServiceName>BC_TEST2</cp:ServiceName>
+		<cp:ChannelName>test2sender</cp:ChannelName>
+		<cp:ChannelObjectId>8ac2d8a156453c05bef317865de7e0d2</cp:ChannelObjectId>
+		<cp:AdapterName>CamelAdapter</cp:AdapterName>
+		<cp:AdapterNamespace>urn:rsug-ru:adapters</cp:AdapterNamespace>
+		<cp:AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</cp:AdapterSWCV>
+		<cp:EngineType>AE</cp:EngineType>
+		<cp:EngineName>af.fa0.fake0db</cp:EngineName>
+		<cp:ChannelDirection>I</cp:ChannelDirection>
+		<cp:MessageProtocol>binary</cp:MessageProtocol>
+		<cp:MessageProtocolVersion>1.0</cp:MessageProtocolVersion>
+		<cp:TransportProtocol>transport</cp:TransportProtocol>
+		<cp:TransportProtocolVersion>4.0.0-M3</cp:TransportProtocolVersion>
+		<cp:FromPartyAgency/>
+		<cp:FromPartySchema/>
+		<cp:ToPartyAgency/>
+		<cp:ToPartySchema/>
+		<cp:ChannelAttributes>
+			<AdapterTypeData>
+				<Attribute xmlns="">
+					<Name>cmdbUrl</Name>
+					<Namespace>general</Namespace>
+					<Value>urn:cmdb:123</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>connection</Name>
+					<Namespace>camel</Namespace>
+					<Value>timer:tick?period=1s</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>connection2</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>docuUrl</Name>
+					<Namespace>general</Namespace>
+					<Value>http://confluence/тратата</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>exchangePattern</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>processor</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>processor2</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>routeId</Name>
+					<Namespace>camel</Namespace>
+					<Value>test2sender</Value>
+				</Attribute>
+			</AdapterTypeData>
+		</cp:ChannelAttributes>
+		<cp:PipelineAttributes>
+			<cp:PipelineData/>
+			<cp:ModuleData/>
+		</cp:PipelineAttributes>
+	</cp:Channel>
+	<cp:Channel xmlns:cp="urn:sap-com:xi:xiChannel">
+		<cp:PartyName/>
+		<cp:ServiceName>BC_TEST2</cp:ServiceName>
+		<cp:ChannelName>test2receiver</cp:ChannelName>
+		<cp:ChannelObjectId>d6d4199bb6ab3db581466a8ef6d5ff62</cp:ChannelObjectId>
+		<cp:AdapterName>CamelAdapter</cp:AdapterName>
+		<cp:AdapterNamespace>urn:rsug-ru:adapters</cp:AdapterNamespace>
+		<cp:AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</cp:AdapterSWCV>
+		<cp:EngineType>AE</cp:EngineType>
+		<cp:EngineName>af.fa0.fake0db</cp:EngineName>
+		<cp:ChannelDirection>O</cp:ChannelDirection>
+		<cp:MessageProtocol>binary</cp:MessageProtocol>
+		<cp:MessageProtocolVersion>1.0</cp:MessageProtocolVersion>
+		<cp:TransportProtocol>transport</cp:TransportProtocol>
+		<cp:TransportProtocolVersion>4.0.0-M3</cp:TransportProtocolVersion>
+		<cp:FromPartyAgency/>
+		<cp:FromPartySchema/>
+		<cp:ToPartyAgency/>
+		<cp:ToPartySchema/>
+		<cp:ChannelAttributes>
+			<AdapterTypeData>
+				<Attribute xmlns="">
+					<Name>cmdbUrl</Name>
+					<Namespace>general</Namespace>
+					<Value>http://cmdb/catalog-is/CF-######</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>connection</Name>
+					<Namespace>camel</Namespace>
+					<Value>file:/camel</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>connection2</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>docuUrl</Name>
+					<Namespace>general</Namespace>
+					<Value>https://confluence/pages/viewpage.action?pageId=#######</Value>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>processor</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
+				</Attribute>
+				<Attribute xmlns="">
+					<Name>processor2</Name>
+					<Namespace>camel</Namespace>
+					<Value/>
+				</Attribute>
+			</AdapterTypeData>
+		</cp:ChannelAttributes>
+		<cp:PipelineAttributes>
+			<cp:PipelineData/>
+			<cp:ModuleData/>
+		</cp:PipelineAttributes>
+	</cp:Channel>
 	<AllInOne version="150">
 		<FromPartyName/>
 		<FromServiceName>BC_TEST1</FromServiceName>
@@ -269,7 +604,7 @@
 		<AllInOneObjectId>e555b0436c03370cbb33dee30c1185b6</AllInOneObjectId>
 		<ParentURI>dir://ICO/e555b0436c03370cbb33dee30c1185b6</ParentURI>
 		<SenderConnectivity>
-			<ChannelObjectId>b82d4c10ca13351c9f6eda52999900b6</ChannelObjectId>
+			<ChannelObjectId>ad2125142a373f20b6a78fd93cc948bd</ChannelObjectId>
 			<AdapterName>CamelAdapter</AdapterName>
 			<AdapterNamespace>urn:rsug-ru:adapters</AdapterNamespace>
 			<AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</AdapterSWCV>
@@ -287,6 +622,10 @@
 					</Attribute>
 				</AdapterTypeData>
 			</AllInOneAttributes>
+			<Users>
+				<Name>UNAME1</Name>
+				<Name>UNAME2</Name>
+			</Users>
 		</SenderConnectivity>
 		<NamespaceMapping>
 			<p1:NSM xmlns:p1="http://sap.com/xi/ib/prefix">
@@ -300,7 +639,7 @@
 			<Receiver>
 				<PartyExtractor>
 					<TRD_EXTRACTOR>
-						<EXTRACTORID>66adba23f6d611edc091005056b4c5ba</EXTRACTORID>
+						<EXTRACTORID>95657fcff7e611edad6700059a3c7a00</EXTRACTORID>
 						<TYPE>KO</TYPE>
 						<VALUE/>
 						<DATATYPE>xsd:string</DATATYPE>
@@ -311,7 +650,7 @@
 				</PartyExtractor>
 				<PartyAgencyExtractor>
 					<TRD_EXTRACTOR>
-						<EXTRACTORID>66adba25f6d611ed8708005056b4c5ba</EXTRACTORID>
+						<EXTRACTORID>95657fd1f7e611ed934900059a3c7a00</EXTRACTORID>
 						<TYPE>KO</TYPE>
 						<VALUE>http://sap.com/xi/XI</VALUE>
 						<DATATYPE>xsd:string</DATATYPE>
@@ -322,7 +661,7 @@
 				</PartyAgencyExtractor>
 				<PartySchemaExtractor>
 					<TRD_EXTRACTOR>
-						<EXTRACTORID>66adba26f6d611ed9b57005056b4c5ba</EXTRACTORID>
+						<EXTRACTORID>95657fd2f7e611eda17900059a3c7a00</EXTRACTORID>
 						<TYPE>KO</TYPE>
 						<VALUE>XIParty</VALUE>
 						<DATATYPE>xsd:string</DATATYPE>
@@ -333,7 +672,7 @@
 				</PartySchemaExtractor>
 				<ServiceExtractor>
 					<TRD_EXTRACTOR>
-						<EXTRACTORID>66adba24f6d611edc289005056b4c5ba</EXTRACTORID>
+						<EXTRACTORID>95657fd0f7e611edc4a200059a3c7a00</EXTRACTORID>
 						<TYPE>KO</TYPE>
 						<VALUE>BC_TEST5</VALUE>
 						<DATATYPE>xsd:string</DATATYPE>
@@ -343,15 +682,15 @@
 					</TRD_EXTRACTOR>
 				</ServiceExtractor>
 			</Receiver>
-			<DefaultReceiverId>a912927ff6d611eda19f000000417ca6</DefaultReceiverId>
+			<DefaultReceiverId>ab9149a8f7fb11edbeb3000000417ca6</DefaultReceiverId>
 		</NoReceiverBehaviour>
 		<ReceiverConfigurations>
 			<ReceiverConfiguration>
-				<ReceiverId>a9129280f6d611edc0cf000000417ca6</ReceiverId>
+				<ReceiverId>ab9149a9f7fb11edb5c5000000417ca6</ReceiverId>
 				<Receiver>
 					<PartyExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a90804fbf6d611ed84d8000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c0c26f7fb11ed9974000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE/>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -362,7 +701,7 @@
 					</PartyExtractor>
 					<PartyAgencyExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a90804fdf6d611edc213000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c16fcf7fb11ed9683000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>http://sap.com/xi/XI</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -373,7 +712,7 @@
 					</PartyAgencyExtractor>
 					<PartySchemaExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a90804fef6d611edc914000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c16fdf7fb11ed9ba7000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>XIParty</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -384,7 +723,7 @@
 					</PartySchemaExtractor>
 					<ServiceExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a90804fcf6d611ed8d94000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c0c27f7fb11ed87f6000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>BC_TEST1</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -413,6 +752,11 @@
 						<IntfMappingObjectId>8f18f0a6bb8932eba6f937473f021a58</IntfMappingObjectId>
 						<IntfMappingSwcvId>59f0ebf0f53011edb686c89aac130d0e</IntfMappingSwcvId>
 						<MappingRequired>2</MappingRequired>
+						<properties>
+							<property id="0" guid="42f8ab5bf70b11edcf53000000417ca6" name="extstring" counter="0" type="xsd:string" valueType="" direction="" parentguid="ab7c16fef7fb11edb324000000417ca6">2</property>
+							<property id="0" guid="42f8ab5cf70b11ed91c9000000417ca6" name="inint" counter="0" type="xsd:integer" valueType="" direction="" parentguid="ab7c16fef7fb11edb324000000417ca6">1</property>
+							<property id="0" guid="42f8ab5df70b11ed8975000000417ca6" name="instring" counter="0" type="xsd:string" valueType="" direction="" parentguid="ab7c16fef7fb11edb324000000417ca6">3</property>
+						</properties>
 					</InterfaceDetermination>
 					<InterfaceDetermination>
 						<FromOperation/>
@@ -432,15 +776,20 @@
 						<IntfMappingObjectId>8f18f0a6bb8932eba6f937473f021a58</IntfMappingObjectId>
 						<IntfMappingSwcvId>59f0ebf0f53011edb686c89aac130d0e</IntfMappingSwcvId>
 						<MappingRequired>2</MappingRequired>
+						<properties>
+							<property id="1" guid="42f8ab5ef70b11edac36000000417ca6" name="extstring" counter="0" type="xsd:string" valueType="" direction="" parentguid="ab7c1702f7fb11ed8312000000417ca6">0</property>
+							<property id="1" guid="42f8ab5ff70b11eda807000000417ca6" name="inint" counter="0" type="xsd:integer" valueType="" direction="" parentguid="ab7c1702f7fb11ed8312000000417ca6">0</property>
+							<property id="1" guid="42f8ab60f70b11edbb67000000417ca6" name="instring" counter="0" type="xsd:string" valueType="" direction="" parentguid="ab7c1702f7fb11ed8312000000417ca6">0</property>
+						</properties>
 					</InterfaceDetermination>
 				</InterfaceDeterminations>
 			</ReceiverConfiguration>
 			<ReceiverConfiguration>
-				<ReceiverId>a912afb9f6d611edb096000000417ca6</ReceiverId>
+				<ReceiverId>ab91bf31f7fb11edafef000000417ca6</ReceiverId>
 				<Receiver>
 					<PartyExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a90804fff6d611edbb62000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c170af7fb11eda513000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE/>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -451,7 +800,7 @@
 					</PartyExtractor>
 					<PartyAgencyExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a9080501f6d611ed9989000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c170cf7fb11edb67b000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>http://sap.com/xi/XI</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -462,7 +811,7 @@
 					</PartyAgencyExtractor>
 					<PartySchemaExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a9080502f6d611ed95fd000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c170df7fb11edb5e3000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>XIParty</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -473,7 +822,7 @@
 					</PartySchemaExtractor>
 					<ServiceExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a9080500f6d611edb95f000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c170bf7fb11ed9702000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>BC_TEST2</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -506,11 +855,11 @@
 				</InterfaceDeterminations>
 			</ReceiverConfiguration>
 			<ReceiverConfiguration>
-				<ReceiverId>a912927ff6d611eda19f000000417ca6</ReceiverId>
+				<ReceiverId>ab9149a8f7fb11edbeb3000000417ca6</ReceiverId>
 				<Receiver>
 					<PartyExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a9080503f6d611ed93bc000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c171af7fb11edb97b000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE/>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -521,7 +870,7 @@
 					</PartyExtractor>
 					<PartyAgencyExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a9080505f6d611eda1d9000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c171cf7fb11ed97b0000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>http://sap.com/xi/XI</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -532,7 +881,7 @@
 					</PartyAgencyExtractor>
 					<PartySchemaExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a9080506f6d611edb867000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c171df7fb11edbad5000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>XIParty</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -543,7 +892,7 @@
 					</PartySchemaExtractor>
 					<ServiceExtractor>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>a9080504f6d611ed87b9000000417ca6</EXTRACTORID>
+							<EXTRACTORID>ab7c171bf7fb11eda0c5000000417ca6</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>BC_TEST5</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -572,6 +921,11 @@
 						<IntfMappingObjectId>8f18f0a6bb8932eba6f937473f021a58</IntfMappingObjectId>
 						<IntfMappingSwcvId>59f0ebf0f53011edb686c89aac130d0e</IntfMappingSwcvId>
 						<MappingRequired>2</MappingRequired>
+						<properties>
+							<property id="3" guid="42f8ab61f70b11ed9297000000417ca6" name="extstring" counter="0" type="xsd:string" valueType="" direction="" parentguid="ab7c1726f7fb11ed80f6000000417ca6">a</property>
+							<property id="3" guid="42f8ab62f70b11ed9f2b000000417ca6" name="inint" counter="0" type="xsd:integer" valueType="" direction="" parentguid="ab7c1726f7fb11ed80f6000000417ca6">1</property>
+							<property id="3" guid="42f8ab63f70b11edcbe3000000417ca6" name="instring" counter="0" type="xsd:string" valueType="" direction="" parentguid="ab7c1726f7fb11ed80f6000000417ca6">a</property>
+						</properties>
 					</InterfaceDetermination>
 					<InterfaceDetermination>
 						<FromOperation/>
@@ -597,15 +951,22 @@
 		</ReceiverConfigurations>
 		<ReceiverAssignmentList mode="standard">
 			<ReceiverAssignment>
-				<ReceiverConditionId>4b8bbd2bf4c311eda68c005056b4c5ba</ReceiverConditionId>
+				<ReceiverConditionId>2aaeea0af7d511edce6100059a3c7a00</ReceiverConditionId>
 				<ReceiverIds>
-					<ReceiverId>a9129280f6d611edc0cf000000417ca6</ReceiverId>
+					<ReceiverId>ab9149a9f7fb11edb5c5000000417ca6</ReceiverId>
 				</ReceiverIds>
 			</ReceiverAssignment>
 			<ReceiverAssignment>
-				<ReceiverConditionId>c7e05eeaf6ba11ed8e15005056b4c5ba</ReceiverConditionId>
+				<ReceiverConditionId>3f0a48def7d511ed9e9600059a3c7a00</ReceiverConditionId>
 				<ReceiverIds>
-					<ReceiverId>a912afb9f6d611edb096000000417ca6</ReceiverId>
+					<ReceiverId>ab91bf31f7fb11edafef000000417ca6</ReceiverId>
+				</ReceiverIds>
+			</ReceiverAssignment>
+			<ReceiverAssignment>
+				<ReceiverConditionId>6cfb24b2f7e611edb4b000059a3c7a00</ReceiverConditionId>
+				<ReceiverIds>
+					<ReceiverId>ab91bf31f7fb11edafef000000417ca6</ReceiverId>
+					<ReceiverId>ab9149a8f7fb11edbeb3000000417ca6</ReceiverId>
 				</ReceiverIds>
 			</ReceiverAssignment>
 		</ReceiverAssignmentList>
@@ -619,7 +980,7 @@
 				<ToInterfaceNamespace>urn:dummy-namespace</ToInterfaceNamespace>
 				<InterfaceVersion/>
 				<ReceiverConnectivityId>19b6370284880c37aa0a508788ca2b7a</ReceiverConnectivityId>
-				<ChannelObjectId>e964dcee782b3b35ab8f1867f8ebf76c</ChannelObjectId>
+				<ChannelObjectId>d6d4199bb6ab3db581466a8ef6d5ff62</ChannelObjectId>
 				<AdapterName>CamelAdapter</AdapterName>
 				<AdapterNamespace>urn:rsug-ru:adapters</AdapterNamespace>
 				<AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</AdapterSWCV>
@@ -636,6 +997,44 @@
 						</Attribute>
 					</AdapterTypeData>
 				</AllInOneAttributes>
+				<HeaderMapping xmlns="">
+					<FieldMapping>
+						<Field>
+							<Name>SenderService</Name>
+							<Extractor>
+								<ExtractorId>7250c81ef7a211ed9af400059a3c7a00</ExtractorId>
+								<ExtractorData>
+									<TRD_EXTRACTOR>
+										<EXTRACTORID>7250c81ef7a211ed9af400059a3c7a00</EXTRACTORID>
+										<TYPE>KO</TYPE>
+										<VALUE>BS_DER_D</VALUE>
+										<DATATYPE>xsd:string</DATATYPE>
+										<MULTLINE/>
+										<COBJNS/>
+										<COBJNAME/>
+									</TRD_EXTRACTOR>
+								</ExtractorData>
+							</Extractor>
+						</Field>
+						<Field>
+							<Name>SenderParty</Name>
+							<Extractor>
+								<ExtractorId>7250c81ff7a211edb35e00059a3c7a00</ExtractorId>
+								<ExtractorData>
+									<TRD_EXTRACTOR>
+										<EXTRACTORID>7250c81ff7a211edb35e00059a3c7a00</EXTRACTORID>
+										<TYPE>KO</TYPE>
+										<VALUE>CS</VALUE>
+										<DATATYPE>xsd:string</DATATYPE>
+										<MULTLINE/>
+										<COBJNS/>
+										<COBJNAME/>
+									</TRD_EXTRACTOR>
+								</ExtractorData>
+							</Extractor>
+						</Field>
+					</FieldMapping>
+				</HeaderMapping>
 			</ReceiverConnectivity>
 			<ReceiverConnectivity>
 				<FromPartyName/>
@@ -653,7 +1052,7 @@
 				<EngineName>af.fa0.fake0db</EngineName>
 				<EngineType>AE</EngineType>
 				<ValidationMode>0</ValidationMode>
-				<VirusScanMode>0</VirusScanMode>
+				<VirusScanMode>2</VirusScanMode>
 				<AllInOneAttributes>
 					<AdapterTypeData>
 						<Attribute xmlns="">
@@ -673,7 +1072,7 @@
 				<ToInterfaceNamespace>urn:dummy-namespace</ToInterfaceNamespace>
 				<InterfaceVersion>00000000000000000000000000000000</InterfaceVersion>
 				<ReceiverConnectivityId>2950f0b4e53a5e4d02878c3580dae902</ReceiverConnectivityId>
-				<ChannelObjectId>9f54154d9f0539a091339f1d203ce556</ChannelObjectId>
+				<ChannelObjectId>e719f09b369a36c6a05b3dda3bafd930</ChannelObjectId>
 				<AdapterName>CamelAdapter</AdapterName>
 				<AdapterNamespace>urn:rsug-ru:adapters</AdapterNamespace>
 				<AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</AdapterSWCV>
@@ -707,7 +1106,7 @@
 				<EngineName>af.fa0.fake0db</EngineName>
 				<EngineType>AE</EngineType>
 				<ValidationMode>0</ValidationMode>
-				<VirusScanMode>0</VirusScanMode>
+				<VirusScanMode>1</VirusScanMode>
 				<AllInOneAttributes>
 					<AdapterTypeData>
 						<Attribute xmlns="">
@@ -721,27 +1120,27 @@
 		</ReceiverConnectivityList>
 		<Conditions>
 			<RDS_CONDSHORT>
-				<CONDITIONID>4b8bbd2bf4c311eda68c005056b4c5ba</CONDITIONID>
+				<CONDITIONID>2aaeea0af7d511edce6100059a3c7a00</CONDITIONID>
 				<CONDLINE>
 					<COMPGROUP>1</COMPGROUP>
 					<COUNTER>1</COUNTER>
-					<COMPOP>EQ</COMPOP>
+					<COMPOP>EX</COMPOP>
 					<LEXTRACTOR>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>60169ce8f4c311eda570005056b4c5ba</EXTRACTORID>
+							<EXTRACTORID>3707b833f7d511edad3900059a3c7a00</EXTRACTORID>
 							<TYPE>XP</TYPE>
-							<VALUE>/s1:a/s2:b</VALUE>
+							<VALUE>/s1:a</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
-							<MULTLINE>X</MULTLINE>
+							<MULTLINE/>
 							<COBJNS/>
 							<COBJNAME/>
 						</TRD_EXTRACTOR>
 					</LEXTRACTOR>
 					<REXTRACTOR>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>6215eaf7f4c311ed91ee005056b4c5ba</EXTRACTORID>
+							<EXTRACTORID>38371a1df7d511edca7600059a3c7a00</EXTRACTORID>
 							<TYPE>KO</TYPE>
-							<VALUE>c</VALUE>
+							<VALUE/>
 							<DATATYPE>xsd:string</DATATYPE>
 							<MULTLINE/>
 							<COBJNS/>
@@ -751,25 +1150,25 @@
 				</CONDLINE>
 			</RDS_CONDSHORT>
 			<RDS_CONDSHORT>
-				<CONDITIONID>c7e05eeaf6ba11ed8e15005056b4c5ba</CONDITIONID>
+				<CONDITIONID>3f0a48def7d511ed9e9600059a3c7a00</CONDITIONID>
 				<CONDLINE>
 					<COMPGROUP>1</COMPGROUP>
 					<COUNTER>1</COUNTER>
-					<COMPOP>NE</COMPOP>
+					<COMPOP>EQ</COMPOP>
 					<LEXTRACTOR>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>d13c10caf6ba11ed9de1005056b4c5ba</EXTRACTORID>
-							<TYPE>CT</TYPE>
-							<VALUE/>
-							<DATATYPE>xsd:string</DATATYPE>
-							<MULTLINE/>
-							<COBJNS>http://sap.com/xi/XI/System/IDoc_AAE</COBJNS>
-							<COBJNAME>CIMTYP</COBJNAME>
+							<EXTRACTORID>47e07239f74811ed96e900059a3c7a00</EXTRACTORID>
+							<TYPE>XP</TYPE>
+							<VALUE>/root</VALUE>
+							<DATATYPE>xsd:date</DATATYPE>
+							<MULTLINE>X</MULTLINE>
+							<COBJNS/>
+							<COBJNAME/>
 						</TRD_EXTRACTOR>
 					</LEXTRACTOR>
 					<REXTRACTOR>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>dae5d050f6ba11edbdd5005056b4c5ba</EXTRACTORID>
+							<EXTRACTORID>4e2a4ceaf74811edc50600059a3c7a00</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>1</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -780,23 +1179,23 @@
 					</REXTRACTOR>
 				</CONDLINE>
 				<CONDLINE>
-					<COMPGROUP>2</COMPGROUP>
-					<COUNTER>1</COUNTER>
-					<COMPOP>CP</COMPOP>
+					<COMPGROUP>1</COMPGROUP>
+					<COUNTER>2</COUNTER>
+					<COMPOP>EQ</COMPOP>
 					<LEXTRACTOR>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>dfac03dff6ba11edb730005056b4c5ba</EXTRACTORID>
-							<TYPE>CT</TYPE>
-							<VALUE/>
+							<EXTRACTORID>5db4707cf74811ed8c6100059a3c7a00</EXTRACTORID>
+							<TYPE>XP</TYPE>
+							<VALUE>/two</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
-							<MULTLINE/>
-							<COBJNS>http://sap.com/xi/XI/System/HTTP_AAE</COBJNS>
-							<COBJNAME>URLParamTwo</COBJNAME>
+							<MULTLINE>X</MULTLINE>
+							<COBJNS/>
+							<COBJNAME/>
 						</TRD_EXTRACTOR>
 					</LEXTRACTOR>
 					<REXTRACTOR>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>e4bef1aaf6ba11edb84a005056b4c5ba</EXTRACTORID>
+							<EXTRACTORID>6123f3b3f74811edc5ed00059a3c7a00</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE>2</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
@@ -807,25 +1206,163 @@
 					</REXTRACTOR>
 				</CONDLINE>
 				<CONDLINE>
-					<COMPGROUP>2</COMPGROUP>
-					<COUNTER>2</COUNTER>
-					<COMPOP>EX</COMPOP>
+					<COMPGROUP>1</COMPGROUP>
+					<COUNTER>3</COUNTER>
+					<COMPOP>EQ</COMPOP>
 					<LEXTRACTOR>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>f4262c70f6ba11edbb37005056b4c5ba</EXTRACTORID>
+							<EXTRACTORID>6524de44f74811eda78100059a3c7a00</EXTRACTORID>
 							<TYPE>XP</TYPE>
-							<VALUE>/c/d</VALUE>
-							<DATATYPE>xsd:integer</DATATYPE>
-							<MULTLINE/>
+							<VALUE>/three</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE>X</MULTLINE>
 							<COBJNS/>
 							<COBJNAME/>
 						</TRD_EXTRACTOR>
 					</LEXTRACTOR>
 					<REXTRACTOR>
 						<TRD_EXTRACTOR>
-							<EXTRACTORID>f7994831f6ba11ed80ea005056b4c5ba</EXTRACTORID>
+							<EXTRACTORID>6678d53bf74811edb9a300059a3c7a00</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>3</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</REXTRACTOR>
+				</CONDLINE>
+				<CONDLINE>
+					<COMPGROUP>2</COMPGROUP>
+					<COUNTER>1</COUNTER>
+					<COMPOP>EQ</COMPOP>
+					<LEXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>6f19f20ef74811edbf5800059a3c7a00</EXTRACTORID>
+							<TYPE>XP</TYPE>
+							<VALUE>/four</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE>X</MULTLINE>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</LEXTRACTOR>
+					<REXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>7e085060f74811edc41f00059a3c7a00</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>4</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</REXTRACTOR>
+				</CONDLINE>
+				<CONDLINE>
+					<COMPGROUP>3</COMPGROUP>
+					<COUNTER>1</COUNTER>
+					<COMPOP>EQ</COMPOP>
+					<LEXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>7ba58ad7f74811edc16a00059a3c7a00</EXTRACTORID>
+							<TYPE>XP</TYPE>
+							<VALUE>/five</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE>X</MULTLINE>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</LEXTRACTOR>
+					<REXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>852a54d7f74811ed96d700059a3c7a00</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>5</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</REXTRACTOR>
+				</CONDLINE>
+				<CONDLINE>
+					<COMPGROUP>3</COMPGROUP>
+					<COUNTER>2</COUNTER>
+					<COMPOP>EX</COMPOP>
+					<LEXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>466ccb02f7d511edb8b400059a3c7a00</EXTRACTORID>
+							<TYPE>XP</TYPE>
+							<VALUE>//six</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE>X</MULTLINE>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</LEXTRACTOR>
+					<REXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>8e9fd2d8f74811ed834400059a3c7a00</EXTRACTORID>
 							<TYPE>KO</TYPE>
 							<VALUE/>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</REXTRACTOR>
+				</CONDLINE>
+			</RDS_CONDSHORT>
+			<RDS_CONDSHORT>
+				<CONDITIONID>6cfb24b2f7e611edb4b000059a3c7a00</CONDITIONID>
+				<CONDLINE>
+					<COMPGROUP>1</COMPGROUP>
+					<COUNTER>1</COUNTER>
+					<COMPOP>EQ</COMPOP>
+					<LEXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>828d11eff7e611ed827700059a3c7a00</EXTRACTORID>
+							<TYPE>XP</TYPE>
+							<VALUE>/s1:a</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE>X</MULTLINE>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</LEXTRACTOR>
+					<REXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>8acf266af7e611edaeb100059a3c7a00</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>&apos;ТестАпострофов&apos;</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</REXTRACTOR>
+				</CONDLINE>
+				<CONDLINE>
+					<COMPGROUP>2</COMPGROUP>
+					<COUNTER>1</COUNTER>
+					<COMPOP>NE</COMPOP>
+					<LEXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>58fe9d3ff7d511ed804200059a3c7a00</EXTRACTORID>
+							<TYPE>XP</TYPE>
+							<VALUE>//s2:b</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE>X</MULTLINE>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</LEXTRACTOR>
+					<REXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>9087e287f7e611eda50500059a3c7a00</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>&quot;ТестКавычек&quot;</VALUE>
 							<DATATYPE>xsd:string</DATATYPE>
 							<MULTLINE/>
 							<COBJNS/>
@@ -866,7 +1403,222 @@
 			</RDS_CONDSHORT>
 		</Conditions>
 		<ScenarioConfiguration>
+			<Parameters>
+				<Parameter>
+					<Name>stage.conf</Name>
+					<Value>BI=3,VI=3,MS=3,AM=1,VO=1</Value>
+				</Parameter>
+				<Parameter>
+					<Name>logger.conf</Name>
+					<Value>BI=3,MS=7,AM=15</Value>
+				</Parameter>
+			</Parameters>
+		</ScenarioConfiguration>
+	</AllInOne>
+	<AllInOne version="150">
+		<FromPartyName/>
+		<FromServiceName>BC_TEST2</FromServiceName>
+		<ToPartyName/>
+		<ToServiceName/>
+		<FromInterfaceName>XiPatternInterface1_Out</FromInterfaceName>
+		<FromInterfaceNamespace>http://sap.com/xi/XI/System/Patterns</FromInterfaceNamespace>
+		<AllInOneObjectId>249602eea8183371bacf684294384d9a</AllInOneObjectId>
+		<ParentURI>dir://ICO/249602eea8183371bacf684294384d9a</ParentURI>
+		<SenderConnectivity>
+			<ChannelObjectId>8ac2d8a156453c05bef317865de7e0d2</ChannelObjectId>
+			<AdapterName>CamelAdapter</AdapterName>
+			<AdapterNamespace>urn:rsug-ru:adapters</AdapterNamespace>
+			<AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</AdapterSWCV>
+			<EngineName>af.fa0.fake0db</EngineName>
+			<EngineType>AE</EngineType>
+			<InterfaceVersion>0050568f0aac1ed4a6e56926325e2eb3</InterfaceVersion>
+			<ValidationMode>0</ValidationMode>
+			<VirusScanMode>0</VirusScanMode>
+			<AllInOneAttributes>
+				<AdapterTypeData>
+					<Attribute xmlns="">
+						<Name>sap.xi.gen.if.is_async</Name>
+						<Namespace/>
+						<Value>1</Value>
+					</Attribute>
+				</AdapterTypeData>
+			</AllInOneAttributes>
+		</SenderConnectivity>
+		<NamespaceMapping>
+			<p2:NSM xmlns:p2="http://sap.com/xi/ib/prefix">
+				<definition prefix="p1" uri="http://sap.com/xi/XI/System/Patterns"/>
+			</p2:NSM>
+		</NamespaceMapping>
+		<NoReceiverBehaviour>
+			<IfNoReceiverFound>0</IfNoReceiverFound>
+		</NoReceiverBehaviour>
+		<ReceiverConfigurations>
+			<ReceiverConfiguration>
+				<ReceiverId>aba5c5d4f7fb11edbebe000000417ca6</ReceiverId>
+				<Receiver>
+					<PartyExtractor>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>ab851e4df7fb11ed8a1f000000417ca6</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE/>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</PartyExtractor>
+					<PartyAgencyExtractor>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>ab851e4ff7fb11eda5e2000000417ca6</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>http://sap.com/xi/XI</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</PartyAgencyExtractor>
+					<PartySchemaExtractor>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>ab851e50f7fb11ed8148000000417ca6</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>XIParty</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</PartySchemaExtractor>
+					<ServiceExtractor>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>ab851e4ef7fb11edb7fa000000417ca6</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>BC_TEST5</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</ServiceExtractor>
+				</Receiver>
+				<InterfaceDeterminations>
+					<InterfaceDetermination>
+						<FromOperation/>
+						<FromXmlRoot/>
+						<FromXmlRootNamespace/>
+						<InterfaceConditionId/>
+						<Interfaces>
+							<Interface>
+								<InterfaceName>XiPatternInterface2_In</InterfaceName>
+								<InterfaceNamespace>http://sap.com/xi/XI/System/Patterns</InterfaceNamespace>
+								<ReceiverConnectivityId>814f790e6d89d03f8452797bd4eb0561</ReceiverConnectivityId>
+								<SequenceNumber>0</SequenceNumber>
+							</Interface>
+						</Interfaces>
+						<IntfMappingName>XiPatternInterface1_OutToInterface2_In</IntfMappingName>
+						<IntfMappingNamespace>http://sap.com/xi/XI/System/Patterns</IntfMappingNamespace>
+						<IntfMappingObjectId>27b1e7af36c03c9189f6cb63d9f251e7</IntfMappingObjectId>
+						<IntfMappingSwcvId>0050568f0aac1ed4a6e56926325e2eb3</IntfMappingSwcvId>
+						<MappingRequired>2</MappingRequired>
+					</InterfaceDetermination>
+				</InterfaceDeterminations>
+			</ReceiverConfiguration>
+		</ReceiverConfigurations>
+		<ReceiverAssignmentList mode="standard">
+			<ReceiverAssignment>
+				<ReceiverConditionId>3027b099f7fb11ed859800059a3c7a00</ReceiverConditionId>
+				<ReceiverIds>
+					<ReceiverId>aba5c5d4f7fb11edbebe000000417ca6</ReceiverId>
+				</ReceiverIds>
+			</ReceiverAssignment>
+		</ReceiverAssignmentList>
+		<ReceiverConnectivityList>
+			<ReceiverConnectivity>
+				<FromPartyName/>
+				<FromServiceName>BC_TEST2</FromServiceName>
+				<ToPartyName/>
+				<ToServiceName>BC_TEST5</ToServiceName>
+				<ToInterfaceName>XiPatternInterface2_In</ToInterfaceName>
+				<ToInterfaceNamespace>http://sap.com/xi/XI/System/Patterns</ToInterfaceNamespace>
+				<InterfaceVersion>0050568f0aac1ed4a6e56926325e2eb3</InterfaceVersion>
+				<ReceiverConnectivityId>814f790e6d89d03f8452797bd4eb0561</ReceiverConnectivityId>
+				<ChannelObjectId>54c42ea4b7fa30df9936d41a24b6c8eb</ChannelObjectId>
+				<AdapterName>CamelAdapter</AdapterName>
+				<AdapterNamespace>urn:rsug-ru:adapters</AdapterNamespace>
+				<AdapterSWCV>59f0ebf0f53011edb686c89aac130d0e</AdapterSWCV>
+				<EngineName>af.fa0.fake0db</EngineName>
+				<EngineType>AE</EngineType>
+				<ValidationMode>0</ValidationMode>
+				<VirusScanMode>0</VirusScanMode>
+				<AllInOneAttributes>
+					<AdapterTypeData>
+						<Attribute xmlns="">
+							<Name>sap.xi.gen.if.is_async</Name>
+							<Namespace/>
+							<Value>1</Value>
+						</Attribute>
+					</AdapterTypeData>
+				</AllInOneAttributes>
+			</ReceiverConnectivity>
+		</ReceiverConnectivityList>
+		<Conditions>
+			<RDS_CONDSHORT>
+				<CONDITIONID>3027b099f7fb11ed859800059a3c7a00</CONDITIONID>
+				<CONDLINE>
+					<COMPGROUP>1</COMPGROUP>
+					<COUNTER>1</COUNTER>
+					<COMPOP>EQ</COMPOP>
+					<LEXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>3913dd97f7fb11edaebe00059a3c7a00</EXTRACTORID>
+							<TYPE>XP</TYPE>
+							<VALUE>/p1:XiPatternMessage1/Person/Id</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE>X</MULTLINE>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</LEXTRACTOR>
+					<REXTRACTOR>
+						<TRD_EXTRACTOR>
+							<EXTRACTORID>4357694cf7fb11edc5ca00059a3c7a00</EXTRACTORID>
+							<TYPE>KO</TYPE>
+							<VALUE>&apos;Ы001234&gt;&lt;</VALUE>
+							<DATATYPE>xsd:string</DATATYPE>
+							<MULTLINE/>
+							<COBJNS/>
+							<COBJNAME/>
+						</TRD_EXTRACTOR>
+					</REXTRACTOR>
+				</CONDLINE>
+			</RDS_CONDSHORT>
+		</Conditions>
+		<ScenarioConfiguration>
 			<Parameters/>
 		</ScenarioConfiguration>
 	</AllInOne>
+	<cp:Service xmlns:cp="urn:sap-com:xi:xiService">
+		<cp:PartyName/>
+		<cp:ServiceName>BC_TEST5</cp:ServiceName>
+		<cp:ServiceObjectId>b3f63c2ddb603ff68b9e9c8605799c41</cp:ServiceObjectId>
+		<cp:ServiceType>SR</cp:ServiceType>
+		<cp:IsThirdParty>true</cp:IsThirdParty>
+		<cp:isNWBPMProcess>false</cp:isNWBPMProcess>
+	</cp:Service>
+	<cp:Service xmlns:cp="urn:sap-com:xi:xiService">
+		<cp:PartyName/>
+		<cp:ServiceName>BC_TEST2</cp:ServiceName>
+		<cp:ServiceObjectId>114200ab9f20325abc502281f0f0ba57</cp:ServiceObjectId>
+		<cp:ServiceType>SR</cp:ServiceType>
+		<cp:IsThirdParty>true</cp:IsThirdParty>
+		<cp:isNWBPMProcess>true</cp:isNWBPMProcess>
+	</cp:Service>
+	<cp:Service xmlns:cp="urn:sap-com:xi:xiService">
+		<cp:PartyName/>
+		<cp:ServiceName>BC_TEST1</cp:ServiceName>
+		<cp:ServiceObjectId>ee25326f7c283eabab1dbd9a8cd95c88</cp:ServiceObjectId>
+		<cp:ServiceType>SR</cp:ServiceType>
+		<cp:IsThirdParty>false</cp:IsThirdParty>
+		<cp:isNWBPMProcess>true</cp:isNWBPMProcess>
+	</cp:Service>
 </CacheRefresh>

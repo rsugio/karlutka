@@ -1,6 +1,4 @@
 import org.apache.camel.CamelContext;
-import org.apache.camel.ProducerTemplate;
-import org.apache.camel.RoutesBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader;
 import org.apache.camel.impl.DefaultCamelContext;
@@ -42,13 +40,27 @@ public class JCamel {
     }
 
     public static void main(String[] args) throws Exception {
-        String xmlDsl = "<routes>" +
-                "<route id=\"0#грабитьКорованы\"><from uri=\"timer:thief?period=10s\"/><log message=\"------- Граблю -------\"/></route>" +
-                "<route id=\"1#охранятьКорованы\"><from uri=\"timer:guard?period=2345ms\"/><log message=\"------- Охраняю -------\"/></route>" +
-                "</routes>";
+        String xmlDsl = """
+                <route xmlns:s2="urn:s2" xmlns:s1="urn:s1" id="1">
+                  <from uri="file:/camel?delete=false"/>
+                  <description>ICo: |BC_TEST1|{urn:dummy-namespace}dummy_interface||, CC: test1sender</description>
+                  <log message="Файл взят"/>
+                  <setProperty name="icord0">
+                    <xpath resultType="BOOLEAN">boolean(/s1:a)</xpath>
+                  </setProperty>
+                  <setProperty name="icord1">
+                    <xpath resultType="BOOLEAN">/root='1' and /two='2' and /three='3' or /four='4' or /five='5' and boolean(/six)</xpath>
+                  </setProperty>
+                  <setProperty name="icord2">
+                    <xpath resultType="BOOLEAN">false or false and boolean(/c/d)</xpath>
+                  </setProperty>
+                  <log message="RD0=${exchangeProperty.icord0}"/>
+                  <log message="RD1=${exchangeProperty.icord1}"/>
+                  <log message="RD2=${exchangeProperty.icord2}"/>
+                </route>""";
         CamelContext camelContext = new DefaultCamelContext(true);
         Resource resource = ResourceHelper.fromString("memory.xml", xmlDsl);
-        RouteBuilder builder = (RouteBuilder)(new XmlRoutesBuilderLoader().loadRoutesBuilder(resource));
+        RouteBuilder builder = (RouteBuilder) (new XmlRoutesBuilderLoader().loadRoutesBuilder(resource));
         camelContext.addRoutes(builder);
         builder.configure();
         camelContext.start();

@@ -1,8 +1,8 @@
 package karlutka.models
 
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
-import nl.adaptivity.xmlutil.XmlWriter
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
@@ -18,14 +18,32 @@ sealed class MCamelDSL {
         val children: MutableList<MCamelDSL> = mutableListOf(),
     ) : MCamelDSL() {
         fun add(c: MCamelDSL) = children.add(c)
+        fun add(s: String) {
+            if (s.isNotBlank()) {
+                val x = xml.decodeFromString<MCamelDSL>(s)
+                children.add(x)
+            }
+        }
 
-        fun encodeToString() = xml.encodeToString(this)
+        fun encodeToString(namespaces: Map<String, String> = mapOf()): String {
+            val s = xml.encodeToString<Route>(this)
+            return if (namespaces.isNotEmpty()) {
+                //TODO делаем пока текстовый хак, правим потом на DelegatingXmlWriter
+                val r = "<route "
+                require(s.startsWith(r))
+                val r2 = namespaces.map { (k, v) -> "xmlns:${k}=\"$v\"" }.joinToString(" ")
+                s.replaceFirst(r, "$r$r2 ")
+            } else {
+                s
+            }
+        }
     }
 
     @Serializable
     @XmlSerialName("description", "", "")
     class Description(
-        @XmlValue val s: String): MCamelDSL()
+        @XmlValue val s: String,
+    ) : MCamelDSL()
 
 
     @Serializable
@@ -39,6 +57,10 @@ sealed class MCamelDSL {
     class To(
         val uri: String,
     ) : MCamelDSL()
+
+    @Serializable
+    @XmlSerialName("stop", "", "")
+    class Stop() : MCamelDSL()
 
     @Serializable
     @XmlSerialName("log", "", "")
@@ -67,12 +89,41 @@ sealed class MCamelDSL {
         @Serializable
         @XmlSerialName("xpath", "", "")
         class XPath(
+            val resultType: String,
+            @XmlValue val value: String,
+        ) : Predicate()
+
+        @Serializable
+        @XmlSerialName("simple", "", "")
+        class Simple(
             @XmlValue val value: String,
         ) : Predicate()
     }
 
+    @Serializable
+    @XmlSerialName("setBody", "", "")
+    class SetBody(
+        val predicate: Predicate,
+    ) : MCamelDSL()
+
+    @Serializable
+    @XmlSerialName("setProperty", "", "")
+    class SetProperty(
+        val name: String,
+        val predicate: Predicate,
+    ) : MCamelDSL()
+
 
     companion object {
-        val xml = XML { autoPolymorphic = true }
+        val xml = XML {
+            autoPolymorphic = true
+            indent = 2
+            isCollectingNSAttributes = true
+            repairNamespaces = true
+        }
+
+        fun decodeFromString(s: String): MCamelDSL {
+            return xml.decodeFromString<MCamelDSL>(s)
+        }
     }
 }
