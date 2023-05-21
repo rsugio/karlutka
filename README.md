@@ -1,20 +1,5 @@
-# karlutka
+Описание: https://github.com/rsugio/karlutka/wiki
 
-Кто знает зачем, тот использует.
-
-## Сборка текущей версии 0.2.1alpha
-
-gradle-7.5, openjdk-17.0.2, kotlin-1.7.10, ktor-2.1, xmlutil-0.84.2
-
-## Запуск и использование
-
-Установить influxdb (для локального обычно висит на `http://localhost:8086`).
-
-Выложить локально `sapjco3.jar` и `libsapjco3.so` для линукса,
-`sapjco3.dll` для windows.
-
-Запуск:
-```c:\java17\bin\java -ea -Xms64m -Xmx512m -classpath sapjco3.jar;karlutka-0.2.0-all.jar MainKt karla.yaml passwd.yaml```
 
 ### Конфигурирование karla.yaml (соединения и свойства программы)
 
@@ -83,11 +68,9 @@ securityMaterials:
 ```
 
 ## История
-
+* 2023-05-21 v0.2.2 - фокус с отдельных парсеров и генераторов и клиентов API на FAE/FESR
 * 2022-08-17 v0.2.0 - выложено на гитхаб.
   https://github.com/rsugio/karlutka/releases/tag/v0.2.0
-
 Недоработки: пароли в открытом виде, кейстор надо создавать снаружи.
 Тестирование: на windows и linux.
-
 * 2021г - писалось много парсеров, бессистемно и без UI
