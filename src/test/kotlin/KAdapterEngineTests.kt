@@ -16,11 +16,6 @@ class KAdapterEngineTests {
     }
 
     @Test
-    fun value() {
-
-    }
-
-    @Test
     fun cpa() {
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/cpa01.xml"))
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/cpa02.xml"))
@@ -32,21 +27,28 @@ class KAdapterEngineTests {
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdate_AMD.xml"))
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdate_ICo.xml"))
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdate_Channel.xml"))
-        XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdateFull.xml"))
+        XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdateFull.xml.sensitive"))
     }
 
     @Test
     fun parseIco() {
-        val cpa = XICache.decodeCacheRefreshFromString(s("/pi_AE/cpa06.xml"))
-        cpa.AllInOne.filter { it.SenderConnectivity.AdapterName != "1CamelAdapter" }.forEach { ico ->
-            val parsed = ico.toParsed()
-            println(parsed)
+        val cpa = XICache.decodeCacheRefreshFromReader(x("/pi_AE/cpa07.xml"))
+        cpa.AllInOne.forEach { ico ->
+            val ico = ico.toParsed(cpa)
+            println(ico.senderAttr)
+            println(ico.receivers)
+            println()
+            ico.channelsR.forEach { println(it) }
+            println()
+            ico.condgroups.forEach { println(it) }
+            //val r = MCamelDSL.Route("0#корованы", MCamelDSL.From("timer:thief?period=10s"))
         }
     }
 
     @Test
     fun compose() {
         val r = MCamelDSL.Route("0#корованы", MCamelDSL.From("timer:thief?period=10s"))
+        r.add(MCamelDSL.Description("умнО работать это хорошо"))
         r.add(MCamelDSL.Log("------- Граблю корованы -------"))
         val w1 = MCamelDSL.When(MCamelDSL.Predicate.XPath("/person/city = 'Москва'"))
         w1.add(MCamelDSL.Log("Москва"))

@@ -5,7 +5,6 @@ import kotlinx.serialization.Contextual
 import kotlinx.serialization.Polymorphic
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.modules.SerializersModule
 import nl.adaptivity.xmlutil.ExperimentalXmlUtilApi
 import nl.adaptivity.xmlutil.XmlDelegatingReader
@@ -121,6 +120,7 @@ class XICache {
         fun getValue() {
 
         }
+
         companion object {
             fun module(): SerializersModule {
                 return SerializersModule {
@@ -134,14 +134,14 @@ class XICache {
     @Serializable
     @XmlSerialName("Row", "", "")
     class Row(
-        @XmlElement val field: List<RowField>
+        @XmlElement val field: List<RowField>,
     )
 
     @Serializable
     @XmlSerialName("Field", "", "")
     class RowField(
         @XmlElement val Fieldname: String,
-        @XmlElement val Fieldvalue: String
+        @XmlElement val Fieldvalue: String,
     )
 
 
@@ -193,6 +193,10 @@ class XICache {
         val namespaceMapping: Map<String, String> = mapOf(),
         val ifNoReceiverFound: Int = 0,
         val defaultReceiver: Receiver? = null,
+        val receivers: List<Receiver>,
+        val condgroups: List<ConditionGroup>,
+        val channelsR: List<ChannelR>,
+        val senderAttr: List<Attribute>
     ) {
         data class Receiver(
             val id: String,
@@ -200,38 +204,41 @@ class XICache {
             val service: String,
         )
 
-        data class Channel(
+        data class ChannelR(
             val id: String,
             val receiver: Receiver,
+            val attrs: List<Attribute>
         )
 
-        interface LogicalNode {
-            fun evaluate(): Boolean
-        }
-
-        class OrNode(val left: LogicalNode, val right: LogicalNode) : LogicalNode {
-            override fun evaluate(): Boolean = left.evaluate() || right.evaluate()
-        }
-
-        class AndNode(val left: LogicalNode, val right: LogicalNode) : LogicalNode {
-            override fun evaluate(): Boolean = left.evaluate() && right.evaluate()
-        }
-
-        class ValueNode(val value: Boolean) : LogicalNode {
-            override fun evaluate(): Boolean = value
-        }
-
-        data class Condition(
+        data class ConditionGroup(
             val id: String,
-            val groups: List<Any> = listOf(),
+            val receivers: List<Receiver> = listOf(),
+            val condlinegroups: List<CondLineGroup> = listOf(),
         )
 
-        data class Extractor(
-            val xpath: String? = null,
-            val co: String? = null,
-            val op: EOp,
+        data class CondLineGroup(
+            val compgroup: Int,
+            val cond: List<CondLine> = listOf(),
+        )
 
+        data class CondLine(
+            val counter: Int,
+            val xpath: String?,
+            val co: String?,        //context object
+            val op: EOp,
+            val right: String,
+        ) {
+            constructor(c: CONDLINE) : this(
+                c.COUNTER,
+                if (c.LEXTRACTOR.TRD_EXTRACTOR.TYPE == "XP") c.LEXTRACTOR.TRD_EXTRACTOR.VALUE else null,
+                if (c.LEXTRACTOR.TRD_EXTRACTOR.TYPE == "CT")
+                    "{${c.LEXTRACTOR.TRD_EXTRACTOR.COBJNS}}${c.LEXTRACTOR.TRD_EXTRACTOR.COBJNAME}"
+                else
+                    null,
+                c.COMPOP,
+                c.REXTRACTOR.TRD_EXTRACTOR.VALUE
             )
+        }
     }
 
     @Serializable
@@ -255,31 +262,46 @@ class XICache {
         @XmlElement val Conditions: Conditions?,    // нет в полной
         @XmlElement val ScenarioConfiguration: ScenarioConfiguration?,      // нет в полной
     ) {
-        fun toParsed(): AllInOneParsed {
-            require(Conditions != null && NamespaceMapping != null && NoReceiverBehaviour != null)
+        fun toParsed(cr: CacheRefresh): AllInOneParsed {
+            requireNotNull(Conditions)
+            requireNotNull(NamespaceMapping)
+            requireNotNull(NoReceiverBehaviour)
             val receivers = ReceiverConfigurations.ReceiverConfiguration.map {
+                requireNotNull(it.ReceiverId)    //TODO - для полного кэша есть пустые
                 AllInOneParsed.Receiver(
-                    it.ReceiverId!!,    //TODO - для полного кэша есть пустые
+                    it.ReceiverId,
                     it.Receiver.PartyExtractor.TRD_EXTRACTOR.VALUE, it.Receiver.ServiceExtractor.TRD_EXTRACTOR.VALUE
                 )
             }
             val channels = ReceiverConnectivityList.ReceiverConnectivity.map { c ->
-                AllInOneParsed.Channel(
+                AllInOneParsed.ChannelR(
                     c.ChannelObjectId,
                     receivers.find { r -> r.party == c.ToPartyName && r.service == c.ToServiceName }!!,
+                    cr.Channel.find{it.ChannelObjectId==c.ChannelObjectId}?.ChannelAttributes?.AdapterTypeData?.Attribute ?: listOf()
                 )
             }.distinctBy { it.id }  //Если один канал несколько раз
             val conditions = Conditions.RDS_CONDSHORT.map { rds ->
-                AllInOneParsed.Condition(
+                val ra = ReceiverAssignmentList!!.ReceiverAssignment.find { it.ReceiverConditionId == rds.CONDITIONID }?.ReceiverIds?.ReceiverId
+                    ?: listOf()
+                val gr = rds.CONDLINE.groupBy { it.COMPGROUP }.map { (COMPGROUP, lines) ->
+                    AllInOneParsed.CondLineGroup(COMPGROUP, lines.map { AllInOneParsed.CondLine(it) })
+                }
+                AllInOneParsed.ConditionGroup(
                     rds.CONDITIONID,
-
-                    )
+                    ra.map { r -> receivers.find { it.id == r }!! },
+                    gr
+                )
             }
             assert(conditions.distinct().size == conditions.size)
-            println(receivers)
-            println(channels)
-            println(conditions)
-            val parsed = AllInOneParsed(FromPartyName,
+            val senderAttr = cr.Channel.find { it.ChannelObjectId==SenderConnectivity.ChannelObjectId}!!.ChannelAttributes.AdapterTypeData.Attribute
+//            println(receivers)
+//            println()
+//            channels.forEach { println(it) }
+//            println()
+//            conditions.forEach { println(it) }
+
+            val parsed = AllInOneParsed(
+                FromPartyName,
                 FromServiceName,
                 ToPartyName,
                 ToServiceName,
@@ -287,10 +309,16 @@ class XICache {
                 FromInterfaceNamespace,
                 NamespaceMapping.NSM.definition.associate { Pair(it.prefix, it.uri) },
                 NoReceiverBehaviour.IfNoReceiverFound,
-                receivers.find { it.id == NoReceiverBehaviour.DefaultReceiverId })
+                receivers.find { it.id == NoReceiverBehaviour.DefaultReceiverId },
+                receivers,
+                conditions,
+                channels,
+                senderAttr
+            )
             return parsed
         }
     }
+
 
     @Serializable
     @XmlSerialName("SenderConnectivity", "", "")
@@ -305,7 +333,7 @@ class XICache {
         @XmlElement val ValidationMode: Int,
         @XmlElement val VirusScanMode: Int,
         @XmlElement val AllInOneAttributes: AllInOneAttributes,
-//        @XmlElement val HeaderMapping: HeaderMapping?,
+        //@XmlElement val HeaderMapping: HeaderMapping?,
         @XmlElement val Users: Users?,
     )
 
@@ -492,8 +520,8 @@ class XICache {
     @Serializable
     @XmlSerialName("ReceiverIds", "", "")
     class ReceiverIds(
-        //@XmlElement @XmlSerialName("ReceiverId", "", "") val ReceiverId: List<String>,
-        @XmlElement val ReceiverId: String,
+        @XmlElement @XmlSerialName("ReceiverId", "", "") val ReceiverId: List<String>,
+        //@XmlElement val ReceiverId: List<String>,
     )
 
     @Serializable
@@ -521,13 +549,14 @@ class XICache {
         @XmlElement val ValidationMode: Int,
         @XmlElement val VirusScanMode: Int,
         @XmlElement val AllInOneAttributes: AllInOneAttributes,
-        @XmlElement val HeaderMapping: HeaderMappingExt?,
+        @XmlElement val HeaderMapping: HeaderMappingExt?,                  // тут путаница для полного и неполного кэша
     )
 
     @Serializable
     @XmlSerialName("HeaderMapping", "", "")
     class HeaderMappingExt(
-        @XmlElement val HeaderMapping: HeaderMapping,
+        @XmlElement val HeaderMapping: HeaderMapping?,
+        @XmlElement val FieldMapping: FieldMapping?,        //костыль для работы обоих кэшей
     )
 
     @Serializable
@@ -619,29 +648,16 @@ class XICache {
 //                pedantic = false
                 autoPolymorphic = true
 //                unknownChildHandler = UnknownChildHandler { xr, kind, descriptor, name, candidates ->
-//                    println(name!!.localPart)
 //                    emptyList()
 //                }
             }
-        }
-
-
-        fun decodeCacheRefreshFromString(s: String): CacheRefresh {
-            TODO()
-            val regex1 = Regex("xmlns:cp=\"urn:sap-com:xi:.+\"")
-            val regex2 = Regex("<cp:")
-            val regex3 = Regex("</cp:")
-            val s2 = s.replace(regex1, "").replace(regex2, "<").replace(regex3, "</")
-            return parser.decodeFromString<CacheRefresh>(s2)
         }
 
         private class NamespaceNormalizingReader(reader: XmlReader) : XmlDelegatingReader(reader) {
             override val namespaceURI: String
                 get() = ""
         }
-        fun decodeCacheRefreshFromReader(xr: XmlReader) = parser.decodeFromReader<CacheRefresh>(NamespaceNormalizingReader(xr))
-        fun decodeChannelAttributesFromReader(xr: XmlReader) = parser.decodeFromReader<ChannelAttributes>(xr)
-        fun decodeChannelFromReader(xr: XmlReader) = parser.decodeFromReader<Channel>(xr)
 
+        fun decodeCacheRefreshFromReader(xr: XmlReader) = parser.decodeFromReader<CacheRefresh>(NamespaceNormalizingReader(xr))
     }
 }

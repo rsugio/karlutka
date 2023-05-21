@@ -6,3 +6,5 @@
 /.etc
 *.log
 .run
+/src/test/resources/pi_AE/ExportedCacheUpdateFull.xml.sensitive
+*.sensitive

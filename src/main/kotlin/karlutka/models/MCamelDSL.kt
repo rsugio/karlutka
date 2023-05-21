@@ -23,6 +23,12 @@ sealed class MCamelDSL {
     }
 
     @Serializable
+    @XmlSerialName("description", "", "")
+    class Description(
+        @XmlValue val s: String): MCamelDSL()
+
+
+    @Serializable
     @XmlSerialName("from", "", "")
     class From(
         val uri: String,
