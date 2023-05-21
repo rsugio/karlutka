@@ -1,10 +1,13 @@
 import org.apache.camel.CamelContext;
+import org.apache.camel.Endpoint;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader;
 import org.apache.camel.impl.DefaultCamelContext;
+import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.support.ResourceHelper;
 
+import java.net.URI;
 import java.time.Instant;
 
 // для проверки работы ideaj camel plugin
@@ -40,6 +43,20 @@ public class JCamel {
     }
 
     public static void main(String[] args) throws Exception {
+        CamelContext camelContext = new DefaultCamelContext(true);
+
+//        String from = "file:/camel?delete=false&recursive=false&exchangePattern=InOnly";
+//        camelContext.addRoutes(new RouteBuilder() {
+//            @Override
+//            public void configure() throws Exception {
+//                from(from);
+//            }
+//        });
+//        Endpoint e = camelContext.getEndpoint("file:camel");
+//        System.out.println(e);
+//        if (true) return;
+
+
         String xmlDsl = """
                 <route xmlns:s2="urn:s2" xmlns:s1="urn:s1" id="1">
                   <from uri="file:/camel?delete=false"/>
@@ -58,7 +75,7 @@ public class JCamel {
                   <log message="RD1=${exchangeProperty.icord1}"/>
                   <log message="RD2=${exchangeProperty.icord2}"/>
                 </route>""";
-        CamelContext camelContext = new DefaultCamelContext(true);
+
         Resource resource = ResourceHelper.fromString("memory.xml", xmlDsl);
         RouteBuilder builder = (RouteBuilder) (new XmlRoutesBuilderLoader().loadRoutesBuilder(resource));
         camelContext.addRoutes(builder);

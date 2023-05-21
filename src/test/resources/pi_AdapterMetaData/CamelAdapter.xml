@@ -43,9 +43,9 @@
 				<AttributeReference>
 					<ReferenceName namespace="camel">routeId</ReferenceName>
 				</AttributeReference>
-				<AttributeReference>
+				<!--AttributeReference>	Зачем дублировать сущности? Надо брать из ендпоинта!
 					<ReferenceName namespace="camel">exchangePattern</ReferenceName>
-				</AttributeReference>
+				</AttributeReference-->
 			</AttributeGroup>
 			<AttributeGroup>
 				<Name>camelprocessor</Name>
