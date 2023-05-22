@@ -58,23 +58,23 @@ public class JCamel {
 
 
         String xmlDsl = """
-                <route xmlns:s2="urn:s2" xmlns:s1="urn:s1" id="1">
-                  <from uri="file:/camel?delete=false"/>
-                  <description>ICo: |BC_TEST1|{urn:dummy-namespace}dummy_interface||, CC: test1sender</description>
-                  <log message="Файл взят"/>
-                  <setProperty name="icord0">
-                    <xpath resultType="BOOLEAN">boolean(/s1:a)</xpath>
-                  </setProperty>
-                  <setProperty name="icord1">
-                    <xpath resultType="BOOLEAN">/root='1' and /two='2' and /three='3' or /four='4' or /five='5' and boolean(/six)</xpath>
-                  </setProperty>
-                  <setProperty name="icord2">
-                    <xpath resultType="BOOLEAN">false or false and boolean(/c/d)</xpath>
-                  </setProperty>
-                  <log message="RD0=${exchangeProperty.icord0}"/>
-                  <log message="RD1=${exchangeProperty.icord1}"/>
-                  <log message="RD2=${exchangeProperty.icord2}"/>
-                </route>""";
+            <route xmlns:s2="urn:s2" xmlns:s1="urn:s1" id="1">
+              <from uri="file:/camel?delete=false"/>
+              <description>ICo: |BC_TEST1|{urn:dummy-namespace}dummy_interface||, CC: test1sender</description>
+              <log message="Файл взят"/>
+              <setProperty name="icord0">
+                <xpath resultType="BOOLEAN">boolean(/s1:a)</xpath>
+              </setProperty>
+              <setProperty name="icord1">
+                <xpath resultType="BOOLEAN">/root='1' and /two='2' and /three='3' or /four='4' or /five='5' and boolean(/six)</xpath>
+              </setProperty>
+              <setProperty name="icord2">
+                <xpath resultType="BOOLEAN">false or false and boolean(/c/d)</xpath>
+              </setProperty>
+              <log message="RD0=${exchangeProperty.icord0}"/>
+              <log message="RD1=${exchangeProperty.icord1}"/>
+              <log message="RD2=${exchangeProperty.icord2}"/>
+            </route>""";
 
         Resource resource = ResourceHelper.fromString("memory.xml", xmlDsl);
         RouteBuilder builder = (RouteBuilder) (new XmlRoutesBuilderLoader().loadRoutesBuilder(resource));

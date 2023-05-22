@@ -34,33 +34,54 @@ class KAdapterEngineTests {
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdateFull.xml.sensitive"))
     }
 
-//    fun endpoint(uri: String) : Endpoint {
-//        return ""
-//    }
-
-    fun convertIco(ico: XICache.AllInOneParsed): String {
+    /**
+     * Нужно для динамической проверки маршрутов при генерации из икох
+     */
+    fun endpointFrom(fromUrl: String): Endpoint {
         val camelContext: CamelContext = DefaultCamelContext(false)
-        val routeId = ico.senderAttr.find { it.Name == "routeId" && it.Namespace == "camel" }!!.valueAsString()
-        val fromUrl = ico.senderAttr.find { it.Name == "connection" && it.Namespace == "camel" }!!.valueAsString()
-
         camelContext.addRoutes(object : RouteBuilder() {
             @Throws(Exception::class)
             override fun configure() {
                 from(fromUrl)
             }
         })
-        val e = camelContext.getEndpoint("file:/camel")
-        println(e)
+        return camelContext.getEndpoint(fromUrl)
+    }
 
+    /**
+     * Нужно для динамической проверки маршрутов при генерации из икох
+     */
+    fun endpointTo(toUrl: String): Endpoint {
+        val camelContext: CamelContext = DefaultCamelContext(false)
+        camelContext.addRoutes(object : RouteBuilder() {
+            @Throws(Exception::class)
+            override fun configure() {
+                from("file:/tmp")
+                    .to(toUrl)
+            }
+        })
+        return camelContext.getEndpoint(toUrl)
+    }
 
-        val mep = e.exchangePattern
+    fun convertIco(ico: XICache.AllInOneParsed): String {
+        require(ico.receivers.isNotEmpty())
+        val routeId = ico.senderAttr.find { it.Name == "routeId" && it.Namespace == "camel" }!!.valueAsString()
+        val fromUrl = ico.senderAttr.find { it.Name == "connection" && it.Namespace == "camel" }!!.valueAsString()
+        val fromEndpoint = endpointFrom(fromUrl)
+        val mep = fromEndpoint.exchangePattern
         val processor = ico.senderAttr.find { it.Name == "processor" && it.Namespace == "camel" }!!.valueAsString()
         val processor2 = ico.senderAttr.find { it.Name == "processor2" && it.Namespace == "camel" }!!.valueAsString()
         val route = MCamelDSL.Route(routeId, MCamelDSL.From(fromUrl))
-        val descr = "ICo: ${ico.fromParty}|${ico.fromService}|{${ico.fromIfacens}}${ico.fromIface}|${ico.toParty}|${ico.toService}" +
-                ", CC: ${ico.senderCC}\n" +
-                "Endpoint: $e"
-        route.add(MCamelDSL.Description(descr))
+        val log = StringBuilder()   //лог принятия решения
+        log.append(
+            """ICo: ${ico.fromParty}|${ico.fromService}|{${ico.fromIfacens}}${ico.fromIface}|${ico.toParty}|${ico.toService}
+CC: ${ico.senderCC},
+sender exchangePattern: $mep
+[ICO translation]
+"""
+        )
+        val descr = MCamelDSL.Description("")
+        route.add(descr)
 
         route.add(processor)
         route.add(processor2)
@@ -70,11 +91,14 @@ class KAdapterEngineTests {
             val isRD: Boolean,              // условие для RD, иначе для ID, третьего не видел
             val receivers: List<Any>,
         )
-        val tmps = mutableListOf<Tmp>()
+
+        val tmpRDs = mutableListOf<Tmp>()   // развилки по получателям
+        val tmpIDs = mutableListOf<Tmp>()   // развилки по меппингам
 
         ico.condgroups.forEachIndexed { cx, cg ->
             val tmp = Tmp(cg.id, "icord$cx", cg.receivers.isNotEmpty(), cg.receivers)
-            tmps.add(tmp)
+            if (tmp.isRD) tmpRDs.add(tmp)
+            else tmpIDs.add(tmp)
             val ors = cg.condlinegroups.map { line ->
                 val ands = line.cond.map { p ->
                     val apos = p.right.contains('\'')
@@ -114,17 +138,44 @@ class KAdapterEngineTests {
         }
 
         // Собственно превращение RD в маршрут
+        //TODO
+        // 1. учёт если MEP по маршруту меняется
+        // 2. Полное тестовое покрытие
+        // 3. Вставить везде меппинги-копировщики для отладки, правильно ли генерируется
+        if (tmpRDs.isEmpty()) {
+            if (ico.receivers.size == 1) {
+                val recv = ico.channelsR[0]
+                log.append("RD содержит одного безусловного получателя ${recv.receiver.party}|${recv.receiver.service} - делаем простой .to()\n")
+                val toUrl = recv.attrs.find { it.Name == "connection" && it.Namespace == "camel" }!!.valueAsString()
+                val rproc = recv.attrs.find { it.Name == "processor" && it.Namespace == "camel" }!!.valueAsString()
+                val rproc2 = recv.attrs.find { it.Name == "processor2" && it.Namespace == "camel" }!!.valueAsString()
+                route.add(rproc)
+                route.add(rproc2)
+                val rcve = endpointTo(toUrl)
+                route.add(MCamelDSL.To(toUrl))  //CC-recv
+            } else {
+                val recv = ico.receivers
+                log.append("RD содержит несколько безусловных получателей - делаем .recipientList()\n")
+            }
+        } else {
+            log.append("RD содержит получателей - TODO\n")
+            if (ico.receivers.size == 1) {
 
+            } else {
 
+            }
+        }
 
+        descr.s = log.toString()
         return route.encodeToString(ico.namespaceMapping)
     }
 
     @Test
     fun parseIco() {
         val cpa = XICache.decodeCacheRefreshFromReader(x("/pi_AE/cpa06.xml"))
-        cpa.AllInOne.forEach { ix ->
+        cpa.AllInOne.filter{it.FromServiceName=="BC_TEST4"}.forEach { ix ->
             val xml = convertIco(ix.toParsed(cpa))
+            println("------------------------------------------")
             println(xml)
         }
     }

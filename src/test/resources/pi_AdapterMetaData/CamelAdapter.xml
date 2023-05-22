@@ -43,9 +43,6 @@
 				<AttributeReference>
 					<ReferenceName namespace="camel">routeId</ReferenceName>
 				</AttributeReference>
-				<!--AttributeReference>	Зачем дублировать сущности? Надо брать из ендпоинта!
-					<ReferenceName namespace="camel">exchangePattern</ReferenceName>
-				</AttributeReference-->
 			</AttributeGroup>
 			<AttributeGroup>
 				<Name>camelprocessor</Name>
@@ -165,33 +162,6 @@
 		<GuiLabels>
 			<Label language="EN">RouteId</Label>
 		</GuiLabels>
-	</Attribute>
-	<Attribute>
-		<Name namespace="camel">exchangePattern</Name>
-		<Usage>optional</Usage>
-		<DataType>xsd:string</DataType>
-		<Length>20</Length>
-		<GuiLabels>
-			<Label language="EN">ExchangePattern</Label>
-		</GuiLabels>
-		<FixedValue>
-			<value></value>
-			<GuiLabels>
-				<Label language="EN"></Label>
-			</GuiLabels>
-		</FixedValue>
-		<FixedValue>
-			<value>InOnly</value>
-			<GuiLabels>
-				<Label language="EN">InOnly</Label>
-			</GuiLabels>
-		</FixedValue>
-		<FixedValue>
-			<value>InOut</value>
-			<GuiLabels>
-				<Label language="EN">InOut</Label>
-			</GuiLabels>
-		</FixedValue>
 	</Attribute>
 	<Attribute>
 		<Name namespace="camel">processor</Name>

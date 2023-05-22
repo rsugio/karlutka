@@ -42,7 +42,7 @@ sealed class MCamelDSL {
     @Serializable
     @XmlSerialName("description", "", "")
     class Description(
-        @XmlValue val s: String,
+        @XmlValue var s: String,
     ) : MCamelDSL()
 
 
