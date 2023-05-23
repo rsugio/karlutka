@@ -39,7 +39,7 @@ import kotlin.io.path.readBytes
 object Server {
     lateinit var pkfg: Path
     lateinit var ppw: Path
-    lateinit var kfg: Kfg
+    var kfg: Kfg = Kfg()
     lateinit var kfpasswds: KfPasswds
     val targets = mutableMapOf<String, MTarget>()
     val UUIDgenerator = Generators.timeBasedGenerator()
@@ -306,7 +306,7 @@ object Server {
             // ProfileProcessorVi для мониторинга из головы в ноги
             post("/ProfileProcessor/basic") {
                 val b = call.receiveText()
-
+                TODO()
             }
         }
     }

@@ -39,7 +39,6 @@ object DB {
         readObj = conn.prepareStatement("select num,typeid,oid,swcvid,swcvsp,key_ from PUBLIC.ESROBJ")
         insvers = conn.prepareStatement("insert into PUBLIC.ESRVER(srcnum,objnum,vid,text) values(?1,?2,?3,?4)", 1)
         inslink = conn.prepareStatement("insert into PUBLIC.ESRVLINK(vernum,role,kpos,objnum) values(?1,?2,?3,?4)")
-        println("H2 соединён на $url")
 
         //readSwcvList()
 //        println("прочитаны SWCV")

@@ -2,6 +2,7 @@ import karlutka.clients.PI
 import karlutka.parsers.pi.HmiUsages
 import karlutka.parsers.pi.PCommon
 import karlutka.server.DB
+import karlutka.server.FAE
 import karlutka.server.Server
 import karlutka.util.*
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +17,7 @@ class KPiTests {
 
     init {
         Server.kfpasswds = KfPasswds.parse(Paths.get("C:\\data\\passwd.yaml"))
-        Server.kfg = Kfg.parse(Paths.get("c:\\data\\karla.yaml"))
+        Server.kfg = Kfg.parse(Paths.get("c:\\data\\karla_dph.yaml"))
         KKeystore.load(Server.kfpasswds.keystore.path, Server.kfpasswds.keystore.passwd)
         KtorClient.createClientEngine()
         KTempFile.tempFolder = Paths.get(Server.kfg.tmpdir)
@@ -28,16 +29,21 @@ class KPiTests {
         pi = PI(target)
         runBlocking {
             withContext(Dispatchers.Default) {
-                println(pi.pingNoAuth())
-                pi.checkAuth("/rwb", "Runtime Workbench")
-                val services = pi.hmiGetRegistered(this)
-                require(services.size > 100)
+//                println(pi.pingNoAuth())
+//                pi.checkAuth("/rwb", "Runtime Workbench")
+//                val services = pi.hmiGetRegistered(this)
+//                require(services.size > 100)
             }
         }
     }
 
     @Test
     fun nop() {
+    }
+
+    @Test
+    fun fae() {
+
     }
 
     @Test

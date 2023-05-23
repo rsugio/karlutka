@@ -7,6 +7,7 @@ import java.net.Authenticator
 import java.net.PasswordAuthentication
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.Paths
 import java.util.*
 import kotlin.io.path.exists
 import kotlin.io.path.inputStream
@@ -51,16 +52,24 @@ class KT {
 
         // Читает свойства, преобразует в Map и добавляет аутентификатор
         fun propAuth(p: Path): Map<String, Any> {
-            require(Files.isRegularFile(p), {"$p must be a regular file"})
+            require(Files.isRegularFile(p), { "$p must be a regular file" })
             val prop = Properties()
             prop.load(p.inputStream())
-            val m = prop.toMutableMap() as MutableMap<String,Any>
+            val m = prop.toMutableMap() as MutableMap<String, Any>
             m["auth"] = object : Authenticator() {
                 override fun getPasswordAuthentication(): PasswordAuthentication {
                     return PasswordAuthentication(m["login"] as String, (m["passw"] as String).toCharArray())
                 }
             }
             return m
+        }
+
+        fun props(s: String): Map<String, String> {
+            val p = Paths.get(s)
+            require(Files.isRegularFile(p), { "$p must be a regular file" })
+            val prop = Properties()
+            prop.load(p.inputStream())
+            return prop.toMap() as Map<String, String>
         }
     }
 }

@@ -23,32 +23,28 @@ import java.util.*
 
 class PI(
     override val konfig: KfTarget,
+    val retries: Int = 2,
+    val logLevel: LogLevel = LogLevel.INFO
 ) : MTarget {
-
     private val httpHostPort: URL
     private val client: HttpClient
-
     private val hmiClientId: UUID = UUID.randomUUID()!!
-
-    // была идея для прикладной системы знать её HMI но пока незачем    private val hmiServices: MutableList<HmiUsages.HmiService> = mutableListOf()
     private var fromnum: Int // номер из БД
-
-    // список адаптер фреймворков, вида af.sid.hostDb
     val afs = mutableListOf<String>()
-
-    val contextuser = "_"                   // пользователь, использующийся в контекстных запросах
+    private val contextuser = "_"                   // пользователь, использующийся в контекстных запросах
 
     init {
-        require(konfig is KfTarget.PIAF)
+        require(konfig is KfTarget.PIAF); requireNotNull(konfig.basic)
         httpHostPort = URL(konfig.url)
         client = KtorClient.createClient(
-            konfig.url, Server.kfg.httpClientRetryOnServerErrors, LogLevel.valueOf(Server.kfg.httpClientLogLevel)
+            konfig.url, retries, logLevel
         )
         KtorClient.setBasicAuth(client, konfig.basic!!.login, konfig.basic!!.passwd(), true)
         fromnum = DB.getPiClientNumber(konfig.sid) { num ->
             // сюда на добавление нового пиая
         }
     }
+    // была идея для прикладной системы знать её HMI но пока незачем    private val hmiServices: MutableList<HmiUsages.HmiService> = mutableListOf()
 
     suspend fun perfServletListOfComponents(scope: CoroutineScope) = scope.async { KtorClient.taskGet(client, PerfMonitorServlet.uriPerfServlet) }
 

@@ -137,5 +137,10 @@ class KBukvar {
             get() = ""
     }
 
+    @Test
+    fun regex() {
+        val a = "af.fa0.fakedb"
+        println(a.split("\\."))
+    }
 
 }

@@ -33,6 +33,9 @@ import kotlin.io.path.reader
 object KtorClient {
     lateinit var clientEngine: HttpClientEngine
     val clients = mutableListOf<HttpClient>()
+    init {
+        createClientEngine()
+    }
 
     fun createClientEngine(
         threads: Int = 4,

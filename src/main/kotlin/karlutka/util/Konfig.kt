@@ -18,6 +18,7 @@ sealed class KfTarget {
     abstract val sid: String
     abstract val text: String?
     abstract fun loadAuths(auths: List<KfAuth>)
+    abstract fun setAuth(auth: KfAuth)
     abstract fun getKind(): String
 
     @SerialName("ABAP")
@@ -37,6 +38,10 @@ sealed class KfTarget {
             props["jco.client.passwd"] = String(kfa.passwd())
         }
 
+        override fun setAuth(auth: KfAuth) {
+            TODO()
+        }
+
         override fun getKind() = "ABAP"
     }
 
@@ -53,8 +58,11 @@ sealed class KfTarget {
         var basic: KfAuth.Basic? = null //TODO подумать про аутентификацию формой /logon_ui_resources/
 
         override fun loadAuths(auths: List<KfAuth>) {
-            val kfa = auths.find { it.id == auth }
-            require(kfa != null && kfa is KfAuth.Basic)
+            setAuth(auths.find { it.id == auth }!!)
+        }
+
+        override fun setAuth(kfa: KfAuth) {
+            require(kfa is KfAuth.Basic)
             basic = kfa
         }
 
@@ -81,6 +89,10 @@ sealed class KfTarget {
             oauth = kfa
         }
 
+        override fun setAuth(auth: KfAuth) {
+            TODO("Not yet implemented")
+        }
+
         override fun getKind() = "BTPNEO"
     }
 
@@ -103,6 +115,10 @@ sealed class KfTarget {
             val oauth = auths.find { it.id == auth }
             require(oauth != null && oauth is KfAuth.OAuth)
             this.oauth = oauth
+        }
+
+        override fun setAuth(auth: KfAuth) {
+            TODO("Not yet implemented")
         }
 
         override fun getKind() = "BTPCF"
@@ -139,6 +155,10 @@ sealed class KfTarget {
                     error("Unsupported")
                 }
             }
+        }
+
+        override fun setAuth(auth: KfAuth) {
+            TODO("Not yet implemented")
         }
 
         override fun getKind() = "CPINEO"
