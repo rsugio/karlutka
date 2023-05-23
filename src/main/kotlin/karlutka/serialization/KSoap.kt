@@ -15,7 +15,9 @@ import nl.adaptivity.xmlutil.util.CompactFragment
 
 class KSoap {
     @Serializable
-    open class ComposeSOAP(val uri:String = "") {
+    open class ComposeSOAP(
+        @Deprecated("WTF??? разобраться и м.б. удалить из общего кода")
+        val uri: String = "") {
         fun composeSOAP() = xmlserializer.encodeToString(Envelope(null, Envelope.Body(this)))
     }
 
@@ -46,7 +48,7 @@ class KSoap {
     }
 
     companion object {
-        val xmlmodule = SerializersModule {
+        private val xmlmodule = SerializersModule {
             polymorphic(Any::class) {
                 subclass(Fault::class, serializer())
                 subclass(AdapterMessageMonitoringVi.CancelMessages::class, serializer())
@@ -133,6 +135,10 @@ class KSoap {
                 subclass(XiBasis.IntegratedConfigurationReadRequest::class, serializer())
                 subclass(XiBasis.IntegratedConfiguration750ReadResponse::class, serializer())
                 subclass(XiBasis.IntegratedConfigurationReadResponse::class, serializer())
+
+                // ProfileProcessorVi
+                subclass(AdapterMessageMonitoringVi.GetProfilesRequest::class, serializer())
+                subclass(AdapterMessageMonitoringVi.GetProfilesResponse::class, serializer())
             }
         }
         val xmlserializer = XML(xmlmodule) {

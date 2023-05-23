@@ -176,4 +176,10 @@ class KAdapterMessageMonitoringTests {
 //        require(i == 2)
 //    }
 
+    @Test
+    fun profileProcessorVi() {
+        val prof1 = KSoap.parseSOAP<GetProfilesRequest>(x("/pi_ProfileProcessor/getProfilesRequest.xml"))
+        val prof1resp = GetProfilesResponse("2017-06-21T12:59:43.471+00:00", prof1!!.applicationKey, "XPI")
+        println(prof1resp.composeSOAP())
+    }
 }

@@ -302,6 +302,12 @@ object Server {
             get("/camel") {
                 getCamel(call)
             }
+
+            // ProfileProcessorVi для мониторинга из головы в ноги
+            post("/ProfileProcessor/basic") {
+                val b = call.receiveText()
+
+            }
         }
     }
 

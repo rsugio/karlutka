@@ -6,6 +6,8 @@ import kotlinx.serialization.Serializable
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 
+const val xmlnsPPVi = "urn:ProfileProcessorVi"
+const val ppvi = "ppvi"
 class AdapterMessageMonitoringVi {
     // ---------------
     @Serializable
@@ -1090,4 +1092,23 @@ class AdapterMessageMonitoringVi {
         val schema: String = "",
     )
 
+    // -----------------------------------------------------------------------------------------------
+    @Serializable
+    @XmlSerialName("getProfiles", xmlnsPPVi, ppvi)
+    class GetProfilesRequest(
+        @XmlSerialName("applicationKey", xmlnsPPVi, ppvi)
+        @XmlElement val applicationKey: String,
+        @XmlSerialName("active", xmlnsPPVi, ppvi)
+        @XmlElement val active: Boolean,
+    )
+    @Serializable
+    @XmlSerialName("getProfilesResponse", xmlnsPPVi, ppvi)
+    class GetProfilesResponse(
+        @XmlSerialName("activation", xmlnsPPVi, ppvi)
+        @XmlElement val activation: String,
+        @XmlSerialName("applicationKey", xmlnsPPVi, ppvi)
+        @XmlElement val applicationKey: String,
+        @XmlSerialName("profileKey", xmlnsPPVi, ppvi)
+        @XmlElement val profileKey: String,
+    ): ComposeSOAP()
 }
