@@ -1,8 +1,24 @@
 // схема единой базы данных
+CREATE TABLE IF NOT EXISTS PUBLIC.FAE
+(
+    SID  CHAR(3)     not null primary key,
+    INFO VARCHAR(64) not null // просто комментарий для понятности
+);
+
+CREATE TABLE IF NOT EXISTS PUBLIC.FAE_CPA
+(
+    SID    CHAR(3) references PUBLIC.FAE (SID),
+    OID    CHAR(32)    not null, // ObjectID, guid
+    TYPEID VARCHAR(32) not null, // MPI.ETypeID, справочно
+    NAME   VARCHAR(64) not null, // человекочитаемое имя, для навигации
+    BLOBV  BLOB        not null, // сериализованное содержимое объекта
+    constraint PK primary key (SID, OID)
+);
+
 CREATE TABLE IF NOT EXISTS PUBLIC.SWCV
 (
-    GUID        CHAR(32)    not null primary key,
-    CAPTION     VARCHAR(64),    //при записи из ссылок может ничего не быть
+    GUID        CHAR(32) not null primary key,
+    CAPTION     VARCHAR(64), //при записи из ссылок может ничего не быть
     WS_NAME     VARCHAR(64),
     VENDOR      VARCHAR(32),
     VERSION     VARCHAR(32),

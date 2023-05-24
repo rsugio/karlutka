@@ -28,7 +28,7 @@ val camel_version = "4.0.0-M3"
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation("ch.qos.logback:logback-classic:1.4.7") //1.2.11
+    implementation("ch.qos.logback:logback-classic:1.4.7")
     implementation("com.fasterxml.uuid:java-uuid-generator:4.1.0")
     implementation("com.sun.mail:javax.mail:1.6.2")             //implementation("org.apache.commons:commons-email:1.5")
     implementation("commons-codec:commons-codec:1.15")

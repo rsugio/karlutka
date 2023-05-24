@@ -5,6 +5,7 @@ import karlutka.parsers.pi.SLD_CIM
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
+import java.io.InputStream
 import java.nio.file.Path
 import java.sql.Connection
 import java.sql.DriverManager
@@ -22,6 +23,12 @@ object DB {
     lateinit var readObj: PreparedStatement
     lateinit var insvers: PreparedStatement
     lateinit var inslink: PreparedStatement
+    lateinit var readFAE: PreparedStatement
+    lateinit var insFAE: PreparedStatement
+    lateinit var readFCPA: PreparedStatement
+    lateinit var delFCPA: PreparedStatement
+    lateinit var insFCPA: PreparedStatement
+    lateinit var updFCPA: PreparedStatement
 
     val swcv = mutableListOf<MPI.Swcv>()
     val esrobjects = mutableListOf<MPI.EsrObj>()
@@ -39,6 +46,12 @@ object DB {
         readObj = conn.prepareStatement("select num,typeid,oid,swcvid,swcvsp,key_ from PUBLIC.ESROBJ")
         insvers = conn.prepareStatement("insert into PUBLIC.ESRVER(srcnum,objnum,vid,text) values(?1,?2,?3,?4)", 1)
         inslink = conn.prepareStatement("insert into PUBLIC.ESRVLINK(vernum,role,kpos,objnum) values(?1,?2,?3,?4)")
+        readFAE = conn.prepareStatement("select sid, info from PUBLIC.FAE where sid=?")
+        insFAE = conn.prepareStatement("insert into PUBLIC.FAE(sid,info) values(?1,?2)")
+        readFCPA = conn.prepareStatement("select name,blobv from PUBLIC.FAE_CPA where sid=?1 and oid=?2")
+        delFCPA = conn.prepareStatement("delete from PUBLIC.FAE_CPA where sid=?1 and oid=?2")
+        updFCPA = conn.prepareStatement("update PUBLIC.FAE_CPA set blobv=?3 where sid=?1 and oid=?2")
+        insFCPA = conn.prepareStatement("insert into PUBLIC.FAE_CPA(sid,oid,typeid,name,blobv) values(?1,?2,?3,?4,?5)")
 
         //readSwcvList()
 //        println("прочитаны SWCV")
@@ -56,29 +69,31 @@ object DB {
     private fun setArgs(ps: PreparedStatement, vararg args: Any?) {
         var ix = 1
         for (arg in args) {
-            // может есть готовый метод?
-            if (arg == null) {
-                ps.setNull(ix++, java.sql.Types.VARCHAR)
-            } else if (arg is String) ps.setString(ix++, arg)
-            else if (arg is Boolean) ps.setBoolean(ix++, arg)
-            else if (arg is Int) ps.setInt(ix++, arg)
-            else error(arg.javaClass)
+            when (arg) {
+                null -> ps.setNull(ix++, java.sql.Types.VARCHAR)
+                is String -> ps.setString(ix++, arg)
+                is Boolean -> ps.setBoolean(ix++, arg)
+                is Int -> ps.setInt(ix++, arg)
+                is ByteArray -> ps.setBlob(ix++, arg.inputStream())
+                is InputStream -> ps.setBlob(ix++, arg)
+                else -> error(arg.javaClass)
+            }
         }
     }
 
-    private fun executeQuery(ps: PreparedStatement, vararg args: Any?): ResultSet {
+    fun executeQuery(ps: PreparedStatement, vararg args: Any?): ResultSet {
         setArgs(ps, *args)
         return ps.executeQuery()
     }
 
-    private fun executeInsertG(ps: PreparedStatement, vararg args: Any?): Int {
+    fun executeInsertG(ps: PreparedStatement, vararg args: Any?): Int {
         setArgs(ps, *args)
         require(ps.executeUpdate() == 1)
         require(ps.generatedKeys.next())
         return ps.generatedKeys.getInt(1)
     }
 
-    private fun executeInsert(ps: PreparedStatement, vararg args: Any?) {
+    fun executeInsert(ps: PreparedStatement, vararg args: Any?) {
         setArgs(ps, *args)
         require(ps.executeUpdate() == 1)
     }

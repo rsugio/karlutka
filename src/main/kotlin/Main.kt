@@ -2,7 +2,6 @@ import com.sap.conn.jco.JCo
 import karlutka.clients.*
 import karlutka.models.MTarget
 import karlutka.server.DB
-import karlutka.server.FAE
 import karlutka.server.SPROXY
 import karlutka.server.Server
 import karlutka.util.*
@@ -16,17 +15,15 @@ suspend fun main(args: Array<String>) {
     val pid = ProcessHandle.current().pid()
     println("[ru-hello]Привет (∀x∈X)P(x), pid=$pid")
 
-    val pkfg: Path
-    val ppw: Path
-    if (args.isEmpty()) {
-        pkfg = Paths.get("karla.yaml")
+    val pkfg: Path = if (args.isEmpty()) {
+        Paths.get("karla.yaml")
     } else {
-        pkfg = Paths.get(args[0])
+        Paths.get(args[0])
     }
-    if (args.size < 2) {
-        ppw = Paths.get("passwd.yaml")
+    val ppw: Path = if (args.size < 2) {
+        Paths.get("passwd.yaml")
     } else {
-        ppw = Paths.get(args[1])
+        Paths.get(args[1])
     }
     println("Конфиг=${pkfg.toAbsolutePath()}, пароли=${ppw.toAbsolutePath()}")
     // Эта проверка инициализирует JCo, проверяет наличие отдельного sapjco3.jar
@@ -74,8 +71,8 @@ suspend fun main(args: Array<String>) {
         val target: MTarget
         var pingAuth = false
         when (konf) {
-            is KfTarget.ABAP   -> target = AbapJCo(konf)
-            is KfTarget.PIAF   -> {
+            is KfTarget.ABAP -> target = AbapJCo(konf)
+            is KfTarget.PIAF -> {
                 val pi = PI(konf)
                 if (konf.checkAuthResource.isNotEmpty()) {
                     pi.checkAuth(konf.checkAuthResource)
@@ -83,8 +80,9 @@ suspend fun main(args: Array<String>) {
                 }
                 target = pi
             }
+
             is KfTarget.BTPNEO -> target = BTPNEO(konf)
-            is KfTarget.BTPCF  -> target = BTPCF(konf)
+            is KfTarget.BTPCF -> target = BTPCF(konf)
             is KfTarget.CPINEO -> target = CPINEO(konf)
         }
         Server.targets[target.getSid()] = target

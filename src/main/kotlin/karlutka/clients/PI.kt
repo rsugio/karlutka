@@ -10,13 +10,9 @@ import karlutka.models.MTarget
 import karlutka.parsers.pi.*
 import karlutka.serialization.KSoap
 import karlutka.server.DB
-import karlutka.server.Server
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.net.URL
 import java.net.URLEncoder
 import java.util.*
@@ -24,7 +20,7 @@ import java.util.*
 class PI(
     override val konfig: KfTarget,
     val retries: Int = 2,
-    val logLevel: LogLevel = LogLevel.INFO
+    val logLevel: LogLevel = LogLevel.INFO,
 ) : MTarget {
     private val httpHostPort: URL
     private val client: HttpClient
@@ -659,4 +655,23 @@ class PI(
             }
         }
     }
+
+    suspend fun sldop(cim: Cim.CIM, scope: CoroutineScope): Deferred<KtorClient.Task> {
+        val payload = cim.encodeToString()
+        val url = "$httpHostPort/sld/cimom"
+        val hd = mapOf(
+            "CIMProtocolVersion" to cim.MESSAGE!!.PROTOCOLVERSION,
+            "CIMOperation" to "MethodCall",
+            "CIMMethod" to cim.MESSAGE.SIMPLEREQ!!.IMETHODCALL!!.NAME,
+            "CIMObject" to "sld/active",
+            "Content-Type" to "application/xml; charset=UTF-8",
+            "Accept" to "application/xml, text/xml",
+            "Accept-Charset" to "UTF-8"
+        )
+        val task = KtorClient.taskPost(
+            client, url, payload, hd
+        )
+        return scope.async { task.execute() }
+    }
+
 }
