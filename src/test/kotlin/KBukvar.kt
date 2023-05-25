@@ -16,6 +16,8 @@ import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
+import java.net.URI
+import java.net.URL
 import java.util.*
 import kotlin.test.Test
 
@@ -139,8 +141,8 @@ class KBukvar {
 
     @Test
     fun regex() {
-        val a = "af.fa0.fakedb"
-        println(a.split("\\."))
+        val u = URI("http://asasasasasasas?q=1&a=c")
+        println(u.scheme)
     }
 
 }

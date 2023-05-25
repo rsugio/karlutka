@@ -42,6 +42,10 @@ class PI(
     }
     // была идея для прикладной системы знать её HMI но пока незачем    private val hmiServices: MutableList<HmiUsages.HmiService> = mutableListOf()
 
+    fun urlOf(res: String=""): String {
+        return "$httpHostPort/$res"
+    }
+
     suspend fun perfServletListOfComponents(scope: CoroutineScope) = scope.async { KtorClient.taskGet(client, PerfMonitorServlet.uriPerfServlet) }
 
     suspend fun perfServletListOfComponents(td: Deferred<KtorClient.Task>): List<String> {

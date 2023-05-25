@@ -1,7 +1,6 @@
 import KT.Companion.props
 import io.ktor.client.plugins.logging.*
 import karlutka.clients.PI
-import karlutka.parsers.pi.Cim
 import karlutka.server.DB
 import karlutka.server.FAE
 import karlutka.util.KTempFile
@@ -12,7 +11,7 @@ import org.junit.jupiter.api.Test
 import java.net.URI
 
 class KFAETests {
-    private val prop = props(".etc/fa0.properties")
+    private val prop = props(".etc/fa9.properties")
     private val caecfg = KfTarget.PIAF(prop["caesid"]!!, null, prop["caeuri"]!!)
     private val sldcfg = KfTarget.PIAF(prop["sldsid"]!!, null, prop["slduri"]!!)
     private val cae: PI
@@ -31,14 +30,13 @@ class KFAETests {
             sld.checkAuth("/sld", "<title>System Landscape Directory</title>")
         }
         fae = FAE(prop["faesid"]!!, prop["faefakedb"]!!, URI(prop["faeuri"]!!), cae, sld)
+        require(fae.afFaHostdb.isNotBlank())
     }
 
     @Test
     fun sldops() {
-        var x: Cim.CIM?
         runBlocking {
-            fae.registerSLD(this)
-            //fae.registerSLD(GlobalScope)
+            fae.registerSLD(prop["faedomain"], this)
         }
     }
 }

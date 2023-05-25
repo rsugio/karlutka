@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package karlutka.parsers.pi
 
 import kotlinx.serialization.Serializable
@@ -33,6 +35,10 @@ class Cim {
         fun getError(): ERROR? {
             return MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.ERROR
         }
+
+        fun isCreatedOrAlreadyExists(): Boolean {
+            return MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.ERROR == null || MESSAGE.SIMPLERSP!!.IMETHODRESPONSE.ERROR!!.CODE == ErrCodes.CIM_ERR_ALREADY_EXISTS.code
+        }
     }
 
     // ------------------------------------------------------------------ Declaration
@@ -41,7 +47,7 @@ class Cim {
     class DECLARATION(
         val DECLGROUP: List<DECLGROUP> = listOf(),
         val DECLGROUP_WITHNAME: List<DECLGROUP_WITHNAME> = listOf(),
-        val DECLGROUP_WITHPATH: List<DECLGROUP_WITHPATH> = listOf()
+        val DECLGROUP_WITHPATH: List<DECLGROUP_WITHPATH> = listOf(),
     )
 
     @Serializable
@@ -50,7 +56,7 @@ class Cim {
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH? = null,
         val NAMESPACEPATH: NAMESPACEPATH? = null,
         val QUALIFIER_DECLARATION: List<QUALIFIER_DECLARATION> = listOf(),
-        val VALUE_OBJECT: List<VALUE_OBJECT> = listOf()
+        val VALUE_OBJECT: List<VALUE_OBJECT> = listOf(),
     )
 
     @Serializable
@@ -76,7 +82,7 @@ class Cim {
     @XmlSerialName("VALUE.ARRAY", "", "")
     class VALUE_ARRAY(
         val VALUE: List<String>,
-        val VALUE_NULL: List<VALUE_NULL> = listOf()
+        val VALUE_NULL: List<VALUE_NULL> = listOf(),
     ) {
         constructor(vararg s: String) : this(s.toList())
         constructor(s: Map<String, Any>) : this(s.keys.toList())
@@ -104,7 +110,7 @@ class Cim {
     @XmlSerialName("VALUE.OBJECT", "", "")
     class VALUE_OBJECT(
         val CLASS: CLASS? = null,
-        val INSTANCE: INSTANCE? = null
+        val INSTANCE: INSTANCE? = null,
     )
 
     @Serializable
@@ -118,7 +124,7 @@ class Cim {
     @XmlSerialName("VALUE.NAMEDOBJECT", "", "")
     class VALUE_NAMEDOBJECT(
         val INSTANCENAME: INSTANCENAME,
-        val INSTANCE: INSTANCE
+        val INSTANCE: INSTANCE,
     )
 
     @Serializable
@@ -145,13 +151,13 @@ class Cim {
 
     @Serializable
     @XmlSerialName("VALUE.NULL", "", "")
-    class VALUE_NULL()
+    class VALUE_NULL
 
     @Serializable
     @XmlSerialName("VALUE.INSTANCEWITHPATH", "", "")
     class VALUE_INSTANCEWITHPATH(
         val INSTANCEPATH: INSTANCEPATH,
-        val INSTANCE: INSTANCE
+        val INSTANCE: INSTANCE,
     )
 
     // ----------------------------------------------------------------------- Naming and location elements
@@ -160,7 +166,7 @@ class Cim {
     @XmlSerialName("NAMESPACEPATH", "", "")
     class NAMESPACEPATH(
         @XmlElement val HOST: String,
-        val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH
+        val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
     )
 
     @Serializable
@@ -181,7 +187,7 @@ class Cim {
     @Serializable
     @XmlSerialName("CLASSNAME", "", "")
     class CLASSNAME(
-        val NAME: String
+        val NAME: String,
     )
 
     @Serializable
@@ -195,21 +201,21 @@ class Cim {
     @XmlSerialName("LOCALCLASSPATH", "", "")
     class LOCALCLASSPATH(
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
-        val CLASSNAME: CLASSNAME
+        val CLASSNAME: CLASSNAME,
     )
 
     @Serializable
     @XmlSerialName("INSTANCEPATH", "", "")
     class INSTANCEPATH(
         val NAMESPACEPATH: NAMESPACEPATH,
-        val INSTANCENAME: INSTANCENAME
+        val INSTANCENAME: INSTANCENAME,
     )
 
     @Serializable
     @XmlSerialName("LOCALINSTANCEPATH", "", "")
     class LOCALINSTANCEPATH(
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
-        val INSTANCENAME: INSTANCENAME
+        val INSTANCENAME: INSTANCENAME,
     )
 
     @Serializable
@@ -220,21 +226,23 @@ class Cim {
         val KEYBINDING: List<KEYBINDING> = listOf(),
         val KEYVALUE: KEYVALUE? = null,
         val VALUE_REFERENCE: VALUE_REFERENCE? = null,
-    )
+    ) {
+        fun getKeyValue(keyBindingName: String) = KEYBINDING.find { it.NAME == keyBindingName }?.KEYVALUE
+    }
 
     @Serializable
     @XmlSerialName("OBJECTPATH", "", "")
     class OBJECTPATH(
         val INSTANCEPATH: INSTANCEPATH?,
-        val CLASSPATH: CLASSPATH?
+        val CLASSPATH: CLASSPATH?,
     )
 
     @Serializable
     @XmlSerialName("KEYBINDING", "", "")
-    data class KEYBINDING(
+    class KEYBINDING(
         val NAME: String,
         @XmlElement(true) val KEYVALUE: String? = null,
-        val VALUE_REFERENCE: List<VALUE_REFERENCE> = listOf()
+        val VALUE_REFERENCE: List<VALUE_REFERENCE> = listOf(),
     )
 
     @Serializable
@@ -360,7 +368,7 @@ class Cim {
         val PARAMETER_REFERENCE: List<PARAMETER_REFERENCE> = listOf(),
         val PARAMETER: List<PARAMETER> = listOf(),
         val PARAMETER_ARRAY: List<PARAMETER_ARRAY> = listOf(),
-        val PARAMETER_REFARRAY: List<PARAMETER_REFARRAY> = listOf()
+        val PARAMETER_REFARRAY: List<PARAMETER_REFARRAY> = listOf(),
     )
 
     @Serializable
@@ -415,8 +423,7 @@ class Cim {
 
     @Serializable
     @XmlSerialName("MULTIREQ", "", "")
-    class MULTIREQ(
-    )
+    class MULTIREQ
 
     @Serializable
     @XmlSerialName("SIMPLEREQ", "", "")
@@ -434,7 +441,7 @@ class Cim {
 
     @Serializable
     @XmlSerialName("PARAMVALUE", "", "")
-    class PARAMVALUE()
+    class PARAMVALUE
 
     @Serializable
     @XmlSerialName("IMETHODCALL", "", "")
@@ -442,7 +449,7 @@ class Cim {
         val NAME: String,
         val LOCALNAMESPACEPATH: LOCALNAMESPACEPATH,
         val LOCALCLASSPATH: LOCALCLASSPATH? = null,
-        val IPARAMVALUE: List<IPARAMVALUE> = listOf()
+        val IPARAMVALUE: List<IPARAMVALUE> = listOf(),
     )
 
     @Serializable
@@ -464,29 +471,24 @@ class Cim {
 
     @Serializable
     @XmlSerialName("MULTIRSP", "", "")
-    class MULTIRSP(
-    )
+    class MULTIRSP
 
     @Serializable
     @XmlSerialName("SIMPLERSP", "", "")
     class SIMPLERSP(
-        val IMETHODRESPONSE: IMETHODRESPONSE
+        val IMETHODRESPONSE: IMETHODRESPONSE,
     )
 
     @Serializable
     @XmlSerialName("METHODRESPONSE", "", "")
-    class METHODRESPONSE(
-//        val NAME: String,
-//        val IRETURNVALUE: IRETURNVALUE?,
-//        val ERROR: ERROR?
-    )
+    class METHODRESPONSE
 
     @Serializable
     @XmlSerialName("IMETHODRESPONSE", "", "")
-    data class IMETHODRESPONSE(
+    class IMETHODRESPONSE(
         val NAME: String,
         val IRETURNVALUE: IRETURNVALUE?,
-        val ERROR: ERROR?
+        val ERROR: ERROR?,
     )
 
     @Serializable
@@ -494,7 +496,7 @@ class Cim {
     class ERROR(
         val CODE: Int,
         val DESCRIPTION: String? = null,
-        val INSTANCE: List<INSTANCE> = listOf()
+        val INSTANCE: List<INSTANCE> = listOf(),
     ) {
         @kotlinx.serialization.Transient
         val code: ErrCodes = ErrCodes.values().find { it.code == CODE }!!
@@ -503,11 +505,11 @@ class Cim {
         }
     }
 
-    class RETURNVALUE()
+    class RETURNVALUE
 
     @Serializable
     @XmlSerialName("IRETURNVALUE", "", "")
-    data class IRETURNVALUE(
+    class IRETURNVALUE(
         val CLASSNAME: List<CLASSNAME> = listOf(),
         val INSTANCENAME: List<INSTANCENAME> = listOf(),
         @XmlSerialName("VALUE", "", "")
@@ -528,62 +530,65 @@ class Cim {
 
     @Serializable
     @XmlSerialName("MULTIEXPREQ", "", "")
-    class MULTIEXPREQ()
+    class MULTIEXPREQ
 
     @Serializable
     @XmlSerialName("SIMPLEEXPREQ", "", "")
-    class SIMPLEEXPREQ()
+    class SIMPLEEXPREQ
 
     @Serializable
     @XmlSerialName("EXPMETHODCALL", "", "")
-    class EXPMETHODCALL()
+    class EXPMETHODCALL
 
     @Serializable
     @XmlSerialName("MULTIEXPRSP", "", "")
-    class MULTIEXPRSP()
+    class MULTIEXPRSP
 
     @Serializable
     @XmlSerialName("SIMPLEEXPRSP", "", "")
-    class SIMPLEEXPRSP()
+    class SIMPLEEXPRSP
 
     @Serializable
     @XmlSerialName("EXPMETHODRESPONSE", "", "")
-    class EXPMETHODRESPONSE()
+    class EXPMETHODRESPONSE
 
     @Serializable
     @XmlSerialName("EXPPARAMVALUE", "", "")
-    class EXPPARAMVALUE()
+    class EXPPARAMVALUE
 
     //class ENUMERATIONCONTEXT()  //removed
 
     @Serializable
     @XmlSerialName("CORRELATOR", "", "")
-    class CORRELATOR()
+    class CORRELATOR
 
     companion object {
+        fun association(
+            prFrom: String,
+            instFrom: INSTANCENAME,
+            prTo: String,
+            instTo: INSTANCENAME,
+            assClass: String,
+            namespacepath: NAMESPACEPATH,
+        ): CIM {
+            val f1 = createPropertyReference(prFrom, instFrom.CLASSNAME, INSTANCEPATH(namespacepath, instFrom))
+            val t1 = createPropertyReference(prTo, instTo.CLASSNAME, INSTANCEPATH(namespacepath, instTo))
+            val ca = createAssociation(assClass, f1, t1)
+            return SLD_CIM.createInstance(ca)
+        }
 
         fun iparamvalue(name: String, value: Any): IPARAMVALUE {
-            val x: IPARAMVALUE
-            if (value is String) {
-                x = IPARAMVALUE(name, value)
-            } else if (value is VALUE_ARRAY) {
-                x = IPARAMVALUE(name, null, value)
-            } else if (value is VALUE_REFERENCE) {
-                x = IPARAMVALUE(name, null, null, value)
-            } else if (value is CLASSNAME) {
-                x = IPARAMVALUE(name, null, null, null, value)
-            } else if (value is INSTANCENAME) {
-                x = IPARAMVALUE(name, null, null, null, null, value)
-            } else if (value is QUALIFIER_DECLARATION) {
-                x = IPARAMVALUE(name, null, null, null, null, null, value)
-            } else if (value is CLASS) {
-                x = IPARAMVALUE(name, null, null, null, null, null, null, value)
-            } else if (value is INSTANCE) {
-                x = IPARAMVALUE(name, null, null, null, null, null, null, null, value)
-            } else if (value is VALUE_NAMEDINSTANCE) {
-                x = IPARAMVALUE(name, null, null, null, null, null, null, null, null, value)
-            } else {
-                TODO()
+            val x: IPARAMVALUE = when (value) {
+                is String -> IPARAMVALUE(name, value)
+                is VALUE_ARRAY -> IPARAMVALUE(name, null, value)
+                is VALUE_REFERENCE -> IPARAMVALUE(name, null, null, value)
+                is CLASSNAME -> IPARAMVALUE(name, null, null, null, value)
+                is INSTANCENAME -> IPARAMVALUE(name, null, null, null, null, value)
+                is QUALIFIER_DECLARATION -> IPARAMVALUE(name, null, null, null, null, null, value)
+                is CLASS -> IPARAMVALUE(name, null, null, null, null, null, null, value)
+                is INSTANCE -> IPARAMVALUE(name, null, null, null, null, null, null, null, value)
+                is VALUE_NAMEDINSTANCE -> IPARAMVALUE(name, null, null, null, null, null, null, null, null, value)
+                else -> error("Unimplemented iparamvalue(${value.javaClass})")
             }
             return x
         }

@@ -16,7 +16,7 @@ import kotlin.io.path.inputStream
 import kotlin.io.path.outputStream
 import kotlin.io.path.writeText
 
-@Suppress("UNUSED_VALUE", "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+@Suppress("UNUSED_VALUE")
 class KSLDTests {
     private val po = KT.propAuth(Paths.get(".etc/po.properties"))
     private val client: HttpClient = HttpClient.newBuilder()
@@ -67,9 +67,9 @@ class KSLDTests {
         val _sid = "FA0"
         val INTEGRATION_ENGINE_JAVA_NCAE_FA0 = "INTEGRATION_ENGINE_JAVA_NCAE_$_sid"
 
-        val httpsNone = "https://none:443"
+        //val httpsNone = "https://none:443"
         val httpShort = po["fa0httpshort"] as String // "http://host:80"
-        val httpLong = po["fa0httplong"] as String // "http://host.domain:80"
+        //val httpLong = po["fa0httplong"] as String // "http://host.domain:80"
 
         val _admintoolname = "AdminTool.$_afname"
         val _admintoolcaption = "AdminTool of $_afname"
@@ -144,22 +144,16 @@ class KSLDTests {
         x = op(x)
 
         // AdminTool.af.fa0.fake0db -> XIAF
-        x = op(asx("Antecedent", afname, "Dependent", admintoolname, "SAP_HostedXIRemoteAdminService", namespacepath))
+        x = op(Cim.association("Antecedent", afname, "Dependent", admintoolname, "SAP_HostedXIRemoteAdminService", namespacepath))
         // AdminTool.af.fa0.fake0db -> HTTPport
-        x = op(asx("Antecedent", admintoolname, "Dependent", portadmintoolname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath))
+        x = op(Cim.association("Antecedent", admintoolname, "Dependent", portadmintoolname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath))
         // four more
-        x = op(asx("Antecedent", afname, "Dependent", cacherefreshname, "SAP_HostedXIRemoteAdminService", namespacepath))
-        x = op(asx("Antecedent", cacherefreshname, "Dependent", portcacherefreshname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath))
-        x = op(asx("Antecedent", afname, "Dependent", RTCname, "SAP_HostedXIRemoteAdminService", namespacepath))
-        x = op(asx("Antecedent", RTCname, "Dependent", portRTCname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath))
+        x = op(Cim.association("Antecedent", afname, "Dependent", cacherefreshname, "SAP_HostedXIRemoteAdminService", namespacepath))
+        x = op(Cim.association("Antecedent", cacherefreshname, "Dependent", portcacherefreshname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath))
+        x = op(Cim.association("Antecedent", afname, "Dependent", RTCname, "SAP_HostedXIRemoteAdminService", namespacepath))
+        x = op(Cim.association("Antecedent", RTCname, "Dependent", portRTCname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath))
         //basic
-        x = op(asx("Antecedent", afname, "Dependent", portbasicurlname, "SAP_XIAdapterHostedHTTPServicePort", namespacepath))
-    }
-    fun asx(prFrom: String, instFrom: Cim.INSTANCENAME, prTo: String, instTo: Cim.INSTANCENAME, assClass: String, namespacepath: Cim.NAMESPACEPATH): Cim.CIM {
-        val f1 = Cim.createPropertyReference(prFrom, instFrom.CLASSNAME, Cim.INSTANCEPATH(namespacepath, instFrom) )
-        val t1 = Cim.createPropertyReference(prTo, instTo.CLASSNAME, Cim.INSTANCEPATH(namespacepath, instTo) )
-        val ca = Cim.createAssociation(assClass, f1, t1)
-        return SLD_CIM.createInstance(ca)
+        x = op(Cim.association("Antecedent", afname, "Dependent", portbasicurlname, "SAP_XIAdapterHostedHTTPServicePort", namespacepath))
     }
 
     @Test
@@ -254,8 +248,8 @@ class KSLDTests {
 
     @Test
     fun parserPrinter() {
-        var x: Cim.CIM
-        x = Cim.decodeFromReader(x("/pi_SLD/cim.xml"))
+        var x = Cim.decodeFromReader(x("/pi_SLD/cim.xml"))
+        requireNotNull(x.MESSAGE?.SIMPLERSP?.IMETHODRESPONSE)
         x = Cim.decodeFromReader(x("/pi_SLD/cim01get.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim02get.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim03getclass.xml"))
@@ -287,5 +281,7 @@ class KSLDTests {
         x = Cim.decodeFromReader(x("/pi_SLD/cim21association.xml"))         // created association instance response
         x = Cim.decodeFromReader(x("/pi_SLD/cim22deleteassociation.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim23createinstancechild.xml")) //PK*4 with simple instance
+        x = Cim.decodeFromReader(x("/pi_SLD/cim24enuminstances_SAP_XIDomain.xml"))
+        x = Cim.decodeFromReader(x("/pi_SLD/cim25enumassocs.xml"))
     }
 }

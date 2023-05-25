@@ -1,0 +1,640 @@
+<CIM CIMVERSION="2.3" DTDVERSION="2.2">
+	<MESSAGE ID="12345677" PROTOCOLVERSION="1.0">
+		<SIMPLERSP>
+			<IMETHODRESPONSE NAME="EnumerateInstances">
+				<IRETURNVALUE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRuntimeManagementServer">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRuntimeManagementServer</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>rwb.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.rwb.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIRuntimeManagementServer</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>rwb.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIIntegrationDirectory">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIIntegrationDirectory</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>directory.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.directory.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIIntegrationDirectory</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>directory.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIIntegrationRepository">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIIntegrationRepository</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>repository.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.repository.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIIntegrationRepository</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>repository.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIAdapterFramework">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>af.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>AdminTool.af.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>af.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIAdapterFramework">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>af.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>CacheRefresh.af.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>af.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIAdapterFramework">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>af.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.af.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>af.dph.ld-s-devpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIIntegrationRepository">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIIntegrationRepository</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>repository.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.repository.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIIntegrationRepository</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>repository.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIAdapterFramework">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>af.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>CacheRefresh.af.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>af.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIIntegrationDirectory">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIIntegrationDirectory</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>directory.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.directory.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIIntegrationDirectory</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>directory.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIAdapterFramework">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>af.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>AdminTool.af.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>af.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRuntimeManagementServer">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRuntimeManagementServer</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>rwb.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.rwb.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIRuntimeManagementServer</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>rwb.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIAdapterFramework">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>af.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.af.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>af.pph.nl-s-pihdbv</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRuntimeManagementServer">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRuntimeManagementServer</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>rwb.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.rwb.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIRuntimeManagementServer</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>rwb.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIIntegrationDirectory">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIIntegrationDirectory</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>directory.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.directory.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIIntegrationDirectory</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>directory.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIIntegrationRepository">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIIntegrationRepository</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>repository.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.repository.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIIntegrationRepository</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>repository.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIAdapterFramework">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>af.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>CacheRefresh.af.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>af.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIAdapterFramework">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>af.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>AdminTool.af.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>af.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+					<VALUE.NAMEDINSTANCE>
+						<INSTANCENAME CLASSNAME="SAP_HostedXIRemoteAdminService">
+							<KEYBINDING NAME="Antecedent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIAdapterFramework">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>af.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+							<KEYBINDING NAME="Dependent">
+								<VALUE.REFERENCE>
+									<INSTANCENAME CLASSNAME="SAP_XIRemoteAdminService">
+										<KEYBINDING NAME="CreationClassName">
+											<KEYVALUE>SAP_XIRemoteAdminService</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="Name">
+											<KEYVALUE>RuntimeCheck.af.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemCreationClassName">
+											<KEYVALUE>SAP_XIAdapterFramework</KEYVALUE>
+										</KEYBINDING>
+										<KEYBINDING NAME="SystemName">
+											<KEYVALUE>af.qph.ld-s-tstpihdb</KEYVALUE>
+										</KEYBINDING>
+									</INSTANCENAME>
+								</VALUE.REFERENCE>
+							</KEYBINDING>
+						</INSTANCENAME>
+						<INSTANCE CLASSNAME="SAP_HostedXIRemoteAdminService"/>
+					</VALUE.NAMEDINSTANCE>
+				</IRETURNVALUE>
+			</IMETHODRESPONSE>
+		</SIMPLERSP>
+	</MESSAGE>
+</CIM>

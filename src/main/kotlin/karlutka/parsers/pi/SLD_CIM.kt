@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 import java.util.zip.ZipInputStream
 
 // прикладуха поверх CIM
+@Suppress("unused")
 class SLD_CIM {
     enum class Classes {
         // классы сущностей
@@ -73,7 +74,7 @@ class SLD_CIM {
         val TechnologyType: String?,
         val PPMSNumber: String?,
         val Description: String?,
-        val RuntimeType: String?
+        val RuntimeType: String?,
     ) {
         companion object {
             fun from(vno: Cim.VALUE_NAMEDOBJECT): SAP_SoftwareComponent? {
@@ -89,13 +90,13 @@ class SLD_CIM {
                 val Type = vno.INSTANCE.PROPERTY.find { it.NAME == "Type" }?.VALUE
                 val RuntimeType = vno.INSTANCE.PROPERTY.find { it.NAME == "RuntimeType" }?.VALUE
                 var guid = vno.INSTANCE.PROPERTY.find { it.NAME == "GUID" }?.VALUE
-                if (guid != null) {
+                return if (guid != null) {
                     guid = guid.replace("-", "")
                     require(guid.length == 32)
-                    return SAP_SoftwareComponent(
+                    SAP_SoftwareComponent(
                         ElementTypeID, Vendor, Name, Version, guid, Caption, Type, TechnologyType, PPMSNumber, Description, RuntimeType
                     )
-                } else return null
+                } else null
             }
         }
     }
@@ -126,22 +127,6 @@ class SLD_CIM {
                     "PropertyList" to Cim.VALUE_ARRAY(*properties)
                 )
             )
-//            return Cim.CIM(
-//                Cim.MESSAGE(
-//                    messageid(), Cim.SIMPLEREQ(
-//                        Cim.IMETHODCALL(
-//                            "EnumerateInstances", sldactive, null, listOf(
-//                                Cim.iparamvalue("ClassName", Cim.CLASSNAME(className)),
-//                                Cim.iparamvalue("LocalOnly", "false"),
-//                                Cim.iparamvalue("IncludeClassOrigin", "true"),
-//                                Cim.iparamvalue(
-//                                    "PropertyList", Cim.VALUE_ARRAY(*properties)
-//                                ),
-//                            )
-//                        )
-//                    )
-//                )
-//            )
         }
 
         fun associators(creation: Classes, name: String, assoc: Classes, result: Classes): Cim.CIM =
@@ -156,22 +141,6 @@ class SLD_CIM {
                     "IncludeClassOrigin" to "true"
                 )
             )
-
-//            Cim.CIM(
-//                Cim.MESSAGE(
-//                    messageid(), Cim.SIMPLEREQ(
-//                        Cim.IMETHODCALL(
-//                            "Associators", sldactive, null,
-//                            listOf(
-//                                Cim.iparamvalue("ObjectName", instancename),
-//                                Cim.IPARAMVALUE("AssocClass", assocClass),
-//                                Cim.IPARAMVALUE("ResultClass", resultClass),
-//                                Cim.IPARAMVALUE("IncludeClassOrigin", "true")
-//                            ),
-//                        )
-//                    )
-//                )
-//            )
         }
 
         fun instance(clazz: Classes, properties: Map<String, String>) = Cim.createInstance(clazz.toString(), properties)
@@ -243,7 +212,6 @@ class SLD_CIM {
             )
         }
 
-
         fun referenceNames(instancename: Cim.INSTANCENAME): Cim.CIM {
             return Cim.CIM(
                 Cim.MESSAGE(
@@ -294,6 +262,5 @@ class SLD_CIM {
                 ze = zins.nextEntry
             }
         }
-
     }
 }
