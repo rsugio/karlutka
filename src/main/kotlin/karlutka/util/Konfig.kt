@@ -75,6 +75,10 @@ sealed class KfTarget {
         override val sid: String,
         override val text: String? = null,
         val cae: String,
+        val sld: String,
+        val fakehostdb: String,
+        val realHostPortURI: String,
+        val domain: String
     ) : KfTarget() {
         init {
             require(cae.isNotBlank())

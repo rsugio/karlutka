@@ -27,7 +27,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-class BTPNEO(override val konfig: KfTarget.BTPNEO) : MTarget {
+class BTPNEO(val konfig: KfTarget.BTPNEO) : MTarget {
     val client: HttpClient
     var json: Json = DefaultJson
     lateinit var token: MCommon.AuthToken

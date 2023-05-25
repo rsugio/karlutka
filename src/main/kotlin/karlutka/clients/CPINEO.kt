@@ -21,7 +21,7 @@ import kotlinx.coroutines.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 
-class CPINEO(override val konfig: KfTarget.CPINEO) : MTarget {
+class CPINEO(val konfig: KfTarget.CPINEO) : MTarget {
     val client: HttpClient
     var json: Json = DefaultJson
     var headers = mutableMapOf("x-csrf-token" to "Fetch")

@@ -17,7 +17,7 @@ import karlutka.util.KtorClient
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 
-class BTPCF(override val konfig: KfTarget.BTPCF) : MTarget {
+class BTPCF(val konfig: KfTarget.BTPCF) : MTarget {
     val client: HttpClient
     lateinit var token: MCommon.AuthToken
     var json: Json = DefaultJson    // на случай кастомного json

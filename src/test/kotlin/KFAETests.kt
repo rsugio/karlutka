@@ -33,12 +33,13 @@ class KFAETests {
         }
         fae = FAE(prop["faesid"]!!, prop["faefakedb"]!!, URI(prop["faeuri"]!!), cae, sld)
         require(fae.afFaHostdb.isNotBlank())
+        fae.domain = prop["faedomain"]!!
     }
 
     @Test
     fun sldops() {
         runBlocking {
-            fae.registerSLD(prop["faedomain"], this)
+            fae.registerSLD(this)
         }
     }
 

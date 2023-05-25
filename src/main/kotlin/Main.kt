@@ -2,14 +2,12 @@ import com.sap.conn.jco.JCo
 import karlutka.clients.*
 import karlutka.models.MTarget
 import karlutka.server.DB
-import karlutka.server.SPROXY
+import karlutka.server.FAE
 import karlutka.server.Server
 import karlutka.util.*
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.Duration
-import java.util.*
-import kotlin.io.path.inputStream
 
 suspend fun main(args: Array<String>) {
     val pid = ProcessHandle.current().pid()
@@ -43,27 +41,13 @@ suspend fun main(args: Array<String>) {
     Server.kfpasswds = pw
     Server.pkfg = pkfg
     Server.ppw = ppw
-    //TODO - временно{
-    val afprops = Properties()
-    afprops.load(Paths.get(".etc/af.properties").inputStream())
-    Server.afprops = afprops.toMap() as Map<String, String>
-    SPROXY.load(Paths.get("c:/data/SPROXY"))
-    //}
 
     KTempFile.tempFolder = Paths.get(kfg.tmpdir)
     KTempFile.start()
     println("Вре́менные файлы в ${KTempFile.tempFolder}")
 
-    KtorClient.createClientEngine(
-        Server.kfg.httpClientThreads,
-        Duration.ofMillis(Server.kfg.httpClientConnectionTimeoutMillis)
-    )
-
+    KtorClient.createClientEngine(4, Duration.ofMillis(2000))
     DB.init(kfg.h2connection)
-    if (kfg.influxdb != null && false) {
-        val info = KInflux.init(kfg.influxdb, pw.securityMaterials)
-        println("Influx по ${kfg.influxdb.host} подключен: $info")
-    }
 
     println("Загружаем соединения")
     Server.kfg.targets.forEach { konf ->
@@ -80,17 +64,29 @@ suspend fun main(args: Array<String>) {
                 }
                 target = pi
             }
-
             is KfTarget.BTPNEO -> target = BTPNEO(konf)
             is KfTarget.BTPCF -> target = BTPCF(konf)
             is KfTarget.CPINEO -> target = CPINEO(konf)
-            is KfTarget.FAE -> TODO()
+            is KfTarget.FAE -> {
+                require(Server.targets.values.filterIsInstance<FAE>().isEmpty())
+                target = FAE(konf, Server.targets[konf.cae]!! as PI, Server.targets[konf.sld]!! as PI)
+            }
+            //else -> error("Not implemented target: $konf")
         }
-        Server.targets[target.getSid()] = target
+        Server.targets[konf.sid] = target
         if (pingAuth)
             println("\tзагружен ${konf.sid}(${konf.getKind()}), с проверкой доступа")
         else
             println("\tзагружен ${konf.sid}(${konf.getKind()}), без проверки доступа")
+    }
+
+    val faes = Server.targets.values.filterIsInstance<FAE>()
+    require(faes.size<2)
+    if (faes.size==1) {
+        println("Работаем в режиме FAE")
+        Server.fae = faes[0]
+    } else {
+        println("FAE отключен")
     }
 
     println("Протяжка продувка .. Ktor-server готовится к запуску на ${kfg.httpServerListenAddress}:${kfg.httpServerListenPort}")

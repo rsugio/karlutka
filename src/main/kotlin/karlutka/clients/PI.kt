@@ -18,7 +18,7 @@ import java.net.URLEncoder
 import java.util.*
 
 class PI(
-    override val konfig: KfTarget,
+    val konfig: KfTarget,
     val retries: Int = 2,
     val logLevel: LogLevel = LogLevel.INFO,
 ) : MTarget {

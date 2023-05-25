@@ -40,6 +40,7 @@ object Server {
     val targets = mutableMapOf<String, MTarget>()
     val UUIDgenerator = Generators.timeBasedGenerator()
     lateinit var afprops: Map<String, String>
+    var fae: FAE? = null
 
     fun installRoutings(app: Application) {
         app.routing {
@@ -472,11 +473,11 @@ object Server {
                     h1 { +"По списку систем (${dur.toMillis()} ms)" }
                     targets.values.filter { it is PI }.forEach { t ->
                         require(t is PI)
-                        h2 { +t.getSid() }
+                        h2 { +"?" }
                         ul {
                             t.afs.forEach { c ->
                                 li {
-                                    a("/PIAF/performance/${t.getSid()}/$c") { +c }
+                                    a("/PIAF/performance/getSid/$c") { +c }
                                     +" запрос информации по компоненту"
                                 }
                             }

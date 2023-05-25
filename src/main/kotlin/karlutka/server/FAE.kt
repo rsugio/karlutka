@@ -3,13 +3,16 @@ package karlutka.server
 import karlutka.clients.PI
 import karlutka.models.MPI
 import karlutka.models.MRouteGenerator
+import karlutka.models.MTarget
 import karlutka.parsers.pi.Cim
 import karlutka.parsers.pi.SLD_CIM
 import karlutka.parsers.pi.XICache
+import karlutka.util.KfTarget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.runBlocking
+import org.apache.camel.impl.DefaultCamelContext
 import java.net.URI
 
 /**
@@ -21,12 +24,18 @@ class FAE(
     val realHostPortURI: URI,
     private val cae: PI,
     private val sld: PI,
-) {
+) : MTarget {
     val afFaHostdb = "af.$sid.$fakehostdb".lowercase()
     private val sldHost: String
     private val namespacepath: Cim.NAMESPACEPATH
     private val channels = mutableListOf<XICache.Channel>()
     private val allinone = mutableListOf<XICache.AllInOne>()
+    var domain: String? = null
+    val camelContext = DefaultCamelContext(true)
+    val routeSources = mutableMapOf<String,String>()
+    constructor(konf: KfTarget.FAE, cae: PI, sld: PI) : this(konf.sid, konf.fakehostdb, URI(konf.realHostPortURI), cae, sld) {
+        domain = konf.domain
+    }
 
     init {
         var rs = DB.executeQuery(DB.readFAE, sid)
@@ -63,28 +72,32 @@ class FAE(
      * Если domain непустой то добавляет также в него
      */
     @Suppress("DuplicatedCode")
-    suspend fun registerSLD(domain: String?, scope: CoroutineScope) {
-        // Найти родительский домен
-
+    suspend fun registerSLD(scope: CoroutineScope) {
+        // Ищем в SLD все XI-домены
         var x = SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_XIDomain)
         x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
         val domains = x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.VALUE_NAMEDINSTANCE
         // domains - см src\test\resources\pi_SLD\cim24enuminstances_SAP_XIDomain.xml
-        val foundDomain = domains.find { d -> d.INSTANCENAME.getKeyValue("Name") == domain }?.INSTANCENAME
 
         val afname = SLD_CIM.Classes.SAP_XIAdapterFramework.toInstanceName2(afFaHostdb)
         val af1 = sld.sldop(SLD_CIM.createInstance(afname, mapOf("Caption" to "Adapter Engine on $afFaHostdb")), scope)
         val af1rez = Cim.decodeFromReader(af1.await().bodyAsXmlReader())
         require(af1rez.isCreatedOrAlreadyExists())
-        if (domain != null && foundDomain != null) {
-            // запрошенный домен действительно существует, ассоциируем его с FAE
-            x = Cim.association(
-                "GroupComponent", foundDomain,
-                "PartComponent", afname,
-                "SAP_XIContainedAdapter", namespacepath
-            )
-            val domainrez = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-            require(domainrez.isCreatedOrAlreadyExists()) { domainrez.MESSAGE?.SIMPLERSP?.IMETHODRESPONSE?.ERROR.toString() }
+        if (domain != null && domain!!.isNotBlank()) {
+            // Ищем домен of CAE
+            val foundDomain = domains.find { d -> d.INSTANCENAME.getKeyValue("Name") == domain }?.INSTANCENAME
+            if (foundDomain != null) {
+                // запрошенный домен действительно существует, ассоциируем его с FAE
+                x = Cim.association(
+                    "GroupComponent", foundDomain,
+                    "PartComponent", afname,
+                    "SAP_XIContainedAdapter", namespacepath
+                )
+                val domainrez = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+                require(domainrez.isCreatedOrAlreadyExists()) { domainrez.MESSAGE?.SIMPLERSP?.IMETHODRESPONSE?.ERROR.toString() }
+            } else {
+                TODO()
+            }
         }
 
         val admintoolname = SLD_CIM.Classes.SAP_XIRemoteAdminService.toInstanceName4(afname, "AdminTool.$afFaHostdb")

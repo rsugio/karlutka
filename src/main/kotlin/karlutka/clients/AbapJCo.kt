@@ -17,14 +17,9 @@ PID: SXMB_GET_PIPELINES
 Нам нужны лишь RECEIVER, SENDER и подтверждения: RECEIVER_BACK, SENDER_BACK
  */
 
-class AbapJCo(override val konfig: KfTarget) : MTarget {
-    private val runtime: JCoDestination
-    private val repository: JCoRepository
-
-    init {
-        runtime = JCoDestinationManager.getDestination(konfig.sid)
-        repository = runtime.repository
-    }
+class AbapJCo(val konfig: KfTarget) : MTarget {
+    private val runtime: JCoDestination = JCoDestinationManager.getDestination(konfig.sid)
+    private val repository: JCoRepository = runtime.repository
 
     object ZDestinationDataProvider : DestinationDataProvider {
         val jcoClients: MutableMap<String, Properties> = mutableMapOf()
