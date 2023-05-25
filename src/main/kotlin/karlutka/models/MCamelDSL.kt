@@ -43,7 +43,11 @@ sealed class MCamelDSL {
     @XmlSerialName("description", "", "")
     class Description(
         @XmlValue var s: String,
-    ) : MCamelDSL()
+    ) : MCamelDSL() {
+        init {
+            require(s.isNotBlank())
+        }
+    }
 
 
     @Serializable

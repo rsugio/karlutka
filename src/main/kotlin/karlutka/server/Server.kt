@@ -24,10 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.withContext
 import kotlinx.html.*
-import org.apache.camel.builder.RouteBuilder
-import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader
-import org.apache.camel.impl.DefaultCamelContext
-import org.apache.camel.support.ResourceHelper
 import java.nio.charset.StandardCharsets
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -44,48 +40,6 @@ object Server {
     val targets = mutableMapOf<String, MTarget>()
     val UUIDgenerator = Generators.timeBasedGenerator()
     lateinit var afprops: Map<String, String>
-    val camelContext = DefaultCamelContext(true)
-    val routeSources = mutableMapOf<String,String>()
-
-    init {
-        addRoute("0#грабитьКорованы", """<route id="0#грабитьКорованы">
-    <from uri="timer:thief?period=10s"/>
-    <log message="------- Граблю корованы -------"/>
-</route>""")
-    }
-
-    fun addRoute(id: String, xmlDsl: String) {
-        routeSources[id] = xmlDsl
-        val resource = ResourceHelper.fromString("memory.xml", xmlDsl)
-        val builder = XmlRoutesBuilderLoader().loadRoutesBuilder(resource) as RouteBuilder
-        camelContext.addRoutes(builder)
-        builder.configure()
-        camelContext.start()
-    }
-
-    suspend fun getCamel(call: ApplicationCall) {
-        call.respondHtml {
-            head {
-                title("Camel тык-пык")
-                link(rel = "stylesheet", href = "/styles.css", type = "text/css")
-                link(rel = "shortcut icon", href = "/favicon.ico")
-            }
-            body {
-                h1 { +"Твой друг кэмелятина" }
-                ul {
-                    camelContext.routes.forEach { r ->
-                        li {
-                            b { +r.id }
-                            +" ${r.toString()}"
-                            pre {
-                                +routeSources[r.id]!!
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     fun installRoutings(app: Application) {
         app.routing {
@@ -299,8 +253,8 @@ object Server {
                     TODO("/rep/interfaceinfo/ext/ ${call.request.queryParameters}")
                 }
             }
-            get("/camel") {
-                getCamel(call)
+            get("/FAE") {
+                //fae.route(call)
             }
 
             // ProfileProcessorVi для мониторинга из головы в ноги

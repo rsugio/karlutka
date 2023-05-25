@@ -36,12 +36,15 @@ targets:
     tmn: "https://e100999-tmn.hci.eu3.hana.ondemand.com"
     auth: e500000
 
+  - sid: fa9
+    type: FAE
+    cae: PID
+
 # тут пока свалка параметров
 httpClientThreads: 3
 httpClientConnectionTimeoutMillis: 1200
 httpClientRetryOnServerErrors: 3
 httpClientLogLevel: HEADERS
-
 
 influxdb:
   host: "http://localhost:8086"

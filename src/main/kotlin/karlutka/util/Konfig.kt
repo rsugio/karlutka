@@ -52,7 +52,7 @@ sealed class KfTarget {
         override val text: String? = null,
         val url: String,
         val auth: String = "",
-        val checkAuthResource: String = ""
+        val checkAuthResource: String = "",
     ) : KfTarget() {
         @Transient
         var basic: KfAuth.Basic? = null //TODO подумать про аутентификацию формой /logon_ui_resources/
@@ -61,12 +61,29 @@ sealed class KfTarget {
             setAuth(auths.find { it.id == auth }!!)
         }
 
-        override fun setAuth(kfa: KfAuth) {
-            require(kfa is KfAuth.Basic)
-            basic = kfa
+        override fun setAuth(auth: KfAuth) {
+            require(auth is KfAuth.Basic)
+            basic = auth
         }
 
         override fun getKind() = "PIAF"
+    }
+
+    @SerialName("FAE")
+    @Serializable
+    class FAE(
+        override val sid: String,
+        override val text: String? = null,
+        val cae: String,
+    ) : KfTarget() {
+        init {
+            require(cae.isNotBlank())
+        }
+
+        override fun loadAuths(auths: List<KfAuth>) {}
+        override fun setAuth(auth: KfAuth) {}
+        override fun getKind() = "FAE"
+
     }
 
     @SerialName("BTPNEO")
@@ -84,8 +101,8 @@ sealed class KfTarget {
 
         override fun loadAuths(auths: List<KfAuth>) {
             val kfa = auths.find { it.id == auth }
-            require(kfa != null, { "для $sid не найден пароль $auth" })
-            require(kfa is KfAuth.OAuth, { "для $sid найден пароль $auth но это не OAuth" })
+            require(kfa != null) { "для $sid не найден пароль $auth" }
+            require(kfa is KfAuth.OAuth) { "для $sid найден пароль $auth но это не OAuth" }
             oauth = kfa
         }
 
@@ -141,7 +158,7 @@ sealed class KfTarget {
 
         override fun loadAuths(auths: List<KfAuth>) {
             val kfa = auths.find { it.id == auth }
-            require(kfa != null, { "для $sid не найден пароль $auth" })
+            require(kfa != null) { "для $sid не найден пароль $auth" }
             when (kfa) {
                 is KfAuth.Basic -> {
                     basic = kfa
@@ -191,7 +208,7 @@ data class Kfg(
     fun encodeToString() = kaml.encodeToString(serializer(), this)
 
     companion object {
-        val cfg = YamlConfiguration(
+        private val cfg = YamlConfiguration(
             encodeDefaults = true, strictMode = true, extensionDefinitionPrefix = null,
             polymorphismStyle = PolymorphismStyle.Property,
             polymorphismPropertyName = "type",
@@ -201,8 +218,7 @@ data class Kfg(
         val kaml = Yaml(EmptySerializersModule(), cfg)
 
         fun parse(s: String): Kfg {
-            val k = kaml.decodeFromString(serializer(), s)
-            return k
+            return kaml.decodeFromString(serializer(), s)
         }
 
         fun parse(p: Path) = parse(p.readText(Charsets.UTF_8))
@@ -267,7 +283,7 @@ sealed class KfAuth {
 }
 
 @Serializable
-data class KfKeystore(
+class KfKeystore(
     @Serializable(with = KPathSerializer::class)
     val path: Path,
     @Serializable(with = KPasswordSerializer::class)
@@ -282,7 +298,7 @@ data class KfPasswds(
     fun encodeToString() = kaml.encodeToString(serializer(), this)
 
     companion object {
-        val cfg = YamlConfiguration(
+        private val cfg = YamlConfiguration(
             encodeDefaults = true, strictMode = true, extensionDefinitionPrefix = null,
             polymorphismStyle = PolymorphismStyle.Property,
             polymorphismPropertyName = "type",
@@ -292,8 +308,7 @@ data class KfPasswds(
         val kaml = Yaml(EmptySerializersModule(), cfg)
 
         fun parse(s: String): KfPasswds {
-            val kfauth = kaml.decodeFromString(serializer(), s)
-            return kfauth
+            return kaml.decodeFromString(serializer(), s)
         }
 
         fun parse(p: Path) = parse(p.readText(Charsets.UTF_8))

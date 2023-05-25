@@ -22,7 +22,7 @@ val ktor_version = "2.3.0"
 val kotlinx_serialization_version = "1.5.0"
 val xmlutil_version = "0.86.0"
 val kaml_version = "0.53.0"
-val h2_version = "1.4.200"
+val h2_version = "2.1.214" // "1.4.200"
 val camel_version = "4.0.0-M3"
 
 dependencies {

@@ -84,6 +84,7 @@ suspend fun main(args: Array<String>) {
             is KfTarget.BTPNEO -> target = BTPNEO(konf)
             is KfTarget.BTPCF -> target = BTPCF(konf)
             is KfTarget.CPINEO -> target = CPINEO(konf)
+            is KfTarget.FAE -> TODO()
         }
         Server.targets[target.getSid()] = target
         if (pingAuth)

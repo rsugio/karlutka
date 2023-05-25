@@ -7,6 +7,8 @@ import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.impl.DefaultCamelContext
 
 class MRouteGenerator(val ico: XICache.AllInOneParsed) {
+    val log = StringBuilder()   //лог принятия решения
+
     fun endpointFrom(fromUrl: String): Endpoint {
         val camelContext: CamelContext = DefaultCamelContext(false)
         camelContext.addRoutes(object : RouteBuilder() {
@@ -32,14 +34,13 @@ class MRouteGenerator(val ico: XICache.AllInOneParsed) {
 
     fun convertIco(): String {
         require(ico.receivers.isNotEmpty())
-        val routeId = ico.senderAttr.find { it.Name == "routeId" && it.Namespace == "camel" }!!.valueAsString()
         val fromUrl = ico.senderAttr.find { it.Name == "connection" && it.Namespace == "camel" }!!.valueAsString()
         val fromEndpoint = endpointFrom(fromUrl)
         val mep = fromEndpoint.exchangePattern
         val processor = ico.senderAttr.find { it.Name == "processor" && it.Namespace == "camel" }!!.valueAsString()
         val processor2 = ico.senderAttr.find { it.Name == "processor2" && it.Namespace == "camel" }!!.valueAsString()
-        val route = MCamelDSL.Route(routeId, MCamelDSL.From(fromUrl))
-        val log = StringBuilder()   //лог принятия решения
+        val route = MCamelDSL.Route(ico.routeId, MCamelDSL.From(fromUrl))
+
         log.append(
             """ICo: ${ico.fromParty}|${ico.fromService}|{${ico.fromIfacens}}${ico.fromIface}|${ico.toParty}|${ico.toService}
 CC: ${ico.senderCC},
@@ -47,11 +48,11 @@ sender exchangePattern: $mep
 [ICO translation]
 """
         )
-        val descr = MCamelDSL.Description("")
+        val descr = MCamelDSL.Description("непустой")
         route.add(descr)
 
-        route.add(processor)
-        route.add(processor2)
+//        route.add(processor)
+//        route.add(processor2)
         class Tmp(
             val ConditionGroupId: String,   //guid
             val pname: String,              // вида icord##, появляется в маршруте
@@ -116,8 +117,8 @@ sender exchangePattern: $mep
                 val toUrl = recv.attrs.find { it.Name == "connection" && it.Namespace == "camel" }!!.valueAsString()
                 val rproc = recv.attrs.find { it.Name == "processor" && it.Namespace == "camel" }!!.valueAsString()
                 val rproc2 = recv.attrs.find { it.Name == "processor2" && it.Namespace == "camel" }!!.valueAsString()
-                route.add(rproc)
-                route.add(rproc2)
+//                route.add(rproc)
+//                route.add(rproc2)
                 val rcve = endpointTo(toUrl)
                 route.add(MCamelDSL.To(toUrl))  //CC-recv
             } else {
