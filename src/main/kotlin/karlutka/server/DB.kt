@@ -26,6 +26,7 @@ object DB {
     lateinit var readFAE: PreparedStatement
     lateinit var insFAE: PreparedStatement
     lateinit var readFCPA: PreparedStatement
+    lateinit var readFCPAO: PreparedStatement
     lateinit var delFCPA: PreparedStatement
     lateinit var insFCPA: PreparedStatement
     lateinit var updFCPA: PreparedStatement
@@ -46,12 +47,14 @@ object DB {
         readObj = conn.prepareStatement("select num,typeid,oid,swcvid,swcvsp,key_ from PUBLIC.ESROBJ")
         insvers = conn.prepareStatement("insert into PUBLIC.ESRVER(srcnum,objnum,vid,text) values(?1,?2,?3,?4)", 1)
         inslink = conn.prepareStatement("insert into PUBLIC.ESRVLINK(vernum,role,kpos,objnum) values(?1,?2,?3,?4)")
+        // FAE
         readFAE = conn.prepareStatement("select sid, info from PUBLIC.FAE where sid=?")
         insFAE = conn.prepareStatement("insert into PUBLIC.FAE(sid,info) values(?1,?2)")
-        readFCPA = conn.prepareStatement("select name,blobv from PUBLIC.FAE_CPA where sid=?1 and oid=?2")
+        readFCPA = conn.prepareStatement("select NAME,XML from PUBLIC.FAE_CPA where sid=?1 and oid=?2")
+        readFCPAO = conn.prepareStatement("select TYPEID,XML from PUBLIC.FAE_CPA where sid=?1")
         delFCPA = conn.prepareStatement("delete from PUBLIC.FAE_CPA where sid=?1 and oid=?2")
-        updFCPA = conn.prepareStatement("update PUBLIC.FAE_CPA set blobv=?3 where sid=?1 and oid=?2")
-        insFCPA = conn.prepareStatement("insert into PUBLIC.FAE_CPA(sid,oid,typeid,name,blobv) values(?1,?2,?3,?4,?5)")
+        updFCPA = conn.prepareStatement("update PUBLIC.FAE_CPA set XML=?3 where SID=?1 and OID=?2")
+        insFCPA = conn.prepareStatement("insert into PUBLIC.FAE_CPA(sid,oid,typeid,name,xml) values(?1,?2,?3,?4,?5)")
 
         //readSwcvList()
 //        println("прочитаны SWCV")
@@ -66,7 +69,7 @@ object DB {
         println("H2 отсоединён")
     }
 
-    private fun setArgs(ps: PreparedStatement, vararg args: Any?) {
+    fun setArgs(ps: PreparedStatement, vararg args: Any?) {
         var ix = 1
         for (arg in args) {
             when (arg) {
@@ -93,7 +96,7 @@ object DB {
         return ps.generatedKeys.getInt(1)
     }
 
-    fun executeInsert(ps: PreparedStatement, vararg args: Any?) {
+    fun executeUpdate(ps: PreparedStatement, vararg args: Any?) {
         setArgs(ps, *args)
         require(ps.executeUpdate() == 1)
     }
@@ -142,7 +145,7 @@ object DB {
     fun writeSwcv(sw: MPI.Swcv) {
 //        require(!swcv.contains(sw))
         try {
-            executeInsert(insswcv, sw.guid, sw.caption, sw.ws_name, sw.vendor, sw.version, sw.description)
+            executeUpdate(insswcv, sw.guid, sw.caption, sw.ws_name, sw.vendor, sw.version, sw.description)
         } catch (_: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException) {
             // Уже есть в БД. Читать не пробуем чтобы не тормозило.
         }
@@ -187,7 +190,7 @@ object DB {
 
     fun writeEsrObjLink(vernum: Int, role: String, kpos: Int, linkTo: MPI.EsrObj) {
         require(linkTo.num != 0)
-        executeInsert(inslink, vernum, role, kpos, linkTo.num)
+        executeUpdate(inslink, vernum, role, kpos, linkTo.num)
     }
 
     fun dot1() {

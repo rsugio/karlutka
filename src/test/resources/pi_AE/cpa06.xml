@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <CacheRefresh>
 	<DELETED_OBJECTS>
 		<SAPXI_OBJECT_KEY>
@@ -116,7 +115,7 @@
 				<Attribute xmlns="">
 					<Name>routeId</Name>
 					<Namespace>camel</Namespace>
-					<Value>test2sender</Value>
+					<Value>test3sender</Value>
 				</Attribute>
 			</AdapterTypeData>
 		</cp:ChannelAttributes>

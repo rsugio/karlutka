@@ -1,6 +1,8 @@
 import KT.Companion.props
+import KT.Companion.x
 import io.ktor.client.plugins.logging.*
 import karlutka.clients.PI
+import karlutka.parsers.pi.XICache
 import karlutka.server.DB
 import karlutka.server.FAE
 import karlutka.util.KTempFile
@@ -11,7 +13,7 @@ import org.junit.jupiter.api.Test
 import java.net.URI
 
 class KFAETests {
-    private val prop = props(".etc/fa9.properties")
+    private val prop = props(".etc/fa0.properties")
     private val caecfg = KfTarget.PIAF(prop["caesid"]!!, null, prop["caeuri"]!!)
     private val sldcfg = KfTarget.PIAF(prop["sldsid"]!!, null, prop["slduri"]!!)
     private val cae: PI
@@ -38,5 +40,18 @@ class KFAETests {
         runBlocking {
             fae.registerSLD(prop["faedomain"], this)
         }
+    }
+
+    @Test
+    fun cpa() {
+        val cpa = XICache.decodeCacheRefreshFromReader(x("/pi_AE/cpa06.xml"))
+        runBlocking {
+            fae.cpalistener(cpa)
+        }
+    }
+
+    @Test
+    fun nop() {
+        println(fae.sid)
     }
 }

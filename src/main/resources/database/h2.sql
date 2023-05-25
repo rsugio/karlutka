@@ -1,17 +1,17 @@
 // схема единой базы данных
 CREATE TABLE IF NOT EXISTS PUBLIC.FAE
 (
-    SID  CHAR(3)     not null primary key,
-    INFO VARCHAR(64) not null // просто комментарий для понятности
+    SID  CHAR(3) not null primary key,
+    INFO VARCHAR not null // просто комментарий для понятности
 );
 
 CREATE TABLE IF NOT EXISTS PUBLIC.FAE_CPA
 (
     SID    CHAR(3) references PUBLIC.FAE (SID),
-    OID    CHAR(32)    not null, // ObjectID, guid
-    TYPEID VARCHAR(32) not null, // MPI.ETypeID, справочно
-    NAME   VARCHAR(64) not null, // человекочитаемое имя, для навигации
-    BLOBV  BLOB        not null, // сериализованное содержимое объекта
+    OID    CHAR(32) not null, // ObjectID, guid
+    TYPEID VARCHAR  not null, // MPI.ETypeID, справочно
+    NAME   VARCHAR  not null, // человекочитаемое имя, для навигации
+    XML    VARCHAR  not null, // XML с содержимым объекта
     constraint PK primary key (SID, OID)
 );
 

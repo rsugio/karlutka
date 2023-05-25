@@ -1,12 +1,9 @@
 package karlutka.parsers.pi
 
 import karlutka.models.MPI
-import kotlinx.serialization.Contextual
-import kotlinx.serialization.Polymorphic
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.modules.SerializersModule
-import nl.adaptivity.xmlutil.ExperimentalXmlUtilApi
 import nl.adaptivity.xmlutil.XmlDelegatingReader
 import nl.adaptivity.xmlutil.XmlReader
 import nl.adaptivity.xmlutil.serialization.XML
@@ -15,6 +12,7 @@ import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
 import nl.adaptivity.xmlutil.util.CompactFragment
 
+@Suppress("unused")
 class XICache {
     enum class EOp { EQ, NE, CP, EX }
 
@@ -22,10 +20,10 @@ class XICache {
     @XmlSerialName("CacheRefresh", "", "")
     class CacheRefresh(
         val DELETED_OBJECTS: DELETED_OBJECTS? = null,
-        val Party: List<Party>,                             // может быть, не читать
+        val Party: List<Party>,
         val Channel: List<Channel>,
         val AllInOne: List<AllInOne>,
-        val ServiceInterface: List<ServiceInterface>,       // может быть, не читать
+        val ServiceInterface: List<ServiceInterface>,
         val MPP_MAP: List<MPP_MAP>,
         @XmlSerialName("AdapterMetaData", "", "") val AdapterMetaData: List<@Contextual CompactFragment>,
         @XmlSerialName("Service", "", "") val Service: List<@Contextual CompactFragment>,
@@ -87,7 +85,9 @@ class XICache {
         @XmlElement val ToPartySchema: String,
         @XmlElement val ChannelAttributes: ChannelAttributes,
         @XmlElement val PipelineAttributes: PipelineAttributes,
-    )
+    ) {
+        fun encodeToString() = parser.encodeToString(this)
+    }
 
     @Serializable
     @XmlSerialName("ChannelAttributes", "", "")// "urn:sap-com:xi:xiChannel", "cp")
@@ -111,10 +111,10 @@ class XICache {
         fun valueAsString(): String {
             require(Value.isTable == null || Value.isTable == false)
             require(Value.isPassword == null || Value.isPassword == false)
-            if (Value.data.isEmpty())
-                return ""
+            return if (Value.data.isEmpty())
+                ""
             else if (Value.data.size == 1)
-                return Value.data[0].toString()
+                Value.data[0].toString()
             else
                 throw NotImplementedError()
         }
@@ -128,10 +128,6 @@ class XICache {
         @XmlElement(false) val encryption: String?,
         @XmlValue val data: List<@Polymorphic Any?>,
     ) {
-        fun getValue() {
-
-        }
-
         companion object {
             fun module(): SerializersModule {
                 return SerializersModule {
@@ -195,6 +191,7 @@ class XICache {
     )
 
     data class AllInOneParsed(
+        val routeId: String,
         val fromParty: String,
         val fromService: String,
         val toParty: String,
@@ -273,7 +270,18 @@ class XICache {
         @XmlElement val Conditions: Conditions?,    // нет в полной
         @XmlElement val ScenarioConfiguration: ScenarioConfiguration?,      // нет в полной
     ) {
-        fun toParsed(cr: CacheRefresh): AllInOneParsed {
+        fun encodeToString() = parser.encodeToString(this)
+
+        /**
+         * Для икохи возвращает перечень Channel.ObjectID
+         */
+        fun getChannelsOID(): List<String> {
+            val lst = ReceiverConnectivityList.ReceiverConnectivity.map{it.ChannelObjectId}.distinct().toMutableList()
+            lst.add(SenderConnectivity.ChannelObjectId)
+            return lst
+        }
+
+        fun toParsed(lstChannels: List<Channel>): AllInOneParsed {
             requireNotNull(Conditions)
             requireNotNull(NamespaceMapping)
             requireNotNull(NoReceiverBehaviour)
@@ -288,7 +296,7 @@ class XICache {
                 AllInOneParsed.ChannelR(
                     c.ChannelObjectId,
                     receivers.find { r -> r.party == c.ToPartyName && r.service == c.ToServiceName }!!,
-                    cr.Channel.find { it.ChannelObjectId == c.ChannelObjectId }?.ChannelAttributes?.AdapterTypeData?.Attribute ?: listOf()
+                    lstChannels.find { it.ChannelObjectId == c.ChannelObjectId }?.ChannelAttributes?.AdapterTypeData?.Attribute ?: listOf()
                 )
             }.distinctBy { it.id }  //Если один канал несколько раз
             val conditions = Conditions.RDS_CONDSHORT.map { rds ->
@@ -304,9 +312,9 @@ class XICache {
                 )
             }
             assert(conditions.distinct().size == conditions.size)
-            val sender = cr.Channel.find { it.ChannelObjectId == SenderConnectivity.ChannelObjectId }!!
-
-            val parsed = AllInOneParsed(
+            val sender = lstChannels.find { it.ChannelObjectId == SenderConnectivity.ChannelObjectId }!!
+            return AllInOneParsed(
+                sender.ChannelAttributes.AdapterTypeData.Attribute.find{it.Name=="routeId" && it.Namespace=="camel"}!!.valueAsString(),
                 FromPartyName,
                 FromServiceName,
                 ToPartyName,
@@ -322,10 +330,8 @@ class XICache {
                 sender.ChannelName,
                 sender.ChannelAttributes.AdapterTypeData.Attribute
             )
-            return parsed
         }
     }
-
 
     @Serializable
     @XmlSerialName("SenderConnectivity", "", "")
@@ -649,14 +655,9 @@ class XICache {
     )
 
     companion object {
-        @OptIn(ExperimentalXmlUtilApi::class)
-        private val parser = XML(Value.module()) {
+        val parser = XML(Value.module()) {
             defaultPolicy {
-//                pedantic = false
                 autoPolymorphic = true
-//                unknownChildHandler = UnknownChildHandler { xr, kind, descriptor, name, candidates ->
-//                    emptyList()
-//                }
             }
         }
 
@@ -666,5 +667,7 @@ class XICache {
         }
 
         fun decodeCacheRefreshFromReader(xr: XmlReader) = parser.decodeFromReader<CacheRefresh>(NamespaceNormalizingReader(xr))
+        fun decodeChannelFromString(s: String) = parser.decodeFromString<Channel>(s)
+        fun decodeAllInOneFromString(s: String) = parser.decodeFromString<AllInOne>(s)
     }
 }
