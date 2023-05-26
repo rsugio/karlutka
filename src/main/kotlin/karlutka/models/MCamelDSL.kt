@@ -61,6 +61,14 @@ sealed class MCamelDSL {
     class To(
         val uri: String,
     ) : MCamelDSL()
+    @Serializable
+    @XmlSerialName("multicast", "", "")
+    class Multicast(
+        val parallelProcessing: Boolean,
+        @XmlValue val children: MutableList<MCamelDSL> = mutableListOf(),
+    ) : MCamelDSL() {
+        constructor(parallelProcessing: Boolean, vararg to: MCamelDSL) : this(parallelProcessing, to.toMutableList())
+    }
 
     @Serializable
     @XmlSerialName("stop", "", "")

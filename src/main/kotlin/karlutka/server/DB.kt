@@ -31,6 +31,7 @@ object DB {
     lateinit var insFCPA: PreparedStatement
     lateinit var updFCPA: PreparedStatement
     lateinit var insFAEM: PreparedStatement
+    lateinit var selectFAEM: PreparedStatement
 
     val swcv = mutableListOf<MPI.Swcv>()
     val esrobjects = mutableListOf<MPI.EsrObj>()
@@ -57,7 +58,8 @@ object DB {
         updFCPA = conn.prepareStatement("update PUBLIC.FAE_CPA set XML=?3 where SID=?1 and OID=?2")
         insFCPA = conn.prepareStatement("insert into PUBLIC.FAE_CPA(sid,oid,typeid,name,xml) values(?1,?2,?3,?4,?5)")
         //   мониторинг
-        insFAEM = conn.prepareStatement("insert into PUBLIC.FAE_MSG(SID,MESSAGEID,DATETIME,SENDER,RECEIVER,BODY) values(?1,?2,?3,?4,?5,?6)")
+        insFAEM = conn.prepareStatement("insert into PUBLIC.FAE_MSG(SID,ROUTEID,MESSAGEID,DATETIME,SENDER,RECEIVER,BODY) values(?1,?2,?3,?4,?5,?6,?7)")
+        selectFAEM = conn.prepareStatement("select ROUTEID,MESSAGEID,DATETIME,SENDER,RECEIVER,BODY from PUBLIC.FAE_MSG where sid=?1 order by DATETIME DESC")
 
         //readSwcvList()
 //        println("прочитаны SWCV")
@@ -80,6 +82,7 @@ object DB {
                 is String -> ps.setString(ix++, arg)
                 is Boolean -> ps.setBoolean(ix++, arg)
                 is Int -> ps.setInt(ix++, arg)
+                is Long -> ps.setLong(ix++, arg)
                 is ByteArray -> ps.setBlob(ix++, arg.inputStream())
                 is InputStream -> ps.setBlob(ix++, arg)
                 else -> error(arg.javaClass)

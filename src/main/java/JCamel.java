@@ -1,16 +1,13 @@
 import org.apache.camel.CamelContext;
-import org.apache.camel.Endpoint;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader;
 import org.apache.camel.impl.DefaultCamelContext;
-import org.apache.camel.model.RouteDefinition;
 import org.apache.camel.spi.InflightRepository;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.support.ResourceHelper;
 
-import java.net.URI;
 import java.time.Instant;
 
 // для проверки работы ideaj camel plugin
@@ -45,7 +42,7 @@ public class JCamel {
 
     public static void main(String[] args) throws Exception {
 
-        CamelContext context = new DefaultCamelContext();
+        CamelContext context = new DefaultCamelContext(true);
         context.getInflightRepository().setInflightBrowseEnabled(true);
         context.addRoutes(new R1());
 

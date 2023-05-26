@@ -62,7 +62,7 @@ class KAdapterEngineTests {
         val c1 = MCamelDSL.Choice()
         c1.whens.add(w1)
         c1.otherwise.add(MCamelDSL.Log("НеМосква"))
-        c1.otherwise.add(MCamelDSL.To("file:/camel/НеМосква"))
+        c1.otherwise.add(MCamelDSL.Multicast(false, MCamelDSL.To("file:/camel/НеМосква")))
         r.add(c1)
         println(r.encodeToString(mapOf("s1" to "urn:s1", "s2" to "urn:s2")))
         //TODO сделать здесь загрузку роута для проверки, не ломается ли парсер

@@ -21,7 +21,6 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.*
-import org.apache.camel.Exchange
 import org.apache.camel.Processor
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader
@@ -31,7 +30,9 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.net.URI
 import java.nio.charset.StandardCharsets
+import java.time.Clock
 import java.time.Instant
+import java.time.ZoneId
 import kotlin.io.path.outputStream
 import kotlin.io.path.readBytes
 
@@ -61,6 +62,26 @@ class FAE(
         logger.info("Created FAE instance: $sid on $fakehostdb, $afFaHostdb")
     }
 
+    private val procmonFrom = Processor { exc ->
+        val dt = Instant.now().toEpochMilli()
+        val body = exc.`in`.body.toString()
+        val x = routes[exc.fromRouteId]!!
+        val from = "${x.fromParty}|${x.fromService}|{${x.fromIfacens}}${x.fromIface}"
+        DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, "", body)
+    }
+
+    private val procmonTo = Processor { exc ->
+        val dt = Instant.now().toEpochMilli()
+        val body = exc.`in`.body.toString()
+        val rep = exc.context.inflightRepository
+        val hist = exc.context.messageHistoryFactory
+        val from = ""
+        val message = exc.getMessage()
+        val to = exc.getProperty("FAEReceiver") ?: "?"
+        rep.build()
+        DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, to, body)
+    }
+
     init {
         var rs = DB.executeQuery(DB.readFAE, sid)
         if (!rs.next()) {
@@ -78,12 +99,15 @@ class FAE(
         sldHost = getSldServer()
         namespacepath = Cim.NAMESPACEPATH(sldHost, SLD_CIM.sldactive)
         camelContext.inflightRepository.isInflightBrowseEnabled = true
+        camelContext.registry.bind("procmonFrom", procmonFrom)
+        camelContext.registry.bind("procmonTo", procmonTo)
         camelContext.setAutoCreateComponents(true)
         camelContext.name = afFaHostdb
         allinone.forEach { ico ->
             // создание или изменение
             generateRoute(ico)
         }
+        runBlocking {registerSLD(GlobalScope)}
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -96,15 +120,6 @@ class FAE(
 
     private fun urlOf(s: String = ""): String {
         return "$realHostPortURI/$s"
-    }
-
-    @Suppress("unused")
-    class ProcMon : Processor {
-        override fun process(exc: Exchange) {
-            val dt = Instant.now().toString()
-            val body = exc.`in`.body.toString()
-            DB.executeUpdateStrict(DB.insFAEM, "sid", exc.exchangeId, dt, exc.fromRouteId, "", body)
-        }
     }
 
     /**
@@ -243,98 +258,139 @@ class FAE(
         camelContext.start()
     }
 
-    fun installRouting(app: Application) {
-        app.routing {
-            get("/XI") {
-                call.respondHtml {
-                    head {
-                        title("Сервлет XI-протокола")
-                        link(rel = "stylesheet", href = "/styles.css", type = "text/css")
-                        link(rel = "shortcut icon", href = "/favicon.ico")
+    fun installRouting(app: Application) = app.routing {
+        get("/XI") {
+            call.respondHtml {
+                head {
+                    title("Сервлет XI-протокола")
+                    link(rel = "stylesheet", href = "/styles.css", type = "text/css")
+                    link(rel = "shortcut icon", href = "/favicon.ico")
+                }
+                body {
+                    pre {
+                        +"Привет! Это сервлет XI-протокола, который надо вызывать через POST а не GET.\n\nТӥледлы удалтон."
                     }
-                    body {
-                        pre {
-                            +"Привет! Это сервлет XI-протокола, который надо вызывать через POST а не GET.\n\nТӥледлы удалтон."
+                }
+            }
+        }
+        post("/XI") {
+            xi(call)
+        }
+        post("/rtc") {
+            // Runtime check
+            rtc(call)
+        }
+        post("/run/rtc") {
+            rtc(call)
+        }
+        post("/rwb/regtest") {
+            rtc(call)
+        }
+        get("/mdt/version.jsp") {
+            call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
+        }
+        post("/run/value_mapping_cache/{...}") {
+            //http://aaaa:80/run/value_mapping_cache/ext?method=invalidateCache&mode=Invalidate&consumer=af.fa0.fake0db&consumer_mode=IR
+            val query = call.request.queryString()
+            cae.valueMappingCache(query)
+            call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
+        }
+        post("/CPACache/invalidate/{...}") {
+            val query = call.request.queryParameters    //method=InvalidateCache или другой
+            val form = call.receiveParameters()   //[consumer=[af.fa0.fake0db], consumer_mode=[AE]]
+            val consumer_mode = form["consumer_mode"]!!
+            val consumer = form["consumer"]!!
+            println("/CPACache/invalidate $form $query")
+            require(consumer_mode == "AE")
+            // получаем изменившиеся объекты
+            val changed = cae.dirHmiCacheRefreshService("C", consumer)
+            cpalistener(changed)
+            // помечаем как обновлённые
+            val done = cae.dirHmiCacheRefreshService("D", consumer)
+            require(done.isEmpty())
+            call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
+        }
+        post("/AdapterFramework/regtest") {
+            rtc(call)
+        }
+        post("/AdapterFramework/rtc") {
+            rtc(call)
+        }
+        post("/AdapterFramework/rwbAdapterAccess/int") {
+            hmi(call)
+        }
+
+        // ProfileProcessorVi для мониторинга из головы в ноги
+        post("/ProfileProcessor/basic") {
+            val b = call.receiveText()
+            TODO(b)
+        }
+
+        get("/FAE") {
+            call.respondHtml {
+                head {
+                    title("FAE кокпит")
+                    link(rel = "stylesheet", href = "/styles.css", type = "text/css")
+                    link(rel = "shortcut icon", href = "/favicon.ico")
+                }
+                body {
+                    h1 { +"FAE кокпит" }
+                    h2 { +"Объекты из CAE ${cae.konfig.sid}" }
+                    ul {
+                        routes.forEach { k, v ->
+                            li {
+                                b { +k }
+                                pre { +v.xmlDsl }
+                            }
                         }
                     }
                 }
             }
-            post("/XI") {
-                xi(call)
-            }
-            post("/rtc") {
-                // Runtime check
-                rtc(call)
-            }
-            post("/run/rtc") {
-                rtc(call)
-            }
-            post("/rwb/regtest") {
-                rtc(call)
-            }
-            get("/mdt/version.jsp") {
-                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
-            }
-            post("/run/value_mapping_cache/{...}") {
-                //http://aaaa:80/run/value_mapping_cache/ext?method=invalidateCache&mode=Invalidate&consumer=af.fa0.fake0db&consumer_mode=IR
-                val query = call.request.queryString()
-                cae.valueMappingCache(query)
-                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
-            }
-            post("/CPACache/invalidate/{...}") {
-                val query = call.request.queryParameters    //method=InvalidateCache или другой
-                val form = call.receiveParameters()   //[consumer=[af.fa0.fake0db], consumer_mode=[AE]]
-                val consumer_mode = form["consumer_mode"]!!
-                val consumer = form["consumer"]!!
-                println("/CPACache/invalidate $form $query")
-                require(consumer_mode == "AE")
-                // получаем изменившиеся объекты
-                val changed = cae.dirHmiCacheRefreshService("C", consumer)
-                cpalistener(changed)
-                // помечаем как обновлённые
-                val done = cae.dirHmiCacheRefreshService("D", consumer)
-                require(done.isEmpty())
-                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
-            }
-            post("/AdapterFramework/regtest") {
-                rtc(call)
-            }
-            post("/AdapterFramework/rtc") {
-                rtc(call)
-            }
-            post("/AdapterFramework/rwbAdapterAccess/int") {
-                hmi(call)
-            }
+        } // get /FAE
+        get("/pimon") {
+            val msktz = ZoneId.of("Europe/Moscow")
+            val msk = Clock.system(msktz)
 
-            // ProfileProcessorVi для мониторинга из головы в ноги
-            post("/ProfileProcessor/basic") {
-                val b = call.receiveText()
-                TODO(b)
-            }
-
-            get("/FAE") {
-                call.respondHtml {
-                    head {
-                        title("FAE кокпит")
-                        link(rel = "stylesheet", href = "/styles.css", type = "text/css")
-                        link(rel = "shortcut icon", href = "/favicon.ico")
-                    }
-                    body {
-                        h1 { +"FAE кокпит" }
-                        h2 { +"Объекты из CAE ${cae.konfig.sid}" }
-                        ul {
-                            routes.forEach { k, v ->
-                                li {
-                                    b{ +k}
-                                    pre { +v.xmlDsl}
+            call.respondHtml {
+                head {
+                    title("FAE pimon")
+                    link(rel = "stylesheet", href = "/styles.css", type = "text/css")
+                    link(rel = "shortcut icon", href = "/favicon.ico")
+                }
+                body {
+                    table("pimon") {
+                        thead {
+                            tr {
+                                td { +"routeId" }
+                                td { +"exchangeId" }
+                                td { +"datetime" }
+                                td { +"from" }
+                                td { +"to" }
+                                td { +"body" }
+                            }
+                        }
+                        tbody {
+                            val rs = DB.executeQuery(DB.selectFAEM, sid)
+                            while (rs.next()) {
+                                tr {
+                                    td { +rs.getString(1) }
+                                    td { +rs.getString(2) }
+                                    td {
+                                        val d = Instant.ofEpochMilli(rs.getLong(3)).atZone(msktz)
+                                        +d.toLocalDateTime().toLocalTime().toString()
+                                    }
+                                    td { +rs.getString(4) }
+                                    td { +rs.getString(5) }
+                                    td { +rs.getString(6) }
                                 }
                             }
                         }
                     }
                 }
-            } // get /FAE
-        }
-    } // routing
+            }
+        } // get /FAE
+    }
+
 
     suspend fun hmi(call: ApplicationCall) {
         val s = call.receiveText()
