@@ -1,27 +1,47 @@
 package karlutka.server
 
+import com.fasterxml.uuid.Generators
+import com.fasterxml.uuid.impl.TimeBasedGenerator
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.html.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import io.ktor.util.*
 import karlutka.clients.PI
 import karlutka.models.MPI
 import karlutka.models.MRouteGenerator
 import karlutka.models.MTarget
-import karlutka.parsers.pi.Cim
-import karlutka.parsers.pi.SLD_CIM
-import karlutka.parsers.pi.XICache
+import karlutka.parsers.pi.*
+import karlutka.util.KTempFile
 import karlutka.util.KfTarget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.runBlocking
+import kotlinx.html.*
+import org.apache.camel.Exchange
+import org.apache.camel.Processor
+import org.apache.camel.builder.RouteBuilder
+import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader
 import org.apache.camel.impl.DefaultCamelContext
+import org.apache.camel.support.ResourceHelper
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.net.URI
+import java.nio.charset.StandardCharsets
+import java.time.Instant
+import kotlin.io.path.outputStream
+import kotlin.io.path.readBytes
 
 /**
  * Fake Adapter Engine
  */
 class FAE(
     val sid: String,
-    val fakehostdb: String,
-    val realHostPortURI: URI,
+    private val fakehostdb: String,
+    private val realHostPortURI: URI,
     private val cae: PI,
     private val sld: PI,
 ) : MTarget {
@@ -30,17 +50,21 @@ class FAE(
     private val namespacepath: Cim.NAMESPACEPATH
     private val channels = mutableListOf<XICache.Channel>()
     private val allinone = mutableListOf<XICache.AllInOne>()
+    private val routes = mutableMapOf<String, XICache.AllInOneParsed>()
     var domain: String? = null
     val camelContext = DefaultCamelContext(true)
-    val routeSources = mutableMapOf<String,String>()
+    private val uuidgeneratorxi: TimeBasedGenerator = Generators.timeBasedGenerator()
+    val logger: Logger = LoggerFactory.getLogger(FAE::javaClass.name)!!
+
     constructor(konf: KfTarget.FAE, cae: PI, sld: PI) : this(konf.sid, konf.fakehostdb, URI(konf.realHostPortURI), cae, sld) {
         domain = konf.domain
+        logger.info("Created FAE instance: $sid on $fakehostdb, $afFaHostdb")
     }
 
     init {
         var rs = DB.executeQuery(DB.readFAE, sid)
         if (!rs.next()) {
-            DB.executeUpdate(DB.insFAE, sid, afFaHostdb)
+            DB.executeUpdateStrict(DB.insFAE, sid, afFaHostdb)
         }
         rs = DB.executeQuery(DB.readFCPAO, sid)
         while (rs.next()) {
@@ -53,6 +77,13 @@ class FAE(
         }
         sldHost = getSldServer()
         namespacepath = Cim.NAMESPACEPATH(sldHost, SLD_CIM.sldactive)
+        camelContext.inflightRepository.isInflightBrowseEnabled = true
+        camelContext.setAutoCreateComponents(true)
+        camelContext.name = afFaHostdb
+        allinone.forEach { ico ->
+            // создание или изменение
+            generateRoute(ico)
+        }
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -67,24 +98,32 @@ class FAE(
         return "$realHostPortURI/$s"
     }
 
+    @Suppress("unused")
+    class ProcMon : Processor {
+        override fun process(exc: Exchange) {
+            val dt = Instant.now().toString()
+            val body = exc.`in`.body.toString()
+            DB.executeUpdateStrict(DB.insFAEM, "sid", exc.exchangeId, dt, exc.fromRouteId, "", body)
+        }
+    }
+
     /**
      * Регистрирует FAE в SLD
      * Если domain непустой то добавляет также в него
      */
-    @Suppress("DuplicatedCode")
     suspend fun registerSLD(scope: CoroutineScope) {
         // Ищем в SLD все XI-домены
         var x = SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_XIDomain)
         x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
         val domains = x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.VALUE_NAMEDINSTANCE
-        // domains - см src\test\resources\pi_SLD\cim24enuminstances_SAP_XIDomain.xml
+        // domains - см пример src\test\resources\pi_SLD\cim24enuminstances_SAP_XIDomain.xml
 
         val afname = SLD_CIM.Classes.SAP_XIAdapterFramework.toInstanceName2(afFaHostdb)
         val af1 = sld.sldop(SLD_CIM.createInstance(afname, mapOf("Caption" to "Adapter Engine on $afFaHostdb")), scope)
         val af1rez = Cim.decodeFromReader(af1.await().bodyAsXmlReader())
         require(af1rez.isCreatedOrAlreadyExists())
         if (domain != null && domain!!.isNotBlank()) {
-            // Ищем домен of CAE
+            // Ищем домен центрального движка
             val foundDomain = domains.find { d -> d.INSTANCENAME.getKeyValue("Name") == domain }?.INSTANCENAME
             if (foundDomain != null) {
                 // запрошенный домен действительно существует, ассоциируем его с FAE
@@ -192,11 +231,224 @@ class FAE(
         return
     }
 
-    fun generateRoute(ico: XICache.AllInOne) {
+    private fun generateRoute(ico: XICache.AllInOne) {
         val required = ico.getChannelsOID().map { oid -> channels.find { it.ChannelObjectId == oid }!! }
-        val gen = MRouteGenerator(ico.toParsed(required))
-        val route = gen.convertIco()
-        println(route)
+        val parsed = ico.toParsed(required)
+        parsed.routeGenerator = MRouteGenerator(parsed)
+        routes[parsed.routeId] = parsed
+        parsed.xmlDsl = parsed.routeGenerator.convertIco()
+        val resource = ResourceHelper.fromString("memory.xml", parsed.xmlDsl)
+        val builder = XmlRoutesBuilderLoader().loadRoutesBuilder(resource) as RouteBuilder
+        camelContext.addRoutes(builder)
+        camelContext.start()
+    }
+
+    fun installRouting(app: Application) {
+        app.routing {
+            get("/XI") {
+                call.respondHtml {
+                    head {
+                        title("Сервлет XI-протокола")
+                        link(rel = "stylesheet", href = "/styles.css", type = "text/css")
+                        link(rel = "shortcut icon", href = "/favicon.ico")
+                    }
+                    body {
+                        pre {
+                            +"Привет! Это сервлет XI-протокола, который надо вызывать через POST а не GET.\n\nТӥледлы удалтон."
+                        }
+                    }
+                }
+            }
+            post("/XI") {
+                xi(call)
+            }
+            post("/rtc") {
+                // Runtime check
+                rtc(call)
+            }
+            post("/run/rtc") {
+                rtc(call)
+            }
+            post("/rwb/regtest") {
+                rtc(call)
+            }
+            get("/mdt/version.jsp") {
+                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
+            }
+            post("/run/value_mapping_cache/{...}") {
+                //http://aaaa:80/run/value_mapping_cache/ext?method=invalidateCache&mode=Invalidate&consumer=af.fa0.fake0db&consumer_mode=IR
+                val query = call.request.queryString()
+                cae.valueMappingCache(query)
+                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
+            }
+            post("/CPACache/invalidate/{...}") {
+                val query = call.request.queryParameters    //method=InvalidateCache или другой
+                val form = call.receiveParameters()   //[consumer=[af.fa0.fake0db], consumer_mode=[AE]]
+                val consumer_mode = form["consumer_mode"]!!
+                val consumer = form["consumer"]!!
+                println("/CPACache/invalidate $form $query")
+                require(consumer_mode == "AE")
+                // получаем изменившиеся объекты
+                val changed = cae.dirHmiCacheRefreshService("C", consumer)
+                cpalistener(changed)
+                // помечаем как обновлённые
+                val done = cae.dirHmiCacheRefreshService("D", consumer)
+                require(done.isEmpty())
+                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
+            }
+            post("/AdapterFramework/regtest") {
+                rtc(call)
+            }
+            post("/AdapterFramework/rtc") {
+                rtc(call)
+            }
+            post("/AdapterFramework/rwbAdapterAccess/int") {
+                hmi(call)
+            }
+
+            // ProfileProcessorVi для мониторинга из головы в ноги
+            post("/ProfileProcessor/basic") {
+                val b = call.receiveText()
+                TODO(b)
+            }
+
+            get("/FAE") {
+                call.respondHtml {
+                    head {
+                        title("FAE кокпит")
+                        link(rel = "stylesheet", href = "/styles.css", type = "text/css")
+                        link(rel = "shortcut icon", href = "/favicon.ico")
+                    }
+                    body {
+                        h1 { +"FAE кокпит" }
+                        h2 { +"Объекты из CAE ${cae.konfig.sid}" }
+                        ul {
+                            routes.forEach { k, v ->
+                                li {
+                                    b{ +k}
+                                    pre { +v.xmlDsl}
+                                }
+                            }
+                        }
+                    }
+                }
+            } // get /FAE
+        }
+    } // routing
+
+    suspend fun hmi(call: ApplicationCall) {
+        val s = call.receiveText()
+        val q = call.request.queryString()
+        println("(262) ${call.request.path()}?$q with plain text $s")
+        val i = Hmi.decodeInstanceFromString(s)
+        val hr = i.toHmiRequest()
+        println("${call.request.path()} with service=${hr.ServiceId} methodId=${hr.MethodId} methodInput=${hr.MethodInput}")
+
+        var j: Hmi.HmiResponse = hr.copyToResponse("text/plain", "")
+        if (hr.ServiceId == "rwbAdapterAccess" && hr.MethodId == "select") {
+            val hitlist = hr.MethodInput!!["hitlist"]!!
+            println("\n(270) histlist=$hitlist\n")
+            val objid = hr.MethodInput["objid"]
+            when (hitlist) {
+                "parties" -> j = hr.copyToResponse("text/plain", "1\n50455e21531b36fa958fefae3be41689\tP_PARTY\n")
+                "party" -> {
+                    val xml = """<cp:Party xmlns:cp="urn:sap-com:xi:xiParty">
+            <cp:PartyObjectId>50455e21531b36fa958fefae3be41689</cp:PartyObjectId>
+            <cp:PartyName>P_PARTY</cp:PartyName>
+            <cp:PartyIdentifier>
+                <cp:Identifier>P_PARTY</cp:Identifier>
+                <cp:Agency>http://sap.com/xi/XI</cp:Agency>
+                <cp:Schema>XIParty</cp:Schema>
+            </cp:PartyIdentifier>
+        </cp:Party>"""
+                    j = hr.copyToResponse(
+                        "text/xml",
+                        "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) " + xml.encodeBase64()
+                    )
+                }
+
+                "services", "channels", "admds" -> {
+                    j = hr.copyToResponse("text/plain", "0")
+                }
+
+                "cache" -> j = hr.copyToResponse(
+                    "text/xml",
+                    "(2178AB70A0DA11D7ADBAF2370A140A60 TYPE I) PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPENhY2hlU3RhdGU+PFN0YXRlPlM8L1N0YXRlPjxFcnJvciAvPjxDb25maXJtYXRpb25YTUwgLz48Q2FjaGVVcGRhdGVYTUwgLz48Q29uZmlybWF0aW9uWE1MSW5kaWNhdG9yPmZhbHNlPC9Db25maXJtYXRpb25YTUxJbmRpY2F0b3I+PENhY2hlVXBkYXRlWE1MSW5kaWNhdG9yPmZhbHNlPC9DYWNoZVVwZGF0ZVhNTEluZGljYXRvcj48VGltZXN0YW1wPjE2ODI2Njc4OTM5Njc8L1RpbWVzdGFtcD48YWU+dHJ1ZTwvYWU+PC9DYWNoZVN0YXRlPg=="
+                )
+            }
+        } else if (hr.MethodId == "InvalidateCache")
+            j = hr.copyToResponse("text/plain", "R\tU\t\t1682667894485")
+        call.respondOutputStream(ContentType.Text.Xml, HttpStatusCode.OK) { j.toInstance().encodeToStream(this) }
+    }
+
+    private suspend fun rtc(call: ApplicationCall) {
+        val method = call.request.httpMethod
+        val req = XIAdapterEngineRegistration.decodeFromString(call.receiveText())
+        val action = req.getAction()
+        println("/${method.value} ${call.request.path()} ${call.request.contentType()} with compname=${req.component[0].compname} action $action")
+        var resp = XIAdapterEngineRegistration.Scenario()
+        val c = XIAdapterEngineRegistration.Component(req.component[0].compname, req.component[0].compversion)
+        c.comphost = "host"
+        resp.component.add(c)
+        when (action) {
+            "ping" -> {
+                c.compinst = "1"
+                c.messages = XIAdapterEngineRegistration.Messages(
+                    mutableListOf(
+                        XIAdapterEngineRegistration.Message(
+                            "OKAY", "001", "XI_GRMG", "001", "AF", "SAP AG", realHostPortURI.toString(), "80", "Ping Successful"
+                        )
+                    )
+                )
+            }
+
+            "selftest" -> {
+                c.addProperty("rezult", "OK")
+                resp.component.add(XIAdapterEngineRegistration.featureCheck("ProfileAccessible", "Is Exchange Profile Available?"))
+                resp.component.add(XIAdapterEngineRegistration.featureCheck("CompUserDefined", "Is a User Defined for Component AF?"))
+                resp.component.add(
+                    XIAdapterEngineRegistration.featureCheck(
+                        "CompMessagingSystemRegistrations",
+                        "Are registrations of connections and protocol handler without errors?"
+                    )
+                )
+                resp.component.add(XIAdapterEngineRegistration.featureCheck("CompAAERunning", "Is the Advanced Adapter Engine running?"))
+                resp.component.add(XIAdapterEngineRegistration.featureCheck("CompXIServiceStatus", "1"))
+                resp.component.add(XIAdapterEngineRegistration.featureCheck("CompMSJobsDelete", "1"))
+                resp.component.add(XIAdapterEngineRegistration.featureCheck("CompMSJobsArchive", "1"))
+                resp.component.add(XIAdapterEngineRegistration.featureCheck("CompMSJobsRestart", "1"))
+                resp.component.add(XIAdapterEngineRegistration.featureCheck("CompMSJobsRecover", "1"))
+                resp.component.add(XIAdapterEngineRegistration.featureCheck("CompAFJobsStatus", "1"))
+            }
+
+            "getSettings" -> {
+                c.compname = "Exchange Profile"
+                //            Server.afprops.filter { it.key.startsWith("com.sap.aii") }.forEach { (k, v) ->
+                //                c.addProperty(k, v)
+                //            }
+            }
+
+            "GetApplicationDetailsFromSLD" -> {
+                resp = XIAdapterEngineRegistration.GetApplicationDetailsFromSLD().answer(
+                    sid,
+                    afFaHostdb,
+                    realHostPortURI.toString(),
+                    cae.urlOf("/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=<Mode>&consumer=<Consumer>")
+                )
+            }
+
+            "RegisterAppWithSLD" -> {
+                resp = XIAdapterEngineRegistration.RegisterAppWithSLD().answer()
+            }
+
+            else -> {
+                TODO()
+            }
+        }
+        call.respondText(
+            ContentType.Text.Xml,
+            HttpStatusCode.OK
+        ) { resp.encodeToString() }
     }
 
     fun cpalistener(cr: XICache.CacheRefresh) {
@@ -209,16 +461,20 @@ class FAE(
             val s = ch.encodeToString()
             val prev = channels.find { it.ChannelObjectId == ch.ChannelObjectId }
             val rs = DB.executeQuery(DB.readFCPA, sid, ch.ChannelObjectId)
-            if (rs.next() && prev != null) {
-                // объект существует
-                DB.executeUpdate(DB.updFCPA, sid, ch.ChannelObjectId, s)
-                channels.remove(prev)
-            } else if (prev == null) {
-                // объекта нет - добавляем
-                val name = "${ch.PartyName}|${ch.ServiceName}|${ch.ChannelName}"
-                DB.executeUpdate(DB.insFCPA, sid, ch.ChannelObjectId, MPI.ETypeID.Channel.toString(), name, s)
-            } else {
-                error("Channel inconsistency")
+            when {
+                rs.next() && prev != null -> {
+                    // объект существует
+                    DB.executeUpdateStrict(DB.updFCPA, sid, ch.ChannelObjectId, s)
+                    channels.remove(prev)
+                }
+
+                prev == null -> {
+                    // объекта нет - добавляем
+                    val name = "${ch.PartyName}|${ch.ServiceName}|${ch.ChannelName}"
+                    DB.executeUpdateStrict(DB.insFCPA, sid, ch.ChannelObjectId, MPI.ETypeID.Channel.toString(), name, s)
+                }
+
+                else -> error("Channel inconsistency")
             }
             if (delo != null) deletedObjects.remove(delo)   //удаление из списка удалений
             channels.add(ch)
@@ -232,25 +488,30 @@ class FAE(
             val s = ico.encodeToString()
             val prev = allinone.find { it.AllInOneObjectId == ico.AllInOneObjectId }
             val rs = DB.executeQuery(DB.readFCPA, sid, ico.AllInOneObjectId)
-            if (rs.next() && prev != null) {
-                // икоха существует
-                DB.executeUpdate(DB.updFCPA, sid, ico.AllInOneObjectId, s)
-                allinone.remove(prev)
-            } else if (prev == null) {
-                // икохи нет - добавляем
-                val name = "${ico.FromPartyName}|${ico.FromServiceName}|{${ico.FromInterfaceNamespace}}${ico.FromInterfaceName}|${ico.ToPartyName}" +
-                        "|${ico.ToServiceName}"
-                DB.executeUpdate(DB.insFCPA, sid, ico.AllInOneObjectId, MPI.ETypeID.AllInOne.toString(), name, s)
-            } else {
-                error("AllInOne inconsistency")
+
+            when {
+                rs.next() && prev != null -> {
+                    // икоха существует
+                    DB.executeUpdateStrict(DB.updFCPA, sid, ico.AllInOneObjectId, s)
+                    allinone.remove(prev)
+                }
+
+                prev == null -> // икохи нет - добавляем
+                    DB.executeUpdateStrict(
+                        DB.insFCPA, sid, ico.AllInOneObjectId, MPI.ETypeID.AllInOne.toString(),
+                        "${ico.FromPartyName}|${ico.FromServiceName}|{${ico.FromInterfaceNamespace}}${ico.FromInterfaceName}" +
+                                "|${ico.ToPartyName}|${ico.ToServiceName}", s
+                    )
+
+                else -> error("AllInOne inconsistency")
             }
             allinone.add(ico)
             if (delo != null) deletedObjects.remove(delo)
         }
         deletedObjects.forEach { dd ->
             if (dd.OBJECT_TYPE in listOf(MPI.ETypeID.Channel, MPI.ETypeID.AllInOne)) {
-                println("Delete FCPA object: $sid ${dd.OBJECT_TYPE} ${dd.OBJECT_ID}")
-                DB.executeUpdate(DB.delFCPA, sid, dd.OBJECT_ID)
+                val deleted = DB.executeUpdate(DB.delFCPA, sid, dd.OBJECT_ID)
+                println("Delete FCPA object: $sid ${dd.OBJECT_TYPE} ${dd.OBJECT_ID}, rowsdeleted=$deleted")
             }
         }
         // updateList - список идентификаторов икох для перегенерации, среди них могут быть удалённые
@@ -264,6 +525,115 @@ class FAE(
                 TODO("икоха удалена: $id, требуется удалить маршрут")
             }
         }
+    }
 
+    suspend fun xi(call: ApplicationCall) {
+        val contentType = call.request.contentType()
+        if (contentType.match("multipart/related")) {
+
+            val ctt = contentType.toString()
+            val ba = call.receive<ByteArray>()
+            val xim = XiMessage(ctt, ba)
+            val hm = xim.header!!
+            val rm = hm.ReliableMessaging!!
+
+            val xif = KTempFile.getTempFileXI(rm.QualityOfService.toShort(), rm.QueueId, hm.Main!!.MessageId)
+            val os = xif.outputStream()
+            os.write("Content-Type: $ctt\n---------------------------\n".toByteArray())
+            os.write(ba)
+            os.close()
+            val part = xim.getPayload()
+            val scnt = String(part.inputStream.readAllBytes(), StandardCharsets.UTF_8)
+
+            when {
+                rm.QualityOfService == XiMessage.QOS.ExactlyOnce -> {
+                    // выдача Ack с application/xml
+                    val answ = xim.systemAck(uuidgeneratorxi.generate().toString(), XiMessage.dateTimeSentNow(), XiMessage.AckStatus.OK)
+                    call.respondText(answ.encodeToString(), ContentType.Application.Xml, HttpStatusCode.OK)
+                }
+
+                rm.QualityOfService == XiMessage.QOS.ExactlyOnceInOrder -> {
+                    val answ = xim.systemAck(
+                        uuidgeneratorxi.generate().toString(),
+                        XiMessage.dateTimeSentNow(),
+                        XiMessage.AckStatus.Error,
+                        XiMessage.AckCategory.transient
+                    )
+                    call.respondText(answ.encodeToString(), ContentType.Application.Xml, HttpStatusCode.OK)
+
+                    //                        // выдача Ack с boundary -- похоже дохлый номер
+                    //                        val ack = xim.systemAck(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), XiMessage.AckStatus.OK, XiMessage.AckCategory.permanent)
+                    //                        val xi = XiMessage(ack)
+                    //                        val f = KTempFile.getTempFileXI(rm.QualityOfService.toShort(), rm.QueueId, hm.Main.MessageId + "_ack")
+                    //                        val os = f.outputStream()
+                    //                        xi.writeTo(os)
+                    //                        os.close()
+                    //                        call.response.status(HttpStatusCode.InternalServerError)
+                    //                        call.response.headers.append("Content-Type", "application/xml")
+                    //                        call.respondBytes { f.readBytes() }
+                }
+
+                scnt.contains("Fault") -> {
+                    // выдать Fault
+                    val e1 = XiMessage.Error(
+                        XiMessage.ErrorCategory.XIServer,
+                        XiMessage.ErrorCode("INTERNAL", "VALUE"),
+                        null,
+                        null,
+                        null,
+                        null,
+                        "Add",
+                        "Stack"
+                    )
+                    val fault = xim.fault("soap:Server", "123", "http://sap.com/xi/XI/Message/30", e1)
+                    val f = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_fault")
+                    val os = f.outputStream()
+                    os.write(fault.encodeToString().toByteArray())
+                    os.close()
+                    call.response.status(HttpStatusCode.InternalServerError)
+                    call.response.headers.append("Content-Type", "application/xml")
+                    call.respondBytes { f.readBytes() }
+                }
+
+                scnt.contains("Error") -> {
+                    // выдать SystemError через boundary
+                    val e1 = XiMessage.Error(
+                        XiMessage.ErrorCategory.XIServer,
+                        XiMessage.ErrorCode("INTERNAL", "INCORRECT_PAYLOAD_DATA"),
+                        null,
+                        null,
+                        null,
+                        null,
+                        "Дополнительная инфа",
+                        "Стек ошибок"
+                    )
+                    val syncError = xim.syncError(uuidgeneratorxi.generate().toString(), XiMessage.dateTimeSentNow(), e1)
+                    syncError.header!!.DynamicConfiguration!!.Record.add(XiMessage.Record("urn:bad", "Bad", "_плохо_"))
+                    val f = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_error")
+                    val os = f.outputStream()
+                    syncError.writeTo(os)
+                    os.close()
+                    call.response.status(HttpStatusCode.InternalServerError)
+                    call.response.headers.append("Content-Type", syncError.getContentType())
+                    call.respondBytes { f.readBytes() }
+                }
+
+                else -> {
+                    // выдать успешный ответ на синхронный запрос
+                    val appResp = xim.syncResponse(uuidgeneratorxi.generate().toString(), XiMessage.dateTimeSentNow())
+                    appResp.header!!.DynamicConfiguration!!.Record.add(XiMessage.Record("urn:successful", "Success", "ХАРАШО"))
+                    appResp.setPayload("<answer/>".toByteArray(), "text/xml; charset=utf-8")
+                    val f = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_resp")
+                    val os = f.outputStream()
+                    appResp.writeTo(os)
+                    os.close()
+                    call.response.status(HttpStatusCode.OK)
+                    call.response.headers.append("Content-Type", appResp.getContentType())
+                    call.respondBytes { f.readBytes() }
+                }
+            }
+        } else {
+            call.respondText(ContentType.Application.Xml, HttpStatusCode.NotAcceptable) { "Wrong Content-Type: $contentType" }
+        }
     }
 }

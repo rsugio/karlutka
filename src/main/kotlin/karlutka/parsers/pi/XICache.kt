@@ -1,6 +1,7 @@
 package karlutka.parsers.pi
 
 import karlutka.models.MPI
+import karlutka.models.MRouteGenerator
 import kotlinx.serialization.*
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.modules.SerializersModule
@@ -28,7 +29,11 @@ class XICache {
         @XmlSerialName("AdapterMetaData", "", "") val AdapterMetaData: List<@Contextual CompactFragment>,
         @XmlSerialName("Service", "", "") val Service: List<@Contextual CompactFragment>,
         @XmlSerialName("SXI_CONT", "", "") val SXI_CONT: @Contextual CompactFragment? = null,  // контейнер параметров, не нужен
-    )
+    ) {
+        fun isEmpty() = DELETED_OBJECTS == null && Party.isEmpty() && Channel.isEmpty() && AllInOne.isEmpty()
+                && ServiceInterface.isEmpty() && MPP_MAP.isEmpty() && AdapterMetaData.isEmpty()
+                && Service.isEmpty() && SXI_CONT == null
+    }
 
     @Serializable
     @XmlSerialName("DELETED_OBJECTS", "", "")
@@ -207,6 +212,8 @@ class XICache {
         val senderCC: String,
         val senderAttr: List<Attribute>,
     ) {
+        lateinit var routeGenerator: MRouteGenerator
+        var xmlDsl: String = ""
         data class Receiver(
             val id: String,
             val party: String,
@@ -276,7 +283,7 @@ class XICache {
          * Для икохи возвращает перечень Channel.ObjectID
          */
         fun getChannelsOID(): List<String> {
-            val lst = ReceiverConnectivityList.ReceiverConnectivity.map{it.ChannelObjectId}.distinct().toMutableList()
+            val lst = ReceiverConnectivityList.ReceiverConnectivity.map { it.ChannelObjectId }.distinct().toMutableList()
             lst.add(SenderConnectivity.ChannelObjectId)
             return lst
         }
@@ -314,7 +321,7 @@ class XICache {
             assert(conditions.distinct().size == conditions.size)
             val sender = lstChannels.find { it.ChannelObjectId == SenderConnectivity.ChannelObjectId }!!
             return AllInOneParsed(
-                sender.ChannelAttributes.AdapterTypeData.Attribute.find{it.Name=="routeId" && it.Namespace=="camel"}!!.valueAsString(),
+                sender.ChannelAttributes.AdapterTypeData.Attribute.find { it.Name == "routeId" && it.Namespace == "camel" }!!.valueAsString(),
                 FromPartyName,
                 FromServiceName,
                 ToPartyName,

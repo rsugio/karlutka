@@ -23,7 +23,6 @@ class MRouteGenerator(val ico: XICache.AllInOneParsed) {
     fun endpointTo(toUrl: String): Endpoint {
         val camelContext: CamelContext = DefaultCamelContext(false)
         camelContext.addRoutes(object : RouteBuilder() {
-            @Throws(Exception::class)
             override fun configure() {
                 from("file:/tmp")
                     .to(toUrl)
@@ -51,8 +50,9 @@ sender exchangePattern: $mep
         val descr = MCamelDSL.Description("непустой")
         route.add(descr)
 
-//        route.add(processor)
-//        route.add(processor2)
+        route.add(processor)
+        route.add(processor2)
+//        route.add(MCamelDSL.Process("#karlutka.server.FAE.ProcMon"))
         class Tmp(
             val ConditionGroupId: String,   //guid
             val pname: String,              // вида icord##, появляется в маршруте
@@ -71,29 +71,27 @@ sender exchangePattern: $mep
                 val ands = line.cond.map { p ->
                     val apos = p.right.contains('\'')
                     val quot = p.right.contains('"')
-                    val r = if (apos && quot) {
-                        // Экранирование требует разбирательств с xmlutil, так как иначе &apos; справедливо
-                        // превращается в &amp;apos; а костылить суррогатные замены очень ненормально
-                        // Возможно надо сделать DelegatingXmlWriter под выдачу маршрутов, заодно и неймспейсы
-                        // приделать
-                        TODO("both ' & \" are in right part of XPath-expression, unimplemented yet")
-                    } else if (apos) {
-                        "\"${p.right}\""
-                    } else {
-                        "'${p.right}'"
+                    val r = when {
+                        apos && quot -> {
+                            // Экранирование требует разбирательств с xmlutil, так как иначе &apos; справедливо
+                            // превращается в &amp;apos; а костылить суррогатные замены очень ненормально
+                            // Возможно надо сделать DelegatingXmlWriter под выдачу маршрутов, заодно и неймспейсы
+                            // приделать
+                            TODO("both ' & \" are in right part of XPath-expression, unimplemented yet")
+                        }
+                        apos -> "\"${p.right}\""
+                        else -> "'${p.right}'"
                     }
 
-                    if (p.xpath != null && p.op == XICache.EOp.EQ) {
-                        "${p.xpath}=$r"
-                    } else if (p.xpath != null && p.op == XICache.EOp.NE) {
-                        "${p.xpath}!=$r"
-                    } else if (p.xpath != null && p.op == XICache.EOp.CP) {
-                        "${p.xpath}~=$r"
-                    } else if (p.xpath != null && p.op == XICache.EOp.EX) {
-                        "boolean(${p.xpath})"
-                    } else {
-                        require(p.cobj != null)
-                        "false"  //пока не делаем
+                    when {
+                        p.xpath != null && p.op == XICache.EOp.EQ -> "${p.xpath}=$r"
+                        p.xpath != null && p.op == XICache.EOp.NE -> "${p.xpath}!=$r"
+                        p.xpath != null && p.op == XICache.EOp.CP -> "${p.xpath}~=$r"
+                        p.xpath != null && p.op == XICache.EOp.EX -> "boolean(${p.xpath})"
+                        else -> {
+                            require(p.cobj != null)
+                            "false"  //пока не делаем
+                        }
                     }
                 }
                 ands.joinToString(" and ")
@@ -117,21 +115,19 @@ sender exchangePattern: $mep
                 val toUrl = recv.attrs.find { it.Name == "connection" && it.Namespace == "camel" }!!.valueAsString()
                 val rproc = recv.attrs.find { it.Name == "processor" && it.Namespace == "camel" }!!.valueAsString()
                 val rproc2 = recv.attrs.find { it.Name == "processor2" && it.Namespace == "camel" }!!.valueAsString()
-//                route.add(rproc)
-//                route.add(rproc2)
-                val rcve = endpointTo(toUrl)
+                route.add(rproc)
+                route.add(rproc2)
+  //              route.add(MCamelDSL.Process("#karlutka.server.FAE.ProcMon"))
+                val rcve = endpointTo(toUrl)    //TODO переделать, добавить сюда наш сендер и генерить маршрут
                 route.add(MCamelDSL.To(toUrl))  //CC-recv
             } else {
                 val recv = ico.receivers
                 log.append("RD содержит несколько безусловных получателей - делаем .recipientList()\n")
+                route.add(MCamelDSL.To("log:end"))
             }
         } else {
             log.append("RD содержит получателей - TODO\n")
-            if (ico.receivers.size == 1) {
-
-            } else {
-
-            }
+            route.add(MCamelDSL.To("log:end"))
         }
         descr.s = log.toString()
         return route.encodeToString(ico.namespaceMapping)

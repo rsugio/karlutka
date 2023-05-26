@@ -136,13 +136,19 @@ class PI(
         throw Exception("HMI POST - ошибка после 10 повторов")
     }
 
-    suspend fun dirHmiCacheRefreshService(mode: String, consumer: String): HttpResponse {
+    suspend fun valueMappingCache(queryParams: String) {
+        val res = "/run/value_mapping_cache/ext?$queryParams"
+        val iv = KtorClient.taskGet(client, res)
+        iv.execute()
+        require(iv.isXml() && iv.resp.status.isSuccess())
+    }
+
+    suspend fun dirHmiCacheRefreshService(mode: String, consumer: String): XICache.CacheRefresh {
         // /dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=C&consumer=af.fa0.fake0db
         val iv = KtorClient.taskGet(client, "/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=$mode&consumer=$consumer")
         iv.execute()
         require(iv.isXml() && iv.resp.status.isSuccess())
-
-        return iv.resp
+        return XICache.decodeCacheRefreshFromReader(iv.bodyAsXmlReader())
     }
 
     @Deprecated("подумать об удалении")

@@ -1,9 +1,12 @@
 import org.apache.camel.CamelContext;
 import org.apache.camel.Endpoint;
+import org.apache.camel.Exchange;
+import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.dsl.xml.io.XmlRoutesBuilderLoader;
 import org.apache.camel.impl.DefaultCamelContext;
 import org.apache.camel.model.RouteDefinition;
+import org.apache.camel.spi.InflightRepository;
 import org.apache.camel.spi.Resource;
 import org.apache.camel.support.ResourceHelper;
 
@@ -12,7 +15,16 @@ import java.time.Instant;
 
 // для проверки работы ideaj camel plugin
 public class JCamel {
+
     static class R1 extends RouteBuilder {
+        Processor p = new Processor() {
+            @Override
+            public void process(Exchange exchange) throws Exception {
+                for (InflightRepository.InflightExchange r: exchange.getContext().getInflightRepository().browse()) {
+                    System.out.println(r);
+                }
+            }
+        };
         public void configure() {
             from("file:/camel/src")
                     .autoStartup(true)
@@ -22,14 +34,19 @@ public class JCamel {
                     .when(xpath("/person/city = 'Москва'"))
                     .log("Москва message")
                     .to("file:/camel/Москва")
+                    .process(p)
                     .otherwise()
                     .log("Other message")
-                    .to("file:/camel/НеМосква");
+                    .to("file:/camel/НеМосква")
+                    .process(p)
+            ;
         }
     }
 
-    public static void main1(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
+
         CamelContext context = new DefaultCamelContext();
+        context.getInflightRepository().setInflightBrowseEnabled(true);
         context.addRoutes(new R1());
 
         //ProducerTemplate template = context.createProducerTemplate();
@@ -38,11 +55,14 @@ public class JCamel {
         context.start();
         Thread.sleep(2000L);
         context.stop();
+
+        System.out.println(context.getInflightRepository().browse());
+
         long d = Instant.now().minusMillis(s.toEpochMilli()).toEpochMilli();
         System.out.println("Stopped in " + d + "ms");
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main2(String[] args) throws Exception {
         CamelContext camelContext = new DefaultCamelContext(true);
 
 //        String from = "file:/camel?delete=false&recursive=false&exchangePattern=InOnly";

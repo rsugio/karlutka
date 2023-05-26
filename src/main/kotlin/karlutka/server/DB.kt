@@ -30,6 +30,7 @@ object DB {
     lateinit var delFCPA: PreparedStatement
     lateinit var insFCPA: PreparedStatement
     lateinit var updFCPA: PreparedStatement
+    lateinit var insFAEM: PreparedStatement
 
     val swcv = mutableListOf<MPI.Swcv>()
     val esrobjects = mutableListOf<MPI.EsrObj>()
@@ -55,6 +56,8 @@ object DB {
         delFCPA = conn.prepareStatement("delete from PUBLIC.FAE_CPA where sid=?1 and oid=?2")
         updFCPA = conn.prepareStatement("update PUBLIC.FAE_CPA set XML=?3 where SID=?1 and OID=?2")
         insFCPA = conn.prepareStatement("insert into PUBLIC.FAE_CPA(sid,oid,typeid,name,xml) values(?1,?2,?3,?4,?5)")
+        //   мониторинг
+        insFAEM = conn.prepareStatement("insert into PUBLIC.FAE_MSG(SID,MESSAGEID,DATETIME,SENDER,RECEIVER,BODY) values(?1,?2,?3,?4,?5,?6)")
 
         //readSwcvList()
 //        println("прочитаны SWCV")
@@ -96,10 +99,17 @@ object DB {
         return ps.generatedKeys.getInt(1)
     }
 
-    fun executeUpdate(ps: PreparedStatement, vararg args: Any?) {
+    fun executeUpdateStrict(ps: PreparedStatement, vararg args: Any?) {
         setArgs(ps, *args)
-        require(ps.executeUpdate() == 1)
+        val i = ps.executeUpdate()
+        require(i > 0) { "Cannot update $ps, got no updates/deletes" }
     }
+
+    fun executeUpdate(ps: PreparedStatement, vararg args: Any?): Int {
+        setArgs(ps, *args)
+        return ps.executeUpdate()
+    }
+
 
     fun getPiClientNumber(sid: String, onNew: (Int) -> Unit): Int {
         val rs = executeQuery(readSrc, sid, true)
@@ -145,7 +155,7 @@ object DB {
     fun writeSwcv(sw: MPI.Swcv) {
 //        require(!swcv.contains(sw))
         try {
-            executeUpdate(insswcv, sw.guid, sw.caption, sw.ws_name, sw.vendor, sw.version, sw.description)
+            executeUpdateStrict(insswcv, sw.guid, sw.caption, sw.ws_name, sw.vendor, sw.version, sw.description)
         } catch (_: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException) {
             // Уже есть в БД. Читать не пробуем чтобы не тормозило.
         }
@@ -190,7 +200,7 @@ object DB {
 
     fun writeEsrObjLink(vernum: Int, role: String, kpos: Int, linkTo: MPI.EsrObj) {
         require(linkTo.num != 0)
-        executeUpdate(inslink, vernum, role, kpos, linkTo.num)
+        executeUpdateStrict(inslink, vernum, role, kpos, linkTo.num)
     }
 
     fun dot1() {

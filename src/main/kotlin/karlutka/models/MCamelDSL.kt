@@ -73,6 +73,19 @@ sealed class MCamelDSL {
     ) : MCamelDSL()
 
     @Serializable
+    @XmlSerialName("process", "", "")
+    class Process(
+        val ref: String,
+    ) : MCamelDSL()
+
+    @Serializable
+    @XmlSerialName("bean", "", "")
+    class Bean(
+        val id: String,
+        @XmlSerialName("class", "", "") val clazz: String,
+    ) : MCamelDSL()
+
+    @Serializable
     @XmlSerialName("choice", "", "")
     class Choice(
         val whens: MutableList<When> = mutableListOf(),
