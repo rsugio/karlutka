@@ -20,17 +20,6 @@ class MRouteGenerator(val ico: XICache.AllInOneParsed) {
         return camelContext.getEndpoint(fromUrl)
     }
 
-    fun endpointTo(toUrl: String): Endpoint {
-        val camelContext: CamelContext = DefaultCamelContext(false)
-        camelContext.addRoutes(object : RouteBuilder() {
-            override fun configure() {
-                from("file:/tmp")
-                    .to(toUrl)
-            }
-        })
-        return camelContext.getEndpoint(toUrl)
-    }
-
     fun convertIco(): String {
         require(ico.receivers.isNotEmpty())
         val fromUrl = ico.senderAttr.find { it.Name == "connection" && it.Namespace == "camel" }!!.valueAsString()
@@ -38,7 +27,9 @@ class MRouteGenerator(val ico: XICache.AllInOneParsed) {
         val mep = fromEndpoint.exchangePattern
         val processor = ico.senderAttr.find { it.Name == "processor" && it.Namespace == "camel" }!!.valueAsString()
         val processor2 = ico.senderAttr.find { it.Name == "processor2" && it.Namespace == "camel" }!!.valueAsString()
-        val route = MCamelDSL.Route(ico.routeId, MCamelDSL.From(fromUrl))
+        val descr = MCamelDSL.Description("непустой")
+        val route = MCamelDSL.Route(ico.routeId, descr)
+        route.add(MCamelDSL.From(fromUrl))
 
         log.append(
             """ICo: ${ico.fromParty}|${ico.fromService}|{${ico.fromIfacens}}${ico.fromIface}|${ico.toParty}|${ico.toService}
@@ -46,19 +37,15 @@ CC: ${ico.senderCC},
 sender exchangePattern: $mep
 """
         )
-        val descr = MCamelDSL.Description("непустой")
-        route.add(descr)
-
         route.add(processor)
         route.add(MCamelDSL.Process("procmonFrom"))
         route.add(processor2)
-//        route.add(MCamelDSL.Process("#karlutka.server.FAE.ProcMon"))
         class Tmp(
             val ConditionGroupId: String,   //guid
             val pname: String,              // вида icord##, появляется в маршруте
             val isRD: Boolean,              // условие для RD, иначе для ID, третьего не видел
             val receivers: List<Any>,
-            var subroute: MCamelDSL.Route
+            var route: MCamelDSL.Route   // для нескольких получателей
         )
 
         val tmpRDs = mutableListOf<Tmp>()   // развилки по получателям
@@ -66,7 +53,8 @@ sender exchangePattern: $mep
 
         ico.condgroups.forEachIndexed { cx, cg ->
             val tmp = Tmp(cg.id, "icord$cx", cg.receivers.isNotEmpty(), cg.receivers,
-                MCamelDSL.Route("${ico.routeId}_$cx", MCamelDSL.From("direct:${ico.routeId}_$cx")))
+                MCamelDSL.Route("${ico.routeId}_$cx", MCamelDSL.Description("непустой")))
+            tmp.route.add(MCamelDSL.From("direct:${ico.routeId}_$cx"))
             if (tmp.isRD)
                 tmpRDs.add(tmp)
             else
@@ -120,12 +108,11 @@ sender exchangePattern: $mep
                 val toUrl = recv.attrs.find { it.Name == "connection" && it.Namespace == "camel" }!!.valueAsString()
                 val rproc = recv.attrs.find { it.Name == "processor" && it.Namespace == "camel" }!!.valueAsString()
                 val rproc2 = recv.attrs.find { it.Name == "processor2" && it.Namespace == "camel" }!!.valueAsString()
-                val rcve = endpointTo(toUrl)    //TODO переделать, добавить сюда наш сендер и генерить маршрут
-                route.add(rproc)
+//                route.add(rproc)
                 route.add(MCamelDSL.To(toUrl))
-                route.add(MCamelDSL.SetProperty("FAEReceiver", MCamelDSL.Predicate.Simple(rn)))
-                route.add(MCamelDSL.Process("procmonTo"))
-                route.add(rproc2)
+//                route.add(MCamelDSL.SetProperty("FAEReceiver", MCamelDSL.Predicate.Simple(rn)))
+//                route.add(MCamelDSL.Process("procmonTo"))
+//                route.add(rproc2)
             } else {
                 val recv = ico.receivers
                 log.append("RD содержит несколько безусловных получателей - делаем .multicast(parallel)\n")
@@ -136,7 +123,6 @@ sender exchangePattern: $mep
                     val toUrl = recv.attrs.find { it.Name == "connection" && it.Namespace == "camel" }!!.valueAsString()
                     val rproc = recv.attrs.find { it.Name == "processor" && it.Namespace == "camel" }!!.valueAsString()
                     val rproc2 = recv.attrs.find { it.Name == "processor2" && it.Namespace == "camel" }!!.valueAsString()
-                    val rcve = endpointTo(toUrl)
                     //multi.children.add(rproc)
                     multi.children.add(MCamelDSL.SetProperty("FAEReceiver", MCamelDSL.Predicate.Simple(rn)))
                     multi.children.add(MCamelDSL.Process("procmonTo"))

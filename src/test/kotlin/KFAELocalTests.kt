@@ -3,9 +3,12 @@ import KT.Companion.x
 import karlutka.models.MCamelDSL
 import karlutka.parsers.pi.XIAdapterEngineRegistration
 import karlutka.parsers.pi.XICache
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
-class KAdapterEngineTests {
+/**
+ * Тесты без онлайна
+ */
+class KFAELocalTests {
     @Test
     fun parse() {
         XIAdapterEngineRegistration.decodeFromString(s("/pi_AE/01regtest_req.xml"))
@@ -34,7 +37,7 @@ class KAdapterEngineTests {
     @Test
     fun parseIco() {
         val cpa = XICache.decodeCacheRefreshFromReader(x("/pi_AE/cpa06.xml"))
-        cpa.AllInOne.filter{it.FromServiceName=="BC_TEST4_1234"}.forEach { ix ->
+        cpa.AllInOne.filter { it.FromServiceName == "BC_TEST4_1234" }.forEach { ix ->
             //val xml = convertIco(ix.toParsed(cpa))
             println("------------------------------------------")
             //println(xml)
@@ -50,9 +53,10 @@ class KAdapterEngineTests {
     }
 
     @Test
-    fun compose() {
-        val r = MCamelDSL.Route("0#корованы", MCamelDSL.From("timer:thief?period=10s"))
-        r.add(MCamelDSL.Description("умнО работать это хорошо"))
+    fun compose(): String {
+        val r = MCamelDSL.Route("0#корованы", MCamelDSL.Description("умнО работать это хорошо"))
+        val from = MCamelDSL.From("timer:thief?period=10s", true, "CC_A_Send", MCamelDSL.Description("|BC_TEST1|Mega_OutAsync"))
+        r.add(from)
         r.add(MCamelDSL.SetBody(MCamelDSL.Predicate.Simple("1")))
 
         r.add(MCamelDSL.Log("------- Граблю корованы -------"))
@@ -62,9 +66,10 @@ class KAdapterEngineTests {
         val c1 = MCamelDSL.Choice()
         c1.whens.add(w1)
         c1.otherwise.add(MCamelDSL.Log("НеМосква"))
-        c1.otherwise.add(MCamelDSL.Multicast(false, MCamelDSL.To("file:/camel/НеМосква")))
+        c1.otherwise.add(MCamelDSL.Multicast(false, MCamelDSL.To("direct:НеМосква")))
         r.add(c1)
-        println(r.encodeToString(mapOf("s1" to "urn:s1", "s2" to "urn:s2")))
-        //TODO сделать здесь загрузку роута для проверки, не ломается ли парсер
+        val s = r.encodeToString(mapOf("s1" to "urn:s1", "s2" to "urn:s2"))
+        println(s)
+        return s
     }
 }

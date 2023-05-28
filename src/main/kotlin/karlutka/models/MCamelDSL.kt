@@ -14,7 +14,7 @@ sealed class MCamelDSL {
     @XmlSerialName("route", "", "")
     class Route(
         val id: String? = null,
-        val from: From,
+        val description: Description? = null,
         val children: MutableList<MCamelDSL> = mutableListOf(),
     ) : MCamelDSL() {
         fun add(c: MCamelDSL) = children.add(c)
@@ -43,23 +43,24 @@ sealed class MCamelDSL {
     @XmlSerialName("description", "", "")
     class Description(
         @XmlValue var s: String,
-    ) : MCamelDSL() {
-        init {
-            require(s.isNotBlank())
-        }
-    }
-
+    )
 
     @Serializable
     @XmlSerialName("from", "", "")
     class From(
         val uri: String,
+        val customId: Boolean? = null,
+        val id: String? = null,
+        val description: Description? = null
     ) : MCamelDSL()
 
     @Serializable
     @XmlSerialName("to", "", "")
     class To(
         val uri: String,
+        val customId: Boolean? = null,
+        val id: String? = null,
+        val description: Description? = null
     ) : MCamelDSL()
     @Serializable
     @XmlSerialName("multicast", "", "")
@@ -78,7 +79,11 @@ sealed class MCamelDSL {
     @XmlSerialName("log", "", "")
     class Log(
         val message: String,
-    ) : MCamelDSL()
+    ) : MCamelDSL() {
+        init {
+            require(message.isNotBlank())   //camel не благославляет
+        }
+    }
 
     @Serializable
     @XmlSerialName("process", "", "")

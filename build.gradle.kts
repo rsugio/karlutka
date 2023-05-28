@@ -63,11 +63,37 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation("commons-io:commons-io:2.11.0")    //BOMInputStream
     implementation("org.apache.camel:camel-core:$camel_version")
-    //implementation("org.apache.camel:camel-http:$camel_version")
+    implementation("org.apache.camel:camel-core-model:$camel_version")
+    implementation("org.apache.camel:camel-core-catalog:$camel_version")
     implementation("org.apache.camel:camel-base:$camel_version")
-    implementation("org.apache.camel:camel-main:$camel_version")
+    implementation("org.apache.camel:camel-catalog:$camel_version")
+    implementation("org.apache.camel:camel-management:$camel_version")
+    implementation("org.apache.camel:camel-api:$camel_version")
+    implementation("org.apache.camel:camel-http:$camel_version")
+//    implementation("org.apache.camel:camel-jms:$camel_version")       // тащит спринг за собой
     implementation("org.apache.camel:camel-componentdsl:$camel_version")
     implementation("org.apache.camel:camel-xml-io-dsl:$camel_version")
+    implementation("org.apache.camel:camel-yaml-dsl:$camel_version")
+    implementation("org.apache.camel:camel-support:$camel_version")     //?
+//    implementation("org.apache.camel:camel-mail:$camel_version")
+//    implementation("org.apache.camel:camel-sql:$camel_version")       // тащит спринг за собой
+    implementation("org.apache.camel:camel-ftp:$camel_version")
+    implementation("org.apache.camel:camel-kafka:$camel_version")
+    implementation("org.apache.camel:camel-jsonpath:$camel_version")
+    implementation("org.apache.camel:camel-seda:$camel_version")
+    implementation("org.apache.camel:camel-endpointdsl:$camel_version")
+    implementation("org.apache.camel:camel-core-languages:$camel_version")
+    implementation("org.apache.camel:camel-xpath:$camel_version")
+    implementation("org.apache.camel:camel-util:$camel_version")
+    implementation("org.apache.camel:camel-amqp:$camel_version")
+//    implementation("org.apache.camel:camel-rabbitmq:$camel_version")
+//    implementation("org.apache.camel:camel-activemq:$camel_version")
+    implementation("org.apache.camel:camel-telegram:$camel_version")
+    implementation("org.apache.camel:camel-ognl:$camel_version")
+    implementation("org.apache.camel:camel-attachments:$camel_version")
+//    implementation("org.apache.camel:camel-saxon:$camel_version")
+//    implementation("org.apache.camel:camel-main:$camel_version")
+
     //compileOnly("org.apache.camel:spi-annotations:$camel_version")
 }
 
