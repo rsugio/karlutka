@@ -2,10 +2,12 @@ import KT.Companion.s
 import karlutka.util.KfPasswds
 import karlutka.util.KfTarget
 import karlutka.util.Kfg
+import org.junit.jupiter.api.Tag
 import java.nio.file.Paths
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+@Tag("Offline")
 class KonfigTests {
     @Test
     fun karla() {
@@ -58,10 +60,8 @@ class KonfigTests {
             "?"
         )
         val k1 = Kfg(mutableListOf(t1, t2, t3, t5))
-        require(k1.encodeToString().contains("руссъ язь"))
-
-        val rus = k1.encodeToString()
-        require(rus.isNotBlank())
+        val rus = k1.encodeToString()                   // snakeyaml-engine 2.3 не работает, а в camel-yaml-dsl именно она
+        require(rus.contains("руссъ язь"))
     }
 
     @Test

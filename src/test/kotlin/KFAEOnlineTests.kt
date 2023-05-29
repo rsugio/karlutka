@@ -9,10 +9,12 @@ import karlutka.util.KTempFile
 import karlutka.util.KfAuth
 import karlutka.util.KfTarget
 import kotlinx.coroutines.runBlocking
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import java.net.URI
 
-class KFAETests {
+@Tag("Online")
+class KFAEOnlineTests {
     private val prop = props(".etc/fa0.properties")
     private val caecfg = KfTarget.PIAF(prop["caesid"]!!, null, prop["caeuri"]!!)
     private val sldcfg = KfTarget.PIAF(prop["sldsid"]!!, null, prop["slduri"]!!)
@@ -38,8 +40,10 @@ class KFAETests {
 
     @Test
     fun sldops() {
+        val log = StringBuilder()
         runBlocking {
-            fae.registerSLD(this)
+            fae.registerSLD(log, this)
+            println(log)
         }
     }
 

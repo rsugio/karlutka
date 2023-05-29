@@ -26,7 +26,7 @@ sealed class KfTarget {
     class ABAP(
         override val sid: String,
         override val text: String? = null,
-        val jco: MutableMap<String, String> = mutableMapOf(),
+        private val jco: MutableMap<String, String> = mutableMapOf(),
         val auth: String = "",                                  // безопасная ссылка на аутентификацию
     ) : KfTarget() {
         override fun loadAuths(auths: List<KfAuth>) {
@@ -201,7 +201,7 @@ data class Kfg(
     val targets: MutableList<KfTarget> = mutableListOf(),
     val tmpdir: String = System.getProperty("java.io.tmpdir") + "/karlutka",
     val httpClientThreads: Int = 4,
-    val httpClientConnectionTimeoutMillis: Long = 123456L,
+    val httpClientConnectionTimeoutMillis: Long = 12345L,
     val httpClientRetryOnServerErrors: Int = 2,
     val httpClientLogLevel: String = "NONE",
     val httpServerListenPort: Int = 80,
@@ -210,7 +210,6 @@ data class Kfg(
     val influxdb: KfInfluxDB? = null,
 ) {
     fun encodeToString() = kaml.encodeToString(serializer(), this)
-
     companion object {
         private val cfg = YamlConfiguration(
             encodeDefaults = true, strictMode = true, extensionDefinitionPrefix = null,

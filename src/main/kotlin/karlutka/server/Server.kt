@@ -101,7 +101,7 @@ object Server {
                 TODO(b)
             }
         }
-        fae?.installRouting(app)
+        fae?.ktor(app)
     }
 
     suspend fun index(call: ApplicationCall) {
@@ -140,8 +140,7 @@ object Server {
                         a("/error2") { +"/error2" }
                         +" ошибка внутри html (самопроверка)"
                     }
-//                    li { +"PID: ${ProcessHandle.current().pid()}" }
-                    li { +"Текущая папка: ${Paths.get(".").toAbsolutePath()}" }
+                    li { +"PID: ${ProcessHandle.current().pid()}" }
                     li { +"База данных: ${kfg.h2connection}" }
                     li { +"Keystore: ${kfpasswds.keystore.path}" }
                     li { +"Конфигурация: $pkfg" }

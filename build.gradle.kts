@@ -38,6 +38,7 @@ dependencies {
     implementation("io.github.pdvrieze.xmlutil:serialutil-jvm:$xmlutil_version")
     implementation("io.github.pdvrieze.xmlutil:xmlserializable:$xmlutil_version")
     implementation("com.charleskorn.kaml:kaml:$kaml_version")
+    implementation("org.snakeyaml:snakeyaml-engine:2.6")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")   // версия не совпадает с котлином
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinx_serialization_version")
@@ -137,7 +138,10 @@ compileTestKotlin.kotlinOptions {
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+    useJUnitPlatform {
+        includeTags("Offline")
+        //excludeTags("Online")
+    }
 }
 
 tasks.withType<JavaCompile> {

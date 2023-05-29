@@ -30,7 +30,6 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.net.URI
 import java.nio.charset.StandardCharsets
-import java.time.Clock
 import java.time.Instant
 import java.time.ZoneId
 import kotlin.io.path.outputStream
@@ -107,8 +106,9 @@ class FAE(
             // создание или изменение
             generateRoute(ico)
         }
-        runBlocking {registerSLD(GlobalScope)}
     }
+
+    private enum class ERAS { AdminTool, CacheRefresh, RuntimeCheck }
 
     @OptIn(DelicateCoroutinesApi::class)
     private fun getSldServer(): String {
@@ -118,29 +118,34 @@ class FAE(
         }
     }
 
-    private fun urlOf(s: String = ""): String {
-        return "$realHostPortURI/$s"
+    private fun urlOf(s: String = ""): URI {
+        return realHostPortURI.resolve(s)
     }
 
     /**
      * Регистрирует FAE в SLD
      * Если domain непустой то добавляет также в него
      */
-    suspend fun registerSLD(scope: CoroutineScope) {
+    suspend fun registerSLD(log: StringBuilder, scope: CoroutineScope) {
         // Ищем в SLD все XI-домены
         var x = SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_XIDomain)
         x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
         val domains = x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.VALUE_NAMEDINSTANCE
         // domains - см пример src\test\resources\pi_SLD\cim24enuminstances_SAP_XIDomain.xml
+        log.append("Найдены XI-домены: ")
+        log.append(domains.map { d -> d.INSTANCENAME.getKeyValue("Name") }.joinToString(" , "))
+        log.append("\n")
 
         val afname = SLD_CIM.Classes.SAP_XIAdapterFramework.toInstanceName2(afFaHostdb)
         val af1 = sld.sldop(SLD_CIM.createInstance(afname, mapOf("Caption" to "Adapter Engine on $afFaHostdb")), scope)
         val af1rez = Cim.decodeFromReader(af1.await().bodyAsXmlReader())
         require(af1rez.isCreatedOrAlreadyExists())
+        log.append("Создана запись класса SAP_XIAdapterFramework для $afFaHostdb\n")
         if (domain != null && domain!!.isNotBlank()) {
             // Ищем домен центрального движка
             val foundDomain = domains.find { d -> d.INSTANCENAME.getKeyValue("Name") == domain }?.INSTANCENAME
             if (foundDomain != null) {
+                log.append("Домен $domain найден, создаём для него ассоциацию:\n")
                 // запрошенный домен действительно существует, ассоциируем его с FAE
                 x = Cim.association(
                     "GroupComponent", foundDomain,
@@ -149,106 +154,106 @@ class FAE(
                 )
                 val domainrez = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
                 require(domainrez.isCreatedOrAlreadyExists()) { domainrez.MESSAGE?.SIMPLERSP?.IMETHODRESPONSE?.ERROR.toString() }
+                if (domainrez.getError() != null) {
+                    log.append(domainrez.getError()!!.DESCRIPTION).append("\n")
+                } else {
+                    log.append("Ассоциация создана успешно\n")
+                }
             } else {
-                TODO()
+                log.append("ОШИБКА! Домен $domain не найден. Ассоциация не создана.\n")
             }
+        } else {
+            log.append("Домен не указан или пустой. Ассоциация не создана.\n")
         }
+        registerSldRASport(afname, ERAS.AdminTool, "/FAE/mdt", log, scope)
+        registerSldRASport(afname, ERAS.CacheRefresh, "/FAE/CPACache/invalidate", log, scope)
+        registerSldRASport(afname, ERAS.RuntimeCheck, "/FAE/AdapterFramework/rtc", log, scope)
 
-        val admintoolname = SLD_CIM.Classes.SAP_XIRemoteAdminService.toInstanceName4(afname, "AdminTool.$afFaHostdb")
-        x = SLD_CIM.createInstance(admintoolname, mapOf("Caption" to "AdminTool of $afFaHostdb", "Purpose" to "AdminTool"))
-        val admtool = sld.sldop(x, scope)
-
-        val cacherefreshname = SLD_CIM.Classes.SAP_XIRemoteAdminService.toInstanceName4(afname, "CacheRefresh.$afFaHostdb")
-        x = SLD_CIM.createInstance(cacherefreshname, mapOf("Caption" to "CacheRefresh of $afFaHostdb", "Purpose" to "CacheRefresh"))
-        val cacherefresh = sld.sldop(x, scope)
-
-        val RTCname = SLD_CIM.Classes.SAP_XIRemoteAdminService.toInstanceName4(afname, "RuntimeCheck.$afFaHostdb")
-        val rtc = sld.sldop(SLD_CIM.createInstance(RTCname, mapOf("Caption" to "RuntimeCheck of $afFaHostdb", "Purpose" to "RuntimeCheck")), scope)
-
-        val atrez = Cim.decodeFromReader(admtool.await().bodyAsXmlReader())
-        require(atrez.isCreatedOrAlreadyExists())
-        val crrez = Cim.decodeFromReader(cacherefresh.await().bodyAsXmlReader())
-        require(crrez.isCreatedOrAlreadyExists())
-        val rtcrez = Cim.decodeFromReader(rtc.await().bodyAsXmlReader())
-        require(rtcrez.isCreatedOrAlreadyExists())
-
-        // создаём http-порты к сервисам
-        val proto = realHostPortURI.scheme
         val portbasicurlname = SLD_CIM.Classes.SAP_HTTPServicePort.toInstanceName4(afname, "basicURLs")
-        x = SLD_CIM.createInstance(
+        registerSldCreateUpdate(
             portbasicurlname, mapOf(
-                "Caption" to "Basic URLs of Adapter Engine $afFaHostdb", "Protocol" to proto, "SecureURL" to urlOf(), "URL" to urlOf()
-            )
+                "Caption" to "Basic URLs of Adapter Engine $afFaHostdb",
+                "Protocol" to realHostPortURI.scheme,
+                "SecureURL" to urlOf().toString(),
+                "URL" to urlOf().toString()
+            ), log, scope
         )
-        val portbasic = sld.sldop(x, scope)
-        val portadmintoolname = SLD_CIM.Classes.SAP_HTTPServicePort.toInstanceName4(afname, "port.AdminTool.$afFaHostdb")
-        x = SLD_CIM.createInstance(
-            portadmintoolname, mapOf(
-                "Caption" to "Port for AdminTool of $afFaHostdb", "Protocol" to proto, "SecureURL" to urlOf("/mdt"), "URL" to urlOf("/mdt")
-            )
-        )
-        val portadmin = sld.sldop(x, scope)
-        val portcacherefreshname = SLD_CIM.Classes.SAP_HTTPServicePort.toInstanceName4(afname, "port.CacheRefresh.$afFaHostdb")
-        x = SLD_CIM.createInstance(
-            portcacherefreshname, mapOf(
-                "Caption" to "Port for CacheRefresh of $afFaHostdb",
-                "Protocol" to proto,
-                "SecureURL" to urlOf("/CPACache/invalidate"),
-                "URL" to urlOf("/CPACache/invalidate")
-            )
-        )
-        val portcr = sld.sldop(x, scope)
-        val portRTCname = SLD_CIM.Classes.SAP_HTTPServicePort.toInstanceName4(afname, "port.RuntimeCheck.$afFaHostdb")
-        x = SLD_CIM.createInstance(
-            portRTCname, mapOf(
-                "Caption" to "Port for RuntimeCheck of $afFaHostdb",
-                "Protocol" to proto,
-                "SecureURL" to urlOf("/AdapterFramework/rtc"),
-                "URL" to urlOf("/AdapterFramework/rtc")
-            )
-        )
-        val portrtc = sld.sldop(x, scope)
-        val portbasicrez = Cim.decodeFromReader(portbasic.await().bodyAsXmlReader())
-        require(portbasicrez.isCreatedOrAlreadyExists())
-        val portadminrez = Cim.decodeFromReader(portadmin.await().bodyAsXmlReader())
-        require(portadminrez.isCreatedOrAlreadyExists())
-        val portcrrez = Cim.decodeFromReader(portcr.await().bodyAsXmlReader())
-        require(portcrrez.isCreatedOrAlreadyExists())
-        val portrtcrez = Cim.decodeFromReader(portrtc.await().bodyAsXmlReader())
-        require(portrtcrez.isCreatedOrAlreadyExists())
-
-        // Делаем ассоциации
-        // AdminTool.af.fa0.fake0db -> XIAF
-        x = Cim.association("Antecedent", afname, "Dependent", admintoolname, "SAP_HostedXIRemoteAdminService", namespacepath)
-        x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        require(x.isCreatedOrAlreadyExists())
-        // AdminTool.af.fa0.fake0db -> HTTPport
-        x = Cim.association("Antecedent", admintoolname, "Dependent", portadmintoolname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath)
-        x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        require(x.isCreatedOrAlreadyExists())
-        // four more
-        x = Cim.association("Antecedent", afname, "Dependent", cacherefreshname, "SAP_HostedXIRemoteAdminService", namespacepath)
-        x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        require(x.isCreatedOrAlreadyExists())
-        x = Cim.association("Antecedent", cacherefreshname, "Dependent", portcacherefreshname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath)
-        x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        require(x.isCreatedOrAlreadyExists())
-        x = Cim.association("Antecedent", afname, "Dependent", RTCname, "SAP_HostedXIRemoteAdminService", namespacepath)
-        x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        require(x.isCreatedOrAlreadyExists())
-        x = Cim.association("Antecedent", RTCname, "Dependent", portRTCname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath)
-        x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        require(x.isCreatedOrAlreadyExists())
-        //basic
         x = Cim.association("Antecedent", afname, "Dependent", portbasicurlname, "SAP_XIAdapterHostedHTTPServicePort", namespacepath)
         x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
         require(x.isCreatedOrAlreadyExists())
         return
     }
 
+    private suspend fun registerSldCreateUpdate(
+        name: Cim.INSTANCENAME,
+        prop: Map<String, String>,
+        log: StringBuilder,
+        scope: CoroutineScope,
+    ): Boolean {
+        var x = SLD_CIM.createInstance(name, prop)
+        var admtool = sld.sldop(x, scope)
+        var atrez = Cim.decodeFromReader(admtool.await().bodyAsXmlReader())
+        var ok = true
+        var e1 = atrez.getError()
+        if (e1 == null) {
+            log.append("${name.CLASSNAME} создана успешно\n")
+        } else if (e1.code == Cim.ErrCodes.CIM_ERR_ALREADY_EXISTS) {
+            log.append(e1.DESCRIPTION).append("\n")
+            log.append("Запускаем ModifyInstance для ${name.CLASSNAME}\n")
+            x = SLD_CIM.modifyInstance(name, prop)
+            admtool = sld.sldop(x, scope)
+            atrez = Cim.decodeFromReader(admtool.await().bodyAsXmlReader())
+            e1 = atrez.getError()
+            if (e1 != null) {
+                log.append("ОШИБКА! ${name.CLASSNAME} обновить не удалось\n")
+                ok = false
+            } else {
+                log.append("${name.CLASSNAME} обновлено успешно\n")
+            }
+        } else {
+            ok = false
+            log.append("ОШИБКА! не удалось создать ${name.CLASSNAME}\n")
+        }
+        return ok
+    }
+
+    private suspend fun registerSldRASport(afname: Cim.INSTANCENAME, ras: ERAS, relative: String, log: StringBuilder, scope: CoroutineScope) {
+        val admintoolname = SLD_CIM.Classes.SAP_XIRemoteAdminService.toInstanceName4(afname, "$ras.$afFaHostdb")
+        val prop1 = mapOf("Caption" to "$ras of $afFaHostdb", "Purpose" to ras.toString())
+        val ok1 = registerSldCreateUpdate(admintoolname, prop1, log, scope)
+
+        val portadmintoolname = SLD_CIM.Classes.SAP_HTTPServicePort.toInstanceName4(afname, "port.$ras.$afFaHostdb")
+        val prop2 = mapOf(
+            "Caption" to "Port for $ras of $afFaHostdb",
+            "Protocol" to realHostPortURI.scheme,
+            "SecureURL" to urlOf(relative).toString(),
+            "URL" to urlOf(relative).toString()
+        )
+        val ok2 = registerSldCreateUpdate(portadmintoolname, prop2, log, scope)
+        // Делаем ассоциации
+        if (ok1 && ok2) {
+            // AdminTool.af.fa0.fake0db -> XIAF
+            var x = Cim.association("Antecedent", afname, "Dependent", admintoolname, "SAP_HostedXIRemoteAdminService", namespacepath)
+            x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+            require(x.isCreatedOrAlreadyExists())
+            log.append("Создана ассоциация SAP_HostedXIRemoteAdminService\n")
+            // AdminTool.af.fa0.fake0db -> HTTPport
+            x = Cim.association("Antecedent", admintoolname, "Dependent", portadmintoolname, "SAP_XIRemoteAdminServiceAccessByHTTP", namespacepath)
+            x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+            require(x.isCreatedOrAlreadyExists())
+            log.append("Создана ассоциация SAP_XIRemoteAdminServiceAccessByHTTP\n")
+        } else {
+            log.append("ОШИБКА! ассоциации не создались\n")
+        }
+    }
+
     private fun generateRoute(ico: XICache.AllInOne) {
-        val required = ico.getChannelsOID().map { oid -> channels.find { it.ChannelObjectId == oid }!! }
-        val parsed = ico.toParsed(required)
+        val required = ico.getChannelsOID().associate { oid -> Pair(oid, channels.find { it.ChannelObjectId == oid }) }
+        val missed = required.filter { it.value == null }
+        require(missed.isEmpty()) {
+            "Нет всех требуемых каналов для икохи, OIDs=${missed.keys}"
+        }
+        val parsed = ico.toParsed(required.values.toList() as List<XICache.Channel>)
         parsed.routeGenerator = MRouteGenerator(parsed)
         routes[parsed.routeId] = parsed
         parsed.xmlDsl = parsed.routeGenerator.convertIco()
@@ -258,14 +263,10 @@ class FAE(
         camelContext.start()
     }
 
-    fun installRouting(app: Application) = app.routing {
+    fun ktor(app: Application) = app.routing {
         get("/XI") {
             call.respondHtml {
-                head {
-                    title("Сервлет XI-протокола")
-                    link(rel = "stylesheet", href = "/styles.css", type = "text/css")
-                    link(rel = "shortcut icon", href = "/favicon.ico")
-                }
+                htmlHead("Сервлет XI-протокола", this)
                 body {
                     pre {
                         +"Привет! Это сервлет XI-протокола, который надо вызывать через POST а не GET.\n\nТӥледлы удалтон."
@@ -295,7 +296,7 @@ class FAE(
             cae.valueMappingCache(query)
             call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
         }
-        post("/CPACache/invalidate/{...}") {
+        post("/FAE/CPACache/invalidate/{...}") {
             val query = call.request.queryParameters    //method=InvalidateCache или другой
             val form = call.receiveParameters()   //[consumer=[af.fa0.fake0db], consumer_mode=[AE]]
             val consumer_mode = form["consumer_mode"]!!
@@ -328,13 +329,28 @@ class FAE(
 
         get("/FAE") {
             call.respondHtml {
-                head {
-                    title("FAE кокпит")
-                    link(rel = "stylesheet", href = "/styles.css", type = "text/css")
-                    link(rel = "shortcut icon", href = "/favicon.ico")
-                }
+                htmlHead("FAE кокпит", this)
                 body {
                     h1 { +"FAE кокпит" }
+                    h2 { +"кнопочки" }
+                    div {
+                        p { +"sid: ${sid.uppercase()} $afFaHostdb, domain: $domain, cae: ${cae.urlOf()}, sld: ${sld.urlOf("/sld/cimom")}" }
+                        form("$realHostPortURI/FAE/clearDB") {
+                            button(ButtonFormEncType.textPlain, ButtonFormMethod.post, "ClearDB", ButtonType.submit, null) {
+                                +"ClearDB - очистить БД"
+                            }
+                        }
+                        form("$realHostPortURI/FAE/reloadDB") {
+                            button(ButtonFormEncType.textPlain, ButtonFormMethod.post, "ReloadDB", ButtonType.submit, null) {
+                                +"ReloadDB - загрузить из CAE"
+                            }
+                        }
+                        form("$realHostPortURI/FAE/registerSLD") {
+                            button(ButtonFormEncType.textPlain, ButtonFormMethod.post, "registerSLD", ButtonType.submit, null) {
+                                +"registerSLD - зарегистрировать в SLD"
+                            }
+                        }
+                    }
                     h2 { +"Объекты из CAE ${cae.konfig.sid}" }
                     ul {
                         routes.forEach { k, v ->
@@ -347,16 +363,35 @@ class FAE(
                 }
             }
         } // get /FAE
+        post("/FAE/clearDB") {
+            DB.executeUpdate(DB.clearFAE)
+            call.respondHtml {
+                htmlHead("FAE кокпит :: clearDB", this)
+                body { +"БД FAE очищена: таблицы FAE_CPA и FAE_MSG" }
+            }
+        }
+        post("/FAE/reloadDB") {
+            call.respondHtml {
+                htmlHead("FAE кокпит :: reloadDB", this)
+                body { +"Сообщение о перезагрузке будет тут" }
+            }
+        }
+        post("/FAE/registerSLD") {
+            val log = StringBuilder()
+            runBlocking { registerSLD(log, GlobalScope) }
+            call.respondHtml {
+                htmlHead("FAE кокпит :: регистрация в SLD", this)
+                body {
+                    h1 { +"Регистрация в SLD: готово" }
+                    pre { +log.toString()}
+                }
+            }
+        }
         get("/pimon") {
             val msktz = ZoneId.of("Europe/Moscow")
-            val msk = Clock.system(msktz)
 
             call.respondHtml {
-                head {
-                    title("FAE pimon")
-                    link(rel = "stylesheet", href = "/styles.css", type = "text/css")
-                    link(rel = "shortcut icon", href = "/favicon.ico")
-                }
+                htmlHead("FAE кокпит :: pimon", this)
                 body {
                     table("pimon") {
                         thead {
@@ -391,7 +426,6 @@ class FAE(
         } // get /FAE
     }
 
-
     suspend fun hmi(call: ApplicationCall) {
         val s = call.receiveText()
         val q = call.request.queryString()
@@ -400,13 +434,13 @@ class FAE(
         val hr = i.toHmiRequest()
         println("${call.request.path()} with service=${hr.ServiceId} methodId=${hr.MethodId} methodInput=${hr.MethodInput}")
 
-        var j: Hmi.HmiResponse = hr.copyToResponse("text/plain", "")
+        var j: Hmi.HmiResponse = hr.copyToResponse(ContentType.Text.Plain.toString(), "")
         if (hr.ServiceId == "rwbAdapterAccess" && hr.MethodId == "select") {
             val hitlist = hr.MethodInput!!["hitlist"]!!
             println("\n(270) histlist=$hitlist\n")
             val objid = hr.MethodInput["objid"]
             when (hitlist) {
-                "parties" -> j = hr.copyToResponse("text/plain", "1\n50455e21531b36fa958fefae3be41689\tP_PARTY\n")
+                "parties" -> j = hr.copyToResponse(ContentType.Text.Plain.toString(), "1\n50455e21531b36fa958fefae3be41689\tP_PARTY\n")
                 "party" -> {
                     val xml = """<cp:Party xmlns:cp="urn:sap-com:xi:xiParty">
             <cp:PartyObjectId>50455e21531b36fa958fefae3be41689</cp:PartyObjectId>
@@ -424,7 +458,7 @@ class FAE(
                 }
 
                 "services", "channels", "admds" -> {
-                    j = hr.copyToResponse("text/plain", "0")
+                    j = hr.copyToResponse(ContentType.Text.Plain.toString(), "0")
                 }
 
                 "cache" -> j = hr.copyToResponse(
@@ -433,7 +467,7 @@ class FAE(
                 )
             }
         } else if (hr.MethodId == "InvalidateCache")
-            j = hr.copyToResponse("text/plain", "R\tU\t\t1682667894485")
+            j = hr.copyToResponse(ContentType.Text.Plain.toString(), "R\tU\t\t1682667894485")
         call.respondOutputStream(ContentType.Text.Xml, HttpStatusCode.OK) { j.toInstance().encodeToStream(this) }
     }
 
@@ -489,7 +523,7 @@ class FAE(
                     sid,
                     afFaHostdb,
                     realHostPortURI.toString(),
-                    cae.urlOf("/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=<Mode>&consumer=<Consumer>")
+                    cae.urlOf("/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=<Mode>&consumer=<Consumer>").toString()
                 )
             }
 
@@ -647,7 +681,7 @@ class FAE(
                     os.write(fault.encodeToString().toByteArray())
                     os.close()
                     call.response.status(HttpStatusCode.InternalServerError)
-                    call.response.headers.append("Content-Type", "application/xml")
+                    call.response.headers.append(ContentType.Text.Plain.toString(), "application/xml")
                     call.respondBytes { f.readBytes() }
                 }
 
@@ -690,6 +724,14 @@ class FAE(
             }
         } else {
             call.respondText(ContentType.Application.Xml, HttpStatusCode.NotAcceptable) { "Wrong Content-Type: $contentType" }
+        }
+    }
+
+    private fun htmlHead(title: String, html: HTML) {
+        html.head {
+            title(title)
+            link(rel = "stylesheet", href = "/styles.css", type = "text/css")
+            link(rel = "shortcut icon", href = "/favicon.ico")
         }
     }
 }

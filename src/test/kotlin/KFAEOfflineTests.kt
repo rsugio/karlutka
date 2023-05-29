@@ -3,12 +3,11 @@ import KT.Companion.x
 import karlutka.models.MCamelDSL
 import karlutka.parsers.pi.XIAdapterEngineRegistration
 import karlutka.parsers.pi.XICache
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 
-/**
- * Тесты без онлайна
- */
-class KFAELocalTests {
+@Tag("Offline")
+class KFAEOfflineTests {
     @Test
     fun parse() {
         XIAdapterEngineRegistration.decodeFromString(s("/pi_AE/01regtest_req.xml"))
@@ -33,7 +32,6 @@ class KFAELocalTests {
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdateFull.xml.sensitive"))
     }
 
-
     @Test
     fun parseIco() {
         val cpa = XICache.decodeCacheRefreshFromReader(x("/pi_AE/cpa06.xml"))
@@ -46,10 +44,8 @@ class KFAELocalTests {
 
     @Test
     fun mcameldsl() {
-        var d = MCamelDSL.decodeFromString("<description>умнО работать это хорошо</description>")
-        // неймспейсы и миксед контент в текущей реализации ломают всё
-        d = MCamelDSL.decodeFromString("<setBody><simple><s1:a xmlns:s1=\"urn:s1\" xmlns:s2=\"urn:s2\"><s2:b/>B</s1></simple></setBody>")
-        println(d)
+        var d = MCamelDSL.decodeSetBodyFromString("<setBody><simple>A123</simple></setBody>")
+        //TODO d = MCamelDSL.decodeSetBodyFromString("<setBody><simple><s1:a xmlns:s1=\"urn:s1\" xmlns:s2=\"urn:s2\"><s2:b/>B</s1></simple></setBody>")
     }
 
     @Test

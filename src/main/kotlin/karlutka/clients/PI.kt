@@ -13,6 +13,7 @@ import karlutka.server.DB
 import karlutka.util.KfTarget
 import karlutka.util.KtorClient
 import kotlinx.coroutines.*
+import java.net.URI
 import java.net.URL
 import java.net.URLEncoder
 import java.util.*
@@ -42,8 +43,11 @@ class PI(
     }
     // была идея для прикладной системы знать её HMI но пока незачем    private val hmiServices: MutableList<HmiUsages.HmiService> = mutableListOf()
 
-    fun urlOf(res: String=""): String {
-        return "$httpHostPort/$res"
+    fun urlOf(res: String=""): URL {
+        return if (res.isEmpty())
+            httpHostPort
+        else
+            httpHostPort.toURI().resolve(res).toURL()
     }
 
     suspend fun perfServletListOfComponents(scope: CoroutineScope) = scope.async { KtorClient.taskGet(client, PerfMonitorServlet.uriPerfServlet) }

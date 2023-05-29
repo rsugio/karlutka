@@ -16,8 +16,8 @@ import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
+import nl.adaptivity.xmlutil.util.CompactFragment
 import java.net.URI
-import java.net.URL
 import java.util.*
 import kotlin.test.Test
 
@@ -87,8 +87,8 @@ class KBukvar {
     fun tmp() {
         val a = A(333)
         println(a.encodeToStringJSON())
-        val b = A.decodeFromStringJSON("\"444\"")
-        println(b)
+        //val b = A.decodeFromStringJSON("\"444\"")
+        //println(b)
     }
 
     @Test
@@ -102,7 +102,7 @@ class KBukvar {
     enum class AddresStatus { VALID, INVALID, TEMPORARY }
 
     @Serializable
-    @XmlSerialName("address")
+    @XmlSerialName("address", "", "")
     data class Address(
         val houseNumber: String,
         val street: String,
@@ -143,6 +143,21 @@ class KBukvar {
     fun regex() {
         val u = URI("http://asasasasasasas?q=1&a=c")
         println(u.scheme)
+    }
+
+
+    @Serializable
+    class A2(
+        @XmlValue val value: @Contextual CompactFragment
+    )
+
+    @Test
+    fun compact() {
+        val x = XML {
+            autoPolymorphic = true
+        }
+        val a = x.decodeFromString<A2>("<A2><simple>цывцвцвц</simple></A2>")
+        println(a)
     }
 
 }

@@ -32,6 +32,7 @@ object DB {
     lateinit var updFCPA: PreparedStatement
     lateinit var insFAEM: PreparedStatement
     lateinit var selectFAEM: PreparedStatement
+    lateinit var clearFAE: PreparedStatement
 
     val swcv = mutableListOf<MPI.Swcv>()
     val esrobjects = mutableListOf<MPI.EsrObj>()
@@ -60,6 +61,7 @@ object DB {
         //   мониторинг
         insFAEM = conn.prepareStatement("insert into PUBLIC.FAE_MSG(SID,ROUTEID,MESSAGEID,DATETIME,SENDER,RECEIVER,BODY) values(?1,?2,?3,?4,?5,?6,?7)")
         selectFAEM = conn.prepareStatement("select ROUTEID,MESSAGEID,DATETIME,SENDER,RECEIVER,BODY from PUBLIC.FAE_MSG where sid=?1 order by DATETIME DESC")
+        clearFAE = conn.prepareStatement("delete PUBLIC.FAE_CPA; delete PUBLIC.FAE_MSG;")
 
         //readSwcvList()
 //        println("прочитаны SWCV")

@@ -103,6 +103,7 @@ object KtorServer {
                 }
             }
             //install(ContentNegotiation) {json()} // io.ktor:ktor-server-content-negotiation-jvm:$ktor_version
+
             Server.installRoutings(this)
         }
     }

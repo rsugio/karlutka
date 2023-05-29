@@ -38,8 +38,8 @@ targets:
 
   - sid: FA0
     type: FAE
-    cae: DPH
-    sld: DPH
+    cae: PID
+    sld: PID
     fakehostdb: fake0db
     realHostPortURI: http://mp-l-5cg0366bml:80
     domain: domain.01.ld-s-devpih

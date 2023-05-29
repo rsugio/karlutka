@@ -6,6 +6,7 @@ import kotlinx.serialization.encodeToString
 import nl.adaptivity.xmlutil.serialization.XML
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import nl.adaptivity.xmlutil.serialization.XmlValue
+import nl.adaptivity.xmlutil.util.CompactFragment
 
 @Serializable
 sealed class MCamelDSL {
@@ -126,8 +127,10 @@ sealed class MCamelDSL {
         @Serializable
         @XmlSerialName("simple", "", "")
         class Simple(
-            @XmlValue val value: String,
-        ) : Predicate()
+            @XmlValue val value: String, // CompactFragment,
+        ) : Predicate() {
+            //constructor(s: String)
+        }
     }
 
     @Serializable
@@ -154,6 +157,9 @@ sealed class MCamelDSL {
 
         fun decodeFromString(s: String): MCamelDSL {
             return xml.decodeFromString<MCamelDSL>(s)
+        }
+        fun decodeSetBodyFromString(s: String): SetBody {
+            return xml.decodeFromString<SetBody>(s)
         }
     }
 }
