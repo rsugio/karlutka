@@ -198,7 +198,7 @@ class XICache {
         @XmlElement val ParamValue: String,
     )
 
-    data class AllInOneParsed(
+    class AllInOneParsed(
         val routeId: String,
         val fromParty: String,
         val fromService: String,
@@ -216,31 +216,35 @@ class XICache {
         val senderAttr: List<Attribute>,
     ) {
         lateinit var routeGenerator: MRouteGenerator
+        val key = "$fromParty|$fromService|{$fromIfacens}$fromIface|$toParty|$toService"
         var xmlDsl: String = ""
-        data class Receiver(
+
+        class Receiver(
             val id: String,
             val party: String,
             val service: String,
         )
 
-        data class ChannelR(
+        class ChannelR(
             val id: String,
             val receiver: Receiver,
             val attrs: List<Attribute>,
-        )
+        ) {
+            val camel = attrs.filter { it.Namespace == "camel" }.associate { Pair(it.Name, it.valueAsString()) }
+        }
 
-        data class ConditionGroup(
+        class ConditionGroup(
             val id: String,
             val receivers: List<Receiver> = listOf(),
             val condlinegroups: List<CondLineGroup> = listOf(),
         )
 
-        data class CondLineGroup(
+        class CondLineGroup(
             val compgroup: Int,
             val cond: List<CondLine> = listOf(),
         )
 
-        data class CondLine(
+        class CondLine(
             val counter: Int,
             val xpath: String?,
             val cobj: String?,        //context object name, потребует своего xpath и отдельного чтения из ESR
@@ -256,6 +260,33 @@ class XICache {
                 c.COMPOP,
                 c.REXTRACTOR.TRD_EXTRACTOR.VALUE //> и < экранируются сами
             )
+
+            fun xpath() : String {
+                val apos = right.contains('\'')
+                val quot = right.contains('"')
+                val r = when {
+                    apos && quot -> {
+                        // Экранирование требует разбирательств с xmlutil, так как иначе &apos; справедливо
+                        // превращается в &amp;apos; а костылить суррогатные замены очень ненормально
+                        // Возможно надо сделать DelegatingXmlWriter под выдачу маршрутов, заодно и неймспейсы
+                        // приделать
+                        TODO("both ' & \" are in right part of XPath-expression, unimplemented yet")
+                    }
+                    apos -> "\"$right\""
+                    else -> "'$right'"
+                }
+
+                return when {
+                    xpath != null && op == EOp.EQ -> "$xpath=$r"
+                    xpath != null && op == EOp.NE -> "$xpath!=$r"
+                    xpath != null && op == EOp.CP -> "$xpath~=$r"   //TODO
+                    xpath != null && op == EOp.EX -> "boolean($xpath)"
+                    else -> {
+                        require(cobj != null)   //TODO
+                        "false"
+                    }
+                }
+            }
         }
     }
 

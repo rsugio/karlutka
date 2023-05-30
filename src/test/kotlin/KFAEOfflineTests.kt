@@ -1,6 +1,7 @@
 import KT.Companion.s
 import KT.Companion.x
 import karlutka.models.MCamelDSL
+import karlutka.models.MRouteGenerator
 import karlutka.parsers.pi.XIAdapterEngineRegistration
 import karlutka.parsers.pi.XICache
 import org.junit.jupiter.api.Tag
@@ -38,15 +39,12 @@ class KFAEOfflineTests {
         // Это полный рефреш полученный {{host}}/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=T&consumer=af.fa0.fake0db
         // чем режим T и TF отличаются, непонятно
         val cpa = XICache.decodeCacheRefreshFromReader(x("/pi_AE/run_value_mapping_cache_int_InvalidateCache_F.xml.sensitive"))
-        cpa.Channel.forEach { ix ->
-            println("cc ${ix.ChannelObjectId}")
-        }
         cpa.AllInOne.forEach { ico ->
-            println("ico ${ico.AllInOneObjectId}")
             val n = ico.getChannelsOID().associateWith { oid -> cpa.Channel.find{it.ChannelObjectId==oid} }
             val nn = n.values.filterNotNull()
             require(n.size==nn.size) {"Не должно быть неизвестных каналов"}
-            val parsed = ico.toParsed(nn)
+            val mrg = MRouteGenerator(ico.toParsed(nn))
+            println(mrg.convertIco())
         }
     }
 

@@ -16,7 +16,10 @@ import karlutka.models.MTarget
 import karlutka.parsers.pi.*
 import karlutka.util.KTempFile
 import karlutka.util.KfTarget
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.runBlocking
 import kotlinx.html.*
 import org.apache.camel.Processor
 import org.apache.camel.builder.RouteBuilder
@@ -461,32 +464,37 @@ class FAE(
         } // get /FAE
         post("/FAE/clearDB") {
             DB.executeUpdate(DB.clearFAE)
+            allinone.clear()
+            channels.clear()
+            routes.clear()
             call.respondHtml {
                 htmlHead("FAE кокпит :: clearDB :: $sid", this)
                 body { +"БД FAE очищена: таблицы FAE_CPA и FAE_MSG" }
             }
         }
         post("/FAE/reloadDB") {
-            // Это полный рефреш полученный {{host}}/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=T&consumer=af.fa0.fake0db
+            // Это полный рефреш полученный
+            // {{host}}/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=T&consumer=af.fa0.fake0db
+            // между F и TF разницы не вижу
             val begin = Instant.now()
             val cacheRefreshFull = cae.dirHmiCacheRefreshService("F", afFaHostdb)
             cpalistener(cacheRefreshFull, begin)
             val end = Instant.now()
-            val ms = end.toEpochMilli() - begin.toEpochMilli()
+            val s = (end.toEpochMilli() - begin.toEpochMilli()) / 1000L
 
             call.respondHtml {
                 htmlHead("FAE кокпит :: reloadDB :: $sid", this)
                 body {
                     h2 { +"Перезагрузка кэша из CAE" }
                     p {
-                        +"Выполнен запрос {{cae}}/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=T&consumer=$afFaHostdb за $ms мс"
+                        +"Выполнен запрос {{cae}}/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=T&consumer=$afFaHostdb за $s с"
                     }
                 }
             }
         }
         post("/FAE/registerSLD") {
             val log = StringBuilder()
-            withContext(Dispatchers.IO) { registerSLD(log, GlobalScope) }
+            registerSLD(log, GlobalScope)
             call.respondHtml {
                 htmlHead("FAE кокпит :: регистрация в SLD :: $sid", this)
                 body {
@@ -497,7 +505,7 @@ class FAE(
         }
         post("/FAE/unregisterSLD") {
             val log = StringBuilder()
-            withContext(Dispatchers.IO) { unregisterSLD(log, GlobalScope) }
+            unregisterSLD(log, GlobalScope)
             call.respondHtml {
                 htmlHead("FAE кокпит :: разрегистрация в SLD :: $sid", this)
                 body {
