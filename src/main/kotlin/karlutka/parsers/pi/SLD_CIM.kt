@@ -32,6 +32,7 @@ class SLD_CIM {
 
         // не-иксайное
         SAP_J2EEEngineCluster,           //SAP AS Java
+        SAP_ApplicationSystem,
 
         // для тестов и отладки на котиках
         SAP_StandaloneDotNetSystem,

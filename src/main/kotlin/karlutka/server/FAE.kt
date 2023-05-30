@@ -104,7 +104,11 @@ class FAE(
         camelContext.name = afFaHostdb
         allinone.forEach { ico ->
             // создание или изменение
-            generateRoute(ico)
+            val required = ico.getChannelsOID().associate { oid -> Pair(oid, channels.find { it.ChannelObjectId == oid }) }
+            val missed = required.filter { it.value == null }
+            if (missed.isEmpty()) {
+                generateRoute(ico.toParsed(required.values.filterNotNull()))
+            }
         }
     }
 
@@ -127,19 +131,21 @@ class FAE(
      * Если domain непустой то добавляет также в него
      */
     suspend fun registerSLD(log: StringBuilder, scope: CoroutineScope) {
+        var x: Cim.CIM      // запрос
+        var y: Cim.CIM      // ответ
+        var ok: Boolean
         // Ищем в SLD все XI-домены
-        var x = SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_XIDomain)
-        x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        val domains = x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.VALUE_NAMEDINSTANCE
+        x = SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_XIDomain)
+        y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+        val domains = y.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE.IRETURNVALUE!!.VALUE_NAMEDINSTANCE
         // domains - см пример src\test\resources\pi_SLD\cim24enuminstances_SAP_XIDomain.xml
         log.append("Найдены XI-домены: ")
         log.append(domains.map { d -> d.INSTANCENAME.getKeyValue("Name") }.joinToString(" , "))
         log.append("\n")
 
         val afname = SLD_CIM.Classes.SAP_XIAdapterFramework.toInstanceName2(afFaHostdb)
-        val af1 = sld.sldop(SLD_CIM.createInstance(afname, mapOf("Caption" to "Adapter Engine on $afFaHostdb")), scope)
-        val af1rez = Cim.decodeFromReader(af1.await().bodyAsXmlReader())
-        require(af1rez.isCreatedOrAlreadyExists())
+        ok = registerSldCreateUpdate(afname, mapOf("Caption" to "Adapter Engine on $afFaHostdb"), log, scope)
+        require(ok)
         log.append("Создана запись класса SAP_XIAdapterFramework для $afFaHostdb\n")
         if (domain != null && domain!!.isNotBlank()) {
             // Ищем домен центрального движка
@@ -165,12 +171,27 @@ class FAE(
         } else {
             log.append("Домен не указан или пустой. Ассоциация не создана.\n")
         }
+
+        // SAP_J2EEEngineCluster
+        val clustername = SLD_CIM.Classes.SAP_J2EEEngineCluster.toInstanceName2("$sid.SystemHome.$fakehostdb")
+        ok = registerSldCreateUpdate(clustername, mapOf("Caption" to "$sid on $afFaHostdb",
+            "SAPSystemName" to sid,
+            "SystemHome" to fakehostdb,
+            "Version" to "7.50.3301.465127.20210512152315"), log, scope)
+        require(ok)
+
+        x = Cim.association("SameElement", afname, "SystemElement", clustername, "SAP_XIViewedXISubSystem", namespacepath)
+        y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+        require(y.isCreatedOrAlreadyExists()) {"Request: ${x.encodeToString()}, Error: ${y.getError()}"}
+        log.append("SAP_XIViewedXISubSystem создана\n")
+
+        // разные Remote-admin сервисы
         registerSldRASport(afname, ERAS.AdminTool, "/FAE/mdt", log, scope)
         registerSldRASport(afname, ERAS.CacheRefresh, "/FAE/CPACache/invalidate", log, scope)
         registerSldRASport(afname, ERAS.RuntimeCheck, "/FAE/AdapterFramework/rtc", log, scope)
 
         val portbasicurlname = SLD_CIM.Classes.SAP_HTTPServicePort.toInstanceName4(afname, "basicURLs")
-        registerSldCreateUpdate(
+        ok = registerSldCreateUpdate(
             portbasicurlname, mapOf(
                 "Caption" to "Basic URLs of Adapter Engine $afFaHostdb",
                 "Protocol" to realHostPortURI.scheme,
@@ -178,9 +199,39 @@ class FAE(
                 "URL" to urlOf().toString()
             ), log, scope
         )
+        require(ok)
         x = Cim.association("Antecedent", afname, "Dependent", portbasicurlname, "SAP_XIAdapterHostedHTTPServicePort", namespacepath)
-        x = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        require(x.isCreatedOrAlreadyExists())
+        y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+        require(y.isCreatedOrAlreadyExists()) {"Request: ${x.encodeToString()}, Error: ${y.getError()}"}
+
+        listOf("AS2", "Axis", "BC", "CIDX", "EDISeparator", "File", "HTTP_AAE",
+            "IDoc_AAE", "JDBC", "JMS", "Mail", "Marketplace", "OData", "OFTP", "REST", "RFC", "RNIF", "RNIF11", "SFSF",
+            "SFTP", "SOAP", "WS", "WS_AAE", "X400", "XIRA", "CamelAdapter"
+        ).forEach { adapter ->
+            val soapname = SLD_CIM.Classes.SAP_XIAdapterService.toInstanceName4(afname, "$adapter.$afFaHostdb")
+            ok = registerSldCreateUpdate(soapname, mapOf("Caption" to "$adapter of $afFaHostdb", "AdapterType" to adapter), log, scope)
+            require(ok)
+            log.append("$adapter создан\n")
+            x = Cim.association("Antecedent", afname, "Dependent", soapname, "SAP_HostedXIAdapterService", namespacepath)
+            y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+            require(y.isCreatedOrAlreadyExists()) {"Request: ${x.encodeToString()}, Error: ${y.getError()}"}
+            log.append("$adapter прикреплён к $afFaHostdb\n")
+            val portname = SLD_CIM.Classes.SAP_HTTPServicePort.toInstanceName4(soapname, "port.$adapter.$afFaHostdb")
+            ok = registerSldCreateUpdate(
+                portname, mapOf(
+                    "Caption" to "Port for $adapter of $afFaHostdb",
+                    "Protocol" to realHostPortURI.scheme,
+                    "SecureURL" to realHostPortURI.toString(),
+                    "URL" to realHostPortURI.toString(),
+                ), log, scope
+            )
+            require(ok)
+            log.append("port.$adapter создан\n")
+            x = Cim.association("Antecedent", soapname, "Dependent", portname, "SAP_XIAdapterServiceAccessByHTTP", namespacepath)
+            y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+            require(y.isCreatedOrAlreadyExists()) {"Request: ${x.encodeToString()}, Error: ${y.getError()}"}
+            log.append("port.$adapter прикреплён к $adapter\n")
+        }
         return
     }
 
@@ -247,13 +298,7 @@ class FAE(
         }
     }
 
-    private fun generateRoute(ico: XICache.AllInOne) {
-        val required = ico.getChannelsOID().associate { oid -> Pair(oid, channels.find { it.ChannelObjectId == oid }) }
-        val missed = required.filter { it.value == null }
-        require(missed.isEmpty()) {
-            "Нет всех требуемых каналов для икохи, OIDs=${missed.keys}"
-        }
-        val parsed = ico.toParsed(required.values.toList() as List<XICache.Channel>)
+    private fun generateRoute(parsed: XICache.AllInOneParsed) {
         parsed.routeGenerator = MRouteGenerator(parsed)
         routes[parsed.routeId] = parsed
         parsed.xmlDsl = parsed.routeGenerator.convertIco()
@@ -383,7 +428,7 @@ class FAE(
                 htmlHead("FAE кокпит :: регистрация в SLD", this)
                 body {
                     h1 { +"Регистрация в SLD: готово" }
-                    pre { +log.toString()}
+                    pre { +log.toString() }
                 }
             }
         }
@@ -607,12 +652,22 @@ class FAE(
         // updateList - список идентификаторов икох для перегенерации, среди них могут быть удалённые
         updateList.distinct().forEach { id ->
             val ico = allinone.find { it.AllInOneObjectId == id }
-            if (ico != null) {
-                // создание или изменение
-                generateRoute(ico)
-            } else {
-                // икоха уже удалена, выводим в лог
-                TODO("икоха удалена: $id, требуется удалить маршрут")
+            val required = ico?.getChannelsOID()?.associateWith { oid -> channels.find { it.ChannelObjectId == oid } } ?: mapOf()
+            val missed = required.filter { it.value == null }
+            when {
+                ico != null && missed.isEmpty() -> {
+                    // создание или изменение
+                    generateRoute(ico.toParsed(required.values.filterNotNull()))
+                }
+
+                ico != null -> {
+                    System.err.println("Нет всех требуемых каналов для икохи, OIDs=${missed.keys}")
+                }
+
+                else -> {
+                    // икоха уже удалена, выводим в лог
+                    TODO("икоха удалена: $id, требуется удалить маршрут")
+                }
             }
         }
     }
