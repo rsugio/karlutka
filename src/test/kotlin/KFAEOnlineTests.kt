@@ -12,6 +12,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
 import java.net.URI
+import java.time.Instant
 
 @Tag("Online")
 class KFAEOnlineTests {
@@ -42,6 +43,7 @@ class KFAEOnlineTests {
     fun sldops() {
         val log = StringBuilder()
         runBlocking {
+            fae.unregisterSLD(log, this)
             fae.registerSLD(log, this)
             println(log)
         }
@@ -51,7 +53,7 @@ class KFAEOnlineTests {
     fun cpa() {
         val cpa = XICache.decodeCacheRefreshFromReader(x("/pi_AE/cpa06.xml"))
         runBlocking {
-            fae.cpalistener(cpa)
+            fae.cpalistener(cpa, Instant.now())
         }
     }
 

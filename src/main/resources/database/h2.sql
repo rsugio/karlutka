@@ -7,12 +7,21 @@ CREATE TABLE IF NOT EXISTS PUBLIC.FAE
 
 CREATE TABLE IF NOT EXISTS PUBLIC.FAE_CPA
 (
-    SID    CHAR(3) references PUBLIC.FAE (SID),
-    OID    CHAR(32) not null, // ObjectID, guid
-    TYPEID VARCHAR  not null, // MPI.ETypeID, справочно
-    NAME   VARCHAR  not null, // человекочитаемое имя, для навигации
-    XML    VARCHAR  not null, // XML с содержимым объекта
+    SID      CHAR(3) references PUBLIC.FAE (SID),
+    OID      CHAR(32) not null, // ObjectID, guid
+    TYPEID   VARCHAR  not null, // MPI.ETypeID, справочно
+    NAME     VARCHAR  not null, // человекочитаемое имя, для навигации
+    XML      VARCHAR  not null, // XML с содержимым объекта
+    DATETIME LONG     not null, // миллисекунды, последний апдейт
     constraint PK primary key (SID, OID)
+);
+
+CREATE TABLE IF NOT EXISTS PUBLIC.FAE_CPAHISTORY
+(
+    SID      CHAR(3) references PUBLIC.FAE (SID),
+    DATETIME LONG    not null, // миллисекунды, последний апдейт
+    FILENAME VARCHAR not null,
+    REMARK   VARCHAR not null
 );
 
 CREATE TABLE IF NOT EXISTS PUBLIC.FAE_MSG

@@ -177,12 +177,15 @@ class SLD_CIM {
         }
 
         // удаление обычного объекта
-        fun deleteInstance(instancename: Cim.INSTANCENAME): Cim.CIM {
+
+        fun deleteInstance(instancename: Cim.INSTANCENAME) = deleteInstance(instancename, "DeleteInstance")
+        fun SAPExt_DeleteInstanceWithReferencesIfFound(instancename: Cim.INSTANCENAME) = deleteInstance(instancename, "SAPExt_DeleteInstanceWithReferencesIfFound")
+        private fun deleteInstance(instancename: Cim.INSTANCENAME, methodName: String): Cim.CIM {
             return Cim.CIM(
                 Cim.MESSAGE(
                     messageid(), Cim.SIMPLEREQ(
                         Cim.IMETHODCALL(
-                            "DeleteInstance", sldactive, null,
+                            methodName, sldactive, null,
                             listOf((Cim.iparamvalue("InstanceName", instancename)))
                         )
                     )

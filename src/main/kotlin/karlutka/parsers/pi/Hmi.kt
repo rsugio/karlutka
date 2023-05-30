@@ -275,27 +275,35 @@ class Hmi {
 
             while (xr.hasNext()) {
                 xr.next()
-                if (xr.isStartElement() && xr.localName == "attribute") {
-                    val ats = xr.attributes.associate { Pair(it.localName, it.value) }
-                    la = Attribute(ats["isleave"]!!.toBooleanStrict(), ats["leave_typeid"], ats["name"]!!)
-                    lst.add(la)
-                } else if (xr.isStartElement() && xr.localName == "value") {
-                    val ats = xr.attributes.associate { Pair(it.localName, it.value) }
-                    lv = Value(ats["index"]!!.toInt(), ats["isnull"]!!.toBooleanStrict())
-                } else if (xr.isStartElement() && xr.localName == "instance" && lv != null) {
-                    li = decodeInstanceFromReader(xr)
-                } else if (xr.isCharacters() && lv != null) {
-                    lt.add(xr.text)
-                } else if (xr.isEndElement() && xr.localName == "attribute") {
-                    la = null
-                } else if (xr.isEndElement() && xr.localName == "value") {
-                    if (li != null) lt.clear() //тексты только если нет instance, иначе всякие \n лезут
-                    la!!.value.add(Value(lv!!.index, lv.isnull, li, lt.joinToString("")))
-                    lv = null
-                    lt.clear()
-                    li = null
-                } else if (xr.isEndElement() && xr.localName == "instance") {
-                    return lst
+                when {
+                    xr.isStartElement() && xr.localName == "attribute" -> {
+                        val ats = xr.attributes.associate { Pair(it.localName, it.value) }
+                        la = Attribute(ats["isleave"]!!.toBooleanStrict(), ats["leave_typeid"], ats["name"]!!)
+                        lst.add(la)
+                    }
+                    xr.isStartElement() && xr.localName == "value" -> {
+                        val ats = xr.attributes.associate { Pair(it.localName, it.value) }
+                        lv = Value(ats["index"]!!.toInt(), ats["isnull"]!!.toBooleanStrict())
+                    }
+                    xr.isStartElement() && xr.localName == "instance" && lv != null -> {
+                        li = decodeInstanceFromReader(xr)
+                    }
+                    xr.isCharacters() && lv != null -> {
+                        lt.add(xr.text)
+                    }
+                    xr.isEndElement() && xr.localName == "attribute" -> {
+                        la = null
+                    }
+                    xr.isEndElement() && xr.localName == "value" -> {
+                        if (li != null) lt.clear() //тексты только если нет instance, иначе всякие \n лезут
+                        la!!.value.add(Value(lv!!.index, lv.isnull, li, lt.joinToString("")))
+                        lv = null
+                        lt.clear()
+                        li = null
+                    }
+                    xr.isEndElement() && xr.localName == "instance" -> {
+                        return lst
+                    }
                 }
             }
             require(false) { "Possible incorrect XML or wrong HMI structure" }

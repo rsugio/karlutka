@@ -30,15 +30,23 @@ class KFAEOfflineTests {
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdate_ICo.xml"))
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdate_Channel.xml"))
         XICache.decodeCacheRefreshFromReader(x("/pi_AE/ExportedCacheUpdateFull.xml.sensitive"))
+        XICache.decodeCacheRefreshFromReader(x("/pi_AE/run_value_mapping_cache_int_InvalidateCache_F.xml.sensitive"))
     }
 
     @Test
     fun parseIco() {
-        val cpa = XICache.decodeCacheRefreshFromReader(x("/pi_AE/cpa06.xml"))
-        cpa.AllInOne.filter { it.FromServiceName == "BC_TEST4_1234" }.forEach { ix ->
-            //val xml = convertIco(ix.toParsed(cpa))
-            println("------------------------------------------")
-            //println(xml)
+        // Это полный рефреш полученный {{host}}/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=T&consumer=af.fa0.fake0db
+        // чем режим T и TF отличаются, непонятно
+        val cpa = XICache.decodeCacheRefreshFromReader(x("/pi_AE/run_value_mapping_cache_int_InvalidateCache_F.xml.sensitive"))
+        cpa.Channel.forEach { ix ->
+            println("cc ${ix.ChannelObjectId}")
+        }
+        cpa.AllInOne.forEach { ico ->
+            println("ico ${ico.AllInOneObjectId}")
+            val n = ico.getChannelsOID().associateWith { oid -> cpa.Channel.find{it.ChannelObjectId==oid} }
+            val nn = n.values.filterNotNull()
+            require(n.size==nn.size) {"Не должно быть неизвестных каналов"}
+            val parsed = ico.toParsed(nn)
         }
     }
 

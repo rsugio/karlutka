@@ -39,7 +39,7 @@ object KtorClient {
 
     fun createClientEngine(
         threads: Int = 4,
-        connectionTimeo: Duration = Duration.ofSeconds(5),
+        connectionTimeo: Duration = Duration.ofSeconds(2000),
     ) {
         clientEngine = Java.create {
             threadsCount = threads
@@ -58,7 +58,7 @@ object KtorClient {
      */
     fun createClient(
         defaultHostPort: String,
-        retries: Int = 2,
+        retries: Int = 4,
         logLevel: LogLevel = LogLevel.NONE,
         headers: Map<String, String> = mapOf(),
         format: StringFormat? = null
@@ -101,7 +101,7 @@ object KtorClient {
         }
     }
 
-    class Task(val stat: HttpStatement) {
+    class Task(private val stat: HttpStatement) {
         val path: Path = KTempFile.task()
         lateinit var os: OutputStream
         lateinit var resp: HttpResponse

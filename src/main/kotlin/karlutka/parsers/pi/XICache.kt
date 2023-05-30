@@ -27,8 +27,11 @@ class XICache {
         val ServiceInterface: List<ServiceInterface>,
         val MPP_MAP: List<MPP_MAP>,
         @XmlSerialName("AdapterMetaData", "", "") val AdapterMetaData: List<@Contextual CompactFragment>,
+        @XmlSerialName("AlertRule", "", "") val AlertRule: List<@Contextual CompactFragment>,
+        @XmlSerialName("SWCV", "", "") val SWCV: List<@Contextual CompactFragment>,
         @XmlSerialName("Service", "", "") val Service: List<@Contextual CompactFragment>,
         @XmlSerialName("SXI_CONT", "", "") val SXI_CONT: @Contextual CompactFragment? = null,  // контейнер параметров, не нужен
+        @XmlSerialName("SXI_PROP", "", "") val SXI_PROP: List<@Contextual CompactFragment>,
     ) {
         fun isEmpty() = DELETED_OBJECTS == null && Party.isEmpty() && Channel.isEmpty() && AllInOne.isEmpty()
                 && ServiceInterface.isEmpty() && MPP_MAP.isEmpty() && AdapterMetaData.isEmpty()
@@ -659,6 +662,10 @@ class XICache {
         @XmlElement val STEP_VERSION_ID: String,
         @XmlElement val ATT_READ: String,
         @XmlElement val PROG: String,
+        @XmlElement val IFMNAME: String?,
+        @XmlElement val IFMNS: String?,
+        @XmlElement val OFMNAME: String?,
+        @XmlElement val OFMNS: String?,
     )
 
     companion object {

@@ -33,6 +33,8 @@ object DB {
     lateinit var insFAEM: PreparedStatement
     lateinit var selectFAEM: PreparedStatement
     lateinit var clearFAE: PreparedStatement
+    lateinit var insFAECPHIST: PreparedStatement
+    lateinit var selectFAECPHIST: PreparedStatement
 
     val swcv = mutableListOf<MPI.Swcv>()
     val esrobjects = mutableListOf<MPI.EsrObj>()
@@ -53,15 +55,18 @@ object DB {
         // FAE
         readFAE = conn.prepareStatement("select sid, info from PUBLIC.FAE where sid=?")
         insFAE = conn.prepareStatement("insert into PUBLIC.FAE(sid,info) values(?1,?2)")
-        readFCPA = conn.prepareStatement("select NAME,XML from PUBLIC.FAE_CPA where sid=?1 and oid=?2")
-        readFCPAO = conn.prepareStatement("select TYPEID,XML from PUBLIC.FAE_CPA where sid=?1")
+        readFCPA = conn.prepareStatement("select NAME,XML,DATETIME from PUBLIC.FAE_CPA where sid=?1 and oid=?2")
+        readFCPAO = conn.prepareStatement("select TYPEID,XML,OID,NAME,DATETIME from PUBLIC.FAE_CPA where sid=?1")
         delFCPA = conn.prepareStatement("delete from PUBLIC.FAE_CPA where sid=?1 and oid=?2")
-        updFCPA = conn.prepareStatement("update PUBLIC.FAE_CPA set XML=?3 where SID=?1 and OID=?2")
-        insFCPA = conn.prepareStatement("insert into PUBLIC.FAE_CPA(sid,oid,typeid,name,xml) values(?1,?2,?3,?4,?5)")
-        //   мониторинг
+        updFCPA = conn.prepareStatement("update PUBLIC.FAE_CPA set XML=?3, DATETIME=?4 where SID=?1 and OID=?2")
+        insFCPA = conn.prepareStatement("insert into PUBLIC.FAE_CPA(sid,oid,typeid,name,xml,DATETIME) values(?1,?2,?3,?4,?5,?6)")
+        // FAE мониторинг
         insFAEM = conn.prepareStatement("insert into PUBLIC.FAE_MSG(SID,ROUTEID,MESSAGEID,DATETIME,SENDER,RECEIVER,BODY) values(?1,?2,?3,?4,?5,?6,?7)")
         selectFAEM = conn.prepareStatement("select ROUTEID,MESSAGEID,DATETIME,SENDER,RECEIVER,BODY from PUBLIC.FAE_MSG where sid=?1 order by DATETIME DESC")
         clearFAE = conn.prepareStatement("delete PUBLIC.FAE_CPA; delete PUBLIC.FAE_MSG;")
+        // FAE история
+        insFAECPHIST = conn.prepareStatement("insert into PUBLIC.FAE_CPAHISTORY(SID,DATETIME,FILENAME,REMARK) values(?1,?2,?3,?4)")
+        selectFAECPHIST = conn.prepareStatement("select DATETIME,FILENAME,REMARK from PUBLIC.FAE_CPAHISTORY where SID=?1 order by DATETIME DESC")
 
         //readSwcvList()
 //        println("прочитаны SWCV")

@@ -50,7 +50,6 @@ object KTempFile {
     }
 
     fun delete(p: Path) {
-        // может быть какая-то логика здесь
-        Files.delete(p)
+        Files.deleteIfExists(p)
     }
 }

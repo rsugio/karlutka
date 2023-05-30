@@ -16,10 +16,7 @@ import karlutka.models.MTarget
 import karlutka.parsers.pi.*
 import karlutka.util.KTempFile
 import karlutka.util.KfTarget
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import kotlinx.html.*
 import org.apache.camel.Processor
 import org.apache.camel.builder.RouteBuilder
@@ -38,6 +35,7 @@ import kotlin.io.path.readBytes
 /**
  * Fake Adapter Engine
  */
+@OptIn(DelicateCoroutinesApi::class)
 class FAE(
     val sid: String,
     private val fakehostdb: String,
@@ -55,6 +53,7 @@ class FAE(
     val camelContext = DefaultCamelContext(true)
     private val uuidgeneratorxi: TimeBasedGenerator = Generators.timeBasedGenerator()
     val logger: Logger = LoggerFactory.getLogger(FAE::javaClass.name)!!
+    private val msktz: ZoneId = ZoneId.of("Europe/Moscow")
 
     constructor(konf: KfTarget.FAE, cae: PI, sld: PI) : this(konf.sid, konf.fakehostdb, URI(konf.realHostPortURI), cae, sld) {
         domain = konf.domain
@@ -63,7 +62,7 @@ class FAE(
 
     private val procmonFrom = Processor { exc ->
         val dt = Instant.now().toEpochMilli()
-        val body = exc.`in`.body.toString()
+        val body = exc.`in`.body?.toString() ?: "NULL"
         val x = routes[exc.fromRouteId]!!
         val from = "${x.fromParty}|${x.fromService}|{${x.fromIfacens}}${x.fromIface}"
         DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, "", body)
@@ -71,11 +70,11 @@ class FAE(
 
     private val procmonTo = Processor { exc ->
         val dt = Instant.now().toEpochMilli()
-        val body = exc.`in`.body.toString()
+        val body = exc.`in`.body?.toString() ?: "NULL"
         val rep = exc.context.inflightRepository
-        val hist = exc.context.messageHistoryFactory
+        // val hist = exc.context.messageHistoryFactory
         val from = ""
-        val message = exc.getMessage()
+        // val message = exc.getMessage()
         val to = exc.getProperty("FAEReceiver") ?: "?"
         rep.build()
         DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, to, body)
@@ -114,16 +113,54 @@ class FAE(
 
     private enum class ERAS { AdminTool, CacheRefresh, RuntimeCheck }
 
-    @OptIn(DelicateCoroutinesApi::class)
     private fun getSldServer(): String {
         return runBlocking {
             val t = sld.sldop(SLD_CIM.SAPExt_GetObjectServer(), GlobalScope).await()
-            SLD_CIM.SAPExt_GetObjectServer_resp(Cim.decodeFromReader(t.bodyAsXmlReader()))
+            val x = SLD_CIM.SAPExt_GetObjectServer_resp(Cim.decodeFromReader(t.bodyAsXmlReader()))
+            t.close()
+            x
         }
     }
 
     private fun urlOf(s: String = ""): URI {
         return realHostPortURI.resolve(s)
+    }
+
+    /**
+     * Фарш назад
+     */
+    suspend fun unregisterSLD(log: StringBuilder, scope: CoroutineScope) {
+        var x: Cim.CIM      // запрос
+        var y: Cim.CIM      // ответ
+
+        listOf(
+            SLD_CIM.Classes.SAP_HTTPServicePort, SLD_CIM.Classes.SAP_XIAdapterService,
+            SLD_CIM.Classes.SAP_XIRemoteAdminService
+        ).forEach { clazz ->
+            // удалить все порты у которых владелец это af.fa#.fake#db
+            // удалить все адаптеры, по владельцу
+            // удалить все RemoteAdminService, по владельцу
+            x = SLD_CIM.enumerateInstances(clazz)
+            y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+            y.MESSAGE?.SIMPLERSP?.IMETHODRESPONSE?.IRETURNVALUE?.VALUE_NAMEDINSTANCE
+                ?.filter { it.INSTANCENAME.getKeyValue("SystemName") == afFaHostdb }
+                ?.forEach {
+                    deleteInstanceWithReference(it.INSTANCENAME, log, scope)
+                }
+        }
+        // удалить AdapterFramework
+        deleteInstanceWithReference(SLD_CIM.Classes.SAP_XIAdapterFramework.toInstanceName2(afFaHostdb), log, scope)
+        // удаляем кластер
+        deleteInstanceWithReference(SLD_CIM.Classes.SAP_J2EEEngineCluster.toInstanceName2("$sid.SystemHome.$fakehostdb"), log, scope)
+        log.append("\n\n********************************** Удаление из SLD завершено\n")
+        sld.closeSldTasks()
+    }
+
+    private suspend fun deleteInstanceWithReference(instanceName: Cim.INSTANCENAME, log: StringBuilder, scope: CoroutineScope) {
+        val x = SLD_CIM.SAPExt_DeleteInstanceWithReferencesIfFound(instanceName)
+        val z = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
+        require(z.getError() == null) { "Request: ${x.encodeToString()}, Error: ${z.getError()}" }
+        log.append("${instanceName.getKeyValue("Name")} удалён успешно\n")
     }
 
     /**
@@ -174,15 +211,19 @@ class FAE(
 
         // SAP_J2EEEngineCluster
         val clustername = SLD_CIM.Classes.SAP_J2EEEngineCluster.toInstanceName2("$sid.SystemHome.$fakehostdb")
-        ok = registerSldCreateUpdate(clustername, mapOf("Caption" to "$sid on $afFaHostdb",
-            "SAPSystemName" to sid,
-            "SystemHome" to fakehostdb,
-            "Version" to "7.50.3301.465127.20210512152315"), log, scope)
+        ok = registerSldCreateUpdate(
+            clustername, mapOf(
+                "Caption" to "$sid on $afFaHostdb",
+                "SAPSystemName" to sid,
+                "SystemHome" to fakehostdb,
+                "Version" to "7.50.3301.465127.20210512152315"
+            ), log, scope
+        )
         require(ok)
 
         x = Cim.association("SameElement", afname, "SystemElement", clustername, "SAP_XIViewedXISubSystem", namespacepath)
         y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        require(y.isCreatedOrAlreadyExists()) {"Request: ${x.encodeToString()}, Error: ${y.getError()}"}
+        require(y.isCreatedOrAlreadyExists()) { "Request: ${x.encodeToString()}, Error: ${y.getError()}" }
         log.append("SAP_XIViewedXISubSystem создана\n")
 
         // разные Remote-admin сервисы
@@ -202,11 +243,12 @@ class FAE(
         require(ok)
         x = Cim.association("Antecedent", afname, "Dependent", portbasicurlname, "SAP_XIAdapterHostedHTTPServicePort", namespacepath)
         y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-        require(y.isCreatedOrAlreadyExists()) {"Request: ${x.encodeToString()}, Error: ${y.getError()}"}
+        require(y.isCreatedOrAlreadyExists()) { "Request: ${x.encodeToString()}, Error: ${y.getError()}" }
 
-        listOf("AS2", "Axis", "BC", "CIDX", "EDISeparator", "File", "HTTP_AAE",
-            "IDoc_AAE", "JDBC", "JMS", "Mail", "Marketplace", "OData", "OFTP", "REST", "RFC", "RNIF", "RNIF11", "SFSF",
-            "SFTP", "SOAP", "WS", "WS_AAE", "X400", "XIRA", "CamelAdapter"
+        listOf(
+            "AS2", "File", "HTTP_AAE",
+            "IDoc_AAE", "JDBC", "JMS", "Mail", "Marketplace", "OData", "REST", "RFC",
+            "SFTP", "SOAP", "WS_AAE", "CamelAdapter"
         ).forEach { adapter ->
             val soapname = SLD_CIM.Classes.SAP_XIAdapterService.toInstanceName4(afname, "$adapter.$afFaHostdb")
             ok = registerSldCreateUpdate(soapname, mapOf("Caption" to "$adapter of $afFaHostdb", "AdapterType" to adapter), log, scope)
@@ -214,7 +256,7 @@ class FAE(
             log.append("$adapter создан\n")
             x = Cim.association("Antecedent", afname, "Dependent", soapname, "SAP_HostedXIAdapterService", namespacepath)
             y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-            require(y.isCreatedOrAlreadyExists()) {"Request: ${x.encodeToString()}, Error: ${y.getError()}"}
+            require(y.isCreatedOrAlreadyExists()) { "Request: ${x.encodeToString()}, Error: ${y.getError()}" }
             log.append("$adapter прикреплён к $afFaHostdb\n")
             val portname = SLD_CIM.Classes.SAP_HTTPServicePort.toInstanceName4(soapname, "port.$adapter.$afFaHostdb")
             ok = registerSldCreateUpdate(
@@ -229,9 +271,11 @@ class FAE(
             log.append("port.$adapter создан\n")
             x = Cim.association("Antecedent", soapname, "Dependent", portname, "SAP_XIAdapterServiceAccessByHTTP", namespacepath)
             y = Cim.decodeFromReader(sld.sldop(x, scope).await().bodyAsXmlReader())
-            require(y.isCreatedOrAlreadyExists()) {"Request: ${x.encodeToString()}, Error: ${y.getError()}"}
+            require(y.isCreatedOrAlreadyExists()) { "Request: ${x.encodeToString()}, Error: ${y.getError()}" }
             log.append("port.$adapter прикреплён к $adapter\n")
         }
+        log.append("\n\n********************************** Регистрация в SLD завершена\n")
+        sld.closeSldTasks()
         return
     }
 
@@ -309,9 +353,9 @@ class FAE(
     }
 
     fun ktor(app: Application) = app.routing {
-        get("/XI") {
+        get("/FAE/XI") {
             call.respondHtml {
-                htmlHead("Сервлет XI-протокола", this)
+                htmlHead("FAE :: сервлет XI-протокола", this)
                 body {
                     pre {
                         +"Привет! Это сервлет XI-протокола, который надо вызывать через POST а не GET.\n\nТӥледлы удалтон."
@@ -319,7 +363,7 @@ class FAE(
                 }
             }
         }
-        post("/XI") {
+        post("/FAE/XI") {
             xi(call)
         }
         post("/rtc") {
@@ -342,24 +386,25 @@ class FAE(
             call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
         }
         post("/FAE/CPACache/invalidate/{...}") {
+            val begin = Instant.now()
             val query = call.request.queryParameters    //method=InvalidateCache или другой
             val form = call.receiveParameters()   //[consumer=[af.fa0.fake0db], consumer_mode=[AE]]
             val consumer_mode = form["consumer_mode"]!!
             val consumer = form["consumer"]!!
-            println("/CPACache/invalidate $form $query")
+            println("/FAE/CPACache/invalidate $form $query")
             require(consumer_mode == "AE")
             // получаем изменившиеся объекты
             val changed = cae.dirHmiCacheRefreshService("C", consumer)
-            cpalistener(changed)
+            cpalistener(changed, begin)
             // помечаем как обновлённые
             val done = cae.dirHmiCacheRefreshService("D", consumer)
             require(done.isEmpty())
             call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
         }
-        post("/AdapterFramework/regtest") {
+        post("/FAE/AdapterFramework/regtest") {
             rtc(call)
         }
-        post("/AdapterFramework/rtc") {
+        post("/FAE/AdapterFramework/rtc") {
             rtc(call)
         }
         post("/AdapterFramework/rwbAdapterAccess/int") {
@@ -374,12 +419,10 @@ class FAE(
 
         get("/FAE") {
             call.respondHtml {
-                htmlHead("FAE кокпит", this)
+                htmlHead("FAE кокпит :: $sid", this)
                 body {
-                    h1 { +"FAE кокпит" }
-                    h2 { +"кнопочки" }
+                    h2 { +"FAE кокпит (sid: ${sid.uppercase()} $afFaHostdb, domain: $domain, cae: ${cae.urlOf()}, sld: ${sld.urlOf("/sld/cimom")})" }
                     div {
-                        p { +"sid: ${sid.uppercase()} $afFaHostdb, domain: $domain, cae: ${cae.urlOf()}, sld: ${sld.urlOf("/sld/cimom")}" }
                         form("$realHostPortURI/FAE/clearDB") {
                             button(ButtonFormEncType.textPlain, ButtonFormMethod.post, "ClearDB", ButtonType.submit, null) {
                                 +"ClearDB - очистить БД"
@@ -392,13 +435,21 @@ class FAE(
                         }
                         form("$realHostPortURI/FAE/registerSLD") {
                             button(ButtonFormEncType.textPlain, ButtonFormMethod.post, "registerSLD", ButtonType.submit, null) {
-                                +"registerSLD - зарегистрировать в SLD"
+                                +"registerSLD"
                             }
                         }
+                        form("$realHostPortURI/FAE/unregisterSLD") {
+                            button(ButtonFormEncType.textPlain, ButtonFormMethod.post, "unregisterSLD", ButtonType.submit, null) {
+                                +"unregisterSLD"
+                            }
+                        }
+                        a(href = "$realHostPortURI/pimon") { +"/pimon" }
+                        +" :: "
+                        a(href = "$realHostPortURI/FAE/CPACache") { +"просмотр обновлений кэша" }
                     }
                     h2 { +"Объекты из CAE ${cae.konfig.sid}" }
                     ul {
-                        routes.forEach { k, v ->
+                        routes.forEach { (k, v) ->
                             li {
                                 b { +k }
                                 pre { +v.xmlDsl }
@@ -411,33 +462,112 @@ class FAE(
         post("/FAE/clearDB") {
             DB.executeUpdate(DB.clearFAE)
             call.respondHtml {
-                htmlHead("FAE кокпит :: clearDB", this)
+                htmlHead("FAE кокпит :: clearDB :: $sid", this)
                 body { +"БД FAE очищена: таблицы FAE_CPA и FAE_MSG" }
             }
         }
         post("/FAE/reloadDB") {
+            // Это полный рефреш полученный {{host}}/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=T&consumer=af.fa0.fake0db
+            val begin = Instant.now()
+            val cacheRefreshFull = cae.dirHmiCacheRefreshService("F", afFaHostdb)
+            cpalistener(cacheRefreshFull, begin)
+            val end = Instant.now()
+            val ms = end.toEpochMilli() - begin.toEpochMilli()
+
             call.respondHtml {
-                htmlHead("FAE кокпит :: reloadDB", this)
-                body { +"Сообщение о перезагрузке будет тут" }
+                htmlHead("FAE кокпит :: reloadDB :: $sid", this)
+                body {
+                    h2 { +"Перезагрузка кэша из CAE" }
+                    p {
+                        +"Выполнен запрос {{cae}}/dir/hmi_cache_refresh_service/ext?method=CacheRefresh&mode=T&consumer=$afFaHostdb за $ms мс"
+                    }
+                }
             }
         }
         post("/FAE/registerSLD") {
             val log = StringBuilder()
-            runBlocking { registerSLD(log, GlobalScope) }
+            withContext(Dispatchers.IO) { registerSLD(log, GlobalScope) }
             call.respondHtml {
-                htmlHead("FAE кокпит :: регистрация в SLD", this)
+                htmlHead("FAE кокпит :: регистрация в SLD :: $sid", this)
                 body {
-                    h1 { +"Регистрация в SLD: готово" }
+                    h2 { +"Регистрация в SLD: готово" }
                     pre { +log.toString() }
                 }
             }
         }
-        get("/pimon") {
-            val msktz = ZoneId.of("Europe/Moscow")
-
+        post("/FAE/unregisterSLD") {
+            val log = StringBuilder()
+            withContext(Dispatchers.IO) { unregisterSLD(log, GlobalScope) }
             call.respondHtml {
-                htmlHead("FAE кокпит :: pimon", this)
+                htmlHead("FAE кокпит :: разрегистрация в SLD :: $sid", this)
                 body {
+                    h2 { +"Разрегистрация в SLD: готово" }
+                    pre { +log.toString() }
+                }
+            }
+        }
+        get("/FAE/CPACache") {
+            call.respondHtml {
+                htmlHead("FAE кокпит :: CPACache :: $sid", this)
+                body {
+                    h2 { +"Текущее содержимое CPACache" }
+                    table("cpacache") {
+                        thead {
+                            tr {
+                                td { +"typeid" }    //TYPEID,XML,OID,NAME,DATETIME
+                                td { +"objectid" }
+                                td { +"имя" }
+                                td { +"последнее обновления" }
+                                td { +"скачать xml" }
+                            }
+                        }
+                        tbody {
+                            val rs = DB.executeQuery(DB.readFCPAO, sid)
+                            while (rs.next()) {
+                                tr {
+                                    td { +rs.getString(1) }
+                                    td { +rs.getString(3) }
+                                    td { +rs.getString(4) }
+                                    td {
+                                        val d = Instant.ofEpochMilli(rs.getLong(5)).atZone(msktz)
+                                        +d.toLocalDateTime().toLocalTime().toString()
+                                    }
+                                    td { +"" }
+                                }
+                            }
+                        }
+                    }
+                    h2 { +"История обновлений CPACache" }
+                    table("cpacache") {
+                        thead {
+                            tr {
+                                td { +"дата обновления" }
+                                td { +"имя файла" }
+                                td { +"содержимое" }
+                            }
+                        }
+                        tbody {
+                            val rs = DB.executeQuery(DB.selectFAECPHIST, sid)
+                            while (rs.next()) {
+                                tr {
+                                    td {
+                                        val d = Instant.ofEpochMilli(rs.getLong(1)).atZone(msktz)
+                                        +d.toLocalDateTime().toLocalTime().toString()
+                                    }
+                                    td { +rs.getString(2) }
+                                    td { +rs.getString(3) }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        get("/pimon") {
+            call.respondHtml {
+                htmlHead("FAE кокпит :: PIMON :: $sid", this)
+                body {
+                    h2 { +"PIMON" }
                     table("pimon") {
                         thead {
                             tr {
@@ -558,9 +688,9 @@ class FAE(
 
             "getSettings" -> {
                 c.compname = "Exchange Profile"
-                //            Server.afprops.filter { it.key.startsWith("com.sap.aii") }.forEach { (k, v) ->
-                //                c.addProperty(k, v)
-                //            }
+//                Server.afprops.filter { it.key.startsWith("com.sap.aii") }.forEach { (k, v) ->
+//                    c.addProperty(k, v)
+//                }
             }
 
             "GetApplicationDetailsFromSLD" -> {
@@ -586,7 +716,7 @@ class FAE(
         ) { resp.encodeToString() }
     }
 
-    fun cpalistener(cr: XICache.CacheRefresh) {
+    fun cpalistener(cr: XICache.CacheRefresh, now: Instant) {
         // Слушаем обновления кэша
         // если объект есть в deletedObjects и в присланном кэше то это изменение, если в deletedObjects и нет в кэше то удаление
         val deletedObjects = cr.DELETED_OBJECTS?.SAPXI_OBJECT_KEY?.toMutableList() ?: mutableListOf()
@@ -599,14 +729,14 @@ class FAE(
             when {
                 rs.next() && prev != null -> {
                     // объект существует
-                    DB.executeUpdateStrict(DB.updFCPA, sid, ch.ChannelObjectId, s)
+                    DB.executeUpdateStrict(DB.updFCPA, sid, ch.ChannelObjectId, s, now.toEpochMilli())
                     channels.remove(prev)
                 }
 
                 prev == null -> {
                     // объекта нет - добавляем
                     val name = "${ch.PartyName}|${ch.ServiceName}|${ch.ChannelName}"
-                    DB.executeUpdateStrict(DB.insFCPA, sid, ch.ChannelObjectId, MPI.ETypeID.Channel.toString(), name, s)
+                    DB.executeUpdateStrict(DB.insFCPA, sid, ch.ChannelObjectId, MPI.ETypeID.Channel.toString(), name, s, now.toEpochMilli())
                 }
 
                 else -> error("Channel inconsistency")
@@ -627,7 +757,7 @@ class FAE(
             when {
                 rs.next() && prev != null -> {
                     // икоха существует
-                    DB.executeUpdateStrict(DB.updFCPA, sid, ico.AllInOneObjectId, s)
+                    DB.executeUpdateStrict(DB.updFCPA, sid, ico.AllInOneObjectId, s, now.toEpochMilli())
                     allinone.remove(prev)
                 }
 
@@ -635,7 +765,7 @@ class FAE(
                     DB.executeUpdateStrict(
                         DB.insFCPA, sid, ico.AllInOneObjectId, MPI.ETypeID.AllInOne.toString(),
                         "${ico.FromPartyName}|${ico.FromServiceName}|{${ico.FromInterfaceNamespace}}${ico.FromInterfaceName}" +
-                                "|${ico.ToPartyName}|${ico.ToServiceName}", s
+                                "|${ico.ToPartyName}|${ico.ToServiceName}", s, now.toEpochMilli()
                     )
 
                 else -> error("AllInOne inconsistency")
@@ -675,7 +805,6 @@ class FAE(
     suspend fun xi(call: ApplicationCall) {
         val contentType = call.request.contentType()
         if (contentType.match("multipart/related")) {
-
             val ctt = contentType.toString()
             val ba = call.receive<ByteArray>()
             val xim = XiMessage(ctt, ba)
@@ -705,17 +834,6 @@ class FAE(
                         XiMessage.AckCategory.transient
                     )
                     call.respondText(answ.encodeToString(), ContentType.Application.Xml, HttpStatusCode.OK)
-
-                    //                        // выдача Ack с boundary -- похоже дохлый номер
-                    //                        val ack = xim.systemAck(UUIDgenerator.generate().toString(), XiMessage.dateTimeSentNow(), XiMessage.AckStatus.OK, XiMessage.AckCategory.permanent)
-                    //                        val xi = XiMessage(ack)
-                    //                        val f = KTempFile.getTempFileXI(rm.QualityOfService.toShort(), rm.QueueId, hm.Main.MessageId + "_ack")
-                    //                        val os = f.outputStream()
-                    //                        xi.writeTo(os)
-                    //                        os.close()
-                    //                        call.response.status(HttpStatusCode.InternalServerError)
-                    //                        call.response.headers.append("Content-Type", "application/xml")
-                    //                        call.respondBytes { f.readBytes() }
                 }
 
                 scnt.contains("Fault") -> {
@@ -732,9 +850,9 @@ class FAE(
                     )
                     val fault = xim.fault("soap:Server", "123", "http://sap.com/xi/XI/Message/30", e1)
                     val f = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_fault")
-                    val os = f.outputStream()
-                    os.write(fault.encodeToString().toByteArray())
-                    os.close()
+                    val ot = f.outputStream()
+                    ot.write(fault.encodeToString().toByteArray())
+                    ot.close()
                     call.response.status(HttpStatusCode.InternalServerError)
                     call.response.headers.append(ContentType.Text.Plain.toString(), "application/xml")
                     call.respondBytes { f.readBytes() }
@@ -755,9 +873,9 @@ class FAE(
                     val syncError = xim.syncError(uuidgeneratorxi.generate().toString(), XiMessage.dateTimeSentNow(), e1)
                     syncError.header!!.DynamicConfiguration!!.Record.add(XiMessage.Record("urn:bad", "Bad", "_плохо_"))
                     val f = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_error")
-                    val os = f.outputStream()
-                    syncError.writeTo(os)
-                    os.close()
+                    val ot = f.outputStream()
+                    syncError.writeTo(ot)
+                    ot.close()
                     call.response.status(HttpStatusCode.InternalServerError)
                     call.response.headers.append("Content-Type", syncError.getContentType())
                     call.respondBytes { f.readBytes() }
@@ -769,9 +887,9 @@ class FAE(
                     appResp.header!!.DynamicConfiguration!!.Record.add(XiMessage.Record("urn:successful", "Success", "ХАРАШО"))
                     appResp.setPayload("<answer/>".toByteArray(), "text/xml; charset=utf-8")
                     val f = KTempFile.getTempFileXI("BE", null, hm.Main.MessageId + "_resp")
-                    val os = f.outputStream()
-                    appResp.writeTo(os)
-                    os.close()
+                    val ot = f.outputStream()
+                    appResp.writeTo(ot)
+                    ot.close()
                     call.response.status(HttpStatusCode.OK)
                     call.response.headers.append("Content-Type", appResp.getContentType())
                     call.respondBytes { f.readBytes() }

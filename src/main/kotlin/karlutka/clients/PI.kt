@@ -670,6 +670,13 @@ class PI(
         }
     }
 
+    private val sldopTasks = mutableListOf<KtorClient.Task>()
+    fun closeSldTasks() {
+        val copy = sldopTasks.toList()
+        sldopTasks.clear()
+        copy.forEach{it.close()}
+    }
+
     suspend fun sldop(cim: Cim.CIM, scope: CoroutineScope): Deferred<KtorClient.Task> {
         val payload = cim.encodeToString()
         val url = "$httpHostPort/sld/cimom"
@@ -685,6 +692,7 @@ class PI(
         val task = KtorClient.taskPost(
             client, url, payload, hd
         )
+        sldopTasks.add(task)
         return scope.async { task.execute() }
     }
 
