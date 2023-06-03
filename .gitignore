@@ -1,10 +1,9 @@
+*.sensitive
+/.etc
 /.idea
 /.gradle
 /tmp
 /out
 /build
-/.etc
+/.run
 *.log
-.run
-/src/test/resources/pi_AE/ExportedCacheUpdateFull.xml.sensitive
-*.sensitive
