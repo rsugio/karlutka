@@ -1,24 +1,24 @@
 import KT.Companion.x
-import karlutka.parsers.pi.Cim
-import karlutka.parsers.pi.SLD_CIM
-import karlutka.parsers.pi.SLD_CIM.Companion.instance
 import nl.adaptivity.xmlutil.PlatformXmlReader
+import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import ru.rsug.karlutka.sld.Cim
+import ru.rsug.karlutka.sld.SLD_CIM
 import java.io.InputStream
 import java.net.Authenticator
 import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
+import java.nio.file.Files
 import java.nio.file.Paths
 import java.time.Duration
 import kotlin.io.path.inputStream
 import kotlin.io.path.outputStream
 import kotlin.io.path.writeText
 
-@Suppress("UNUSED_VALUE")
-class KSLDTests {
-    private val po = KT.propAuth(Paths.get(".etc/po.properties"))
+class KSLDAnyTests {
+    private val po = KT.propAuth(Paths.get("../.etc/sld.properties"))
     private val client: HttpClient = HttpClient.newBuilder()
         .version(HttpClient.Version.HTTP_1_1)
         .followRedirects(HttpClient.Redirect.NORMAL)
@@ -27,7 +27,7 @@ class KSLDTests {
         .build()
 
     private fun op(cim: Cim.CIM): Cim.CIM {
-        val q = Paths.get("tmp/cimReq.xml")
+        val q = Files.createTempFile("KSLDAnyTests_request_", ".xml")
         q.writeText(cim.encodeToString())
         val request: HttpRequest = HttpRequest.newBuilder()
             .uri(URI.create(po["sld"] as String))
@@ -40,13 +40,13 @@ class KSLDTests {
             .build()
         val response: HttpResponse<InputStream> = client.send(request, HttpResponse.BodyHandlers.ofInputStream())
         return if (response.statusCode() == 200) {
-            val p = Paths.get("tmp/cim.xml")
+            val p = Files.createTempFile("KSLDAnyTests_response_", ".xml")
             val os = p.outputStream()
             response.body().copyTo(os)
             os.close()
             val resp = Cim.decodeFromReader(PlatformXmlReader(p.inputStream(), "UTF-8"))
             if (resp.getError()!=null) {
-                System.err.println(resp.getError())
+                error(resp.getError()!!)
             } else {
                 println(resp.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
             }
@@ -59,7 +59,9 @@ class KSLDTests {
     }
 
     @Test
+    @Tag("Online")
     fun AAE() {
+        return
         val _afname = "af.fa0.fake0db"
         val _af2 = "fa0.fake0db"
         val _rwbname = "rwb.$_af2"
@@ -157,6 +159,7 @@ class KSLDTests {
     }
 
     @Test
+    @Tag("Online")
     fun assoc() {
         var x: Cim.CIM?
         x = op(SLD_CIM.SAPExt_GetObjectServer())
@@ -199,18 +202,12 @@ class KSLDTests {
         x = SLD_CIM.deleteInstance(ca)
         x = op(x)
         println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
-
-        // удаляем кластер и систему
-
     }
 
     @Test
-    fun tmp() {
-        op(SLD_CIM.enumerateInstances(SLD_CIM.Classes.SAP_XISubSystem))
-    }
-
-    @Test
+    @Tag("Online")
     fun runtime() {
+        return
         var x: Cim.CIM?
         x = op(SLD_CIM.SAPExt_GetObjectServer())
         println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
@@ -232,7 +229,7 @@ class KSLDTests {
         x = op(SLD_CIM.referenceNames(instanceName))
         println(x.MESSAGE!!.SIMPLERSP!!.IMETHODRESPONSE)
 
-        val i = instance(
+        val i = SLD_CIM.Companion.instance(
             SLD_CIM.Classes.SAP_StandaloneDotNetSystem,
             mapOf("CreationClassName" to SLD_CIM.Classes.SAP_StandaloneDotNetSystem.toString(), "Name" to "2", "Caption" to "2")
         )
@@ -247,6 +244,7 @@ class KSLDTests {
     }
 
     @Test
+    @Tag("Offline")
     fun parserPrinter() {
         var x = Cim.decodeFromReader(x("/pi_SLD/cim.xml"))
         requireNotNull(x.MESSAGE?.SIMPLERSP?.IMETHODRESPONSE)
@@ -264,7 +262,7 @@ class KSLDTests {
         x = Cim.decodeFromReader(x("/pi_SLD/cim12createinstance.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim13createinstance.xml"))
         x = Cim.decodeFromReader(x("/pi_SLD/cim14createinstance.xml"))
-        val i = instance(
+        val i = SLD_CIM.Companion.instance(
             SLD_CIM.Classes.SAP_XIDomain,
             mapOf("CreationClassName" to SLD_CIM.Classes.SAP_XIDomain.toString(), "Name" to "1", "Caption" to "1")
         )

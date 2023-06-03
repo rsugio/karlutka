@@ -1,23 +1,16 @@
 import nl.adaptivity.xmlutil.PlatformXmlReader
 import nl.adaptivity.xmlutil.XmlReader
-import org.apache.commons.io.input.BOMInputStream
-import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.Authenticator
 import java.net.PasswordAuthentication
 import java.nio.file.Files
 import java.nio.file.Path
-import java.nio.file.Paths
 import java.util.*
 import kotlin.io.path.exists
 import kotlin.io.path.inputStream
 
-
 class KT {
     companion object {
-        // Переключатели, какие тесты запускать
-        const val testInflux = false
-        const val testBtpCf = false
 
         /**
          * Строка из ресурса (короткое имя для тестов)
@@ -26,14 +19,8 @@ class KT {
             require(s.startsWith("/"))
             val x = Companion::class.java.getResourceAsStream(s)
             requireNotNull(x) { "Ресурс $s не найден" }
-            return InputStreamReader(BOMInputStream(x), Charsets.UTF_8).readText()
-        }
-
-        fun ris(s: String): InputStream {
-            require(s.startsWith("/"))
-            val x = Companion::class.java.getResourceAsStream(s)
-            requireNotNull(x) { "Ресурс $s не найден" }
-            return x
+//            return InputStreamReader(BOMInputStream(x), Charsets.UTF_8).readText()
+            return InputStreamReader(x, Charsets.UTF_8).readText()
         }
 
         // XmlReader из ресурса
@@ -41,7 +28,7 @@ class KT {
             require(s.startsWith("/"))
             val x = Companion::class.java.getResourceAsStream(s)
             requireNotNull(x) { "Ресурс $s не найден" }
-            return PlatformXmlReader(InputStreamReader(BOMInputStream(x), Charsets.UTF_8))
+            return PlatformXmlReader(InputStreamReader(x, Charsets.UTF_8))
         }
 
         // XmlReader из пути
@@ -52,24 +39,22 @@ class KT {
 
         // Читает свойства, преобразует в Map и добавляет аутентификатор
         fun propAuth(p: Path): Map<String, Any> {
-            require(Files.isRegularFile(p), { "$p must be a regular file" })
-            val prop = Properties()
-            prop.load(p.inputStream())
-            val m = prop.toMutableMap() as MutableMap<String, Any>
+            val m = mutableMapOf<String, Any>()
+            val ps = props(p)
+            m.putAll(ps)
             m["auth"] = object : Authenticator() {
                 override fun getPasswordAuthentication(): PasswordAuthentication {
-                    return PasswordAuthentication(m["login"] as String, (m["passw"] as String).toCharArray())
+                    return PasswordAuthentication(requireNotNull(ps["login"]), requireNotNull(ps["passw"]).toCharArray())
                 }
             }
             return m
         }
 
-        fun props(s: String): Map<String, String> {
-            val p = Paths.get(s)
-            require(Files.isRegularFile(p), { "$p must be a regular file" })
+        fun props(p: Path): Map<String, String> {
+            require(Files.isRegularFile(p)) { "$p must be a regular file" }
             val prop = Properties()
             prop.load(p.inputStream())
-            return prop.toMap() as Map<String, String>
+            @Suppress("UNCHECKED_CAST") return prop.toMap() as Map<String, String>
         }
     }
 }
