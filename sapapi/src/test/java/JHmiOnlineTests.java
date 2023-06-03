@@ -1,5 +1,4 @@
 import kotlin.collections.CollectionsKt;
-import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.Charsets;
 import nl.adaptivity.xmlutil.StAXReader;
 import nl.adaptivity.xmlutil.XmlDeclMode;
@@ -15,13 +14,17 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.*;
+import java.util.Base64;
+import java.util.Map;
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @Tag("Online")
-public class JHmiOnlineTests {
+class JHmiOnlineTests {
     private final Map<String, String> po = KT.Companion.props(Paths.get("../.etc/hmi.properties"));
     String authb64 = "Basic " + Base64.getEncoder().encodeToString((po.get("login") + ':' + po.get("passw")).getBytes());
     private final URI uriRep = URI.create(po.get("url") + "/rep/query/int?container=any");
@@ -67,23 +70,22 @@ public class JHmiOnlineTests {
     }
 
     @Test
-    public final void dirAllList() throws Exception {
+    final void dirAllList() throws Exception {
         SimpleQuery.QueryRequest allDir75 = SimpleQuery.Companion.queryRequestDir(
-                MPI.Companion.getDir75alltypes(),
-                CollectionsKt.listOf(SimpleQuery.EResult.RA_XILINK, SimpleQuery.EResult.OBJECTID, SimpleQuery.EResult.TEXT),
-                new SimpleQuery.Condition()
+                MPI.Companion.getDir75alltypes(),   // какие типы берём
+                CollectionsKt.listOf(SimpleQuery.EResult.RA_XILINK, SimpleQuery.EResult.OBJECTID, SimpleQuery.EResult.TEXT),    // какие поля вытаскиваем
+                new SimpleQuery.Condition() // по какому условию (пусто)
         );
         SimpleQuery.QueryResult resp = this.doSimpleQuery(uriDir, allDir75);
         for (SimpleQuery.R r : resp.getMatrix().getR()) {
             SimpleQuery.Qref qref = (r.getC().get(0)).getQref();
-            assert qref != null;
+            assertNotNull(qref);
             MPI.ETypeID typeID = qref.getRef().getKey().getTypeID();
             String oid = Objects.requireNonNull((r.getC().get(1)).getSimple()).getBin();
             String desc = Objects.requireNonNull((r.getC().get(2)).getSimple()).getStrg();
-            String var12 = typeID.toString() + '\t' + oid + " = " + desc;
-            System.out.println(var12);
+            String txt = typeID.toString() + '\t' + oid + " = " + desc;
+            System.out.println(txt);
         }
-
     }
 
 }
