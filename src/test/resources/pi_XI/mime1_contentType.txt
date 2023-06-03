@@ -1,1 +1,0 @@
-multipart/related; type="text/xml"; boundary="uuid:2696a86b-809f-41e2-ad81-eaed85ba8d3b"; start="<root.message@cxf.apache.org>"; start-info="text/xml"

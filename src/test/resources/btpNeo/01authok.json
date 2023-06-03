@@ -1,6 +1,0 @@
-{
-  "access_token": "d85daf2c523adfba9b31c8c9c974274",
-  "token_type": "Bearer",
-  "expires_in": 1500,
-  "scope": "hcp.readPasswords hcp.manageMultiTargetApplication hcp.readE2ETraces hcp.manageAuditLogs hcp.readMultiTargetApplication hcp.readLogs hcp.manageKeystores hcp.readHeapDumps hcp.readKeystores hcp.readGit hcp.manageAccountMembers hcp.manageAuthorizationSettings hcp.readVirtualMachines hcp.readJavaApplications hcp.managePasswords hcp.readTrustSettings hcp.manageGit hcp.readAccountMembers hcp.readDestination hcp.accessGit hcp.manageTrustSettings hcp.readAuditLogs hcp.readMonitoringData hcp.manageVirtualMachines hcp.manageAlertingChannels hcp.manageDestination hcp.manageMonitoringConfiguration hcp.manageJavaApplications hcp.readAuthorizationSettings hcp.readExceptions"
-}

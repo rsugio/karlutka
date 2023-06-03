@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE ErrorInformation SYSTEM "/AdapterFramework/channelAdmin/ChannelAdmin.dtd">
-<ErrorInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://H:50000/AdapterFramework/channelAdmin/ChannelAdmin.xsd">
-    <Usage>http://h:50000&#x2f;AdapterFramework&#x2f;ChannelAdminServlet?action={start|stop|status}&amp;party=&lt;party&gt;&amp;service=&lt;service&gt;&amp;channel=&lt;channelName&gt;[&amp;showProcessLog={true|false}][&amp;showAdminHistory={true|false}][&amp;status={all|ok|error|stopped|inactive|unknown|unregistered}]</Usage>
-    <Description>See log trace with Id: n/a (set trace location com.sap.aii.af.app.administration.scheduling.SchedulingServlet to severity Warning or higher to get this information)</Description>
-</ErrorInformation>
