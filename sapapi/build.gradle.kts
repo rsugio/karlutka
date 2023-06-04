@@ -6,10 +6,15 @@ val karlutka_group: String by project
 val fasterxmluuid_version: String by project
 val logback_version: String by project
 
+val jfrogMavenRepo: String by project
+val jfrogMavenUser: String by project
+val jfrogMavenPassw: String by project
+
 plugins {
     id("org.jetbrains.kotlin.jvm")
     kotlin("plugin.serialization")
     `java-library`
+    `maven-publish`
 }
 
 group = karlutka_group
@@ -18,6 +23,13 @@ version = karlutka_version
 repositories {
     mavenCentral()
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
+    maven {
+        url = uri(jfrogMavenRepo)
+        credentials {
+            username = jfrogMavenUser
+            password = jfrogMavenPassw
+        }
+    }
 }
 
 dependencies {
@@ -29,6 +41,44 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
     testImplementation(kotlin("test"))
+}
+
+publishing {//https://docs.gradle.org/current/userguide/publishing_maven.html
+    repositories {
+        maven {
+            name = "JFROG"
+            url = uri(jfrogMavenRepo)
+            credentials {
+                username = jfrogMavenUser
+                password = jfrogMavenPassw
+            }
+        }
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/rsugio/karlutka")
+            credentials {
+                username = findProperty("gpr.user").toString()
+                password = findProperty("gpr.key").toString()
+            }
+//            authentication {header("Authorization", "Basic " + Base64.getEncoder().encodeToString("${credentials.username}:${credentials.password}".toByteArray()))}
+        }
+    }
+    publications {
+        create<MavenPublication>("JFROG") {
+            groupId = karlutka_group
+            artifactId = "sapapi"
+            version = karlutka_version
+
+            from(components["java"])
+        }
+        create<MavenPublication>("GitHubPackages") {
+            groupId = karlutka_group
+            artifactId = "sapapi"
+            version = karlutka_version
+
+            from(components["java"])
+        }
+    }
 }
 
 java {

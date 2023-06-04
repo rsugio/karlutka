@@ -17,7 +17,7 @@ val ktor_version: String by project
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("io.ktor.plugin") version "2.3.0"
+    id("io.ktor.plugin") version "2.3.1"
     application
 }
 

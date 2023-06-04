@@ -5,12 +5,14 @@ import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import ru.rsug.karlutka.serialization.KSoap.ComposeSOAP
 
-private const val xmlnsPPVi = "urn:ProfileProcessorVi"
-private const val ppvi = "ppvi"
 private const val xmlnsAMVi = "urn:AdapterMessageMonitoringVi"
 private const val amvi = "amvi"
 private const val xmlnsAfw = "urn:com.sap.aii.mdt.server.adapterframework.ws"
 private const val afwp = "afw"
+private const val xmlnsPPVi = "urn:ProfileProcessorVi"
+private const val ppvi = "ppvi"
+private const val xmlnsStat = "urn:com.sap.aii.af.service.statistic.ws.impl"
+private const val stat = "stat"
 
 class AdapterMessageMonitoringVi {
     // ---------------
@@ -1107,11 +1109,22 @@ class AdapterMessageMonitoringVi {
     @Serializable
     @XmlSerialName("getProfilesResponse", xmlnsPPVi, ppvi)
     class GetProfilesResponse(
-        @XmlSerialName("activation", xmlnsPPVi, ppvi)
-        @XmlElement val activation: String,
-        @XmlSerialName("applicationKey", xmlnsPPVi, ppvi)
-        @XmlElement val applicationKey: String,
-        @XmlSerialName("profileKey", xmlnsPPVi, ppvi)
-        @XmlElement val profileKey: String,
+        @XmlElement val response: PPResponse
     ): ComposeSOAP()
+
+    @Serializable
+    @XmlSerialName("Response", "", "")
+    class PPResponse(
+        @XmlElement val wsProfile: WSProfile
+    )
+    @Serializable
+    @XmlSerialName("WSProfile", xmlnsStat, stat)
+    class WSProfile(
+        @XmlSerialName("activation", xmlnsStat, stat)
+        @XmlElement val activation: String,
+        @XmlSerialName("applicationKey", xmlnsStat, stat)
+        @XmlElement val applicationKey: String,
+        @XmlSerialName("profileKey", xmlnsStat, stat)
+        @XmlElement val profileKey: String,
+    )
 }

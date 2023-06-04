@@ -16,8 +16,9 @@ import nl.adaptivity.xmlutil.util.CompactFragment
 class KSoap {
     @Serializable
     open class ComposeSOAP(
-        @Deprecated("WTF??? разобраться и м.б. удалить из общего кода")
-        val uri: String = "") {
+        @Transient
+        val uri: String = ""
+    ) {
         fun composeSOAP() = xmlserializer.encodeToString(Envelope(null, Envelope.Body(this)))
     }
 

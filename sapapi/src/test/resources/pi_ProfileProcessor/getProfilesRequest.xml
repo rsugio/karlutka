@@ -1,0 +1,9 @@
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <ns2:getProfiles xmlns='urn:com.sap.aii.af.service.statistic.ws.impl' xmlns:ns2='urn:ProfileProcessorVi' xmlns:ns4='urn:ProfileProcessorWsd/ProfileProcessorVi' xmlns:ns3='urn:java/lang'>
+            <ns2:applicationKey>sap - XPI_STATISTIC - http://sap.com/xi/XI/Message/30</ns2:applicationKey>
+            <ns2:active>true</ns2:active>
+        </ns2:getProfiles>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
