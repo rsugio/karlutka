@@ -10,6 +10,7 @@ import kotlinx.serialization.modules.EmptySerializersModule
 import kotlinx.serialization.serializer
 import ru.rsug.karlutka.serialization.KPasswordSerializer
 import ru.rsug.karlutka.serialization.KPathSerializer
+import java.net.URI
 import java.nio.file.Path
 import kotlin.io.path.readText
 import kotlin.text.toCharArray
@@ -82,8 +83,18 @@ class Konfig {
             val sld: String,
             val fakehostdb: String,
             val realHostPortURI: String,
-            val domain: String
+            val domain: String?
         ) : Target() {
+            @Transient
+            val uri = URI(realHostPortURI)
+            @Transient
+            val port: Int = when {
+                uri.port == -1 && uri.scheme == "https" -> 443
+                uri.port == -1 && uri.scheme == "http" -> 80
+                uri.port == -1 -> error("порт неясен")
+                else -> uri.port
+            }
+
             init {
                 require(cae.isNotBlank())
             }

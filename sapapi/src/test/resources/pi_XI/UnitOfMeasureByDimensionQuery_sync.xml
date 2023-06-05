@@ -1,0 +1,10 @@
+<n0:UnitOfMeasureByDimensionQuery_sync xmlns:n0="http://sap.com/xi/APPL/SE">
+ <UnitOfMeasureSelectionByDimension>
+  <DimensionCode listID="Token 1" listVersionID="Token 2" listAgencyID="Token 3" listAgencySchemeID="Token 4" listAgencySchemeAgencyID="Tok">Token 6</DimensionCode>
+ </UnitOfMeasureSelectionByDimension>
+ <ProcessingConditions>
+  <QueryHitsMaximumNumberValue>7</QueryHitsMaximumNumberValue>
+  <QueryHitsUnlimitedIndicator>true</QueryHitsUnlimitedIndicator>
+  <LastReturnedObjectID schemeID="Token 8" schemeVersionID="Token 9" schemeAgencyID="Token 10" schemeAgencySchemeID="Token 11" schemeAgencySchemeAgencyID="Tok">Token 13</LastReturnedObjectID>
+ </ProcessingConditions>
+</n0:UnitOfMeasureByDimensionQuery_sync>

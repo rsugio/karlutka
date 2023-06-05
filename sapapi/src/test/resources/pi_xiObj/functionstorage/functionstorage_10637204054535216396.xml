@@ -1,0 +1,760 @@
+<?xml version="1.0" encoding="UTF-8"?><functionstorage version="XI7.1"><key><key typeID="FUNC_LIB" oid="c6d8fedf0b4233dd8409540ba6c5d2f5"><elem>UDFVdaToDelforPool</elem><elem>http://sap.com/xi/B2B/Examples/VDA</elem></key></key><classname>UDFVdaToDelforPool</classname><package>sap.com</package><imports><![CDATA[import com.sap.aii.mapping.api.*;
+import com.sap.aii.mapping.lookup.*;
+import com.sap.aii.mappingtool.tf7.rt.*;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
+import java.text.*;
+]]></imports><globals><javaText><![CDATA[
+	private Locale locale = Locale.getDefault();
+	
+	private static final String VDA4905 = "vda4905";
+	private static final String VDA4915 = "vda4915";
+
+	private AbstractTrace trace;
+
+	private void genE1EDP16FromS513(List s513Data, String lastEntry,
+			String noNeed, String backlog, String timeInterval,
+			String immediate, List e1EDP16List, Container container) {
+		Object dat1 = s513Data.get(0);
+		Object dat2 = s513Data.get(2);
+		Object dat3 = s513Data.get(4);
+		Object dat4 = s513Data.get(6);
+		Object dat5 = s513Data.get(8);
+
+		Object qty1 = s513Data.get(1);
+		Object qty2 = s513Data.get(3);
+		Object qty3 = s513Data.get(5);
+		Object qty4 = s513Data.get(7);
+		Object qty5 = s513Data.get(9);
+
+		addE1EDP16ToE1EDP16List(dat1, null, qty1, null, lastEntry, noNeed,
+				backlog, timeInterval, immediate, e1EDP16List, container);
+		addE1EDP16ToE1EDP16List(dat2, null, qty2, null, lastEntry, noNeed,
+				backlog, timeInterval, immediate, e1EDP16List, container);
+		addE1EDP16ToE1EDP16List(dat3, null, qty3, null, lastEntry, noNeed,
+				backlog, timeInterval, immediate, e1EDP16List, container);
+		addE1EDP16ToE1EDP16List(dat4, null, qty4, null, lastEntry, noNeed,
+				backlog, timeInterval, immediate, e1EDP16List, container);
+		addE1EDP16ToE1EDP16List(dat5, null, qty5, null, lastEntry, noNeed,
+				backlog, timeInterval, immediate, e1EDP16List, container);
+	}
+
+	private void genE1EDP16FromS514(List s514List, String lastEntry,
+			String noNeed, String backlog, String timeInterval,
+			String immediate, List e1EDP16List, Container container) {
+
+		if (s514List.size() > 0) {
+			for (int i = 0; i < s514List.size(); i++) {
+				List s514Data = (List) s514List.get(i);
+				Object dat1 = s514Data.get(0);
+				Object dat2 = s514Data.get(2);
+				Object dat3 = s514Data.get(4);
+				Object dat4 = s514Data.get(6);
+				Object dat5 = s514Data.get(8);
+				Object dat6 = s514Data.get(10);
+				Object dat7 = s514Data.get(12);
+				Object dat8 = s514Data.get(14);
+
+				Object qty1 = s514Data.get(1);
+				Object qty2 = s514Data.get(3);
+				Object qty3 = s514Data.get(5);
+				Object qty4 = s514Data.get(7);
+				Object qty5 = s514Data.get(9);
+				Object qty6 = s514Data.get(11);
+				Object qty7 = s514Data.get(13);
+				Object qty8 = s514Data.get(15);
+
+				addE1EDP16ToE1EDP16List(dat1, null, qty1, null, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat2, null, qty2, null, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat3, null, qty3, null, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat4, null, qty4, null, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat5, null, qty5, null, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat6, null, qty6, null, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat7, null, qty7, null, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat8, null, qty8, null, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+			}
+		}
+	}
+
+	private void genE1EDP16FromS554(List s554List, String lastEntry,
+			String noNeed, String backlog, String timeInterval,
+			String immediate, List e1EDP16List, Container container) {
+		//AbstractTrace trace = container.getTrace();
+		if (s554List.size() > 0) {
+			for (int i = 0; i < s554List.size(); i++) {
+				List s554Data = (List) s554List.get(i);
+				//trace.addInfo(i + "s554Data " + s554Data_part2.toString());
+
+				Object dat1 = s554Data.get(0);
+				Object dat2 = s554Data.get(4);
+				Object dat3 = s554Data.get(8);
+				Object dat4 = s554Data.get(12);
+				Object dat5 = s554Data.get(16);
+				Object dat6 = s554Data.get(20);
+
+				Object time1 = s554Data.get(1);
+				Object time2 = s554Data.get(5);
+				Object time3 = s554Data.get(9);
+				Object time4 = s554Data.get(13);
+				Object time5 = s554Data.get(17);
+				Object time6 = s554Data.get(21);
+
+				Object qty1 = s554Data.get(2);
+				Object qty2 = s554Data.get(6);
+				Object qty3 = s554Data.get(10);
+				Object qty4 = s554Data.get(14);
+				Object qty5 = s554Data.get(18);
+				Object qty6 = s554Data.get(22);
+
+				Object status1 = s554Data.get(3);
+				Object status2 = s554Data.get(7);
+				Object status3 = s554Data.get(11);
+				Object status4 = s554Data.get(15);
+				Object status5 = s554Data.get(19);
+				Object status6 = s554Data.get(23);
+
+				addE1EDP16ToE1EDP16List(dat1, time1, qty1, status1, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat2, time2, qty2, status2, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat3, time3, qty3, status3, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat4, time4, qty4, status4, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat5, time5, qty5, status5, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+				addE1EDP16ToE1EDP16List(dat6, time6, qty6, status6, lastEntry,
+						noNeed, backlog, timeInterval, immediate, e1EDP16List,
+						container);
+			}
+		}
+
+		//trace.addInfo(SIGNATURE + " end with " + e1EDP16List.toString());
+	}
+
+	private void addE1EDP16ToE1EDP16List(Object dat, Object time, Object qty,
+			Object status, String lastEntry, String noNeed, String backlog,
+			String timeInterval, String immediate, List e1EDP16List,
+			Container container) {
+
+			if (("999999").equals(dat)) {
+				AbstractTrace trace = container.getTrace();
+				 trace.addInfo("forecast rest (qualifier 999999) quantity " + qty + " is skipped");
+     			 return;
+			}
+
+		List e1EDP16Data = genE1EDP16Data(dat, time, qty, status,
+				lastEntry, noNeed, backlog, timeInterval, immediate, container);
+		if (e1EDP16Data.size() > 1) {
+			e1EDP16List.add(e1EDP16Data);
+		}
+	}
+	
+	private List genE1EDP16Data(Object datObj, Object timeObj, Object qtyObj,
+			Object statusObj, String lastEntry, String noNeed, String backlog,
+			String timeInterval, String immediate, Container container) {
+		//AbstractTrace trace = container.getTrace();
+		List e1EDP16Data = new ArrayList();
+		GlobalContainer glCont = container.getGlobalContainer();
+		String timeIntervalBegin = (String) glCont
+				.getParameter("timeIntervalBegin");
+
+		if (datObj != null && qtyObj != null) {
+			String dat = (String) datObj;
+			String qty = (String) qtyObj;
+
+		AbstractTrace trace = container.getTrace();
+				 trace.addInfo("dat  " + dat + " ");
+
+			if (dat.trim().length() > 0) {
+				if (lastEntry.equalsIgnoreCase(dat)) {
+					glCont.setParameter("timeIntervalBegin", "false");
+					return e1EDP16Data;
+				} else if (noNeed.equalsIgnoreCase(dat)) { // 222222
+					glCont.setParameter("timeIntervalBegin", "false");
+					String eTTYP = "1";
+					String pRGRS = "";
+					String currentData = getCurrentDate();
+					String wMENG = "0";
+					e1EDP16Data.add(0, eTTYP);
+					e1EDP16Data.add(1, pRGRS);
+					e1EDP16Data.add(2, currentData);
+					e1EDP16Data.add(3, timeObj);
+					e1EDP16Data.add(4, currentData);
+					e1EDP16Data.add(5, wMENG);
+					e1EDP16Data.add(6, statusObj);
+					return e1EDP16Data;
+				} else if (immediate.equalsIgnoreCase(dat)) { // 444444
+					glCont.setParameter("timeIntervalBegin", "false");
+					String eTTYP = "3";
+					String pRGRS = "";
+					String currentData = getCurrentDate();
+					String wMENG = trimZeroLeft(qty);
+					e1EDP16Data.add(0, eTTYP);
+					e1EDP16Data.add(1, pRGRS);
+					e1EDP16Data.add(2, currentData);
+					e1EDP16Data.add(3, timeObj);
+					e1EDP16Data.add(4, currentData);
+					e1EDP16Data.add(5, wMENG);
+					e1EDP16Data.add(6, statusObj);
+					return e1EDP16Data;
+				} else if (backlog.equalsIgnoreCase(dat)) { // 333333
+					glCont.setParameter("timeIntervalBegin", "false");
+					String eTTYP = "2";
+					String pRGRS = "";
+					String currentData = getCurrentDate();
+					String wMENG = trimZeroLeft(qty);
+					e1EDP16Data.add(0, eTTYP);
+					e1EDP16Data.add(1, pRGRS);
+					e1EDP16Data.add(2, currentData);
+					e1EDP16Data.add(3, timeObj);
+					e1EDP16Data.add(4, currentData);
+					e1EDP16Data.add(5, wMENG);
+					e1EDP16Data.add(6, statusObj);
+					return e1EDP16Data;
+				} else if (timeInterval.equalsIgnoreCase(dat)) { // 555555
+					glCont.setParameter("timeIntervalBegin", "true");
+					return e1EDP16Data;
+				} else if (timeIntervalBegin.equalsIgnoreCase("true")) {
+					String timeIntervalTyp = getTimeIntervalTyp(dat);
+					if ("week".equalsIgnoreCase(timeIntervalTyp)) {
+						String eTTYP = "4";
+						String pRGRS = "W";
+						String wMENG = trimZeroLeft(qty);
+						String year = dat.substring(0, 2);
+						String week = dat.substring(4, 6);
+						String fromWeekDay = getMondayOfWeek(year, week);
+						String toWeekDay = getFridayOfWeek(year, week);
+						e1EDP16Data.add(0, eTTYP);
+						e1EDP16Data.add(1, pRGRS);
+						e1EDP16Data.add(2, fromWeekDay);
+						e1EDP16Data.add(3, timeObj);
+						e1EDP16Data.add(4, toWeekDay);
+						e1EDP16Data.add(5, wMENG);
+						e1EDP16Data.add(6, statusObj);
+						return e1EDP16Data;
+					} else if ("month".equalsIgnoreCase(timeIntervalTyp)) {
+						String eTTYP = "4";
+						String pRGRS = "M";
+						String wMENG = trimZeroLeft(qty);
+						String year = dat.substring(0, 2);
+						String month = dat.substring(2, 4);
+						String fromDate = "20" + year + month + "01";
+						String toDate = getLastDayOfMonth(year, month);
+						e1EDP16Data.add(0, eTTYP);
+						e1EDP16Data.add(1, pRGRS);
+						e1EDP16Data.add(2, fromDate);
+						e1EDP16Data.add(3, timeObj);
+						e1EDP16Data.add(4, toDate);
+						e1EDP16Data.add(5, wMENG);
+						e1EDP16Data.add(6, statusObj);
+						return e1EDP16Data;
+					} else if ("weekInterval".equalsIgnoreCase(timeIntervalTyp)) {
+						String eTTYP = "4";
+						String pRGRS = "I";
+						String wMENG = trimZeroLeft(qty);
+						String year = dat.substring(0, 2);
+						String fromWeek = dat.substring(2, 4);
+						String toWeek = dat.substring(4, 6);
+						String fromWeekDay = getMondayOfWeek(year, fromWeek);
+						String toWeekDay = getFridayOfWeek(year, toWeek);
+						e1EDP16Data.add(0, eTTYP);
+						e1EDP16Data.add(1, pRGRS);
+						e1EDP16Data.add(2, fromWeekDay);
+						e1EDP16Data.add(3, timeObj);
+						e1EDP16Data.add(4, toWeekDay);
+						e1EDP16Data.add(5, wMENG);
+						e1EDP16Data.add(6, statusObj);
+						return e1EDP16Data;
+					}
+				} else if (isValidDate(dat)) {
+					String eTTYP = "1";
+					String pRGRS = "";
+					dat = "20" + dat;
+					String wMENG = trimZeroLeft(qty);
+					e1EDP16Data.add(0, eTTYP);
+					e1EDP16Data.add(1, pRGRS);
+					e1EDP16Data.add(2, dat);
+					e1EDP16Data.add(3, timeObj);
+					e1EDP16Data.add(4, dat);
+					e1EDP16Data.add(5, wMENG);
+					e1EDP16Data.add(6, statusObj);
+					return e1EDP16Data;
+				}
+			}
+		}
+
+		//trace.addInfo(SIGNATURE + " end with " + record.toString());
+
+		return e1EDP16Data;
+	}
+
+	private String getCurrentDate() {
+		Date date = new Date();
+		DateFormat dateFormat = createFormatter("yyyyMMdd");
+		return dateFormat.format(date);
+	}
+
+	private String trimZeroLeft(String val) {
+		String output = val != null ? val.replaceAll("^0*", "") : "";
+		return output.trim().length() > 0 ? output : "0";
+	}
+
+	private String getTimeIntervalTyp(String date) {
+		String timeInterValBasis = "noVal";
+		if (date != null && date.length() == 6) {
+			String monthWeek = date.substring(2, 4);
+			String dayWeek = date.substring(4, 6);
+
+			if ("00".equalsIgnoreCase(monthWeek)
+					&& !"00".equalsIgnoreCase(dayWeek)) {
+				timeInterValBasis = "week";
+				return timeInterValBasis;
+			} else if (!"00".equalsIgnoreCase(monthWeek)
+					&& "00".equalsIgnoreCase(dayWeek)) {
+				timeInterValBasis = "month";
+				return timeInterValBasis;
+			} else if (!"00".equalsIgnoreCase(monthWeek)
+					&& !"00".equalsIgnoreCase(dayWeek)) {
+				timeInterValBasis = "weekInterval";
+				return timeInterValBasis;
+			}
+
+		}
+		return timeInterValBasis;
+	}
+	
+	private String getMondayOfWeek(String year, String week) {
+				
+		DateFormat dfYYMM = createFormatter("yyww");
+		dfYYMM.setLenient(false);
+		Date date = null;
+		Calendar calendar = null;
+		try {
+			// Try to parse current date
+			try {
+				date = dfYYMM.parse(year + week);
+				calendar = createCalendar();
+				calendar.setTimeInMillis(date.getTime());
+			} catch (Exception e) {
+			// If method parse does not work we try a second
+			// convertion by own method and temporaly disabled lenient
+				calendar = getCalendarByYearAndWeek(year, week);
+			}		
+		} catch (Exception ex) {
+		// two shots have failed therefore we throw an error
+			throw new RuntimeException("FunctionLib UDFVdaToDelforPool: "
+					+ " cannot parse year/month " + year + "/" + week);
+		}
+		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		DateFormat df = createFormatter("yyyyMMdd");
+		return df.format(calendar.getTime());
+	}
+	
+	private String getFridayOfWeek(String year, String week) {
+		DateFormat dfYYMM = createFormatter("yyww");
+		dfYYMM.setLenient(false);
+		Date date = null;
+		Calendar calendar = null;
+		try {
+			// Try to parse current date
+			try {
+				date = dfYYMM.parse(year + week);
+				calendar = createCalendar();
+				calendar.setTimeInMillis(date.getTime());
+			} catch (Exception e) {
+			// If method parse does not work we try a second
+			// convertion by own method and temporaly disabled lenient
+				calendar = getCalendarByYearAndWeek(year, week);
+			}		
+		} catch (Exception ex) {
+		// two shots have failed therefore we throw an error
+			throw new RuntimeException("FunctionLib UDFVdaToDelforPool: "
+					+ " cannot parse year/month " + year + "/" + week);
+		}
+		calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+		DateFormat df = createFormatter("yyyyMMdd");
+		return df.format(calendar.getTime());
+	}
+	
+	private String getLastDayOfMonth(String year, String month) {
+		DateFormat dfYYMM = createFormatter("yyMM");
+		dfYYMM.setLenient(false);
+		Date date = null;
+		try {
+			date = dfYYMM.parse(year + month);
+		} catch (Exception ex) {
+			throw new RuntimeException("FunctionLib UDFDateTimePool: "
+					+ " cannot parse year/month " + year + "/" + month);
+		}
+		
+		Calendar calendar = createCalendar();
+		calendar.setTimeInMillis(date.getTime());
+		calendar.set(Calendar.DAY_OF_MONTH, calendar
+				.getActualMaximum(Calendar.DAY_OF_MONTH));
+		DateFormat df = createFormatter("yyyyMMdd");
+
+		return df.format(calendar.getTime());
+	}
+
+	private boolean isValidDate(String dateString) {
+		boolean validDate;
+
+		DateFormat formatter = createFormatter("yyMMdd");
+		formatter.setLenient(false);
+		try {
+			formatter.parse(dateString);
+			validDate = true;
+		} catch (ParseException pe) {
+			validDate = false;
+		}
+
+		return validDate;
+	}
+
+	private DateFormat createFormatter(String pattern) {
+		DateFormat formatter = new SimpleDateFormat(pattern, locale);
+		formatter.setLenient(false);
+		return formatter;
+	}
+
+	private Calendar createCalendar() {
+		Calendar calendar = Calendar.getInstance(locale);
+		return calendar;
+	}
+	
+	private Calendar getCalendarByYearAndWeek(String year, String week) {
+      try {
+         int yearInt = Integer.parseInt(year);
+		  	if (yearInt < 100) {
+				      yearInt = 2000 + yearInt;
+		  	}
+          Calendar calendar = createCalendar();
+			   calendar.set(Calendar.YEAR, yearInt);
+			   calendar.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(week));
+					 // workaround: apparently the yy and WW values are
+					// calculated independently. So 20120101 becomes 120052.
+					// Estimate the day which determines the year the week belong to.
+				int minimalDaysInFirstWeek = calendar.getMinimalDaysInFirstWeek();
+					int maximalDaysInWeek = calendar.getActualMaximum(Calendar.DAY_OF_WEEK);
+					int firstDayOfWeek = calendar.getFirstDayOfWeek();
+					int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+					if (dayOfWeek != firstDayOfWeek) {
+						calendar.set(Calendar.DAY_OF_WEEK, firstDayOfWeek);
+					}
+					// count from the end of week
+					calendar.add(Calendar.DAY_OF_YEAR, maximalDaysInWeek - minimalDaysInFirstWeek);
+			return calendar;
+
+		} catch (Exception ex1) {
+			throw new RuntimeException("FunctionLib UDFDateTimePool: "
+					+ "getDateByYearAndWeek cannot parse integer " 
+					+ year + "/" + week);
+		}
+	}]]></javaText></globals><init><functionmodel><signature cacheType="2"/><name>init</name><key>%init%</key><tab/><title/><uiTitle/><implementation type="udf"><javaText><![CDATA[
+// set the local manually if necessary
+//locale = Locale.getDefault();
+ locale = Locale.GERMANY;
+
+// here you can debug the calendar propeties
+//trace.addInfo("FunctionLib UDFVdaToDelforPool Locale: " + locale);
+//Calendar calendar = Calendar.getInstance(locale);
+//trace.addInfo("FunctionLib UDFVdaToDelforPool MinimalDaysInFirstWeek: " + calendar.getMinimalDaysInFirstWeek());
+//trace.addInfo("FunctionLib UDFVdaToDelforPool  FirstDayOfWeek: " + calendar.getFirstDayOfWeek());]]></javaText></implementation></functionmodel></init><cleanup><javaText><![CDATA[]]></javaText></cleanup><functionmodel><signature cacheType="0"/><name>initIdocData</name><key>calculate1222222222222</key><tab>UDFVdaToDelforPool</tab><title>initIdocData</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		AbstractTrace trace = container.getTrace();
+		GlobalContainer glCont = container.getGlobalContainer();
+		int counterInt = Integer.parseInt(glCont.getParameter("counter")
+				.toString()) + 1;
+		String counter = Integer.toString(counterInt);
+		
+		glCont.setParameter("counter", counter);
+		glCont.setParameter("timeIntervalBegin", "false");
+		trace.addInfo("UDF initIdocData: counter " + counter);
+
+		return "";]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"/><name>const4905</name><key>calculate12222222222222</key><tab>UDFVdaToDelforPool</tab><title>const4905</title><uiTitle/><implementation type="udf"><javaText><![CDATA[		return VDA4905;]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"/><name>const4915</name><key>calculate122222222222222</key><tab>UDFVdaToDelforPool</tab><title>const4915</title><uiTitle/><implementation type="udf"><javaText><![CDATA[	return VDA4915;]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="dat1" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty1" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat2" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty2" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat3" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty3" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat4" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty4" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat5" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty5" jtp="String"><uiTitle/></argument></signature><name>collectS513Data</name><key>calculate1</key><tab>UDFVdaToDelforPool</tab><title>collectS513Data</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		AbstractTrace trace = container.getTrace();
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+		int counterInt = Integer.parseInt(counter) + 1;
+		counter = Integer.toString(counterInt);
+		glCont.setParameter("counter", counter);
+		glCont.setParameter("timeIntervalBegin", "false");
+		trace.addInfo("UDF collectS513Data: counter " + counter);
+
+		List s513Data = new ArrayList();
+		List s514List = new ArrayList();
+		s513Data.add(0, dat1);
+		s513Data.add(1, qty1);
+		s513Data.add(2, dat2);
+		s513Data.add(3, qty2);
+		s513Data.add(4, dat3);
+		s513Data.add(5, qty3);
+		s513Data.add(6, dat4);
+		s513Data.add(7, qty4);
+		s513Data.add(8, dat5);
+		s513Data.add(9, qty5);
+		glCont.setParameter("s513Data" + counter, s513Data);
+		glCont.setParameter("s514List" + counter, s514List);
+
+		trace.addInfo("UDF collectS513Data: s513Data" + counter + " "
+				+ s513Data);
+
+		return "";]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="dat1" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty1" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat2" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty2" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat3" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty3" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat4" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty4" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat5" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty5" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat6" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty6" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat7" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty7" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat8" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty8" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>collectS514Data</name><key>calculate12</key><tab>UDFVdaToDelforPool</tab><title>collectS514Data</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		AbstractTrace trace = container.getTrace();
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+
+		List s514List = (List) glCont.getParameter("s514List" + counter);
+		for (int i = 0; i < dat1.length; i++) {
+			List s514Data = new ArrayList();
+
+			s514Data.add(0, dat1[i]);
+			s514Data.add(1, qty1[i]);
+			s514Data.add(2, dat2[i]);
+			s514Data.add(3, qty2[i]);
+			s514Data.add(4, dat3[i]);
+			s514Data.add(5, qty3[i]);
+			s514Data.add(6, dat4[i]);
+			s514Data.add(7, qty4[i]);
+			s514Data.add(8, dat5[i]);
+			s514Data.add(9, qty5[i]);
+			s514Data.add(10, dat6[i]);
+			s514Data.add(11, qty6[i]);
+			s514Data.add(12, dat7[i]);
+			s514Data.add(13, qty7[i]);
+			s514Data.add(14, dat8[i]);
+			s514Data.add(15, qty8[i]);
+
+			s514List.add(s514Data);
+		}
+
+		glCont.setParameter("s514List" + counter, s514List);
+		trace.addInfo("UDF collectS514Data: s514List" + counter + " : "
+				+ s514List);
+
+		result.addValue("");]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="dat1" jtp="String"><uiTitle/></argument><argument tp="0" nm="time1" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty1" jtp="String"><uiTitle/></argument><argument tp="0" nm="status1" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat2" jtp="String"><uiTitle/></argument><argument tp="0" nm="time2" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty2" jtp="String"><uiTitle/></argument><argument tp="0" nm="status2" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat3" jtp="String"><uiTitle/></argument><argument tp="0" nm="time3" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty3" jtp="String"><uiTitle/></argument><argument tp="0" nm="status3" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat4" jtp="String"><uiTitle/></argument><argument tp="0" nm="time4" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty4" jtp="String"><uiTitle/></argument><argument tp="0" nm="status4" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat5" jtp="String"><uiTitle/></argument><argument tp="0" nm="time5" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty5" jtp="String"><uiTitle/></argument><argument tp="0" nm="status5" jtp="String"><uiTitle/></argument><argument tp="0" nm="dat6" jtp="String"><uiTitle/></argument><argument tp="0" nm="time6" jtp="String"><uiTitle/></argument><argument tp="0" nm="qty6" jtp="String"><uiTitle/></argument><argument tp="0" nm="status6" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>collectS554Data</name><key>calculate122222222222</key><tab>UDFVdaToDelforPool</tab><title>collectS554Data</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		AbstractTrace trace = container.getTrace();
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+
+		List s554List = new ArrayList();
+		for (int i = 0; i < dat1.length; i++) {
+			List s554Data = new ArrayList();
+
+			s554Data.add(0, dat1[i]);
+			s554Data.add(1, time1[i]);
+			s554Data.add(2, qty1[i]);
+			s554Data.add(3, status1[i]);
+
+			s554Data.add(4, dat2[i]);
+			s554Data.add(5, time2[i]);
+			s554Data.add(6, qty2[i]);
+			s554Data.add(7, status2[i]);
+
+			s554Data.add(8, dat3[i]);
+			s554Data.add(9, time3[i]);
+			s554Data.add(10, qty3[i]);
+			s554Data.add(11, status3[i]);
+
+			s554Data.add(12, dat4[i]);
+			s554Data.add(13, time4[i]);
+			s554Data.add(14, qty4[i]);
+			s554Data.add(15, status4[i]);
+
+			s554Data.add(16, dat5[i]);
+			s554Data.add(17, time5[i]);
+			s554Data.add(18, qty5[i]);
+			s554Data.add(19, status5[i]);
+
+			s554Data.add(20, dat6[i]);
+			s554Data.add(21, time6[i]);
+			s554Data.add(22, qty6[i]);
+			s554Data.add(23, status6[i]);
+
+			s554List.add(s554Data);
+		}
+
+		glCont.setParameter("s554List" + counter, s554List);
+		trace.addInfo("UDF collectS54Data: s554List" + counter + " : "
+				+ s554List.toString());
+
+		result.addValue("");]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextDummy" jtp="String"><uiTitle/></argument><argument tp="0" nm="vdaType" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>generateE1EDP16DataList</name><key>calculate1222</key><tab>UDFVdaToDelforPool</tab><title>generateE1EDP16DataList</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		AbstractTrace trace = container.getTrace();
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+
+		String lastEntry = "000000";
+		String noNeed = "222222";
+		String backlog = "333333";
+		String immediate = "444444";
+		String timeInterval = "555555";
+
+		List e1EDP16List = new ArrayList();
+		String type = vdaType[0];
+		trace.addInfo("UDF generateE1EDP16DataList: e1EDP16List" + counter
+				+ " deliveryForcastType: " + type);
+
+		if (VDA4905.equals(type)) {
+			List s513Data = (List) glCont.getParameter("s513Data"
+					+ counter);
+			List s514List = (List) glCont.getParameter("s514List" + counter);
+			trace.addInfo("UDF generateE1EDP16DataList: s513Data "
+					+ s513Data);
+			trace.addInfo("UDF generateE1EDP16DataList: s514List " + s514List);
+
+			genE1EDP16FromS513(s513Data, lastEntry, noNeed, backlog,
+					timeInterval, immediate, e1EDP16List, container);
+
+			genE1EDP16FromS514(s514List, lastEntry, noNeed, backlog,
+					timeInterval, immediate, e1EDP16List, container);
+		} else if (VDA4915.equals(type)) {
+			List s554List = (List) glCont.getParameter("s554List" + counter);
+			genE1EDP16FromS554(s554List, lastEntry, noNeed, backlog,
+					timeInterval, immediate, e1EDP16List, container);
+		} else {
+			throw new RuntimeException(
+					"UDF generateE1EDP16DataList: unexspected vdaType "
+							+ vdaType);
+		}
+
+		glCont.setParameter("e1EDP16List" + counter, e1EDP16List);
+		trace.addInfo("UDF generateE1EDP16DataList: e1EDP16List" + counter
+				+ ": " + e1EDP16List);
+
+		result.addValue("");]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextDummy" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>createE1EDP16</name><key>calculate122</key><tab>UDFVdaToDelforPool</tab><title>createE1EDP16</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		AbstractTrace trace = container.getTrace();
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+
+		List e1EDP16List = (List) glCont.getParameter("e1EDP16List" + counter);
+		trace.addInfo("UDF createE1EDP16: e1EDP16List" + counter + " begin");
+
+		for (int i = 0; i < e1EDP16List.size(); i++)
+			result.addValue("");
+
+		trace.addInfo("UDF createE1EDP16: e1EDP16List" + counter + " end");]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextDummy" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getETTYP</name><key>calculate12222</key><tab>UDFVdaToDelforPool</tab><title>getETTYP</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+
+		List e1EDP16List = (List) glCont.getParameter("e1EDP16List" + counter);
+		for (int i = 0; i < e1EDP16List.size(); i++) {
+			List e1EDP16DataList = (List) e1EDP16List.get(i);
+			Object eTTYP = e1EDP16DataList.get(0);
+			if (eTTYP != null) {
+				result.addValue((String) eTTYP);
+			} else {
+				result.addSuppress();
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextDummy" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getPRGRS</name><key>calculate122222</key><tab>UDFVdaToDelforPool</tab><title>getPRGRS</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+
+		List e1EDP16List = (List) glCont.getParameter("e1EDP16List" + counter);
+		for (int i = 0; i < e1EDP16List.size(); i++) {
+			List e1EDP16DataList = (List) e1EDP16List.get(i);
+			Object pRGRS = e1EDP16DataList.get(1);
+			if (pRGRS != null) {
+				result.addValue((String) pRGRS);
+			} else {
+				result.addSuppress();
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextDummy" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getEDATUV</name><key>calculate1222222</key><tab>UDFVdaToDelforPool</tab><title>getEDATUV</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+		
+		List e1EDP16List = (List) glCont.getParameter("e1EDP16List" + counter);
+		for (int i = 0; i < e1EDP16List.size(); i++) {
+			List e1EDP16DataList = (List) e1EDP16List.get(i);
+			Object eDATUV = e1EDP16DataList.get(2);
+			if (eDATUV != null) {
+				result.addValue((String) eDATUV);
+			} else {
+				result.addSuppress();
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextDummy" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getEZEIT</name><key>calculate1222222222222222</key><tab>UDFVdaToDelforPool</tab><title>getEZEIT</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+
+		List e1EDP16List = (List) glCont.getParameter("e1EDP16List" + counter);
+		for (int i = 0; i < e1EDP16List.size(); i++) {
+			List e1EDP16DataList = (List) e1EDP16List.get(i);
+			Object eZEIT = e1EDP16DataList.get(3);
+			if (eZEIT != null) {
+				result.addValue((String) eZEIT);
+			} else {
+				result.addSuppress();
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextDummy" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getEDATUB</name><key>calculate12222222</key><tab>UDFVdaToDelforPool</tab><title>getEDATUB</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+		
+		List e1EDP16List = (List) glCont.getParameter("e1EDP16List" + counter);
+		for (int i = 0; i < e1EDP16List.size(); i++) {
+			List e1EDP16DataList = (List) e1EDP16List.get(i);
+			Object eDATUB = e1EDP16DataList.get(4);
+			if (eDATUB != null) {
+				result.addValue((String) eDATUB);
+			} else {
+				result.addSuppress();
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextDummy" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getWMENG</name><key>calculate122222222</key><tab>UDFVdaToDelforPool</tab><title>getWMENG</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+		
+		List e1EDP16List = (List) glCont.getParameter("e1EDP16List" + counter);
+		for (int i = 0; i < e1EDP16List.size(); i++) {
+			List e1EDP16DataList = (List) e1EDP16List.get(i);
+			Object wMENG = e1EDP16DataList.get(5);
+			if (wMENG != null) {
+				result.addValue((String) wMENG);
+			} else {
+				result.addSuppress();
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextDummy" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getBSTAS</name><key>calculate12222222222222222</key><tab>UDFVdaToDelforPool</tab><title>getBSTAS</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		GlobalContainer glCont = container.getGlobalContainer();
+		String counter = (String) glCont.getParameter("counter");
+
+		List e1EDP16List = (List) glCont.getParameter("e1EDP16List" + counter);
+		for (int i = 0; i < e1EDP16List.size(); i++) {
+			List e1EDP16DataList = (List) e1EDP16List.get(i);
+			Object bSTAS = e1EDP16DataList.get(6);
+			if (bSTAS != null) {
+				result.addValue((String) bSTAS);
+			} else {
+				result.addSuppress();
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="value" jtp="String"><uiTitle/></argument><argument tp="0" nm="counter" jtp="String"><uiTitle/></argument></signature><name>trimZeroRightVda</name><key>calculate1222222222</key><tab>UDFVdaToDelforPool</tab><title>trimZeroRightVda</title><uiTitle/><implementation type="udf"><javaText><![CDATA[
+		int counterInt;
+		try {
+			counterInt = Integer.parseInt(counter);
+		} catch (Exception ex) {
+			throw new RuntimeException("UDF trimZeroRightVda: counter "
+					+ counter + " is not a number");
+		}
+		if (value.length() <= counterInt) {
+			return value;
+		} else {
+			return value.substring(0, value.length() - counterInt);
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="date" jtp="String"><uiTitle/></argument></signature><name>isValidDateVda</name><key>calculate12222222222</key><tab>UDFVdaToDelforPool</tab><title>isValidDateVda</title><uiTitle/><implementation type="udf"><javaText><![CDATA[return String.valueOf(isValidDate(date));]]></javaText></implementation></functionmodel><usedjars/></functionstorage>

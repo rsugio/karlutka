@@ -15,6 +15,14 @@
         </encoder>
     </appender>
 
+    <appender name="fae" class="ch.qos.logback.core.FileAppender">
+        <file>karlutka_fae.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <root level="INFO">
         <appender-ref ref="file"/>
     </root>

@@ -1,0 +1,37 @@
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<SOAP-ENV:Body xmlns:rpl="urn:AdapterMessageMonitoringVi">
+		<rpl:getUserDefinedSearchFiltersResponse xmlns:rn0="urn:com.sap.aii.mdt.api.data.esiext"
+			xmlns:rn1="urn:com.sap.exception" xmlns:rn2="urn:com.sap.aii.mdt.api.data"
+			xmlns:rn3="http://schemas.xmlsoap.org/soap/encoding/" xmlns:rn4="java:sap/standard"
+			xmlns:rn5="urn:com.sap.aii.mdt.server.adapterframework.ws.esiext" xmlns:rn6="urn:java/lang"
+			xmlns:rn7="urn:com.sap.aii.mdt.server.adapterframework.ws" xmlns:rn8="urn:java.lang">
+			<rpl:Response>
+				<rn2:MessageInterface>
+					<rn2:name>HRMD_A.HRMD_A09</rn2:name>
+					<rn2:namespace>urn:sap-com:document:sap:idoc:messages</rn2:namespace>
+					<rn2:senderParty/>
+					<rn2:senderComponent>AAAAAAA</rn2:senderComponent>
+					<rn2:receiverParty/>
+					<rn2:receiverComponent>*</rn2:receiverComponent>
+				</rn2:MessageInterface>
+				<rn2:MessageInterface>
+					<rn2:name>COND_A.COND_A04</rn2:name>
+					<rn2:namespace>urn:sap-com:document:sap:idoc:messages</rn2:namespace>
+					<rn2:senderParty/>
+					<rn2:senderComponent/>
+					<rn2:receiverParty/>
+					<rn2:receiverComponent/>
+				</rn2:MessageInterface>
+				<rn2:MessageInterface>
+					<rn2:name>ZORDRSP.ORDERS05.ZORDERS05_1</rn2:name>
+					<rn2:namespace>urn:sap-com:document:sap:idoc:messages</rn2:namespace>
+					<rn2:senderParty/>
+					<rn2:senderComponent/>
+					<rn2:receiverParty/>
+					<rn2:receiverComponent/>
+				</rn2:MessageInterface>
+			</rpl:Response>
+		</rpl:getUserDefinedSearchFiltersResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

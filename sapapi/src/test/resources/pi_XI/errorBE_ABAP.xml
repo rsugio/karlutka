@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><!-- Входящее сообщение --> <SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SAP="http://sap.com/xi/XI/Message/30"><SOAP:Header><SAP:Main versionMajor="003" versionMinor="001" SOAP:mustUnderstand="1" wsu:Id="wsuid-main-92ABE13F5C59AB7FE10000000A1551F7" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"><SAP:MessageClass>SystemError</SAP:MessageClass><SAP:ProcessingMode>synchronous</SAP:ProcessingMode><SAP:MessageId>D65207C8-E596-11ED-AAD1-000000465A5B</SAP:MessageId><SAP:RefToMessageId>005056B4-EF13-1EDD-B9B2-C46C6C3AB3B2</SAP:RefToMessageId><SAP:TimeSent>2023-04-28T07:32:32Z</SAP:TimeSent><SAP:Sender><SAP:Service>SID100</SAP:Service><SAP:Interface namespace="http://psimetals.psi.com">SI_Z_CHANGE_DELIVERY_DATA_SAP_ERP_IN</SAP:Interface></SAP:Sender><SAP:Receiver><SAP:Party agency="http://sap.com/xi/XI" scheme="XIParty"/><SAP:Service>BC_VERONA_PSI</SAP:Service><SAP:Interface namespace="http://psimetals.psi.com">SI_Z_CHANGE_DELIVERY_DATA_SAP_AS400_OUT</SAP:Interface><SAP:Mapping notRequired="X"/></SAP:Receiver><SAP:Interface namespace="http://psimetals.psi.com">SI_Z_CHANGE_DELIVERY_DATA_SAP_ERP_IN</SAP:Interface></SAP:Main><SAP:ReliableMessaging SystemErrorAckRequested="true" SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:QualityOfService>BestEffort</SAP:QualityOfService></SAP:ReliableMessaging><SAP:Error SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:Category>XIAdapterFramework</SAP:Category><SAP:Code area="MESSAGE">GENERAL</SAP:Code><SAP:P1/><SAP:P2/><SAP:P3/><SAP:P4/><SAP:AdditionalText>com.sap.engine.interfaces.messaging.api.exception.MessagingException: java.net.SocketTimeoutException: Read timed out (local port 51512 to address 1111 (devpi), remote port 8002 to address 111.271.7.174)</SAP:AdditionalText><SAP:Stack/><SAP:Retry>M</SAP:Retry></SAP:Error><SAP:HopList SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:Hop timeStamp="2023-04-28T07:27:31Z" wasRead="false"><SAP:Engine type="IS"/><SAP:Adapter namespace="http://sap.com/xi/XI/System">SOAP</SAP:Adapter><SAP:MessageId>005056B4-EF13-1EDD-B9B2-C46C6C3AB3B2</SAP:MessageId><SAP:Info/></SAP:Hop><SAP:Hop timeStamp="2023-04-28T07:27:31Z" wasRead="false"><SAP:Engine type="IS">is.00.devpi</SAP:Engine><SAP:Adapter namespace="http://sap.com/xi/XI/System">XI</SAP:Adapter><SAP:MessageId>005056B4-EF13-1EDD-B9B2-C46C6C3AB3B2</SAP:MessageId><SAP:Info>3.0</SAP:Info></SAP:Hop></SAP:HopList><SAP:Ack SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:Status>Error</SAP:Status><SAP:Category>permanent</SAP:Category></SAP:Ack><SAP:RunTime xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:Date>20230428</SAP:Date><SAP:Time>111638</SAP:Time><SAP:Host>devpi_PPI_00</SAP:Host><SAP:SystemId>PPI</SAP:SystemId><SAP:SystemNr/><SAP:OS>Linux</SAP:OS><SAP:DB>ORACLE</SAP:DB><SAP:Language/><SAP:ProcStatus>000</SAP:ProcStatus><SAP:AdapterStatus>000</SAP:AdapterStatus><SAP:User>PIAPPLUSER</SAP:User><SAP:TraceLevel>1</SAP:TraceLevel><SAP:Logging>1</SAP:Logging><SAP:LogSeqNbr>000</SAP:LogSeqNbr><SAP:RetryLogSeqNbr>000</SAP:RetryLogSeqNbr><SAP:PipelineIdInternal>SAP_CENTRAL</SAP:PipelineIdInternal><SAP:PipelineIdExternal>CENTRAL</SAP:PipelineIdExternal><SAP:PipelineElementId/><SAP:PipelineService/><SAP:QIdInternal/><SAP:CommitActor/><SAP:SplitNumber>0</SAP:SplitNumber><SAP:NumberOfRetries>0</SAP:NumberOfRetries><SAP:NumberOfManualRetries>0</SAP:NumberOfManualRetries><SAP:TypeOfEngine client=""/><SAP:PlsrvExceptionCode/><SAP:EOReferenceRuntime type="TID"/><SAP:EOReferenceInbound type="TID"/><SAP:EOReferenceOutbound type="TID"/><SAP:MessageSizePayload>22457</SAP:MessageSizePayload><SAP:MessageSizeTotal>35232</SAP:MessageSizeTotal><SAP:PayloadSizeRequest>22457</SAP:PayloadSizeRequest><SAP:PayloadSizeRequestMap>22457</SAP:PayloadSizeRequestMap><SAP:PayloadSizeResponse>0</SAP:PayloadSizeResponse><SAP:PayloadSizeResponseMap>0</SAP:PayloadSizeResponseMap><SAP:Reorganization>INI</SAP:Reorganization><SAP:AdapterInbound>AENGINE</SAP:AdapterInbound><SAP:AdapterOutbound>SOAP</SAP:AdapterOutbound><SAP:InterfaceAction>INIT</SAP:InterfaceAction><SAP:RandomNumber>00</SAP:RandomNumber><SAP:AckStatus>000</SAP:AckStatus><SAP:SkipReceiverDetermination/></SAP:RunTime><SAP:PerformanceHeader xmlns:SAP="http://sap.com/xi/XI/Message/30"><SAP:RunTimeItem><SAP:Name type="ADAPTER_IN">INTEGRATION_ENGINE_HTTP_ENTRY</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072731.996121</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="ADAPTER_IN">INTEGRATION_ENGINE_HTTP_ENTRY</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.000464</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="CORE">INTEGRATION_ENGINE</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.000571</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="CORE">PLSRV_XML_VALIDATION_RQ_XMS</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.001265</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="CORE">PLSRV_XML_VALIDATION_RQ_XMS</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.001275</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="CORE">INTEGRATION_ENGINE</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.001305</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_XML_VALIDATION_RQ_INB</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.006382</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_XML_VALIDATION_RQ_INB</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.006753</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_RECEIVER_DETERMINATION</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.010498</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_RECEIVER_DETERMINATION</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.012368</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_INTERFACE_DETERMINATION</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.01627</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_INTERFACE_DETERMINATION</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.017522</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_RECEIVER_MESSAGE_SPLIT</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.021317</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_RECEIVER_MESSAGE_SPLIT</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.021764</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_MAPPING_REQUEST</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.025521</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_MAPPING_REQUEST</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.025985</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_OUTBOUND_BINDING</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.02971</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_OUTBOUND_BINDING</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.032276</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_VIRUS_SCAN_RQ_OUT</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.036536</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_VIRUS_SCAN_RQ_OUT</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.036809</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_XML_VALIDATION_RQ_OUT</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.040696</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_XML_VALIDATION_RQ_OUT</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428072732.041225</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_CALL_ADAPTER</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.045434</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">HTTP_SEND</SAP:Name><SAP:Timestamp type="begin" host="devpi">20230428072732.047102</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">HTTP_SEND</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428073232.192344</SAP:Timestamp></SAP:RunTimeItem><SAP:RunTimeItem><SAP:Name type="PLSRV">PLSRV_CALL_ADAPTER</SAP:Name><SAP:Timestamp type="end" host="devpi">20230428073232.200035</SAP:Timestamp></SAP:RunTimeItem></SAP:PerformanceHeader><SAP:Diagnostic SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:TraceLevel>Information</SAP:TraceLevel><SAP:Logging>Off</SAP:Logging></SAP:Diagnostic><SAP:OutboundBinding xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"><SAP:OutboundBindingEntry version="30"><SAP:OutboundBindingObjectId>CAB478882956334994F5906173058192</SAP:OutboundBindingObjectId><SAP:FromPartyName/><SAP:FromServiceName>BC_VERONA_PSI</SAP:FromServiceName><SAP:ToPartyName/><SAP:ToServiceName>SID100</SAP:ToServiceName><SAP:ToInterfaceName>SI_Z_CHANGE_DELIVERY_DATA_SAP_ERP_IN</SAP:ToInterfaceName><SAP:ToInterfaceNamespace>http://psimetals.psi.com</SAP:ToInterfaceNamespace><SAP:OutboundBindingAttributes><SAP:AdapterTypeData><SAP:Attribute><SAP:Name>applyEncryptionAlias</SAP:Name><SAP:Value/></SAP:Attribute><SAP:Attribute><SAP:Name>applyEncryptionKeyStore</SAP:Name><SAP:Value/></SAP:Attribute><SAP:Attribute><SAP:Name>applyEncryptionSignatureAlias</SAP:Name><SAP:Value/></SAP:Attribute><SAP:Attribute><SAP:Name>applyEncryptionSignatureKeyStore</SAP:Name><SAP:Value/></SAP:Attribute><SAP:Attribute><SAP:Name>applySignatureAlias</SAP:Name><SAP:Value/></SAP:Attribute><SAP:Attribute><SAP:Name>applySignatureEncryptionAlias</SAP:Name><SAP:Value/></SAP:Attribute><SAP:Attribute><SAP:Name>applySignatureEncryptionKeyStore</SAP:Name><SAP:Value/></SAP:Attribute><SAP:Attribute><SAP:Name>applySignatureKeyStore</SAP:Name><SAP:Value/></SAP:Attribute><SAP:Attribute><SAP:Name>propagatePrincipal</SAP:Name><SAP:Value>0</SAP:Value></SAP:Attribute><SAP:Attribute><SAP:Name>securityProfileSignAndEncrypt</SAP:Name><SAP:Value>applySignatureHeaderAndManifestWithSameKey</SAP:Value></SAP:Attribute><SAP:Attribute><SAP:Name>wsse.xinamespace</SAP:Name><SAP:Value>http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd</SAP:Value></SAP:Attribute></SAP:AdapterTypeData></SAP:OutboundBindingAttributes><SAP:HeaderMapping><SAP:FieldMapping/></SAP:HeaderMapping><SAP:ChannelEntry version="30"><SAP:PartyName/><SAP:ServiceName>SID100</SAP:ServiceName><SAP:ChannelName>CC_PSI_VERONA_ERP_SOAP_RECEIVER</SAP:ChannelName><SAP:AdapterName>SOAP</SAP:AdapterName><SAP:AdapterNamespace>http://sap.com/xi/XI/System</SAP:AdapterNamespace><SAP:AdapterSWCV>C90D3621A40A11E18645D49F0A4290B1</SAP:AdapterSWCV><SAP:AdapterEngineType>AE</SAP:AdapterEngineType><SAP:AdapterEngineName/><SAP:MessageProtocol>XI</SAP:MessageProtocol><SAP:MessageProtocolVersion/><SAP:TransportProtocol>HTTP</SAP:TransportProtocol><SAP:TransportProtocolVersion/><SAP:ChannelDirection>O</SAP:ChannelDirection><SAP:FromPartyAgency/><SAP:FromPartySchema/><SAP:ToPartySchema/><SAP:ToPartyAgency/><SAP:ChannelAttributes><SAP:AdapterTypeData/></SAP:ChannelAttributes></SAP:ChannelEntry></SAP:OutboundBindingEntry></SAP:OutboundBinding><SAP:Trace xmlns:SAP="http://sap.com/xi/XI/Message/30"><Trace level="1" type="T">Party normalization: sender </Trace>
+<Trace level="1" type="T">Determining the sender agreement </Trace>
+<Trace level="1" type="T">Simple SOAP Adapter was called</Trace>
+<Trace level="1" type="T">XMB was called with URL /sap/xi/engine?type=entry&amp;sap-user=PIAPPLUSER&amp;sap-password=++++++++&amp;version=3.0&amp;Sender.Service=BC_VERONA_PSI&amp;Interface=http%3A%2F%2Fpsimetals.psi.com%5ESI_Z_CHANGE_DELIVERY_DATA_SAP_AS400_OUT</Trace>
+<Trace level="1" type="T">Remote address = 1111</Trace>
+<Trace level="1" type="T">User = PIAPPLUSER</Trace>
+<Trace level="1" type="T">Process ID: 2267</Trace>
+<Trace level="1" type="T">Work Process ID: 26 </Trace>
+<Trace level="1" type="T">Message ID = 005056B4EF131EDDB9B2C46C6C3AB3B2</Trace>
+<Trace level="1" type="B" name="CL_XMS_MAIN-ENTER_XMS">
+<Trace level="1" type="T">CL_XMS_MAIN-&gt;DETERMINE_EXT_PID: CENTRAL</Trace>
+<Trace level="1" type="T">Hop engine name = is.00.devpi</Trace>
+<Trace level="1" type="T">Hop engine type = IS</Trace>
+<Trace level="1" type="T">Hop adapter name = XI</Trace>
+<Trace level="1" type="T">Hop adapter namespace = http://sap.com/xi/XI/System</Trace>
+<Trace level="1" type="B" name="CL_XMS_TROUBLESHOOT-ENTER_PLSRV">
+</Trace>
+<Trace level="1" type="T">system-ID = PPI</Trace>
+<Trace level="1" type="T">client = 001</Trace>
+<Trace level="1" type="T">language = R</Trace>
+<Trace level="1" type="T">user = PIAPPLUSER</Trace>
+<Trace level="1" type="Timestamp">2023-04-28T07:27:31Z RUS03  </Trace>
+<Trace level="1" type="T">ACL Check is performed </Trace>
+<Trace level="1" type="T">XML validation is executed </Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_UC_EXECUTE"></Trace><!-- ************************************ -->
+<Trace level="1" type="T">PLNAME = CENTRAL</Trace>
+<Trace level="1" type="T">QOS = BE</Trace>
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PIPELINE_SYNC"></Trace><!-- ************************************ -->
+<Trace level="1" type="T">&gt;&gt;&gt;PID delete old pid determination coding </Trace>
+<Trace level="1" type="T">system-ID = PPI</Trace>
+<Trace level="1" type="T">client = 001</Trace>
+<Trace level="1" type="T">language = R</Trace>
+<Trace level="1" type="T">user = PIAPPLUSER</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+<Trace level="1" type="B" name="PLSRV_XML_VALIDATION_RQ_INB">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+<Trace level="1" type="B" name="CL_XMS_PLSRV_VALIDATION-ENTER_PLSRV">
+<Trace level="1" type="T">Чтение соглашения отправителя </Trace>
+<Trace level="1" type="T">Сообщение не содержит соглашение отправителя. </Trace>
+<Trace level="1" type="T">Входящая проверка с помощью интеграционной машины не выполняется. </Trace>
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+<Trace level="1" type="B" name="PLSRV_RECEIVER_DETERMINATION">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+<Trace level="1" type="B" name="CL_RD_PLSRV-ENTER_PLSRV">
+<Trace level="1" type="T">R E C E I V E R - D E T E R M I N A T I O N </Trace>
+<Trace level="1" type="T"> Cache content is up to date </Trace>
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+<Trace level="1" type="B" name="PLSRV_INTERFACE_DETERMINATION">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+<Trace level="1" type="B" name="CL_ID_PLSRV-ENTER_PLSRV">
+<Trace level="1" type="T">I N T E R F A C E - D E T E R M I N A T I O N </Trace>
+<Trace level="1" type="T"> Cache content is up to date </Trace>
+<Trace level="1" type="T">total= 00001 success= 00000 fail= 00000 </Trace>
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+<Trace level="1" type="B" name="PLSRV_RECEIVER_MESSAGE_SPLIT">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+<Trace level="1" type="B" name="CL_XMS_PLSRV_RECEIVER_SPLIT2->ENTER_PLSRV">
+<Trace level="1" type="T">number of receivers: 1 </Trace>
+<Trace level="1" type="T">Single-receiver split case </Trace>
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+<Trace level="1" type="B" name="PLSRV_MAPPING_REQUEST">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+<Trace level="1" type="B" name="CL_MAPPING_XMS_PLSRV3-ENTER_PLSRV">
+<Trace level="1" type="T">Мэппинг не требуется. </Trace>
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+<Trace level="1" type="B" name="PLSRV_OUTBOUND_BINDING">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+<Trace level="1" type="B" name="CL_XMS_PLSRV_OUTBINDING-ENTER_PLSRV">
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+<Trace level="1" type="B" name="PLSRV_VIRUS_SCAN_RQ_OUT">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+<Trace level="1" type="B" name="CL_XMS_PLSRV_VIRUS_SCAN-ENTER_PLSRV">
+<Trace level="1" type="T">Считывание соглашения получателя </Trace>
+<Trace level="1" type="T">Исходящее сканирование на вирусы не выполняется </Trace>
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+<Trace level="1" type="B" name="PLSRV_XML_VALIDATION_RQ_OUT">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+<Trace level="1" type="B" name="CL_XMS_PLSRV_VALIDATION-ENTER_PLSRV">
+<Trace level="1" type="T">Чтение соглашения по получателям </Trace>
+<Trace level="1" type="T">Исходящая проверка не выполняется. </Trace>
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+<Trace level="1" type="B" name="PLSRV_CALL_ADAPTER">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+<Trace level="1" type="B" name="CL_XMS_PLSRV_IE_ADAPTER-ENTER_PLSRV">
+<Trace level="1" type="B" name="CL_XMS_PLSRV_IE_ADAPTER-CALL_XMS_HTTP">
+<Trace level="1" type="T">Get logon data for adapter engine (SAI_AE_DETAILS_GET): </Trace>
+<Trace level="1" type="T">URL = http://dev:8000/MessagingSystem/receive/AFW/XI</Trace>
+<Trace level="1" type="T">User = PIISUSER</Trace>
+<Trace level="1" type="T">Cached = X</Trace>
+<Trace level="1" type="T">Security: Basic authentication </Trace>
+<Trace level="1" type="T">Serializing message object... </Trace>
+<Trace level="1" type="T">Tuning - AFW_MAXREQUESTCONTENTLENGTH 2000000000</Trace>
+<Trace level="1" type="T">HTTP Multipart document length: 25460 </Trace>
+<Trace level="1" type="T">Timeout: 0 </Trace>
+<Trace level="1" type="T">HTTP-client: request sent</Trace>
+<Trace level="1" type="T">HTTP-client: response received</Trace>
+<Trace level="1" type="T">HTTP-client: status code = 200</Trace>
+<Trace level="1" type="T">Deserializing message object... </Trace>
+<Trace level="1" type="T">HTTP-client: parsed &amp; response message object created</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST">
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+</Trace>
+<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST"></Trace><!-- ************************************ -->
+</SAP:Trace></SOAP:Header><SOAP:Body><SAP:Manifest wsu:Id="wsuid-manifest-5CABE13F5C59AB7FE10000000A1551F7" xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"/></SOAP:Body></SOAP:Envelope>

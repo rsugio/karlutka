@@ -1,0 +1,9 @@
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Body xmlns:rpl='urn:AdapterMessageMonitoringVi'>
+        <rpl:getErrorCodesResponse xmlns:rn0='urn:com.sap.aii.mdt.api.data.esiext' xmlns:rn1='urn:com.sap.exception' xmlns:rn2='urn:com.sap.aii.mdt.api.data' xmlns:rn3='http://schemas.xmlsoap.org/soap/encoding/' xmlns:rn4='java:sap/standard' xmlns:rn5='urn:com.sap.aii.mdt.server.adapterframework.ws.esiext' xmlns:rn6='urn:java/lang' xmlns:rn7='urn:com.sap.aii.mdt.server.adapterframework.ws' xmlns:rn8='urn:java.lang'>
+            <Response>
+                <rn6:String>ODATA_INITIALIZATION_ERROR</rn6:String>
+            </Response>
+        </rpl:getErrorCodesResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

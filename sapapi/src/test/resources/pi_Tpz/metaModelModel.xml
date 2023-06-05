@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nonXiObj>
+	<wrksp name="SAP ABA 7.50" orderName="22" isMod="false" isOrig="false" hasExtDocu="false" originalLanguage="EN" targetLanguages="">
+		<wkID id="0050568f0aac1ed4aadec7beb91360df" order="22"/>
+		<admInf>
+			<modifBy>sap</modifBy>
+			<modifAt>2021-09-13 09:24:45.007</modifAt>
+			<modifAtLong>1631517885007</modifAtLong>
+			<owner>sap</owner>
+		</admInf>
+		<subWrks>
+			<subWrksBr>
+				<subWrk depType="0" name="SAP BASIS 7.50">
+					<wkID id="0050568f0aac1ed4a6e56926325e2eb3" order="-1"/>
+				</subWrk>
+			</subWrksBr>
+			<subWrk depType="0" name="SAP BASIS 7.50">
+				<wkID id="0050568f0aac1ed4a6e56926325e2eb3" order="-1"/>
+			</subWrk>
+		</subWrks>
+		<wrkSpDetails depType="S">
+			<wrkSwcDetails>
+				<wkID id="0050568f0aac1ed4aadec7beb91360df" order="22"/>
+				<r3info client="" group="" host="" sysid=""/>
+				<devMode>
+					<backendCompMode>NW04S</backendCompMode>
+				</devMode>
+				<content>
+					<key swcGuid="0050568f0aac1ed4aadec7beb91360df" elemTypeId="73554900100200001735" name="SAP_ABA" vndr="sap.com" vers="750"/>
+					<attribs caption="SAP ABA 7.50" lineName="SAP_ABA" lineVndr="sap.com" lineCaption="SAP ABA"/>
+					<swcRelations swcDepType="0" usedSwcv="0050568f0aac1ed4a6e56926325e2eb3" usingSwcv="0050568f0aac1ed4aadec7beb91360df" usedSwcvCaption="SAP BASIS 7.50"/>
+				</content>
+			</wrkSwcDetails>
+		</wrkSpDetails>
+	</wrksp>
+</nonXiObj>

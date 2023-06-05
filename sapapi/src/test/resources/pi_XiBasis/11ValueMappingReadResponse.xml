@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Body>
+        <ns2:ValueMappingReadResponse xmlns:ns2='http://sap.com/xi/BASIS'>
+            <ValueMapping>
+                <MasterLanguage>EN</MasterLanguage>
+                <AdministrativeData>
+                    <ResponsibleUserAccountID>xxx</ResponsibleUserAccountID>
+                    <LastChangeUserAccountID>vvv</LastChangeUserAccountID>
+                    <LastChangeDateTime>2020-02-21T11:49:33.840+03:00</LastChangeDateTime>
+                    <FolderPathID>/ARIBA/QuoteRequest/</FolderPathID>
+                </AdministrativeData>
+                <ValueMappingID>bfeb23d2-5486-11ea-c17b-00ff06795f51</ValueMappingID>
+                <GroupName>Lang</GroupName>
+                <Representation schemeAgencyID='LANG_ERP' schemeID='Lang'>R</Representation>
+                <Representation schemeAgencyID='LANG_ISO' schemeID='Lang'>ru</Representation>
+            </ValueMapping>
+            <ValueMapping>
+                <MasterLanguage>EN</MasterLanguage>
+                <AdministrativeData>
+                    <ResponsibleUserAccountID>bbb</ResponsibleUserAccountID>
+                    <LastChangeUserAccountID>yy</LastChangeUserAccountID>
+                    <LastChangeDateTime>2020-02-21T11:49:33.840+03:00</LastChangeDateTime>
+                    <FolderPathID>/ARIBA/QuoteRequest/</FolderPathID>
+                </AdministrativeData>
+                <ValueMappingID>bfeb23d2-5486-11ea-c17b-00ff06795f51</ValueMappingID>
+                <GroupName>Lang</GroupName>
+                <Representation schemeAgencyID='LANG_ERP' schemeID='Lang'>R</Representation>
+                <Representation schemeAgencyID='LANG_ISO' schemeID='Lang'>ru</Representation>
+            </ValueMapping>
+            <LogMessageCollection></LogMessageCollection>
+        </ns2:ValueMappingReadResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -1,0 +1,53 @@
+﻿<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP:Header>
+		<sap:ReliableMessaging xmlns:sap="http://sap.com/xi/XI/Message/30" SOAP:mustUnderstand="1">
+			<sap:QualityOfService>ExactlyOnce</sap:QualityOfService>
+		</sap:ReliableMessaging>
+		<sap:DynamicConfiguration xmlns:sap="http://sap.com/xi/XI/Message/30" SOAP:mustUnderstand="1">
+			<sap:Record namespace="http://sap.com/xi/XI/System/REST" name="operation">POST</sap:Record>
+			<sap:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="SourceMessageType"/>
+			<sap:Record namespace="http://sap.com/xi/XI/System/REST" name="path">/xi</sap:Record>
+			<sap:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="InterfaceDeterminationHash"
+				>4bf43570d97e08840dc5e589f342a89a</sap:Record>
+			<sap:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="SourceMessageTypeNS"/>
+			<sap:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="InterfaceFromOperation"/>
+			<sap:Record namespace="http://sap.com/xi/XI/Message/30/general" name="senderAgreementGUID"
+				>8647772360b43a08881ae6c6bc4cafff</sap:Record>
+		</sap:DynamicConfiguration>
+		<sap:Passport xmlns:sap="http://sap.com/xi/XI/Message/30">
+			<sap:PassportHash>2A54482A0300E6000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003534303739663165646132353131656461626630303030303030343137636136000000000270024040DA2211ED88C5000000417CA60000000000000000000000000000000000000000000000002A54482A</sap:PassportHash>
+			<sap:Transaction_ID>54079f1eda2511edabf0000000417ca6</sap:Transaction_ID>
+		</sap:Passport>
+		<sap:System xmlns:sap="http://sap.com/xi/XI/Message/30" SOAP:mustUnderstand="1"/>
+		<sap:Main xmlns:sap="http://sap.com/xi/XI/Message/30" versionMajor="3" versionMinor="1" SOAP:mustUnderstand="1">
+			<sap:MessageClass>ApplicationMessage</sap:MessageClass>
+			<sap:ProcessingMode>asynchronous</sap:ProcessingMode>
+			<sap:MessageId>58fdc1e0-da25-11ed-b01e-000000417ca6</sap:MessageId>
+			<sap:TimeSent>2023-04-13T18:02:26Z</sap:TimeSent>
+			<sap:Sender>
+				<sap:Party agency="http://sap.com/xi/XI" scheme="XIParty"/>
+				<sap:Service>BC_TEST1</sap:Service>
+			</sap:Sender>
+			<sap:Receiver>
+				<sap:Party agency="http://sap.com/xi/XI" scheme="XIParty"/>
+				<sap:Service>BC_TEST1</sap:Service>
+			</sap:Receiver>
+			<sap:Interface namespace="urn:none">SI_OutAsync</sap:Interface>
+		</sap:Main>
+		<sap:HopList xmlns:sap="http://sap.com/xi/XI/Message/30" SOAP:mustUnderstand="1">
+			<sap:Hop timeStamp="2023-04-13T18:02:26Z" wasRead="false">
+				<sap:Engine type="AE">af.dph.ld-s-vendordb</sap:Engine>
+				<sap:Adapter namespace="http://sap.com/xi/XI/System">XIRA</sap:Adapter>
+				<sap:MessageId>58fdc1e0-da25-11ed-b01e-000000417ca6</sap:MessageId>
+			</sap:Hop>
+		</sap:HopList>
+	</SOAP:Header>
+	<SOAP:Body>
+		<sap:Manifest xmlns:sap="http://sap.com/xi/XI/Message/30" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<sap:Payload xlink:type="simple" xlink:href="cid:payload-58fde1aeda2511ed978f000000417ca6@sap.com">
+				<sap:Name>MainDocument</sap:Name>
+				<sap:Type>Application</sap:Type>
+			</sap:Payload>
+		</sap:Manifest>
+	</SOAP:Body>
+</SOAP:Envelope>

@@ -12,8 +12,8 @@ import ru.rsug.karlutka.util.KtorClient
 class SLD(val piaf: PIAF) {
     private val sldopTasks = mutableListOf<KtorClient.Task>()
     private val client = piaf.client
-    val sldHost: String                         // полученный от SLD-сервера
-    val namespacepath: Cim.NAMESPACEPATH        // sldHost + sld/active
+    private val sldHost: String                         // полученный от SLD-сервера
+    private val namespacepath: Cim.NAMESPACEPATH        // sldHost + sld/active
 
     private enum class ERAS { AdminTool, CacheRefresh, RuntimeCheck }
 
@@ -111,9 +111,9 @@ class SLD(val piaf: PIAF) {
         ok = registerSldCreateUpdate(afname, mapOf("Caption" to "Adapter Engine on ${fae.afFaHostdb}"), log)
         require(ok)
         log.append("Создана запись класса SAP_XIAdapterFramework для ${fae.afFaHostdb}\n")
-        if (fae.domain!=null && fae.domain!!.isNotBlank()) {
+        if (!fae.domain.isNullOrBlank()) {
             // Ищем домен центрального движка
-            val foundDomain = domains.find { d -> d.INSTANCENAME.getKeyValue("Name") == fae.domain!! }?.INSTANCENAME
+            val foundDomain = domains.find { d -> d.INSTANCENAME.getKeyValue("Name") == fae.domain }?.INSTANCENAME
             if (foundDomain != null) {
                 log.append("Домен ${fae.domain} найден, создаём для него ассоциацию:\n")
                 // запрошенный домен действительно существует, ассоциируем его с FAE
@@ -173,8 +173,7 @@ class SLD(val piaf: PIAF) {
         require(y.isCreatedOrAlreadyExists()) { "Request: ${x.encodeToString()}, Error: ${y.getError()}" }
 
         listOf(
-            "AS2", "File", "HTTP_AAE",
-            "IDoc_AAE", "JDBC", "JMS", "Mail", "Marketplace", "OData", "REST", "RFC",
+            "AS2", "File", "HTTP_AAE", "IDoc_AAE", "JDBC", "JMS", "Mail", "OData", "REST", "RFC",
             "SFTP", "SOAP", "WS_AAE", "CamelAdapter"
         ).forEach { adapter ->
             val soapname = SLD_CIM.Classes.SAP_XIAdapterService.toInstanceName4(afname, "$adapter.${fae.afFaHostdb}")
@@ -201,6 +200,34 @@ class SLD(val piaf: PIAF) {
             require(y.isCreatedOrAlreadyExists()) { "Request: ${x.encodeToString()}, Error: ${y.getError()}" }
             log.append("port.$adapter прикреплён к $adapter\n")
         }
+
+        // Судя по примерам, у ncAAE есть RWB и Directory без ассоциаций. Делаем так же, неясно где выстрелит
+        // В голове у них есть хотя бы RuntimeCheck
+        // RWB
+        val rwbname = SLD_CIM.Classes.SAP_XIRuntimeManagementServer.toInstanceName2("rwb.${fae.sidhostdb}")
+        ok = registerSldCreateUpdate(
+            rwbname, mapOf(
+                "Caption" to "RWB on ${fae.sidhostdb}",
+            ), log
+        )
+        require(ok)
+        // Directory
+        val dirname = SLD_CIM.Classes.SAP_XIIntegrationDirectory.toInstanceName2("dir.${fae.sidhostdb}")
+        ok = registerSldCreateUpdate(
+            dirname, mapOf(
+                "Caption" to "Integration Directory on ${fae.sidhostdb}",
+            ), log
+        )
+        require(ok)
+        // Также на всякий случай создаём SAP_BusinessSystem INTEGRATION_ENGINE_JAVA_NCAE_<SID>, возможно с ассоциациями
+        val bussystname = SLD_CIM.Classes.SAP_BusinessSystem.toInstanceName2("INTEGRATION_ENGINE_JAVA_NCAE_${fae.sid.uppercase()}")
+        ok = registerSldCreateUpdate(
+            bussystname, mapOf(
+                "Caption" to "INTEGRATION_ENGINE_JAVA_NCAE_${fae.sid.uppercase()}",
+            ), log
+        )
+        require(ok)
+
         log.append("\n\n********************************** Регистрация в SLD завершена\n")
         closeSldTasks()
         return

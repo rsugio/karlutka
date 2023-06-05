@@ -1,0 +1,72 @@
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP:Header xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:xlink="http://www.w3.org/1999/xlink"
+		xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+		xmlns:wsse="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+		<SAP:Main versionMajor="3" versionMinor="1" SOAP:mustUnderstand="1"
+			wsu:Id="wsuid-main-92ABE13F5C59AB7FE10000000A1551F7">
+			<SAP:MessageClass>ApplicationMessage</SAP:MessageClass>
+			<SAP:ProcessingMode>asynchronous</SAP:ProcessingMode>
+			<SAP:MessageId>005056bf-38e0-1edd-b58c-9b5814a5e450</SAP:MessageId>
+			<SAP:TimeSent>2023-04-06T10:22:01Z</SAP:TimeSent>
+			<SAP:Sender>
+				<SAP:Party agency="" scheme=""/>
+				<SAP:Service>DER200</SAP:Service>
+			</SAP:Sender>
+			<SAP:Receiver>
+				<SAP:Party agency="http://sap.com/xi/XI" scheme="XIParty"/>
+				<SAP:Service>BS_DigitalPlatformKafka_D</SAP:Service>
+			</SAP:Receiver>
+			<SAP:Interface namespace="urn:vendor:po:I:DIGITALPLATFORMKAFKA:India:CharTransfering"
+				>SI_CharTransfering_InAsync</SAP:Interface>
+		</SAP:Main>
+		<SAP:ReliableMessaging SOAP:mustUnderstand="1">
+			<SAP:QualityOfService>ExactlyOnce</SAP:QualityOfService>
+		</SAP:ReliableMessaging>
+		<SAP:System SOAP:mustUnderstand="1">
+<SAP:Record namespace="http://sap.com/xi/XI/Message/30/general" name="interfaceDeterminationGUID">830791ead46411edb906000000417ca6</SAP:Record>
+			<SAP:Record namespace="http://sap.com/xi/XI/Message/30/general" name="senderAgreementGUID">ce5a92e369bf3b0892062a69e7b7330a</SAP:Record>
+			<SAP:Record namespace="http://www.sap.com/webas/712/soap/features/runtime/metering/" name="CallingType">SA</SAP:Record>
+		</SAP:System>
+		<SAP:Diagnostic SOAP:mustUnderstand="1">
+			<SAP:TraceLevel>Information</SAP:TraceLevel>
+			<SAP:Logging>On</SAP:Logging>
+		</SAP:Diagnostic>
+		<SAP:HopList SOAP:mustUnderstand="1">
+			<SAP:Hop timeStamp="2023-04-06T10:21:55Z" wasRead="false">
+				<SAP:Engine type="BS">DER200</SAP:Engine>
+				<SAP:Adapter namespace="http://sap.com/xi/XI/System">XI</SAP:Adapter>
+				<SAP:MessageId>005056bf-38e0-1edd-b58c-9b5814a5e450</SAP:MessageId>
+				<SAP:Info>3.0</SAP:Info>
+			</SAP:Hop>
+			<SAP:Hop timeStamp="2023-04-06T10:22:01Z" wasRead="false">
+				<SAP:Engine type="AE">af.dph.ld-s-vendordb</SAP:Engine>
+				<SAP:Adapter namespace="http://sap.com/xi/XI/System">XIRA</SAP:Adapter>
+				<SAP:MessageId>005056bf-38e0-1edd-b58c-9b5814a5e450</SAP:MessageId>
+			</SAP:Hop>
+		</SAP:HopList>
+		<SAP:Passport>
+			<SAP:PassportHash>2A54482A0300E60000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000062343162373166616434363431316564393530373030303030303431376361360000000002B41B71FAD46411ED9507000000417CA60000000000000000000000000000000000000000000000002A54482A</SAP:PassportHash>
+			<SAP:Transaction_ID>b41b71fad46411ed9507000000417ca6</SAP:Transaction_ID>
+		</SAP:Passport>
+		<SAP:DynamicConfiguration SOAP:mustUnderstand="1">
+			<SAP:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="SourceMessageType"/>
+			<SAP:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="InterfaceDeterminationHash"
+				>83ecae035120ee188bf2d5395cec6f2d</SAP:Record>
+			<SAP:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="SourceMessageTypeNS"/>
+			<SAP:Record namespace="http://sap.com/xi/XI/Message/30/routing" name="InterfaceFromOperation"/>
+			<SAP:Record namespace="http://sap.com/xi/XI/Message/30/general" name="senderAgreementGUID"
+				>ce5a92e369bf3b0892062a69e7b7330a</SAP:Record>
+		</SAP:DynamicConfiguration>
+	</SOAP:Header>
+	<SOAP:Body>
+		<sap:Manifest xmlns:sap="http://sap.com/xi/XI/Message/30" xmlns:xlink="http://www.w3.org/1999/xlink"
+			xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+			wsu:Id="wsuid-manifest-5CABE13F5C59AB7FE10000000A1551F7">
+			<sap:Payload xlink:type="simple" xlink:href="cid:payload-005056BF38E01EDDB58C9B5814A60450@sap.com">
+				<sap:Name>MainDocument</sap:Name>
+				<sap:Description/>
+				<sap:Type>Application</sap:Type>
+			</sap:Payload>
+		</sap:Manifest>
+	</SOAP:Body>
+</SOAP:Envelope>

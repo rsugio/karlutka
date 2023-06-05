@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p1:xiObj xmlns:p1="urn:sap-com:xi">
+	<p1:idInfo VID="2bf5325053ce11e1b9de00001e2b30eb">
+		<p1:vc vcType="S" swcGuid="0050568f0aac1ed8878a92199a65f7cb" sp="-1" caption="B2B MAPPING KIT 2.0">
+			<p1:clCxt consider="A"/>
+		</p1:vc>
+		<p1:key typeID="FUNC_LIB" oid="23b1a0d8482d38be80459168d2b2cfd5">
+			<p1:elem>UDFDateTimePool</p1:elem>
+			<p1:elem>http://sap.com/xi/B2B/MappingFunctions</p1:elem>
+		</p1:key>
+	</p1:idInfo>
+	<p1:generic>
+		<p1:admInf>
+			<p1:modifBy>sap</p1:modifBy>
+			<p1:modifAt>2012-02-10 10:02:35.077</p1:modifAt>
+			<modifAtLong>1328864555077</modifAtLong>
+			<p1:owner>sap</p1:owner>
+		</p1:admInf>
+		<p1:lnks>
+			<p1:lnkRole role="_inner" kpos="0">
+				<p1:lnk rMode="R">
+					<p1:key typeID="FUNC_LIB_PROG" oid="34425f9387183af68340563e926548f3">
+						<p1:elem>UDFDateTimePool</p1:elem>
+						<p1:elem>http://sap.com/xi/B2B/MappingFunctions</p1:elem>
+						<p1:elem>class</p1:elem>
+						<p1:elem>sap/com/UDFDateTimePool</p1:elem>
+					</p1:key>
+				</p1:lnk>
+			</p1:lnkRole>
+		</p1:lnks>
+		<p1:textInfo loadedL="EN">
+			<p1:textObj id="2bf5325053ce11e1b9de00001e2b30eb" type="0" masterL="EN">
+				<p1:texts lang="EN">
+					<p1:text label="58abc5f5c994d70a0aebb87b061c5d41">Creates a HHMM time value from the first argument
+						using the second argument (an EDIFACT-F2379-conform qualifier). If the third argument has value
+						TRUE the time format is HHMMSS</p1:text>
+					<p1:text label="2123244cfe17cf5bd6a02e1709f20413">UDFDateTimePool</p1:text>
+					<p1:text label="d43b477b7dc6c0fb3ec5e0e364f2cbc7">UDFDateTimePool</p1:text>
+					<p1:text label="b229e44786413757026a207acb45da6a">Gets the number of days between two dates of
+						YYYYMMDD format. The first argument marks the begin of the time intervall.</p1:text>
+					<p1:text label="4639fce3233a4956b9f7177efb3c6cd2">Generates the last day (Friday) of the week
+						(Argument 2: &quot;W&quot;) or month (&quot;M&quot;) for a given date in Argument 1; returns
+						Argument 1 when Argument 2 is &quot;D&quot;.</p1:text>
+					<p1:text label="b0f5df0947abf5308cebf5611f407cdb">Gets the date after the date of the first argument
+						(YYYYMMDD) by adding a number of days contained in the second argument</p1:text>
+					<p1:text label="df69f3b4efc4502caaad4a0fd02e1d8c">getEndDateOfTimePeriod</p1:text>
+					<p1:text label="db8d754c8504290d61677960eab8f1e2">UDFDateTimePool</p1:text>
+					<p1:text label="58a3ce7fc46d369a1275548a2aaa92ff">UDFDateTimePool</p1:text>
+					<p1:text label="503f0ddfd8353f49e4a483c9e8085178">getMonthDifference</p1:text>
+					<p1:text label="342d4f6964b2c91e41681ee15776a0bd">getStartDateOfTimePeriod</p1:text>
+					<p1:text label="9262b2d5c2bf8084617e301ef438b938">UDFDateTimePool</p1:text>
+					<p1:text label="84ba4eb48fdd24c6eb0ae24d4e22e2a4">UDFDateTimePool</p1:text>
+					<p1:text label="576cf02aac0bc9de53bed225cfc655c0">getDateAfterDays</p1:text>
+					<p1:text label="b30fca9f25237bbb7b69a2fa3851db2f">UDFDateTimePool</p1:text>
+					<p1:text label="9459f0e41d58c5ba469a2cbb4b481807">getDateFormat</p1:text>
+					<p1:text label="4230db861fb117d43de0c2b7de086e73">Creates a YYYYMMDD date from the first argument
+						using the second argument (an EDIFACT-F2379-conform qualifier). The third argument has one of
+						the values constantDate, constantDateFrom or constantDateTo provided by this function
+						library</p1:text>
+					<p1:text label="85487e28ae1a4d7f1a61e55d1cbd54de">UDFDateTimePool</p1:text>
+					<p1:text label="c61b1eafbcdd9e978e7af6a11545fbdc">getEndOfOneOrTwoDates</p1:text>
+					<p1:text label="1986c30d8b3015ca42c66511ce6e1279">Use this generated constant as an input for UDF
+						getDate: indicates a single date value</p1:text>
+					<p1:text label="e38811182717df90ed4435ae293e49cc">Gets the first of month date after the date of the
+						first argument (YYYYMMDD) by adding a number of months contained in the second
+						argument</p1:text>
+					<p1:text label="57b6de4b23ae1b3c6ccc76aeaa7c2094">getDateDifference</p1:text>
+					<p1:text label="393b580031ad331281272d3710d3e33e">constantDate</p1:text>
+					<p1:text label="c1894a1426c55375ea6120374632e506">getFirstOfMonthAfterMonths</p1:text>
+					<p1:text label="9c54132bbdf0c75cf8601fb9509f2084">Generates the first day of the week (Argument 2:
+						&quot;W&quot;) or month (&quot;M&quot;) for a given date in Argument 1; returns Argument 1 when
+						Argument 2 is &quot;D&quot;</p1:text>
+					<p1:text label="4bdffc9a3532d31c1dc231d9e6995106">UDFDateTimePool</p1:text>
+					<p1:text label="4267f735bf2e4774df04b489c2d2f007">getTime</p1:text>
+					<p1:text label="120dfb24743da8b8426669281c0ac1c7">Use this generated constant as an input for UDF
+						getDate: indicates the end of a time period</p1:text>
+					<p1:text label="64b7df503bb0b8e9f9bb1c9ce847fa4f">Use this generated constant as an input for UDF
+						getDate: indicates the begin of a time period</p1:text>
+					<p1:text label="38c017d0d7541b47756d0820d86c9a86">getDate</p1:text>
+					<p1:text label="ff6b61fff5a0cee26d152208d2aadc2f">constantDateTo</p1:text>
+					<p1:text label="f8c7b95d5f5c4331ce342430994d36bd">UDFDateTimePool</p1:text>
+					<p1:text label="f54850853e5e5064fc7b89349f8f5dfb">UDFDateTimePool</p1:text>
+					<p1:text label="5b892a066210a2b07feabf52e3d4d333">Gets the last date of one or more date
+						strings</p1:text>
+					<p1:text label="0bef97849f2db8423c71dac3a9a2643e">UDFDateTimePool</p1:text>
+					<p1:text label="63a47e2ff07c80c4367200e5e00615f7">Returns an EDIFACT-F2379-conform qualifier
+						describing the dates format.</p1:text>
+					<p1:text label="e6b864d13c6107f3a71c250cd690e07f">constantDateFrom</p1:text>
+					<p1:text label="eac3dac369871b453664493f8b6a4694">Gets the number of months between two dates of
+						YYYYMMDD format. Dates wizhin a calendar month yields a 0. The first argument marks the begin of
+						the time intervall.</p1:text>
+					<p1:text label="33723a422dd524666c5c2c777d2e7f76">UDFDateTimePool</p1:text>
+					<p1:text label="9b7f1ea178264d132e9fac8d36afa37b">Gets the oldest date of one or more date
+						strings</p1:text>
+					<p1:text label="12aa50dabca896e2efbd64ba48bff2be">UDFDateTimePool</p1:text>
+					<p1:text label="79fa5a1fa7669fa2ba000efc2de5b1ae">getStartOfOneOrTwoDates</p1:text>
+				</p1:texts>
+			</p1:textObj>
+		</p1:textInfo>
+	</p1:generic>
+	<p1:content>
+		<fl:FunctionLibrary xmlns:fl="urn:sap-com:xi:flib">
+			<fl:MetaData>
+				<fl:blob type="zip" zipped="true"
+					>!zip!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</fl:blob>
+			</fl:MetaData>
+			<fl:ByteCodeJar>
+				<fl:blob type="jar" zipped="true"
+					>!jar!UEsDBBQACAAIAAVUTVAAAAAAAAAAAAAAAAAFAAAAdmFsdWWFmFc7HAC7tQVBdIIgShjRe++ii9FLdMIYLUTvLcgQvY8ySvTe2xAleovoo4w2iCB6b8P3vkff3kd7rYN1Pdd6/sC6dYBY2BQYeP9xsrH6O4z/IXoMbAxPazc+kKsLn6GSipK1F9jA0QWs4+rqzAtytvb0fBzDwOgyeRFkMD//lH9vt9OlgYOHhUX4KYnHlombdvfLCC3RV2VyUlLIe8GwaVtye1Zu7xoC3sHKdITCP73m+HGjQR4yXQc0J6JmxvTTP9OqFicz5HJIK9rp8n5djC81i1/euQdqtdP1I9dzEp3vOXnmt78VRYKRyfy6azEusHMxNvB8KvL+YisE7feGkaSwX6ksOqqz3i0REnyHrg85uO4bAFgOnJZDsO6Cp/p8u24YGJpO1juegtF+K31MfP4yBYxy9SfFkDJu6ZrAyd3hJqoQh00Jgqguaogq98NILOOW/0u5hpNwSP6+CF/AqdDDSmzGSeNRd6FZ3f7wp4DDf1Qh1iii1aeSaLGuzPC2i5u6ixHk3SkXQY/oaQLEtyuz9tpPG3j1Gn1TA1n/sxX8YCn0GPEZPd2HS/Voi5q8S3sCoRR5Fq24H+Zje1ChPA+rfapUj9YoEEG+Mab+APkf1jS3RCtcvWjr6HFysWuqxCMY1Lh022RzXvEWesO9B3pvBbwz0fv4PhT4ACWst/3+9hkQx0RwMYUpwGUqpQBK2GQLfwvgpnEcZQ9ngkDjRP+Ic74f8gNXxwmBOzleYgdncJvVu6HD21sIFoxqjVuVNupkuTolzNcoEly4694PFTXECz0P3mkbIB91427nXJmjIrvpqHDKeHE2s1rr4zJP3rraYQGgdgvgLa1InzcUaQkPnwtvtW2u6JTMVvNYnp3TY/wcU/xWfWIJlOPNtoUK0NIqr3V15NX+ajbeP+3g7wlvSf813l8zfdbu/aKL1aTqlVNIU2GDg0frT/ZsuPpG9vrMu7uQ+WljW0czTwsWy9e1s8is14DR5ygWs9iYBIp7YxXWHckaXxTiTu2ToPqbdq5r4xnyT3iuZgg/UxaP1o979otcNEvZ3AvMH1oHYP2jK/d7PJxb03E8d57FkjkbKPGB1VQYvFKW4b2Quspm+CZduMavLr4aNmXZfEmUtZpMuYNNZGvHULsHntjx/m9kKyt5wmS8SPE2Pv3sdCDq34w6pQbXGBh3FAotPbPdujjza3zYLoV2uL08FKcpHdoSYqsVLFFzs9AlRkq3Fmgj3ZVZphFpzTW3s1C7mPTGn8sOTd32l7+7gDTbB9oyYJwicxXdpNE6wbWZasNMAQNkiuDLVUtSF+e4AYBA8Ph+woTkkwjqoQKYvJLW7hkGmFhRMWXjyciwL289cJBO9qpezGs0yznYqtbOKv/ozzv6JCLRwrHA0u8emA+ON9UfB5w6ALEm8vUJQESqWoRHhSYIODeVCVXd6kzhK92NJk+ajZ6JZkyOZ4lJfdWuMV9BXGbPEdV3rMO6AZ9Mlzcvk8fKfWKxjHjLmzWV8mMe2BwLguGESM2s3VQbjlMUAXwxCuhWQfJqk1lfPViPNRV72Du/rrKCo1FgRVisu6FGghxYGsxMtv+ir7PVQT/iSi142QbWrzkd2WcXcKCQnzZum6+RXLFiXnq77Zel/nfto1mdtlYSviSEBSIM7tC2G/mL7cT5QkFQX87O3QfZ+hYYBKdauHUjqt152ObYrneBMbSVtTmfooDw5Sj6gOW8pUZI5ALPZkxr5hpA8bGAC5RcU5N8Z1tcoEOg76f1GvI5TmUTgi0y2FnQm/YyWNBMy0bjwA7aC1YHm1VbilUVeUNkSEkoqRBRoAaobUxon0r0r3MCM1qC1y6BfBeocfhamoTsAbS99Nf5aJDJRr9W0CAbQYkeSf5Bqn6xuo67hllL5Fa0Gkr07t+ZXfAgPD/t3jaZ+6ivPwFfZHoHUap2PTjbUXE1Sm6ynwpuNHc70/X15HX58HEE+oYWqCK6bJwg2Zft15CSVZmp/GjBrShq7Ll12ufGXZKZ9iXAVt/Ps7i+1110VGEoLR62Kxj07yWXWcYwIDp7JPxSVsKQ9dYWwh+fPFo6d2f7tvXe7W3t2SinRDyxwXEpDbKd7PmBfnZD4gdZ7RnoNxbnWYuJboBpAY4jkWIPoDYSMDfBoUudMNyPDBjJFUk/xyitvhzduxLJ/BXavD6aqk80mwx4G76WoGkUQW9aHemlRD1Tg/hDe09oOy6UdHg1I1Oj3JT9aok6fonNku3Lx0bFpf5exvgLQpPqvUkKjV+LovR4Hsl2MFXOGiAK6v6tEIRSCSzC+1eix99vsg78tYfGC6/IjzdwHXvwirlSDZqpo9H3NtO8zVnNsZPT7x8+Lzdp4DXIXNn+/p2ot7sS68fNgjK+2RbPZbISc5+D8AQZlz0FAeVvV8dPTuwHVJ/k8U0kyZfeWIs6XHYui09bpwI2IfjIXeKXCXJztY3183m7PrFePqpFx8rfOLIKr/FA7dEXz7fpOV2j9Qu89dZdBlVx+tbEKS4ItWRzEgk0HE/eK9HSdHphIMLgUfbjheYffKlQpDlTZoMKiGQ3oX/pxsx/fjvW0viYTTUR2nxFUJE6EgrRfG9s8jj2KpkT+9HITHdZkfbFWi4pi75kGybhzmOBU2ITycP+r4tWXNDAU4hrKYV2jJRNKhB/e7P8n4DoXhA+8/I7csPXIB53BGW0Gh8FRWOoyhs1Zdwj10/xq5Yj1Ndn5C7eL1SH3ukaajHhUhr+yaPOrCK1EXFy5aJGSpm3YgprtqrrXQ2meJG93ABw0X1wiE6rqo3hiRYVUa4QNppmJsrsfXFU/RY8aZUGYtQuAlhlmK+mto9jZc+u3LFQ1rN0iiyvIKrFqma+a+62YIwIi/J8y7AxVLWZ/oYIq3KoYRhnW+f8MTbFEayrSzy2Mp/LBia6A305nHEuZv89APqd2O4PLygorWlJf5Ybx32Vk0gtER9qSAI7ppWLmfhbmSmk4iQ2aNa6q00gek5YlKsaluUlhKqvYVul10IzgKVARYj7E3MorOHbsO1PbS/KFKwEYQz8rYrYKQUP7boJD3FP7+6CS1KtYh36DMNW26I5NCVu0XTkBAY34SCVM5i5Pl4GUnIQKlu0noj2FLoDLsrxFa3nBweYt0btL/cxgFqse0zcTui3TakAQZa1cnoeOf64d698FWIYwwNIVRqk8Ra6ppZGKIOuIL32jHC17ERrlo9aw2yjq03i+1hxx2u4vkuyfhQ+oO2QzE9X/aaz0dI9bVi34AfvnwvRsrhvtzn33q0n/fi1Xof1nDJPMDQULQpkDO/pwzf23asL5o88l+/+drIwYAUINTq9Zgm1+nPM8Uh8ei0cynh2TQihHxGKvM0b86VfT7Nw2b4Hd4udioXL1Rq9vtkKuHT4uVKTd0DuhQEh7NBPiTQ/dKrL6+LaRRwiMXd4Lwg6CKTpqctxaydLBS+UvsNElzyD0dMLfLumrhL/yvZEDrC97IMml97tVFOeHChwqK4EvOHb9YF1oHiuSPYHNnRC3Pn5dol2fG3wjMaB0umdU4q0Qm/j5DKhakez5uM5EhPzzcoI56idj4HRdoFh/aJbQVncC39T3DMnNFx3tD3pao20p+mAsyDAxeK3nLO4A8jzNTaCTtggJt97du1GsbwkO2iZCBQTAZvY/zCxX0qHO2ITEvLq/HNyjDN0jfdoDdOK+IhA5FqinThjMO/ayeDOkpJ8caY2UOTu+w5/1WJozpp4okEtcZxEDf1LxTWNQncW9mknmnxNeq9DCLVUXO4QETWs41Ivar7TCNIJKRIIKxqkjhpl7yNs3flOkc7ej8U+LJvwSM22oWywIfJrAJYJWQe1boMSLgaDaL48F8RPF3xZNuLMDb0th4KNOT/VmyMKVPrK0+2qU3iMefKH9zyYEKc7eUwLKI0lyOUZj3MSkgx6/F2LGJTa+aW8M7Jpmz6HJ/RdatBXu1tsgT8KsbQRooYxE/vYzrpsNlXZUS77BjlVH1DSlL2DnJHAuQ/mlbx94BhencMBSqdXtQZtW7Ter2oNfbck58P4qtBwS5mE3H3+7kLLYaJ9niBNNPGPuahFF7h7rDUKpiJ7RY3lViWA3UYDOuEBkXe75HxDxvvD+43jpOLT4eMOP7uGILv8vMplDVj3cbni774yivpY95yyd0fxkVu/OrVUdO3AMpLivWW9M0s9NvSCKmjvOdQVm9kbfB5RjpJh2ibuaKmNleRvoA9WyNtMmdGi+IfCTG013cz8yrY73R2/DZ4Tls5UGj52yD4MkmX8Wxslfo4VV5xBDySRejHpMT+bqXIs+XLSWpYYJBCiZNKTBr20U0XMPiqbtPSG4lhbbbTK/fk1yX4wKXFNPmz1pzKD44CL4sqb+yefTrwY+4GIo7XUi1YqUXnrwFSDdRrfndysOW/7saZjjUnA81WqJ0n+9oUI6rhcwCwuR2TGZJvEHfFw6HiWrz9yrWjjGETmqsPz+IXoBgN2wsawaWr+l27Tj0FheCvsXgCs+f4Ui19SwPt9xXSYY0lg4MBBD7/TE2XIQzxdd9w/euKt2w9BgSKniuLdHcWw358mHyIcR4adDweM6LKR8KrHRLj327jZJlUK4QN5y9Dzk29ETS505vKvnosz7XrEb5xG8CYS//UZB5McW2S/cFTmS1qOVnteas9lRggfhAS5F/VkUnNTqagxDMW8St0FJ7xiLAUy/vreRraDI1Ys+HKHs36SeTU6TtX1zdbswtGnB4toCw5MiVzcudZLu1GmTl2PDdZOvQA8LCBxGgOcJvgKdEf7FKcVdPRdF/XCT534oPco5Yu90whhdpRbjhxF8XFe+2vFix+uuHaHCoxP0VdvzOQXZAOUmkGKFaUN1GwxEXZTnEKlPpssh/X5X/ZIGlD4O4f9dIMlbLY/jtolDWC0zf4d4D1E0KqNs8nGhm+F6rJcdPNsnExWMcGloLaTydRs9FjE9dkIGWtEBoji8OgNAxDQjf9MQTdSOutrmCANoARTWTBXbfInfpbyujQs5IZFyZZ3U5DEbHdyMh0CN6Da8qgYSPfAv0re+c49DGqkWC+reyqZs5Xv/kHgIcKbLjN2+zZq21yBFxaoENIYmcMv81WfU1oFQsP/oisNiq3RR92sN2VGfPGB9eIDya4c+7ywTxCxaa90aGh8p9huMKYl87HL8CXtmAklIfIHGd42rE3g71mpgqA98sLtRdT1R3OjvCJPs9D0VJSfEFW+jb122APmJEPcpGkXO6jl5TaSbG4cd/9Pm+7GBXZ8L0w08gEQ16v+WjHvMw+i5oEQxF+C3vrbIpCZVTyfQL809NGHRrEpLm1aOPK0MVK+fZy6VehCETFDrVUmkCMPKv8bg8cKBHDaAhBjSw4fT2SBNttTMS4exLxJ4rypLD5qrz8nTcDTw9Cfl9QVFyP7CU/qRtpv3v3uZ/Po3h5/Tp7E53Y8Dm425wZt61Uk44EXmf5tc0rod7P/HRUxGTr3Dupv3+inE7O7yTg4dB/0tUteyYywddROqbP/z3aIKLbSTpExYRHbohpOpphK3nbM3/saluaZM3TCTvii45HmpUdbEbcttJjQR0z6cWpNg4fHV9pWUo5rXokBVn7hoJT1nr6mXG04v3DEa9ZEaITumz5MSmerTpNnBZiFayNu2ENoKJ6ua5/lOaQc9zpJynrUYnf8oKpnRROwGIs6I1WZrkiA3uswX88KSX/j9KcuGwP92r4S+uT/lQZZVJ4RIRx5vBV75kelta6xNZfZgfarISibDJ8aC8UpSJdQEKeHE5ErwlfLjBqSZ5lWbS5MKYUvmwqY+RzcVyvxXaea12/DpO8yMPTv3q2VElFa2qd+EUtanwqbFSQ7ipWPUx3PlOexk1+HuBUl6J5xk4UkTB/y6z4K4IwC8cbOqVnlesV3OpTPmD13jTLFegZzbg13ftWdLnf9frghck5viz6pc3/uieIb/XGT/YBzeCa1Ajgu0g9JVM1kZEyRAxf0lBEE2zHwItXbfAuOWYQ5Llze1FhOW+XGd1t0wg7ZCU2yqhBX/Gq+tMZtlN9JJHMZeHMZwYUGg3Mu8REzzhcA9VA2dcaCOnJCPX88Toj12E9xO7TyWMQtJ6NhJWNlOgnQkFHJMJQlLT/r6Wf17Hq2LJoxd9YKPZkTsiqQ+xi3pn2slbtWc1i1bfwuMwozchxVP4cX7kYnz86KB8LrMw7nT3ij8QavBNtaUJ4dgJeK12cQzh//hm5ypoyZ4BvyhOcvuZabx2bE45Qeq6xl8K4P/MI3WxEOZGtr+txX87hc8lZSvAPrSOqQRFht+bMOW7bkW81Lxd+BCee1XmsCT1lApHtpqEx+Ffr1jbluSmWxzOMz2vTwVcIl6x8tsSPz7oO2/2kHH3Fkh+1CdGJIZ76YWdUPHU2qg1e7l35/nHOm3me5MPLkV5hQZuLqPXWSRVRAjOs4dcsqSXVj69/z9C45cVQN65uI1P40rIQabnB+CK06NfSW5Or2vok0TVQ1BFEFrWvd1xPRzfo/mGH/Enjbhg4bL9IWArJxP88z45f+Fxs7/B7TwQ5LwnWv/Ni9e9fvK8OIaLoAUxV9kaJ/lmiLQMSKqMwTq9TEKY5Mh5fEbKuNxVOqUfNcKFRmSSwzgxMHKVAyF9qa+urP0tDCVpXCLJkoLENQk37Ai0g/Pt04V4t0n/+r8fA3b4KzeYkBqQQmzjBdzmiaSiK2ignhURfhUc+GFMNrJ28GROV59OUgXMeiD/9B8EAHGX39Z+AWv7mKq8HIAhI1T9z5vXbw9f4d9wqyySZqCN31RHg0oTrcxcR2hBY+8rFGJsTwbqCx80IrJE+fsNB1L9GupGjYt8cJpSeqwifNwp6o3XX1ix7NC1e2u3WmO19StFT0o4xSKN90T+LuuvYF45s7kk2f+bBAQ7buKoah8X2MkJruDMjjIbxf/glDiK6QD5DVRrLgf//xkI8Yfv2TU6DUyTH/p6rzklVAiy9ISzYzugOpNeftc9Tau2tpYbqZvVzTPeekHdAybHLo8WF9xvAjcGQu4HwxUGAWPC4yr1sAw7d2GfJ7xIYigXqVR5aLq23N/ZMzfhr3fhMi6+uFsGwXU4FShGcVol717wx4GcfYdE+3Feg90dtswYZAmhyuqPmG4OYNCO2NhD475ykvSyrLi9SWweoJoIqY96SuJQZV35FF5w8rXGJSVeTbQAKSH/f+ev2p+1gVQPmqYsEtOiB3OTCiez9jsSYE8noeBjfpipeak1osWxtM3Q+WLlrrJ5l3PSm4AwgtkgyUPXI/uzSiKXjMK5mXeiIy9Q5mraF9kqjJ86w2bRFsdgqhqqHF9498lo8KX3cD1VvbwK2tq5OjJFRkqWiD60d2YylV5AYI5chVMMzi5eEj1HHAOKbFz4SDLUP8B6Iqmyog8c+iKihikPAVzTDqPQgzT2BoI2rIOMiBgiCO/JQGTM5fOoK3dcNds3ZZsS4fl0WDTfXIhZZT8JQofYoXYlQOIgKWZIvwhvZki3x+SskWYQh9yr5PhpNERyV1Mh59Lq3gU40w5idCjfgeWBw/yukAcfH2RiKciigxMPD5MDB0gM8wKTD+P/P9n91/me//1v9JgHWAz3H++/jsP9b+T55R/vf6f1BLBwifMKYxRhYAAFcWAABQSwECFAAUAAgACAAFVE1QnzCmMUYWAABXFgAABQAAAAAAAAAAAAAAAAAAAAAAdmFsdWVQSwUGAAAAAAEAAQAzAAAAeRYAAAAA</fl:blob>
+			</fl:ByteCodeJar>
+		</fl:FunctionLibrary>
+	</p1:content>
+	<p1:inner/>
+</p1:xiObj>

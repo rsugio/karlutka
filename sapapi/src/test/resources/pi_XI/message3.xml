@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?><!-- PLSRV_CALL_INBOUND_PROXY -->
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SAP="http://sap.com/xi/XI/Message/30">
+	<SOAP:Header>
+		<SAP:Main versionMajor="003" versionMinor="000" SOAP:mustUnderstand="1"
+			wsu:Id="wsuid-main-92ABE13F5C59AB7FE10000000A1551F7" xmlns:SAP="http://sap.com/xi/XI/Message/30"
+			xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/"
+			xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+			<SAP:MessageClass>ApplicationResponse</SAP:MessageClass>
+			<SAP:ProcessingMode>synchronous</SAP:ProcessingMode>
+			<SAP:MessageId>005056BF-8D88-1EED-B6C3-F9F848CD3546</SAP:MessageId>
+			<SAP:RefToMessageId>005056B4-7359-1EDD-B6C3-F9F6A98FA6E5</SAP:RefToMessageId>
+			<SAP:TimeSent>2023-04-13T17:22:48Z</SAP:TimeSent>
+			<SAP:Sender>
+				<SAP:Service>SID100</SAP:Service>
+				<SAP:Interface namespace="http://vendor-it.ru/sd/contract_approve_sync"
+					>SI_SD_CAS_GET_KNTRGNT_BY_ID_ERP_IN</SAP:Interface>
+			</SAP:Sender>
+			<SAP:Receiver>
+				<SAP:Party agency="" scheme=""/>
+				<SAP:Service>BC_SPT</SAP:Service>
+				<SAP:Interface namespace=""/>
+			</SAP:Receiver>
+			<SAP:Interface namespace="http://vendor-it.ru/sd/contract_approve_sync"
+				>SI_SD_CAS_GET_KNTRGNT_BY_ID_ERP_IN</SAP:Interface>
+		</SAP:Main>
+		<SAP:ReliableMessaging SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30"
+			xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+			<SAP:QualityOfService>BestEffort</SAP:QualityOfService>
+		</SAP:ReliableMessaging>
+		<SAP:HopList SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30"
+			xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+			<SAP:Hop timeStamp="2023-04-13T17:22:48Z" wasRead="false">
+				<SAP:Engine type="IS"/>
+				<SAP:Adapter namespace="http://sap.com/xi/XI/System">SOAP</SAP:Adapter>
+				<SAP:MessageId>005056B4-7359-1EDD-B6C3-F9F6A98FA6E5</SAP:MessageId>
+				<SAP:Info/>
+			</SAP:Hop>
+			<SAP:Hop timeStamp="2023-04-13T17:22:48Z" wasRead="false">
+				<SAP:Engine type="IS">is.00.qaspi</SAP:Engine>
+				<SAP:Adapter namespace="http://sap.com/xi/XI/System">XI</SAP:Adapter>
+				<SAP:MessageId>005056B4-7359-1EDD-B6C3-F9F6A98FA6E5</SAP:MessageId>
+				<SAP:Info>3.0</SAP:Info>
+			</SAP:Hop>
+			<SAP:Hop timeStamp="2023-04-13T17:22:48Z" wasRead="false">
+				<SAP:Engine type="BS">SID100</SAP:Engine>
+				<SAP:Adapter namespace="http://sap.com/xi/XI/System">XI</SAP:Adapter>
+				<SAP:MessageId>005056B4-7359-1EDD-B6C3-F9F6A98FA6E5</SAP:MessageId>
+				<SAP:Info>3.0</SAP:Info>
+			</SAP:Hop>
+		</SAP:HopList>
+		<SAP:RunTime xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+			<SAP:Date>20230413</SAP:Date>
+			<SAP:Time>202248</SAP:Time>
+			<SAP:Host>tsterp</SAP:Host>
+			<SAP:SystemId>TER</SAP:SystemId>
+			<SAP:SystemNr>00</SAP:SystemNr>
+			<SAP:OS>Linux</SAP:OS>
+			<SAP:DB>HDB</SAP:DB>
+			<SAP:Language/>
+			<SAP:ProcStatus>000</SAP:ProcStatus>
+			<SAP:AdapterStatus>000</SAP:AdapterStatus>
+			<SAP:User>PIAPPLUSER</SAP:User>
+			<SAP:TraceLevel>1</SAP:TraceLevel>
+			<SAP:Logging>1</SAP:Logging>
+			<SAP:LogSeqNbr>000</SAP:LogSeqNbr>
+			<SAP:RetryLogSeqNbr>000</SAP:RetryLogSeqNbr>
+			<SAP:PipelineIdInternal>SAP_RECEIVER</SAP:PipelineIdInternal>
+			<SAP:PipelineIdExternal>RECEIVER</SAP:PipelineIdExternal>
+			<SAP:PipelineElementId>2992CD1D946A7F428BB9E632327168E9</SAP:PipelineElementId>
+			<SAP:PipelineService>PLSRV_CALL_INBOUND_PROXY</SAP:PipelineService>
+			<SAP:QIdInternal/>
+			<SAP:CommitActor>X</SAP:CommitActor>
+			<SAP:SplitNumber>0</SAP:SplitNumber>
+			<SAP:NumberOfRetries>0</SAP:NumberOfRetries>
+			<SAP:NumberOfManualRetries>0</SAP:NumberOfManualRetries>
+			<SAP:TypeOfEngine client="400">SND_CENTR</SAP:TypeOfEngine>
+			<SAP:PlsrvExceptionCode/>
+			<SAP:EOReferenceRuntime type="TID"/>
+			<SAP:EOReferenceInbound type="TID"/>
+			<SAP:EOReferenceOutbound type="TID"/>
+			<SAP:MessageSizePayload>308</SAP:MessageSizePayload>
+			<SAP:MessageSizeTotal>6717</SAP:MessageSizeTotal>
+			<SAP:PayloadSizeRequest>343</SAP:PayloadSizeRequest>
+			<SAP:PayloadSizeRequestMap>0</SAP:PayloadSizeRequestMap>
+			<SAP:PayloadSizeResponse>308</SAP:PayloadSizeResponse>
+			<SAP:PayloadSizeResponseMap>0</SAP:PayloadSizeResponseMap>
+			<SAP:Reorganization>INI</SAP:Reorganization>
+			<SAP:AdapterInbound>IENGINE</SAP:AdapterInbound>
+			<SAP:AdapterOutbound>PROXY</SAP:AdapterOutbound>
+			<SAP:InterfaceAction>INIT</SAP:InterfaceAction>
+			<SAP:RandomNumber>92</SAP:RandomNumber>
+			<SAP:AckStatus>000</SAP:AckStatus>
+			<SAP:SkipReceiverDetermination/>
+		</SAP:RunTime>
+		<SAP:PerformanceHeader xmlns:SAP="http://sap.com/xi/XI/Message/30">
+			<SAP:RunTimeItem>
+				<SAP:Name type="ADAPTER_IN">INTEGRATION_ENGINE_HTTP_ENTRY</SAP:Name>
+				<SAP:Timestamp type="begin" host="tsterp">20230413172248.288138</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="ADAPTER_IN">INTEGRATION_ENGINE_HTTP_ENTRY</SAP:Name>
+				<SAP:Timestamp type="end" host="tsterp">20230413172248.292454</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="CORE">INTEGRATION_ENGINE</SAP:Name>
+				<SAP:Timestamp type="begin" host="tsterp">20230413172248.292562</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="CORE">INTEGRATION_ENGINE</SAP:Name>
+				<SAP:Timestamp type="end" host="tsterp">20230413172248.29338</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PLSRV">PLSRV_CALL_INBOUND_PROXY</SAP:Name>
+				<SAP:Timestamp type="begin" host="tsterp">20230413172248.303361</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PROXY_IN">PROXY_INBOUND_METHOD</SAP:Name>
+				<SAP:Timestamp type="begin" host="tsterp">20230413172248.303546</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PROXY_IN">PROXY_INBOUND_METHOD</SAP:Name>
+				<SAP:Timestamp type="end" host="tsterp">20230413172248.33498</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PROXY_IN">PROXY_INBOUND_PARSE</SAP:Name>
+				<SAP:Timestamp type="begin" host="tsterp">20230413172248.303791</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PROXY_IN">PROXY_INBOUND_PARSE</SAP:Name>
+				<SAP:Timestamp type="end" host="tsterp">20230413172248.303877</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PROXY_IN">PROXY_INBOUND_APPLMETH</SAP:Name>
+				<SAP:Timestamp type="begin" host="tsterp">20230413172248.304033</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PROXY_IN">PROXY_INBOUND_APPLMETH</SAP:Name>
+				<SAP:Timestamp type="end" host="tsterp">20230413172248.334327</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PROXY_IN">PROXY_INBOUND_RENDER</SAP:Name>
+				<SAP:Timestamp type="begin" host="tsterp">20230413172248.334425</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PROXY_IN">PROXY_INBOUND_RENDER</SAP:Name>
+				<SAP:Timestamp type="end" host="tsterp">20230413172248.33496</SAP:Timestamp>
+			</SAP:RunTimeItem>
+			<SAP:RunTimeItem>
+				<SAP:Name type="PLSRV">PLSRV_CALL_INBOUND_PROXY</SAP:Name>
+				<SAP:Timestamp type="end" host="tsterp">20230413172248.33606</SAP:Timestamp>
+			</SAP:RunTimeItem>
+		</SAP:PerformanceHeader>
+		<SAP:Diagnostic SOAP:mustUnderstand="1" xmlns:SAP="http://sap.com/xi/XI/Message/30"
+			xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+			<SAP:TraceLevel>Information</SAP:TraceLevel>
+			<SAP:Logging>Off</SAP:Logging>
+		</SAP:Diagnostic>
+		<SAP:Trace xmlns:SAP="http://sap.com/xi/XI/Message/30">
+			<Trace level="1" type="T">XMB was called with URL /sap/xi/engine?type=entry</Trace>
+			<Trace level="1" type="T">Remote address = 111111</Trace>
+			<Trace level="1" type="T">User = PIAPPLUSER</Trace>
+			<Trace level="1" type="T">Process ID: 31341</Trace>
+			<Trace level="1" type="T">Work Process ID: 84 </Trace>
+			<Trace level="1" type="T">Message ID = 005056B473591EDDB6C3F9F6A98FA6E5</Trace>
+			<Trace level="1" type="B" name="CL_XMS_MAIN-ENTER_XMS">
+				<Trace level="1" type="T">CL_XMS_MAIN-&gt;DETERMINE_EXT_PID: RECEIVER</Trace>
+				<Trace level="1" type="T">Hop engine name = SID100</Trace>
+				<Trace level="1" type="T">Hop engine type = BS</Trace>
+				<Trace level="1" type="T">Hop adapter name = XI</Trace>
+				<Trace level="1" type="T">Hop adapter namespace = http://sap.com/xi/XI/System</Trace>
+				<Trace level="1" type="B" name="CL_XMS_TROUBLESHOOT-ENTER_PLSRV"> </Trace>
+				<Trace level="1" type="T">system-ID = TER</Trace>
+				<Trace level="1" type="T">client = 400</Trace>
+				<Trace level="1" type="T">language = R</Trace>
+				<Trace level="1" type="T">user = PIAPPLUSER</Trace>
+				<Trace level="1" type="Timestamp">2023-04-13T17:22:48Z RUS03 </Trace>
+			</Trace>
+			<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_UC_EXECUTE"/>
+			<!-- ************************************ -->
+			<Trace level="1" type="T">PLNAME = RECEIVER</Trace>
+			<Trace level="1" type="T">QOS = BE</Trace>
+			<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PIPELINE_SYNC"/>
+			<!-- ************************************ -->
+			<Trace level="1" type="T">&gt;&gt;&gt;PID delete old pid determination coding </Trace>
+			<Trace level="1" type="T">system-ID = TER</Trace>
+			<Trace level="1" type="T">client = 400</Trace>
+			<Trace level="1" type="T">language = R</Trace>
+			<Trace level="1" type="T">user = PIAPPLUSER</Trace>
+			<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST"> </Trace>
+			<Trace level="1" type="B" name="PLSRV_CALL_INBOUND_PROXY">
+				<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV">
+					<Trace level="1" type="B" name="CL_XMS_MAIN-CALL_PLSRV_LOCAL">
+						<Trace level="1" type="B" name="Inbound Framework">
+							<Trace level="1" type="B" name="Inbound Proxy Transaction Guard: Configuration">
+								<Trace level="1" type="T">RUNTIME-INBOUND_PROXY_TRANSACTION_GUARD = 1 (default) </Trace>
+								<Trace level="1" type="T">Inbound Proxy Transaction Guard is ON </Trace>
+							</Trace>
+							<Trace level="1" type="T"> Proxy implementing class ZUNI_XI_CL_SI_SD_CAS_GET_KNTRG</Trace>
+							<Trace level="1" type="B" name="Inbound Proxy Transaction Guard: Result">
+								<Trace level="1" type="T">No violations detected </Trace>
+							</Trace>
+						</Trace>
+					</Trace>
+				</Trace>
+				<Trace level="1" type="T">ApplicationResponse message generated. Guid:
+					005056BF8D881EEDB6C3F9F848CD3546</Trace>
+				<Trace level="1" type="T">ApplicationMessage was: 005056B473591EDDB6C3F9F6A98FA6E5</Trace>
+			</Trace>
+			<Trace level="1" type="B" name="CL_XMS_MESSAGE_PERS_MAN-WRITE_MESSAGE_LOG_TO_PERSIST"/>
+			<!-- ************************************ -->
+		</SAP:Trace>
+	</SOAP:Header>
+	<SOAP:Body>
+		<SAP:Manifest wsu:Id="wsuid-manifest-5CABE13F5C59AB7FE10000000A1551F7"
+			xmlns:SAP="http://sap.com/xi/XI/Message/30" xmlns:xlink="http://www.w3.org/1999/xlink"
+			xmlns:wsu="http://www.docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+			<SAP:Payload xlink:href="cid:payload-005056BF8D881EEDB6C3F9F848CCF546@sap.com">
+				<SAP:Name>MainDocument</SAP:Name>
+				<SAP:Description/>
+				<SAP:Type>Application</SAP:Type>
+			</SAP:Payload>
+		</SAP:Manifest>
+	</SOAP:Body>
+</SOAP:Envelope>

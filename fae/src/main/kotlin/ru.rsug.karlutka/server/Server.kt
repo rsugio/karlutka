@@ -33,6 +33,8 @@ object Server {
                 div {
                     a("/selfcheck") { +"Самопроверки и служебная информация" }
                     +" "
+                    a("https://github.com/rsugio/karlutka") { +"Проект на гитхабе" }
+                    br()
                     a("/shutdown") { +"Завершение работы" }
                 }
             }

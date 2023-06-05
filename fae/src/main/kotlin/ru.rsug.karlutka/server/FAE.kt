@@ -9,14 +9,17 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.html.*
-import org.apache.camel.Processor
 import org.apache.camel.impl.DefaultCamelContext
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import ru.rsug.karlutka.client.PIAF
+import ru.rsug.karlutka.client.RWB
 import ru.rsug.karlutka.client.SLD
+import ru.rsug.karlutka.pi.AdapterMessageMonitoringVi
 import ru.rsug.karlutka.pi.MPI
+import ru.rsug.karlutka.pi.Scenario
 import ru.rsug.karlutka.pi.XICache
+import ru.rsug.karlutka.serialization.KSoap
 import ru.rsug.karlutka.util.DB
 import ru.rsug.karlutka.util.Konfig
 import java.net.URI
@@ -32,43 +35,23 @@ class FAE(
     val realHostPortURI: URI,
     val cae: PIAF,
     val sld: SLD,
+    val port: Int,
+    val domain: String?,
 ) {
-    val afFaHostdb = "af.$sid.$fakehostdb".lowercase()
+    val sidhostdb = "$sid.$fakehostdb".lowercase()
+    val afFaHostdb = "af.$sidhostdb"
+    private val logger: Logger = LoggerFactory.getLogger("fae.FAE")!!
+    private val rwb = RWB(this)
+
     private val channels = mutableListOf<XICache.Channel>()
     private val allinone = mutableListOf<XICache.AllInOne>()
     private val routes = mutableMapOf<String, XICache.AllInOneParsed>()
-    var domain: String? = null
-    val camelContext = DefaultCamelContext(true)
-    val logger: Logger = LoggerFactory.getLogger(FAE::javaClass.name)!!
+    private val camelContext = DefaultCamelContext(true)
     private val msktz: ZoneId = ZoneId.of("Europe/Moscow")
     private val uuidgeneratorxi: TimeBasedGenerator = Generators.timeBasedGenerator()
 
-    constructor(konf: Konfig.Target.FAE, cae: PIAF, sld: SLD) : this(konf.sid, konf.fakehostdb, URI(konf.realHostPortURI), cae, sld) {
-        domain = konf.domain
-        logger.info("Created FAE instance: $sid on $fakehostdb, $afFaHostdb")
-    }
-
-    private val procmonFrom = Processor { exc ->
-        val dt = Instant.now().toEpochMilli()
-        val body = exc.`in`.body?.toString() ?: "NULL"
-        val x = routes[exc.fromRouteId]!!
-        val from = "${x.fromParty}|${x.fromService}|{${x.fromIfacens}}${x.fromIface}"
-        DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, "", body)
-    }
-
-    private val procmonTo = Processor { exc ->
-        val dt = Instant.now().toEpochMilli()
-        val body = exc.`in`.body?.toString() ?: "NULL"
-        val rep = exc.context.inflightRepository
-        // val hist = exc.context.messageHistoryFactory
-        val from = ""
-        // val message = exc.getMessage()
-        val to = exc.getProperty("FAEReceiver") ?: "?"
-        rep.build()
-        DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, to, body)
-    }
-
     init {
+        logger.info("Created FAE instance: $sid on $fakehostdb, $afFaHostdb")
         var rs = DB.executeQuery(DB.readFAE, sid)
         if (!rs.next()) {
             DB.executeUpdateStrict(DB.insFAE, sid, afFaHostdb)
@@ -83,8 +66,8 @@ class FAE(
             }
         }
         camelContext.inflightRepository.isInflightBrowseEnabled = true
-        camelContext.registry.bind("procmonFrom", procmonFrom)
-        camelContext.registry.bind("procmonTo", procmonTo)
+//        camelContext.registry.bind("procmonFrom", procmonFrom)
+//        camelContext.registry.bind("procmonTo", procmonTo)
         camelContext.setAutoCreateComponents(true)
         camelContext.name = afFaHostdb
         allinone.forEach { ico ->
@@ -97,11 +80,32 @@ class FAE(
         }
     }
 
+    constructor(konf: Konfig.Target.FAE, cae: PIAF, sld: SLD) :
+            this(konf.sid, konf.fakehostdb, URI(konf.realHostPortURI), cae, sld, konf.port, konf.domain)
+
+//    private val procmonFrom = Processor { exc ->
+//        val dt = Instant.now().toEpochMilli()
+//        val body = exc.`in`.body?.toString() ?: "NULL"
+//        val x = routes[exc.fromRouteId]!!
+//        val from = "${x.fromParty}|${x.fromService}|{${x.fromIfacens}}${x.fromIface}"
+//        DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, "", body)
+//    }
+//
+//    private val procmonTo = Processor { exc ->
+//        val dt = Instant.now().toEpochMilli()
+//        val body = exc.`in`.body?.toString() ?: "NULL"
+//        val rep = exc.context.inflightRepository
+//        // val hist = exc.context.messageHistoryFactory
+//        val from = ""
+//        // val message = exc.getMessage()
+//        val to = exc.getProperty("FAEReceiver") ?: "?"
+//        rep.build()
+//        DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, to, body)
+//    }
 
     fun urlOf(s: String = ""): URI {
         return realHostPortURI.resolve(s)
     }
-
 
     private fun generateRoute(parsed: XICache.AllInOneParsed) {
 //        parsed.routeGenerator = MRouteGenerator(parsed)
@@ -116,37 +120,15 @@ class FAE(
     fun ktor(app: Application): Routing {
         val fae = this
         val routing = app.routing {
-            get("/FAE/XI") {
-                call.respondHtml {
-                    htmlHead("FAE :: сервлет XI-протокола", this)
-                    body {
-                        pre {
-                            +"Привет! Это сервлет XI-протокола, который надо вызывать через POST а не GET.\n\nТӥледлы удалтон."
-                        }
-                    }
-                }
+            post(Regex(".+/rtc")) {
+                val sc = Scenario.decodeFromString(call.receiveText())
+                val rt = rwb.servletFaeAdapterFrameworkRtc(sc, call.request.uri, call.request.queryParameters)
+                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { rt }
             }
-            post("/FAE/XI") {
-                //            xi(call)
-            }
-            post("/11rtc") {
-                // Runtime check
-                //            rtc(call)
-            }
-            post("/11run/rtc") {
-                //            rtc(call)
-            }
-            post("/11rwb/regtest") {
-                //            rtc(call)
-            }
-            get("/mdt/version.jsp") {
-                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
-            }
-            post("/run/value_mapping_cache/{...}") {
-                //http://aaaa:80/run/value_mapping_cache/ext?method=invalidateCache&mode=Invalidate&consumer=af.fa0.fake0db&consumer_mode=IR
-                val query = call.request.queryString()
-                cae.valueMappingCache(query)
-                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
+            post(Regex(".+/regtest")) {
+                val sc = Scenario.decodeFromString(call.receiveText())
+                val rt = rwb.servletFaeAdapterFrameworkRegtest(sc, call.request.uri, call.request.queryParameters)
+                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { rt }
             }
             post("/FAE/CPACache/invalidate/{...}") {
                 val begin = Instant.now()
@@ -164,22 +146,85 @@ class FAE(
                 require(done.isEmpty())
                 call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
             }
-            post("/FAE/AdapterFramework/regtest") {
-                //            rtc(call)
+            post("/ProfileProcessor/basic") {
+                // ProfileProcessorVi для мониторинга из головы в ноги
+                val sxml = call.receiveText()
+                logger.info(sxml)
+                val request = KSoap.parseSOAP<AdapterMessageMonitoringVi.GetProfilesRequest>(sxml)
+                val response = AdapterMessageMonitoringVi.GetProfilesResponse(
+                    AdapterMessageMonitoringVi.PPResponse(
+                        AdapterMessageMonitoringVi.WSProfile(
+                            "2023-06-04T12:59:43.471+00:00", request!!.applicationKey, "XPI"
+                        )
+                    )
+                )
+                val ansxml = response.composeSOAP()
+                logger.info(ansxml)
+                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { ansxml }
             }
-            post("/FAE/AdapterFramework/rtc") {
-                //            rtc(call)
+            get("/FAE/mdt/Systatus") {
+                // RWB - FAE - [Engine status]
+                // Engine Status (Current Server Node: Server 00 01_141237)
+                // Показывает бэклог, блокировки, обзор, кэш, очереди, треды и тд
+                call.respondHtml {
+                    htmlHead("FAE кокпит :: RWB :: $sid :: /FAE/mdt/Systatus", this)
+                    body {
+                        h2 { +"$sid :: /FAE/mdt/Systatus" }
+                    }
+                }
+            }
+            get("/FAE/mdt/msgprioservlet") {
+                // RWB - FAE - [Message Prioritization]
+                call.respondHtml {
+                    htmlHead("FAE кокпит :: RWB :: $sid :: /FAE/mdt/msgprioservlet", this)
+                    body {
+                        h2 { +"$sid :: /FAE/mdt/msgprioservlet" }
+                    }
+                }
+            }
+            get("/FAE/mdt/amtServlet") {
+                // RWB - FAE - [JPR Monitoring]
+                call.respondHtml {
+                    htmlHead("FAE кокпит :: RWB :: $sid :: /FAE/mdt/amtServlet", this)
+                    body {
+                        h2 { +"$sid :: /FAE/mdt/amtServlet" }
+                    }
+                }
+            }
+            get("/FAE/mdt/channelmonitorservlet") {
+                // RWB - FAE - [Communication Channel monitoring]
+                call.respondHtml {
+                    htmlHead("FAE кокпит :: RWB :: $sid :: /FAE/mdt/channelmonitorservlet", this)
+                    body {
+                        h2 { +"$sid :: /FAE/mdt/channelmonitorservlet" }
+                    }
+                }
+            }
+
+            get("/FAE/XI") {
+                call.respondHtml {
+                    htmlHead("FAE :: сервлет XI-протокола", this)
+                    body {
+                        pre {
+                            +"Привет! Это сервлет XI-протокола, который надо вызывать через POST а не GET.\n\nТӥледлы удалтон."
+                        }
+                    }
+                }
+            }
+            post("/FAE/XI") {
+                //            xi(call)
+            }
+            post("/run/value_mapping_cache/{...}") {
+                //http://aaaa:80/run/value_mapping_cache/ext?method=invalidateCache&mode=Invalidate&consumer=af.fa0.fake0db&consumer_mode=IR
+                val query = call.request.queryString()
+                cae.valueMappingCache(query)
+                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
             }
             post("/AdapterFramework/rwbAdapterAccess/int") {
                 //            hmi(call)
             }
 
-            // ProfileProcessorVi для мониторинга из головы в ноги
-            post("/ProfileProcessor/basic") {
-                val b = call.receiveText()
-                TODO(b)
-            }
-
+            // Кастомная логика
             get("/FAE") {
                 call.respondHtml {
                     htmlHead("FAE кокпит :: $sid", this)
@@ -367,11 +412,27 @@ class FAE(
                     }
                 }
             } // get /FAE
+            get("/FAE/mdt_soa/monitorservlet") {
+                call.respondHtml {
+                    htmlHead("FAE кокпит :: $sid :: /FAE/mdt_soa/monitorservlet", this)
+                    body {
+                        h2 { +"FAE кокпит :: $sid :: /FAE/mdt_soa/monitorservlet" }
+                        hr {}
+                        p { +"//TODO" }
+                    }
+                }
+            }
+            get("/mdt/version.jsp") {
+                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
+            }
+            get("/mdt/") {
+                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
+            }
         }
         return routing
     }
 
-    fun cpalistener(cr: XICache.CacheRefresh, now: Instant) {
+    private fun cpalistener(cr: XICache.CacheRefresh, now: Instant) {
         // Слушаем обновления кэша
         // если объект есть в deletedObjects и в присланном кэше то это изменение, если в deletedObjects и нет в кэше то удаление
         val deletedObjects = cr.DELETED_OBJECTS?.SAPXI_OBJECT_KEY?.toMutableList() ?: mutableListOf()

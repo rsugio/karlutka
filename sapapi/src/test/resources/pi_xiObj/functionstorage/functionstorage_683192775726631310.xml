@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?><functionstorage version="XI7.1"><key><key typeID="FUNC_LIB" oid="86d6ecb74dfa3c6491cbd028ff0bcc98"><elem>UDFDateTimePool</elem><elem>http://sap.com/xi/XI/B2BMappingkit</elem></key></key><classname>UDFDateTimePool</classname><package>sap.com</package><imports><![CDATA[import com.sap.aii.mapping.api.*;
+import com.sap.aii.mapping.lookup.*;
+import com.sap.aii.mappingtool.tf7.rt.*;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
+import java.text.*;
+]]></imports><globals><javaText><![CDATA[
+
+	private static final String MODE_DATE_FROM = "dateFrom";
+	private static final String MODE_DATE_TO = "dateTo";
+	private static final String MODE_DATE = "date";
+	private static final String MODE_TIME = "time";
+
+	private static final String[] MODES = new String[]{MODE_DATE_FROM,
+			MODE_DATE_TO, MODE_DATE, MODE_TIME};
+	private static final List MODE_LIST = Arrays.asList(MODES);
+	private Locale locale = Locale.getDefault();
+	
+	private AbstractTrace trace = null;
+
+
+    private String getDate(String date, String dateFormat, String mode)
+	    throws NumberFormatException {
+	if (!MODE_LIST.contains(mode)) {
+	    throw new IllegalArgumentException("unvalid mode " + mode);
+	}
+
+	String result = null;
+	String mydate = date.trim();
+
+	// boolean modeIsDateFrom = modus.equalsIgnoreCase(MODE_DATE_FROM);
+	boolean modeIsDateTo = mode.equalsIgnoreCase(MODE_DATE_TO);
+	// boolean modeIsDate = modus.equalsIgnoreCase(MODE_DATE);
+	boolean modeIsTime = mode.equalsIgnoreCase(MODE_TIME);
+
+	int dtmFormat = Integer.parseInt(dateFormat);
+	switch (dtmFormat) {
+        	case 101: { // YYMMDD
+        	    if (!modeIsTime) {
+        		result = "20" + mydate;
+        	    }
+        	    break;
+        	}
+        	case 102: { // CCYYMMDD
+        	    if (!modeIsTime) {
+        		result = mydate;
+        	    }
+        	    break;
+        	}
+        	case 201: {// YYMMDDHHMM
+        	    if (modeIsTime) {
+        		result = mydate.substring(6);
+        	    } else {
+        		result = "20" + mydate.substring(0, 6);
+        	    }
+        	    break;
+        	}
+        	case 202: { // YYMMDDHHMMSS
+        	    if (modeIsTime) {
+        		result = mydate.substring(6);
+        	    } else {
+        		result = "20" + mydate.substring(0, 6);
+        	    }
+        	    break;
+        	}
+        	case 203: { // CCYYMMDDHHMM
+        	    if (modeIsTime) {
+        		result = mydate.substring(8);
+        	    } else {
+        		result = mydate.substring(0, 8);
+        	    }
+        	    break;
+        	}
+        	case 204: {// CCYYMMDDHHMMSS
+        	    if (modeIsTime) {
+        		result = mydate.substring(8);
+        	    } else {
+        		result = mydate.substring(0, 8);
+        	    }
+        	    break;
+        	}
+        	case 609: { // YYMM
+        	    if (modeIsDateTo) {
+        		String year = mydate.substring(0, 2);
+        		String month = mydate.substring(2, 4);
+        		DateFormat dfMonth = createFormatter("yyMM");
+        		result = getLastDayOfMonth(year, month, dfMonth);
+        	    } else {
+        		if (!modeIsTime) {
+        		    result = "20" + mydate.substring(0, 4) + "01";
+        		}
+        	    }
+        	    break;
+        	}
+        	case 610: {// CCYYMM
+        	    if (modeIsDateTo) {
+        		String year = mydate.substring(0, 4);
+        		String month = mydate.substring(4, 6);
+        		DateFormat dfMonth = createFormatter("yyyyMM");
+        		result = getLastDayOfMonth(year, month, dfMonth);
+        	    } else {
+        		if (!modeIsTime) {
+        		    result = mydate.substring(0, 6) + "01";
+        		}
+        	    }
+        	    break;
+        	}
+        	case 615: { // YYWW
+        	    String year = mydate.substring(0, 2);
+        	    String week = mydate.substring(2, 4);
+        	    DateFormat dfWeek = createFormatter("yyww");
+        	    if (modeIsDateTo) {
+        		result = getFridayOfWeek(year, week, dfWeek);
+        	    } else {
+        		if (!modeIsTime) {
+        		    result = getMondayOfWeek(year, week, dfWeek);
+        		}
+        	    }
+        	    break;
+        	}
+        	case 616: {// CCYYWW
+        	    String year = mydate.substring(0, 4);
+        	    String week = mydate.substring(4, 6);
+        	    DateFormat dfWeek = createFormatter("yyyyww");
+        	    if (modeIsDateTo) {
+        		result = getFridayOfWeek(year, week, dfWeek);
+        	    } else {
+        		if (!modeIsTime) {
+        		    result = getMondayOfWeek(year, week, dfWeek);
+        		}
+        	    }
+        	    break;
+        	}
+        	case 715: { // YYWW-YYWW without hyphen
+        	    String year = null;
+        	    String week = null;
+        	    DateFormat dfWeek = createFormatter("yyww");
+        	    if (modeIsDateTo) {
+        		year = mydate.substring(4, 6);
+        		week = mydate.substring(6, 8);
+        		result = getFridayOfWeek(year, week, dfWeek);
+        	    } else {
+        		if (!modeIsTime) {
+        		    year = mydate.substring(0, 2);
+        		    week = mydate.substring(2, 4);
+        		    result = getMondayOfWeek(year, week, dfWeek);
+        		}
+        	    }
+        	    break;
+        	}
+        	case 716: { // CCYYWW-CCYYWW without hyphen
+        	    String year = null;
+        	    String week = null;
+        	    DateFormat dfWeek = createFormatter("yyyyww");
+        	    if (modeIsDateTo) {
+        		year = mydate.substring(6, 10);
+        		week = mydate.substring(10, 12);
+        		result = getFridayOfWeek(year, week, dfWeek);
+        	    } else {
+        		if (!modeIsTime) {
+        		    year = mydate.substring(0, 4);
+        		    week = mydate.substring(4, 6);
+        		    result = getMondayOfWeek(year, week, dfWeek);
+        		}
+        	    }
+        	    break;
+        	}
+        	default: {
+        	    throw new RuntimeException("Unexpected date qualifier "
+        		    + dateFormat);
+        	}
+	}
+
+    if (!modeIsTime) {
+	    DateFormat formatter = createFormatter("yyyyMMdd");
+	    try {
+		    formatter.parse(result);
+	    } catch (Exception ex) {
+		    throw new RuntimeException("FunctionLib UDFDateTimePool: "
+			       + " cannot date string " + date + " of format "
+			       + dateFormat);
+	    }
+	}
+
+	return result;
+    }
+
+	private String getMondayOfWeek(String year, String week, DateFormat dfWeek) {
+		Date date = null;
+		Calendar calendar = null;
+		try {
+			date = dfWeek.parse(year + week);
+			calendar = createCalendar();
+			calendar.setTimeInMillis(date.getTime());
+		} catch (Exception ex) {
+			calendar = getCalendarByYearAndWeek(year, week);
+		}
+
+		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+		DateFormat df = createFormatter("yyyyMMdd");
+		return df.format(calendar.getTime());
+	}
+
+	private String getFridayOfWeek(String year, String week, DateFormat dfWeek) {
+		Date date = null;
+		Calendar calendar = null;
+		try {
+			date = dfWeek.parse(year + week);
+			calendar = createCalendar();
+			calendar.setTimeInMillis(date.getTime());
+		} catch (Exception ex) {
+			calendar = getCalendarByYearAndWeek(year, week);
+		}
+
+		calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+		DateFormat df = createFormatter("yyyyMMdd");
+		return df.format(calendar.getTime());
+	}
+
+	private String getLastDayOfMonth(String year, String month,
+			DateFormat dfMonth) {
+		Date date = null;
+		try {
+			date = dfMonth.parse(year + month);
+		} catch (Exception ex) {
+			throw new RuntimeException("FunctionLib UDFDateTimePool: "
+					+ " cannot parse year/month " + year + "/" + month);
+		}
+
+		Calendar calendar = createCalendar();
+		calendar.setTimeInMillis(date.getTime());
+		calendar.set(Calendar.DAY_OF_MONTH, calendar
+				.getActualMaximum(Calendar.DAY_OF_MONTH));
+		DateFormat df = createFormatter("yyyyMMdd");
+		return df.format(calendar.getTime());
+	}
+
+	private DateFormat createFormatter(String pattern) {
+		DateFormat formatter = new SimpleDateFormat(pattern, locale);
+		formatter.setLenient(false);
+		return formatter;
+	}
+
+	private Calendar createCalendar() {
+		Calendar calendar = Calendar.getInstance(locale);
+		return calendar;
+	}
+	
+	private Calendar getCalendarByYearAndWeek(String year, String week) {
+		try {
+			int yearInt = Integer.parseInt(year);
+			if (yearInt < 100) {
+				yearInt = 2000 + yearInt;
+			}
+			Calendar calendar = createCalendar();
+			calendar.setLenient(false);
+			calendar.set(Calendar.YEAR, yearInt);
+			calendar.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(week));
+			calendar.setLenient(true);
+			return calendar;
+		} catch (Exception ex1) {
+			throw new RuntimeException("FunctionLib UDFDateTimePool: "
+					+ "getDateByYearAndWeek cannot parse integer " 
+					+ year + "/" + week);
+		}
+	}]]></javaText></globals><init><functionmodel><signature cacheType="2"/><name>init</name><key>%init%</key><tab/><title/><uiTitle/><implementation type="udf"><javaText><![CDATA[
+//trace = container.getTrace();
+
+// set the local manually if necessary
+//locale = Locale.getDefault();
+//locale = Locale.GERMANY;
+
+// here you can debug the calendar propeties
+//trace.addInfo("FunctionLib UDFDateTimePool Locale: " + locale);
+//Calendar calendar = Calendar.getInstance(locale);
+//trace.addInfo("FunctionLib UDFDateTimePool MinimalDaysInFirstWeek: " + calendar.getMinimalDaysInFirstWeek());
+//trace.addInfo("FunctionLib UDFDateTimePool  FirstDayOfWeek: " + calendar.getFirstDayOfWeek());]]></javaText></implementation></functionmodel></init><cleanup><javaText><![CDATA[]]></javaText></cleanup><functionmodel><signature cacheType="1"><argument tp="0" nm="dateValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="dateFormatValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="mode" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getDate</name><key>calculate1222222</key><tab>UDFDateTimePool</tab><title>getDate</title><uiTitle><![CDATA[Creates a YYYYMMDD date from the first argument using the second argument (an EDIFACT-F2379-conform qualifier). The third argument has one of the values constantDate, constantDateFrom or constantDateTo provided by this function library]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		// Execution type: all values of a context
+		if (dateValues != null && dateValues.length > 0) {
+			if (dateFormatValues != null
+					&& dateValues.length != dateFormatValues.length) {
+				throw new IllegalStateException(
+						"UDF getDate: dateArr and dateFormatArr have"
+								+ " different lenght");
+			}
+
+			try {
+				for (int i = 0; i < dateValues.length; i++) {
+					String dateValue = dateValues[i];
+					if (dateValue == null
+							|| ResultList.SUPPRESS.equals(dateValue)
+							|| dateValue.trim().length() == 0
+							|| "0".equals(dateValue)) {
+						result.addSuppress();
+					} else {
+						String dateFormat = dateFormatValues[i];
+						String date = null;
+						try {
+							date = getDate(dateValue, dateFormat, mode[0]);
+							if (date == null) {
+								date = ResultList.SUPPRESS;
+							}
+							result.addValue(date);
+						} catch (RuntimeException re) {
+							//date = ResultList.SUPPRESS;
+							throw new RuntimeException("UDF dateValue " + dateValue
+									+ ", dateFormat " + dateFormat + " causes "
+									+ re);
+						}
+					}
+				}
+			} catch (Exception ex) {
+				throw new RuntimeException("getDate " + ex, ex);
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="dateValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="dateFormatValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="longFormatValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getTime</name><key>calculate12222222</key><tab>UDFDateTimePool</tab><title>getTime</title><uiTitle><![CDATA[Creates a HHMM time value from the first argument using the second argument (an EDIFACT-F2379-conform qualifier). If the third argument has value TRUE the time format is HHMMSS]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		// Execution type: all values of a context
+		if (dateValues != null && dateValues.length > 0) {
+			if (dateFormatValues != null
+					&& dateValues.length != dateFormatValues.length) {
+				throw new IllegalStateException(
+						"UDF getTime: dateValues array and dateFormatValues array have"
+								+ " different lenght");
+			}
+
+			// long format: seconds inclusive
+			boolean longFormat = Boolean.parseBoolean(longFormatValues[0]);
+			try {
+				for (int i = 0; i < dateValues.length; i++) {
+					String dateValue = dateValues[i];
+					if (dateValue == null
+							|| ResultList.SUPPRESS.equals(dateValue)
+							|| dateValue.trim().length() == 0
+							|| "0".equals(dateValue)) {
+						result.addSuppress();
+					} else {
+						String dateFormat = dateFormatValues[i];
+						String date = null;
+						try {
+							date = getDate(dateValue, dateFormat, MODE_TIME);
+							if (date == null) {
+								date = ResultList.SUPPRESS;
+							} else {
+								int dateLength = date.length();
+								if (!longFormat && dateLength > 4) {
+									date = date.substring(0, 4);
+								} else if (!longFormat && dateLength < 4) {
+									date = date + "0000";
+									date = date.substring(0, 4);
+								} else if (longFormat && dateLength < 6) {
+									date = date + "000000";
+									date = date.substring(0, 6);
+								} else if (longFormat && dateLength > 6) {
+									date = date.substring(0, 6);
+								}
+							}
+							result.addValue(date);
+						} catch (RuntimeException re) {
+							//date = ResultList.SUPPRESS;
+							throw new RuntimeException("UDF dateValue " + dateValue
+									+ ", dateFormat " + dateFormat + "causes "
+									+ re);
+						}
+					}
+				}
+			} catch (Exception ex) {
+				throw new RuntimeException("getTime " + ex, ex);
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"/><name>constantDate</name><key>calculate2</key><tab>UDFDateTimePool</tab><title>constantDate</title><uiTitle>Use this generated constant as an input for UDF getDate: indicates a single date value</uiTitle><implementation type="udf"><javaText><![CDATA[return MODE_DATE;]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"/><name>constantDateFrom</name><key>calculate1222222222</key><tab>UDFDateTimePool</tab><title>constantDateFrom</title><uiTitle>Use this generated constant as an input for UDF getDate: indicates the begin of a time period</uiTitle><implementation type="udf"><javaText><![CDATA[return MODE_DATE_FROM;]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"/><name>constantDateTo</name><key>calculate122222222</key><tab>UDFDateTimePool</tab><title>constantDateTo</title><uiTitle>Use this generated constant as an input for UDF getDate: indicates the end of a time period</uiTitle><implementation type="udf"><javaText><![CDATA[return MODE_DATE_TO;]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="dateBegin" jtp="String"><uiTitle/></argument><argument tp="0" nm="dateEnd" jtp="String"><uiTitle/></argument></signature><name>getDateDifference</name><key>calculate12222222222</key><tab>UDFDateTimePool</tab><title>getDateDifference</title><uiTitle>Gets the number of days between two dates of YYYYMMDD format. The first argument marks the begin of the time intervall.</uiTitle><implementation type="udf"><javaText><![CDATA[
+		DateFormat formatter = createFormatter("yyyyMMdd");
+		formatter.setLenient(false);
+
+		Date date1 = null;
+		Date date2 = null;
+		try {
+			date1 = formatter.parse(dateBegin);
+		} catch (ParseException pe) {
+			if (dateBegin.trim().length() == 0) {
+				return ResultList.SUPPRESS;
+			} else {
+			throw new RuntimeException("UDF getDateDifference: "
+					+ " cannot parse dateBegin " + dateBegin);
+			}
+		}
+		try {
+			date2 = formatter.parse(dateEnd);
+		} catch (ParseException pe) {
+			if (dateEnd.trim().length() == 0) {
+				return ResultList.SUPPRESS;
+			} else {
+			throw new RuntimeException("UDF getDateDifference: "
+					+ " cannot parse dateBegin " + dateEnd);
+			}
+		}
+
+		long diff = date2.getTime() - date1.getTime();
+		return (diff / 86400000) + "";]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="dateBegin" jtp="String"><uiTitle/></argument><argument tp="0" nm="dateEnd" jtp="String"><uiTitle/></argument></signature><name>getMonthDifference</name><key>calculate122222222222</key><tab>UDFDateTimePool</tab><title>getMonthDifference</title><uiTitle><![CDATA[Gets the number of months between two dates of YYYYMMDD format. Dates wizhin a calendar month yields a 0. The first argument marks the begin of the time intervall.]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		DateFormat formatter = createFormatter("yyyyMMdd");
+
+		Date date1 = null;
+		Date date2 = null;
+		try {
+			date1 = formatter.parse(dateBegin);
+		} catch (ParseException pe) {
+			if (dateBegin.trim().length() == 0) {
+				return ResultList.SUPPRESS;
+			} else {
+			throw new RuntimeException("UDF getMonthDifference: "
+					+ " cannot parse dateBegin " + dateBegin);
+			}
+		}
+		try {
+			date2 = formatter.parse(dateEnd);
+		} catch (java.text.ParseException pe) {
+			if (dateEnd.trim().length() == 0) {
+				return ResultList.SUPPRESS;
+			} else {
+			throw new RuntimeException("UDF getMonthDifference: "
+					+ " cannot parse dateBegin " + dateEnd);
+			}
+		}
+
+		Calendar calendar1 =	createCalendar();
+		calendar1.setTimeInMillis(date1.getTime());
+		Calendar calendar2 = createCalendar();
+		calendar2.setTimeInMillis(date2.getTime());
+
+		int yearDiff = calendar2.get(Calendar.YEAR)
+				- calendar1.get(Calendar.YEAR);
+		int monthEnd = calendar2.get(Calendar.MONTH);
+		int monthBegin = calendar1.get(Calendar.MONTH);
+		if (yearDiff != 0) {
+			monthEnd = monthEnd + 12 * yearDiff;
+		}
+
+		return (monthEnd - monthBegin) + "";]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="date" jtp="String"><uiTitle/></argument><argument tp="0" nm="numberOfDays" jtp="String"><uiTitle/></argument></signature><name>getDateAfterDays</name><key>calculate12</key><tab>UDFDateTimePool</tab><title>getDateAfterDays</title><uiTitle>Gets the date after the date of the first argument (YYYYMMDD) by adding a number of days contained in the second argument</uiTitle><implementation type="udf"><javaText><![CDATA[
+		DateFormat formatter = createFormatter("yyyyMMdd");
+		Calendar calendar = createCalendar();
+
+		Date aDate;
+		int dayCount;
+		try {
+			aDate = formatter.parse(date);
+		} catch (ParseException pe) {
+			if (date.trim().length() == 0) {
+				return ResultList.SUPPRESS;
+			} else {
+			throw new RuntimeException("UDF getDateAfterDays: "
+					+ " cannot parse date " + date);
+			}
+		}
+		try {
+			dayCount = Integer.parseInt(numberOfDays);
+		} catch (NumberFormatException pe) {
+			throw new RuntimeException("UDF getDateAfterDays: "
+					+ " cannot parse int " + numberOfDays);
+		}
+
+		calendar.setTimeInMillis(aDate.getTime());
+		calendar.add(Calendar.DAY_OF_MONTH, dayCount);
+
+		return formatter.format(calendar.getTime());]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="date" jtp="String"><uiTitle/></argument><argument tp="0" nm="numberOfMonths" jtp="String"><uiTitle/></argument></signature><name>getFirstOfMonthAfterMonths</name><key>calculate122222</key><tab>UDFDateTimePool</tab><title>getFirstOfMonthAfterMonths</title><uiTitle>Gets the first of month date after the date of the first argument (YYYYMMDD) by adding a number of months contained in the second argument</uiTitle><implementation type="udf"><javaText><![CDATA[
+		DateFormat formatter = createFormatter("yyyyMMdd");
+		Calendar calendar = createCalendar();
+
+		Date aDate;
+		int monthCount;
+		try {
+			aDate = formatter.parse(date);
+		} catch (ParseException pe) {
+			if (date.trim().length() == 0) {
+				return ResultList.SUPPRESS;
+			} else {
+			throw new RuntimeException("UDF getFirstOfMonthAfterMonths: "
+					+ " cannot parse dateBegin " + date);
+			}
+		}
+		try {
+			monthCount = Integer.parseInt(numberOfMonths);
+		} catch (NumberFormatException pe) {
+			throw new RuntimeException("UDF getFirstOfMonthAfterMonths: "
+					+ " cannot parse int " + numberOfMonths);
+		}
+
+		calendar.setTimeInMillis(aDate.getTime());
+		calendar.add(Calendar.MONTH, monthCount);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+
+		return formatter.format(calendar.getTime());]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="date" jtp="String"><uiTitle/></argument></signature><name>getDateFormat</name><key>calculate1</key><tab>UDFDateTimePool</tab><title>getDateFormat</title><uiTitle>Returns an EDIFACT-F2379-conform qualifier describing the dates format.</uiTitle><implementation type="udf"><javaText><![CDATA[
+		String dtmFormat = ResultList.SUPPRESS;
+		String dateString = date != null ? date.trim() : null;
+		if (date != null && dateString.length() > 0) {
+			dtmFormat = "";
+			int dateLength = date.length();
+			switch (dateLength) {
+				case 6 : {
+					dtmFormat = "101";
+					break;
+				}
+				case 8 : {
+					dtmFormat = "102";
+					break;
+				}
+				case 10 : {
+					dtmFormat = "201";
+					break;
+				}
+				case 12 : {
+					String yearBegin = date.substring(0, 2);
+					if ("20".equalsIgnoreCase(yearBegin)
+							|| "19".equalsIgnoreCase(yearBegin)) {
+						dtmFormat = "203";
+					} else {
+						dtmFormat = "202";
+					}
+					break;
+				}
+				case 14 : {
+					dtmFormat = "204";
+					break;
+				}
+				default : {
+					throw new IllegalArgumentException("getDateFormat: " +
+							"the date length " + dateLength +
+							" cannot be processed");
+				}
+			}
+		}
+		
+		return dtmFormat;]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="dateString" jtp="String"><uiTitle/></argument><argument tp="0" nm="timingQualf" jtp="String"><uiTitle/></argument></signature><name>getStartDateOfTimePeriod</name><key>calculate1222222222222</key><tab>UDFDateTimePool</tab><title>getStartDateOfTimePeriod</title><uiTitle>Generates the first day of the week (Argument 2: &quot;W&quot;) or month (&quot;M&quot;) for a given date in Argument 1; returns Argument 1 when Argument 2 is &quot;D&quot;</uiTitle><implementation type="udf"><javaText><![CDATA[
+	String resultString = null;
+	DateFormat dfmt = createFormatter("yyyyMMdd");
+
+	String newDateString = dateString.trim();
+	int length = newDateString.length();
+	if (length == 6) {
+	    newDateString = "20" + newDateString;
+	} else if (length > 8) {
+	    newDateString = newDateString.substring(0, 8);
+	}
+
+	Date date = null;
+	try {
+	    date = dfmt.parse(newDateString);
+	} catch (Exception e) {
+	    throw new RuntimeException(
+		    "UDF getStartDateOfTimePeriod: Could not parse Date "
+			    + newDateString);
+	}
+
+	if (timingQualf.equals("D")) {
+	    resultString = newDateString;
+	} else {
+	    Calendar calendar = createCalendar();
+	    calendar.setTime(date);
+	    if (timingQualf.equals("W")) { // weekly
+		calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+	    } else if (timingQualf.equals("M")) { // monthly
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+	    } else {
+		throw new RuntimeException(
+			"UDF getEndDateOfTimePeriod: unexspected time period qualifier"
+				+ timingQualf);
+	    }
+	    resultString = dfmt.format(calendar.getTime());
+	}
+
+	return resultString;]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="0"><argument tp="0" nm="dateString" jtp="String"><uiTitle/></argument><argument tp="0" nm="timingQualf" jtp="String"><uiTitle/></argument></signature><name>getEndDateOfTimePeriod</name><key>calculate122</key><tab>UDFDateTimePool</tab><title>getEndDateOfTimePeriod</title><uiTitle><![CDATA[Generates the last day (Friday) of the week (Argument 2: "W") or month ("M") for a given date in Argument 1; returns Argument 1 when Argument 2 is "D".]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+	String resultString = null;
+	DateFormat dfmt = createFormatter("yyyyMMdd");
+
+	String newDateString = dateString.trim();
+	int length = newDateString.length();
+	if (length == 6) {
+	    newDateString = "20" + newDateString;
+	} else if (length > 8) {
+	    newDateString = newDateString.substring(0, 8);
+	}
+
+	Date date = null;
+	try {
+	    date = dfmt.parse(newDateString);
+	} catch (Exception e) {
+	    throw new RuntimeException(
+		    "UDF getEndDateOfTimePeriod: Could not parse Date "
+			    + newDateString);
+	}
+
+	if (timingQualf.equals("D")) {
+	    resultString = newDateString;
+	} else {
+	    Calendar calendar = createCalendar();
+	    calendar.setTime(date);
+	    if (timingQualf.equals("W")) { // weekly
+		calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+	    } else if (timingQualf.equals("M")) { // monthly
+		calendar.set(Calendar.DAY_OF_MONTH, calendar
+			.getActualMaximum(Calendar.DAY_OF_MONTH));
+	    } else {
+		throw new RuntimeException(
+			"UDF getEndDateOfTimePeriod: unexspected time period qualifier"
+				+ timingQualf);
+	    }
+	    resultString = dfmt.format(calendar.getTime());
+	}
+
+	return resultString;]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="dates" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getStartOfOneOrTwoDates</name><key>calculate1222</key><tab>UDFDateTimePool</tab><title>getStartOfOneOrTwoDates</title><uiTitle>Gets the oldest date of one or more date strings</uiTitle><implementation type="udf"><javaText><![CDATA[
+
+		if (dates != null && dates.length > 0) {
+			String startDate = null;
+			if (dates.length < 2) {
+				startDate = dates[0];
+			}
+			if (startDate == null) {
+				String date_0 = dates[0].trim();
+				if (date_0.length() == 0 || ResultList.SUPPRESS.equals(date_0)
+						|| "0".equals(date_0)) {
+					startDate = dates[0];
+				}
+				if (startDate == null) {
+					String date_1 = dates[1].trim();
+					if (date_1.length() == 0 || ResultList.SUPPRESS.equals(date_1)
+							|| "0".equals(date_1)) {
+						startDate = dates[1];
+					}
+				}
+				if (startDate == null) {
+					DateFormat dfmt = createFormatter("yyyyMMdd");
+					Date date1 = null;
+					Date date2 = null;
+					try {
+						date1 = dfmt.parse(dates[0]);
+						date2 = dfmt.parse(dates[1]);
+					} catch (ParseException e) {
+						// ignore and try again
+					}
+					if (date1 == null || date2 == null) {
+						try {
+							date1 = dfmt.parse(dates[0].substring(0,8));
+							date2 = dfmt.parse(dates[1].substring(0,8));
+						} catch (ParseException e) {
+							throw new RuntimeException(
+									"UDF getStartOfOneOrTwoDates: Could not parse Date"
+											+ dates[0] + " and/or " + dates[1]);
+						}
+					}
+        
+					if (date1.before(date2)) {
+						startDate = dfmt.format(date1);
+					} else {
+						startDate = dfmt.format(date2);
+					}
+				}
+			}
+			result.addValue(startDate);
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="dates" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getEndOfOneOrTwoDates</name><key>calculate12222</key><tab>UDFDateTimePool</tab><title>getEndOfOneOrTwoDates</title><uiTitle>Gets the last date of one or more date strings</uiTitle><implementation type="udf"><javaText><![CDATA[
+
+		if (dates != null && dates.length > 0) {
+			String endDate = null;
+			if (dates.length < 2) {
+				endDate = dates[0];
+			}
+			if (endDate == null) {
+				String date_0 = dates[0].trim();
+				if (date_0.length() == 0 || ResultList.SUPPRESS.equals(date_0)
+						|| "0".equals(date_0)) {
+					endDate = dates[1];
+				}
+				if (endDate == null) {
+					String date_1 = dates[1].trim();
+					if (date_1.length() == 0
+							|| ResultList.SUPPRESS.equals(date_1)
+							|| "0".equals(date_1)) {
+						endDate = dates[0];
+					}
+				}
+				if (endDate == null) {
+					DateFormat dfmt = createFormatter("yyyyMMdd");
+					Date date1 = null;
+					Date date2 = null;
+					try {
+						date1 = dfmt.parse(dates[0]);
+						date2 = dfmt.parse(dates[1]);
+					} catch (ParseException e) {
+						// ignore and try again
+					}
+					if (date1 == null || date2 == null) {
+						try {
+							date1 = dfmt.parse(dates[0].substring(0,8));
+							date2 = dfmt.parse(dates[1].substring(0,8));
+						} catch (ParseException e) {
+							throw new RuntimeException(
+									"UDF getEndOfOneOrTwoDates: Could not parse Date"
+											+ dates[0] + " and/or " + dates[1]);
+						}
+					}
+
+					if (date1.before(date2)) {
+						endDate = dfmt.format(date2);
+					} else {
+						endDate = dfmt.format(date1);
+					}
+				}
+			}
+			result.addValue(endDate);
+		}]]></javaText></implementation></functionmodel><usedjars/></functionstorage>

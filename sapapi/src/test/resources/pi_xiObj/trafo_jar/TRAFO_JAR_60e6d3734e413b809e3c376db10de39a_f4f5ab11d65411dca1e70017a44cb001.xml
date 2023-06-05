@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p1:xiObj xmlns:p1="urn:sap-com:xi">
+	<p1:idInfo VID="f4f5ab11d65411dca1e70017a44cb001">
+		<p1:vc vcType="S" swcGuid="0fdbbda44c4011dd94cbea860a424100" sp="-1" caption="SCEMSRV 7.01">
+			<p1:clCxt consider="A"/>
+		</p1:vc>
+		<p1:key typeID="TRAFO_JAR" oid="60e6d3734e413b809e3c376db10de39a">
+			<p1:elem>EPCISQueryDocument_TO_OER_XSL_MAPPING</p1:elem>
+			<p1:elem>http://sap.com/xi/PTA</p1:elem>
+		</p1:key>
+	</p1:idInfo>
+	<p1:generic>
+		<p1:admInf>
+			<p1:modifBy>sap</p1:modifBy>
+			<p1:modifAt>2007-09-19 12:04:25.306</p1:modifAt>
+			<modifAtLong>1190196265306</modifAtLong>
+			<p1:owner>sap</p1:owner>
+		</p1:admInf>
+		<p1:lnks>
+			<p1:lnkRole role="_inner" kpos="0">
+				<p1:lnk rMode="R">
+					<p1:key typeID="MAP_ARCHIVE_PRG" oid="a4c1f99b947b3ebd9270a1f27bbd2084">
+						<p1:elem>EPCISQueryDocument_TO_OER_XSL_MAPPING</p1:elem>
+						<p1:elem>http://sap.com/xi/PTA</p1:elem>
+						<p1:elem>xsl</p1:elem>
+						<p1:elem>EPCISQueryDocumentMapping_In</p1:elem>
+					</p1:key>
+				</p1:lnk>
+			</p1:lnkRole>
+		</p1:lnks>
+		<p1:textInfo loadedL="EN">
+			<p1:textObj id="f4f5ab11d65411dca1e70017a44cb001" type="0" masterL="EN">
+				<p1:texts lang="EN">
+					<p1:text label="">Maps an external EPCISQueryDocument to the internal OER format</p1:text>
+				</p1:texts>
+			</p1:textObj>
+		</p1:textInfo>
+	</p1:generic>
+	<p1:content>
+		<ar:Archive xmlns:ar="urn:sap-com:xi:mapping:archive">
+			<ar:blob type="jar" zipped="false"
+				>!jar!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</ar:blob>
+			<ar:Encoding>Cp1252</ar:Encoding>
+		</ar:Archive>
+	</p1:content>
+	<p1:inner/>
+</p1:xiObj>

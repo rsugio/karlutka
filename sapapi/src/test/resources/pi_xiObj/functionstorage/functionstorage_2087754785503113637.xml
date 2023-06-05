@@ -1,0 +1,690 @@
+<?xml version="1.0" encoding="UTF-8"?><functionstorage version="XI7.1"><key><key typeID="FUNC_LIB" oid="2993aca97d393a28bcf014f235595a38"><elem>UDFNodePool</elem><elem>http://sap.com/xi/B2B/Examples/EDIFACT</elem></key></key><classname>UDFNodePool</classname><package>sap.com</package><imports><![CDATA[import com.sap.aii.mapping.api.*;
+import com.sap.aii.mapping.lookup.*;
+import com.sap.aii.mappingtool.tf7.rt.*;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
+]]></imports><globals><javaText><![CDATA[]]></javaText></globals><init><functionmodel><signature cacheType="2"/><name>init</name><key>%init%</key><tab/><title/><uiTitle/><implementation type="udf"><javaText><![CDATA[]]></javaText></implementation></functionmodel></init><cleanup><javaText><![CDATA[]]></javaText></cleanup><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>createIfHasValue</name><key>calculate122</key><tab>UDFNodePool</tab><title>createIfHasValue</title><uiTitle>Produces empty value if argument is not empty; ResultList.SUPPRESS otherwise</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues != null && contextValues.length > 0) {
+			for (int i = 0; i < contextValues.length; i++) {
+				String value = contextValues[i];
+				if (value != null && value.trim().length() > 0
+						&& !ResultList.SUPPRESS.equalsIgnoreCase(value)) {
+					result.addValue("");
+				} else {
+					result.addSuppress();
+				}
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>createIfExistsAndHasValue</name><key>calculate1222222222222222222222</key><tab>UDFNodePool</tab><title>createIfExistsAndHasValue</title><uiTitle>Produces empty value if argument is not empty and exists; ResultList.SUPPRESS otherwise</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues != null && contextValues.length > 0) {
+			for (int i = 0; i < contextValues.length; i++) {
+				String value = contextValues[i];
+				if (value != null && value.trim().length() > 0
+						&& !ResultList.SUPPRESS.equalsIgnoreCase(value)) {
+					result.addValue("");
+				} else {
+					result.addSuppress();
+				}
+			}
+		}
+else {
+		result.addSuppress();
+}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="suchValuesString" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>createIfHasOneOfSuchValues</name><key>calculate1</key><tab>UDFNodePool</tab><title>createIfHasOneOfSuchValues</title><uiTitle><![CDATA[Produces empty value when the first argument has one of the values passed as a constant in the second argument (separated by a semicolon);  ResultList.SUPPRESS otherwise]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (suchValuesString == null || suchValuesString.length == 0) {
+			throw new IllegalStateException(
+					"createIfHasOneOfSuchValues: there is no suchValuesString");
+		}
+		if (contextValues != null && contextValues.length > 0) {
+			String[] suchValues = suchValuesString[0].split(";");
+
+			for (int i = 0; i < contextValues.length; i++) {
+				String value = ResultList.SUPPRESS;
+				for (int j = 0; j < suchValues.length; j++) {
+					if (suchValues[j].equalsIgnoreCase(contextValues[i])) {
+						value = "";
+						break;
+					}
+				}
+				result.addValue(value);
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>passIfHasValue</name><key>calculate12222</key><tab>UDFNodePool</tab><title>passIfHasValue</title><uiTitle>Maps every context value to itself when not an empty string; to ResultList.SUPPRESS otherwise</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues != null && contextValues.length > 0) {
+			for (int i = 0; i < contextValues.length; i++) {
+				String str = contextValues[i];
+				if (str != null && str.trim().length() > 0) {
+					result.addValue(str);
+				} else {
+					result.addSuppress();
+				}
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="conditionContextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="suchValuesString" jtp="String"><uiTitle/></argument><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>assignValueByCondition</name><key>calculate1222222</key><tab>UDFNodePool</tab><title>assignValueByCondition</title><uiTitle><![CDATA[Passes a value from the third argument when the corresponding value from first argument has one of the value contained in the second value (these conditions are separated by a semicolon); passes ResultList.SUPPRESS otherwise]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (suchValuesString == null || suchValuesString.length == 0) {
+			throw new IllegalStateException("assignValueByCondition: "
+					+ "there is no suchValuesString");
+		}
+		// AbstractTrace trace=container.getTrace();
+		if (conditionContextValues != null && conditionContextValues.length > 0) {
+			if (contextValues == null
+					|| contextValues.length != conditionContextValues.length) {
+				throw new IllegalStateException(
+						"assignValueByCondition: "
+								+ "conditionContextValues and contextValues have different lengths");
+			}
+
+			String[] conditions = suchValuesString[0].split(";");
+			for (int i = 0; i < conditionContextValues.length; i++) {
+				String value = ResultList.SUPPRESS;
+				for (int j = 0; j < conditions.length; j++) {
+					if (conditions[j]
+							.equalsIgnoreCase(conditionContextValues[i])) {
+						value = contextValues[i];
+						break; // leave the inner loop
+					}
+				}
+				result.addValue(value);
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="secondContext" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>simpleUseOneAsManyAndSplitByEachValue</name><key>calculate12222222222222222222222</key><tab>UDFNodePool</tab><title>simpleUseOneAsManyAndSplitByEachValue</title><uiTitle><![CDATA[Uses the first argument (the context should have exactly one value) as often as the length of the second context indicates and splits the result by each value.]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues != null && contextValues.length > 0
+				&& secondContext != null && secondContext.length > 0) {
+			String value = null;
+			if (contextValues.length == 1) {
+				value = contextValues[0];
+			} else {
+				for (int i = 0; i < contextValues.length; i++) {
+					if (!ResultList.SUPPRESS.equals(contextValues[i])) {
+						value = contextValues[i];
+						break;
+					}
+				}
+				if (value == null) {
+					value = contextValues[0];
+				}
+			}
+			result.addValue(value);
+			for (int i = 1; i < secondContext.length; i++) {
+				result.addContextChange();
+				result.addValue(value);
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="secondContext" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>simpleUseOneAsMany</name><key>calculate122222</key><tab>UDFNodePool</tab><title>simpleUseOneAsMany</title><uiTitle>Uses the first argument (the context should have exactly one value) as often as the length of the second context indicates.</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues != null && contextValues.length > 0
+				&& secondContext != null && secondContext.length > 0) {
+			String value = null;
+			if (contextValues.length == 1) {
+				value = contextValues[0];
+			} else {
+				for (int i = 0; i < contextValues.length; i++) {
+					if (!ResultList.SUPPRESS.equals(contextValues[i])) {
+						value = contextValues[i];
+						break;
+					}
+				}
+				if (value == null) {
+					value = contextValues[0];
+				}
+			}
+			for (int i = 0; i < secondContext.length; i++) {
+				result.addValue(value);
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>deleteSuppress</name><key>calculate122222222</key><tab>UDFNodePool</tab><title>deleteSuppress</title><uiTitle>Maps every context value to itself when not null and not ResultList.SUPPRESS - maybe the context queue will get shoter&lt;br&gt;</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues != null && contextValues.length > 0) {
+			for (int i = 0; i < contextValues.length; i++) {
+				if (contextValues[i] != null
+						&& !ResultList.SUPPRESS
+								.equalsIgnoreCase(contextValues[i])) {
+					result.addValue(contextValues[i]);
+				}
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getFirstContextValue</name><key>calculate12222222</key><tab>UDFNodePool</tab><title>getFirstContextValue</title><uiTitle>Returns the first non empty context value (or ResultList.SUPPRESS if no such value exits).</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues != null && contextValues.length > 0) {
+			String value = ResultList.SUPPRESS;
+			for (int i = 0; i < contextValues.length; i++) {
+				String str = contextValues[i];
+				if (str != null && !ResultList.SUPPRESS.equalsIgnoreCase(str)) {
+					value = str;
+					break;
+				}
+			}
+			result.addValue(value);
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>hasValue</name><key>calculate12</key><tab>UDFNodePool</tab><title>existsAndHasValue</title><uiTitle>Produces &quot;true&quot; if the argument is not empty; &quot;false&quot; otherwise</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues != null && contextValues.length > 0) {
+			for (int i = 0; i < contextValues.length; i++) {
+				if (contextValues[i] != null
+						&& contextValues[i].trim().length() > 0
+						&& !ResultList.SUPPRESS
+								.equalsIgnoreCase(contextValues[i])) {
+					result.addValue("true");
+				} else {
+					result.addValue("false");
+				}
+			}
+		}  else {
+			result.addValue("false");
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="suchValuesString" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>hasOneOfSuchValues</name><key>calculate1222</key><tab>UDFNodePool</tab><title>existsAndHasOneOfSuchValues</title><uiTitle>Produces &quot;true&quot;if the first argument has one of the values passed as a constant in the second argument (separated by a semicolon); &quot;false&quot; otherwise</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (suchValuesString == null || suchValuesString.length == 0) {
+			throw new IllegalStateException("hasOneOfSuchValues: "
+					+ "there is no suchValuesString");
+		}
+		
+		if (contextValues != null && contextValues.length > 0) {
+			String[] suchValues = suchValuesString[0].split(";");
+
+			for (int i = 0; i < contextValues.length; i++) {
+				String oneOfSuchValues = "false";
+				for (int j = 0; j < suchValues.length; j++) {
+					if (suchValues[j].equalsIgnoreCase(contextValues[i])) {
+						oneOfSuchValues = "true";
+						break;
+					}
+				}
+				result.addValue(oneOfSuchValues);
+			}
+		}  else {
+			result.addValue("false");
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="suchValuesString" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>contextHasOneOfSuchValues</name><key>calculate1222222222</key><tab>UDFNodePool</tab><title>contextHasOneOfSuchValues</title><uiTitle><![CDATA[Produces a single  "true" if the first argument (a context queue) contains one of the values passed as a constant in the second argument (separated by a semicolon); "false" otherwise]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues != null && contextValues.length > 0) {
+			if (suchValuesString == null || suchValuesString.length == 0
+					|| suchValuesString[0] == null) {
+				throw new IllegalStateException("contextHasOneOfSuchValues: "
+						+ "there is no suchValuesString");
+			}
+			String[] suchValues = suchValuesString[0].split(";");
+
+			String oneOfSuchValues = "false";
+			fcontext: for (int i = 0; i < contextValues.length; i++) {
+				for (int j = 0; j < suchValues.length; j++) {
+					if (suchValues[j].equalsIgnoreCase(contextValues[i])) {
+						oneOfSuchValues = "true";
+						break fcontext;
+					}
+				}
+			}
+
+			result.addValue(oneOfSuchValues);
+		} else {
+			result.addValue("false");
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="secondContext" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>useOneContextAsMany</name><key>calculate12222222222222</key><tab>UDFNodePool</tab><title>useOneContextAsMany</title><uiTitle>Uses the first argument as often as values exit in the second argument.</uiTitle><implementation type="udf"><javaText><![CDATA[		if (contextValues != null && contextValues.length > 0) {
+			if (secondContext != null && secondContext.length > 0) {
+				for (int i = 0; i < secondContext.length - 1; i++) {
+					for (int j=0; j < contextValues.length; j++) {
+						result.addValue(contextValues[j]);
+					}
+					result.addContextChange();
+				}
+				// the last context
+				for (int j=0; j < contextValues.length; j++) {
+					result.addValue(contextValues[j]);
+				}
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="queue1values" jtp="String"><uiTitle/></argument><argument tp="0" nm="queue2values" jtp="String"><uiTitle/></argument><argument tp="0" nm="queue3values" jtp="String"><uiTitle/></argument><argument tp="0" nm="queue4values" jtp="String"><uiTitle/></argument><argument tp="0" nm="queue5values" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>concatToOneQueue</name><key>calculate12222222222</key><tab>UDFNodePool</tab><title>concatToOneQueue</title><uiTitle>Puts all arguments sequentially into one queue</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (queue1values != null && queue1values.length > 0) {
+			for (int i = 0; i < queue1values.length; i++) {
+				result.addValue(queue1values[i]);
+			}
+		} else {
+			result.addValue(ResultList.SUPPRESS);
+		}
+		if (queue2values != null && queue2values.length > 0) {
+			for (int i = 0; i < queue2values.length; i++) {
+				result.addValue(queue2values[i]);
+			}
+		} else {
+			result.addValue(ResultList.SUPPRESS);
+		}
+		if (queue3values != null && queue3values.length > 0) {
+			for (int i = 0; i < queue3values.length; i++) {
+				result.addValue(queue3values[i]);
+			}
+		} else {
+			result.addValue(ResultList.SUPPRESS);
+		}
+		if (queue4values != null && queue4values.length > 0) {
+			for (int i = 0; i < queue4values.length; i++) {
+				result.addValue(queue4values[i]);
+			}
+		} else {
+			result.addValue(ResultList.SUPPRESS);
+		}
+		if (queue5values != null && queue5values.length > 0) {
+			for (int i = 0; i < queue5values.length; i++) {
+				result.addValue(queue5values[i]);
+			}
+		} else {
+			result.addValue(ResultList.SUPPRESS);
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>groupContextValues</name><key>calculate1222222222222222</key><tab>UDFNodePool</tab><title>deleteMultipleContextValues</title><uiTitle>Removes all multiple values from the context.leaving only the first</uiTitle><implementation type="udf"><javaText><![CDATA[
+		List values = new ArrayList();
+		if (contextValues != null && contextValues.length > 0) {
+			for (int i = 0; i < contextValues.length; i++) {
+				if (ResultList.SUPPRESS.equals(contextValues[i])) {
+					continue;
+				}
+				if (!values.contains(contextValues[i])) {
+					values.add(contextValues[i]);
+					result.addValue(contextValues[i]);
+				}
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="delimiterString" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>concatContextValues</name><key>calculate12222222222222222222</key><tab>UDFNodePool</tab><title>concatContextValues</title><uiTitle>concatenates all values of a context seperated by second argument</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (delimiterString == null || delimiterString.length == 0) {
+			throw new IllegalStateException("concatContextValues: "
+					+ "there is no delimiterString");
+		}
+
+		if (contextValues != null && contextValues.length > 0) {
+			String delimiter = delimiterString[0];
+			StringBuffer sb = new StringBuffer(contextValues[0]);
+			for (int i = 1; i < contextValues.length; i++) {
+				sb.append(delimiter).append(contextValues[i]);
+			}
+
+			result.addValue(sb.toString());
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="2"><argument tp="0" nm="inputQueue" jtp="String"><uiTitle/></argument><argument tp="0" nm="exampleQueue" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>formatByContextExample</name><key>calculate122222222222222222222</key><tab>UDFNodePool</tab><title>formatByContextExample</title><uiTitle>format contexts in inputQueue by values (representing contexts) in exampleQueue</uiTitle><implementation type="udf"><javaText><![CDATA[		// format contexts in inputQueue by values (representing contexts) in exampleQueue
+		// this means that contexts can reduce
+		// requirement: number of contexts in inputQueue = number of values in exampleQueue
+		
+		// declaration
+		int inputCCCounter = 1;
+		int exampleContextCounter = 0;
+		
+		// count number of contexts in inputQueue for checking
+		for (int k = 0; k < inputQueue.length; k++) {
+			if (ResultList.CC.equals(inputQueue[k])) {
+				inputCCCounter++;
+			}
+		}
+
+		// count number of values in exampleQueue for checking
+		for (int l = 0; l < exampleQueue.length; l++) {
+			if (!(ResultList.CC.equals(exampleQueue[l]))) {
+				exampleContextCounter++;
+			}
+		}
+
+		// start of main computing
+		if (inputCCCounter == exampleContextCounter) {
+			int inputIndex = 0;
+			
+			// looping on exampleQueue
+			for (int i = 0; i < exampleQueue.length; i++) {
+				// check for context change in exampleQueue
+				if (ResultList.CC.equals(exampleQueue[i])) {
+					// add context change to result
+					result.addContextChange();
+				} else
+					// looping on inputQueue
+					for (int j = inputIndex; j < inputQueue.length; j++) {
+						inputIndex++;
+						// check for context changes in inputQueue
+						if (ResultList.CC.equals(inputQueue[j])) {
+							break;
+						} else {
+							// add value to result if there is no context change
+							result.addValue(inputQueue[j]);
+						}
+					}
+			}
+		} else
+			throw new RuntimeException(
+					"formatByContextExample: number of contexts in inputQueue ("+inputCCCounter+") and number of values in exampleQueue ("+exampleContextCounter+") are not equal.");
+]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="copyCounts" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>createMultipleCopies</name><key>calculate12222222222222222</key><tab>UDFNodePool</tab><title>createMultipleCopies</title><uiTitle>Copies each value of the 1st queue as often as the corresponding value of the 2nd queue indicates</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (contextValues == null || copyCounts == null
+				|| contextValues.length != copyCounts.length) {
+			throw new IllegalStateException(
+					"createMultipleCopies: "
+							+ "contextValues and copyCounts have different lengths");
+		}
+		if (contextValues != null) {
+			for (int i=0; i < contextValues.length; i++) {
+				int count = 0;
+				try {
+					count = Integer.parseInt(copyCounts[i]);
+				} catch (Exception ex) {
+					throw new RuntimeException("UDF createMultipleCopies: " +
+							copyCounts[i] + " is not a number");
+				}
+				
+				if(count > 0){
+				for (int j = 0; j < count; j++) {
+					result.addValue(contextValues[i]);
+				}}
+else result.addSuppress();
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="copyCounts" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>createMultipleContextCopies</name><key>calculate12222222222222222222222222</key><tab>UDFNodePool</tab><title>createMultipleContextCopies</title><uiTitle>Copies the whole context of 1st queue as often as the corresponding value of the 2nd queue indicates</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (copyCounts.length == 0) {
+			throw new RuntimeException("UDF createMultipleContextCopies: "
+					+ " copyCounts has length 0");
+		}
+		int count = 0;
+		try {
+			count = Integer.parseInt(copyCounts[0]);
+		} catch (Exception ex) {
+			throw new RuntimeException("UDF createMultipleContextCopies: "
+					+ copyCounts[0] + " is not a number");
+		}
+		if (count > 0) {
+			for (int i = 0; i < contextValues.length; i++) {
+				result.addValue(contextValues[i]);
+			}
+			for (int i = 1; i < count; i++) {
+				result.addContextChange();
+				for (int k = 0; k < contextValues.length; k++) {
+					result.addValue(contextValues[k]);
+				}
+			}
+		} else {
+			for (int i = 0; i < contextValues.length; i++) {
+				result.addSuppress();
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="wholeValue" jtp="String"><uiTitle/></argument><argument tp="0" nm="maxFragmentCount" jtp="String"><uiTitle/></argument><argument tp="0" nm="eachFragmentsLength" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>fragmentSingleValue</name><key>calculate122222222222</key><tab>UDFNodePool</tab><title>fragmentSingleValue</title><uiTitle><![CDATA[Fragments the first argument (a single context value) into a max. number of peaces (given by the second argument) of length from the third; the last one may be shorter. All arguments are treated like constants.]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		// AbstractTrace trace = container.getTrace();
+		if (wholeValue.length == 0) {
+			return;
+		}
+		if (wholeValue.length > 1) {
+			List contextValueList = new ArrayList();
+			for (int i = 0; i < wholeValue.length; i++) {
+				if (!ResultList.SUPPRESS.equals(wholeValue[i])) {
+					contextValueList.add(wholeValue[i]);
+				}
+			}
+			if (contextValueList.size() > 1) {
+				throw new RuntimeException("Only one context value is expected");
+			}
+			if (contextValueList.size() == 0) {
+				result.addSuppress();
+				return;
+			}
+		}
+		
+		String singleValue = wholeValue[0];
+
+		int maxCount;
+		int length;
+		try {
+			maxCount = Integer.parseInt(maxFragmentCount[0]);
+		} catch (Exception ex) {
+			throw new RuntimeException(
+					"UDF fragmentSingleValue: maxFragmentCount"
+							+ maxFragmentCount[0] + " is not a number");
+		}
+
+		try {
+			length = Integer.parseInt(eachFragmentsLength[0]);
+		} catch (Exception ex) {
+			throw new RuntimeException(
+					"UDF fragmentSingleValue: eachFragmentsLength"
+							+ eachFragmentsLength[0] + " is not a number");
+		}
+
+		int completeLineCount = singleValue.length() / length;
+		int rest = singleValue.length() - completeLineCount * length;
+
+		if (completeLineCount == 0 && rest == 0) {
+			result.addValue(singleValue);
+			return;
+		}
+
+		int resultLineCount = Math.min(maxCount, completeLineCount);
+		// trace.addInfo("completeLineCount: " + completeLineCount);
+		// trace.addInfo("maxCount: " + maxCount);
+		// trace.addInfo("resultLineCount: " + resultLineCount);
+		// trace.addInfo("rest: " + rest);
+		for (int i = 0; i < resultLineCount; i++) {
+			String subString = singleValue.substring(i * length, (i + 1)
+					* length);
+			result.addValue(subString);
+		}
+
+		if (maxCount > completeLineCount && rest > 0) {
+			String subString = singleValue.substring(completeLineCount
+					* length);
+			result.addValue(subString);
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="queue1values" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument><argument tp="0" nm="queue2values" jtp="String"><uiTitle/></argument></signature><name>concatTwoQueuesToOne</name><key>calculate1222222222222</key><tab>UDFNodePool</tab><title>concatTwoQueuesToOne</title><uiTitle>Puts all arguments sequentially into one queue</uiTitle><implementation type="udf"><javaText><![CDATA[
+	if (queue1values != null && queue1values.length > 0) {
+	    for (int i = 0; i < queue1values.length; i++) {
+					result.addValue(queue1values[i]);
+	    }
+	}
+	if (queue2values != null && queue2values.length > 0) {
+	    for (int i = 0; i < queue2values.length; i++) {
+		result.addValue(queue2values[i]);
+	    }
+	}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="arrangedSetOfKeys" jtp="String"><uiTitle/></argument><argument tp="0" nm="allKeys" jtp="String"><uiTitle/></argument><argument tp="0" nm="valuesToRearrange" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getFieldValsByStr</name><key>calculate122222222222222</key><tab>UDFNodePool</tab><title>rearrangeByKey</title><uiTitle>Rearranges the third argument by the corresponding key set in the second argument formatted by the first argument</uiTitle><implementation type="udf"><javaText><![CDATA[//		AbstractTrace trace = container.getTrace();
+		if (allKeys == null || valuesToRearrange == null
+				|| allKeys.length != valuesToRearrange.length) {
+			throw new IllegalStateException("UDF rearrangeByKey: "
+					+ "allKeys and valuesToRearrange have different lengths");
+		}
+
+		if (valuesToRearrange == null || valuesToRearrange.length == 0) {
+			for (int i = 0; i < arrangedSetOfKeys.length; i++) {
+				result.addSuppress();
+			}
+		} else {
+			if (arrangedSetOfKeys == null || arrangedSetOfKeys.length == 0) {
+				throw new IllegalStateException(
+						"UDF rearrangeByKey: there is no arrangedKeySet");
+			}
+
+			Set indexSet = new HashSet();
+			for (int i = 0; i < allKeys.length; i++) {
+				//				trace.addInfo("i: ... " + indexSet);
+				//				trace.addInfo("i: ... " + allKeys[i]);
+				if (ResultList.SUPPRESS.equals(allKeys[i])
+						|| allKeys[i].trim().length() == 0) {
+					// keep suppress values
+					result.addSuppress();
+				} else {
+					// iterate over the arranged key set
+					for1 : for (int k = 0; k < arrangedSetOfKeys.length; k++) {
+						for (int m = 0; m < allKeys.length; m++) {
+							if (indexSet.contains(new Integer(m))) {
+								// value is already processed; ignore
+								continue;
+							}
+							if (ResultList.SUPPRESS.equals(allKeys[m])
+									|| allKeys[m].trim().length() == 0) {
+								continue;
+							}
+							if (arrangedSetOfKeys[k].equals(allKeys[m])) {
+								// value is not yet already processed; 
+								// add tu resultlist and keep in mind by
+								// putting onto a set
+								result.addValue(valuesToRearrange[m]);
+								indexSet.add(Integer.valueOf(m + ""));
+								break for1;
+							}
+						}
+					}
+				}
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="index" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>getValueByIndex</name><key>calculate122222222222222222</key><tab>UDFNodePool</tab><title>getValueByIndex</title><uiTitle>returns a value from a context(arg1) by given index(arg2) (starting at 1)</uiTitle><implementation type="udf"><javaText><![CDATA[		if(contextValues!=null && index!=null){
+			String indexStr=index[0];			
+			try{
+				int indexInt=Integer.parseInt(indexStr);
+				
+				if(indexInt <= contextValues.length && indexInt >0) result.addValue(contextValues[indexInt-1]);
+				return;
+			}
+
+			catch(java.lang.NumberFormatException numberFormatExp){
+					throw new NumberFormatException(
+						"UDF getValueByIndex: could not convert index to number");
+			}
+
+		}
+]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="startValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="endValues" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>createNumberRange</name><key>calculate1222222222222222222</key><tab>UDFNodePool</tab><title>createNumberRange</title><uiTitle>Creates an empty string for each number of the missing Argument-to-Argument 2-intervall</uiTitle><implementation type="udf"><javaText><![CDATA[
+		if (startValues.length != endValues.length) {
+			throw new IllegalStateException("UDF createNumberRange: "
+					+ "startValues and endValues have different lengths");
+		}
+		for (int i = 0; i < startValues.length; i++) {
+			String startValue = startValues[i].trim();
+			if (ResultList.SUPPRESS.equals(startValue)) {
+				continue;
+			}
+			long lv_from;
+			try {
+				lv_from = Long.parseLong(startValue);
+			} catch (NumberFormatException nfe) {
+				throw new RuntimeException("UDF createNumberRange: "
+						+ " cannot parse long startValue " + startValue);
+			}
+
+			String endValue = endValues[i].trim();
+			long lv_to;
+			if (endValue.length() == 0
+					|| ResultList.SUPPRESS.equals(startValue)) {
+				lv_to = lv_from;
+			} else {
+				try {
+					lv_to = Long.parseLong(endValue);
+				} catch (NumberFormatException nfe) {
+					throw new RuntimeException("UDF createNumberRange: "
+							+ " cannot parse long endValue " + endValue);
+				}
+			}
+
+			for (long k = lv_from; k <= lv_to; k++) {
+				result.addValue(k + "");
+			}
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="2" nm="blockSize" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>createContextsForFixedBlockSize</name><key>calculate122222222222222222222222</key><tab>UDFNodePool</tab><title>createContextsForFixedBlockSize</title><uiTitle>DO NOT USE ANYMORE!!! Splits context in first argument into blocks defined in size by parameter. Returns SUPPRESS when context is empty.</uiTitle><implementation type="udf"><javaText><![CDATA[
+		List contextValueList = new ArrayList();
+		for (int i = 0; i < contextValues.length; i++) {
+			if (!ResultList.SUPPRESS.equals(contextValues[i])) {
+				contextValueList.add(contextValues[i]);
+			}
+		}
+		int contextValueSize = contextValueList.size();
+		if (contextValueSize > 0) {
+			int blockSizeInt = 0;
+			try {
+				blockSizeInt = Integer.parseInt(blockSize);
+			} catch (Exception ex) {
+				throw new RuntimeException(
+						"UDF createContextsForFixedBlockSize " + blockSize + " isn't an int value");
+			}
+			int ftxCount = contextValueSize / blockSizeInt;
+			if (contextValueSize % blockSizeInt > 0) {
+				++ftxCount;
+			}
+			for (int i = 0; i < ftxCount; i++) {
+				result.addValue("");
+			}
+		} else {
+			result.addSuppress();
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="indexString" jtp="String"><uiTitle/></argument><argument tp="2" nm="blockSize" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>buildBlocksAndGetValueByIndex</name><key>calculate2</key><tab>UDFNodePool</tab><title>buildBlocksAndGetValueByIndex</title><uiTitle><![CDATA[DO NOT USE ANYMORE!!! Splits context in first argument into blocks defined in size by parameter and returns value at index given by second argument. Returns SUPPRESS when context is empty.]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		List contextValueList = new ArrayList();
+		for (int i = 0; i < contextValues.length; i++) {
+			if (!ResultList.SUPPRESS.equals(contextValues[i])) {
+				contextValueList.add(contextValues[i]);
+			}
+		}
+
+		int contextValueSize = contextValueList.size();
+		if (contextValueSize > 0) {
+			int blockSizeInt = 0;
+			try {
+				blockSizeInt = Integer.parseInt(blockSize);
+			} catch (Exception ex) {
+				throw new RuntimeException(
+						"UDF buildBlocksAndGetValueByIndex " + blockSize + " isn't an int value");
+			}
+
+			int index = 0;
+			try {
+				index = Integer.parseInt(indexString[0]);
+			} catch (Exception ex) {
+				throw new RuntimeException("UDF buildBlocksAndGetValueByIndex " + indexString 
+									+ " isn't an index value");
+			}
+			
+			if (index >= blockSizeInt) {
+				throw new RuntimeException("UDF buildBlocksAndGetValueByIndex: indexString "
+						+ indexString + " doen't fit the blocksize " + blockSize);
+			}
+
+			for (int i = index; i < contextValueSize; i += blockSizeInt) {
+				result.addValue(contextValueList.get(i));
+			}
+
+			int mod = contextValueSize % blockSizeInt;
+			if (mod != 0 && index >= mod) {
+				result.addSuppress();
+			}
+		} else {
+			result.addSuppress();
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="blockSize" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>createContextsForFixedBlockSize001</name><key>calculate122222222222222222222222222</key><tab>UDFNodePool</tab><title>createContextsForFixedBlockSize001</title><uiTitle>Splits context in 1st argument into blocks defined in size by 2nd argument. Returns SUPPRESS when context is empty.</uiTitle><implementation type="udf"><javaText><![CDATA[
+		List contextValueList = new ArrayList();
+		for (int i = 0; i < contextValues.length; i++) {
+			if (!ResultList.SUPPRESS.equals(contextValues[i])) {
+				contextValueList.add(contextValues[i]);
+			}
+		}
+
+		int contextValueSize = contextValueList.size();
+		if (contextValueSize > 0) {
+			int blockSizeInt = 0;
+			try {
+				blockSizeInt = Integer.parseInt(blockSize[0]);
+			} catch (Exception ex) {
+				throw new RuntimeException(
+						"UDF createContextsForFixedBlockSize001 " + blockSize[0] + " isn't an int value");
+			}
+
+			int ftxCount = contextValueSize / blockSizeInt;
+			if (contextValueSize % blockSizeInt > 0) {
+				++ftxCount;
+			}
+			for (int i = 0; i < ftxCount; i++) {
+				result.addValue("");
+			}
+		} else {
+			result.addSuppress();
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="contextValues" jtp="String"><uiTitle/></argument><argument tp="0" nm="indexString" jtp="String"><uiTitle/></argument><argument tp="0" nm="blockSize" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>buildBlocksAndGetValueByIndex001</name><key>calculate1222222222222222222222222222</key><tab>UDFNodePool</tab><title>buildBlocksAndGetValueByIndex001</title><uiTitle><![CDATA[Splits context in 1st argument into blocks defined in size by 3rd argument and returns value at index given by 2nd argument. Returns SUPPRESS when context is empty.]]></uiTitle><implementation type="udf"><javaText><![CDATA[
+		List contextValueList = new ArrayList();
+		for (int i = 0; i < contextValues.length; i++) {
+			if (!ResultList.SUPPRESS.equals(contextValues[i])) {
+				contextValueList.add(contextValues[i]);
+			}
+		}
+
+		int contextValueSize = contextValueList.size();
+		if (contextValueSize > 0) {
+			int blockSizeInt = 0;
+			try {
+				blockSizeInt = Integer.parseInt(blockSize[0]);
+			} catch (Exception ex) {
+				throw new RuntimeException(
+						"UDF buildBlocksAndGetValueByIndex001 " + blockSize[0] + " isn't an int value");
+			}
+
+			int index = 0;
+			try {
+				index = Integer.parseInt(indexString[0]);
+			} catch (Exception ex) {
+				throw new RuntimeException("UDF buildBlocksAndGetValueByIndex001 "
+						+ indexString[0] + " isn't an index value");
+			}
+			
+			if (index >= blockSizeInt) {
+				throw new RuntimeException("UDF buildBlocksAndGetValueByIndex001: indexString "
+						+ indexString[0] +  " doen't fit the blocksize " + blockSize[0]);
+			}
+
+			for (int i = index; i < contextValueSize; i += blockSizeInt) {
+				result.addValue(contextValueList.get(i));
+			}
+
+			int mod = contextValueSize % blockSizeInt;
+			if (mod != 0 && index >= mod) {
+				result.addSuppress();
+			}
+		} else {
+			result.addSuppress();
+		}]]></javaText></implementation></functionmodel><functionmodel><signature cacheType="1"><argument tp="0" nm="inputString" jtp="String"><uiTitle/></argument><argument tp="0" nm="delimiter" jtp="String"><uiTitle/></argument><argument tp="1" nm="result" jtp="ResultList"><uiTitle/></argument></signature><name>splitValueStringToContextValues</name><key>calculate1222222222222222222222222</key><tab>UDFNodePool</tab><title>splitValueStringToContextValues</title><uiTitle>splits input string (Arg1) at given delimiter (Arg2) and creates a new context value for each new value</uiTitle><implementation type="udf"><javaText><![CDATA[if (inputString == null)
+	return;
+
+for (int i=0; i<inputString.length; i++) {
+	String[] splits = inputString[i].split(delimiter[0]);
+	for (int j=0; j<splits.length; j++)
+		result.addValue(splits[j]);
+}]]></javaText></implementation></functionmodel><usedjars/></functionstorage>

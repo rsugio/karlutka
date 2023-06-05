@@ -1,0 +1,17 @@
+﻿<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <SOAP-ENV:Body>
+        <ns2:CommunicationChannelQueryResponse xmlns:ns2='http://sap.com/xi/BASIS'>
+            <CommunicationChannelID>
+                <PartyID></PartyID>
+                <ComponentID>BST_TansportHUB</ComponentID>
+                <ChannelID>cc_http_sender</ChannelID>
+            </CommunicationChannelID>
+            <CommunicationChannelID>
+                <PartyID></PartyID>
+                <ComponentID>BS_QHM230</ComponentID>
+                <ChannelID>CC_HCM_Proxy_Sender_NCAE</ChannelID>
+            </CommunicationChannelID>
+            <LogMessageCollection></LogMessageCollection>
+        </ns2:CommunicationChannelQueryResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

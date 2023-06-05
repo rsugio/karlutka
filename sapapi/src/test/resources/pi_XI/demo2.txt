@@ -1,0 +1,23 @@
+﻿POST /XISOAPAdapter/MessageServlet?xi_message=true HTTP/1.0
+Accept: */*
+Host: nl-sp-cpi-app1:5555
+User-Agent: SAP-Messaging-com.sap.aii.af.sdk.xi/1.0505
+Content-Type: multipart/related; boundary=SAP_e66631c4-da21-11ed-b96a-000000417ca6_END; type="text/xml"; start="<soap-e65cbb4cda2111edba04000000417ca6@sap.com>"
+Content-Length: 3903
+SOAPACTION:
+
+--SAP_e66631c4-da21-11ed-b96a-000000417ca6_END
+Content-ID: <soap-e65cbb4cda2111edba04000000417ca6@sap.com>
+Content-Disposition: attachment;filename="soap-e65cbb4cda2111edba04000000417ca6@sap.com.xml"
+Content-Type: text/xml; charset=utf-8
+Content-Description: SOAP
+
+<SOAP:Envelope xmlns:SOAP='http://schemas.xmlsoap.org/soap/envelope/'><SOAP:Header><sap:ReliableMessaging xmlns:sap='http://sap.com/xi/XI/Message/30' SOAP:mustUnderstand='1'><sap:QualityOfService>ExactlyOnce</sap:QualityOfService></sap:ReliableMessaging><sap:DynamicConfiguration xmlns:sap='http://sap.com/xi/XI/Message/30' SOAP:mustUnderstand='1'><sap:Record namespace='http://sap.com/xi/XI/System/REST' name='operation'>POST</sap:Record><sap:Record namespace='http://sap.com/xi/XI/Message/30/routing' name='SourceMessageType'></sap:Record><sap:Record namespace='http://sap.com/xi/XI/System/REST' name='path'>/xi</sap:Record><sap:Record namespace='http://sap.com/xi/XI/Message/30/routing' name='InterfaceDeterminationHash'>68390214727e60ab3dbb599d37befa4b</sap:Record><sap:Record namespace='http://sap.com/xi/XI/Message/30/routing' name='SourceMessageTypeNS'></sap:Record><sap:Record namespace='http://sap.com/xi/XI/Message/30/routing' name='InterfaceFromOperation'></sap:Record><sap:Record namespace='http://sap.com/xi/XI/Message/30/general' name='senderAgreementGUID'>8647772360b43a08881ae6c6bc4cafff</sap:Record></sap:DynamicConfiguration><sap:Passport xmlns:sap='http://sap.com/xi/XI/Message/30'><sap:PassportHash>2A54482A0300E60000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000063323739336162346461323131316564636334333030303030303431376361360000000002E65407CFDA2111EDBFC8000000417CA60000000000000000000000000000000000000000000000002A54482A</sap:PassportHash><sap:Transaction_ID>c2793ab4da2111edcc43000000417ca6</sap:Transaction_ID></sap:Passport><sap:System xmlns:sap='http://sap.com/xi/XI/Message/30' SOAP:mustUnderstand='1'/><sap:HopList xmlns:sap='http://sap.com/xi/XI/Message/30' SOAP:mustUnderstand='1'><sap:Hop timeStamp='2023-04-13T17:37:45Z' wasRead='false'><sap:Engine type='AE'>af.dph.ld-s-vendordb</sap:Engine><sap:Adapter namespace='http://sap.com/xi/XI/System'>XIRA</sap:Adapter><sap:MessageId>e65ac36e-da21-11ed-b33b-000000417ca6</sap:MessageId></sap:Hop></sap:HopList><sap:Main xmlns:sap='http://sap.com/xi/XI/Message/30' versionMajor='3' versionMinor='1' SOAP:mustUnderstand='1'><sap:MessageClass>ApplicationMessage</sap:MessageClass><sap:ProcessingMode>asynchronous</sap:ProcessingMode><sap:MessageId>e65ac36e-da21-11ed-b33b-000000417ca6</sap:MessageId><sap:TimeSent>2023-04-13T17:37:45Z</sap:TimeSent><sap:Sender><sap:Party agency='http://sap.com/xi/XI' scheme='XIParty'></sap:Party><sap:Service>BC_TEST1</sap:Service></sap:Sender><sap:Receiver><sap:Party agency='http://sap.com/xi/XI' scheme='XIParty'></sap:Party><sap:Service>BC_TEST1</sap:Service></sap:Receiver><sap:Interface namespace='urn:none'>SI_OutDemo</sap:Interface></sap:Main></SOAP:Header><SOAP:Body><sap:Manifest xmlns:sap='http://sap.com/xi/XI/Message/30' xmlns:xlink='http://www.w3.org/1999/xlink'><sap:Payload xlink:type='simple' xlink:href='cid:payload-e65ad2ecda2111edbbff000000417ca6@sap.com'><sap:Name>MainDocument</sap:Name><sap:Type>Application</sap:Type></sap:Payload></sap:Manifest></SOAP:Body></SOAP:Envelope>
+--SAP_e66631c4-da21-11ed-b96a-000000417ca6_END
+Content-ID: <payload-e65ad2ecda2111edbbff000000417ca6@sap.com>
+Content-Disposition: attachment;filename="MainDocument.bin"
+Content-Type: multipart/related; boundary=SAP_867dc846-d766-11ed-c626-000000417ca6_END
+Content-Description: MainDocument
+
+<aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/>
+--SAP_e66631c4-da21-11ed-b96a-000000417ca6_END--

@@ -1,0 +1,63 @@
+<?xml version='1.0'?>
+<SOAP:Envelope xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+	<SOAP:Body>
+		<SOAP:Fault xmlns:SOAP="http://schemas.xmlsoap.org/soap/envelope/">
+			<faultcode>SOAP:Client</faultcode>
+			<faultstring>Server Error</faultstring>
+			<faultactor>http://sap.com/xi/XI/Message/30</faultactor>
+			<detail>
+				<SAP:Error xmlns:SAP="http://sap.com/xi/XI/Message/30" SOAP:mustUnderstand="1">
+					<SAP:Category>XIProtocol</SAP:Category>
+					<SAP:Code area="PARSING">GENERAL</SAP:Code>
+					<SAP:Stack><![CDATA[com.sap.engine.interfaces.messaging.api.exception.MessagingException: com.sap.engine.interfaces.messaging.api.exception.RetryControlException: Receiver Determination did not find any receivers at all
+	at com.sap.aii.adapter.soap.web.SOAPHandler.processSOAPtoXMB(SOAPHandler.java:839)
+	at com.sap.aii.adapter.soap.web.MessageServlet.doPost(MessageServlet.java:783)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:754)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:847)
+	at com.sap.engine.services.servlets_jsp.server.runtime.FilterChainImpl.runServlet(FilterChainImpl.java:202)
+	at com.sap.engine.services.servlets_jsp.server.runtime.FilterChainImpl.doFilter(FilterChainImpl.java:103)
+	at com.sap.engine.services.servlets_jsp.server.servlet.AuthenticationFilter.doFilter(AuthenticationFilter.java:126)
+	at com.sap.engine.services.servlets_jsp.server.runtime.FilterChainImpl.doFilter(FilterChainImpl.java:79)
+	at com.sap.engine.services.servlets_jsp.server.HttpHandlerImpl.runServlet(HttpHandlerImpl.java:441)
+	at com.sap.engine.services.servlets_jsp.server.HttpHandlerImpl.handleRequest(HttpHandlerImpl.java:210)
+	at com.sap.engine.services.httpserver.server.RequestAnalizer.startServlet(RequestAnalizer.java:439)
+	at com.sap.engine.services.httpserver.server.RequestAnalizer.startServlet(RequestAnalizer.java:428)
+	at com.sap.engine.services.servlets_jsp.filters.DSRWebContainerFilter.process(DSRWebContainerFilter.java:38)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.servlets_jsp.filters.ServletSelector.process(ServletSelector.java:81)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.servlets_jsp.filters.ApplicationSelector.process(ApplicationSelector.java:278)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.httpserver.filters.WebContainerInvoker.process(WebContainerInvoker.java:85)
+	at com.sap.engine.services.httpserver.chain.HostFilter.process(HostFilter.java:9)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.httpserver.filters.ResponseLogWriter.process(ResponseLogWriter.java:60)
+	at com.sap.engine.services.httpserver.chain.HostFilter.process(HostFilter.java:9)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.httpserver.filters.DefineHostFilter.process(DefineHostFilter.java:27)
+	at com.sap.engine.services.httpserver.chain.ServerFilter.process(ServerFilter.java:12)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.httpserver.filters.MonitoringFilter.process(MonitoringFilter.java:29)
+	at com.sap.engine.services.httpserver.chain.ServerFilter.process(ServerFilter.java:12)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.httpserver.filters.SessionSizeFilter.process(SessionSizeFilter.java:26)
+	at com.sap.engine.services.httpserver.chain.ServerFilter.process(ServerFilter.java:12)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.httpserver.filters.MemoryStatisticFilter.process(MemoryStatisticFilter.java:57)
+	at com.sap.engine.services.httpserver.chain.ServerFilter.process(ServerFilter.java:12)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.httpserver.filters.DSRHttpFilter.process(DSRHttpFilter.java:43)
+	at com.sap.engine.services.httpserver.chain.ServerFilter.process(ServerFilter.java:12)
+	at com.sap.engine.services.httpserver.chain.AbstractChain.process(AbstractChain.java:78)
+	at com.sap.engine.services.httpserver.server.Processor.chainedRequest(Processor.java:468)
+	at com.sap.engine.services.httpserver.server.Processor$FCAProcessorThread.process(Processor.java:262)
+	at com.sap.engine.services.httpserver.server.rcm.RequestProcessorThread.run(RequestProcessorThread.java:56)
+	at com.sap.engine.core.thread.execution.Executable.run(Executable.java:122)
+	at com.sap.engine.core.thread.execution.Executable.run(Executable.java:101)
+	at com.sap.engine.core.thread.execution.CentralExecutor$SingleThread.run(CentralExecutor.java:328)
+]]></SAP:Stack>
+				</SAP:Error>
+			</detail>
+		</SOAP:Fault>
+	</SOAP:Body>
+</SOAP:Envelope>

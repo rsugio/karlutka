@@ -146,7 +146,9 @@ class KSoap {
             autoPolymorphic = true
         }
 
-        @Deprecated("Использовать в крайнем случае", ReplaceWith("parseSOAP", "XmlReader"))
+        /**
+         * В основном используется в ktor-сервлетах
+         */
         inline fun <reified T> parseSOAP(sxml: String, f: Fault = Fault()): T? {
             val x = xmlserializer.decodeFromString<Envelope<T>>(sxml)
             f.faultcode = x.body.fault?.faultcode ?: ""
@@ -154,6 +156,9 @@ class KSoap {
             return x.body.data
         }
 
+        /**
+         * Используется из задач
+         */
         inline fun <reified T> parseSOAP(xmlReader: XmlReader, f: Fault = Fault()): T? {
             val x = xmlserializer.decodeFromReader<Envelope<T>>(xmlReader)
             f.faultcode = x.body.fault?.faultcode ?: ""
