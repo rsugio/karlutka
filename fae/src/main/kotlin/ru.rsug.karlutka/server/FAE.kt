@@ -121,7 +121,7 @@ class FAE(
     fun ktor(app: Application): Routing {
         val fae = this
         val routing = app.routing {
-            post(Regex(".+/rtc")) {
+            post(Regex("/IGW/compmon|.+/rtc")) {
                 val sc = Scenario.decodeFromString(call.receiveText())
                 val rt = rwb.servletFaeAdapterFrameworkRtc(sc, call.request.uri, call.request.queryParameters)
                 call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { rt }
@@ -163,8 +163,6 @@ class FAE(
                 )
                 val ansxml = response.composeSOAP()
                 logger.info(ansxml)
-//                val s =
-//                    """<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><SOAP-ENV:Body xmlns:rpl='urn:ProfileProcessorVi'><rpl:getProfilesResponse xmlns:rn0='urn:com.sap.aii.af.service.statistic.ws.impl' xmlns:rn1='urn:com.sap.aii.af.service.statistic.ws' xmlns:rn2='http://schemas.xmlsoap.org/soap/encoding/' xmlns:rn3='java:sap/standard' xmlns:rn4='urn:java/lang'><Response><rn0:WSProfile><rn0:activation>2017-06-21T12:59:43.471+00:00</rn0:activation><rn0:applicationKey>sap - XPI_STATISTIC - http://sap.com/xi/XI/Message/30</rn0:applicationKey><rn0:profileKey>XPI</rn0:profileKey></rn0:WSProfile></Response></rpl:getProfilesResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>"""
                 call.respondText(ContentType.Text.Xml.withCharset(StandardCharsets.UTF_8), HttpStatusCode.OK) { ansxml }
             }
             get("/FAE/mdt/Systatus") {
@@ -428,7 +426,9 @@ class FAE(
                 }
             }
             get("/mdt/version.jsp") {
-                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
+                // Implementation-Version: 7.5021.20210426113256.0000<br>  должен быть побайтово точным
+                val jsp = requireNotNull(this.javaClass.getResourceAsStream("/rwb/mdt_version.jsp")).readBytes()
+                call.respondBytes(ContentType.Text.Html, HttpStatusCode.OK) { jsp }
             }
             get("/mdt/") {
                 call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }

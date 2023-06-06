@@ -1,0 +1,185 @@
+<scenario><!--{{host}}/IGW/compmon ping selftest -->
+    <scenname/>
+    <scenversion/>
+    <sceninst/>
+    <component>
+        <compname>selftest</compname>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <comphost>host</comphost>
+    </component>
+    <component>
+        <compname>featureCheck</compname>
+        <property>
+            <propname>feature</propname>
+            <propvalue>Is Integration Gateway active on system?</propvalue>
+        </property>
+        <property>
+            <propname>featureDescr</propname>
+            <propvalue>Is Integration Gateway active on system?</propvalue>
+        </property>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <property>
+            <propname>details</propname>
+            <propvalue>Yes</propvalue>
+        </property>
+    </component>
+    <component>
+        <compname>featureCheck</compname>
+        <property>
+            <propname>feature</propname>
+            <propvalue>Is secure keystore available?</propvalue>
+        </property>
+        <property>
+            <propname>featureDescr</propname>
+            <propvalue>Is secure keystore available?</propvalue>
+        </property>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <property>
+            <propname>details</propname>
+            <propvalue>Yes</propvalue>
+        </property>
+    </component>
+    <component>
+        <compname>featureCheck</compname>
+        <property>
+            <propname>feature</propname>
+            <propvalue>Are all Integration Gateway applications running without errors?</propvalue>
+        </property>
+        <property>
+            <propname>featureDescr</propname>
+            <propvalue>Are all Integration Gateway applications running without errors?</propvalue>
+        </property>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <property>
+            <propname>details</propname>
+            <propvalue>Yes</propvalue>
+        </property>
+    </component>
+    <component>
+        <compname>featureCheck</compname>
+        <property>
+            <propname>feature</propname>
+            <propvalue>Is all Cloud Integration Content running without errors?</propvalue>
+        </property>
+        <property>
+            <propname>featureDescr</propname>
+            <propvalue>Is all Cloud Integration Content running without errors?</propvalue>
+        </property>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <property>
+            <propname>details</propname>
+            <propvalue>1 integration flows are started
+0 integration flows are stopped</propvalue>
+        </property>
+    </component>
+    <component>
+        <compname>featureCheck</compname>
+        <property>
+            <propname>feature</propname>
+            <propvalue>backgroundjobs</propvalue>
+        </property>
+        <property>
+            <propname>featureDescr</propname>
+            <propvalue>Is the archiving job (IGWArchiveJob) running without errors?</propvalue>
+        </property>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <property>
+            <propname>details</propname>
+            <propvalue>The job is not scheduled or was not executed in the last 7 days.</propvalue>
+        </property>
+    </component>
+    <component>
+        <compname>featureCheck</compname>
+        <property>
+            <propname>feature</propname>
+            <propvalue>backgroundjobs</propvalue>
+        </property>
+        <property>
+            <propname>featureDescr</propname>
+            <propvalue>Is the delete job (IGWMonitorDataCleanUpJob) running without errors?</propvalue>
+        </property>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <property>
+            <propname>details</propname>
+            <propvalue>The job is not scheduled or was not executed in the last 7 days.</propvalue>
+        </property>
+    </component>
+    <component>
+        <compname>featureCheck</compname>
+        <property>
+            <propname>feature</propname>
+            <propvalue>backgroundjobs</propvalue>
+        </property>
+        <property>
+            <propname>featureDescr</propname>
+            <propvalue>Is the data/message store cleanup job (IGWMonitorDataCleanUpJob) running without errors?</propvalue>
+        </property>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <property>
+            <propname>details</propname>
+            <propvalue>The job is not scheduled or was not executed in the last 7 days.</propvalue>
+        </property>
+    </component>
+    <component>
+        <compname>featureCheck</compname>
+        <property>
+            <propname>feature</propname>
+            <propvalue>backgroundjobs</propvalue>
+        </property>
+        <property>
+            <propname>featureDescr</propname>
+            <propvalue>Is the trace data cleanup job (IGWTraceDataCleanupJob) running without errors?</propvalue>
+        </property>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <property>
+            <propname>details</propname>
+            <propvalue>The job is not scheduled or was not executed in the last 7 days.</propvalue>
+        </property>
+    </component>
+    <component>
+        <compname>featureCheck</compname>
+        <property>
+            <propname>feature</propname>
+            <propvalue>jndiRegistry</propvalue>
+        </property>
+        <property>
+            <propname>featureDescr</propname>
+            <propvalue>Are all required components registered in the system JNDI registry?</propvalue>
+        </property>
+        <property>
+            <propname>result</propname>
+            <propvalue>OK</propvalue>
+        </property>
+        <property>
+            <propname>details</propname>
+            <propvalue>Yes</propvalue>
+        </property>
+    </component>
+</scenario>

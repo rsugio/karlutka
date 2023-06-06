@@ -1,0 +1,24 @@
+<scenario>
+    <scenname/>
+    <scenversion/>
+    <sceninst/>
+    <component>
+        <compname>ping</compname>
+        <compversion>2.0</compversion>
+        <comphost>ld-s-devpihdb</comphost>
+        <compinst>1</compinst>
+        <messages>
+            <message>
+                <messalert>OKAY</messalert>
+                <messseverity>001</messseverity>
+                <messarea>XI_GRMG</messarea>
+                <messnumber>001</messnumber>
+                <messparam1>AF</messparam1>
+                <messparam2>SAP AG</messparam2>
+                <messparam3>ld-s-devpih</messparam3>
+                <messparam4>50000</messparam4>
+                <messtext>Ping Successful</messtext>
+            </message>
+        </messages>
+    </component>
+</scenario>
