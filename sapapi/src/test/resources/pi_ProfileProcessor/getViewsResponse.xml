@@ -1,0 +1,19 @@
+﻿<!-- Auto generated server sample response. -->
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns0="urn:ProfileProcessorVi"
+	xmlns:ns1="urn:com.sap.aii.af.service.statistic.ws.impl">
+	<SOAP-ENV:Header/>
+	<SOAP-ENV:Body>
+		<ns0:getViewsResponse>
+			<ns0:Response>
+				<ns1:WSProfile>
+					<ns1:activation>DATETIME</ns1:activation>
+					<ns1:applicationKey>STRING</ns1:applicationKey>
+					<ns1:profile>BASE64BINARY</ns1:profile>
+					<ns1:profileKey>STRING</ns1:profileKey>
+					<ns1:view>BASE64BINARY</ns1:view>
+					<ns1:viewKey>STRING</ns1:viewKey>
+				</ns1:WSProfile>
+			</ns0:Response>
+		</ns0:getViewsResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

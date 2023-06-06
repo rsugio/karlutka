@@ -138,8 +138,12 @@ class KSoap {
                 subclass(XiBasis.IntegratedConfigurationReadResponse::class, serializer())
 
                 // ProfileProcessorVi
+                subclass(AdapterMessageMonitoringVi.GetApplicationsRequest::class, serializer())
+                subclass(AdapterMessageMonitoringVi.GetApplicationsResponse::class, serializer())
                 subclass(AdapterMessageMonitoringVi.GetProfilesRequest::class, serializer())
                 subclass(AdapterMessageMonitoringVi.GetProfilesResponse::class, serializer())
+                subclass(AdapterMessageMonitoringVi.GetViewsRequest::class, serializer())
+//                subclass(AdapterMessageMonitoringVi.GetProfilesResponse::class, serializer())
             }
         }
         val xmlserializer = XML(xmlmodule) {

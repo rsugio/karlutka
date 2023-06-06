@@ -1098,6 +1098,31 @@ class AdapterMessageMonitoringVi {
     )
 
     // -----------------------------------------------------------------------------------------------
+    // profileprocessorservice
+    @Serializable
+    @XmlSerialName("getApplications", xmlnsPPVi, ppvi)
+    class GetApplicationsRequest() : ComposeSOAP()
+
+    @Serializable
+    @XmlSerialName("getApplicationsResponse", xmlnsPPVi, ppvi)
+    class GetApplicationsResponse(
+        @XmlElement val response: AppResponse
+    ) : ComposeSOAP()
+
+    @Serializable
+    @XmlSerialName("Response", "", "")
+    class AppResponse(
+        @XmlElement
+        @XmlSerialName("WSApplication", xmlnsStat, stat)
+        val wsApplication: List<WSApplication> = listOf(),
+    )
+
+    @Serializable
+    class WSApplication(
+        @XmlSerialName("applicationKey", xmlnsStat, stat)
+        @XmlElement val applicationKey: String,
+    )
+
     @Serializable
     @XmlSerialName("getProfiles", xmlnsPPVi, ppvi)
     class GetProfilesRequest(
@@ -1105,20 +1130,23 @@ class AdapterMessageMonitoringVi {
         @XmlElement val applicationKey: String,
         @XmlSerialName("active", xmlnsPPVi, ppvi)
         @XmlElement val active: Boolean,
-    )
+    ) : ComposeSOAP()
+
     @Serializable
     @XmlSerialName("getProfilesResponse", xmlnsPPVi, ppvi)
     class GetProfilesResponse(
-        @XmlElement val response: PPResponse
-    ): ComposeSOAP()
+        @XmlElement val response: PPResponse,
+    ) : ComposeSOAP()
 
     @Serializable
     @XmlSerialName("Response", "", "")
     class PPResponse(
-        @XmlElement val wsProfile: WSProfile
+        @XmlElement
+        @XmlSerialName("WSProfile", xmlnsStat, stat)
+        val wsProfile: List<WSProfile> = listOf(),
     )
+
     @Serializable
-    @XmlSerialName("WSProfile", xmlnsStat, stat)
     class WSProfile(
         @XmlSerialName("activation", xmlnsStat, stat)
         @XmlElement val activation: String,
@@ -1126,5 +1154,19 @@ class AdapterMessageMonitoringVi {
         @XmlElement val applicationKey: String,
         @XmlSerialName("profileKey", xmlnsStat, stat)
         @XmlElement val profileKey: String,
+        @XmlSerialName("profile", xmlnsStat, stat)
+        @XmlElement val profile: String? = null,
+        @XmlSerialName("view", xmlnsStat, stat)
+        @XmlElement val view: String? = null,
+        @XmlSerialName("viewKey", xmlnsStat, stat)
+        @XmlElement val viewKey: String? = null,
     )
+
+    @Serializable
+    @XmlSerialName("getViews", xmlnsPPVi, ppvi)
+    class GetViewsRequest(
+        @XmlElement
+        @XmlSerialName("wSProfile", xmlnsPPVi, ppvi)
+        val wsProfile: WSProfile,
+    ) : ComposeSOAP()
 }

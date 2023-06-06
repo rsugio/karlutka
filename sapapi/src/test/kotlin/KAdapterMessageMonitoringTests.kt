@@ -160,16 +160,23 @@ class KAdapterMessageMonitoringTests {
 
     @Test
     fun profileProcessorVi() {
+        val appresp = KSoap.parseSOAP<GetApplicationsResponse>(x("/pi_ProfileProcessor/getApplicationsResponse.xml"))
+        require(appresp!!.response.wsApplication.size==4)
+
         val prof1 = KSoap.parseSOAP<GetProfilesRequest>(x("/pi_ProfileProcessor/getProfilesRequest.xml"))
         var prof1resp = KSoap.parseSOAP<GetProfilesResponse>(x("/pi_ProfileProcessor/getProfilesResponse.xml"))
-        require(prof1resp!!.response.wsProfile.profileKey=="XPI")
+        require(prof1resp!!.response.wsProfile[0].profileKey == "XPI")
         prof1resp = GetProfilesResponse(
             PPResponse(
-                WSProfile(
-                    "2017-06-21T12:59:43.471+00:00", prof1!!.applicationKey, "XPI"
-                )
+                listOf(WSProfile(
+                    "2017-06-21T12:59:43.471+00:00", prof1!!.applicationKey!!, "XPI"
+                ))
             )
         )
-        println(prof1resp.composeSOAP())
+        require(prof1resp.composeSOAP().isNotBlank())
+
+        val view1req = KSoap.parseSOAP<KSoap.ComposeSOAP>(x("/pi_ProfileProcessor/getViewsRequest.xml"))
+        println(view1req)
+        //require(view1req!!.wsProfile.profileKey=="XPI")
     }
 }

@@ -23,6 +23,7 @@ import ru.rsug.karlutka.serialization.KSoap
 import ru.rsug.karlutka.util.DB
 import ru.rsug.karlutka.util.Konfig
 import java.net.URI
+import java.nio.charset.StandardCharsets
 import java.time.Instant
 import java.time.ZoneId
 
@@ -153,14 +154,18 @@ class FAE(
                 val request = KSoap.parseSOAP<AdapterMessageMonitoringVi.GetProfilesRequest>(sxml)
                 val response = AdapterMessageMonitoringVi.GetProfilesResponse(
                     AdapterMessageMonitoringVi.PPResponse(
-                        AdapterMessageMonitoringVi.WSProfile(
-                            "2023-06-04T12:59:43.471+00:00", request!!.applicationKey, "XPI"
+                        listOf(
+                            AdapterMessageMonitoringVi.WSProfile(
+                                "2017-06-21T12:59:43.471+00:00", request!!.applicationKey, "AEX"
+                            )
                         )
                     )
                 )
                 val ansxml = response.composeSOAP()
                 logger.info(ansxml)
-                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { ansxml }
+//                val s =
+//                    """<SOAP-ENV:Envelope xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><SOAP-ENV:Body xmlns:rpl='urn:ProfileProcessorVi'><rpl:getProfilesResponse xmlns:rn0='urn:com.sap.aii.af.service.statistic.ws.impl' xmlns:rn1='urn:com.sap.aii.af.service.statistic.ws' xmlns:rn2='http://schemas.xmlsoap.org/soap/encoding/' xmlns:rn3='java:sap/standard' xmlns:rn4='urn:java/lang'><Response><rn0:WSProfile><rn0:activation>2017-06-21T12:59:43.471+00:00</rn0:activation><rn0:applicationKey>sap - XPI_STATISTIC - http://sap.com/xi/XI/Message/30</rn0:applicationKey><rn0:profileKey>XPI</rn0:profileKey></rn0:WSProfile></Response></rpl:getProfilesResponse></SOAP-ENV:Body></SOAP-ENV:Envelope>"""
+                call.respondText(ContentType.Text.Xml.withCharset(StandardCharsets.UTF_8), HttpStatusCode.OK) { ansxml }
             }
             get("/FAE/mdt/Systatus") {
                 // RWB - FAE - [Engine status]

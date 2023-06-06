@@ -1,0 +1,20 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Body>
+        <rpl:getApplicationsResponse xmlns:rn0='urn:com.sap.aii.af.service.statistic.ws.impl' xmlns:rpl='urn:ProfileProcessorVi'>
+            <Response>
+                <rn0:WSApplication>
+                    <rn0:applicationKey>sap - XPI_PERFORMANCE_STATISTIC - http://sap.com/xi/XI/Message/30</rn0:applicationKey>
+                </rn0:WSApplication>
+                <rn0:WSApplication>
+                    <rn0:applicationKey>sap - IGW_STATISTIC - http://sap.com/xi/XI/Message/30</rn0:applicationKey>
+                </rn0:WSApplication>
+                <rn0:WSApplication>
+                    <rn0:applicationKey>IENGINE</rn0:applicationKey>
+                </rn0:WSApplication>
+                <rn0:WSApplication>
+                    <rn0:applicationKey>sap - XPI_STATISTIC - http://sap.com/xi/XI/Message/30</rn0:applicationKey>
+                </rn0:WSApplication>
+            </Response>
+        </rpl:getApplicationsResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
