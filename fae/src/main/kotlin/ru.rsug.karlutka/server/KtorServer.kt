@@ -17,12 +17,19 @@ import kotlinx.html.*
 import org.slf4j.event.Level
 
 object KtorServer {
-    const val useLocalFolder = true               // локальная отладка из ./static
     lateinit var server: ApplicationEngine
     lateinit var app: Application
 
     fun createServer(port: Int, host: String) {
         server = embeddedServer(CIO, port, host, module = Application::main)
+    }
+
+    fun htmlHead(title: String, html: HTML) {
+        html.head {
+            title(title)
+            link(rel = "stylesheet", href = "/styles.css", type = "text/css")
+            link(rel = "shortcut icon", href = "/favicon.ico")
+        }
     }
 }
 

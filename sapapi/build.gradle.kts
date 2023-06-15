@@ -1,4 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.util.*
+
 val kotlin_version: String by project
 val xmlutil_version: String by project
 val karlutka_version: String by project
@@ -60,7 +62,10 @@ publishing {//https://docs.gradle.org/current/userguide/publishing_maven.html
                 username = findProperty("gpr.user").toString()
                 password = findProperty("gpr.key").toString()
             }
-//            authentication {header("Authorization", "Basic " + Base64.getEncoder().encodeToString("${credentials.username}:${credentials.password}".toByteArray()))}
+            authentication {
+//                val a = Base64.getEncoder().encodeToString("${credentials.username}:${credentials.password}".toByteArray())
+                //header("Authorization", "Basic " + a)
+            }
         }
     }
     publications {

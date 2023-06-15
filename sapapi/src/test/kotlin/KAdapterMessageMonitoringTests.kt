@@ -169,7 +169,7 @@ class KAdapterMessageMonitoringTests {
         prof1resp = GetProfilesResponse(
             PPResponse(
                 listOf(WSProfile(
-                    "2017-06-21T12:59:43.471+00:00", prof1!!.applicationKey!!, "XPI"
+                    "2017-06-21T12:59:43.471+00:00", prof1!!.applicationKey, "XPI"
                 ))
             )
         )

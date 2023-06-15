@@ -34,15 +34,15 @@ class FAE(
     val sid: String,
     val fakehostdb: String,
     val realHostPortURI: URI,
-    val cae: PIAF,
-    val sld: SLD,
+    private val cae: PIAF,
+    private val sld: SLD,
     val port: Int,
     val domain: String?,
 ) {
     val sidhostdb = "$sid.$fakehostdb".lowercase()
     val afFaHostdb = "af.$sidhostdb"
     private val logger: Logger = LoggerFactory.getLogger("fae.FAE")!!
-    private val rwb = RWB(this)
+    private val rwb = RWB(this, cae, sld)
 
     private val channels = mutableListOf<XICache.Channel>()
     private val allinone = mutableListOf<XICache.AllInOne>()
@@ -119,18 +119,8 @@ class FAE(
     }
 
     fun ktor(app: Application): Routing {
-        val fae = this
+        rwb.ktor(app)
         val routing = app.routing {
-            post(Regex("/IGW/compmon|.+/rtc")) {
-                val sc = Scenario.decodeFromString(call.receiveText())
-                val rt = rwb.servletFaeAdapterFrameworkRtc(sc, call.request.uri, call.request.queryParameters)
-                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { rt }
-            }
-            post(Regex(".+/regtest")) {
-                val sc = Scenario.decodeFromString(call.receiveText())
-                val rt = rwb.servletFaeAdapterFrameworkRegtest(sc, call.request.uri, call.request.queryParameters)
-                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { rt }
-            }
             post("/FAE/CPACache/invalidate/{...}") {
                 val begin = Instant.now()
                 val query = call.request.queryParameters    //method=InvalidateCache или другой
@@ -147,66 +137,9 @@ class FAE(
                 require(done.isEmpty())
                 call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
             }
-            post("/ProfileProcessor/basic") {
-                // ProfileProcessorVi для мониторинга из головы в ноги
-                val sxml = call.receiveText()
-                logger.info(sxml)
-                val request = KSoap.parseSOAP<AdapterMessageMonitoringVi.GetProfilesRequest>(sxml)
-                val response = AdapterMessageMonitoringVi.GetProfilesResponse(
-                    AdapterMessageMonitoringVi.PPResponse(
-                        listOf(
-                            AdapterMessageMonitoringVi.WSProfile(
-                                "2017-06-21T12:59:43.471+00:00", request!!.applicationKey, "AEX"
-                            )
-                        )
-                    )
-                )
-                val ansxml = response.composeSOAP()
-                logger.info(ansxml)
-                call.respondText(ContentType.Text.Xml.withCharset(StandardCharsets.UTF_8), HttpStatusCode.OK) { ansxml }
-            }
-            get("/FAE/mdt/Systatus") {
-                // RWB - FAE - [Engine status]
-                // Engine Status (Current Server Node: Server 00 01_141237)
-                // Показывает бэклог, блокировки, обзор, кэш, очереди, треды и тд
-                call.respondHtml {
-                    htmlHead("FAE кокпит :: RWB :: $sid :: /FAE/mdt/Systatus", this)
-                    body {
-                        h2 { +"$sid :: /FAE/mdt/Systatus" }
-                    }
-                }
-            }
-            get("/FAE/mdt/msgprioservlet") {
-                // RWB - FAE - [Message Prioritization]
-                call.respondHtml {
-                    htmlHead("FAE кокпит :: RWB :: $sid :: /FAE/mdt/msgprioservlet", this)
-                    body {
-                        h2 { +"$sid :: /FAE/mdt/msgprioservlet" }
-                    }
-                }
-            }
-            get("/FAE/mdt/amtServlet") {
-                // RWB - FAE - [JPR Monitoring]
-                call.respondHtml {
-                    htmlHead("FAE кокпит :: RWB :: $sid :: /FAE/mdt/amtServlet", this)
-                    body {
-                        h2 { +"$sid :: /FAE/mdt/amtServlet" }
-                    }
-                }
-            }
-            get("/FAE/mdt/channelmonitorservlet") {
-                // RWB - FAE - [Communication Channel monitoring]
-                call.respondHtml {
-                    htmlHead("FAE кокпит :: RWB :: $sid :: /FAE/mdt/channelmonitorservlet", this)
-                    body {
-                        h2 { +"$sid :: /FAE/mdt/channelmonitorservlet" }
-                    }
-                }
-            }
-
             get("/FAE/XI") {
                 call.respondHtml {
-                    htmlHead("FAE :: сервлет XI-протокола", this)
+                    KtorServer.htmlHead("FAE :: сервлет XI-протокола", this)
                     body {
                         pre {
                             +"Привет! Это сервлет XI-протокола, который надо вызывать через POST а не GET.\n\nТӥледлы удалтон."
@@ -217,20 +150,9 @@ class FAE(
             post("/FAE/XI") {
                 //            xi(call)
             }
-            post("/run/value_mapping_cache/{...}") {
-                //http://aaaa:80/run/value_mapping_cache/ext?method=invalidateCache&mode=Invalidate&consumer=af.fa0.fake0db&consumer_mode=IR
-                val query = call.request.queryString()
-                cae.valueMappingCache(query)
-                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
-            }
-            post("/AdapterFramework/rwbAdapterAccess/int") {
-                //            hmi(call)
-            }
-
-            // Кастомная логика
             get("/FAE") {
                 call.respondHtml {
-                    htmlHead("FAE кокпит :: $sid", this)
+                    KtorServer.htmlHead("FAE кокпит :: $sid", this)
                     body {
                         h2 { +"FAE кокпит (sid: ${sid.uppercase()} $afFaHostdb, domain: $domain, cae: ${cae.urlOf()}, sld: ${sld.piaf.urlOf("/sld/cimom")})" }
                         div {
@@ -276,7 +198,7 @@ class FAE(
                 channels.clear()
                 routes.clear()
                 call.respondHtml {
-                    htmlHead("FAE кокпит :: clearDB :: $sid", this)
+                    KtorServer.htmlHead("FAE кокпит :: clearDB :: $sid", this)
                     body { +"БД FAE очищена: таблицы FAE_CPA и FAE_MSG" }
                 }
             }
@@ -291,7 +213,7 @@ class FAE(
                 val s = (end.toEpochMilli() - begin.toEpochMilli()) / 1000L
 
                 call.respondHtml {
-                    htmlHead("FAE кокпит :: reloadDB :: $sid", this)
+                    KtorServer.htmlHead("FAE кокпит :: reloadDB :: $sid", this)
                     body {
                         h2 { +"Перезагрузка кэша из CAE" }
                         p {
@@ -302,9 +224,9 @@ class FAE(
             }
             post("/FAE/registerSLD") {
                 val log = StringBuilder()
-                sld.registerFAEinSLD(fae, log)
+                sld.registerFAEinSLD(this@FAE, log)
                 call.respondHtml {
-                    htmlHead("FAE кокпит :: регистрация в SLD :: $sid", this)
+                    KtorServer.htmlHead("FAE кокпит :: регистрация в SLD :: $sid", this)
                     body {
                         h2 { +"Регистрация в SLD: готово" }
                         pre { +log.toString() }
@@ -313,9 +235,9 @@ class FAE(
             }
             post("/FAE/unregisterSLD") {
                 val log = StringBuilder()
-                sld.unregisterFAEinSLD(fae, log)
+                sld.unregisterFAEinSLD(this@FAE, log)
                 call.respondHtml {
-                    htmlHead("FAE кокпит :: разрегистрация в SLD :: $sid", this)
+                    KtorServer.htmlHead("FAE кокпит :: разрегистрация в SLD :: $sid", this)
                     body {
                         h2 { +"Разрегистрация в SLD: готово" }
                         pre { +log.toString() }
@@ -324,7 +246,7 @@ class FAE(
             }
             get("/FAE/CPACache") {
                 call.respondHtml {
-                    htmlHead("FAE кокпит :: CPACache :: $sid", this)
+                    KtorServer.htmlHead("FAE кокпит :: CPACache :: $sid", this)
                     body {
                         h2 { +"Текущее содержимое CPACache" }
                         table("cpacache") {
@@ -381,7 +303,7 @@ class FAE(
             }
             get("/pimon") {
                 call.respondHtml {
-                    htmlHead("FAE кокпит :: PIMON :: $sid", this)
+                    KtorServer.htmlHead("FAE кокпит :: PIMON :: $sid", this)
                     body {
                         h2 { +"PIMON" }
                         table("pimon") {
@@ -415,29 +337,11 @@ class FAE(
                     }
                 }
             } // get /FAE
-            get("/FAE/mdt_soa/monitorservlet") {
-                call.respondHtml {
-                    htmlHead("FAE кокпит :: $sid :: /FAE/mdt_soa/monitorservlet", this)
-                    body {
-                        h2 { +"FAE кокпит :: $sid :: /FAE/mdt_soa/monitorservlet" }
-                        hr {}
-                        p { +"//TODO" }
-                    }
-                }
-            }
-            get("/mdt/version.jsp") {
-                // Implementation-Version: 7.5021.20210426113256.0000<br>  должен быть побайтово точным
-                val jsp = requireNotNull(this.javaClass.getResourceAsStream("/rwb/mdt_version.jsp")).readBytes()
-                call.respondBytes(ContentType.Text.Html, HttpStatusCode.OK) { jsp }
-            }
-            get("/mdt/") {
-                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
-            }
         }
         return routing
     }
 
-    private fun cpalistener(cr: XICache.CacheRefresh, now: Instant) {
+    fun cpalistener(cr: XICache.CacheRefresh, now: Instant) {
         // Слушаем обновления кэша
         // если объект есть в deletedObjects и в присланном кэше то это изменение, если в deletedObjects и нет в кэше то удаление
         val deletedObjects = cr.DELETED_OBJECTS?.SAPXI_OBJECT_KEY?.toMutableList() ?: mutableListOf()
@@ -523,11 +427,5 @@ class FAE(
         }
     }
 
-    private fun htmlHead(title: String, html: HTML) {
-        html.head {
-            title(title)
-            link(rel = "stylesheet", href = "/styles.css", type = "text/css")
-            link(rel = "shortcut icon", href = "/favicon.ico")
-        }
-    }
+
 }

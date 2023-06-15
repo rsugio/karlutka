@@ -1,16 +1,32 @@
 package ru.rsug.karlutka.client
 
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.html.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import kotlinx.html.body
+import kotlinx.html.h2
+import kotlinx.html.hr
+import kotlinx.html.p
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import ru.rsug.karlutka.pi.AdapterMessageMonitoringVi
 import ru.rsug.karlutka.pi.Scenario
+import ru.rsug.karlutka.serialization.KSoap
 import ru.rsug.karlutka.server.FAE
+import ru.rsug.karlutka.server.KtorServer
 import ru.rsug.karlutka.util.KTempFile
+import java.nio.charset.StandardCharsets
+import java.time.Instant
+
 import kotlin.io.path.writer
 
 /**
  * Ответы на запросы из RWB и PIMON
  */
-class RWB(val fae: FAE) {
+class RWB(val fae: FAE, val cae: PIAF, val sld: SLD) {
     private val logger: Logger = LoggerFactory.getLogger("fae.RWB")!!
     private var tmpnum: Int = 10000
 
@@ -23,7 +39,7 @@ class RWB(val fae: FAE) {
         w.close()
     }
 
-    fun servletFaeAdapterFrameworkRtc(sc: Scenario, url: String, params: io.ktor.http.Parameters): String {
+    private fun servletFaeAdapterFrameworkRtc(sc: Scenario, url: String, params: io.ktor.http.Parameters): String {
         // /FAE/AdapterFramework/rtc
         val fromRWB = params["FromRWB"]?.toBoolean() ?: false
 
@@ -93,7 +109,7 @@ class RWB(val fae: FAE) {
         return response
     }
 
-    fun servletFaeAdapterFrameworkRegtest(sc: Scenario, url: String, params: io.ktor.http.Parameters): String {
+    private fun servletFaeAdapterFrameworkRegtest(sc: Scenario, url: String, params: io.ktor.http.Parameters): String {
         // /FAE/AdapterFramework/regtest
         require(sc.component.size == 1)
         val comp = sc.component[0]
@@ -124,5 +140,108 @@ class RWB(val fae: FAE) {
         val response = asc.encodeToString()
         custom("RWB", url, request, response)
         return response
+    }
+
+    // Все обработчики
+    fun ktor(app: Application): Routing {
+        val routing = app.routing {
+            post(Regex("/IGW/compmon|.+/rtc")) {
+                val sc = Scenario.decodeFromString(call.receiveText())
+                val rt = servletFaeAdapterFrameworkRtc(sc, call.request.uri, call.request.queryParameters)
+                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { rt }
+            }
+            post(Regex(".+/regtest")) {
+                val sc = Scenario.decodeFromString(call.receiveText())
+                val rt = servletFaeAdapterFrameworkRegtest(sc, call.request.uri, call.request.queryParameters)
+                call.respondText(ContentType.Text.Xml, HttpStatusCode.OK) { rt }
+            }
+            post("/ProfileProcessor/basic") {
+                // ProfileProcessorVi для мониторинга из головы в ноги
+                val sxml = call.receiveText()
+                logger.info(sxml)
+                val request = KSoap.parseSOAP<AdapterMessageMonitoringVi.GetProfilesRequest>(sxml)
+                val response = AdapterMessageMonitoringVi.GetProfilesResponse(
+                    AdapterMessageMonitoringVi.PPResponse(
+                        listOf(
+                            AdapterMessageMonitoringVi.WSProfile(
+                                "2017-06-21T12:59:43.471+00:00", request!!.applicationKey, "AEX"
+                            )
+                        )
+                    )
+                )
+                val ansxml = response.composeSOAP()
+                logger.info(ansxml)
+                call.respondText(ContentType.Text.Xml.withCharset(StandardCharsets.UTF_8), HttpStatusCode.OK) { ansxml }
+            }
+            get("/FAE/mdt/Systatus") {
+                // RWB - FAE - [Engine status]
+                // Engine Status (Current Server Node: Server 00 01_141237)
+                // Показывает бэклог, блокировки, обзор, кэш, очереди, треды и тд
+                call.respondHtml {
+                    KtorServer.htmlHead("FAE кокпит :: RWB :: ${fae.sid} :: /FAE/mdt/Systatus", this)
+                    body {
+                        h2 { +"${fae.sid} :: /FAE/mdt/Systatus" }
+                    }
+                }
+            }
+            get("/FAE/mdt/msgprioservlet") {
+                // RWB - FAE - [Message Prioritization]
+                call.respondHtml {
+                    KtorServer.htmlHead("FAE кокпит :: RWB :: ${fae.sid} :: /FAE/mdt/msgprioservlet", this)
+                    body {
+                        h2 { +"${fae.sid} :: /FAE/mdt/msgprioservlet" }
+                    }
+                }
+            }
+            get("/FAE/mdt/amtServlet") {
+                // RWB - FAE - [JPR Monitoring]
+                call.respondHtml {
+                    KtorServer.htmlHead("FAE кокпит :: RWB :: ${fae.sid} :: /FAE/mdt/amtServlet", this)
+                    body {
+                        h2 { +"${fae.sid} :: /FAE/mdt/amtServlet" }
+                    }
+                }
+            }
+            get("/FAE/mdt/channelmonitorservlet") {
+                // RWB - FAE - [Communication Channel monitoring]
+                call.respondHtml {
+                    KtorServer.htmlHead("FAE кокпит :: RWB :: ${fae.sid} :: /FAE/mdt/channelmonitorservlet", this)
+                    body {
+                        h2 { +"${fae.sid} :: /FAE/mdt/channelmonitorservlet" }
+                    }
+                }
+            }
+            post("/run/value_mapping_cache/{...}") {
+                //http://aaaa:80/run/value_mapping_cache/ext?method=invalidateCache&mode=Invalidate&consumer=af.fa0.fake0db&consumer_mode=IR
+                val query = call.request.queryString()
+                cae.valueMappingCache(query)
+                call.respondText(ContentType.Any, HttpStatusCode.OK) { "" }
+            }
+            post("/AdapterFramework/rwbAdapterAccess/int") {
+                //TODO
+            }
+            get("/FAE/mdt_soa/monitorservlet") {
+                //TODO вписать что это такое
+                call.respondHtml {
+                    KtorServer.htmlHead("FAE кокпит :: ${fae.sid} :: /FAE/mdt_soa/monitorservlet", this)
+                    body {
+                        h2 { +"FAE кокпит :: ${fae.sid} :: /FAE/mdt_soa/monitorservlet" }
+                        hr {}
+                        p { +"//TODO" }
+                    }
+                }
+            }
+            get("/mdt/version.jsp") {
+                // Implementation-Version: 7.5021.20210426113256.0000<br>  должен быть побайтово точным
+                val jsp = requireNotNull(this.javaClass.getResourceAsStream("/rwb/mdt_version.jsp")).readBytes()
+                call.respondBytes(ContentType.Text.Html, HttpStatusCode.OK) { jsp }
+            }
+            get("/mdt/") {
+                //TODO вписать зачем
+                call.respondText(ContentType.Text.Html, HttpStatusCode.OK) { "<html/>" }
+            }
+
+        }
+        return routing
     }
 }
