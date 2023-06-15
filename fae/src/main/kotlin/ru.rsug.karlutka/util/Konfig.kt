@@ -1,6 +1,7 @@
 package ru.rsug.karlutka.util
 
 import com.charleskorn.kaml.*
+import io.ktor.client.plugins.auth.providers.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.util.*
 import kotlinx.serialization.SerialName
@@ -16,6 +17,18 @@ import kotlin.io.path.readText
 import kotlin.text.toCharArray
 
 class Konfig {
+    @Serializable
+    class AuthToken(
+        val access_token: String,
+        val token_type: String,
+        val expires_in: Int,
+        val scope: String = "",
+        val jti: String = "",
+    ) {
+        fun auth() = "$token_type $access_token"
+        fun bearer() = BearerTokens(access_token, "")
+    }
+
     @Serializable
     sealed class Target {
         abstract val sid: String
@@ -70,7 +83,6 @@ class Konfig {
                 require(auth is KfAuth.Basic)
                 basic = auth
             }
-
             override fun getKind() = "PIAF"
         }
 

@@ -1,4 +1,8 @@
 import com.sap.conn.jco.JCo
+import karlutka.clients.AbapJCo
+import karlutka.clients.BTPCF
+import karlutka.clients.BTPNEO
+import karlutka.clients.CPINEO
 import ru.rsug.karlutka.client.PIAF
 import ru.rsug.karlutka.client.SLD
 import ru.rsug.karlutka.server.FAE
@@ -60,14 +64,14 @@ suspend fun main(args: Array<String>) {
                 pi
             }
             is Konfig.Target.FAE -> {
-                require(Server.targets.values.filterIsInstance<FAE>().isEmpty())
+                require(Server.targets.values.filterIsInstance<FAE>().isEmpty()) {"Должен быть только 0..1 FAE"}
                 Server.fae = FAE(konf, Server.targets[konf.cae]!! as PIAF, SLD(Server.targets[konf.sld]!! as PIAF))
                 Server.fae!!
             }
-//            is Konfig.Target.ABAP -> target = AbapJCo(konf)
-//            is KfTarget.BTPNEO -> target = BTPNEO(konf)
-//            is KfTarget.BTPCF -> target = BTPCF(konf)
-//            is KfTarget.CPINEO -> target = CPINEO(konf)
+            is Konfig.Target.ABAP -> AbapJCo(konf)
+            is Konfig.Target.BTPNEO -> BTPNEO(konf)
+            is Konfig.Target.BTPCF -> BTPCF(konf)
+            is Konfig.Target.CPINEO -> CPINEO(konf)
             else -> error("Not implemented target: $konf")
         }
         Server.targets[konf.sid] = t

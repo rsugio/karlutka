@@ -3,6 +3,7 @@ import java.util.*
 
 val kotlin_version: String by project
 val xmlutil_version: String by project
+val ktor_version: String by project
 val karlutka_version: String by project
 val karlutka_group: String by project
 val fasterxmluuid_version: String by project
@@ -40,6 +41,7 @@ dependencies {
     implementation("io.github.pdvrieze.xmlutil:serialization-jvm:$xmlutil_version")
     implementation("io.github.pdvrieze.xmlutil:serialutil-jvm:$xmlutil_version")
     implementation("io.github.pdvrieze.xmlutil:xmlserializable:$xmlutil_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
     testImplementation(kotlin("test"))
