@@ -43,79 +43,19 @@ class FAE(
     val afFaHostdb = "af.$sidhostdb"
     private val logger: Logger = LoggerFactory.getLogger("fae.FAE")!!
     private val rwb = RWB(this, cae, sld)
+    private val camel = FAECamel(this)
 
-    private val channels = mutableListOf<XICache.Channel>()
-    private val allinone = mutableListOf<XICache.AllInOne>()
-    private val routes = mutableMapOf<String, XICache.AllInOneParsed>()
-    private val camelContext = DefaultCamelContext(true)
-    private val msktz: ZoneId = ZoneId.of("Europe/Moscow")
     private val uuidgeneratorxi: TimeBasedGenerator = Generators.timeBasedGenerator()
 
     init {
         logger.info("Created FAE instance: $sid on $fakehostdb, $afFaHostdb")
-        var rs = DB.executeQuery(DB.readFAE, sid)
-        if (!rs.next()) {
-            DB.executeUpdateStrict(DB.insFAE, sid, afFaHostdb)
-        }
-        rs = DB.executeQuery(DB.readFCPAO, sid)
-        while (rs.next()) {
-            val s = rs.getString("XML")
-            when (MPI.ETypeID.valueOf(rs.getString("TYPEID"))) {
-                MPI.ETypeID.Channel -> channels.add(XICache.decodeChannelFromString(s))
-                MPI.ETypeID.AllInOne -> allinone.add(XICache.decodeAllInOneFromString(s))
-                else -> error("Wrong typeid")
-            }
-        }
-        camelContext.inflightRepository.isInflightBrowseEnabled = true
-//        camelContext.registry.bind("procmonFrom", procmonFrom)
-//        camelContext.registry.bind("procmonTo", procmonTo)
-        camelContext.setAutoCreateComponents(true)
-        camelContext.name = afFaHostdb
-        allinone.forEach { ico ->
-            // создание или изменение
-            val required = ico.getChannelsOID().associate { oid -> Pair(oid, channels.find { it.ChannelObjectId == oid }) }
-            val missed = required.filter { it.value == null }
-            if (missed.isEmpty()) {
-                generateRoute(ico.toParsed(required.values.filterNotNull()))
-            }
-        }
     }
 
     constructor(konf: Konfig.Target.FAE, cae: PIAF, sld: SLD) :
             this(konf.sid, konf.fakehostdb, URI(konf.realHostPortURI), cae, sld, konf.port, konf.domain)
 
-//    private val procmonFrom = Processor { exc ->
-//        val dt = Instant.now().toEpochMilli()
-//        val body = exc.`in`.body?.toString() ?: "NULL"
-//        val x = routes[exc.fromRouteId]!!
-//        val from = "${x.fromParty}|${x.fromService}|{${x.fromIfacens}}${x.fromIface}"
-//        DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, "", body)
-//    }
-//
-//    private val procmonTo = Processor { exc ->
-//        val dt = Instant.now().toEpochMilli()
-//        val body = exc.`in`.body?.toString() ?: "NULL"
-//        val rep = exc.context.inflightRepository
-//        // val hist = exc.context.messageHistoryFactory
-//        val from = ""
-//        // val message = exc.getMessage()
-//        val to = exc.getProperty("FAEReceiver") ?: "?"
-//        rep.build()
-//        DB.executeUpdateStrict(DB.insFAEM, sid, exc.fromRouteId.toString(), exc.exchangeId, dt, from, to, body)
-//    }
-
     fun urlOf(s: String = ""): URI {
         return realHostPortURI.resolve(s)
-    }
-
-    private fun generateRoute(parsed: XICache.AllInOneParsed) {
-//        parsed.routeGenerator = MRouteGenerator(parsed)
-//        routes[parsed.routeId] = parsed
-//        parsed.xmlDsl = parsed.routeGenerator.convertIco()
-//        val resource = ResourceHelper.fromString("memory.xml", parsed.xmlDsl)
-//        val builder = XmlRoutesBuilderLoader().loadRoutesBuilder(resource) as RouteBuilder
-//        camelContext.addRoutes(builder)
-//        camelContext.start()
     }
 
     fun ktor(app: Application): Routing {
@@ -131,7 +71,7 @@ class FAE(
                 require(consumer_mode == "AE")
                 // получаем изменившиеся объекты
                 val changed = cae.dirHmiCacheRefreshService("C", consumer)
-                cpalistener(changed, begin)
+                camel.cpalistener(changed, begin)
                 // помечаем как обновлённые
                 val done = cae.dirHmiCacheRefreshService("D", consumer)
                 require(done.isEmpty())
@@ -182,7 +122,7 @@ class FAE(
                         }
                         h2 { +"Объекты из CAE ${cae.konfig.sid}" }
                         ul {
-                            routes.forEach { (k, v) ->
+                            camel.routes.forEach { (k, v) ->
                                 li {
                                     b { +k }
                                     pre { +v.xmlDsl }
@@ -194,9 +134,9 @@ class FAE(
             } // get /FAE
             post("/FAE/clearDB") {
                 DB.executeUpdate(DB.clearFAE)
-                allinone.clear()
-                channels.clear()
-                routes.clear()
+                camel.allinone.clear()
+                camel.channels.clear()
+                camel.routes.clear()
                 call.respondHtml {
                     KtorServer.htmlHead("FAE кокпит :: clearDB :: $sid", this)
                     body { +"БД FAE очищена: таблицы FAE_CPA и FAE_MSG" }
@@ -208,7 +148,7 @@ class FAE(
                 // между F и TF разницы не вижу
                 val begin = Instant.now()
                 val cacheRefreshFull = cae.dirHmiCacheRefreshService("F", afFaHostdb)
-                cpalistener(cacheRefreshFull, begin)
+                camel.cpalistener(cacheRefreshFull, begin)
                 val end = Instant.now()
                 val s = (end.toEpochMilli() - begin.toEpochMilli()) / 1000L
 
@@ -267,7 +207,7 @@ class FAE(
                                         td { +rs.getString(3) }
                                         td { +rs.getString(4) }
                                         td {
-                                            val d = Instant.ofEpochMilli(rs.getLong(5)).atZone(msktz)
+                                            val d = Instant.ofEpochMilli(rs.getLong(5)).atZone(camel.msktz)
                                             +d.toLocalDateTime().toLocalTime().toString()
                                         }
                                         td { +"" }
@@ -289,7 +229,7 @@ class FAE(
                                 while (rs.next()) {
                                     tr {
                                         td {
-                                            val d = Instant.ofEpochMilli(rs.getLong(1)).atZone(msktz)
+                                            val d = Instant.ofEpochMilli(rs.getLong(1)).atZone(camel.msktz)
                                             +d.toLocalDateTime().toLocalTime().toString()
                                         }
                                         td { +rs.getString(2) }
@@ -324,7 +264,7 @@ class FAE(
                                         td { +rs.getString(1) }
                                         td { +rs.getString(2) }
                                         td {
-                                            val d = Instant.ofEpochMilli(rs.getLong(3)).atZone(msktz)
+                                            val d = Instant.ofEpochMilli(rs.getLong(3)).atZone(camel.msktz)
                                             +d.toLocalDateTime().toLocalTime().toString()
                                         }
                                         td { +rs.getString(4) }
@@ -340,92 +280,5 @@ class FAE(
         }
         return routing
     }
-
-    fun cpalistener(cr: XICache.CacheRefresh, now: Instant) {
-        // Слушаем обновления кэша
-        // если объект есть в deletedObjects и в присланном кэше то это изменение, если в deletedObjects и нет в кэше то удаление
-        val deletedObjects = cr.DELETED_OBJECTS?.SAPXI_OBJECT_KEY?.toMutableList() ?: mutableListOf()
-        val updateList = mutableListOf<String>()    //AllInOneObjectId а не икохи, так как привязки каналов могут меняться
-        cr.Channel.forEach { ch ->
-            val delo = deletedObjects.find { it.OBJECT_ID == ch.ChannelObjectId }
-            val s = ch.encodeToString()
-            val prev = channels.find { it.ChannelObjectId == ch.ChannelObjectId }
-            val rs = DB.executeQuery(DB.readFCPA, sid, ch.ChannelObjectId)
-            when {
-                rs.next() && prev != null -> {
-                    // объект существует
-                    DB.executeUpdateStrict(DB.updFCPA, sid, ch.ChannelObjectId, s, now.toEpochMilli())
-                    channels.remove(prev)
-                }
-
-                prev == null -> {
-                    // объекта нет - добавляем
-                    val name = "${ch.PartyName}|${ch.ServiceName}|${ch.ChannelName}"
-                    DB.executeUpdateStrict(DB.insFCPA, sid, ch.ChannelObjectId, MPI.ETypeID.Channel.toString(), name, s, now.toEpochMilli())
-                }
-
-                else -> error("Channel inconsistency")
-            }
-            if (delo != null) deletedObjects.remove(delo)   //удаление из списка удалений
-            channels.add(ch)
-            // для перегенерации икох с этим каналом
-            val touched = allinone.filter { it.getChannelsOID().contains(ch.ChannelObjectId) }.map { it.AllInOneObjectId }
-            updateList.addAll(touched)
-        }
-        cr.AllInOne.forEach { ico ->
-            updateList.add(ico.AllInOneObjectId)
-            val delo = deletedObjects.find { it.OBJECT_ID == ico.AllInOneObjectId }
-            val s = ico.encodeToString()
-            val prev = allinone.find { it.AllInOneObjectId == ico.AllInOneObjectId }
-            val rs = DB.executeQuery(DB.readFCPA, sid, ico.AllInOneObjectId)
-
-            when {
-                rs.next() && prev != null -> {
-                    // икоха существует
-                    DB.executeUpdateStrict(DB.updFCPA, sid, ico.AllInOneObjectId, s, now.toEpochMilli())
-                    allinone.remove(prev)
-                }
-
-                prev == null -> // икохи нет - добавляем
-                    DB.executeUpdateStrict(
-                        DB.insFCPA, sid, ico.AllInOneObjectId, MPI.ETypeID.AllInOne.toString(),
-                        "${ico.FromPartyName}|${ico.FromServiceName}|{${ico.FromInterfaceNamespace}}${ico.FromInterfaceName}" +
-                                "|${ico.ToPartyName}|${ico.ToServiceName}", s, now.toEpochMilli()
-                    )
-
-                else -> error("AllInOne inconsistency")
-            }
-            allinone.add(ico)
-            if (delo != null) deletedObjects.remove(delo)
-        }
-        deletedObjects.forEach { dd ->
-            if (dd.OBJECT_TYPE in listOf(MPI.ETypeID.Channel, MPI.ETypeID.AllInOne)) {
-                val deleted = DB.executeUpdate(DB.delFCPA, sid, dd.OBJECT_ID)
-                println("Delete FCPA object: $sid ${dd.OBJECT_TYPE} ${dd.OBJECT_ID}, rowsdeleted=$deleted")
-            }
-        }
-        // updateList - список идентификаторов икох для перегенерации, среди них могут быть удалённые
-        updateList.distinct().forEach { id ->
-            val ico = allinone.find { it.AllInOneObjectId == id }
-            val required = ico?.getChannelsOID()?.associateWith { oid -> channels.find { it.ChannelObjectId == oid } } ?: mapOf()
-            val missed = required.filter { it.value == null }
-            when {
-                ico != null && missed.isEmpty() -> {
-                    // создание или изменение
-                    generateRoute(ico.toParsed(required.values.filterNotNull()))
-                }
-
-                ico != null -> {
-                    System.err.println("Нет всех требуемых каналов для икохи, OIDs=${missed.keys}")
-                }
-
-                else -> {
-                    // икоха уже удалена, выводим в лог
-                    TODO("икоха удалена: $id, требуется удалить маршрут")
-                }
-            }
-        }
-    }
-
 
 }

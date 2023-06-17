@@ -214,7 +214,6 @@ class XICache {
         val senderAttr: List<Attribute>,
     ) {
         val key = "$fromParty|$fromService|{$fromIfacens}$fromIface|$toParty|$toService"
-        var xmlDsl: String = ""
 
         class Receiver(
             val id: String,
