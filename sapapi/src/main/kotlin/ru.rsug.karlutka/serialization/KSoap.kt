@@ -114,10 +114,22 @@ class KSoap {
 //            subclass(GetChannelAutomationStatus::class, serializer())
                 subclass(IChannelAdmin.GetChannelAdminHistory::class, serializer())
 
-                subclass(SAPControl.ListLogFiles::class, serializer())
+                // -------------------------------------------------------------------------------
+                subclass(SAPControl.AnalyseLogFilesRequest::class, serializer())
+                subclass(SAPControl.AnalyseLogFilesResponse::class, serializer())
+                subclass(SAPControl.ListLogFilesRequest::class, serializer())
                 subclass(SAPControl.ListLogFilesResponse::class, serializer())
-                subclass(SAPControl.ReadLogFile::class, serializer())
+                subclass(SAPControl.ReadLogFileRequest::class, serializer())
                 subclass(SAPControl.ReadLogFileResponse::class, serializer())
+                subclass(SAPControl.ReadDeveloperTraceRequest::class, serializer())
+                subclass(SAPControl.ReadDeveloperTraceResponse::class, serializer())
+                subclass(SAPControl.ListDeveloperTracesRequest::class, serializer())
+                subclass(SAPControl.ListDeveloperTracesResponse::class, serializer())
+                subclass(SAPControl.J2EEGetThreadListRequest::class, serializer())
+                subclass(SAPControl.J2EEGetThreadListResponse::class, serializer())
+                subclass(SAPControl.J2EEGetThreadList2Request::class, serializer())
+                subclass(SAPControl.J2EEGetThreadList2Response::class, serializer())
+                // -------------------------------------------------------------------------------
 
                 subclass(XiBasis.CommunicationChannelQueryRequest::class, serializer())
                 subclass(XiBasis.CommunicationChannelQueryResponse::class, serializer())

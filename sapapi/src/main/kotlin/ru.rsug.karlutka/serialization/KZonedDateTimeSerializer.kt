@@ -9,6 +9,7 @@ import kotlinx.serialization.encoding.Encoder
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
+//TODO унести это в Btp и там по месту обрабатывать зоны
 object KZonedDateTimeSerializer : KSerializer<ZonedDateTime> {
     val dtf1: DateTimeFormatter = DateTimeFormatter.ISO_ZONED_DATE_TIME // ofPattern("yyyy MM dd HH:mm:ss")
     override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("ZonedDateTime", PrimitiveKind.STRING)

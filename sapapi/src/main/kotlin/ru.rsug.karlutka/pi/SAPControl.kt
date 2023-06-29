@@ -1,51 +1,86 @@
 package ru.rsug.karlutka.pi
 
-import ru.rsug.karlutka.serialization.KLocalDateTimeSerializer
+import kotlinx.serialization.KSerializer
 import ru.rsug.karlutka.serialization.KSoap.ComposeSOAP
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.PrimitiveKind
+import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import nl.adaptivity.xmlutil.serialization.XmlElement
 import nl.adaptivity.xmlutil.serialization.XmlSerialName
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 /**
- * Формально это не пиай а просто базис
+ * Формально это не пиай а просто базис, но смысла выделять нет
  */
+private const val xmlSAPControl = "urn:SAPControl"
+private const val xmlnsSAPControl = "sap"
 class SAPControl {
-    @Serializable
-    @XmlSerialName("ListLogFiles", "urn:SAPControl", "urn")
-    class ListLogFiles : ComposeSOAP()
+    private object KLocalDateTimeSerializer : KSerializer<LocalDateTime> {
+        private val dtf1: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy MM dd HH:mm:ss")
+        override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
+        override fun deserialize(decoder: Decoder): LocalDateTime {
+            val string = decoder.decodeString()
+            return LocalDateTime.parse(string, dtf1)
+        }
 
-    @Serializable
-    @XmlSerialName("ListLogFilesResponse", "urn:SAPControl", "urn")
-    class ListLogFilesResponse(
-        @XmlElement(true)
-        val file: File,
-    ) {
-        @Serializable
-        @XmlSerialName("file", "", "")
-        class File(
-            @XmlElement(true)
-            val item: List<Item> = listOf(),
-        )
-
-        @Serializable
-        @XmlSerialName("item", "", "")
-        class Item(
-            @XmlElement(true)
-            val filename: String,
-            @XmlElement(true)
-            val size: Long,
-            @XmlElement(true)
-            @Serializable(with = KLocalDateTimeSerializer::class)
-            val modtime: LocalDateTime,  //2021 03 22 17:41:01
-            @XmlElement(true)
-            val format: String,
-        )
+        override fun serialize(encoder: Encoder, value: LocalDateTime) {
+            encoder.encodeString(value.toString())
+        }
     }
+    @Serializable
+    @XmlSerialName("file", "", "")
+    class File(
+        @XmlElement(true)
+        val item: List<FileItem> = listOf(),
+    )
 
     @Serializable
-    @XmlSerialName("ReadLogFile", "urn:SAPControl", "urn")
-    class ReadLogFile(
+    @XmlSerialName("item", "", "")
+    class FileItem(
+        @XmlElement(true)
+        val filename: String,
+        @XmlElement(true)
+        val size: Long,
+        @XmlElement(true)
+        @Serializable(with = KLocalDateTimeSerializer::class)
+        val modtime: LocalDateTime,  //2021 03 22 17:41:01,  2022 12 24 23:34:15
+        @XmlElement(true)
+        val format: String?          //не во всех
+    )
+
+    @Serializable
+    @XmlSerialName("AnalyseLogFiles", xmlSAPControl, xmlnsSAPControl)
+    class AnalyseLogFilesRequest(
+        @XmlElement val starttime: String?,
+        @XmlElement val endtime: String?,
+        @XmlElement @XmlSerialName("severity-level", "", "") val severityLevel: Int? = 2,
+        @XmlElement val maxentries: Int? = 10000,
+    ) : ComposeSOAP()
+
+    @Serializable
+    @XmlSerialName("AnalyseLogFilesResponse", xmlSAPControl, xmlnsSAPControl)
+    class AnalyseLogFilesResponse(
+        @XmlElement val format: String?,
+        val fields: String?,
+    )
+
+    @Serializable
+    @XmlSerialName("ListLogFiles", xmlSAPControl, xmlnsSAPControl)
+    class ListLogFilesRequest : ComposeSOAP()
+
+    @Serializable
+    @XmlSerialName("ListLogFilesResponse", xmlSAPControl, xmlnsSAPControl)
+    class ListLogFilesResponse(
+        @XmlElement(true) val file: File,
+    )
+
+    @Serializable
+    @XmlSerialName("ReadLogFile", xmlSAPControl, xmlnsSAPControl)
+    class ReadLogFileRequest(
         @XmlElement(true)
         val filename: String,
         @XmlElement(true)
@@ -59,7 +94,7 @@ class SAPControl {
     ) : ComposeSOAP()
 
     @Serializable
-    @XmlSerialName("ReadLogFileResponse", "urn:SAPControl", "urn")
+    @XmlSerialName("ReadLogFileResponse", xmlSAPControl, xmlnsSAPControl)
     class ReadLogFileResponse(
         @XmlElement(true)
         @XmlSerialName("format", "", "")
@@ -81,14 +116,109 @@ class SAPControl {
         )
     }
 
+    @Serializable
+    @XmlSerialName("ListDeveloperTraces", xmlSAPControl, xmlnsSAPControl)
+    class ListDeveloperTracesRequest: ComposeSOAP()
+
+    @Serializable
+    @XmlSerialName("ListDeveloperTracesResponse", xmlSAPControl, xmlnsSAPControl)
+    class ListDeveloperTracesResponse(
+        @XmlElement val file: File
+    )
+
+    @Serializable
+    @XmlSerialName("J2EEGetThreadList", xmlSAPControl, xmlnsSAPControl)
+    class J2EEGetThreadListRequest: ComposeSOAP()
+
+    @Serializable
+    @XmlSerialName("J2EEGetThreadList2", xmlSAPControl, xmlnsSAPControl)
+    class J2EEGetThreadList2Request: ComposeSOAP()
+
+    @Serializable
+    @XmlSerialName("J2EEGetThreadListResponse", xmlSAPControl, xmlnsSAPControl)
+    class J2EEGetThreadListResponse(
+        @XmlElement @XmlSerialName("thread", "", "") val thread: SAPControlThread
+    )
+
+    @Serializable
+    class SAPControlThread(
+        @XmlElement @XmlSerialName("item", "", "") val item: List<SAPControlThreadItem>
+    )
+
+    @Serializable
+    class SAPControlThreadItem(
+        @XmlElement val processname: String?,
+        @XmlElement val startTime: String?,
+        @XmlElement val updateTime: String?,
+        @XmlElement val taskupdateTime: String?,
+        @XmlElement val subtaskupdateTime: String?,
+        @XmlElement val task: String?,
+        @XmlElement val subtask: String?,
+        @XmlElement val name: String?,
+        @XmlElement val classname: String?,
+        @XmlElement val user: String?,
+        @XmlElement val pool: String?,
+        @XmlElement val state: String?,
+        @XmlElement val dispstatus: String?,
+    )
+
+    @Serializable
+    @XmlSerialName("J2EEGetThreadList2Response", xmlSAPControl, xmlnsSAPControl)
+    class J2EEGetThreadList2Response(
+        @XmlElement @XmlSerialName("thread", "", "") val thread: SAPControlThread2
+    )
+
+    @Serializable
+    class SAPControlThread2(
+        @XmlElement @XmlSerialName("item", "", "") val item: List<SAPControlThread2Item>
+    )
+
+    @Serializable
+    class SAPControlThread2Item(
+        @XmlElement val processname: String?,
+        @XmlElement val startTime: String?,
+        @XmlElement val updateTime: String?,
+        @XmlElement val taskupdateTime: String?,
+        @XmlElement val subtaskupdateTime: String?,
+        @XmlElement val task: String?,
+        @XmlElement val subtask: String?,
+        @XmlElement val name: String?,
+        @XmlElement val classname: String?,
+        @XmlElement val user: String?,
+        @XmlElement val pool: String?,
+        @XmlElement val state: String?,
+        @XmlElement val dispstatus: String?,
+        @XmlElement val index: Int,
+    )
+
+    @Serializable
+    @XmlSerialName("ReadDeveloperTrace", xmlSAPControl, xmlnsSAPControl)
+    class ReadDeveloperTraceRequest(
+        @XmlElement @XmlSerialName("filename", "", "") val filename: String,
+        @XmlElement @XmlSerialName("size", "", "") val size: Int,
+    ): ComposeSOAP()
+
+    @Serializable
+    @XmlSerialName("ReadDeveloperTraceResponse", xmlSAPControl, xmlnsSAPControl)
+    class ReadDeveloperTraceResponse(
+        @XmlElement @XmlSerialName("name", "", "") val name: String?,
+        @XmlElement @XmlSerialName("lines", "", "") val lines: Lines,
+    ) {
+        @Serializable
+        class Lines(
+            @XmlElement(true)
+            val item: List<String> = listOf(),
+        )
+    }
+
 //    @Serializable
-//    @XmlSerialName("GetProcessParameter", "urn:SAPControl", "urn")
+//    @XmlSerialName("GetProcessParameter", xmlSAPControl, xmlnsSAPControl)
 //    class GetProcessParameter {
 //        fun composeSOAP() = xmlserializer.encodeToString(EnvelopeH(null, EnvelopeH.Body(this)))
 //    }
 //
 //    @Serializable
-//    @XmlSerialName("GetProcessParameterResponse", "urn:SAPControl", "urn")
+//    @XmlSerialName("GetProcessParameterResponse", xmlSAPControl, xmlnsSAPControl)
 //    class GetProcessParameterResponse(
 //        @XmlElement(true)
 //        val parameter: Parameter,

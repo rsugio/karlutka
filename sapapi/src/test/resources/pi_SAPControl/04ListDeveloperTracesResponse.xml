@@ -1,0 +1,549 @@
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SAPControl="urn:SAPControl" xmlns:SAPCCMS="urn:SAPCCMS" xmlns:SAPHostControl="urn:SAPHostControl" xmlns:SAPLandscapeService="urn:SAPLandscapeService" xmlns:SAPMetricService="urn:SAPMetricService" xmlns:SAPOscol="urn:SAPOscol" xmlns:SAPDSR="urn:SAPDSR">
+   <SOAP-ENV:Header/>
+   <SOAP-ENV:Body>
+      <SAPControl:ListDeveloperTracesResponse>
+         <file>
+            <item>
+               <filename>sapcpe_base.log</filename>
+               <size>486</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_j2eeinst.log</filename>
+               <size>7473</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_igsexe.log</filename>
+               <size>2496</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_sapjvm_8.log</filename>
+               <size>17641</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_bootstrap.log</filename>
+               <size>4865</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>jvm_server0.out</filename>
+               <size>0</size>
+               <modtime>2022 12 24 23:34:26</modtime>
+            </item>
+            <item>
+               <filename>available.log</filename>
+               <size>23976</size>
+               <modtime>2023 06 21 21:49:28</modtime>
+            </item>
+            <item>
+               <filename>dev_bootstrap.cld</filename>
+               <size>7619</size>
+               <modtime>2016 11 26 18:38:05</modtime>
+            </item>
+            <item>
+               <filename>dev_jstart</filename>
+               <size>698409</size>
+               <modtime>2023 06 20 19:33:36</modtime>
+            </item>
+            <item>
+               <filename>log_bootstrap.0.log</filename>
+               <size>3433826</size>
+               <modtime>2022 12 24 23:34:22</modtime>
+            </item>
+            <item>
+               <filename>dev_sapstart</filename>
+               <size>1215</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>sapstart.log</filename>
+               <size>2863</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>jvm_deployment.out</filename>
+               <size>1335</size>
+               <modtime>2022 12 24 23:34:18</modtime>
+            </item>
+            <item>
+               <filename>jvm_version.out</filename>
+               <size>96</size>
+               <modtime>2017 08 29 17:13:42</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_j2eeinst.old.log</filename>
+               <size>7473</size>
+               <modtime>2022 12 24 23:23:32</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_igsexe.old.log</filename>
+               <size>2496</size>
+               <modtime>2022 12 24 23:23:32</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_sapjvm_8.old.log</filename>
+               <size>17641</size>
+               <modtime>2022 12 24 23:23:32</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_sapcrypto.log</filename>
+               <size>1867</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_bootstrap.old.log</filename>
+               <size>4865</size>
+               <modtime>2022 12 24 23:23:32</modtime>
+            </item>
+            <item>
+               <filename>std_server1.out</filename>
+               <size>59049764</size>
+               <modtime>2023 06 21 21:49:36</modtime>
+            </item>
+            <item>
+               <filename>stdout0</filename>
+               <size>0</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>stderr0</filename>
+               <size>151</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>sapstart0.trc</filename>
+               <size>151</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>stdout1</filename>
+               <size>0</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>stderr1</filename>
+               <size>500</size>
+               <modtime>2022 12 24 23:34:46</modtime>
+            </item>
+            <item>
+               <filename>sapstart1.trc</filename>
+               <size>176</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>jvm_server0.ou1</filename>
+               <size>0</size>
+               <modtime>2022 11 20 00:44:08</modtime>
+            </item>
+            <item>
+               <filename>dev_server1.1</filename>
+               <size>52428955</size>
+               <modtime>2023 06 20 12:05:17</modtime>
+            </item>
+            <item>
+               <filename>dev_jcmon.b01</filename>
+               <size>1708</size>
+               <modtime>2016 12 02 12:37:36</modtime>
+            </item>
+            <item>
+               <filename>sapstartsrv.old</filename>
+               <size>7333</size>
+               <modtime>2022 12 24 23:32:34</modtime>
+            </item>
+            <item>
+               <filename>jvm_server1.ou1</filename>
+               <size>0</size>
+               <modtime>2022 11 20 00:44:08</modtime>
+            </item>
+            <item>
+               <filename>dev_server0.1</filename>
+               <size>52428881</size>
+               <modtime>2023 06 20 03:45:10</modtime>
+            </item>
+            <item>
+               <filename>dev_jstart.1</filename>
+               <size>83188</size>
+               <modtime>2022 12 24 23:13:48</modtime>
+            </item>
+            <item>
+               <filename>dev_sldregk</filename>
+               <size>1743</size>
+               <modtime>2017 09 23 19:00:13</modtime>
+            </item>
+            <item>
+               <filename>jvm_bootstrap.out</filename>
+               <size>10931</size>
+               <modtime>2022 12 24 23:34:22</modtime>
+            </item>
+            <item>
+               <filename>dev_version.cl0</filename>
+               <size>4993</size>
+               <modtime>2016 12 27 13:29:57</modtime>
+            </item>
+            <item>
+               <filename>dev_server0.0</filename>
+               <size>52428991</size>
+               <modtime>2023 06 21 05:59:11</modtime>
+            </item>
+            <item>
+               <filename>dev_icm_sec</filename>
+               <size>11150893</size>
+               <modtime>2022 03 04 10:03:40</modtime>
+            </item>
+            <item>
+               <filename>deploy.1.log</filename>
+               <size>10000068</size>
+               <modtime>2020 02 14 22:18:29</modtime>
+            </item>
+            <item>
+               <filename>jvm_version.ou1</filename>
+               <size>96</size>
+               <modtime>2016 12 01 18:18:18</modtime>
+            </item>
+            <item>
+               <filename>dev_jstart.0</filename>
+               <size>29292</size>
+               <modtime>2022 12 24 23:24:33</modtime>
+            </item>
+            <item>
+               <filename>deploy.0.log</filename>
+               <size>10000446</size>
+               <modtime>2019 10 14 21:59:52</modtime>
+            </item>
+            <item>
+               <filename>deploy.0.trc</filename>
+               <size>1137298</size>
+               <modtime>2022 12 24 22:58:38</modtime>
+            </item>
+            <item>
+               <filename>log_deployment.0.log</filename>
+               <size>1624</size>
+               <modtime>2022 12 24 22:55:52</modtime>
+            </item>
+            <item>
+               <filename>jvm_deployment.ou0</filename>
+               <size>7014</size>
+               <modtime>2022 12 24 22:56:05</modtime>
+            </item>
+            <item>
+               <filename>dev_deployment</filename>
+               <size>6649</size>
+               <modtime>2022 12 24 23:34:18</modtime>
+            </item>
+            <item>
+               <filename>std_icm.ou1</filename>
+               <size>873</size>
+               <modtime>2022 12 24 22:02:00</modtime>
+            </item>
+            <item>
+               <filename>std_deployment.ou1</filename>
+               <size>829</size>
+               <modtime>2022 11 20 00:44:00</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_igshelper.log</filename>
+               <size>2511</size>
+               <modtime>2022 12 24 23:34:15</modtime>
+            </item>
+            <item>
+               <filename>dev_server1</filename>
+               <size>12120023</size>
+               <modtime>2023 06 21 21:49:36</modtime>
+            </item>
+            <item>
+               <filename>dev_krnlreg</filename>
+               <size>2860</size>
+               <modtime>2017 09 23 19:00:13</modtime>
+            </item>
+            <item>
+               <filename>std_version.ou1</filename>
+               <size>309</size>
+               <modtime>2016 12 01 18:18:16</modtime>
+            </item>
+            <item>
+               <filename>std_server1.ou0</filename>
+               <size>47946</size>
+               <modtime>2022 12 24 23:11:28</modtime>
+            </item>
+            <item>
+               <filename>dev_deployment.1</filename>
+               <size>6600</size>
+               <modtime>2022 11 20 00:44:00</modtime>
+            </item>
+            <item>
+               <filename>jvm_deployment.ou1</filename>
+               <size>1335</size>
+               <modtime>2022 11 20 00:44:00</modtime>
+            </item>
+            <item>
+               <filename>dev_bootstrap.0</filename>
+               <size>16105</size>
+               <modtime>2022 12 24 22:56:14</modtime>
+            </item>
+            <item>
+               <filename>jvm_bootstrap.ou1</filename>
+               <size>10932</size>
+               <modtime>2022 11 20 00:44:04</modtime>
+            </item>
+            <item>
+               <filename>dev_bootstrap</filename>
+               <size>7528</size>
+               <modtime>2022 12 24 23:34:22</modtime>
+            </item>
+            <item>
+               <filename>std_bootstrap.ou1</filename>
+               <size>1240</size>
+               <modtime>2022 11 20 00:44:04</modtime>
+            </item>
+            <item>
+               <filename>dev_jcmon.b00</filename>
+               <size>1708</size>
+               <modtime>2016 12 02 12:45:00</modtime>
+            </item>
+            <item>
+               <filename>jvm_server1.out</filename>
+               <size>0</size>
+               <modtime>2022 12 24 23:34:26</modtime>
+            </item>
+            <item>
+               <filename>std_icm.ou0</filename>
+               <size>22462</size>
+               <modtime>2022 12 24 23:11:30</modtime>
+            </item>
+            <item>
+               <filename>std_server0.ou1</filename>
+               <size>8044319</size>
+               <modtime>2022 12 24 22:01:57</modtime>
+            </item>
+            <item>
+               <filename>dev_server1.0</filename>
+               <size>52428857</size>
+               <modtime>2023 06 21 13:30:51</modtime>
+            </item>
+            <item>
+               <filename>std_version.out</filename>
+               <size>309</size>
+               <modtime>2017 08 29 17:13:37</modtime>
+            </item>
+            <item>
+               <filename>dev_version.cld</filename>
+               <size>5099</size>
+               <modtime>2017 08 29 17:13:42</modtime>
+            </item>
+            <item>
+               <filename>deploy.3.log</filename>
+               <size>4147425</size>
+               <modtime>2023 06 20 11:08:30</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_sapcrypto.old.log</filename>
+               <size>1867</size>
+               <modtime>2022 12 24 23:23:32</modtime>
+            </item>
+            <item>
+               <filename>std_server1.ou1</filename>
+               <size>8208104</size>
+               <modtime>2022 12 24 22:01:57</modtime>
+            </item>
+            <item>
+               <filename>dev_icm_sec_1</filename>
+               <size>6662686</size>
+               <modtime>2023 04 27 13:35:50</modtime>
+            </item>
+            <item>
+               <filename>dev_sldregs</filename>
+               <size>1796</size>
+               <modtime>2023 06 21 03:31:33</modtime>
+            </item>
+            <item>
+               <filename>dev_server0</filename>
+               <size>27601702</size>
+               <modtime>2023 06 21 21:49:25</modtime>
+            </item>
+            <item>
+               <filename>sapstartsrv.log</filename>
+               <size>4893</size>
+               <modtime>2022 12 24 23:37:07</modtime>
+            </item>
+            <item>
+               <filename>std_snapshot.ou1</filename>
+               <size>856</size>
+               <modtime>2022 02 19 22:18:32</modtime>
+            </item>
+            <item>
+               <filename>std_snapshot.ou0</filename>
+               <size>796</size>
+               <modtime>2022 11 01 17:27:59</modtime>
+            </item>
+            <item>
+               <filename>std_snapshot.out</filename>
+               <size>398</size>
+               <modtime>2023 03 19 15:02:08</modtime>
+            </item>
+            <item>
+               <filename>deploy.2.log</filename>
+               <size>10000131</size>
+               <modtime>2022 06 05 00:57:54</modtime>
+            </item>
+            <item>
+               <filename>std_bootstrap.ou0</filename>
+               <size>3141</size>
+               <modtime>2022 12 24 22:56:13</modtime>
+            </item>
+            <item>
+               <filename>dev_version.cl1</filename>
+               <size>5180</size>
+               <modtime>2016 12 01 18:18:18</modtime>
+            </item>
+            <item>
+               <filename>jvm_bootstrap.ou0</filename>
+               <size>34932</size>
+               <modtime>2022 12 24 22:56:14</modtime>
+            </item>
+            <item>
+               <filename>std_bootstrap.out</filename>
+               <size>1240</size>
+               <modtime>2022 12 24 23:34:22</modtime>
+            </item>
+            <item>
+               <filename>std_icm.out</filename>
+               <size>834</size>
+               <modtime>2022 12 24 23:34:23</modtime>
+            </item>
+            <item>
+               <filename>dev_icm</filename>
+               <size>18893863</size>
+               <modtime>2023 06 21 21:49:08</modtime>
+            </item>
+            <item>
+               <filename>std_version.ou0</filename>
+               <size>309</size>
+               <modtime>2016 12 27 13:29:55</modtime>
+            </item>
+            <item>
+               <filename>dev_jcmon</filename>
+               <size>1708</size>
+               <modtime>2016 12 27 14:14:01</modtime>
+            </item>
+            <item>
+               <filename>jvm_datcol.out</filename>
+               <size>41624</size>
+               <modtime>2023 03 19 15:01:53</modtime>
+            </item>
+            <item>
+               <filename>std_datcol.ou1</filename>
+               <size>308</size>
+               <modtime>2022 11 01 15:42:25</modtime>
+            </item>
+            <item>
+               <filename>std_deployment.out</filename>
+               <size>895</size>
+               <modtime>2022 12 24 23:34:18</modtime>
+            </item>
+            <item>
+               <filename>std_deployment.ou0</filename>
+               <size>3347</size>
+               <modtime>2022 12 24 22:56:05</modtime>
+            </item>
+            <item>
+               <filename>dev_icm.old</filename>
+               <size>42463</size>
+               <modtime>2022 12 24 23:13:43</modtime>
+            </item>
+            <item>
+               <filename>dev_datcol.0</filename>
+               <size>4285</size>
+               <modtime>2022 11 01 17:27:55</modtime>
+            </item>
+            <item>
+               <filename>std_datcol.out</filename>
+               <size>308</size>
+               <modtime>2023 03 19 15:01:52</modtime>
+            </item>
+            <item>
+               <filename>jvm_version.ou0</filename>
+               <size>96</size>
+               <modtime>2016 12 27 13:29:57</modtime>
+            </item>
+            <item>
+               <filename>dev_datcol.cld</filename>
+               <size>5430</size>
+               <modtime>2023 03 19 15:01:53</modtime>
+            </item>
+            <item>
+               <filename>jvm_datcol.ou0</filename>
+               <size>41624</size>
+               <modtime>2022 11 01 17:27:55</modtime>
+            </item>
+            <item>
+               <filename>std_datcol.ou0</filename>
+               <size>308</size>
+               <modtime>2022 11 01 17:27:53</modtime>
+            </item>
+            <item>
+               <filename>jvm_datcol.ou1</filename>
+               <size>41624</size>
+               <modtime>2022 11 01 15:42:26</modtime>
+            </item>
+            <item>
+               <filename>dev_deployment.0</filename>
+               <size>21592</size>
+               <modtime>2022 12 24 22:56:05</modtime>
+            </item>
+            <item>
+               <filename>jvm_server1.ou0</filename>
+               <size>0</size>
+               <modtime>2022 12 24 22:41:07</modtime>
+            </item>
+            <item>
+               <filename>std_server0.ou0</filename>
+               <size>47997</size>
+               <modtime>2022 12 24 23:13:28</modtime>
+            </item>
+            <item>
+               <filename>jvm_server0.ou0</filename>
+               <size>0</size>
+               <modtime>2022 12 24 22:41:07</modtime>
+            </item>
+            <item>
+               <filename>std_server0.out</filename>
+               <size>583007218</size>
+               <modtime>2023 06 21 21:49:25</modtime>
+            </item>
+            <item>
+               <filename>dev_datcol.1</filename>
+               <size>4311</size>
+               <modtime>2022 11 01 15:42:26</modtime>
+            </item>
+            <item>
+               <filename>dev_datcol</filename>
+               <size>4338</size>
+               <modtime>2023 03 19 15:01:54</modtime>
+            </item>
+            <item>
+               <filename>dev_datcol.cl1</filename>
+               <size>5393</size>
+               <modtime>2022 11 01 15:42:26</modtime>
+            </item>
+            <item>
+               <filename>dev_datcol.cl0</filename>
+               <size>5395</size>
+               <modtime>2022 11 01 17:27:55</modtime>
+            </item>
+            <item>
+               <filename>dev_bootstrap.1</filename>
+               <size>7526</size>
+               <modtime>2022 11 20 00:44:04</modtime>
+            </item>
+            <item>
+               <filename>sapcpe_igshelper.old.log</filename>
+               <size>2511</size>
+               <modtime>2022 12 24 23:23:32</modtime>
+            </item>
+         </file>
+      </SAPControl:ListDeveloperTracesResponse>
+   </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

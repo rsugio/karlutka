@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:SAPControl">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:ReadDeveloperTrace>
+         <filename>sapcpe_base.log</filename>
+         <size>486</size>
+      </urn:ReadDeveloperTrace>
+   </soapenv:Body>
+</soapenv:Envelope>
