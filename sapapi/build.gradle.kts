@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.*
 
 val kotlin_version: String by project
 val xmlutil_version: String by project
@@ -105,8 +104,8 @@ compileTestKotlin.kotlinOptions {
 
 tasks.withType<Test> {
     useJUnitPlatform {
-        includeTags("Offline")
-        excludeTags("Online")
+        //includeTags("Offline")
+        //excludeTags("Online")
     }
 }
 

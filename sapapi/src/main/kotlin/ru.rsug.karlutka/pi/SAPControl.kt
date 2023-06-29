@@ -18,7 +18,8 @@ import java.time.format.DateTimeFormatter
  */
 private const val xmlSAPControl = "urn:SAPControl"
 private const val xmlnsSAPControl = "sap"
-class SAPControl {
+@Serializable
+open class SAPControl {
     private object KLocalDateTimeSerializer : KSerializer<LocalDateTime> {
         private val dtf1: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy MM dd HH:mm:ss")
         override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
@@ -66,7 +67,7 @@ class SAPControl {
     class AnalyseLogFilesResponse(
         @XmlElement val format: String?,
         val fields: String?,
-    )
+    ) : SAPControl()
 
     @Serializable
     @XmlSerialName("ListLogFiles", xmlSAPControl, xmlnsSAPControl)
@@ -76,7 +77,7 @@ class SAPControl {
     @XmlSerialName("ListLogFilesResponse", xmlSAPControl, xmlnsSAPControl)
     class ListLogFilesResponse(
         @XmlElement(true) val file: File,
-    )
+    ): SAPControl()
 
     @Serializable
     @XmlSerialName("ReadLogFile", xmlSAPControl, xmlnsSAPControl)
@@ -108,7 +109,7 @@ class SAPControl {
         @XmlElement(true)
         @XmlSerialName("fields", "", "")
         val fields: Fields,
-    ) {
+    ): SAPControl() {
         @Serializable
         class Fields(
             @XmlElement(true)
@@ -124,7 +125,7 @@ class SAPControl {
     @XmlSerialName("ListDeveloperTracesResponse", xmlSAPControl, xmlnsSAPControl)
     class ListDeveloperTracesResponse(
         @XmlElement val file: File
-    )
+    ): SAPControl()
 
     @Serializable
     @XmlSerialName("J2EEGetThreadList", xmlSAPControl, xmlnsSAPControl)
@@ -138,7 +139,7 @@ class SAPControl {
     @XmlSerialName("J2EEGetThreadListResponse", xmlSAPControl, xmlnsSAPControl)
     class J2EEGetThreadListResponse(
         @XmlElement @XmlSerialName("thread", "", "") val thread: SAPControlThread
-    )
+    ): SAPControl()
 
     @Serializable
     class SAPControlThread(
@@ -166,7 +167,7 @@ class SAPControl {
     @XmlSerialName("J2EEGetThreadList2Response", xmlSAPControl, xmlnsSAPControl)
     class J2EEGetThreadList2Response(
         @XmlElement @XmlSerialName("thread", "", "") val thread: SAPControlThread2
-    )
+    ): SAPControl()
 
     @Serializable
     class SAPControlThread2(
@@ -203,7 +204,7 @@ class SAPControl {
     class ReadDeveloperTraceResponse(
         @XmlElement @XmlSerialName("name", "", "") val name: String?,
         @XmlElement @XmlSerialName("lines", "", "") val lines: Lines,
-    ) {
+    ): SAPControl() {
         @Serializable
         class Lines(
             @XmlElement(true)

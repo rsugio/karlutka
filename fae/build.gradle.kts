@@ -17,7 +17,7 @@ val ktor_version: String by project
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
-    id("io.ktor.plugin") version "2.3.1"
+    id("io.ktor.plugin") version "2.3.2"
     application
 }
 
@@ -116,7 +116,7 @@ compileTestKotlin.kotlinOptions {
 
 tasks.withType<Test> {
     useJUnitPlatform {
-        includeTags("Offline")
+        //includeTags("Offline")
         //excludeTags("Online")
     }
 }
