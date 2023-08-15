@@ -53,7 +53,6 @@ class KSAPControlTest {
     //@Tag("Offline")
     @Test
     fun static() {
-
         require(SAPControl.ListLogFilesRequest().composeSOAP().isNotBlank())
         val llfr = KSoap.parseSOAP<SAPControl.ListLogFilesResponse>(s("/pi_SAPControl/01ListLogFilesResponse.xml"), fault)
         require(fault.isSuccess() && llfr!!.file.item.size == 755)
