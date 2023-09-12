@@ -20,5 +20,8 @@ public class JWebDispatcherTest {
         JWDAccessLog.FileFinder ff = new JWDAccessLog.FileFinder(f, "wd_access_log-%d%m%y");
         String s = ff.createFileName(it);
         System.out.println(s);
+
+        JWDAccessLog wl = new JWDAccessLog();
+        
     }
 }

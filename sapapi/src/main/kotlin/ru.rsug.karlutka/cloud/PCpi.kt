@@ -4,7 +4,11 @@ import kotlinx.serialization.*
 //TODO подумать и переписать с io.ktor:ktor-serialization-kotlinx-json-jvm
 import kotlinx.serialization.json.*
 import kotlinx.serialization.json.Json.Default.decodeFromJsonElement
+import kotlinx.serialization.modules.EmptySerializersModule
+import java.io.InputStream
 
+// https://help.sap.com/docs/cloud-integration/sap-cloud-integration/message-processing-logs
+// https://api.sap.com/api/MessageProcessingLogs/overview
 class PCpi {
     @Serializable
     class Error(
@@ -43,6 +47,16 @@ class PCpi {
     open class ODataJson(
         val __metadata: __Metadata? = null
     )
+
+    @Serializable
+    class Attachment(
+        val Id: String, //"Id": "sap-it-res:msg:j1f3f5ee1:5fe171ef-12fe-49a6-9cad-1fe572c5f1e5",
+        val MessageGuid: String, //"MessageGuid": "AGAsY9TBVshDMOiDE4bn1oHJWvG2",
+        val TimeStamp: String, //TODO переделать на Jsondate.serializer() "/Date(1563279368554)/",
+        val Name: String, //"Log - msgHeader"
+        val ContentType: String, //"text/xml"
+        val PayloadSize: String, // "40176"
+    ) : ODataJson()
 
     @Serializable
     class SecurityArtifactDescriptor(
@@ -118,9 +132,9 @@ class PCpi {
 
     @Serializable
     class IntegrationArtifact(
-        val Id: String,
-        val Name: String,
-        val Type: String,
+        val Id: String?,                // при чтении старых потоков почему-то может стрелять нулями
+        val Name: String?,
+        val Type: String?,
         val PackageId: String?,
         val PackageName: String?,
     ) : ODataJson()
@@ -181,36 +195,36 @@ class PCpi {
     @Serializable
     class MessageProcessingLog(
         val MessageGuid: String,
-        val CorrelationId: String,
-        val ApplicationMessageId: String?,
-        val ApplicationMessageType: String?,
-        val LogStart: String,       // /Date(1613521876190)/
-        val LogEnd: String = "",    // /Date(1613521876190)/
-        val Sender: String?,
-        val Receiver: String?,
-        val IntegrationFlowName: String,
-        val Status: String,
+        val CorrelationId: String? = null,
+        val ApplicationMessageId: String? = null,
+        val ApplicationMessageType: String? = null,
+        val LogStart: String? = null,       // /Date(1613521876190)/
+        val LogEnd: String? = null,    // /Date(1613521876190)/
+        val Sender: String? = null,
+        val Receiver: String? = null,
+        val IntegrationFlowName: String? = null,
+        val Status: String,             //PROCESSING
         val AlternateWebLink: String,
         val IntegrationArtifact: IntegrationArtifact,
-        val LogLevel: String,
-        val CustomStatus: String?,
+        val LogLevel: String? = null,           //INFO
+        val CustomStatus: String? = null,      //COMPLETED
 
-        val ArchivingStatus: String?,   //NOT_RELEVANT
+        val ArchivingStatus: String? = null,   //NOT_RELEVANT
         val ArchivingSenderChannelMessages: Boolean,
         val ArchivingReceiverChannelMessages: Boolean,
         val ArchivingLogAttachments: Boolean,
         val ArchivingPersistedMessages: Boolean,
 
-        val TransactionId: String?,
-        val PreviousComponentName: String?,
-        val LocalComponentName: String?,
-        val OriginComponentName: String?,
-        val CustomHeaderProperties: __Deferred<MessageProcessingLogCustomHeaderProperties>,
-        val MessageStoreEntries: __Deferred<ODataJson>,
-        val ErrorInformation: __Deferred<ODataJson>,
-        val AdapterAttributes: __Deferred<ODataJson>,
-        val Attachments: __Deferred<ODataJson>,
-        val Runs: __Deferred<ODataJson>,
+        val TransactionId: String? = null,
+        val PreviousComponentName: String? = null,
+        val LocalComponentName: String? = null,
+        val OriginComponentName: String? = null,
+        val CustomHeaderProperties: __Deferred<MessageProcessingLogCustomHeaderProperties>?,
+        val MessageStoreEntries: __Deferred<ODataJson>?,
+        val ErrorInformation: __Deferred<ODataJson>?,
+        val AdapterAttributes: __Deferred<ODataJson>?,
+        val Attachments: __Deferred<ODataJson>?,
+        val Runs: __Deferred<ODataJson>?,
     ) : ODataJson()
 
     @Serializable
@@ -240,70 +254,103 @@ class PCpi {
         val ContentType: String,        // com.sap.hci.api.Definition
     ) : ODataJson()
 
+    @Serializable
+    class ODataJsonRoot<T>(val d: OData_T<T>)
+
+    @Serializable
+    class OData_T<T>(
+        // Выдаётся внутри d
+        val __count: String? = null,    // "__count": "1092770" - при $inlinecount=allpages
+        val results: List<T>,
+        val __next: String? = null      // если есть куда листать дальше
+    )
 
     companion object {
-        val __metas = mapOf(
-            // закомментированных нет на верхнем уровне.
-            // Нас интересует полиморфизм верхнего уровня, но здесь для поиска пусть будет
-//            "com.sap.hci.api.SecurityArtifactDescriptor" to SecurityArtifactDescriptor::class,
-//            "com.sap.hci.api.IntegrationArtifact" to IntegrationArtifact::class,
-//            "com.sap.hci.api.MessageProcessingLogCustomHeaderProperty" to MessageProcessingLogCustomHeaderProperty::class,
-            "com.sap.hci.api.UserCredential" to UserCredential::class,
-            "com.sap.hci.api.DataStore" to DataStore::class,
-            "com.sap.hci.api.DataStoreEntry" to DataStoreEntry::class,
-            "com.sap.hci.api.IntegrationPackage" to IntegrationPackage::class,
-            "com.sap.hci.api.IntegrationDesigntimeArtifact" to IntegrationDesigntimeArtifact::class,
-            "com.sap.hci.api.ValueMappingDesigntimeArtifact" to ValueMappingDesigntimeArtifact::class,
-            "com.sap.hci.api.ServiceEndpoint" to ServiceEndpoint::class,
-            "com.sap.hci.api.MessageProcessingLog" to MessageProcessingLog::class,
-            "com.sap.hci.api.LogFile" to LogFile::class,
-            "com.sap.hci.api.LogFileArchive" to LogFileArchive::class,
-        )
 
-        @OptIn(InternalSerializationApi::class)
-        fun serializerFromMetadata(m: JsonElement): KSerializer<out ODataJson> {
-            val j = m.jsonObject["__metadata"]
-            requireNotNull(j) { "Элемент должен содержать __metadata" }
-            val type = (j.jsonObject["type"]!! as JsonPrimitive).content
-            val kl = __metas[type]
-            requireNotNull(kl) { "Не найден сериализатор для $type" }
-            return kl.serializer()
-        }
+//        val Json1 = Json(JsonConfiguration(), EmptySerializersModule())
+//        val __metas = mapOf(
+//            // закомментированных нет на верхнем уровне.
+//            // Нас интересует полиморфизм верхнего уровня, но здесь для поиска пусть будет
+////            "com.sap.hci.api.SecurityArtifactDescriptor" to SecurityArtifactDescriptor::class,
+////            "com.sap.hci.api.IntegrationArtifact" to IntegrationArtifact::class,
+////            "com.sap.hci.api.MessageProcessingLogCustomHeaderProperty" to MessageProcessingLogCustomHeaderProperty::class,
+//            "com.sap.hci.api.UserCredential" to UserCredential::class,
+//            "com.sap.hci.api.DataStore" to DataStore::class,
+//            "com.sap.hci.api.DataStoreEntry" to DataStoreEntry::class,
+//            "com.sap.hci.api.IntegrationPackage" to IntegrationPackage::class,
+//            "com.sap.hci.api.IntegrationDesigntimeArtifact" to IntegrationDesigntimeArtifact::class,
+//            "com.sap.hci.api.ValueMappingDesigntimeArtifact" to ValueMappingDesigntimeArtifact::class,
+//            "com.sap.hci.api.ServiceEndpoint" to ServiceEndpoint::class,
+//            "com.sap.hci.api.MessageProcessingLog" to MessageProcessingLog::class,
+//            "com.sap.hci.api.LogFile" to LogFile::class,
+//            "com.sap.hci.api.LogFileArchive" to LogFileArchive::class,
+//        )
 
-        @Serializable
-        class ODataJsonRoot(val d: ODataJsonList)
+//        @OptIn(InternalSerializationApi::class)
+//        fun serializerFromMetadata(m: JsonElement): KSerializer<out ODataJson> {
+//            val j = m.jsonObject["__metadata"]
+//            requireNotNull(j) { "Элемент должен содержать __metadata" }
+//            val type = (j.jsonObject["type"]!! as JsonPrimitive).content
+//            val kl = __metas[type]
+//            requireNotNull(kl) { "Не найден сериализатор для $type" }
+//            return kl.serializer()
+//        }
 
-        @Serializable
-        class ODataJsonList(
-            val results: List<JsonElement>,
-            val __next: String? = null
-        )
+//        @Serializable
+//        class ODataJsonList(
+//            val __count: String? = null,    // "__count": "1092770"
+//            val results: List<JsonElement>,
+//            val __next: String? = null
+//        )
 
-        inline fun <reified T> parse(sjson: String): Pair<List<T>, String?> {
-            val d = Json.decodeFromString<ODataJsonRoot>(sjson)
-            val results = d.d.results
-            val out = mutableListOf<T>()
-            results.forEach { j ->
-                val s = decodeFromJsonElement(serializerFromMetadata(j), j)
-                require(s is T) { "запрошен разбор типа ${T::class} но обнаружен ${s::class}" }
-                out.add(s)
-            }
-            return Pair(out, d.d.__next)
-        }
+//        @OptIn(ExperimentalSerializationApi::class)
+//        inline fun <reified T> parse(sjson: InputStream): Triple<List<T>, String?, Long?> {
+//            val d = Json.decodeFromStream<ODataJsonRoot>(sjson)
+//            val results = d.d.results
+//            val out = mutableListOf<T>()
+//            var ix = 0
+//            results.forEach { j ->
+//                println(ix++)
+//                val kl = serializerFromMetadata(j)
+//                val s = decodeFromJsonElement(kl, j)
+//                require(s is T) { "запрошен разбор типа ${T::class} но обнаружен ${s::class}" }
+//                out.add(s)
+//            }
+//            return Triple(out, d.d.__next, 1)
+//        }
 
-        inline fun <reified T> parseSingle(sjson: String): T {
-            val src = Json.decodeFromString<JsonObject>(sjson)
-            val j = src["d"]!!
-            val s = decodeFromJsonElement(serializerFromMetadata(j), j)
-            require(s is T) { "запрошен разбор типа ${T::class} но обнаружен ${s::class}" }
-            return s
-        }
+//        inline fun <reified T> parse(sjson: String): Pair<List<T>, String?> {
+//            val d = Json.decodeFromString<ODataJsonRoot>(sjson)
+//            val results = d.d.results
+//            val out = mutableListOf<T>()
+//            results.forEach { j ->
+//                val s = decodeFromJsonElement(serializerFromMetadata(j), j)
+//                require(s is T) { "запрошен разбор типа ${T::class} но обнаружен ${s::class}" }
+//                out.add(s)
+//            }
+//            return Pair(out, d.d.__next)
+//        }
+//
+//        inline fun <reified T> parseSingle(sjson: String): T {
+//            val src = Json.decodeFromString<JsonObject>(sjson)
+//            val j = src["d"]!!
+//            val s = decodeFromJsonElement(serializerFromMetadata(j), j)
+//            require(s is T) { "запрошен разбор типа ${T::class} но обнаружен ${s::class}" }
+//            return s
+//        }
 
         @Serializable
         private class X(val error: Error)
 
         fun parseError(sjson: String): Error {
             return Json.decodeFromString<X>(sjson).error
+        }
+
+        //TODO разобраться как сделать не-inline вариант этой функции, через регистрацию стратегии
+        @OptIn(ExperimentalSerializationApi::class)
+        inline fun <reified T:ODataJson> parseStream(x: InputStream): ODataJsonRoot<T> {
+            val y = Json.decodeFromStream<ODataJsonRoot<T>>(x)
+            return y
         }
     }
 }
