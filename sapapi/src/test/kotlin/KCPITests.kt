@@ -61,8 +61,8 @@ class KCPITests {
     @Test
     @Tag("Online")
     fun listByID() {
-        val p = Paths.get("C:\\Temp\\cpieuprd\\Sales_Order_from_CPQ_to_S4")
-        listAllBy(p, "\$filter=IntegrationFlowName+eq+'Sales_Order_from_CPQ_to_S4'&\$top=20000&\$orderby=LogStart+desc&\$expand=CustomHeaderProperties")
+        val p = Paths.get("C:\\Temp\\cpieuprd\\CPQ_PPS_01")
+        listAllBy(p, "\$filter=IntegrationFlowName+eq+'Sales_Quotation_CPQ_PPS'&\$top=200&\$orderby=LogStart+desc&\$expand=CustomHeaderProperties")
     }
 
     fun listAllBy(p: Path, by: String) {

@@ -71,10 +71,13 @@ $xml
         for (i in 1..100) {
             order(i, false)
         }
-        for (i in 1..100 ) {
-            for (j in 0..2) {
-                delivery(i, i * 10 + j, false)
-            }
+        for (i in 1..100) {
+            order(i, false)
         }
+//        for (i in 1..100 ) {
+//            for (j in 0..2) {
+//                delivery(i, i * 10 + j, false)
+//            }
+//        }
     }
 }

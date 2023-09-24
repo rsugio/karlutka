@@ -6,4 +6,5 @@ plugins {
 
 rootProject.name = "karlutka"
 include(":sapapi")
+include(":etcapi")
 include(":fae")
