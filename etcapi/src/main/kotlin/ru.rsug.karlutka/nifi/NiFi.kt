@@ -1,12 +1,13 @@
 package ru.rsug.karlutka.nifi
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
-import java.nio.file.Paths
+import kotlinx.serialization.json.decodeFromStream
+import java.io.InputStream
 import java.util.function.Predicate
-import kotlin.io.path.readText
 
 class NiFi {
     enum class EComponentType { PROCESS_GROUP, CONNECTION }
@@ -112,18 +113,34 @@ class NiFi {
         }
     }
 
-    private fun printProcess(depth: Int, c: NFlowContents, parent: TL? = null): TL {
-        val tl = TL(c.name, c.variables)
-        parent?.children?.add(tl)
-        c.processGroups.forEach { t ->
-            printProcess(depth + 1, t, tl)
+
+    companion object {
+        private fun rec(depth: Int, c: NFlowContents, parent: TL? = null): TL {
+            val tl = TL(c.name, c.variables)
+            parent?.children?.add(tl)
+            c.processGroups.forEach { t ->
+                rec(depth + 1, t, tl)
+            }
+            return tl
         }
-        return tl
-    }
 
-    private val predicate = { x: Map.Entry<String, String> ->
-        val banned = listOf("", "PO.Password", "S3.SecretKey", "Email.From", "Email.To", "Email.Subject", "mime.type")
-        !banned.contains(x.key) && !x.value.endsWith("/RESTAdapter/PO/Mail")
-    }
+        private fun rec(d: NFlowDefinition): TL {
+            val root = TL("/")
+            d.flowContents.processGroups.forEach { t ->
+                rec(0, t, root)
+            }
+            return root
+        }
 
+        @OptIn(ExperimentalSerializationApi::class)
+        fun parseStream(`is`: InputStream): TL {
+            val d = Json.decodeFromStream<NFlowDefinition>(`is`)
+            return rec(d)
+        }
+
+        fun parseString(s: String): TL {
+            val d = Json.decodeFromString<NFlowDefinition>(s)
+            return rec(d)
+        }
+    }
 }

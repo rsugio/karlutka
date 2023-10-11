@@ -1,17 +1,28 @@
 import KT.Companion.x
+import nl.adaptivity.xmlutil.PlatformXmlReader
 import org.junit.jupiter.api.Tag
 import ru.rsug.karlutka.pi.AdapterMessageMonitoringVi.*
 import ru.rsug.karlutka.serialization.KSoap
 import ru.rsug.karlutka.serialization.KSoap.Fault
+import java.nio.file.Paths
+import kotlin.io.path.reader
 import kotlin.test.Test
 
 @Tag("Offline")
 class KAdapterMessageMonitoringTests {
+    val fault = Fault()
+    @Test
+    fun adhoc() {
+        // быстрые проверки для отдельных сервисов
+        val p = Paths.get("../tmp/kammvi.xml")
+        val l = KSoap.parseSOAP<GetMessageListResponse>(PlatformXmlReader(p.reader()), fault)
+        requireNotNull(l?.Resp)
+    }
+
     @Test
     fun ammvi() {
         GetUserDefinedSearchFilters().composeSOAP()
         val mkey = "7b761582-1227-11ed-8bad-0000004c2912\\OUTBOUND\\4991250\\EO\\0\\"
-        val fault = Fault()
         val userfilter = KSoap.parseSOAP<GetUserDefinedSearchFiltersResponse>(x("/pi_AdapterMM/01.xml"), fault)
         require(userfilter!!.Response.MessageInterface.size == 3 && fault.isSuccess())
         val b = KSoap.parseSOAP<GetUserDefinedSearchFiltersResponse>(x("/pi_AdapterMM/02.xml"), fault)
@@ -26,7 +37,9 @@ class KAdapterMessageMonitoringTests {
         require(!filter.archive)
         var s = GetMessageList(filter).composeSOAP()
         require(s != "")
-        var l = KSoap.parseSOAP<GetMessageListResponse>(x("/pi_AdapterMM/04.xml"), fault)
+        var l = KSoap.parseSOAP<GetMessageListResponse>(x("/pi_AdapterMM/04.xml"), fault)       //Response
+        require(l!!.Resp.afw == null)
+        l = KSoap.parseSOAP<GetMessageListResponse>(x("/pi_AdapterMM/04another.xml"), fault)    //rpl:Response
         require(l!!.Resp.afw == null)
         l = KSoap.parseSOAP<GetMessageListResponse>(x("/pi_AdapterMM/05prev.xml"), fault)
         require(l!!.Resp.afw!!.list[0].businessAttributes!!.list.size == 3)

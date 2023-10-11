@@ -30,7 +30,7 @@ class AdapterMessageMonitoringVi {
         @XmlElement(true)
         @XmlSerialName("Response", "", "")
         val Resp: AdminActionResultMap,
-    )
+    ) :  ComposeSOAP()
 
     // ---------------
     @Serializable
@@ -48,9 +48,10 @@ class AdapterMessageMonitoringVi {
     @XmlSerialName("failEoioMessageResponse", xmlnsAMVi, amvi)
     class FailEoioMessageResponse(
         @XmlElement(true)
-        @XmlSerialName("Response", "", "")
+//        @XmlSerialName("Response", "", "")
+        @XmlSerialName("Response", xmlnsAMVi, amvi)
         val Response: AdminActionResult,
-    )
+    ):  ComposeSOAP()
 
     // ---------------
     @Serializable
@@ -286,7 +287,9 @@ class AdapterMessageMonitoringVi {
     @Serializable
     @XmlSerialName("getMessageListResponse", xmlnsAMVi, amvi)
     class GetMessageListResponse(
-        // имя не в XML
+        //TODO - блядский сап выдаёт в разных неймспейсах
+        @XmlSerialName("Response", xmlnsAMVi, amvi)
+//        @XmlSerialName("Response", "", "")
         val Resp: Response,
     )
 
@@ -729,7 +732,6 @@ class AdapterMessageMonitoringVi {
     )
 
     @Serializable
-    @XmlSerialName("Response", "", "")
     class Response(
         @XmlElement(true)
         @XmlSerialName("date", xmlnsAfw, afwp)
